@@ -1,0 +1,42 @@
+{
+  "common": {
+    "name": "shelly",
+    "version": "0.0.1",
+    "news": {
+      "0.0.1": {
+        "en": "Empty template",
+        "de": "leere Hülle"
+      }
+    },
+    "title": "Lupusec alarm system",
+    "titleLang": {
+      "en": "Shelly switch",
+      "de": "Shelly Schalter"
+    },
+    "desc": {
+      "en": "Shelly switch adapter",
+      "de": "Shelly Adapter für Schalter"
+    },
+    "license": "MIT",
+    "authors": [
+      "Thorsten Stueben <thorsten@stueben.de>"
+    ],
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "lupusec.png",
+    "materialize": true,
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/schmupu/ioBroker.shelly/master/admin/shelly.png",
+    "keywords": ["shelly", "switch", "smarthome", "iobroker"],
+    "readme": "https://github.com/schmupu/ioBroker.shelly/blob/master/README.md",
+    "loglevel": "info",
+    "type": "switch",
+    "restartAdapters": []
+  },
+  "native": {
+    "host": "",
+    "port": ""
+  },
+  "objects": [],
+  "instanceObjects": []
+}

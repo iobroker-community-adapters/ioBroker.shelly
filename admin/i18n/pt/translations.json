@@ -1,0 +1,10 @@
+{
+  "alarm_type": "sistema de alarme",
+  "alarm_host": "Sistema de alarme IP-Address / Hostname",
+  "alarm_port": "Port",
+  "on save adapter restarts with new config immediately": "on save adapter reinicia com nova configuração imediatamente.",
+  "alarm_user": "Do utilizador",
+  "alarm_password": "Senha",
+  "alarm_https": "https",
+  "alarm_allstates": "Mostrar todos os campos (não recomendado)"
+}

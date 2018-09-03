@@ -1,0 +1,42 @@
+{
+  "name": "iobroker.shelly",
+  "version": "0.0.1",
+  "description": "Shelly",
+  "author": {
+    "name": "Thorsten Stueben",
+    "email": "thorsten@stueben.de"
+  },
+  "contributors": [{
+    "name": "Thorsten Stueben",
+    "email": "thorsten@stueben.de"
+  }],
+  "homepage": "https://github.com/schmupu/ioBroker.shelly",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "Shelly",
+    "Smart Home",
+    "switch"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schmupu/ioBroker.shelly"
+  },
+  "dependencies": {
+    "ping": "^0.2.1",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "mocha": "^4.1.0",
+    "chai": "^4.1.2"
+  },
+  "main": "shelly.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha --exit"
+  },
+  "bugs": {
+    "url": "https://github.com/schmupu/ioBroker.shelly/issues"
+  },
+  "readmeFilename": "README.md"
+}
