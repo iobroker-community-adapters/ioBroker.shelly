@@ -95,7 +95,9 @@ function main() {
                 createDeviceStates(deviceId, desc[deviceId], data);
                 if (!--deviceCounter) { // we have created everything initially
 
-                    adapter.subscribeStates('*');
+                    objectHelper.processObjectQueue(() => {
+                        adapter.subscribeStates('*');
+                    });
                 }
 
             });
