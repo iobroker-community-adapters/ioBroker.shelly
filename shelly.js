@@ -9,25 +9,45 @@
 const utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 const adapter = new utils.Adapter('shelly');
 const objectHelper = require(__dirname + '/lib/objectHelper'); // Get common adapter utils
-objectHelper.init(adapter);
 const Shelly = require('shelly-iot');
 let shelly;
 
+const knownDevices = {};
+
 // is called when adapter shuts down - callback has to be called under any circumstances!
 adapter.on('unload', function(callback) {
-  try {
-      // adapter.log.info('cleaned everything up...');
-      callback();
-  } catch (e) {
-      callback();
-  }
+    try {
+        if (shelly) {
+            shelly.stopListening(callback);
+            return;
+        }
+        // adapter.log.info('cleaned everything up...');
+        callback();
+    } catch (e) {
+        callback();
+    }
 });
+process.on('SIGINT', function () {
+    if (shelly) {
+        shelly.stopListening();
+    }
+});
+process.on('uncaughtException', function (err) {
+    if (adapter && adapter.log) {
+        adapter.log.warn('Exception: ' + err);
+    }
+    if (shelly) {
+        shelly.stopListening();
+    }
+});
+
 
 // is called if a subscribed state changes
 adapter.on('stateChange', function(id, state) {
     // Warning, state can be null if it was deleted
     adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
 
+    objectHelper.handeStateChange(id, state);
 });
 
 
@@ -39,6 +59,9 @@ adapter.on('ready', function() {
 
 
 function createDeviceStates(deviceId, description, data) {
+    knownDevices[deviceId] = description; // remember the device data
+
+    adapter.log.info('Create states for ' + deviceId);
     objectHelper.setOrUpdateObject(deviceId, {type: 'device', common: {name: 'Device ' + deviceId}});
     /*
       Weiter vllt:
@@ -53,7 +76,14 @@ function createDeviceStates(deviceId, description, data) {
       objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'state', common: {name: '...', type:'...', role'...''}}, value);
       SHSW-44#06231A#1.Relay0.Switch -> State
 
-      und am besten in einem extra array merken welches device und "ID" welcher Statename ist das dues in updateDeviceStates nutzen knnst
+      und am besten in einem extra array/objekt merken welches device und "ID" welcher Statename ist das dues in updateDeviceStates nutzen knnst
+
+      Und bei den States die später änderbar sind kann bei dem "setorUpdateObject" noch ein callback als letzter Parameter mitgegeben werden:
+
+      objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'state', common: {name: '...', type:'...', role'...''}}, value, (value) => {
+          // Code that should be executed for state change here
+      });
+
     */
 }
 
@@ -64,6 +94,7 @@ function updateDeviceStates(deviceId, data) {
 
 // main function
 function main() {
+    objectHelper.init(adapter);
     const options = {
         logger: adapter.log.info
     };
@@ -72,6 +103,15 @@ function main() {
 
     shelly.on('update-device-status', (deviceId, status) => {
         adapter.log.info('Status update received for ' + deviceId + ': ' + JSON.stringify(status));
+
+        if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
+            shelly.getDeviceDescription(deviceId, (err, description) => {
+                createDeviceStates(deviceId, description, status);
+                objectHelper.processObjectQueue();
+            });
+            return;
+        }
+
         updateDeviceStates(deviceId, status);
     });
 
@@ -97,11 +137,11 @@ function main() {
 
                     objectHelper.processObjectQueue(() => {
                         adapter.subscribeStates('*');
+                        adapter.log.info('initialization done');
                     });
                 }
 
             });
-            // now call a function to parse the description data and create all objects
         }
     });
 
