@@ -19,7 +19,8 @@
     },
     "license": "MIT",
     "authors": [
-      "Thorsten Stueben <thorsten@stueben.de>"
+      "Thorsten Stueben <thorsten@stueben.de>",
+      "Apollon77 <iobroker@fischer-ka.de>"
     ],
     "platform": "Javascript/Node.js",
     "mode": "daemon",

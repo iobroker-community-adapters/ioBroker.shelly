@@ -61,22 +61,46 @@ adapter.on('ready', function() {
 });
 
 
-function getStatusById(sid, data) {
+// get Value by Sensor ID
+function getStatusBySenId(sid, data) {
 
   for (let d in data) {
+    let senId = data[d][1]; // Sensor ID
+    let senValue = data[d][2]; // Value
+    if (sid == senId) return sendValue;
+  }
+  return undefined;
+}
 
-    let senId = data[d][1];
-    let senValue = data[d][2];
+function getSenByBlkID(blockId, sen) {
 
-    if (sid == senId) {
+  let arr = [];
+  let cnt = 0;
 
+  for (let s in sen) {
+    if (blockId == sen[s].L) {
+      arr[++cnt] = sen[s];
     }
-
   }
 
-  return data;
-
+  return arr;
 }
+
+function getActByBlkID(blockId, act) {
+
+  let arr = [];
+  let cnt = 0;
+
+  for (let a in act) {
+    if (blockId == act[a].L) {
+      arr[++cnt] = act[a];
+    }
+  }
+
+  return arr;
+}
+
+
 
 function createDeviceStates(deviceId, description, data) {
   knownDevices[deviceId] = description; // remember the device data
@@ -89,96 +113,117 @@ function createDeviceStates(deviceId, description, data) {
     }
   });
 
-  let blk = description.description.blk || [];
-  let sen = description.description.sen || [];
-  let act = description.description.act || [];
+  if (description && description.description) {
 
-  for (let b in blk) {
+    let blk = description.description.blk || [];
 
-    let blkId = blk[b].I;
-    let blkDescr = blk[b].D;
+    for (let b in blk) {
 
-    // SHSW-44#06231A#1.Relay0 -> Channel
-    objectHelper.setOrUpdateObject(deviceId + '.' + blkDescr, {
-      type: 'channel',
-      common: {
-        name: blkDescr
+      let blkId = blk[b].I; // Block ID
+      let blkDescr = blk[b].D; // Block Descrition
+      let sen = getSenByBlkID(blkId, description.description.sen); // Sensoren for this Block
+      let act = getActByBlkID(blkId, description.description.act); // Actions for this Block
+
+      // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
+      objectHelper.setOrUpdateObject(deviceId + '.' + blkDescr, {
+        type: 'channel',
+        common: {
+          name: blkDescr
+        }
+      });
+
+
+      for (let s in sen) {
+
+        let senId = sen[s].I; // Sensor ID
+        let senDescr = sen[s].D; // Sensor Descrition
+        let senType = sen[s].T; // Sensor Type^
+        let senRange = sen[s].R; // Sensor Role
+        let senLink = sen[s].L; // Sensor Link to Block ID
+        let dp = datapoints.getSensor(sen[s]);
+
+        if (dp) {
+
+          let tmpId = deviceId + '.' + blkDescr + '.' + dp.name; // Status ID in ioBroker
+          let value = getStatusBySenId(senId, data); // Status for Sensor ID
+
+          sensorIoBrokerIDs[deviceId + '#' + senId] = tmpId; // remember the link Shelly ID -> ioBroker ID
+
+          // SHSW-44#06231A#1.Relay0.W -> State
+          objectHelper.setOrUpdateObject(tmpId, {
+            type: 'state',
+            common: {
+              name: dp.name,
+              type: dp.type,
+              role: dp.role,
+              read: dp.read,
+              write: dp.write,
+              min: dp.min,
+              max: dp.max,
+              states: dp.states,
+              unit: dp.unit
+            }
+          }, value);
+
+        }
+
       }
-    });
 
-    for (let s in sen) {
-
-      let senId = sen[s].I;
-      let senDescr = sen[s].D;
-      let senType = sen[s].T;
-      let senRange = sen[s].R;
-      let senLink = sen[s].L;
-      let dp = datapoints.getSensor(sen[s]);
-
-      if (blkId == senLink && dp) {
-
-        let tmpId = deviceId + '.' + blkDescr + '.' + dp.name;
-        let value = getStatusById(senId, data);
-
-        sensorIoBrokerIDs[deviceId + '#' + senId] = tmpId;
-
-        // SHSW-44#06231A#1.Relay0.W -> State
-        objectHelper.setOrUpdateObject(tmpId, {
-          type: 'state',
-          common: {
-            name: dp.name,
-            type: dp.type,
-            role: dp.role,
-            read: dp.read,
-            write: dp.write,
-            min: dp.min,
-            max: dp.max,
-            states: dp.states,
-            unit: dp.unit
-          }
-        }, value);
-
-      }
+      for (let a in act) {}
 
     }
 
+    // SHSW-44#06231A#1.Relay0 -> Channel
+    //objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'channel', common: {name: 'Relay0'}});
+    /*
+      Weiter vllt:
+      deviceId.block-name als "Channel" und danndarunter .status, Also:
+      SHSW-44#06231A#1 -> device
+      objectHelper.setOrUpdateObject(deviceId, {type: 'device', common: {name: 'Device ' + deviceId}});
+
+      SHSW-44#06231A#1.Relay0 -> Channel
+      objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'channel', common: {name: 'Relay0'}});
+
+      SHSW-44#06231A#1.Relay0.W -> State
+      objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'state', common: {name: '...', type:'...', role'...''}}, value);
+      SHSW-44#06231A#1.Relay0.Switch -> State
+
+      und am besten in einem extra array/objekt merken welches device und "ID" welcher Statename ist das dues in updateDeviceStates nutzen knnst
+
+      Und bei den States die später änderbar sind kann bei dem "setorUpdateObject" noch ein callback als letzter Parameter mitgegeben werden:
+
+      objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'state', common: {name: '...', type:'...', role'...''}}, value, (value) => {
+          // Code that should be executed for state change here
+      });
+
+    */
+
   }
 
-  // SHSW-44#06231A#1.Relay0 -> Channel
-  //objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'channel', common: {name: 'Relay0'}});
-  /*
-    Weiter vllt:
-    deviceId.block-name als "Channel" und danndarunter .status, Also:
-    SHSW-44#06231A#1 -> device
-    objectHelper.setOrUpdateObject(deviceId, {type: 'device', common: {name: 'Device ' + deviceId}});
-
-    SHSW-44#06231A#1.Relay0 -> Channel
-    objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'channel', common: {name: 'Relay0'}});
-
-    SHSW-44#06231A#1.Relay0.W -> State
-    objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'state', common: {name: '...', type:'...', role'...''}}, value);
-    SHSW-44#06231A#1.Relay0.Switch -> State
-
-    und am besten in einem extra array/objekt merken welches device und "ID" welcher Statename ist das dues in updateDeviceStates nutzen knnst
-
-    Und bei den States die später änderbar sind kann bei dem "setorUpdateObject" noch ein callback als letzter Parameter mitgegeben werden:
-
-    objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'state', common: {name: '...', type:'...', role'...''}}, value, (value) => {
-        // Code that should be executed for state change here
-    });
-
-  */
 }
 
+
+// transfer Status array to an object
+function statusArrayToObject(data) {
+
+  let obj = {};
+  for (let i in data.G) {
+    obj[data.G[i][1]] = data.G[i][2]; // id = val
+  }
+  return obj;
+
+}
+
+
+
 function updateDeviceStates(deviceId, data) {
-  // Viele
-  // adapter.setState hier :-)
+
   for (let g in data.G) {
 
     let senId = data.G[g][1];
     let senValue = data.G[g][2];
     let tmpId = deviceId + '#' + senId;
-    let ioBrokerId = sensorIoBrokerIDs[tmpId];
+    let ioBrokerId = sensorIoBrokerIDs[tmpId]; // get ioBroker Id
 
     if (ioBrokerId) {
 

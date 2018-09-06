@@ -6,13 +6,16 @@
     "name": "Thorsten Stueben",
     "email": "thorsten@stueben.de"
   },
-  "contributors": [{
-    "name": "Thorsten Stueben",
-    "email": "thorsten@stueben.de"
-  },{
-    "name": "Apollon77",
-    "email": "iobroker@fischer-ka.de"
-  }],
+  "contributors": [
+    {
+      "name": "Thorsten Stueben",
+      "email": "thorsten@stueben.de"
+    },
+    {
+      "name": "Apollon77",
+      "email": "iobroker@fischer-ka.de"
+    }
+  ],
   "homepage": "https://github.com/schmupu/ioBroker.shelly",
   "license": "MIT",
   "keywords": [
@@ -26,7 +29,7 @@
     "url": "https://github.com/schmupu/ioBroker.shelly"
   },
   "dependencies": {
-    "shelly-iot":  "Apollon77/shelly-iot",
+    "shelly-iot": "Apollon77/shelly-iot",
     "ping": "^0.2.1",
     "request": "^2.79.0"
   },
