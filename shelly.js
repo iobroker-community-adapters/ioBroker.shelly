@@ -62,12 +62,12 @@ adapter.on('ready', function() {
 
 
 // get Value by Sensor ID
-function getStatusBySenId(sid, data) {
+function getStateBySenId(sid, data) {
 
-  for (let d in data) {
-    let senId = data[d][1]; // Sensor ID
-    let senValue = data[d][2]; // Value
-    if (sid == senId) return sendValue;
+  for (let g in data.G) {
+    let senId = data.G[g][1]; // Sensor ID
+    let senValue = data.G[g][2]; // Value
+    if (sid == senId) return senValue;
   }
   return undefined;
 }
@@ -145,7 +145,7 @@ function createDeviceStates(deviceId, description, data) {
         if (dp) {
 
           let tmpId = deviceId + '.' + blkDescr + '.' + dp.name; // Status ID in ioBroker
-          let value = getStatusBySenId(senId, data); // Status for Sensor ID
+          let value = getStateBySenId(senId, data); // Status for Sensor ID
 
           sensorIoBrokerIDs[deviceId + '#' + senId] = tmpId; // remember the link Shelly ID -> ioBroker ID
 
@@ -218,19 +218,23 @@ function statusArrayToObject(data) {
 
 function updateDeviceStates(deviceId, data) {
 
-  for (let g in data.G) {
+  if (data) {
 
-    let senId = data.G[g][1];
-    let senValue = data.G[g][2];
-    let tmpId = deviceId + '#' + senId;
-    let ioBrokerId = sensorIoBrokerIDs[tmpId]; // get ioBroker Id
+    for (let g in data.G) {
 
-    if (ioBrokerId) {
+      let senId = data.G[g][1];
+      let senValue = data.G[g][2];
+      let tmpId = deviceId + '#' + senId;
+      let ioBrokerId = sensorIoBrokerIDs[tmpId]; // get ioBroker Id
 
-      adapter.setState(ioBrokerId, {
-        val: senValue,
-        ack: true
-      });
+      if (ioBrokerId) {
+
+        adapter.setState(ioBrokerId, {
+          val: senValue,
+          ack: true
+        });
+
+      }
 
     }
 
