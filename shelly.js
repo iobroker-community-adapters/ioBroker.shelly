@@ -177,7 +177,7 @@ function createDeviceStates(deviceId, description, data) {
         if (dp) {
           let tmpId = deviceId + '.' + b.D + '.' + dp.name; // Status ID in ioBroker
           let value = getStateBySenId(s.I, data); // Status for Sensor ID
-          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,s.I)] = tmpId; // remember the link Shelly ID -> ioBroker ID
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)] = tmpId; // remember the link Shelly ID -> ioBroker ID
           // SHSW-44#06231A#1.Relay0.W -> State
           objectHelper.setOrUpdateObject(tmpId, {
             type: 'state',
@@ -263,7 +263,7 @@ function updateDeviceStates(deviceId, data) {
   // tranfer Array to Object
   let dataObj = statusArrayToObject(data);
   Object.entries(dataObj).forEach(([id, value]) => {
-    let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,id)]; // get ioBroker Id
+    let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)]; // get ioBroker Id
     if (ioBrokerId) {
       adapter.setState(ioBrokerId, {
         val: value,
@@ -297,10 +297,35 @@ function main() {
   });
 
   shelly.discoverDevices((err, desc) => {
+
+    if (!err) {
+      objectHelper.processObjectQueue(() => {
+        adapter.subscribeStates('*');
+        adapter.log.info('initialization done');
+      });
+    }
+
+    for (let deviceId in desc) {
+      if (!desc.hasOwnProperty(deviceId)) continue;
+
+      adapter.log.info('Discovered ' + deviceId + ': ' + JSON.stringify(desc[deviceId]));
+
+      shelly.getDeviceStatus(deviceId, (err, data) => {
+        if (!err && data) {
+          createDeviceStates(deviceId, desc[deviceId], data);
+        }
+      });
+    }
+  });
+
+/*
+  shelly.discoverDevices((err, desc) => {
+
     if (err) {
       //Error colorhandling
       return;
     }
+
     let deviceCounter = 0;
     for (let deviceId in desc) {
       if (!desc.hasOwnProperty(deviceId)) continue;
@@ -309,11 +334,9 @@ function main() {
       deviceCounter++;
 
       shelly.getDeviceStatus(deviceId, (err, data) => {
-        if (err) {
-          //Error colorhandling
-          return;
+        if (!err && data) {
+          createDeviceStates(deviceId, desc[deviceId], data);
         }
-        createDeviceStates(deviceId, desc[deviceId], data);
         if (!--deviceCounter) { // we have created everything initially
 
           objectHelper.processObjectQueue(() => {
@@ -325,5 +348,5 @@ function main() {
       });
     }
   });
-
+*/
 }
