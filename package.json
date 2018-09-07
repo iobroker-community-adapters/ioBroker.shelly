@@ -29,9 +29,9 @@
     "url": "https://github.com/schmupu/ioBroker.shelly"
   },
   "dependencies": {
-    "shelly-iot": "Apollon77/shelly-iot",
     "ping": "^0.2.1",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "shelly-iot": "github:Apollon77/shelly-iot"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

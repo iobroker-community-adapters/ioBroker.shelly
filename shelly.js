@@ -63,44 +63,81 @@ adapter.on('ready', function() {
 
 // get Value by Sensor ID
 function getStateBySenId(sid, data) {
-
-  for (let g in data.G) {
-    let senId = data.G[g][1]; // Sensor ID
-    let senValue = data.G[g][2]; // Value
-    if (sid == senId) return senValue;
+  if (data && data.G) {
+    for (let i in data.G) {
+      let g = data.G[i];
+      let senId = g[1]; // Sensor ID
+      let senValue = g[2]; // Value
+      if (sid == senId) {
+        return senValue;
+      }
+    }
   }
   return undefined;
 }
 
+// array with all sen for a block ID
 function getSenByBlkID(blockId, sen) {
-
   let arr = [];
   let cnt = 0;
-
-  for (let s in sen) {
-    if (blockId == sen[s].L) {
-      arr[++cnt] = sen[s];
-    }
+  if (sen) {
+    sen.forEach(function(s) {
+      if (blockId == s.L) {
+        arr[++cnt] = s;
+      }
+    });
   }
-
   return arr;
 }
 
+// array with all actions for a block ID
 function getActByBlkID(blockId, act) {
-
   let arr = [];
   let cnt = 0;
-
-  for (let a in act) {
-    if (blockId == act[a].L) {
-      arr[++cnt] = act[a];
-    }
+  if (act) {
+    act.forEach(function(a) {
+      if (blockId == a.L) {
+        arr[++cnt] = a;
+      }
+    });
   }
-
   return arr;
 }
 
 
+function getDeviceIdSenIdfromIoBrokerId(ioBrokerId) {
+  const regex = /(.+)#S#(.+)/gm;
+  let m;
+  if ((m = regex.exec(ioBrokerId)) !== null) {
+    return {
+      id: m[1],
+      senId: m[1]
+    };
+  } else {
+    return {};
+  }
+}
+
+function getIoBrokerIdfromDeviceIdSenId(deviceId, senId) {
+  return deviceId + '#S#' + senId
+}
+
+function getDeviceIdActIdfromIoBrokerId(ioBrokerId) {
+  const regex = /(.+)#A#(.+)/gm;
+  let m;
+  if ((m = regex.exec(ioBrokerId)) !== null) {
+    return {
+      id: m[1],
+      actId: m[1]
+    };
+  } else {
+    return {};
+  }
+}
+
+function getIoBrokerIdfromDeviceIdActId(deviceId, actId) {
+  return deviceId + '#A#' + actId
+}
 
 function createDeviceStates(deviceId, description, data) {
   knownDevices[deviceId] = description; // remember the device data
@@ -116,39 +153,31 @@ function createDeviceStates(deviceId, description, data) {
   if (description && description.description) {
 
     let blk = description.description.blk || [];
-
-    for (let b in blk) {
-
-      let blkId = blk[b].I; // Block ID
-      let blkDescr = blk[b].D; // Block Descrition
-      let sen = getSenByBlkID(blkId, description.description.sen); // Sensoren for this Block
-      let act = getActByBlkID(blkId, description.description.act); // Actions for this Block
-
+    // Loop over block
+    blk.forEach(function(b) {
+      // Block ID:         b.I
+      // Block Descrition: b.D
+      let sen = getSenByBlkID(b.I, description.description.sen); // Sensoren for this Block
+      let act = getActByBlkID(b.I, description.description.act); // Actions for this Block
       // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
-      objectHelper.setOrUpdateObject(deviceId + '.' + blkDescr, {
+      objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
         type: 'channel',
         common: {
-          name: blkDescr
+          name: b.D
         }
       });
-
-
-      for (let s in sen) {
-
-        let senId = sen[s].I; // Sensor ID
-        let senDescr = sen[s].D; // Sensor Descrition
-        let senType = sen[s].T; // Sensor Type^
-        let senRange = sen[s].R; // Sensor Role
-        let senLink = sen[s].L; // Sensor Link to Block ID
-        let dp = datapoints.getSensor(sen[s]);
-
+      // Loop over sensor
+      sen.forEach(function(s) {
+        // Sensor ID:               s.I
+        // Sensor Descrition:       s.D
+        // Sensor Type:             s.T
+        // Sensor Role:             s.R
+        // Sensor Link to Block ID: s.L
+        let dp = datapoints.getSensor(s);
         if (dp) {
-
-          let tmpId = deviceId + '.' + blkDescr + '.' + dp.name; // Status ID in ioBroker
-          let value = getStateBySenId(senId, data); // Status for Sensor ID
-
-          sensorIoBrokerIDs[deviceId + '#' + senId] = tmpId; // remember the link Shelly ID -> ioBroker ID
-
+          let tmpId = deviceId + '.' + b.D + '.' + dp.name; // Status ID in ioBroker
+          let value = getStateBySenId(s.I, data); // Status for Sensor ID
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,s.I)] = tmpId; // remember the link Shelly ID -> ioBroker ID
           // SHSW-44#06231A#1.Relay0.W -> State
           objectHelper.setOrUpdateObject(tmpId, {
             type: 'state',
@@ -164,14 +193,12 @@ function createDeviceStates(deviceId, description, data) {
               unit: dp.unit
             }
           }, value);
-
         }
+      });
 
-      }
+      act.forEach(function(a) {});
 
-      for (let a in act) {}
-
-    }
+    });
 
     // SHSW-44#06231A#1.Relay0 -> Channel
     //objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'channel', common: {name: 'Relay0'}});
@@ -207,39 +234,43 @@ function createDeviceStates(deviceId, description, data) {
 function statusArrayToObject(data) {
 
   let obj = {};
-  for (let i in data.G) {
-    obj[data.G[i][1]] = data.G[i][2]; // id = val
+  if (data && data.G) {
+    data.G.forEach(function(g) {
+      obj[g[1]] = g[2]; // id = val
+    });
   }
   return obj;
-
 }
 
 
-
+// Update Status
 function updateDeviceStates(deviceId, data) {
-
-  if (data) {
-
-    for (let g in data.G) {
-
-      let senId = data.G[g][1];
-      let senValue = data.G[g][2];
-      let tmpId = deviceId + '#' + senId;
-      let ioBrokerId = sensorIoBrokerIDs[tmpId]; // get ioBroker Id
-
+  /*
+  if (data && data.G) {
+    data.G.forEach(function(g) {
+      let senId = g[1]; // Id
+      let senValue = g[2]; // Value
+      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,senId)]; // get ioBroker Id
       if (ioBrokerId) {
-
         adapter.setState(ioBrokerId, {
           val: senValue,
           ack: true
         });
-
       }
-
-    }
-
+    });
   }
-
+  */
+  // tranfer Array to Object
+  let dataObj = statusArrayToObject(data);
+  Object.entries(dataObj).forEach(([id, value]) => {
+    let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,id)]; // get ioBroker Id
+    if (ioBrokerId) {
+      adapter.setState(ioBrokerId, {
+        val: value,
+        ack: true
+      });
+    }
+  });
 }
 
 // main function
