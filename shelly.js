@@ -273,6 +273,13 @@ function updateDeviceStates(deviceId, data) {
   });
 }
 
+function initDone() {
+    objectHelper.processObjectQueue(() => {
+      adapter.subscribeStates('*');
+      adapter.log.info('initialization done');
+    });
+}
+
 // main function
 function main() {
   objectHelper.init(adapter);
@@ -299,6 +306,8 @@ function main() {
   shelly.discoverDevices((err, desc) => {
     if (err) {
       //Error colorhandling
+      adapter.log.error(err);
+      initDone();
       return;
     }
     let deviceCounter = 0;
@@ -309,21 +318,22 @@ function main() {
       deviceCounter++;
 
       shelly.getDeviceStatus(deviceId, (err, data) => {
-        if (err) {
-          //Error colorhandling
-          return;
+        if (!err && data) {
+          // if we got a description, process it and create all objects in queue
+          createDeviceStates(deviceId, desc[deviceId], data);
         }
-        createDeviceStates(deviceId, desc[deviceId], data);
-        if (!--deviceCounter) { // we have created everything initially
-
-          objectHelper.processObjectQueue(() => {
-            adapter.subscribeStates('*');
-            adapter.log.info('initialization done');
-          });
+        else {
+          // else log the error
+          adapter.log.error(err);
+        }
+        if (!--deviceCounter) { // all requests came with an answer or error, we are done
+          initDone();
         }
 
       });
     }
+    // if no devices were found, we still are ok because we add them when they come later
+    if (!deviceCounter) initDone();
   });
 
 }
