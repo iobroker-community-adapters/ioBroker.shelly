@@ -24,7 +24,7 @@
     ],
     "platform": "Javascript/Node.js",
     "mode": "daemon",
-    "icon": "lupusec.png",
+    "icon": "admin/shelly.png",
     "materialize": true,
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/schmupu/ioBroker.shelly/master/admin/shelly.png",
@@ -35,8 +35,10 @@
     "restartAdapters": []
   },
   "native": {
-    "host": "",
-    "port": ""
+    "keys": [{
+      "hosts": "",
+      "devids": ""
+    }]
   },
   "objects": [],
   "instanceObjects": []

@@ -4,196 +4,250 @@
   <!-- these 4 files always have to be included -->
   <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
   <link rel="stylesheet" type="text/css" href="../../css/adapter.css" />
-
   <script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
-
-
   <!-- these files always have to be included -->
   <script type="text/javascript" src="../../js/translate.js"></script>
   <script type="text/javascript" src="../../lib/js/materialize.js"></script>
   <script type="text/javascript" src="../../js/adapter-settings.js"></script>
   <script type="text/javascript" src="words.js"></script>
-  <style>
-    .m .col .select-wrapper+label {
-      top: -26px;
-    }
 
-    .m span {
-      font-size: 0.9em;
-    }
-  </style>
-  <!-- you have to define 2 functions in the global scope: -->
+
   <script type="text/javascript">
-    // the function loadSettings has to exist ...
+    var devices = [];
+    var active = false;
+    var g_onChange;
+    var SEP = '_';
+
+    if (typeof _ !== 'function') _ = translateWord;
+
+
     function load(settings, onChange) {
-      // example: select elements with id=key and class=value and insert value
-      if (!settings) return;
-      $('.value').each(function() {
-        var $key = $(this);
-        var id = $key.attr('id');
-        if ($key.attr('type') === 'checkbox') {
-          // do not call onChange direct, because onChange could expect some arguments
-          $key.prop('checked', settings[id]).change(function() {
+      g_onChange = onChange;
+
+
+      getIPs(function(ips) {
+        for (var i = 0; i < ips.length; i++) {
+          $('#bind').append('<option value="' + ips[i].address + '">' + ips[i].name + '</option>');
+        }
+        $('#bind.value').val(settings.bind).select();
+      });
+
+
+      $('#values').on('click', function() {
+        //checkDevices();
+      });
+
+      function checkDevices() {
+        console.log("Ceck devices");
+        var oldDev = table2values('values');
+        var newDev = [];
+        var tmpIp = [];
+        for (var i = 0; i < oldDev.length; i++) {
+          console.log(JSON.stringify(tmpIp));
+          if (!tmpIp.includes(oldDev[i].ip)) {
+            tmpIp.push(oldDev[i].ip);
+            newDev.push(oldDev[i]);
+            if (i === oldDev.length - 1) {
+              console.log("safe");
+              values2table('values', newDev, true);
+            }
+          }
+        }
+      };
+      //checkDevices();
+
+      socket.emit('getState', 'system.adapter.' + adapter + '.' + instance + '.alive', function(err, state) {
+        active = /*common.enabled ||*/ (state && state.val);
+      });
+
+      changed = true;
+      g_onChange = onChange;
+
+      function getVal(id) {
+        var ar = id.split(SEP);
+        var obj = settings;
+        for (var i = 0; i < ar.length - 1; i++) {
+          if (obj[ar[i]] === undefined) obj[ar[i]] = {};
+          obj = obj[ar[i]];
+        }
+        return obj[ar[ar.length - 1]];
+      }
+
+      function forAllKeys(obj, s, cb) {
+        var sep = SEP; //'.';
+        if (typeof s === 'function') {
+          cb = s;
+          s = '';
+        }
+        for (var i in obj) {
+          if (typeof obj[i] === 'object') {
+            if (Array.isArray(obj[i])) continue;
+            forAllKeys(obj[i], s ? s + sep + i : i, cb)
+          } else {
+            cb && cb(s ? s + sep + i : i);
+          }
+        }
+      }
+
+      //for (var key in settings) {
+      forAllKeys(settings, function(key) {
+        // example: select elements with id=key and class=value and insert value
+        var val = getVal(key);
+        if ($('#' + key + '.value').attr('type') == 'checkbox') {
+          $('#' + key + '.value').prop('checked', val).change(function() {
+            if ($('#auth').prop('checked')) {
+              $('#secure').prop('checked', true);
+            }
             onChange();
+            //showHideSettings();
           });
         } else {
-          // do not call onChange direct, because onChange could expect some arguments
-          $key.val(settings[id]).change(function() {
+          $('#' + key + '.value').val(val).change(function() {
             onChange();
           }).keyup(function() {
             onChange();
           });
         }
       });
-
-
-      $('#alarm_password_confirm').val($('#alarm_password').val());
-      init();
+      // Set default language
+      if (!settings.language) {
+        settings.language = systemLang || 'en';
+        $('#language').val(settings.language).trigger('change');
+      }
+      devices = settings.keys; // || [ {name: '', ip: "", mac: ""} ];
+      values2table('values', devices, onChange);
+      //changed = true;
       onChange(false);
-      M.updateTextFields(); // function Materialize.updateTextFields(); to reinitialize all the Materialize labels on the page if you are dynamically adding inputs.
     }
 
-    // ... and the function save has to exist.
-    // you have to make sure the callback is called with the settings object as first param!
+    function setVal(obj, id, val) {
+      var ar = id.split(SEP);
+      for (var i = 0; i < ar.length - 1; i++) {
+        if (obj[ar[i]] === undefined) obj[ar[i]] = {};
+        obj = obj[ar[i]];
+      }
+      obj[ar[ar.length - 1]] = val;
+    }
+
     function save(callback) {
-      // example: select elements with class=value and build settings object
       var obj = {};
+      changed = true;
       $('.value').each(function() {
-        var $this = $(this);
-        if ($this.attr('type') === 'checkbox') {
-          obj[$this.attr('id')] = $this.prop('checked');
-        } else {
-          obj[$this.attr('id')] = $this.val();
+        var $this = $(this),
+          val;
+        switch ($this.attr('type')) {
+          case 'checkbox':
+            val = $this.prop('checked');
+            break;
+          case 'number':
+          case 'value':
+            val = ~~$this.val();
+            break;
+          default:
+            val = $this.val();
         }
+        setVal(obj, $this.attr('id'), val);
       });
-
-
-      if ($('#alarm_password').val() !== $('#alarm_password_confirm').val()) {
-           showMessage(_('Password confirmation is not equal with password'));
-           return;
-       }
-
-
+      obj.keys = table2values('values');
       callback(obj);
     }
+  </script>
+  <style>
+    .loader {
+      border: 4px solid #b8d1f3;
+      /* Light grey */
+      border-top: 4px solid #3498db;
+      /* Blue */
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      animation: spin 2s linear infinite;
+    }
 
-
-    function changeValue() {
-
-      var port;
-
-      if ($('#alarm_https').prop('checked') === true) {
-
-        if ($('#alarm_port').val() == 80) {
-
-          port = 443;
-          $('#alarm_port').val(port);
-
-        } else {
-
-          showMessage(_('Check Port. For https it should be normaly 443 and not ' + $('#alarm_port').val() + ' !'));
-
-        }
-
-      } else {
-
-        if ($('#alarm_port').val() == 443) {
-
-          port = 80;
-          $('#alarm_port').val(port);
-
-        } else {
-
-          showMessage(_('Check Port. For http it should be normaly 80 and not ' + $('#alarm_port').val() + ' !'));
-
-        }
-
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
       }
 
+      100% {
+        transform: rotate(360deg);
+      }
     }
-
-    function init() {
-      $('#alarm_https').on('change', changeValue);
-      // changeValue();
-    }
-  </script>
+  </style>
 </head>
+
 
 <body>
   <!-- you have to put your config page in a div with id adapter-container -->
   <div class="m adapter-container">
+
+    <!-- div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s2"><a href="#tab-main" class="translate active">Main settings</a></li>
+          <li class="tab col s2"><a href="#tab-keys" class="translate">Subscribers</a></li>
+        </ul>
+      </div -->
+
+    <!--div id="tab-main" class="col s12 page">
+
+        <div class="row">
+          <div class="input-field col s6">
+            <img src="shelly.png" class="logo">
+          </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12 m8 l5">
+              <select class="value" id="bind"></select>
+              <label class="translate" for="bind">IP:</label>
+            </div>
+            <div class="col s12 m4 l1">
+              <input class="value number" id="port" min="1" max="65565" type="number" />
+              <label class="translate" for="port">Port:</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12">
+              <p class="translate">on save adapter restarts with new config immediately</p>
+            </div>
+          </div>
+        </div-->
+    <!-- /div -->
+
+    <!-- div id="tab-keys" class="col s12 page" -->
+
     <div class="row">
-      <!-- Forms are the standard way to receive user inputted data.
-         Learn more http://materializecss.com/forms.html-->
-      <div class="row">
-        <div class="input-field col s6">
-          <img src="lupusec.png" class="logo">
+      <div class="input-field col s6">
+        <img src="shelly.png" class="logo">
         </div>
       </div>
 
-      <div class="row">
-        <div class="input-field col s12 m4 l4">
-          <select id="alarm_type" class="value">
-              <option value="lupusec_xt1_plus">Lupusec XT1 Plus</option>
-              <option value="lupusec_xt2">Lupusec XT2</option>
-              <option value="lupusec_xt2_plus">Lupusec XT2 Plus</option>
-              <option value="lupusec_xt3">Lupusec XT3</option>
-          </select>
-          <!-- label class="translate" for="alarm_type">alarm system:</label -->
+      <div id="values">
+        <div class="row">
+          <div class="col s12">
+            <a class="btn-floating waves-effect waves-light table-button-add"><i class="material-icons">add</i></a>
+          </div>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="input-field col s12 m8 l4">
-          <input id="alarm_host" type="text" size="50" class="value" />
-          <label class="translate" for="alarm_host">Host:</label>
-        </div>
-        <div class="input-field col s12 m4 l1">
-          <input class="value number" id="alarm_port" min="1" max="65565" type="number" />
-          <label class="translate" for="alarm_port">Port:</label>
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div class="input-field col s12">
-          <input class="value" id="alarm_https" type="checkbox" />
-          <label for="alarm_https" class="translate">https</label>
-        </div>
-
-        <div class="input-field col s12">
-          <input class="value" id="alarm_allstates" type="checkbox" />
-          <label for="alarm_allstates" class="translate">Show all fields (not recomended)</label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="input-field col s12 m6 l4">
-          <input id="alarm_user" type="text" size="30" class="value" />
-          <label class="translate" for="alarm_user">User:</label>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="input-field col s12 m6 l4">
-          <input id="alarm_password" type="password" size="30" class="value" />
-          <label class="translate" for="alarm_password">Password:</label>
-        </div>
-
-        <div class="input-field col s12 m6 l4">
-          <input id="alarm_password_confirm" type="password" size="30" class="value" />
-          <label class="translate" for="alarm_password_confirm">Confirm Password:</label>
-        </div>
-
-      </div>
-
-      <div class="row">
-        <div class="col s12">
-          <p class="translate">Adapter restarts with new config immediately</p>
+        <div class="row">
+          <div class="col s12">
+            <table class="table-values" style="width: 100%;">
+              <thead>
+                <tr>
+                  <th data-name="_index" style="width: 40px" class="translate"></th>
+                  <th data-name="hosts" style="width: 240px" data-style="width: 240px" class="translate" for="hosts">Hostname</th>
+                  <th data-name="devids" style="width: 120px" data-style="width: 120px" class="translate" for="devids">Shelly Deivce ID</th>
+                  <th data-buttons="delete" style="width: 40px"></th>
+                </tr>
+              </thead>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+    <!-- /div -->
   </div>
 </body>
 
