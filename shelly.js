@@ -245,12 +245,12 @@ function statusArrayToObject(data) {
 
 // Update Status
 function updateDeviceStates(deviceId, data) {
-  /*
+
   if (data && data.G) {
     data.G.forEach(function(g) {
       let senId = g[1]; // Id
       let senValue = g[2]; // Value
-      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,senId)]; // get ioBroker Id
+      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, senId)]; // get ioBroker Id
       if (ioBrokerId) {
         adapter.setState(ioBrokerId, {
           val: senValue,
@@ -258,26 +258,28 @@ function updateDeviceStates(deviceId, data) {
         });
       }
     });
+
+    /*
+    // tranfer Array to Object
+    let dataObj = statusArrayToObject(data);
+    Object.entries(dataObj).forEach(([id, value]) => {
+      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)]; // get ioBroker Id
+      if (ioBrokerId) {
+        adapter.setState(ioBrokerId, {
+          val: value,
+          ack: true
+        });
+      }
+    });
+    */
   }
-  */
-  // tranfer Array to Object
-  let dataObj = statusArrayToObject(data);
-  Object.entries(dataObj).forEach(([id, value]) => {
-    let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)]; // get ioBroker Id
-    if (ioBrokerId) {
-      adapter.setState(ioBrokerId, {
-        val: value,
-        ack: true
-      });
-    }
-  });
 }
 
 function initDone() {
-    objectHelper.processObjectQueue(() => {
-      adapter.subscribeStates('*');
-      adapter.log.info('initialization done');
-    });
+  objectHelper.processObjectQueue(() => {
+    adapter.subscribeStates('*');
+    adapter.log.info('initialization done');
+  });
 }
 
 // main function
@@ -303,29 +305,29 @@ function main() {
     updateDeviceStates(deviceId, status);
   });
 
-/*
-  shelly.discoverDevices((err, desc) => {
+  /*
+    shelly.discoverDevices((err, desc) => {
 
-    if (!err) {
-      objectHelper.processObjectQueue(() => {
-        adapter.subscribeStates('*');
-        adapter.log.info('initialization done');
-      });
-    }
+      if (!err) {
+        objectHelper.processObjectQueue(() => {
+          adapter.subscribeStates('*');
+          adapter.log.info('initialization done');
+        });
+      }
 
-    for (let deviceId in desc) {
-      if (!desc.hasOwnProperty(deviceId)) continue;
+      for (let deviceId in desc) {
+        if (!desc.hasOwnProperty(deviceId)) continue;
 
-      adapter.log.info('Discovered ' + deviceId + ': ' + JSON.stringify(desc[deviceId]));
+        adapter.log.info('Discovered ' + deviceId + ': ' + JSON.stringify(desc[deviceId]));
 
-      shelly.getDeviceStatus(deviceId, (err, data) => {
-        if (!err && data) {
-          createDeviceStates(deviceId, desc[deviceId], data);
-        }
-      });
-    }
-  });
-*/
+        shelly.getDeviceStatus(deviceId, (err, data) => {
+          if (!err && data) {
+            createDeviceStates(deviceId, desc[deviceId], data);
+          }
+        });
+      }
+    });
+  */
 
   shelly.discoverDevices((err, desc) => {
 
@@ -347,8 +349,7 @@ function main() {
         if (!err && data) {
           // if we got a description, process it and create all objects in queue
           createDeviceStates(deviceId, desc[deviceId], data);
-        }
-        else {
+        } else {
           // else log the error
           adapter.log.error(err);
         }
