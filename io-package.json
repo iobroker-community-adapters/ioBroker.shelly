@@ -10,12 +10,12 @@
     },
     "title": "Shelly",
     "titleLang": {
-      "en": "Shelly switch",
-      "de": "Shelly Schalter"
+      "en": "Shelly",
+      "de": "Shelly"
     },
     "desc": {
-      "en": "Shelly switch adapter",
-      "de": "Shelly Adapter für Schalter"
+      "en": "Shelly adapter",
+      "de": "Shelly Adapter"
     },
     "license": "MIT",
     "authors": [
