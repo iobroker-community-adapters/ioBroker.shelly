@@ -222,7 +222,7 @@ function createDeviceStates(deviceId, description, ip, data) {
                 const params = {
                   'turn': (value === true || value === 1) ? 'on' : 'off'
                 };
-                shelly.controlDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+                shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
               };
             }
           }
@@ -341,7 +341,7 @@ function initDevices(deviceIPs, callback) {
     return initDevices(deviceIPs, callback);
   }
 
-  shelly.controlDevice(device.native.ip, '/status', (err, data) => { // send REST call to devices IP to get status
+  shelly.callDevice(device.native.ip, '/status', (err, data) => { // send REST call to devices IP to get status
     if (err) {
       adapter.log.info('Error on status check for ' + device._id + ' with IP ' + device.native.ip + ', consider offline ...');
       adapter.setState(device._id + '.online', false, true);
