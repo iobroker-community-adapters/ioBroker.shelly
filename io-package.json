@@ -1,11 +1,11 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "news": {
-      "0.0.1": {
-        "en": "Empty template",
-        "de": "leere Hülle"
+      "0.1.0": {
+        "en": "Initial rough working version",
+        "de": "Intiale grob funktionierende Version"
       }
     },
     "title": "Shelly",
@@ -41,5 +41,27 @@
     }]
   },
   "objects": [],
-  "instanceObjects": []
+  "instanceObjects": [
+      {
+          "_id":  "info",
+          "type": "channel",
+          "common": {
+              "name": "Information"
+          },
+          "native": {}
+      },
+      {
+          "_id":  "info.connection",
+          "type": "state",
+          "common": {
+              "role":  "indicator.connected",
+              "name":  "If listening for Shelly packets",
+              "type":  "boolean",
+              "read":  true,
+              "write": false,
+              "def":   false
+          },
+          "native": {}
+      }
+  ]
 }

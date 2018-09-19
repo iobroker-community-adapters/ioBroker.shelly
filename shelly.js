@@ -11,15 +11,21 @@ const adapter = new utils.Adapter('shelly');
 const objectHelper = require(__dirname + '/lib/objectHelper'); // Get common adapter utils
 const datapoints = require(__dirname + '/lib/datapoints'); // Get common adapter utils
 const Shelly = require('shelly-iot');
+// use the following line instead above for the dummy data version!
+//const Shelly = require(__dirname + '/../../node_modules/shelly-iot/index-dummy.js');
 let shelly;
 
 const knownDevices = {};
 const sensorIoBrokerIDs = {};
+let isStopped = false;
+let connected = null;
 
 // is called when adapter shuts down - callback has to be called under any circumstances!
 adapter.on('unload', function(callback) {
   try {
+    setConnected(false);
     if (shelly) {
+      isStopped = true;
       shelly.stopListening(callback);
       return;
     }
@@ -32,16 +38,22 @@ adapter.on('unload', function(callback) {
 
 process.on('SIGINT', function() {
   if (shelly) {
+    isStopped = true;
     shelly.stopListening();
   }
+  setConnected(false);
 });
+
 process.on('uncaughtException', function(err) {
+  console.log('Exception: ' + err + '/' + err.toString());
   if (adapter && adapter.log) {
     adapter.log.warn('Exception: ' + err);
   }
   if (shelly) {
+    isStopped = true;
     shelly.stopListening();
   }
+  setConnected(false);
 });
 
 
@@ -50,9 +62,19 @@ adapter.on('stateChange', function(id, state) {
   // Warning, state can be null if it was deleted
   adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
 
-  objectHelper.handeStateChange(id, state);
+  objectHelper.handleStateChange(id, state);
 });
 
+function setConnected(isConnected) {
+    if (connected !== isConnected) {
+        connected = isConnected;
+        adapter.setState('info.connection', connected, true, (err) => {
+            // analyse if the state could be set (because of permissions)
+            if (err) adapter.log.error('Can not update connected state: ' + err);
+              else adapter.log.debug('connected set to ' + connected);
+        });
+    }
+}
 
 // is called when databases are connected and adapter received configuration.
 // start here!
@@ -119,7 +141,7 @@ function getDeviceIdSenIdfromIoBrokerId(ioBrokerId) {
 }
 
 function getIoBrokerIdfromDeviceIdSenId(deviceId, senId) {
-  return deviceId + '#S#' + senId
+  return deviceId + '#S#' + senId;
 }
 
 function getDeviceIdActIdfromIoBrokerId(ioBrokerId) {
@@ -136,10 +158,10 @@ function getDeviceIdActIdfromIoBrokerId(ioBrokerId) {
 }
 
 function getIoBrokerIdfromDeviceIdActId(deviceId, actId) {
-  return deviceId + '#A#' + actId
+  return deviceId + '#A#' + actId;
 }
 
-function createDeviceStates(deviceId, description, data) {
+function createDeviceStates(deviceId, description, ip, data) {
   knownDevices[deviceId] = description; // remember the device data
 
   adapter.log.info('Create states for ' + deviceId);
@@ -147,18 +169,31 @@ function createDeviceStates(deviceId, description, data) {
     type: 'device',
     common: {
       name: 'Device ' + deviceId
+    },
+    native: {
+      ip: ip
     }
   });
 
-  if (description && description.description) {
+  objectHelper.setOrUpdateObject(deviceId + '.online', {
+    type: 'state',
+    common: {
+      name: 'Device online status',
+      type: 'boolean',
+      role: 'indicator.reachable',
+      read: true,
+      write: false
+    }
+  }, true);
+  if (description && description) {
 
-    let blk = description.description.blk || [];
+    let blk = description.blk || [];
     // Loop over block
     blk.forEach(function(b) {
       // Block ID:         b.I
       // Block Descrition: b.D
-      let sen = getSenByBlkID(b.I, description.description.sen); // Sensoren for this Block
-      let act = getActByBlkID(b.I, description.description.act); // Actions for this Block
+      let sen = getSenByBlkID(b.I, description.sen); // Sensoren for this Block
+      let act = getActByBlkID(b.I, description.act); // Actions for this Block
       // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
       objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
         type: 'channel',
@@ -177,8 +212,23 @@ function createDeviceStates(deviceId, description, data) {
         if (dp) {
           let tmpId = deviceId + '.' + b.D + '.' + dp.name; // Status ID in ioBroker
           let value = getStateBySenId(s.I, data); // Status for Sensor ID
-          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)] = tmpId; // remember the link Shelly ID -> ioBroker ID
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,s.I)] = tmpId; // remember the link Shelly ID -> ioBroker ID
           // SHSW-44#06231A#1.Relay0.W -> State
+          let controlFunction;
+          if (true) { // TODO detect if action is existing in act for this s.D
+            if (b.D.startsWith('Relay') && s.T === 'Switch') { // Implement all needed action stuff here based on the names
+              const relayId = parseInt(b.D.substr(5), 10);
+              controlFunction = function(value) {
+                const params = {
+                  'turn': (value === true || value === 1) ? 'on' : 'off'
+                };
+                shelly.controlDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+              };
+            }
+          }
+          if (dp.type === 'boolean') {
+              value = !!value; // convert to boolean
+          }
           objectHelper.setOrUpdateObject(tmpId, {
             type: 'state',
             common: {
@@ -192,7 +242,7 @@ function createDeviceStates(deviceId, description, data) {
               states: dp.states,
               unit: dp.unit
             }
-          }, value);
+          }, value, controlFunction);
         }
       });
 
@@ -245,12 +295,12 @@ function statusArrayToObject(data) {
 
 // Update Status
 function updateDeviceStates(deviceId, data) {
-
+  /*
   if (data && data.G) {
     data.G.forEach(function(g) {
       let senId = g[1]; // Id
       let senValue = g[2]; // Value
-      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, senId)]; // get ioBroker Id
+      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,senId)]; // get ioBroker Id
       if (ioBrokerId) {
         adapter.setState(ioBrokerId, {
           val: senValue,
@@ -258,35 +308,66 @@ function updateDeviceStates(deviceId, data) {
         });
       }
     });
-
-    /*
-    // tranfer Array to Object
-    let dataObj = statusArrayToObject(data);
-    Object.entries(dataObj).forEach(([id, value]) => {
-      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)]; // get ioBroker Id
-      if (ioBrokerId) {
-        adapter.setState(ioBrokerId, {
-          val: value,
-          ack: true
-        });
-      }
-    });
-    */
   }
+  */
+  // tranfer Array to Object
+  let dataObj = statusArrayToObject(data);
+  Object.keys(dataObj).forEach((id) => {
+    let value = dataObj[id];
+    let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,id)]; // get ioBroker Id
+    const obj = objectHelper.getObject(ioBrokerId);
+    if (ioBrokerId) {
+      if (
+          obj.common &&
+          obj.common.type &&
+          obj.common.type === 'boolean'
+      ) {
+          value = !!value; // convert to boolean
+      }
+      adapter.setState(ioBrokerId, {
+        val: value,
+        ack: true
+      });
+    }
+  });
 }
 
-function initDone() {
-  objectHelper.processObjectQueue(() => {
-    adapter.subscribeStates('*');
-    adapter.log.info('initialization done');
+function initDevices(deviceIPs, callback) {
+  if (!deviceIPs.length) {
+      return callback && callback();
+  }
+  const device = deviceIPs.shift();
+  if (!device.native || !device.native.ip) {
+    return initDevices(deviceIPs, callback);
+  }
+
+  shelly.controlDevice(device.native.ip, '/status', (err, data) => { // send REST call to devices IP to get status
+    if (err) {
+      adapter.log.info('Error on status check for ' + device._id + ' with IP ' + device.native.ip + ', consider offline ...');
+      adapter.setState(device._id + '.online', false, true);
+      return initDevices(deviceIPs, callback);
+    }
+
+    shelly.getDeviceStatus(device.native.ip, (err, deviceId, payload, ip) => {
+      if (err) {
+        adapter.log.info('Error on status request for ' + device._id + ' with IP ' + device.native.ip + ', consider offline ...');
+        adapter.setState(device._id + '.online', false, true);
+      }
+      else {
+        shelly.emit('update-device-status', deviceId, payload);
+      }
+      initDevices(deviceIPs, callback);
+    });
   });
 }
 
 // main function
 function main() {
+  setConnected(false);
   objectHelper.init(adapter);
+
   const options = {
-    logger: adapter.log.info
+    logger: adapter.log.debug
   };
 
   shelly = new Shelly(options);
@@ -295,9 +376,11 @@ function main() {
     adapter.log.info('Status update received for ' + deviceId + ': ' + JSON.stringify(status));
 
     if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
-      shelly.getDeviceDescription(deviceId, (err, description) => {
-        createDeviceStates(deviceId, description, status);
-        objectHelper.processObjectQueue();
+      shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
+        createDeviceStates(deviceId, description, ip, status);
+        objectHelper.processObjectQueue(() => {
+          adapter.log.info('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
+        }); // if device is added later, create all objects
       });
       return;
     }
@@ -305,62 +388,39 @@ function main() {
     updateDeviceStates(deviceId, status);
   });
 
-  /*
-    shelly.discoverDevices((err, desc) => {
+  shelly.on('device-connection-status', (deviceId, connected) => {
+    adapter.log.info('Connection update received for ' + deviceId + ': ' + connected);
 
-      if (!err) {
-        objectHelper.processObjectQueue(() => {
-          adapter.subscribeStates('*');
-          adapter.log.info('initialization done');
-        });
-      }
-
-      for (let deviceId in desc) {
-        if (!desc.hasOwnProperty(deviceId)) continue;
-
-        adapter.log.info('Discovered ' + deviceId + ': ' + JSON.stringify(desc[deviceId]));
-
-        shelly.getDeviceStatus(deviceId, (err, data) => {
-          if (!err && data) {
-            createDeviceStates(deviceId, desc[deviceId], data);
-          }
-        });
-      }
-    });
-  */
-
-  shelly.discoverDevices((err, desc) => {
-
-    if (err) {
-      //Error colorhandling
-      adapter.log.error(err);
-      initDone();
-      return;
+    if (knownDevices[deviceId]) {
+        adapter.setState(deviceId + '.online', connected, true);
     }
-
-    let deviceCounter = 0;
-    for (let deviceId in desc) {
-      if (!desc.hasOwnProperty(deviceId)) continue;
-
-      adapter.log.info('Discovered ' + deviceId + ': ' + JSON.stringify(desc[deviceId]));
-      deviceCounter++;
-
-      shelly.getDeviceStatus(deviceId, (err, data) => {
-        if (!err && data) {
-          // if we got a description, process it and create all objects in queue
-          createDeviceStates(deviceId, desc[deviceId], data);
-        } else {
-          // else log the error
-          adapter.log.error(err);
-        }
-        if (!--deviceCounter) { // all requests came with an answer or error, we are done
-          initDone();
-        }
-
-      });
-    }
-    // if no devices were found, we still are ok because we add them when they come later
-    if (!deviceCounter) initDone();
   });
 
-}
+  shelly.on('error', (err) => {
+    adapter.log.info('Error handling Shelly data: ' + err);
+  });
+
+  shelly.on('disconnect', () => {
+    if (!isStopped) {
+      setConnected(false);
+      adapter.log.info('Reconnecting ...');
+      setTimeout(() => {
+        shelly.listen(() => {
+          setConnected(true);
+        });
+      }, 2000);
+    }
+  });
+
+  adapter.getDevices((err, devices) => {
+    initDevices(devices, () => {
+      shelly.listen(() => {
+        setConnected(true);
+        shelly.discoverDevices(() => {
+            adapter.log.info('Listening for Shelly packets in the network');
+            adapter.subscribeStates('*');
+          });
+        });
+      });
+    });
+  }
