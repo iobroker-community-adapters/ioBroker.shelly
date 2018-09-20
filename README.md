@@ -10,22 +10,24 @@
 
 Requires node.js 6.0 or higher and Admin v3!
 
-This adapter .....
+The adapter communicates with Shelly devices by rest api and the CoAP protocol and default Shelly firmware (no flashing of firmware needed!).
+Because CoAP use multicast packages, the Shelly devices has to be in the same subnet like ioBroker.
+If you use ioBroker in a docker container, the container has to run in host or macvlan modus.  
 
+In the future, we plan to support and implement the MQTT protocol. Assumed the Shelly devices supports MQTT in the default firmware. This is planed in one of the upcoming firmwares for the Shelly switch devices.  
 
-You can find detailed information here: [Shelly](https://shelly.cloud/)
+You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
 
 ## Installation
 
 1. Install the adapter
-
-2. Configuration of the adapter
+2. No configuration needed. Shelly devices will be added automatically. Sometimes you have to reboot the shelly device before it appear in ioBroker.
 
 
 ## Changelog
 
-### 0.0.1 (03.09.2018)
-* (Stübi) Empty Template
+### 0.1.0 (20.09.2018)
+* First Version. Supported are all Shelly switches like Shelly 1, Shelly 2, Shelly 4 and the power socket.
 
 
 ## License

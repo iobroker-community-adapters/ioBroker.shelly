@@ -4,18 +4,39 @@
     "version": "0.1.0",
     "news": {
       "0.1.0": {
-        "en": "Initial rough working version",
-        "de": "Intiale grob funktionierende Version"
+        "en": "Initiale Shelly Adapter Version",
+        "de": "Initiale Shelly Adapter Version",
+        "ru": "Версия Initiale Shelly Adapter",
+        "pt": "Versão do Adaptador Initiale Shelly",
+        "nl": "Initiale Shelly-adapterversie",
+        "fr": "Initiale Shelly Adapter Version",
+        "it": "Versione dell'adattatore Initiale Shelly",
+        "es": "Initiale Shelly Adapter Version",
+        "pl": "Initiale Shelly Adapter Version"
       }
     },
     "title": "Shelly",
     "titleLang": {
       "en": "Shelly",
-      "de": "Shelly"
+      "de": "Shelly",
+      "ru": "изобилующий раковинами",
+      "pt": "Shelly",
+      "nl": "schaalachtig",
+      "fr": "Shelly",
+      "it": "Shelly",
+      "es": "Shelly",
+      "pl": "Shelly"
     },
     "desc": {
-      "en": "Shelly adapter",
-      "de": "Shelly Adapter"
+      "en": "Shelly Adapter",
+      "de": "Shelly Adapter",
+      "ru": "Шестигранный адаптер",
+      "pt": "Adaptador Shelly",
+      "nl": "Shelly-adapter",
+      "fr": "Adaptateur Shelly",
+      "it": "Adattatore Shelly",
+      "es": "Adaptador Shelly",
+      "pl": "Adapter Shelly"
     },
     "license": "MIT",
     "authors": [
@@ -41,27 +62,26 @@
     }]
   },
   "objects": [],
-  "instanceObjects": [
-      {
-          "_id":  "info",
-          "type": "channel",
-          "common": {
-              "name": "Information"
-          },
-          "native": {}
+  "instanceObjects": [{
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
       },
-      {
-          "_id":  "info.connection",
-          "type": "state",
-          "common": {
-              "role":  "indicator.connected",
-              "name":  "If listening for Shelly packets",
-              "type":  "boolean",
-              "read":  true,
-              "write": false,
-              "def":   false
-          },
-          "native": {}
-      }
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "If listening for Shelly packets",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
   ]
 }
