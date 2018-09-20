@@ -27,7 +27,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 ## Changelog
 
 ### 0.1.0 (20.09.2018)
-* First Version. Supported are all Shelly switches like Shelly 1, Shelly 2, Shelly 4 and the power socket.
+* First Version. Supports all Shelly switches like Shelly 1, Shelly 2, Shelly 4 and the power sockets.
 
 
 ## License
