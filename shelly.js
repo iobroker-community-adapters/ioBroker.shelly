@@ -183,7 +183,7 @@ function getIoBrokerIdfromDeviceIdActId(deviceId, actId) {
   return deviceId + '#A#' + actId;
 }
 
-// create sensor 
+// create sensor
 function createSensorStates(deviceId, b, s, data) {
   let dp = datapoints.getSensor(s);
   if (dp) {
@@ -246,6 +246,18 @@ function createDeviceStates(deviceId, description, ip, data) {
       write: false
     }
   }, true);
+  adapter.log.debug('Create state object for ' + deviceId + '.hostname' + ' if not exist');
+  objectHelper.setOrUpdateObject(deviceId + '.hostname', {
+    type: 'state',
+    common: {
+      name: 'Device hostname',
+      type: 'string',
+      role: 'info.ip',
+      read: true,
+      write: false
+    }
+  }, ip);
+
   if (description && description) {
     let blk = description.blk || [];
     // Loop over block
