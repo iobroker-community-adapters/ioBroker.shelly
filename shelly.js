@@ -12,7 +12,7 @@ const objectHelper = require(__dirname + '/lib/objectHelper'); // Get common ada
 const datapoints = require(__dirname + '/lib/datapoints'); // Get common adapter utils
 const Shelly = require('shelly-iot');
 // use the following line instead above for the dummy data version!
-//const Shelly = require(__dirname + '/../../node_modules/shelly-iot/index-dummy.js');
+//const Shelly = require(__dirname + '/node_modules/shelly-iot/index-dummy.js');
 let shelly;
 
 const knownDevices = {};
@@ -60,7 +60,7 @@ process.on('uncaughtException', function(err) {
 // is called if a subscribed state changes
 adapter.on('stateChange', function(id, state) {
   // Warning, state can be null if it was deleted
-  adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
+  adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
 
   objectHelper.handleStateChange(id, state);
 });
@@ -164,7 +164,7 @@ function getIoBrokerIdfromDeviceIdActId(deviceId, actId) {
 function createDeviceStates(deviceId, description, ip, data) {
   knownDevices[deviceId] = description; // remember the device data
 
-  adapter.log.info('Create states for ' + deviceId);
+  adapter.log.debug('Create device object for ' + deviceId + ' if not exist');
   objectHelper.setOrUpdateObject(deviceId, {
     type: 'device',
     common: {
@@ -175,6 +175,7 @@ function createDeviceStates(deviceId, description, ip, data) {
     }
   });
 
+  adapter.log.debug('Create state object for ' + deviceId + '.online'  + ' if not exist');
   objectHelper.setOrUpdateObject(deviceId + '.online', {
     type: 'state',
     common: {
@@ -215,7 +216,8 @@ function createDeviceStates(deviceId, description, ip, data) {
           sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,s.I)] = tmpId; // remember the link Shelly ID -> ioBroker ID
           // SHSW-44#06231A#1.Relay0.W -> State
           let controlFunction;
-          if (true) { // TODO detect if action is existing in act for this s.D
+
+          if (dp.write === true) { // check if it is allwoed to change datapoint (state)
             if (b.D.startsWith('Relay') && s.T === 'Switch') { // Implement all needed action stuff here based on the names
               const relayId = parseInt(b.D.substr(5), 10);
               controlFunction = function(value) {
@@ -250,39 +252,12 @@ function createDeviceStates(deviceId, description, ip, data) {
 
     });
 
-    // SHSW-44#06231A#1.Relay0 -> Channel
-    //objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'channel', common: {name: 'Relay0'}});
-    /*
-      Weiter vllt:
-      deviceId.block-name als "Channel" und danndarunter .status, Also:
-      SHSW-44#06231A#1 -> device
-      objectHelper.setOrUpdateObject(deviceId, {type: 'device', common: {name: 'Device ' + deviceId}});
-
-      SHSW-44#06231A#1.Relay0 -> Channel
-      objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'channel', common: {name: 'Relay0'}});
-
-      SHSW-44#06231A#1.Relay0.W -> State
-      objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'state', common: {name: '...', type:'...', role'...''}}, value);
-      SHSW-44#06231A#1.Relay0.Switch -> State
-
-      und am besten in einem extra array/objekt merken welches device und "ID" welcher Statename ist das dues in updateDeviceStates nutzen knnst
-
-      Und bei den States die später änderbar sind kann bei dem "setorUpdateObject" noch ein callback als letzter Parameter mitgegeben werden:
-
-      objectHelper.setOrUpdateObject(deviceId + '.' + 'Relay0', {type: 'state', common: {name: '...', type:'...', role'...''}}, value, (value) => {
-          // Code that should be executed for state change here
-      });
-
-    */
-
   }
 
 }
 
-
 // transfer Status array to an object
 function statusArrayToObject(data) {
-
   let obj = {};
   if (data && data.G) {
     data.G.forEach(function(g) {
@@ -292,24 +267,8 @@ function statusArrayToObject(data) {
   return obj;
 }
 
-
 // Update Status
 function updateDeviceStates(deviceId, data) {
-  /*
-  if (data && data.G) {
-    data.G.forEach(function(g) {
-      let senId = g[1]; // Id
-      let senValue = g[2]; // Value
-      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId,senId)]; // get ioBroker Id
-      if (ioBrokerId) {
-        adapter.setState(ioBrokerId, {
-          val: senValue,
-          ack: true
-        });
-      }
-    });
-  }
-  */
   // tranfer Array to Object
   let dataObj = statusArrayToObject(data);
   Object.keys(dataObj).forEach((id) => {
@@ -373,13 +332,13 @@ function main() {
   shelly = new Shelly(options);
 
   shelly.on('update-device-status', (deviceId, status) => {
-    adapter.log.info('Status update received for ' + deviceId + ': ' + JSON.stringify(status));
+    adapter.log.debug('Status update received for ' + deviceId + ': ' + JSON.stringify(status));
 
     if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
       shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
         createDeviceStates(deviceId, description, ip, status);
         objectHelper.processObjectQueue(() => {
-          adapter.log.info('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
+          adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
         }); // if device is added later, create all objects
       });
       return;
@@ -389,7 +348,7 @@ function main() {
   });
 
   shelly.on('device-connection-status', (deviceId, connected) => {
-    adapter.log.info('Connection update received for ' + deviceId + ': ' + connected);
+    adapter.log.debug('Connection update received for ' + deviceId + ': ' + connected);
 
     if (knownDevices[deviceId]) {
         adapter.setState(deviceId + '.online', connected, true);
