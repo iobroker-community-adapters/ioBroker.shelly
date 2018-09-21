@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "Bug fixing",
+        "de": "Fehlerbehebung"
+      },
       "0.1.0": {
         "en": "Initiale Shelly Adapter Version",
         "de": "Initiale Shelly Adapter Version",

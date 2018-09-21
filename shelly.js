@@ -17,8 +17,10 @@ let shelly;
 
 const knownDevices = {};
 const sensorIoBrokerIDs = {};
+const sensorIoBrokerParamer = {};
 let isStopped = false;
 let connected = null;
+let ttt = 0;
 
 // is called when adapter shuts down - callback has to be called under any circumstances!
 adapter.on('unload', function(callback) {
@@ -61,8 +63,8 @@ process.on('uncaughtException', function(err) {
 adapter.on('stateChange', function(id, state) {
   // Warning, state can be null if it was deleted
   adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
-
   objectHelper.handleStateChange(id, state);
+
 });
 
 function setConnected(isConnected) {
@@ -183,13 +185,23 @@ function getIoBrokerIdfromDeviceIdActId(deviceId, actId) {
   return deviceId + '#A#' + actId;
 }
 
+function isObject(item) {
+  return (typeof item === "object" && !Array.isArray(item) && item !== null);
+}
+
 // create sensor
 function createSensorStates(deviceId, b, s, data) {
+
   let dp = datapoints.getSensor(s);
   if (dp) {
     let tmpId = b ? deviceId + '.' + b.D + '.' + dp.name : deviceId + '.' + dp.name; // Status ID in ioBroker
     let value = getStateBySenId(s.I, data); // Status for Sensor ID
-    sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)] = tmpId; // remember the link Shelly ID -> ioBroker ID
+    if (!sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)]) {
+      sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)] = {
+        id: tmpId,
+        param: {}
+      }; // remember the link Shelly ID -> ioBroker ID
+    }
     // SHSW-44#06231A#1.Relay0.W -> State
     let controlFunction;
     if (dp.write === true) { // check if it is allwoed to change datapoint (state)
@@ -197,7 +209,8 @@ function createSensorStates(deviceId, b, s, data) {
         const relayId = parseInt(b.D.substr(5), 10);
         controlFunction = function(value) {
           const params = {
-            'turn': (value === true || value === 1) ? 'on' : 'off'
+            'turn': (value === true || value === 1) ? 'on' : 'off',
+            'timer': sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer || 0
           };
           shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
         };
@@ -220,6 +233,36 @@ function createSensorStates(deviceId, b, s, data) {
         unit: dp.unit
       }
     }, value, controlFunction);
+
+    // get pseudo datapoints for sensor. for this psuedo sensor they will no
+    // data send by shelly devices
+    let addp = datapoints.getDepSensor(s);
+    addp.forEach(function(ddp) {
+      tmpId = b ? deviceId + '.' + b.D + '.' + ddp.name : deviceId + '.' + ddp.name; // Status ID in ioBroker
+      value = ddp.hasOwnProperty('def') ? ddp.def : undefined;
+      controlFunction = undefined;
+      // for timer set callback funtion
+      if (b && b.D.startsWith('Relay') && s.T === 'Switch' && ddp.name == 'Timer') {
+        controlFunction = function(value) {
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer = value;
+        };
+      }
+      objectHelper.setOrUpdateObject(tmpId, {
+        type: 'state',
+        common: {
+          name: ddp.name,
+          type: ddp.type,
+          role: ddp.role,
+          read: ddp.read,
+          write: ddp.write,
+          min: ddp.min,
+          max: ddp.max,
+          states: ddp.states,
+          unit: ddp.unit,
+        }
+      }, value, controlFunction);
+    });
+
   }
 }
 
@@ -306,20 +349,26 @@ function updateDeviceStates(deviceId, data) {
   let dataObj = statusArrayToObject(data);
   Object.keys(dataObj).forEach((id) => {
     let value = dataObj[id];
-    let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)]; // get ioBroker Id
-    const obj = objectHelper.getObject(ioBrokerId);
-    if (ioBrokerId) {
-      if (
-        obj.common &&
-        obj.common.type &&
-        obj.common.type === 'boolean'
-      ) {
-        value = !!value; // convert to boolean
+    if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)]) {
+      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].id; // get ioBroker Id
+      let oldValue = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value;
+      const obj = objectHelper.getObject(ioBrokerId);
+      if (ioBrokerId) {
+        if (
+          obj.common &&
+          obj.common.type &&
+          obj.common.type === 'boolean'
+        ) {
+          value = !!value; // convert to boolean
+        }
+        if (value != oldValue) {
+          adapter.setState(ioBrokerId, {
+            val: value,
+            ack: true
+          });
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value = value;
+        }
       }
-      adapter.setState(ioBrokerId, {
-        val: value,
-        ack: true
-      });
     }
   });
 }
