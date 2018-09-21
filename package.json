@@ -31,7 +31,7 @@
   "dependencies": {
     "ping": "^0.2.1",
     "request": "^2.79.0",
-    "shelly-iot": "github:Apollon77/shelly-iot"
+    "shelly-iot": "^0.1.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
