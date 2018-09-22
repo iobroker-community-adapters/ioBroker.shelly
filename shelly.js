@@ -20,7 +20,7 @@ const sensorIoBrokerIDs = {};
 const sensorIoBrokerParamer = {};
 let isStopped = false;
 let connected = null;
-let ttt = 0;
+
 
 // is called when adapter shuts down - callback has to be called under any circumstances!
 adapter.on('unload', function(callback) {
@@ -208,10 +208,18 @@ function createSensorStates(deviceId, b, s, data) {
       if (b && b.D.startsWith('Relay') && s.T === 'Switch') { // Implement all needed action stuff here based on the names
         const relayId = parseInt(b.D.substr(5), 10);
         controlFunction = function(value) {
-          const params = {
-            'turn': (value === true || value === 1) ? 'on' : 'off',
-            'timer': sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer || 0
-          };
+          let params;
+          // if timer > 0 sec. call rest with timer paramater
+          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer > 0) {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off',
+              'timer': sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer
+            };
+          } else {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off'
+            };
+          }
           shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
         };
       }
@@ -258,7 +266,7 @@ function createSensorStates(deviceId, b, s, data) {
           min: ddp.min,
           max: ddp.max,
           states: ddp.states,
-          unit: ddp.unit,
+          unit: ddp.unit
         }
       }, value, controlFunction);
     });
@@ -301,7 +309,8 @@ function createDeviceStates(deviceId, description, ip, data) {
     }
   }, ip);
 
-  if (description && description) {
+  if (description) {
+    let relay = 0;
     let blk = description.blk || [];
     // Loop over block
     blk.forEach(function(b) {
@@ -309,6 +318,11 @@ function createDeviceStates(deviceId, description, ip, data) {
       // Block Descrition: b.D
       let sen = getSenByBlkID(b.I, description.sen); // Sensoren for this Block
       let act = getActByBlkID(b.I, description.act); // Actions for this Block
+
+      if (b.D.startsWith('Relay')) {
+        relay++;
+      }
+
       // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
       objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
         type: 'channel',
@@ -329,6 +343,22 @@ function createDeviceStates(deviceId, description, ip, data) {
     sen.forEach(function(s) {
       createSensorStates(deviceId, null, s, data);
     });
+
+    // 2 Relais => Shelly 2
+    if (false && relay == 2) {
+      let b = {
+        'I': 999,
+        'D': 'Shutter'
+      };
+      let s = {
+        'I': 999,
+        'T': 'Shutter',
+        'D': 'Shutter',
+        'L': 999
+      };
+      createSensorStates(deviceId, b, s, data);
+    }
+
   }
 }
 
