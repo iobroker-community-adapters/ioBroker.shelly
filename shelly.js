@@ -225,27 +225,27 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'Shutter') {
         controlFunction = function(value) {
-          let relay0 = 'off';
-          let relay1 = 'on';
+          let param = {};
           switch (value) {
             case 1:
-              relay0 = 'on';
-              relay1 = 'off';
+              param = {
+                'go': 'open'
+              };
               break;
             case 2:
-              relay0 = 'off';
-              relay1 = 'on';
+              param = {
+                'go': 'close'
+              };
               break;
             default:
-              relay0 = 'off';
-              relay1 = 'off';
+              param = {
+                'go': 'stop'
+              };
           }
-          shelly.callDevice(deviceId, '/relay/0', {
-            'turn': relay0
-          });
-          shelly.callDevice(deviceId, '/relay/1', {
-            'turn': relay1
-          });
+          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.duration > 0) {
+            param.duration = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.duration;
+          }
+          shelly.callDevice(deviceId, '/roller/0', param);
         };
       }
     }
@@ -276,6 +276,11 @@ function createSensorStates(deviceId, b, s, data) {
       controlFunction = undefined;
       // for timer set callback funtion
       if (b && b.D.startsWith('Relay') && s.T === 'Switch' && ddp.name == 'Timer') {
+        controlFunction = function(value) {
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer = value;
+        };
+      }
+      if (b && b.D.startsWith('Shutter') && s.T === 'Shutter' && ddp.name == 'Duration') {
         controlFunction = function(value) {
           sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer = value;
         };
