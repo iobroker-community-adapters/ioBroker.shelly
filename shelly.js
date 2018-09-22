@@ -199,7 +199,8 @@ function createSensorStates(deviceId, b, s, data) {
     if (!sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)]) {
       sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)] = {
         id: tmpId,
-        param: {}
+        param: {},
+        value: value
       }; // remember the link Shelly ID -> ioBroker ID
     }
     // SHSW-44#06231A#1.Relay0.W -> State
@@ -310,7 +311,6 @@ function createDeviceStates(deviceId, description, ip, data) {
   }, ip);
 
   if (description) {
-    let relay = 0;
     let blk = description.blk || [];
     // Loop over block
     blk.forEach(function(b) {
@@ -318,10 +318,6 @@ function createDeviceStates(deviceId, description, ip, data) {
       // Block Descrition: b.D
       let sen = getSenByBlkID(b.I, description.sen); // Sensoren for this Block
       let act = getActByBlkID(b.I, description.act); // Actions for this Block
-
-      if (b.D.startsWith('Relay')) {
-        relay++;
-      }
 
       // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
       objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
@@ -345,7 +341,7 @@ function createDeviceStates(deviceId, description, ip, data) {
     });
 
     // 2 Relais => Shelly 2
-    if (false && relay == 2) {
+    if (false && deviceId.startsWith('SHSW-2')) {
       let b = {
         'I': 999,
         'D': 'Shutter'
