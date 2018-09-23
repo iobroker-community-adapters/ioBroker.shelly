@@ -56,7 +56,7 @@
     "keywords": ["shelly", "switch", "smarthome", "iobroker"],
     "readme": "https://github.com/schmupu/ioBroker.shelly/blob/master/README.md",
     "loglevel": "info",
-    "type": "switch",
+    "type": "iot-systems",
     "restartAdapters": []
   },
   "native": {
