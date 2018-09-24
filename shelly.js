@@ -315,7 +315,7 @@ function createDeviceStates(deviceId, description, ip, data) {
     native: {
       ip: ip
     }
-  });
+  }, ['name']);
   adapter.log.debug('Create state object for ' + deviceId + '.online' + ' if not exist');
   objectHelper.setOrUpdateObject(deviceId + '.online', {
     type: 'state',
@@ -411,7 +411,7 @@ function updateShutter(deviceId) {
         valRelay1 = sensorIoBrokerIDs[prop].value;
       }
       if (ioBrokerId.endsWith('Shutter.Shutter')) {
-        valSwitch = sensorIoBrokerIDs[prop].value;;
+        valSwitch = sensorIoBrokerIDs[prop].value;
         senSwitch = sensorIoBrokerIDs[prop];
       }
     }
