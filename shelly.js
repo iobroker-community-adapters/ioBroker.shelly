@@ -260,6 +260,15 @@ function createSensorStates(deviceId, b, s, data) {
           shelly.callDevice(deviceId, '/roller/0', params);
         };
       }
+      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterStop') {
+        controlFunction = function(value) {
+          let params = {
+            'go': 'stop'
+          };
+          adapter.log.debug("RollerStop: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/roller/0', params);
+        };
+      }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDuration') {
         controlFunction = function(value) {
           sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration = value || 0;
@@ -408,6 +417,14 @@ function createDeviceStates(deviceId, description, ip, data) {
       s = {
         'I': 'customer112',
         'T': 'ShutterDown',
+        'D': 'Shutter',
+        'L': 'customer0'
+      };
+      createSensorStates(deviceId, b, s, data);
+      // up and down
+      s = {
+        'I': 'customer113',
+        'T': 'ShutterStop',
         'D': 'Shutter',
         'L': 'customer0'
       };
