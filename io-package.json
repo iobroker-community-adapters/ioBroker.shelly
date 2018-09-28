@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "news": {
+      "0.2.0": {
+        "en": "Roller/shutter modus supported",
+        "de": "Rollädenmodus wird unterstützt"
+      },
       "0.1.1": {
         "en": "Bug fixing",
         "de": "Fehlerbehebung"

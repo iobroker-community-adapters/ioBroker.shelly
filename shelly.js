@@ -196,13 +196,6 @@ function createSensorStates(deviceId, b, s, data) {
 
     let tmpId = b ? deviceId + '.' + b.D + '.' + dp.name : deviceId + '.' + dp.name; // Status ID in ioBroker
 
-    /*
-    if (deviceId.startsWith('SHSW-2') && b && b.D.startsWith('Relay')) {
-      const relayId = parseInt(b.D.substr(5), 10);
-      tmpId = deviceId + '.' + 'shutter0' + '.' + dp.name + relayId;
-    }
-    */
-
     let value = getStateBySenId(s.I, data); // Status for Sensor ID
     if (!sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)]) {
       sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)] = {
@@ -229,34 +222,50 @@ function createSensorStates(deviceId, b, s, data) {
               'turn': (value === true || value === 1) ? 'on' : 'off'
             };
           }
+          adapter.log.debug("Relay: " + JSON.stringify(params));
           shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
         };
       }
-      if (b && b.D.startsWith('Shutter') && s.T === 'Shutter') {
+      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterUp') {
         controlFunction = function(value) {
-          let param = {};
-          switch (value) {
-            case 1:
-              param = {
-                'go': 'open'
-              };
-              break;
-            case 2:
-              param = {
-                'go': 'close'
-              };
-              break;
-            default:
-              param = {
-                'go': 'stop'
-              };
+          let params = {};
+          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration > 0) {
+            params = {
+              'go': (value === true || value === 1) ? 'open' : 'stop',
+              'duration': sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration
+            };
+          } else {
+            params = {
+              'go': (value === true || value === 1) ? 'open' : 'stop'
+            };
           }
-          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.duration > 0) {
-            param.duration = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.duration;
-          }
-          shelly.callDevice(deviceId, '/roller/0', param);
+          adapter.log.debug("RollerUp: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/roller/0', params);
         };
       }
+      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDown') {
+        controlFunction = function(value) {
+          let params = {};
+          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration > 0) {
+            params = {
+              'go': (value === true || value === 1) ? 'close' : 'stop',
+              'duration': sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration
+            };
+          } else {
+            params = {
+              'go': (value === true || value === 1) ? 'close' : 'stop'
+            };
+          }
+          adapter.log.debug("RollerDown: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/roller/0', params);
+        };
+      }
+      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDuration') {
+        controlFunction = function(value) {
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration = value || 0;
+        };
+      }
+
     }
     if (dp.type === 'boolean') {
       value = !!value; // convert to boolean
@@ -291,7 +300,7 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'Shutter' && ddp.name == 'Duration') {
         controlFunction = function(value) {
-          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer = value;
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.duration = value;
         };
       }
       objectHelper.setOrUpdateObject(tmpId, {
@@ -357,22 +366,14 @@ function createDeviceStates(deviceId, description, ip, data) {
       let sen = getSenByBlkID(b.I, description.sen); // Sensoren for this Block
       let act = getActByBlkID(b.I, description.act); // Actions for this Block
 
-      if (deviceId.startsWith('SHSW-2') && b.D.startsWith('Relay')) {
-        objectHelper.setOrUpdateObject(deviceId + '.' + 'shutter0', {
-          type: 'channel',
-          common: {
-            name: 'Shutter'
-          }
-        });
-      } else {
-        // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
-        objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
-          type: 'channel',
-          common: {
-            name: b.D
-          }
-        });
-      }
+      // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
+      objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
+        type: 'channel',
+        common: {
+          name: b.D
+        }
+      });
+
 
       // Loop over sensor for a block device
       sen.forEach(function(s) {
@@ -389,21 +390,37 @@ function createDeviceStates(deviceId, description, ip, data) {
     });
 
     // 2 Relais => Shelly 2
-
     if (deviceId.startsWith('SHSW-2')) {
-      /*
-            let b = {
-              'I': 'customer0', // Pseudo ID
-              'D': 'Shutter'
-            };
-            let s = {
-              'I': 'customer01',
-              'T': 'Shutter',
-              'D': 'Shutter',
-              'L': 'customer0'
-            };
-            createSensorStates(deviceId, channel, b, s, data);
-            */
+      let b, s;
+      b = {
+        'I': 'customer0', // Pseudo ID
+        'D': 'Shutter'
+      };
+      // Dummy Sensor for roller/shuter way up
+      s = {
+        'I': 'customer111',
+        'T': 'ShutterUp',
+        'D': 'Shutter',
+        'L': 'customer0'
+      };
+      createSensorStates(deviceId, b, s, data);
+      // Dummy Sensor for roller/shuter way down
+      s = {
+        'I': 'customer112',
+        'T': 'ShutterDown',
+        'D': 'Shutter',
+        'L': 'customer0'
+      };
+      createSensorStates(deviceId, b, s, data);
+      // duration, how long up and down is on
+      s = {
+        'I': 'customer04',
+        'T': 'ShutterDuration',
+        'D': 'Duration',
+        'L': 'customer0'
+      };
+      createSensorStates(deviceId, b, s, data);
+
     }
 
   }
@@ -422,7 +439,9 @@ function statusArrayToObject(data) {
 
 // update Shuter
 function updateShutter(deviceId) {
+
   let valRelay0, valRelay1, valSwitch, senSwitch, value;
+  let valSwitchDown, senSwitchDown, valSwitchUp, senSwitchUp;
   for (let prop in sensorIoBrokerIDs) {
     if (prop.startsWith(deviceId)) {
       let ioBrokerId = sensorIoBrokerIDs[prop].id; // get ioBroker Id
@@ -436,24 +455,32 @@ function updateShutter(deviceId) {
         valSwitch = sensorIoBrokerIDs[prop].value;
         senSwitch = sensorIoBrokerIDs[prop];
       }
+      if (ioBrokerId.endsWith('Shutter.Down')) {
+        valSwitchDown = sensorIoBrokerIDs[prop].value;
+        senSwitchDown = sensorIoBrokerIDs[prop];
+      }
+      if (ioBrokerId.endsWith('Shutter.Up')) {
+        valSwitchUp = sensorIoBrokerIDs[prop].value;
+        senSwitchUp = sensorIoBrokerIDs[prop];
+      }
     }
   }
-  if (senSwitch) {
-    if ((valRelay0 === true || valRelay0 === 1) && (valRelay1 === true || valRelay1 === 1)) {
-      value = null;
-    } else if (valRelay0 === true || valRelay0 === 1) {
-      value = 1;
-    } else if (valRelay1 === true || valRelay1 === 1) {
-      value = 2;
-    } else {
-      value = 0;
-    }
-    if (value != valSwitch) {
-      adapter.setState(senSwitch.id, {
+  if (senSwitchUp && senSwitchDown) {
+    value = (valRelay0 === true || valRelay0 === 1) ? true : false;
+    if (value != valSwitchUp) {
+      adapter.setState(senSwitchUp.id, {
         val: value,
         ack: true
       });
-      senSwitch.value = value;
+      senSwitchUp.value = value;
+    }
+    value = (valRelay1 === true || valRelay1 === 1) ? true : false;
+    if (value != valSwitchDown) {
+      adapter.setState(senSwitchDown.id, {
+        val: value,
+        ack: true
+      });
+      senSwitchDown.value = value;
     }
   }
 }
@@ -483,7 +510,11 @@ function updateDeviceStates(deviceId, data) {
             ack: true
           });
           sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value = value;
-          updateShutter(deviceId);
+          // enter only if device == Shelly2
+          if (deviceId.startsWith('SHSW-2')) {
+            updateShutter(deviceId);
+          }
+
         }
       }
     }
