@@ -529,7 +529,7 @@ function updateDeviceStates(deviceId, data) {
           sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value = value;
           // enter only if device == Shelly2
           if (deviceId.startsWith('SHSW-2')) {
-            updateShutter(deviceId);
+            // updateShutter(deviceId);
           }
 
         }
