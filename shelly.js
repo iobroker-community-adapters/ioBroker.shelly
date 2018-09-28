@@ -193,7 +193,14 @@ function createSensorStates(deviceId, b, s, data) {
 
   let dp = datapoints.getSensor(s);
   if (dp) {
+
     let tmpId = b ? deviceId + '.' + b.D + '.' + dp.name : deviceId + '.' + dp.name; // Status ID in ioBroker
+
+    if (deviceId.startsWith('SHSW-2') && b && b.D.startsWith('Relay')) {
+      const relayId = parseInt(b.D.substr(5), 10);
+      tmpId = deviceId + '.' + 'shutter0' + '.' + dp.name + relayId;
+    }
+
     let value = getStateBySenId(s.I, data); // Status for Sensor ID
     if (!sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)]) {
       sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)] = {
@@ -348,13 +355,23 @@ function createDeviceStates(deviceId, description, ip, data) {
       let sen = getSenByBlkID(b.I, description.sen); // Sensoren for this Block
       let act = getActByBlkID(b.I, description.act); // Actions for this Block
 
-      // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
-      objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
-        type: 'channel',
-        common: {
-          name: b.D
-        }
-      });
+      if (deviceId.startsWith('SHSW-2') && b.D.startsWith('Relay')) {
+        objectHelper.setOrUpdateObject(deviceId + '.' + 'shutter0', {
+          type: 'channel',
+          common: {
+            name: 'Shutter'
+          }
+        });
+      } else {
+        // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
+        objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
+          type: 'channel',
+          common: {
+            name: b.D
+          }
+        });
+      }
+
       // Loop over sensor for a block device
       sen.forEach(function(s) {
         createSensorStates(deviceId, b, s, data);
@@ -370,18 +387,21 @@ function createDeviceStates(deviceId, description, ip, data) {
     });
 
     // 2 Relais => Shelly 2
+
     if (deviceId.startsWith('SHSW-2')) {
-      let b = {
-        'I': 999,
-        'D': 'Shutter'
-      };
-      let s = {
-        'I': 999,
-        'T': 'Shutter',
-        'D': 'Shutter',
-        'L': 999
-      };
-      createSensorStates(deviceId, b, s, data);
+      /*
+            let b = {
+              'I': 'customer0', // Pseudo ID
+              'D': 'Shutter'
+            };
+            let s = {
+              'I': 'customer01',
+              'T': 'Shutter',
+              'D': 'Shutter',
+              'L': 'customer0'
+            };
+            createSensorStates(deviceId, channel, b, s, data);
+            */
     }
 
   }
