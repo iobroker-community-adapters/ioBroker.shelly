@@ -196,10 +196,12 @@ function createSensorStates(deviceId, b, s, data) {
 
     let tmpId = b ? deviceId + '.' + b.D + '.' + dp.name : deviceId + '.' + dp.name; // Status ID in ioBroker
 
+    /*
     if (deviceId.startsWith('SHSW-2') && b && b.D.startsWith('Relay')) {
       const relayId = parseInt(b.D.substr(5), 10);
       tmpId = deviceId + '.' + 'shutter0' + '.' + dp.name + relayId;
     }
+    */
 
     let value = getStateBySenId(s.I, data); // Status for Sensor ID
     if (!sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)]) {
