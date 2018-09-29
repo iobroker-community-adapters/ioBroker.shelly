@@ -42,8 +42,12 @@
 
 
     function loadHelper(settings, onChange) {
-      g_onChange = onChange;
 
+      if (!settings) return;
+      if (settings.password === undefined) settings.password = '';
+      if (settings.user === undefined) settings.user = '';
+
+      g_onChange = onChange;
 
       getIPs(function(ips) {
         for (var i = 0; i < ips.length; i++) {
@@ -144,7 +148,7 @@
       devices = settings.keys; // || [ {name: '', ip: "", mac: ""} ];
       values2table('values', devices, onChange);
       //changed = true;
-      $('#password_confirm').val($('#password').val());
+      // $('#password_confirm').val($('#password').val());
       onChange(false);
     }
 
@@ -190,11 +194,12 @@
       });
       obj.keys = table2values('values');
 
-
+      /*
       if ($('#password').val() !== $('#password_confirm').val()) {
         showMessage(_('Password confirmation is not equal with password'));
         return;
       }
+      */
 
 
       callback(obj);
@@ -296,10 +301,10 @@
         <label class="translate" for="password">Password</label>
       </div>
 
-      <div class="input-field col s12 m6 l4">
+      <!--div class="input-field col s12 m6 l4">
         <input id="password_confirm" type="password" size="30" class="value" />
         <label class="translate" for="password_confirm">Confirm Password</label>
-      </div>
+      </div-->
 
 
       <!--div id="values">
