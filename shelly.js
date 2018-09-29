@@ -90,12 +90,15 @@ function setConnected(isConnected) {
 adapter.on('ready', function() {
   // main();
   adapter.getForeignObject('system.config', (err, obj) => {
-    if (obj && obj.native && obj.native.secret) {
-      //noinspection JSUnresolvedVariable
-      adapter.config.password = decrypt(obj.native.secret, adapter.config.password);
-    } else {
-      //noinspection JSUnresolvedVariable
-      adapter.config.password = decrypt('Zgfr56gFe87jJOM', adapter.config.password);
+
+    if (adapter.config.pwd && adapter.config.password) {
+      if (obj && obj.native && obj.native.secret) {
+        //noinspection JSUnresolvedVariable
+        adapter.config.password = decrypt(obj.native.secret, adapter.config.password);
+      } else {
+        //noinspection JSUnresolvedVariable
+        adapter.config.password = decrypt('Zgfr56gFe87jJOM', adapter.config.password);
+      }
     }
     main();
   });
