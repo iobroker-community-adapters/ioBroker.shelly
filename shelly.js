@@ -91,7 +91,7 @@ adapter.on('ready', function() {
   // main();
   adapter.getForeignObject('system.config', (err, obj) => {
 
-    if (adapter.config.pwd && adapter.config.password) {
+    if (adapter.config.password) {
       if (obj && obj.native && obj.native.secret) {
         //noinspection JSUnresolvedVariable
         adapter.config.password = decrypt(obj.native.secret, adapter.config.password);
@@ -599,7 +599,7 @@ function main() {
 
   let options = {};
 
-  if (adapter.config.pwd) {
+  if (adapter.config.user && adapter.config.password) {
     options = {
       logger: adapter.log.debug,
       user: adapter.config.user,
