@@ -115,7 +115,7 @@
         // example: select elements with id=key and class=value and insert value
         var val = getVal(key);
 
-        if ($('#' + key + '.value').attr('data-crypt') == "1") {
+        if (val && $('#' + key + '.value').attr('data-crypt') == "1") {
           val = decrypt(secret, val);
         }
         //var val = $key.data('crypt') && settings[key] ? decrypt(secret, settings[key]) : settings[key];
