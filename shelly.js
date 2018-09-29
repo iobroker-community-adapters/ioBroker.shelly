@@ -211,11 +211,16 @@ function createSensorStates(deviceId, b, s, data) {
         const relayId = parseInt(b.D.substr(5), 10);
         controlFunction = function(value) {
           let params;
+          let timer = 0;
+          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'switchtimer' + s.I)] &&
+            sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'switchtimer' + s.I)].param) {
+            timer = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'switchtimer' + s.I)].param.timer;
+          }
           // if timer > 0 sec. call rest with timer paramater
-          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer > 0) {
+          if (timer > 0) {
             params = {
               'turn': (value === true || value === 1) ? 'on' : 'off',
-              'timer': sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer
+              'timer': timer
             };
           } else {
             params = {
@@ -226,13 +231,23 @@ function createSensorStates(deviceId, b, s, data) {
           shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
         };
       }
+      if (b && b.D.startsWith('Relay') && s.T === 'SwitchTimer') {
+        controlFunction = function(value) {
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer = value || 0;
+        };
+      }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterUp') {
         controlFunction = function(value) {
           let params = {};
-          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration > 0) {
+          let duration = 0;
+          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')] &&
+            sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')].param) {
+            duration = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')].param.duration;
+          }
+          if (duration > 0) {
             params = {
               'go': (value === true || value === 1) ? 'open' : 'stop',
-              'duration': sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration
+              'duration': duration
             };
           } else {
             params = {
@@ -246,10 +261,15 @@ function createSensorStates(deviceId, b, s, data) {
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDown') {
         controlFunction = function(value) {
           let params = {};
-          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration > 0) {
+          let duration = 0;
+          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')] &&
+            sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')].param) {
+            duration = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')].param.duration;
+          }
+          if (duration > 0) {
             params = {
               'go': (value === true || value === 1) ? 'close' : 'stop',
-              'duration': sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration
+              'duration': duration
             };
           } else {
             params = {
@@ -271,7 +291,7 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDuration') {
         controlFunction = function(value) {
-          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'customer04')].param.duration = value || 0;
+          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.duration = value || 0;
         };
       }
 
@@ -293,41 +313,6 @@ function createSensorStates(deviceId, b, s, data) {
         unit: dp.unit
       }
     }, value, controlFunction);
-
-    // get pseudo datapoints for sensor. for this psuedo sensor they will no
-    // data send by shelly devices
-    let addp = datapoints.getDepSensor(s);
-    addp.forEach(function(ddp) {
-      tmpId = b ? deviceId + '.' + b.D + '.' + ddp.name : deviceId + '.' + ddp.name; // Status ID in ioBroker
-      value = ddp.hasOwnProperty('def') ? ddp.def : undefined;
-      controlFunction = undefined;
-      // for timer set callback funtion
-      if (b && b.D.startsWith('Relay') && s.T === 'Switch' && ddp.name == 'Timer') {
-        controlFunction = function(value) {
-          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer = value;
-        };
-      }
-      if (b && b.D.startsWith('Shutter') && s.T === 'Shutter' && ddp.name == 'Duration') {
-        controlFunction = function(value) {
-          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.duration = value;
-        };
-      }
-      objectHelper.setOrUpdateObject(tmpId, {
-        type: 'state',
-        common: {
-          name: ddp.name,
-          type: ddp.type,
-          role: ddp.role,
-          read: ddp.read,
-          write: ddp.write,
-          min: ddp.min,
-          max: ddp.max,
-          states: ddp.states,
-          unit: ddp.unit
-        }
-      }, value, controlFunction);
-    });
-
   }
 }
 
@@ -387,6 +372,18 @@ function createDeviceStates(deviceId, description, ip, data) {
       // Loop over sensor for a block device
       sen.forEach(function(s) {
         createSensorStates(deviceId, b, s, data);
+
+        // Create Timer for Switch
+        if (b && b.D.startsWith('Relay') && s.T === 'Switch') {
+          s = {
+            'I': 'switchtimer' + s.I,
+            'T': 'SwitchTimer',
+            'D': 'Timer',
+            'L': b.I
+          };
+          createSensorStates(deviceId, b, s, data);
+        }
+
       });
       // loop over action for block device
       act.forEach(function(a) {});
@@ -398,48 +395,52 @@ function createDeviceStates(deviceId, description, ip, data) {
       createSensorStates(deviceId, null, s, data);
     });
 
-    // 2 Relais => Shelly 2
+    // for shelly2 the roller/shuter pseudo states will be added
     if (deviceId.startsWith('SHSW-2')) {
       let b, s;
-      b = {
-        'I': 'customer0', // Pseudo ID
-        'D': 'Shutter'
-      };
-      // Dummy Sensor for roller/shuter way up
-      s = {
-        'I': 'customer111',
-        'T': 'ShutterUp',
-        'D': 'Shutter',
-        'L': 'customer0'
-      };
-      createSensorStates(deviceId, b, s, data);
-      // Dummy Sensor for roller/shuter way down
-      s = {
-        'I': 'customer112',
-        'T': 'ShutterDown',
-        'D': 'Shutter',
-        'L': 'customer0'
-      };
-      createSensorStates(deviceId, b, s, data);
-      // up and down
-      s = {
-        'I': 'customer113',
-        'T': 'ShutterStop',
-        'D': 'Shutter',
-        'L': 'customer0'
-      };
-      createSensorStates(deviceId, b, s, data);
-      // duration, how long up and down is on
-      s = {
-        'I': 'customer04',
-        'T': 'ShutterDuration',
-        'D': 'Duration',
-        'L': 'customer0'
-      };
-      createSensorStates(deviceId, b, s, data);
 
+      shelly.callDevice(deviceId, '/roller/0', (error,data) => {
+        // let str = error && Buffer.isBuffer(error) ? error.toString('utf8') : error;
+        if (!error && data) {
+          b = {
+            'I': 'roller', // Pseudo ID
+            'D': 'Shutter'
+          };
+          // Dummy Sensor for roller/shuter way up
+          s = {
+            'I': 'rollerup', //id
+            'T': 'ShutterUp',
+            'D': 'Shutter',
+            'L': 'roller' // link to b.I
+          };
+          createSensorStates(deviceId, b, s, data);
+          // Dummy Sensor for roller/shuter way down
+          s = {
+            'I': 'rollerdown',
+            'T': 'ShutterDown',
+            'D': 'Shutter',
+            'L': 'roller'
+          };
+          createSensorStates(deviceId, b, s, data);
+          // Stop shutter
+          s = {
+            'I': 'rollerstop',
+            'T': 'ShutterStop',
+            'D': 'Shutter',
+            'L': 'roller'
+          };
+          createSensorStates(deviceId, b, s, data);
+          // duration, how long up and down is on
+          s = {
+            'I': 'rollerduration',
+            'T': 'ShutterDuration',
+            'D': 'Duration',
+            'L': 'roller'
+          };
+          createSensorStates(deviceId, b, s, data);
+        }
+      });
     }
-
   }
 }
 
@@ -468,17 +469,21 @@ function updateShutter(deviceId) {
       if (ioBrokerId.endsWith('Relay1.Switch')) {
         valRelay1 = sensorIoBrokerIDs[prop].value;
       }
-      if (ioBrokerId.endsWith('Shutter.Shutter')) {
-        valSwitch = sensorIoBrokerIDs[prop].value;
-        senSwitch = sensorIoBrokerIDs[prop];
-      }
-      if (ioBrokerId.endsWith('Shutter.Down')) {
+      if (ioBrokerId.endsWith('Shutter.Close')) {
         valSwitchDown = sensorIoBrokerIDs[prop].value;
         senSwitchDown = sensorIoBrokerIDs[prop];
       }
-      if (ioBrokerId.endsWith('Shutter.Up')) {
+      if (ioBrokerId.endsWith('Shutter.Open')) {
         valSwitchUp = sensorIoBrokerIDs[prop].value;
         senSwitchUp = sensorIoBrokerIDs[prop];
+      }
+      if (ioBrokerId.endsWith('Shutter.Pause')) {
+        /*
+        valSwitchUp  = sensorIoBrokerIDs[prop].value;
+        senSwitchUp   = sensorIoBrokerIDs[prop];
+        valSwitchDown = sensorIoBrokerIDs[prop].value;
+        senSwitchDown = sensorIoBrokerIDs[prop];
+        */
       }
     }
   }
