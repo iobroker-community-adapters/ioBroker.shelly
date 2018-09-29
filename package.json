@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Shelly",
   "author": {
     "name": "Thorsten Stueben",
@@ -31,7 +31,7 @@
   "dependencies": {
     "ping": "^0.2.1",
     "request": "^2.79.0",
-    "shelly-iot": "^0.1.1"
+    "shelly-iot": "git+https://github.com/Apollon77/shelly-iot.git"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

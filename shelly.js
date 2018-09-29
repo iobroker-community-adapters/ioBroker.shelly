@@ -20,6 +20,14 @@ const sensorIoBrokerIDs = {};
 let isStopped = false;
 let connected = null;
 
+function decrypt(key, value) {
+  let result = '';
+  for (let i = 0; i < value.length; ++i) {
+    result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
+  }
+  return result;
+}
+
 
 // is called when adapter shuts down - callback has to be called under any circumstances!
 adapter.on('unload', function(callback) {
@@ -80,7 +88,17 @@ function setConnected(isConnected) {
 // is called when databases are connected and adapter received configuration.
 // start here!
 adapter.on('ready', function() {
-  main();
+  // main();
+  adapter.getForeignObject('system.config', (err, obj) => {
+    if (obj && obj.native && obj.native.secret) {
+      //noinspection JSUnresolvedVariable
+      adapter.config.password = decrypt(obj.native.secret, adapter.config.password);
+    } else {
+      //noinspection JSUnresolvedVariable
+      adapter.config.password = decrypt('Zgfr56gFe87jJOM', adapter.config.password);
+    }
+    main();
+  });
 });
 
 
@@ -399,7 +417,7 @@ function createDeviceStates(deviceId, description, ip, data) {
     if (deviceId.startsWith('SHSW-2')) {
       let b, s;
 
-      shelly.callDevice(deviceId, '/roller/0', (error,data) => {
+      shelly.callDevice(deviceId, '/roller/0', (error, data) => {
         // let str = error && Buffer.isBuffer(error) ? error.toString('utf8') : error;
         if (!error && data) {
           b = {
@@ -576,9 +594,19 @@ function main() {
   setConnected(false);
   objectHelper.init(adapter);
 
-  const options = {
-    logger: adapter.log.debug
-  };
+  let options = {};
+
+  if (adapter.config.pwd) {
+    options = {
+      logger: adapter.log.debug,
+      user: adapter.config.user,
+      password: adapter.config.password
+    };
+  } else {
+    options = {
+      logger: adapter.log.debug,
+    };
+  }
 
   shelly = new Shelly(options);
 

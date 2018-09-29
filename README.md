@@ -37,6 +37,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 0.2.1 (28.09.2018)
+* Username/Password supported
+
 ### 0.2.0 (28.09.2018)
 * Roller / Shutter for Shelly2 supported
 

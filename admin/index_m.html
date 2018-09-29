@@ -18,11 +18,30 @@
     var active = false;
     var g_onChange;
     var SEP = '_';
+    var secret;
 
     if (typeof _ !== 'function') _ = translateWord;
 
+    function encrypt(key, value) {
+      var result = '';
+      for (var i = 0; i < value.length; ++i) {
+        result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
+      }
+      return result;
+    }
 
-    function load(settings, onChange) {
+    function decrypt(key, value) {
+
+      var result = '';
+      for (var i = 0; i < value.length; ++i) {
+        result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
+      }
+      return result;
+
+    }
+
+
+    function loadHelper(settings, onChange) {
       g_onChange = onChange;
 
 
@@ -90,10 +109,17 @@
         }
       }
 
+
       //for (var key in settings) {
       forAllKeys(settings, function(key) {
         // example: select elements with id=key and class=value and insert value
         var val = getVal(key);
+
+        if ($('#' + key + '.value').attr('data-crypt') == "1") {
+          val = decrypt(secret, val);
+        }
+        //var val = $key.data('crypt') && settings[key] ? decrypt(secret, settings[key]) : settings[key];
+        // var val = $key.data('crypt') && getVal(key) ? decrypt(secret, getVal(key)) : getVal(key);
         if ($('#' + key + '.value').attr('type') == 'checkbox') {
           $('#' + key + '.value').prop('checked', val).change(function() {
             if ($('#auth').prop('checked')) {
@@ -118,6 +144,17 @@
       devices = settings.keys; // || [ {name: '', ip: "", mac: ""} ];
       values2table('values', devices, onChange);
       //changed = true;
+      $('#password_confirm').val($('#password').val());
+      onChange(false);
+    }
+
+    function load(settings, onChange) {
+
+      socket.emit('getObject', 'system.config', function(err, obj) {
+        secret = (obj.native ? obj.native.secret : '') || 'Zgfr56gFe87jJOM';
+        loadHelper(settings, onChange);
+      });
+
       onChange(false);
     }
 
@@ -145,11 +182,21 @@
             val = ~~$this.val();
             break;
           default:
-            val = $this.val();
+            // val = $this.val();
+            // obj[$this.attr('id')] =  $this.data('crypt') && $this.val() ? encrypt(secret, $this.val()) : $this.val();
+            val = $this.data('crypt') && $this.val() ? encrypt(secret, $this.val()) : $this.val();
         }
         setVal(obj, $this.attr('id'), val);
       });
       obj.keys = table2values('values');
+
+
+      if ($('#password').val() !== $('#password_confirm').val()) {
+        showMessage(_('Password confirmation is not equal with password'));
+        return;
+      }
+
+
       callback(obj);
     }
   </script>
@@ -222,13 +269,36 @@
     <div class="row">
       <div class="input-field col s6">
         <img src="shelly.png" class="logo">
-        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12">
+        <p class="translate">shellydescription</p>
+      </div>
+    </div>
+
+    <div class="input-field col s12">
+      <input class="value" id="pwd" type="checkbox" />
+      <label for="pwd" class="translate">Password Enable</label>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m6 l4">
+        <input id="user" type="text" size="30" class="value" />
+        <label class="translate" for="user">User</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m6 l4">
+        <input id="password" type="password" data-crypt="1" size="30" class="value" />
+        <label class="translate" for="password">Password</label>
       </div>
 
-      <div class="row">
-        <div class="col s12">
-          <p class="translate">shellydescription</p>
-        </div>
+      <div class="input-field col s12 m6 l4">
+        <input id="password_confirm" type="password" size="30" class="value" />
+        <label class="translate" for="password_confirm">Confirm Password</label>
       </div>
 
 

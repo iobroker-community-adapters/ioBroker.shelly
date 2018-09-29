@@ -46,4 +46,48 @@ systemDictionary = {
     "es": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Die Shelly Devices werden automatisch erkannt. Sollte das nicht der Fall sein, bitte Shelly Gerät reiniciado.",
     "pl": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Urządzenia Die Shelly werden automatisch erkannt. Sollte das nicht der Fall sein, bitte Shelly Gerät rebooten."
   },
+  "User": {
+    "en": "User",
+    "de": "Benutzer",
+    "ru": "пользователь",
+    "pt": "Do utilizador",
+    "nl": "Gebruiker",
+    "fr": "Utilisateur",
+    "it": "Utente",
+    "es": "Usuario",
+    "pl": "Użytkownik"
+  },
+  "Password": {
+    "en": "Password",
+    "de": "Passwort",
+    "ru": "пароль",
+    "pt": "Senha",
+    "nl": "Wachtwoord",
+    "fr": "Mot de passe",
+    "it": "Parola d'ordine",
+    "es": "Contraseña",
+    "pl": "Hasło"
+  },
+  "Confirm Password": {
+    "en": "Confim Password",
+    "de": "Bestätige das Passwort",
+    "ru": "Подтвердите Пароль",
+    "pt": "Confirme a Senha",
+    "nl": "bevestig wachtwoord",
+    "fr": "Confirmez le mot de passe",
+    "it": "conferma password",
+    "es": "Confirmar contraseña",
+    "pl": "Potwierdź hasło"
+  },
+  "Password Enable": {
+    "en": "Login with password",
+    "de": "Einloggen mit Passwort",
+    "ru": "Вход с паролем",
+    "pt": "Login com senha",
+    "nl": "Inloggen met wachtwoord",
+    "fr": "Se connecter avec mot de passe",
+    "it": "Accedi con password",
+    "es": "Iniciar sesión con contraseña",
+    "pl": "Zaloguj się za pomocą hasła"
+  }
 };

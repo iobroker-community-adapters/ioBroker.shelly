@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "news": {
+      "0.2.1": {
+        "en": "Username/Password support",
+        "de": "Username/Password support"
+      },
       "0.2.0": {
         "en": "Roller/shutter modus supported",
         "de": "Rollädenmodus wird unterstützt"
@@ -64,6 +68,9 @@
     "restartAdapters": []
   },
   "native": {
+    "pwd": false,
+    "user": "admin",
+    "password": "",
     "keys": [{
       "hosts": "",
       "devids": ""
