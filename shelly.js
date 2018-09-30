@@ -138,6 +138,32 @@ function setSensorIoBrokerIDs(deviceId, sensorId, value) {
 }
 
 
+function delOldObjects(deviceId) {
+  if (deviceId.startsWith('SHSW-2')) {
+    shelly.callDevice(deviceId, '/roller/0', (error, data) => {
+      let channel;
+      //roller Modus
+      if (!error && data) {
+        // Shutter Modus, we delete Relay
+        channel = adapter.namespace + '.' + deviceId + '.' + 'Relay';
+      } else {
+        // relay modus, we delete Shutter
+        channel = adapter.namespace + '.' + deviceId + '.' + 'Shutter';
+      }
+      adapter.getAdapterObjects(function(obj) {
+        for (let id in obj) {
+          let o = obj[id];
+          if (id.startsWith(channel)) {
+            adapter.delObject(id, function() {
+              adapter.log.debug("Delete old object " + id);
+            });
+          }
+        }
+      });
+    });
+  }
+}
+
 // get Value by Sensor ID
 function getStateBySenId(sid, data) {
   if (data && data.G) {
@@ -685,7 +711,6 @@ function main() {
       });
       return;
     }
-
     updateDeviceStates(deviceId, status);
   });
 
