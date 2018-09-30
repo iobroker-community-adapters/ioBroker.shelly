@@ -291,13 +291,16 @@ function createSensorStates(deviceId, b, s, data) {
           setSensorIoBrokerIDs(deviceId, s.I, {
             value: value || 0
           });
+          let sen = getSensorIoBrokerIDs(deviceId, s.I);
+          if (sen && sen.id) {
+            adapter.setState(sen.id, {
+              val: value || 0,
+              ack: true
+            });
+          }
         }
-        let ioBrokerId = getSensorIoBrokerIDs(deviceId, s.I).id;
-        if (ioBrokerId) {
-          adapter.setState(ioBrokerId, {
-            val: value || 0
-          });
-        }
+        // call once at start
+        controlFunction(value || 0);
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterUp') {
         controlFunction = function(value) {
@@ -357,13 +360,16 @@ function createSensorStates(deviceId, b, s, data) {
           setSensorIoBrokerIDs(deviceId, s.I, {
             value: value || 0
           });
+          let sen = getSensorIoBrokerIDs(deviceId, s.I);
+          if (sen && sen.id) {
+            adapter.setState(sen.id, {
+              val: value || 0,
+              ack: true
+            });
+          }
         }
-        let ioBrokerId = getSensorIoBrokerIDs(deviceId, s.I).id;
-        if (ioBrokerId) {
-          adapter.setState(ioBrokerId, {
-            val: value || 0
-          });
-        }
+        // call at start once
+        controlFunction(value || 0);
       }
     }
     if (dp.type === 'boolean') {
