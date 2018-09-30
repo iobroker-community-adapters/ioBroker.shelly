@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "news": {
+      "0.2.1": {
+        "en": "Bugfixing, devault value for switch timer will be 0 sec",
+        "de": "Feherbehebung, beim Start ist switch timer 0 sec"
+      },
       "0.2.1": {
         "en": "Username/Password support",
         "de": "Username/Password support"

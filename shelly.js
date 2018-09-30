@@ -105,6 +105,39 @@ adapter.on('ready', function() {
 });
 
 
+// get values from array SensorIoBrokerIDs
+function getSensorIoBrokerIDsByDSId(id) {
+  return sensorIoBrokerIDs[id] || null;
+}
+
+// set values for sensorIoBrokerIDs  array
+function setSensorIoBrokerIDsByDSId(id, value) {
+  let val = getSensorIoBrokerIDsByDSId(id);
+  if (val) {
+    // merge objects
+    sensorIoBrokerIDs[id] = Object.assign(val, value);
+  } else if (value) {
+    // new object
+    sensorIoBrokerIDs[id] = value;
+  } else {
+    // empty object
+    sensorIoBrokerIDs[id] = {};
+  }
+}
+
+// get values from array SensorIoBrokerIDs
+function getSensorIoBrokerIDs(deviceId, sensorId) {
+  let id = getIoBrokerIdfromDeviceIdSenId(deviceId, sensorId);
+  return getSensorIoBrokerIDsByDSId(id);
+}
+
+// set values for sensorIoBrokerIDs  array
+function setSensorIoBrokerIDs(deviceId, sensorId, value) {
+  let id = getIoBrokerIdfromDeviceIdSenId(deviceId, sensorId);
+  setSensorIoBrokerIDsByDSId(id, value);
+}
+
+
 // get Value by Sensor ID
 function getStateBySenId(sid, data) {
   if (data && data.G) {
@@ -218,13 +251,14 @@ function createSensorStates(deviceId, b, s, data) {
     let tmpId = b ? deviceId + '.' + b.D + '.' + dp.name : deviceId + '.' + dp.name; // Status ID in ioBroker
 
     let value = getStateBySenId(s.I, data); // Status for Sensor ID
-    if (!sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)]) {
-      sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)] = {
+    if (!getSensorIoBrokerIDs(deviceId, s.I)) {
+      setSensorIoBrokerIDs(deviceId, s.I, {
         id: tmpId,
         param: {},
         value: value
-      }; // remember the link Shelly ID -> ioBroker ID
+      });
     }
+
     // SHSW-44#06231A#1.Relay0.W -> State
     let controlFunction;
     if (dp.write === true) { // check if it is allwoed to change datapoint (state)
@@ -233,9 +267,9 @@ function createSensorStates(deviceId, b, s, data) {
         controlFunction = function(value) {
           let params;
           let timer = 0;
-          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'switchtimer' + s.I)] &&
-            sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'switchtimer' + s.I)].param) {
-            timer = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'switchtimer' + s.I)].param.timer;
+          let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'switchtimer' + s.I);
+          if (sensorIoBrokerID) {
+            timer = sensorIoBrokerID.value;
           }
           // if timer > 0 sec. call rest with timer paramater
           if (timer > 0) {
@@ -254,16 +288,24 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('Relay') && s.T === 'SwitchTimer') {
         controlFunction = function(value) {
-          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.timer = value || 0;
-        };
+          setSensorIoBrokerIDs(deviceId, s.I, {
+            value: value || 0
+          });
+        }
+        let ioBrokerId = getSensorIoBrokerIDs(deviceId, s.I).id;
+        if (ioBrokerId) {
+          adapter.setState(ioBrokerId, {
+            val: value || 0
+          });
+        }
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterUp') {
         controlFunction = function(value) {
           let params = {};
           let duration = 0;
-          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')] &&
-            sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')].param) {
-            duration = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')].param.duration;
+          let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
+          if (sensorIoBrokerID) {
+            duration = sensorIoBrokerID.value;
           }
           if (duration > 0) {
             params = {
@@ -283,9 +325,9 @@ function createSensorStates(deviceId, b, s, data) {
         controlFunction = function(value) {
           let params = {};
           let duration = 0;
-          if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')] &&
-            sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')].param) {
-            duration = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, 'rollerduration')].param.duration;
+          let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
+          if (sensorIoBrokerID) {
+            duration = sensorIoBrokerID.value;
           }
           if (duration > 0) {
             params = {
@@ -312,10 +354,17 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDuration') {
         controlFunction = function(value) {
-          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, s.I)].param.duration = value || 0;
-        };
+          setSensorIoBrokerIDs(deviceId, s.I, {
+            value: value || 0
+          });
+        }
+        let ioBrokerId = getSensorIoBrokerIDs(deviceId, s.I).id;
+        if (ioBrokerId) {
+          adapter.setState(ioBrokerId, {
+            val: value || 0
+          });
+        }
       }
-
     }
     if (dp.type === 'boolean') {
       value = !!value; // convert to boolean
@@ -396,6 +445,11 @@ function createDeviceStates(deviceId, description, ip, data) {
 
         // Create Timer for Switch
         if (b && b.D.startsWith('Relay') && s.T === 'Switch') {
+          /*
+          setSensorIoBrokerIDs(deviceId, s.I, {
+            sidTimer: 'switchtimer' + s.I
+          });
+          */
           s = {
             'I': 'switchtimer' + s.I,
             'T': 'SwitchTimer',

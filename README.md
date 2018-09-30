@@ -37,6 +37,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 0.2.2 (30.09.2018)
+* Bugfixing, on start default value of timer and duration of relay and shutter will be 0 sec
+
 ### 0.2.1 (28.09.2018)
 * Username/Password supported
 
