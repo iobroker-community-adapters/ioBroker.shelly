@@ -1,9 +1,13 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "news": {
-      "0.2.1": {
+      "0.2.3": {
+        "en": "Bugfixing, shutter status display",
+        "de": "Feherbehebung, Rollädenanzeige angepasst"
+      },
+      "0.2.2": {
         "en": "Bugfixing, devault value for switch timer will be 0 sec",
         "de": "Feherbehebung, beim Start ist switch timer 0 sec"
       },

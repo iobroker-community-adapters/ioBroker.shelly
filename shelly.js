@@ -330,6 +330,8 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterUp') {
         controlFunction = function(value) {
+          // if (value === true || value === 1) {
+          // only do something if value is true
           let params = {};
           let duration = 0;
           let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
@@ -348,10 +350,13 @@ function createSensorStates(deviceId, b, s, data) {
           }
           adapter.log.debug("RollerUp: " + JSON.stringify(params));
           shelly.callDevice(deviceId, '/roller/0', params);
-        };
+          // }
+        }
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDown') {
         controlFunction = function(value) {
+          // only do something if value is true
+          // if (value === true || value === 1) {
           let params = {};
           let duration = 0;
           let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
@@ -370,16 +375,31 @@ function createSensorStates(deviceId, b, s, data) {
           }
           adapter.log.debug("RollerDown: " + JSON.stringify(params));
           shelly.callDevice(deviceId, '/roller/0', params);
-        };
+          // }
+        }
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterStop') {
         controlFunction = function(value) {
-          let params = {
-            'go': 'stop'
-          };
-          adapter.log.debug("RollerStop: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/roller/0', params);
-        };
+          if (value === true || value === 1) {
+            // only do something if value is true
+            let params = {
+              'go': 'stop'
+            };
+            // updateShutter(deviceId);
+            let sen = getSensorIoBrokerIDs(deviceId, s.I);
+            if (sen && sen.id) {
+              setSensorIoBrokerIDs(deviceId, s.I, {
+                value: false
+              });
+              adapter.setState(sen.id, {
+                val: false,
+                ack: true
+              });
+            }
+            adapter.log.debug("RollerStop: " + JSON.stringify(params));
+            shelly.callDevice(deviceId, '/roller/0', params);
+          }
+        }
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDuration') {
         controlFunction = function(value) {
@@ -567,6 +587,7 @@ function updateShutter(deviceId) {
 
   let valRelay0, valRelay1, valSwitch, senSwitch, value;
   let valSwitchDown, senSwitchDown, valSwitchUp, senSwitchUp;
+  let valSwitchPause, senSwitchPause;
   for (let prop in sensorIoBrokerIDs) {
     if (prop.startsWith(deviceId)) {
       let ioBrokerId = sensorIoBrokerIDs[prop].id; // get ioBroker Id
@@ -585,16 +606,12 @@ function updateShutter(deviceId) {
         senSwitchUp = sensorIoBrokerIDs[prop];
       }
       if (ioBrokerId.endsWith('Shutter.Pause')) {
-        /*
-        valSwitchUp  = sensorIoBrokerIDs[prop].value;
-        senSwitchUp   = sensorIoBrokerIDs[prop];
-        valSwitchDown = sensorIoBrokerIDs[prop].value;
-        senSwitchDown = sensorIoBrokerIDs[prop];
-        */
+        valSwitchPause = sensorIoBrokerIDs[prop].value;
+        senSwitchPause = sensorIoBrokerIDs[prop];
       }
     }
   }
-  if (senSwitchUp && senSwitchDown) {
+  if (senSwitchUp && senSwitchDown && senSwitchPause) {
     value = (valRelay0 === true || valRelay0 === 1) ? true : false;
     if (value != valSwitchUp) {
       adapter.setState(senSwitchUp.id, {
@@ -611,6 +628,14 @@ function updateShutter(deviceId) {
       });
       senSwitchDown.value = value;
     }
+    value = (valRelay0 === true || valRelay0 === 1) || (valRelay1 === true || valRelay1 === 1) ? true : false;
+    if (value === false && value != valSwitchPause) {
+      adapter.setState(senSwitchPause.id, {
+        val: value,
+        ack: true
+      });
+    }
+    senSwitchPause.value = value;
   }
 }
 
@@ -641,7 +666,7 @@ function updateDeviceStates(deviceId, data) {
           sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value = value;
           // enter only if device == Shelly2
           if (deviceId.startsWith('SHSW-2')) {
-            // updateShutter(deviceId);
+            updateShutter(deviceId);
           }
 
         }
