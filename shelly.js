@@ -330,52 +330,72 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterUp') {
         controlFunction = function(value) {
-          // if (value === true || value === 1) {
-          // only do something if value is true
-          let params = {};
-          let duration = 0;
-          let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
-          if (sensorIoBrokerID) {
-            duration = sensorIoBrokerID.value;
+          if (value === true || value === 1) {
+            // only do something if value is true
+            let params = {};
+            let duration = 0;
+            let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
+            if (sensorIoBrokerID) {
+              duration = sensorIoBrokerID.value;
+            }
+            if (duration > 0) {
+              params = {
+                'go': (value === true || value === 1) ? 'open' : 'stop',
+                'duration': duration
+              };
+            } else {
+              params = {
+                'go': (value === true || value === 1) ? 'open' : 'stop'
+              };
+            }
+            let sen = getSensorIoBrokerIDs(deviceId, s.I);
+            if (sen && sen.id) {
+              setSensorIoBrokerIDs(deviceId, s.I, {
+                value: false
+              });
+              adapter.setState(sen.id, {
+                val: false,
+                ack: true
+              });
+              adapter.log.debug("RollerUp: " + JSON.stringify(params));
+              shelly.callDevice(deviceId, '/roller/0', params);
+            }
           }
-          if (duration > 0) {
-            params = {
-              'go': (value === true || value === 1) ? 'open' : 'stop',
-              'duration': duration
-            };
-          } else {
-            params = {
-              'go': (value === true || value === 1) ? 'open' : 'stop'
-            };
-          }
-          adapter.log.debug("RollerUp: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/roller/0', params);
-          // }
         }
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDown') {
         controlFunction = function(value) {
           // only do something if value is true
-          // if (value === true || value === 1) {
-          let params = {};
-          let duration = 0;
-          let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
-          if (sensorIoBrokerID) {
-            duration = sensorIoBrokerID.value;
+          if (value === true || value === 1) {
+            let params = {};
+            let duration = 0;
+            let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
+            if (sensorIoBrokerID) {
+              duration = sensorIoBrokerID.value;
+            }
+            if (duration > 0) {
+              params = {
+                'go': (value === true || value === 1) ? 'close' : 'stop',
+                'duration': duration
+              };
+            } else {
+              params = {
+                'go': (value === true || value === 1) ? 'close' : 'stop'
+              };
+            }
+            let sen = getSensorIoBrokerIDs(deviceId, s.I);
+            if (sen && sen.id) {
+              setSensorIoBrokerIDs(deviceId, s.I, {
+                value: false
+              });
+              adapter.setState(sen.id, {
+                val: false,
+                ack: true
+              });
+              adapter.log.debug("RollerDown: " + JSON.stringify(params));
+              shelly.callDevice(deviceId, '/roller/0', params);
+            }
           }
-          if (duration > 0) {
-            params = {
-              'go': (value === true || value === 1) ? 'close' : 'stop',
-              'duration': duration
-            };
-          } else {
-            params = {
-              'go': (value === true || value === 1) ? 'close' : 'stop'
-            };
-          }
-          adapter.log.debug("RollerDown: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/roller/0', params);
-          // }
         }
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterStop') {
@@ -664,9 +684,9 @@ function updateDeviceStates(deviceId, data) {
             ack: true
           });
           sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value = value;
-          // enter only if device == Shelly2
+          // enter only if device == Shelly2 and the shutter objects are switches and not buttons
           if (deviceId.startsWith('SHSW-2')) {
-            updateShutter(deviceId);
+            // updateShutter(deviceId);
           }
 
         }
