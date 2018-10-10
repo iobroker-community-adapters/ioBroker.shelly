@@ -508,7 +508,7 @@ function createDeviceStates(deviceId, description, ip, data) {
         common: {
           name: b.D
         }
-      });
+      }, ['name']);
 
 
       // Loop over sensor for a block device
@@ -553,6 +553,13 @@ function createDeviceStates(deviceId, description, ip, data) {
             'I': 'roller', // Pseudo ID
             'D': 'Shutter'
           };
+          // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
+          objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
+            type: 'channel',
+            common: {
+              name: b.D
+            }
+          }, ['name']);
           // Dummy Sensor for roller/shuter way up
           s = {
             'I': 'rollerup', //id

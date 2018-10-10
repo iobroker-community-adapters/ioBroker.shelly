@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "news": {
+      "0.2.4": {
+        "en": "Channel name can be overwrite with own name",
+        "de": "Channelname kann mit eigenen Namen überschrieben werden"
+      },
       "0.2.3": {
         "en": "Bugfixing, shutter status display",
         "de": "Feherbehebung, Rollädenanzeige angepasst"

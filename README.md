@@ -37,6 +37,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 0.2.4 (10.10.2018)
+* Channel name can be overwrite with own name 
+
 ### 0.2.3 (01.10.2018)
 * Bugfixing, shutter status display
 
