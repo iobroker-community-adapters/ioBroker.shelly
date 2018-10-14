@@ -6,6 +6,7 @@
 'use strict';
 
 // you have to require the utils module and call adapter function
+const dns = require('dns');
 const utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 const adapter = new utils.Adapter('shelly');
 const objectHelper = require(__dirname + '/lib/objectHelper'); // Get common adapter utils
@@ -326,7 +327,14 @@ function createSensorStates(deviceId, b, s, data) {
           }
         }
         // call once at start
-        controlFunction(value || 0);
+        let sen = getSensorIoBrokerIDs(deviceId, s.I);
+        adapter.getState(sen.id, function(err, state) {
+          if (!err && state) {
+            controlFunction(state.val);
+          } else {
+            controlFunction(value || 0);
+          }
+        });
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterUp') {
         controlFunction = function(value) {
@@ -454,7 +462,7 @@ function createSensorStates(deviceId, b, s, data) {
         states: dp.states,
         unit: dp.unit
       }
-    }, value, controlFunction);
+    }, ['name'], value, controlFunction);
   }
 }
 
@@ -481,17 +489,22 @@ function createDeviceStates(deviceId, description, ip, data) {
       write: false
     }
   }, true);
-  adapter.log.debug('Create state object for ' + deviceId + '.hostname' + ' if not exist');
-  objectHelper.setOrUpdateObject(deviceId + '.hostname', {
-    type: 'state',
-    common: {
-      name: 'Device hostname',
-      type: 'string',
-      role: 'info.ip',
-      read: true,
-      write: false
-    }
-  }, ip);
+
+  // get hostname for ip adresss
+  dns.reverse(ip, function(err, hostnames) {
+    let hostname = (!err && hostnames.length > 0) ? hostnames[0] : ip;
+    adapter.log.debug('Create state object for ' + deviceId + '.hostname' + ' if not exist');
+    objectHelper.setOrUpdateObject(deviceId + '.hostname', {
+      type: 'state',
+      common: {
+        name: 'Device hostname',
+        type: 'string',
+        role: 'info.ip',
+        read: true,
+        write: false
+      }
+    }, hostname);
+  });
 
   if (description) {
     let blk = description.blk || [];

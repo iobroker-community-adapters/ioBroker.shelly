@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "news": {
+      "0.2.5": {
+        "en": "Hostname instead of ip address will be shown",
+        "de": "Anzeige Hostname statt IP-Adresse"
+      },
       "0.2.4": {
         "en": "Channel name can be overwrite with own name",
         "de": "Channelname kann mit eigenen Namen überschrieben werden"
