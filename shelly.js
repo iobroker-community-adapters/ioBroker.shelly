@@ -404,7 +404,7 @@ function createSensorStates(deviceId, b, s, data) {
               val: value || 0,
               ack: true
             });
-          }
+          } 
           let params;
           params = {
             'auto_off': value

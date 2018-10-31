@@ -38,7 +38,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 ## Changelog
 
 ### 0.2.6 (31.10.2018)
-* Two new datapoints (alarm_on and alarm_off) for Shely 1/2
+* Two new datapoints (AutoTimerOn and AutoTimerOn) for Shelly 1/2
 
 ### 0.2.5 (13.10.2018)
 * Hostname instead of ip address will be shown
