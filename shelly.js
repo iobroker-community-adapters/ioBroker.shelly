@@ -274,9 +274,13 @@ function createSensorStates(deviceId, b, s, data) {
 
   let dp = datapoints.getSensor(s);
   if (dp) {
+    let tmpId;
+    if (dp.id) {
+      tmpId = b ? deviceId + '.' + b.D + '.' + dp.id : deviceId + '.' + dp.id; // Status ID in ioBroker
 
-    let tmpId = b ? deviceId + '.' + b.D + '.' + dp.name : deviceId + '.' + dp.name; // Status ID in ioBroker
-
+    } else {
+      tmpId = b ? deviceId + '.' + b.D + '.' + dp.name : deviceId + '.' + dp.name; // Status ID in ioBroker
+    }
     let value = getStateBySenId(s.I, data); // Status for Sensor ID
     if (!getSensorIoBrokerIDs(deviceId, s.I)) {
       setSensorIoBrokerIDs(deviceId, s.I, {
@@ -326,6 +330,88 @@ function createSensorStates(deviceId, b, s, data) {
             });
           }
         }
+        // call once at start
+        let sen = getSensorIoBrokerIDs(deviceId, s.I);
+        adapter.getState(sen.id, function(err, state) {
+          if (!err && state) {
+            controlFunction(state.val);
+          } else {
+            controlFunction(value || 0);
+          }
+        });
+      }
+      if (b && b.D.startsWith('Relay') && s.T === 'AutoTimerOn') {
+        const relayId = parseInt(b.D.substr(5), 10);
+        let turn = 0;
+        let sensorIoBrokerID;
+        for (let i in sensorIoBrokerIDs) {
+          if (sensorIoBrokerIDs[i].id == deviceId + '.' + b.D + '.Switch') {
+            sensorIoBrokerID = sensorIoBrokerIDs[i];
+            break;
+          }
+        }
+        if (sensorIoBrokerID) {
+          turn = sensorIoBrokerID.value;
+        }
+        controlFunction = function(value) {
+          setSensorIoBrokerIDs(deviceId, s.I, {
+            value: value || 0
+          });
+          let sen = getSensorIoBrokerIDs(deviceId, s.I);
+          if (sen && sen.id) {
+            adapter.setState(sen.id, {
+              val: value || 0,
+              ack: true
+            });
+          }
+          let params;
+          params = {
+            'auto_on': value
+          };
+          adapter.log.debug("Auto Timer on: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/settings/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        };
+        // call once at start
+        let sen = getSensorIoBrokerIDs(deviceId, s.I);
+        adapter.getState(sen.id, function(err, state) {
+          if (!err && state) {
+            controlFunction(state.val);
+          } else {
+            controlFunction(value || 0);
+          }
+        });
+      }
+      if (b && b.D.startsWith('Relay') && s.T === 'AutoTimerOff') {
+        const relayId = parseInt(b.D.substr(5), 10);
+        let turn = 0;
+        let sensorIoBrokerID;
+        for (let i in sensorIoBrokerIDs) {
+          if (sensorIoBrokerIDs[i].id == deviceId + '.' + b.D + '.Switch') {
+            sensorIoBrokerID = sensorIoBrokerIDs[i];
+            break;
+          }
+        }
+        if (sensorIoBrokerID) {
+          turn = sensorIoBrokerID.value;
+        }
+        controlFunction = function(value) {
+          setSensorIoBrokerIDs(deviceId, s.I, {
+            value: value || 0
+          });
+          let sen = getSensorIoBrokerIDs(deviceId, s.I);
+          if (sen && sen.id) {
+            adapter.setState(sen.id, {
+              val: value || 0,
+              ack: true
+            });
+          }
+          let params;
+          params = {
+            'auto_off': value
+          };
+          adapter.log.debug("Auto Timer off: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/settings/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        };
         // call once at start
         let sen = getSensorIoBrokerIDs(deviceId, s.I);
         adapter.getState(sen.id, function(err, state) {
@@ -535,13 +621,33 @@ function createDeviceStates(deviceId, description, ip, data) {
             sidTimer: 'switchtimer' + s.I
           });
           */
+
+          let sI = s.I;
+
           s = {
-            'I': 'switchtimer' + s.I,
+            'I': 'switchtimer' + sI,
             'T': 'SwitchTimer',
             'D': 'Timer',
             'L': b.I
           };
           createSensorStates(deviceId, b, s, data);
+
+          s = {
+            'I': 'autotimeron' + sI,
+            'T': 'AutoTimerOn',
+            'D': 'Auto Timer On',
+            'L': b.I
+          };
+          createSensorStates(deviceId, b, s, data);
+
+          s = {
+            'I': 'autotimeroff' + sI,
+            'T': 'AutoTimerOff',
+            'D': 'Auto Timer Off',
+            'L': b.I
+          };
+          createSensorStates(deviceId, b, s, data);
+
         }
 
       });

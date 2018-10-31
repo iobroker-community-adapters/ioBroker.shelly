@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "news": {
+      "0.2.6": {
+        "en": "Two new datapoints (alarm_on and alarm_off) for Shely 1/2",
+        "de": "Datapoints alarm_on und alarm_off für Shelly 1/2 hinzugefügt"
+      },
       "0.2.5": {
         "en": "Hostname instead of ip address will be shown",
         "de": "Anzeige Hostname statt IP-Adresse"
