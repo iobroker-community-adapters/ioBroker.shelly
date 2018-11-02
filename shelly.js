@@ -404,7 +404,7 @@ function createSensorStates(deviceId, b, s, data) {
               val: value || 0,
               ack: true
             });
-          } 
+          }
           let params;
           params = {
             'auto_off': value
@@ -531,6 +531,61 @@ function createSensorStates(deviceId, b, s, data) {
         // call at start once
         controlFunction(value || 0);
       }
+      if (b && b.D.startsWith('RGBW') && s.T === 'Red') { // Implement all needed action stuff here based on the names
+        const relayId = b.I;
+        controlFunction = function(value) {
+          let params;
+          params = {
+            'red': value
+          };
+          adapter.log.debug("RGBW Red: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        };
+      }
+      if (b && b.D.startsWith('RGBW') && s.T === 'Green') { // Implement all needed action stuff here based on the names
+        const relayId = b.I;
+        controlFunction = function(value) {
+          let params;
+          params = {
+            'green': value
+          };
+          adapter.log.debug("RGBW Green: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        };
+      }
+      if (b && b.D.startsWith('RGBW') && s.T === 'Blue') { // Implement all needed action stuff here based on the names
+        const relayId = b.I;
+        controlFunction = function(value) {
+          let params;
+          params = {
+            'blue': value
+          };
+          adapter.log.debug("RGBW Blue: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        };
+      }
+      if (b && b.D.startsWith('RGBW') && s.T === 'White') { // Implement all needed action stuff here based on the names
+        const relayId = b.I;
+        controlFunction = function(value) {
+          let params;
+          params = {
+            'white': value
+          };
+          adapter.log.debug("RGBW White: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        };
+      }
+      if (b && b.D.startsWith('RGBW') && s.T === 'VSwitch') { // Implement all needed action stuff here based on the names
+        const relayId = b.I;
+        controlFunction = function(value) {
+          let params;
+          params = {
+            'turn': (value === true || value === 1) ? 'on' : 'off'
+          };
+          adapter.log.debug("RGBW Switch: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        };
+      }
     }
     if (dp.type === 'boolean') {
       value = !!value; // convert to boolean
@@ -598,6 +653,12 @@ function createDeviceStates(deviceId, description, ip, data) {
     blk.forEach(function(b) {
       // Block ID:         b.I
       // Block Descrition: b.D
+
+      // Workaround, because, the block ID is wrong
+      if (b.D == 'RGBW' && b.I == 1) {
+        b.I = 0;
+      }
+
       let sen = getSenByBlkID(b.I, description.sen); // Sensoren for this Block
       let act = getActByBlkID(b.I, description.act); // Actions for this Block
 
@@ -920,4 +981,65 @@ function main() {
       });
     });
   });
+}
+
+
+let v = {
+  "blk": [{
+    "I": 1,
+    "D": "RGBW"
+  }],
+  "sen": [{
+    "I": 111,
+    "T": "Red",
+    "R": "0/65535",
+    "L": 0
+  }, {
+    "I": 121,
+    "T": "Green",
+    "R": "0/65535",
+    "L": 0
+  }, {
+    "I": 131,
+    "T": "Blue",
+    "R": "0/65535",
+    "L": 0
+  }, {
+    "I": 141,
+    "T": "White",
+    "R": "0/65535",
+    "L": 0
+  }, {
+    "I": 151,
+    "T": "VSwitch",
+    "R": "0/1",
+    "L": 0
+  }],
+  "act": [{
+    "I": 211,
+    "D": "RGBW",
+    "L": 0,
+    "P": [{
+      "I": 2011,
+      "T": "Red",
+      "R": "0/65535"
+    }, {
+      "I": 2021,
+      "T": "Green",
+      "R": "0/65535"
+    }, {
+      "I": 2031,
+      "T": "Blue",
+      "R": "0/65535"
+    }, {
+      "I": 2041,
+      "T": "White",
+      "R": "0/65535"
+    }, {
+      "I": 2051,
+      "T": "VSwitch",
+      "R": "VSwitch",
+      "P": 0
+    }]
+  }]
 }
