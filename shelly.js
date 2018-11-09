@@ -31,7 +31,7 @@ function decrypt(key, value) {
 
 
 // is called when adapter shuts down - callback has to be called under any circumstances!
-adapter.on('unload', function(callback) {
+adapter.on('unload', function (callback) {
   try {
     setConnected(false);
     if (shelly) {
@@ -46,7 +46,7 @@ adapter.on('unload', function(callback) {
   }
 });
 
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
   if (shelly) {
     isStopped = true;
     shelly.stopListening();
@@ -54,7 +54,7 @@ process.on('SIGINT', function() {
   setConnected(false);
 });
 
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', function (err) {
   console.log('Exception: ' + err + '/' + err.toString());
   if (adapter && adapter.log) {
     adapter.log.warn('Exception: ' + err);
@@ -68,7 +68,7 @@ process.on('uncaughtException', function(err) {
 
 
 // is called if a subscribed state changes
-adapter.on('stateChange', function(id, state) {
+adapter.on('stateChange', function (id, state) {
   // Warning, state can be null if it was deleted
   adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
   objectHelper.handleStateChange(id, state);
@@ -88,7 +88,7 @@ function setConnected(isConnected) {
 
 // is called when databases are connected and adapter received configuration.
 // start here!
-adapter.on('ready', function() {
+adapter.on('ready', function () {
   // main();
   adapter.getForeignObject('system.config', (err, obj) => {
 
@@ -151,11 +151,11 @@ function delOldObjects(deviceId) {
         // relay modus, we delete Shutter
         channel = adapter.namespace + '.' + deviceId + '.' + 'Shutter';
       }
-      adapter.getAdapterObjects(function(obj) {
+      adapter.getAdapterObjects(function (obj) {
         for (let id in obj) {
           let o = obj[id];
           if (id.startsWith(channel)) {
-            adapter.delObject(id, function() {
+            adapter.delObject(id, function () {
               adapter.log.debug("Delete old object " + id);
             });
           }
@@ -186,9 +186,9 @@ function getSenByMissingBlkID(blk, sen) {
   let arr = [];
   let cnt = 0;
   if (sen && blk) {
-    sen.forEach(function(s) {
+    sen.forEach(function (s) {
       let found = false;
-      blk.forEach(function(b) {
+      blk.forEach(function (b) {
         if (b.I == s.L) {
           found = true;
           return;
@@ -207,7 +207,7 @@ function getSenByBlkID(blockId, sen) {
   let arr = [];
   let cnt = 0;
   if (sen) {
-    sen.forEach(function(s) {
+    sen.forEach(function (s) {
       if (blockId == s.L) {
         arr[++cnt] = s;
       }
@@ -221,7 +221,7 @@ function getActByBlkID(blockId, act) {
   let arr = [];
   let cnt = 0;
   if (act) {
-    act.forEach(function(a) {
+    act.forEach(function (a) {
       if (blockId == a.L) {
         arr[++cnt] = a;
       }
@@ -295,7 +295,7 @@ function createSensorStates(deviceId, b, s, data) {
     if (dp.write === true) { // check if it is allwoed to change datapoint (state)
       if (b && b.D.startsWith('Relay') && s.T === 'Switch') { // Implement all needed action stuff here based on the names
         const relayId = parseInt(b.D.substr(5), 10);
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           let params;
           let timer = 0;
           let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'switchtimer' + s.I);
@@ -318,7 +318,7 @@ function createSensorStates(deviceId, b, s, data) {
         };
       }
       if (b && b.D.startsWith('Relay') && s.T === 'SwitchTimer') {
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           setSensorIoBrokerIDs(deviceId, s.I, {
             value: value || 0
           });
@@ -332,7 +332,7 @@ function createSensorStates(deviceId, b, s, data) {
         }
         // call once at start
         let sen = getSensorIoBrokerIDs(deviceId, s.I);
-        adapter.getState(sen.id, function(err, state) {
+        adapter.getState(sen.id, function (err, state) {
           if (!err && state) {
             controlFunction(state.val);
           } else {
@@ -353,7 +353,7 @@ function createSensorStates(deviceId, b, s, data) {
         if (sensorIoBrokerID) {
           turn = sensorIoBrokerID.value;
         }
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           setSensorIoBrokerIDs(deviceId, s.I, {
             value: value || 0
           });
@@ -373,7 +373,7 @@ function createSensorStates(deviceId, b, s, data) {
         };
         // call once at start
         let sen = getSensorIoBrokerIDs(deviceId, s.I);
-        adapter.getState(sen.id, function(err, state) {
+        adapter.getState(sen.id, function (err, state) {
           if (!err && state) {
             controlFunction(state.val);
           } else {
@@ -394,7 +394,7 @@ function createSensorStates(deviceId, b, s, data) {
         if (sensorIoBrokerID) {
           turn = sensorIoBrokerID.value;
         }
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           setSensorIoBrokerIDs(deviceId, s.I, {
             value: value || 0
           });
@@ -414,7 +414,7 @@ function createSensorStates(deviceId, b, s, data) {
         };
         // call once at start
         let sen = getSensorIoBrokerIDs(deviceId, s.I);
-        adapter.getState(sen.id, function(err, state) {
+        adapter.getState(sen.id, function (err, state) {
           if (!err && state) {
             controlFunction(state.val);
           } else {
@@ -423,7 +423,7 @@ function createSensorStates(deviceId, b, s, data) {
         });
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterUp') {
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           if (value === true || value === 1) {
             // only do something if value is true
             let params = {};
@@ -458,7 +458,7 @@ function createSensorStates(deviceId, b, s, data) {
         }
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDown') {
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           // only do something if value is true
           if (value === true || value === 1) {
             let params = {};
@@ -493,7 +493,7 @@ function createSensorStates(deviceId, b, s, data) {
         }
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterStop') {
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           if (value === true || value === 1) {
             // only do something if value is true
             let params = {
@@ -516,7 +516,7 @@ function createSensorStates(deviceId, b, s, data) {
         }
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDuration') {
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           setSensorIoBrokerIDs(deviceId, s.I, {
             value: value || 0
           });
@@ -533,7 +533,7 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('RGBW') && s.T === 'Red') { // Implement all needed action stuff here based on the names
         const relayId = b.I;
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           let params;
           params = {
             'red': value
@@ -544,7 +544,7 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('RGBW') && s.T === 'Green') { // Implement all needed action stuff here based on the names
         const relayId = b.I;
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           let params;
           params = {
             'green': value
@@ -555,7 +555,7 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('RGBW') && s.T === 'Blue') { // Implement all needed action stuff here based on the names
         const relayId = b.I;
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           let params;
           params = {
             'blue': value
@@ -566,7 +566,7 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('RGBW') && s.T === 'White') { // Implement all needed action stuff here based on the names
         const relayId = b.I;
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           let params;
           params = {
             'white': value
@@ -577,7 +577,7 @@ function createSensorStates(deviceId, b, s, data) {
       }
       if (b && b.D.startsWith('RGBW') && s.T === 'VSwitch') { // Implement all needed action stuff here based on the names
         const relayId = b.I;
-        controlFunction = function(value) {
+        controlFunction = function (value) {
           let params;
           params = {
             'turn': (value === true || value === 1) ? 'on' : 'off'
@@ -632,7 +632,7 @@ function createDeviceStates(deviceId, description, ip, data) {
   }, true);
 
   // get hostname for ip adresss
-  dns.reverse(ip, function(err, hostnames) {
+  dns.reverse(ip, function (err, hostnames) {
     let hostname = (!err && hostnames.length > 0) ? hostnames[0] : ip;
     adapter.log.debug('Create state object for ' + deviceId + '.hostname' + ' if not exist');
     objectHelper.setOrUpdateObject(deviceId + '.hostname', {
@@ -650,7 +650,7 @@ function createDeviceStates(deviceId, description, ip, data) {
   if (description) {
     let blk = description.blk || [];
     // Loop over block
-    blk.forEach(function(b) {
+    blk.forEach(function (b) {
       // Block ID:         b.I
       // Block Descrition: b.D
 
@@ -672,7 +672,7 @@ function createDeviceStates(deviceId, description, ip, data) {
 
 
       // Loop over sensor for a block device
-      sen.forEach(function(s) {
+      sen.forEach(function (s) {
         createSensorStates(deviceId, b, s, data);
 
         // Create Timer for Switch
@@ -713,12 +713,12 @@ function createDeviceStates(deviceId, description, ip, data) {
 
       });
       // loop over action for block device
-      act.forEach(function(a) {});
+      act.forEach(function (a) { });
     });
     // looking for sensor with no link to a block device
     let sen = getSenByMissingBlkID(description.blk, description.sen) || [];
     // loop over sensor with no link to a block device
-    sen.forEach(function(s) {
+    sen.forEach(function (s) {
       createSensorStates(deviceId, null, s, data);
     });
 
@@ -782,7 +782,7 @@ function createDeviceStates(deviceId, description, ip, data) {
 function statusArrayToObject(data) {
   let obj = {};
   if (data && data.G) {
-    data.G.forEach(function(g) {
+    data.G.forEach(function (g) {
       obj[g[1]] = g[2]; // id = val
     });
   }
@@ -984,62 +984,3 @@ function main() {
 }
 
 
-let v = {
-  "blk": [{
-    "I": 1,
-    "D": "RGBW"
-  }],
-  "sen": [{
-    "I": 111,
-    "T": "Red",
-    "R": "0/65535",
-    "L": 0
-  }, {
-    "I": 121,
-    "T": "Green",
-    "R": "0/65535",
-    "L": 0
-  }, {
-    "I": 131,
-    "T": "Blue",
-    "R": "0/65535",
-    "L": 0
-  }, {
-    "I": 141,
-    "T": "White",
-    "R": "0/65535",
-    "L": 0
-  }, {
-    "I": 151,
-    "T": "VSwitch",
-    "R": "0/1",
-    "L": 0
-  }],
-  "act": [{
-    "I": 211,
-    "D": "RGBW",
-    "L": 0,
-    "P": [{
-      "I": 2011,
-      "T": "Red",
-      "R": "0/65535"
-    }, {
-      "I": 2021,
-      "T": "Green",
-      "R": "0/65535"
-    }, {
-      "I": 2031,
-      "T": "Blue",
-      "R": "0/65535"
-    }, {
-      "I": 2041,
-      "T": "White",
-      "R": "0/65535"
-    }, {
-      "I": 2051,
-      "T": "VSwitch",
-      "R": "VSwitch",
-      "P": 0
-    }]
-  }]
-}
