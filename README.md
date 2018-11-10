@@ -37,6 +37,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 1.0.0 (10.11.2018)
+* Optimizations and Online status fixed
+
 ### 0.2.6 (31.10.2018)
 * Two new datapoints (AutoTimerOn and AutoTimerOn) for Shelly 1/2
 

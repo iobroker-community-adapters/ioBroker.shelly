@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "0.2.6",
+    "version": "1.0.0",
     "news": {
+      "1.0.0": {
+        "en": "Optimizations and Online status fixed",
+        "de": "Fehelr bei Anzeige des Online-Status behoben, Optimierungen"
+      },
       "0.2.6": {
         "en": "Two new datapoints (AutoTimerOn and AutoTimerOff) for Shelly 1/2",
         "de": "Datapoints AutoTimerOn und AutoTimerOff für Shelly 1/2 hinzugefügt"
