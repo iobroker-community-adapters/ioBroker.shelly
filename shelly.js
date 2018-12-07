@@ -964,7 +964,7 @@ function main() {
       });
       return;
     }
-    // updateDeviceStates(deviceId, status);
+    updateDeviceStates(deviceId, status);
   });
 
   shelly.on('device-connection-status', (deviceId, connected) => {
