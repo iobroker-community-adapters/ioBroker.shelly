@@ -492,6 +492,18 @@ function createSensorStates(deviceId, b, s, data) {
           }
         }
       }
+      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterPosition') {
+        controlFunction = function (value) {
+          let params;
+          let position = value;
+          params = {
+            'go': 'to_pos',
+            'roller_pos': position 
+          };
+          adapter.log.debug("RollerPosition: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/roller/0', params);
+        };
+      }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterStop') {
         controlFunction = function (value) {
           if (value === true || value === 1) {
@@ -772,6 +784,14 @@ function createDeviceStates(deviceId, description, ip, data) {
             'L': 'roller'
           };
           createSensorStates(deviceId, b, s, data);
+           // Shutterpostion 
+          s = {
+            'I': 'rollerposition',
+            'T': 'ShutterPosition',
+            'D': 'Position',
+            'L': 'roller'
+          };
+          createSensorStates(deviceId, b, s, data);
         }
       });
     }
@@ -864,6 +884,7 @@ function updateDeviceStates(deviceId, data) {
           obj.common.type === 'boolean'
         ) {
           value = !!value; // convert to boolean
+          oldValue = !!oldValue;
         }
         if (value != oldValue) {
           adapter.setState(ioBrokerId, {
@@ -873,7 +894,7 @@ function updateDeviceStates(deviceId, data) {
           sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value = value;
           // enter only if device == Shelly2 and the shutter objects are switches and not buttons
           if (deviceId.startsWith('SHSW-2')) {
-            // updateShutter(deviceId);
+            updateShutter(deviceId);
           }
 
         }
@@ -943,7 +964,7 @@ function main() {
       });
       return;
     }
-    updateDeviceStates(deviceId, status);
+    // updateDeviceStates(deviceId, status);
   });
 
   shelly.on('device-connection-status', (deviceId, connected) => {

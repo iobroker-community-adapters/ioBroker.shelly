@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "news": {
+      "1.0.1": {
+        "en": "Add State Roller/Shuter position",
+        "de": "Status Rolllädenposition hinzugefügt"
+      },
       "1.0.0": {
         "en": "Optimizations and Online status fixed",
         "de": "Fehelr bei Anzeige des Online-Status behoben, Optimierungen"

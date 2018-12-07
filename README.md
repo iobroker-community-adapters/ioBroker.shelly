@@ -37,6 +37,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 1.0.1 (07.12.2018)
+* Add shutter/roller position
+
 ### 1.0.0 (10.11.2018)
 * Optimizations and Online status fixed
 
