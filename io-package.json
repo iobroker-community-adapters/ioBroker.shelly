@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "news": {
+      "1.0.2": {
+        "en": "Work around for showing states in shutter/roller modus",
+        "de": "Work around und den Status im Rollladenmodus anzuzeigen"
+      },
       "1.0.1": {
         "en": "Add State Roller/Shuter position",
         "de": "Status Rolllädenposition hinzugefügt"

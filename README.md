@@ -37,6 +37,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 1.0.2 (17.12.2018)
+* Work around for showing states in shutter/roller modus
+
 ### 1.0.1 (07.12.2018)
 * Add shutter/roller position
 

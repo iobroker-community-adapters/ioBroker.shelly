@@ -869,6 +869,19 @@ function updateShutter(deviceId) {
 
 // Update Status
 function updateDeviceStates(deviceId, data) {
+
+  // Workaround because of wrong ID in data in shutter modus
+  // [0,112,1],[0,112,0] - one direction
+  // [0,112,0],[0,112,1] - another direction
+  // It will be changed to (112 -> 122 in Array 2)
+  // [0,112,1],[0,122,0] - one direction
+  // [0,112,0],[0,122,1] - another direction
+  if (deviceId.startsWith('SHSW-2')) {
+   if(data.G && data.G[0] && data.G[1] && data.G[0][1] == 112 && data.G[1][1] == 112) {
+    data.G[1][1] = 122;
+   }
+  }
+
   // tranfer Array to Object
   let dataObj = statusArrayToObject(data);
   Object.keys(dataObj).forEach((id) => {
@@ -894,7 +907,7 @@ function updateDeviceStates(deviceId, data) {
           sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value = value;
           // enter only if device == Shelly2 and the shutter objects are switches and not buttons
           if (deviceId.startsWith('SHSW-2')) {
-            updateShutter(deviceId);
+            // updateShutter(deviceId);
           }
 
         }
