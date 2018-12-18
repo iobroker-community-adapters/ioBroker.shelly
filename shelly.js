@@ -498,7 +498,7 @@ function createSensorStates(deviceId, b, s, data) {
           let position = value;
           params = {
             'go': 'to_pos',
-            'roller_pos': position 
+            'roller_pos': position
           };
           adapter.log.debug("RollerPosition: " + JSON.stringify(params));
           shelly.callDevice(deviceId, '/roller/0', params);
@@ -784,7 +784,7 @@ function createDeviceStates(deviceId, description, ip, data) {
             'L': 'roller'
           };
           createSensorStates(deviceId, b, s, data);
-           // Shutterpostion 
+          // Shutterpostion 
           s = {
             'I': 'rollerposition',
             'T': 'ShutterPosition',
@@ -870,6 +870,12 @@ function updateShutter(deviceId) {
 // Update Status
 function updateDeviceStates(deviceId, data) {
 
+  // shelly1Status(deviceId);
+
+  shelly.callDevice(deviceId, '/status', (error, data2) => {
+    adapter.log.info('Status ' + deviceId + ': ' + JSON.stringify(data2));
+  });
+
   // Workaround because of wrong ID in data in shutter modus
   // [0,112,1],[0,112,0] - one direction
   // [0,112,0],[0,112,1] - another direction
@@ -877,9 +883,9 @@ function updateDeviceStates(deviceId, data) {
   // [0,112,1],[0,122,0] - one direction
   // [0,112,0],[0,122,1] - another direction
   if (deviceId.startsWith('SHSW-2')) {
-   if(data.G && data.G[0] && data.G[1] && data.G[0][1] == 112 && data.G[1][1] == 112) {
-    data.G[1][1] = 122;
-   }
+    if (data.G && data.G[0] && data.G[1] && data.G[0][1] == 112 && data.G[1][1] == 112) {
+      data.G[1][1] = 122;
+    }
   }
 
   // tranfer Array to Object
@@ -916,6 +922,46 @@ function updateDeviceStates(deviceId, data) {
   });
 }
 
+
+function obj2str(data, obj, str) {
+  if (typeof data !== 'object') {
+    // adapter.log.debug(str + ' = ' + data);
+    obj[str] = data;
+  } else {
+    for (let i in data) {
+      let val = data[i];
+      if (str) {
+        if (Array.isArray(data)) {
+          if(data.length == 1) { 
+            obj2str(val, obj, str);
+          } else {
+            obj2str(val, obj, str + i);
+          }
+        } else {
+          obj2str(val, obj, str + '.' + i);
+        }
+      } else {
+        obj2str(val, obj, i);
+      }
+    }
+  }
+}
+
+
+
+function shelly1Status(deviceId, callback) {
+  shelly.callDevice(deviceId, '/status', (error, data) => {
+    if (!error && data) {
+      let ids = {};
+      obj2str(data, ids);
+      for (let i in ids) {
+        adapter.log.debug(i + ' = ' + ids[i]);
+      }
+    }
+  });
+}
+
+
 function initDevices(deviceIPs, callback) {
   if (!deviceIPs.length) {
     return callback && callback();
@@ -946,6 +992,7 @@ function initDevices(deviceIPs, callback) {
 
 // main function
 function main() {
+
   setConnected(false);
   objectHelper.init(adapter);
 
