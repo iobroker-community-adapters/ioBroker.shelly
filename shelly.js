@@ -923,43 +923,6 @@ function updateDeviceStates(deviceId, data) {
 }
 
 
-function obj2str(data, obj, str) {
-  if (typeof data !== 'object') {
-    // adapter.log.debug(str + ' = ' + data);
-    obj[str] = data;
-  } else {
-    for (let i in data) {
-      let val = data[i];
-      if (str) {
-        if (Array.isArray(data)) {
-          if(data.length == 1) { 
-            obj2str(val, obj, str);
-          } else {
-            obj2str(val, obj, str + i);
-          }
-        } else {
-          obj2str(val, obj, str + '.' + i);
-        }
-      } else {
-        obj2str(val, obj, i);
-      }
-    }
-  }
-}
-
-
-
-function shelly1Status(deviceId, callback) {
-  shelly.callDevice(deviceId, '/status', (error, data) => {
-    if (!error && data) {
-      let ids = {};
-      obj2str(data, ids);
-      for (let i in ids) {
-        adapter.log.debug(i + ' = ' + ids[i]);
-      }
-    }
-  });
-}
 
 
 function initDevices(deviceIPs, callback) {
