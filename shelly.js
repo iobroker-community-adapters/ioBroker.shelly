@@ -132,7 +132,7 @@ function createDeviceChannelFromState(deviceId, state) {
 }
 
 
-function shelly1Status(deviceId, callback) {
+function shelly2Status(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly2');
 
@@ -144,7 +144,7 @@ function shelly1Status(deviceId, callback) {
 
     createDeviceChannelFromState(deviceId, i);
 
-    if (i == 'Relay0.Switch' || i == 'Relay0.Switch') { // Implement all needed action stuff here based on the names
+    if (i == 'Relay0.Switch' || i == 'Relay1.Switch') { // Implement all needed action stuff here based on the names
       const relayId = parseInt(i.substr(5), 10);
       controlFunction = function (value) {
         let params = {};
@@ -153,8 +153,8 @@ function shelly1Status(deviceId, callback) {
           'turn': (value === true || value === 1) ? 'on' : 'off'
         };
         adapter.log.debug("Relay: " + JSON.stringify(params));
-        // shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
-      }
+        shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+      };
     }
 
     if (i == 'Shutter.Open' || i == 'Shutter.Close' || i == 'Shutter.Pause') { // Implement all needed action stuff here based on the names
@@ -178,8 +178,8 @@ function shelly1Status(deviceId, callback) {
           };
         }
         adapter.log.debug("Relay: " + JSON.stringify(params));
-        // shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
-      }
+        shelly.callDevice(deviceId, '/roller/0', params);
+      };
     }
 
 
@@ -190,11 +190,9 @@ function shelly1Status(deviceId, callback) {
     }, ['name'], value, controlFunction);
   }
 
-  shelly.doGet('http://192.168.20.159/settings', (data, error) => {
-    error = null;
-    // shelly.callDevice(deviceId, '/settings', (error, data) => {
-
-
+  // shelly.doGet('http://192.168.20.159/settings', (data, error) => {
+  //   error = null;
+  shelly.callDevice(deviceId, '/settings', (error, data) => {
     if (!error && data) {
       let ids = {};
       obj2str(data, ids);
@@ -206,7 +204,7 @@ function shelly1Status(deviceId, callback) {
         // historical mapping
         switch (id) {
           case 'relays0.ison':
-            id = 'Relay0.Switch';
+            //id = 'Relay0.Switch';
             rollerValue = ids['rollers.state'];
             rollerModus = ids['mode'];
             if (rollerModus == 'roller' && (rollerValue == 'stop' || rollerValue == 'close')) { value = false; }
@@ -219,7 +217,7 @@ function shelly1Status(deviceId, callback) {
             id = 'Relay0.AutoTimerOff';
             break;
           case 'relays1.ison':
-            id = 'Relay1.Switch';
+            //id = 'Relay1.Switch';
             rollerValue = ids['rollers.state'];
             rollerModus = ids['mode'];
             if (rollerModus == 'roller' && (rollerValue == 'stop' || rollerValue == 'open')) { value = false; }
@@ -246,6 +244,22 @@ function shelly1Status(deviceId, callback) {
           default:
         }
 
+        let controlFunction;
+        /*
+        if (i == 'Relay0.Switch' || i == 'Relay1.Switch') { // Implement all needed action stuff here based on the names
+          const relayId = parseInt(i.substr(5), 10);
+          controlFunction = function (value) {
+            let params = {};
+            let timer = 0;
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off'
+            };
+            adapter.log.debug("Relay: " + JSON.stringify(params));
+            shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+          };
+        }
+        */
+       
         if (devices.hasOwnProperty(id)) {
           let stateId = deviceId + '.' + id;
           let common = devices[id];
@@ -253,16 +267,16 @@ function shelly1Status(deviceId, callback) {
           objectHelper.setOrUpdateObject(stateId, {
             type: 'state',
             common: common
-          }, ['name'], value);
+          }, ['name'], value, controlFunction);
         }
 
       }
     }
   });
 
-  shelly.doGet('http://192.168.20.159/status', (data, error) => {
-    error = null;
-    // shelly.callDevice(deviceId, '/settings', (error, data) => {
+  //shelly.doGet('http://192.168.20.159/status', (data, error) => {
+  // error = null;
+  shelly.callDevice(deviceId, '/settings', (error, data) => {
 
     if (!error && data) {
       let ids = {};
@@ -558,7 +572,7 @@ function createSensorStates(deviceId, b, s, data) {
               ack: true
             });
           }
-        }
+        };
         // call once at start
         let sen = getSensorIoBrokerIDs(deviceId, s.I);
         adapter.getState(sen.id, function (err, state) {
@@ -684,7 +698,7 @@ function createSensorStates(deviceId, b, s, data) {
               shelly.callDevice(deviceId, '/roller/0', params);
             }
           }
-        }
+        };
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDown') {
         controlFunction = function (value) {
@@ -719,7 +733,7 @@ function createSensorStates(deviceId, b, s, data) {
               shelly.callDevice(deviceId, '/roller/0', params);
             }
           }
-        }
+        };
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterPosition') {
         controlFunction = function (value) {
@@ -754,7 +768,7 @@ function createSensorStates(deviceId, b, s, data) {
             adapter.log.debug("RollerStop: " + JSON.stringify(params));
             shelly.callDevice(deviceId, '/roller/0', params);
           }
-        }
+        };
       }
       if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDuration') {
         controlFunction = function (value) {
@@ -768,7 +782,7 @@ function createSensorStates(deviceId, b, s, data) {
               ack: true
             });
           }
-        }
+        };
         // call at start once
         controlFunction(value || 0);
       }
@@ -1210,15 +1224,21 @@ function main() {
   }
 
   shelly = new Shelly(options);
-
+ /*
   obj2str(settings, arr);
   setInterval(() => {
-    shelly1Status('deviceId');
+    shelly2Status('deviceId');
   }, 5 * 1000);
   adapter.subscribeStates('*');
+*/
 
   shelly.on('update-device-status', (deviceId, status) => {
     adapter.log.debug('Status update received for ' + deviceId + ': ' + JSON.stringify(status));
+
+    if (deviceId.startsWith('SHSW-2')) {
+      shelly2Status(deviceId);
+      objectHelper.processObjectQueue(() => {});
+    }
 
     if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
       shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
