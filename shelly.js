@@ -136,7 +136,6 @@ function shelly1Status(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly2');
 
-
   for (let i in devices) {
     let common = devices[i];
     let stateId = deviceId + '.' + i;
@@ -145,10 +144,10 @@ function shelly1Status(deviceId, callback) {
 
     createDeviceChannelFromState(deviceId, i);
 
-    if (i.startsWith('Relay')) { // Implement all needed action stuff here based on the names
+    if (i == 'Relay0.Switch' || i == 'Relay0.Switch') { // Implement all needed action stuff here based on the names
       const relayId = parseInt(i.substr(5), 10);
       controlFunction = function (value) {
-        let params;
+        let params = {};
         let timer = 0;
         params = {
           'turn': (value === true || value === 1) ? 'on' : 'off'
@@ -157,6 +156,33 @@ function shelly1Status(deviceId, callback) {
         // shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
       }
     }
+
+    if (i == 'Shutter.Open' || i == 'Shutter.Close' || i == 'Shutter.Pause') { // Implement all needed action stuff here based on the names
+      const pos = i.substr(8);
+      controlFunction = function (value) {
+        let params = {};
+        let duration = 0;
+        if (pos == 'Close') {
+          params = {
+            'go': (value === true || value === 1) ? 'close' : 'stop'
+          };
+        }
+        if (pos == 'Open') {
+          params = {
+            'go': (value === true || value === 1) ? 'open' : 'stop'
+          };
+        }
+        if (pos == 'Pause') {
+          params = {
+            'go': 'stop'
+          };
+        }
+        adapter.log.debug("Relay: " + JSON.stringify(params));
+        // shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+      }
+    }
+
+
     adapter.log.debug("Creating State " + stateId);
     objectHelper.setOrUpdateObject(stateId, {
       type: 'state',
@@ -175,10 +201,16 @@ function shelly1Status(deviceId, callback) {
       for (let i in ids) {
         let id = i;
         let value = ids[i];
+        let rollerValue;
+        let rollerModus;
         // historical mapping
         switch (id) {
           case 'relays0.ison':
             id = 'Relay0.Switch';
+            rollerValue = ids['rollers.state'];
+            rollerModus = ids['mode'];
+            if (rollerModus == 'roller' && (rollerValue == 'stop' || rollerValue == 'close')) { value = false; }
+            if (rollerModus == 'roller' && rollerValue == 'open') { value = true; }
             break;
           case 'relays0.auto_on':
             id = 'Relay0.AutoTimerOn';
@@ -188,6 +220,10 @@ function shelly1Status(deviceId, callback) {
             break;
           case 'relays1.ison':
             id = 'Relay1.Switch';
+            rollerValue = ids['rollers.state'];
+            rollerModus = ids['mode'];
+            if (rollerModus == 'roller' && (rollerValue == 'stop' || rollerValue == 'open')) { value = false; }
+            if (rollerModus == 'roller' && rollerValue == 'close') { value = true; }
             break;
           case 'relays1.auto_on':
             id = 'Relay1.AutoTimerOn';
@@ -204,16 +240,45 @@ function shelly1Status(deviceId, callback) {
           case 'rollers.state':
             // id = 'Shutter.Open';
             break;
-          case 'rollers.state':
-            // id = 'Shutter.Pause';
+          case 'meters.power':
+            id = 'Power';
             break;
+          default:
+        }
+
+        if (devices.hasOwnProperty(id)) {
+          let stateId = deviceId + '.' + id;
+          let common = devices[id];
+          adapter.log.debug(i + ' = ' + stateId);
+          objectHelper.setOrUpdateObject(stateId, {
+            type: 'state',
+            common: common
+          }, ['name'], value);
+        }
+
+      }
+    }
+  });
+
+  shelly.doGet('http://192.168.20.159/status', (data, error) => {
+    error = null;
+    // shelly.callDevice(deviceId, '/settings', (error, data) => {
+
+    if (!error && data) {
+      let ids = {};
+      obj2str(data, ids);
+      for (let i in ids) {
+        let id = i;
+        let value = ids[i];
+        // historical mapping
+        switch (id) {
           case 'rollers.current_pos': // in Status
             id = 'Shutter.Position';
             break;
-          case 'meters_power':
-            id = 'Power';
+          case 'rollers.state':
+            id = 'Shutter.state';
             break;
-          case 'device.hostname':
+          case 'wifi_sta.ip':
             id = 'hostname';
             break;
           default:
@@ -1147,7 +1212,9 @@ function main() {
   shelly = new Shelly(options);
 
   obj2str(settings, arr);
-  shelly1Status('deviceId');
+  setInterval(() => {
+    shelly1Status('deviceId');
+  }, 5 * 1000);
   adapter.subscribeStates('*');
 
   shelly.on('update-device-status', (deviceId, status) => {
