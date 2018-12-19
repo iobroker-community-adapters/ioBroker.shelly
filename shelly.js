@@ -75,6 +75,170 @@ adapter.on('stateChange', function (id, state) {
 
 });
 
+
+// *******************************************************************************
+// Reads object makes an ID out of them
+// { roller: { state1: true, state2: false}} 
+// -> roller.state1 = true and roller.state2 = false
+// *******************************************************************************
+function obj2str(data, obj, str) {
+  if (typeof data !== 'object') {
+    adapter.log.debug(str + ' = ' + data);
+    obj[str] = data;
+  } else {
+    for (let i in data) {
+      let val = data[i];
+      if (str) {
+        if (Array.isArray(data)) {
+          if (data.length == 1) {
+            obj2str(val, obj, str);
+          } else {
+            obj2str(val, obj, str + i);
+          }
+        } else {
+          obj2str(val, obj, str + '.' + i);
+        }
+      } else {
+        obj2str(val, obj, i);
+      }
+    }
+  }
+}
+
+
+function createDeviceChannelFromState(deviceId, state) {
+
+  adapter.log.debug("Creating device " + deviceId);
+  objectHelper.setOrUpdateObject(deviceId, {
+    type: 'device',
+    common: {
+      name: 'Device ' + deviceId
+    },
+    native: {}
+  }, ['name']);
+
+  let arr = state.split('.');
+  if (arr.length >= 2) {
+    let channelId = deviceId + '.' + arr[0];
+    adapter.log.debug("Creating Channel " + channelId);
+    objectHelper.setOrUpdateObject(channelId, {
+      type: 'channel',
+      common: {
+        name: 'Channel ' + arr[0]
+      }
+    }, ['name']);
+  }
+
+}
+
+
+function shelly1Status(deviceId, callback) {
+
+  let devices = datapoints.getObjectByName('shelly2');
+
+
+  for (let i in devices) {
+    let common = devices[i];
+    let stateId = deviceId + '.' + i;
+    let value;
+    let controlFunction;
+
+    createDeviceChannelFromState(deviceId, i);
+
+    if (i.startsWith('Relay')) { // Implement all needed action stuff here based on the names
+      const relayId = parseInt(i.substr(5), 10);
+      controlFunction = function (value) {
+        let params;
+        let timer = 0;
+        params = {
+          'turn': (value === true || value === 1) ? 'on' : 'off'
+        };
+        adapter.log.debug("Relay: " + JSON.stringify(params));
+        // shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+      }
+    }
+    adapter.log.debug("Creating State " + stateId);
+    objectHelper.setOrUpdateObject(stateId, {
+      type: 'state',
+      common: common
+    }, ['name'], value, controlFunction);
+  }
+
+  shelly.doGet('http://192.168.20.159/settings', (data, error) => {
+    error = null;
+    // shelly.callDevice(deviceId, '/settings', (error, data) => {
+
+
+    if (!error && data) {
+      let ids = {};
+      obj2str(data, ids);
+      for (let i in ids) {
+        let id = i;
+        let value = ids[i];
+        // historical mapping
+        switch (id) {
+          case 'relays0.ison':
+            id = 'Relay0.Switch';
+            break;
+          case 'relays0.auto_on':
+            id = 'Relay0.AutoTimerOn';
+            break;
+          case 'relays0.auto_off':
+            id = 'Relay0.AutoTimerOff';
+            break;
+          case 'relays1.ison':
+            id = 'Relay1.Switch';
+            break;
+          case 'relays1.auto_on':
+            id = 'Relay1.AutoTimerOn';
+            break;
+          case 'relays1.auto_off':
+            id = 'Relay1.AutoTimerOff';
+            break;
+          case 'rollers.state':
+            // id = 'Shutter.Close';
+            break;
+          case 'rollers."maxtime':
+            id = 'Shutter.Duration';
+            break;
+          case 'rollers.state':
+            // id = 'Shutter.Open';
+            break;
+          case 'rollers.state':
+            // id = 'Shutter.Pause';
+            break;
+          case 'rollers.current_pos': // in Status
+            id = 'Shutter.Position';
+            break;
+          case 'meters_power':
+            id = 'Power';
+            break;
+          case 'device.hostname':
+            id = 'hostname';
+            break;
+          default:
+        }
+
+        if (devices.hasOwnProperty(id)) {
+          let stateId = deviceId + '.' + id;
+          let common = devices[id];
+          adapter.log.debug(i + ' = ' + stateId);
+          objectHelper.setOrUpdateObject(stateId, {
+            type: 'state',
+            common: common
+          }, ['name'], value);
+        }
+
+      }
+    }
+  });
+
+  objectHelper.processObjectQueue(() => { });
+
+}
+
+
+
 function setConnected(isConnected) {
   if (connected !== isConnected) {
     connected = isConnected;
@@ -956,8 +1120,15 @@ function initDevices(deviceIPs, callback) {
 // main function
 function main() {
 
-  setConnected(false);
   objectHelper.init(adapter);
+
+  let status1 = { "wifi_sta": { "connected": true, "ssid": "AP Stueben", "ip": "192.168.20.159" }, "cloud": { "enabled": false, "connected": false }, "mqtt": { "connected": false }, "time": "07:52", "serial": 1, "has_update": false, "mac": "86F3EB9F5FBB", "relays": [{ "ison": false, "has_timer": false, "overpower": false, "is_valid": true }, { "ison": false, "has_timer": false, "overpower": false, "is_valid": true }], "rollers": [{ "state": "stop", "power": 0.00, "is_valid": true, "safety_switch": false, "stop_reason": "normal", "last_direction": "open", "current_pos": 46, "calibrating": false, "positioning": true }], "meters": [{ "power": 0.00, "is_valid": true, "timestamp": 1545205967, "counters": [0.000, 0.000, 0.000], "total": 0 }], "update": { "status": "idle", "has_update": false, "new_version": "20181217-130502/v1.4.2@cc724b51", "old_version": "20181217-130502/v1.4.2@cc724b51" }, "ram_total": 50488, "ram_free": 38416, "fs_size": 233681, "fs_free": 158381, "uptime": 5595 };
+  let status2 = { "wifi_sta": { "connected": true, "ssid": "AP Stueben", "ip": "192.168.20.159" }, "cloud": { "enabled": false, "connected": false }, "mqtt": { "connected": false }, "time": "07:57", "serial": 1, "has_update": false, "mac": "86F3EB9F5FBB", "relays": [{ "ison": false, "has_timer": false, "overpower": false, "is_valid": true }, { "ison": false, "has_timer": false, "overpower": false, "is_valid": true }], "rollers": [{ "state": "stop", "power": 0.00, "is_valid": true, "safety_switch": false, "stop_reason": "normal", "last_direction": "open", "current_pos": 46, "calibrating": false, "positioning": true }], "meters": [{ "power": 0.00, "is_valid": true, "timestamp": 1545206235, "counters": [0.000, 0.000, 0.000], "total": 0 }], "update": { "status": "idle", "has_update": false, "new_version": "20181217-130502/v1.4.2@cc724b51", "old_version": "20181217-130502/v1.4.2@cc724b51" }, "ram_total": 50488, "ram_free": 37988, "fs_size": 233681, "fs_free": 158381, "uptime": 5863 };
+  let settings = { "device": { "type": "SHSW-21", "mac": "86F3EB9F5FBB", "hostname": "shellyswitch-9F5FBB", "num_outputs": 2, "num_meters": 1, "num_rollers": 1 }, "wifi_ap": { "enabled": false, "ssid": "shellyswitch-9F5FBB", "key": "" }, "wifi_sta": { "enabled": true, "ssid": "AP Stueben", "ipv4_method": "dhcp", "ip": null, "gw": null, "mask": null, "dns": null }, "mqtt": { "enable": true, "server": "192.168.20.242:1882", "user": "mqttuser", "reconnect_timeout_max": 60.000000, "reconnect_timeout_min": 2.000000, "clean_session": true, "keep_alive": 60, "will_topic": "FlotteHN/Fahrzeug1/#", "will_message": "Mein Letzer Wille", "max_qos": 0, "retain": true }, "login": { "enabled": false, "unprotected": false, "username": "admin", "password": "admin" }, "pin_code": "@d1Gnm", "coiot_execute_enable": true, "name": "", "fw": "20181217-130502/v1.4.2@cc724b51", "build_info": { "build_id": "20181217-130502/v1.4.2@cc724b51", "build_timestamp": "2018-12-17T13:05:02Z", "build_version": "1.0" }, "cloud": { "enabled": false, "connected": false }, "timezone": "Europe/Berlin", "lat": 50.110901, "lng": 8.682130, "tzautodetect": true, "time": "08:21", "hwinfo": { "hw_revision": "prod-2018-07c", "batch_id": 4 }, "mode": "relay", "max_power": 1840, "relays": [{ "name": null, "ison": true, "has_timer": false, "overpower": false, "default_state": "switch", "btn_type": "toggle", "auto_on": 0.00, "auto_off": 0.00, "schedule": false, "schedule_rules": [], "sun": false, "sun_on_times": "0000000000000000000000000000", "sun_off_times": "0000000000000000000000000000" }, { "name": null, "ison": false, "has_timer": false, "overpower": false, "default_state": "switch", "btn_type": "toggle", "auto_on": 0.00, "auto_off": 0.00, "schedule": false, "schedule_rules": [], "sun": false, "sun_on_times": "0000000000000000000000000000", "sun_off_times": "0000000000000000000000000000" }], "rollers": [{ "maxtime": 20.00, "default_state": "stop", "swap": false, "input_mode": "openclose", "button_type": "toggle", "state": "stop", "power": 1.30, "is_valid": true, "safety_switch": false, "schedule": false, "schedule_rules": [], "sun": false, "sun_open_times": "0000000000000000000000000000", "sun_close_times": "0000000000000000000000000000", "obstacle_mode": "disabled", "obstacle_action": "stop", "obstacle_power": 200, "obstacle_delay": 1, "safety_mode": "while_opening", "safety_action": "stop", "safety_allowed_on_trigger": "none", "off_power": 2, "positioning": true }], "meters": [{ "power": 1.30, "is_valid": true, "timestamp": 1545207660, "counters": [0.002, 0.002, 0.002], "total": 0 }] };
+  let arr = [];
+
+  setConnected(false);
+
 
   let options = {};
 
@@ -974,6 +1145,10 @@ function main() {
   }
 
   shelly = new Shelly(options);
+
+  obj2str(settings, arr);
+  shelly1Status('deviceId');
+  adapter.subscribeStates('*');
 
   shelly.on('update-device-status', (deviceId, status) => {
     adapter.log.debug('Status update received for ' + deviceId + ': ' + JSON.stringify(status));

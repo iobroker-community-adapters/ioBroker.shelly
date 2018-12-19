@@ -11,7 +11,7 @@
             "program": "${workspaceFolder}/shelly.js",
             "cwd": "${workspaceRoot}",
             "args": [
-                "--debug", "--force", "--trace-warnings"
+                "--debug", "--force", "--logs", "--trace-warnings"
             ]
         },
         {
