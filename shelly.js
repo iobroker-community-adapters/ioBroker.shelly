@@ -733,6 +733,7 @@ function main() {
         objectHelper.processObjectQueue(() => {
           adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
         }); // if device is added later, create all objects
+        knownDevices[deviceId] = description;
       });
       return;
     }
