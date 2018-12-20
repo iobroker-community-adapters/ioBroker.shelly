@@ -730,6 +730,7 @@ function main() {
     if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
       shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
         createShellyStates(deviceId, description, ip);
+        updateShellyStates(deviceId);
         objectHelper.processObjectQueue(() => {
           adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
         }); // if device is added later, create all objects
