@@ -725,10 +725,9 @@ function main() {
   shelly = new Shelly(options);
 
   // Test START
-
+/*
   createShellyStates('SHSW-1DUMMY', 'Test', '192.168.20.159');
   objectHelper.processObjectQueue(() => { });
-/*
 setInterval(() => {
   updateShellyStates('SHSW-2DUMMY');
   // objectHelper.processObjectQueue(() => { });
