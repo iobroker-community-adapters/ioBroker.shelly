@@ -77,6 +77,16 @@ adapter.on('stateChange', function (id, state) {
 });
 
 
+function getDeviceIdFromIoBrokerId(iobrokerId) {
+  let deviceId;
+  if (iobrokerId) {
+    let res = iobrokerId.replace(adapter.namespace + '.', '');
+    let arr = res.split('.');
+    deviceId = arr[0];
+  }
+  return deviceId;
+}
+
 // *******************************************************************************
 // Reads object makes an ID out of them
 // { roller: { state1: true, state2: false}} 
@@ -176,7 +186,7 @@ function createDevice(deviceId, description, ip) {
   }
 }
 
-function createShellyStates(deviceId, description, ip) {
+function createShellyStates(deviceId, description, ip, callback) {
   createDevice(deviceId, description, ip);
   if (deviceId.startsWith('SHSW-1')) {
     createShelly1States(deviceId);
@@ -184,15 +194,17 @@ function createShellyStates(deviceId, description, ip) {
   if (deviceId.startsWith('SHSW-2')) {
     createShelly2States(deviceId);
   }
-  // objectHelper.processObjectQueue(() => { });
+  objectHelper.processObjectQueue(() => { 
+    callback && callback();
+  });
 }
 
-function updateShellyStates(deviceId) {
+function updateShellyStates(deviceId, callback) {
   if (deviceId.startsWith('SHSW-1')) {
-    updateShelly1States(deviceId);
+    updateShelly1States(deviceId, callback);
   }
   if (deviceId.startsWith('SHSW-2')) {
-    updateShelly2States(deviceId);
+    updateShelly2States(deviceId, callback);
   }
   // objectHelper.processObjectQueue(() => { });
 }
@@ -313,45 +325,9 @@ function updateShelly1States(deviceId, callback) {
 
       }
     }
+    callback && callback();
   });
 
-  // shelly.doGet('http://192.168.20.159/status', {}, (data, error) => {
-  // error = null;
-  /*
-  shelly.callDevice(deviceId, '/settings', (error, data) => {
-
-    if (!error && data) {
-      let ids = {};
-      obj2str(data, ids);
-      for (let i in ids) {
-        let id = i;
-        let value = ids[i];
-        let controlFunction;
-        // historical mapping
-
-        switch (id) {
-          default:
-        }
-
-        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
-          continue;
-        }
-        shellyStates[deviceId + '.' + id] = value;
-
-        if (devices.hasOwnProperty(id)) {
-          let stateId = deviceId + '.' + id;
-          let common = devices[id];
-          // adapter.log.debug(i + ' = ' + stateId);
-          objectHelper.setOrUpdateObject(stateId, {
-            type: 'state',
-            common: common
-          }, ['name'], value, controlFunction);
-        }
-
-      }
-    }
-  });
-  */
 }
 
 
@@ -437,7 +413,7 @@ function createShelly2States(deviceId, callback) {
       };
     }
 
-    if (i == 'Shutter.State') { // Implement all needed action stuff here based on the names
+    if (i == 'Shutter.state') { // Implement all needed action stuff here based on the names
       controlFunction = function (value) {
         let params = {};
         let duration = 0;
@@ -581,54 +557,51 @@ function updateShelly2States(deviceId, callback) {
             common: common
           }, ['name'], value, controlFunction);
         }
-
       }
     }
-  });
-
-  // shelly.doGet('http://192.168.20.159/status', {}, (data, error) => {
-  // error = null;
-  shelly.callDevice(deviceId, '/settings', (error, data) => {
-
-    if (!error && data) {
-      let ids = {};
-      obj2str(data, ids);
-      for (let i in ids) {
-        let id = i;
-        let value = ids[i];
-        let controlFunction;
-        // historical mapping
 
 
-        switch (id) {
-          case 'rollers.current_pos': // in Status
-            id = 'Shutter.Position';
-            break;
-          case 'rollers.state':
-            id = 'Shutter.state';
-            break;
-          default:
+    // shelly.doGet('http://192.168.20.159/status', {}, (data, error) => {
+    // error = null;
+    shelly.callDevice(deviceId, '/status', (error, data) => {
+      if (!error && data) {
+        let ids = {};
+        obj2str(data, ids);
+        for (let i in ids) {
+          let id = i;
+          let value = ids[i];
+          let controlFunction;
+          // historical mapping
+          switch (id) {
+            case 'rollers.current_pos': // in Status
+              id = 'Shutter.Position';
+              break;
+            case 'rollers.state':
+              id = 'Shutter.state';
+              break;
+            default:
+          }
+
+          if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+            continue;
+          }
+          shellyStates[deviceId + '.' + id] = value;
+
+          if (devices.hasOwnProperty(id)) {
+            let stateId = deviceId + '.' + id;
+            let common = devices[id];
+            // adapter.log.debug(i + ' = ' + stateId);
+            objectHelper.setOrUpdateObject(stateId, {
+              type: 'state',
+              common: common
+            }, ['name'], value, controlFunction);
+          }
+
         }
-
-        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
-          continue;
-        }
-        shellyStates[deviceId + '.' + id] = value;
-
-        if (devices.hasOwnProperty(id)) {
-          let stateId = deviceId + '.' + id;
-          let common = devices[id];
-          // adapter.log.debug(i + ' = ' + stateId);
-          objectHelper.setOrUpdateObject(stateId, {
-            type: 'state',
-            common: common
-          }, ['name'], value, controlFunction);
-        }
-
       }
-    }
+      callback && callback();
+    });
   });
-
 }
 
 
@@ -694,6 +667,12 @@ function initDevices(deviceIPs, callback) {
   });
 }
 
+function updateStates(deviceId) {
+  updateShellyStates(deviceId, () => {
+    setTimeout(updateStates, 15 * 1000, deviceId);
+  });
+}
+
 // main function
 function main() {
 
@@ -742,9 +721,10 @@ function main() {
     if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
       shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
         createShellyStates(deviceId, description, ip);
-        updateShellyStates(deviceId);
         objectHelper.processObjectQueue(() => {
           adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
+          //updateShellyStates(deviceId);
+          // updateStates(deviceId);
         }); // if device is added later, create all objects
         knownDevices[deviceId] = description;
       });
