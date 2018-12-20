@@ -17,7 +17,7 @@ const Shelly = require('shelly-iot');
 let shelly;
 
 const knownDevices = {};
-const sensorIoBrokerIDs = {};
+const shellyStates = {};
 let isStopped = false;
 let connected = null;
 
@@ -70,9 +70,10 @@ process.on('uncaughtException', function (err) {
 // is called if a subscribed state changes
 adapter.on('stateChange', function (id, state) {
   // Warning, state can be null if it was deleted
-  adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
-  objectHelper.handleStateChange(id, state);
-
+  if (state && !state.ack) {
+    adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
+    objectHelper.handleStateChange(id, state);
+  }
 });
 
 
@@ -83,7 +84,7 @@ adapter.on('stateChange', function (id, state) {
 // *******************************************************************************
 function obj2str(data, obj, str) {
   if (typeof data !== 'object') {
-    adapter.log.debug(str + ' = ' + data);
+    // adapter.log.debug(str + ' = ' + data);
     obj[str] = data;
   } else {
     for (let i in data) {
@@ -105,18 +106,7 @@ function obj2str(data, obj, str) {
   }
 }
 
-
-function createDeviceChannelFromState(deviceId, state) {
-
-  adapter.log.debug("Creating device " + deviceId);
-  objectHelper.setOrUpdateObject(deviceId, {
-    type: 'device',
-    common: {
-      name: 'Device ' + deviceId
-    },
-    native: {}
-  }, ['name']);
-
+function createChannel(deviceId, state) {
   let arr = state.split('.');
   if (arr.length >= 2) {
     let channelId = deviceId + '.' + arr[0];
@@ -128,11 +118,73 @@ function createDeviceChannelFromState(deviceId, state) {
       }
     }, ['name']);
   }
+}
+
+function createDevice(deviceId, description, ip) {
+
+  adapter.log.debug("Creating device " + deviceId);
+  objectHelper.setOrUpdateObject(deviceId, {
+    type: 'device',
+    common: {
+      name: 'Device ' + deviceId
+    },
+    native: {}
+  }, ['name']);
+
+
+  adapter.log.debug('Create state object for ' + deviceId + '.online' + ' if not exist');
+  objectHelper.setOrUpdateObject(deviceId + '.online', {
+    type: 'state',
+    common: {
+      name: 'Device online status',
+      type: 'boolean',
+      role: 'indicator.reachable',
+      read: true,
+      write: false
+    }
+  }, true);
+
+  // get hostname for ip adresss
+  dns.reverse(ip, function (err, hostnames) {
+    let hostname = (!err && hostnames.length > 0) ? hostnames[0] : ip;
+    adapter.log.debug('Create state object for ' + deviceId + '.hostname' + ' if not exist');
+    objectHelper.setOrUpdateObject(deviceId + '.hostname', {
+      type: 'state',
+      common: {
+        name: 'Device hostname',
+        type: 'string',
+        role: 'info.ip',
+        read: true,
+        write: false
+      }
+    }, hostname);
+  });
 
 }
 
+function createShellyStates(deviceId, description, ip) {
+  createDevice(deviceId, description, ip);
+  if (deviceId.startsWith('SHSW-1')) {
+    createShelly1States(deviceId);
+  }
+  if (deviceId.startsWith('SHSW-2')) {
+    createShelly2States(deviceId);
+  }
+  objectHelper.processObjectQueue(() => { });
+}
 
-function shelly2Status(deviceId, callback) {
+function updateShellyStates(deviceId) {
+  if (deviceId.startsWith('SHSW-1')) {
+    updateShelly1States(deviceId);
+  }
+  if (deviceId.startsWith('SHSW-2')) {
+    updateShelly2States(deviceId);
+  }
+  objectHelper.processObjectQueue(() => { });
+}
+
+
+function createShelly1States(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly2');
 
@@ -142,46 +194,56 @@ function shelly2Status(deviceId, callback) {
     let value;
     let controlFunction;
 
-    createDeviceChannelFromState(deviceId, i);
+    createChannel(deviceId, i);
 
     if (i == 'Relay0.Switch' || i == 'Relay1.Switch') { // Implement all needed action stuff here based on the names
       const relayId = parseInt(i.substr(5), 10);
       controlFunction = function (value) {
         let params = {};
         let timer = 0;
-        params = {
-          'turn': (value === true || value === 1) ? 'on' : 'off'
-        };
-        adapter.log.debug("Relay: " + JSON.stringify(params));
-        shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        let timerId = deviceId + '.Relay' + relayId + '.Timer';
+        adapter.getState(timerId, (err, state) => {
+          // if timer > 0 sec. call rest with timer paramater
+          timer = state ? state.val : 0;
+          if (timer > 0) {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off',
+              'timer': timer
+            };
+          } else {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off'
+            };
+          }
+          adapter.log.debug("Relay: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        });
       };
     }
 
-    if (i == 'Shutter.Open' || i == 'Shutter.Close' || i == 'Shutter.Pause') { // Implement all needed action stuff here based on the names
-      const pos = i.substr(8);
+    if (i == 'Relay0.AutoTimerOff' || i == 'Relay1.AutoTimerOff') {
+      const relayId = parseInt(i.substr(5), 10);
       controlFunction = function (value) {
-        let params = {};
-        let duration = 0;
-        if (pos == 'Close') {
-          params = {
-            'go': (value === true || value === 1) ? 'close' : 'stop'
-          };
-        }
-        if (pos == 'Open') {
-          params = {
-            'go': (value === true || value === 1) ? 'open' : 'stop'
-          };
-        }
-        if (pos == 'Pause') {
-          params = {
-            'go': 'stop'
-          };
-        }
-        adapter.log.debug("Relay: " + JSON.stringify(params));
-        shelly.callDevice(deviceId, '/roller/0', params);
+        let params;
+        params = {
+          'auto_off': value
+        };
+        adapter.log.debug("Auto Timer off: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
       };
     }
 
+    if (i == 'Relay0.AutoTimerOn' || i == 'Relay1.AutoTimerOn') {
+      const relayId = parseInt(i.substr(5), 10);
+      controlFunction = function (value) {
+        let params;
+        params = {
+          'auto_on': value
+        };
+        adapter.log.debug("Auto Timer off: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+      };
+    }
 
     adapter.log.debug("Creating State " + stateId);
     objectHelper.setOrUpdateObject(stateId, {
@@ -190,8 +252,14 @@ function shelly2Status(deviceId, callback) {
     }, ['name'], value, controlFunction);
   }
 
-  // shelly.doGet('http://192.168.20.159/settings', (data, error) => {
-  //   error = null;
+}
+
+function updateShelly1States(deviceId, callback) {
+
+  let devices = datapoints.getObjectByName('shelly2');
+
+  // shelly.doGet('http://192.168.20.159/settings', {}, (data, error) => {
+  // error = null;
   shelly.callDevice(deviceId, '/settings', (error, data) => {
     if (!error && data) {
       let ids = {};
@@ -201,10 +269,262 @@ function shelly2Status(deviceId, callback) {
         let value = ids[i];
         let rollerValue;
         let rollerModus;
+        let controlFunction;
         // historical mapping
+
         switch (id) {
           case 'relays0.ison':
-            //id = 'Relay0.Switch';
+            id = 'Relay0.Switch';
+            break;
+          case 'relays0.auto_on':
+            id = 'Relay0.AutoTimerOn';
+            break;
+          case 'relays0.auto_off':
+            id = 'Relay0.AutoTimerOff';
+            break;
+          case 'relays1.ison':
+            id = 'Relay1.Switch';
+            break;
+          case 'relays1.auto_on':
+            id = 'Relay1.AutoTimerOn';
+            break;
+          case 'relays1.auto_off':
+            id = 'Relay1.AutoTimerOff';
+            break;
+          default:
+        }
+
+        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+          continue;
+        }
+        shellyStates[deviceId + '.' + id] = value;
+
+        if (devices.hasOwnProperty(id)) {
+          let stateId = deviceId + '.' + id;
+          let common = devices[id];
+          // adapter.log.debug(i + ' = ' + stateId);
+          objectHelper.setOrUpdateObject(stateId, {
+            type: 'state',
+            common: common
+          }, ['name'], value, controlFunction);
+        }
+
+      }
+    }
+  });
+
+  // shelly.doGet('http://192.168.20.159/status', {}, (data, error) => {
+  // error = null;
+  shelly.callDevice(deviceId, '/settings', (error, data) => {
+
+    if (!error && data) {
+      let ids = {};
+      obj2str(data, ids);
+      for (let i in ids) {
+        let id = i;
+        let value = ids[i];
+        let controlFunction;
+        // historical mapping
+
+        switch (id) {
+          default:
+        }
+
+        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+          continue;
+        }
+        shellyStates[deviceId + '.' + id] = value;
+
+        if (devices.hasOwnProperty(id)) {
+          let stateId = deviceId + '.' + id;
+          let common = devices[id];
+          // adapter.log.debug(i + ' = ' + stateId);
+          objectHelper.setOrUpdateObject(stateId, {
+            type: 'state',
+            common: common
+          }, ['name'], value, controlFunction);
+        }
+
+      }
+    }
+  });
+
+}
+
+
+
+function createShelly2States(deviceId, callback) {
+
+  let devices = datapoints.getObjectByName('shelly2');
+
+  for (let i in devices) {
+    let common = devices[i];
+    let stateId = deviceId + '.' + i;
+    let value;
+    let controlFunction;
+
+    createChannel(deviceId, i);
+
+    if (i == 'Relay0.Switch' || i == 'Relay1.Switch') { // Implement all needed action stuff here based on the names
+      const relayId = parseInt(i.substr(5), 10);
+      controlFunction = function (value) {
+        let params = {};
+        let timer = 0;
+        let timerId = deviceId + '.Relay' + relayId + '.Timer';
+        adapter.getState(timerId, (err, state) => {
+          // if timer > 0 sec. call rest with timer paramater
+          timer = state ? state.val : 0;
+          if (timer > 0) {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off',
+              'timer': timer
+            };
+          } else {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off'
+            };
+          }
+          adapter.log.debug("Relay: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        });
+      };
+    }
+
+    if (i == 'Shutter.Open' || i == 'Shutter.Close' || i == 'Shutter.Pause') { // Implement all needed action stuff here based on the names
+      const pos = i.substr(8);
+      controlFunction = function (value) {
+        let params = {};
+        let duration = 0;
+        let durationId = deviceId + '.Shutter.Duration';
+        adapter.getState(durationId, (err, state) => {
+          // if timer > 0 sec. call rest with timer paramater
+          duration = state ? state.val : 0;
+          if (pos == 'Close') {
+            if (duration > 0) {
+              params = {
+                'go': (value === true || value === 1) ? 'close' : 'stop',
+                'duration': duration
+              };
+            } else {
+              params = {
+                'go': (value === true || value === 1) ? 'close' : 'stop'
+              };
+            }
+          }
+          if (pos == 'Open') {
+            if (duration > 0) {
+              params = {
+                'go': (value === true || value === 1) ? 'open' : 'stop',
+                'duration': duration
+              };
+            } else {
+              params = {
+                'go': (value === true || value === 1) ? 'open' : 'stop'
+              };
+            }
+          }
+          if (pos == 'Pause') {
+            params = {
+              'go': 'stop'
+            };
+          }
+          adapter.log.debug("Relay: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/roller/0', params);
+        });
+      };
+    }
+
+    if (i == 'Shutter.State') { // Implement all needed action stuff here based on the names
+      controlFunction = function (value) {
+        let params = {};
+        let duration = 0;
+        let durationId = deviceId + '.Shutter.Duration';
+        adapter.getState(durationId, (err, state) => {
+          // if timer > 0 sec. call rest with timer paramater
+          duration = state ? state.val : 0;
+          if (duration > 0) {
+            params = {
+              'go': value,
+              'duration': duration
+            };
+          } else {
+            params = {
+              'go': value
+            };
+          }
+          adapter.log.debug("Relay: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/roller/0', params);
+        });
+      };
+    }
+
+    if (i == 'Shutter.Position') { // Implement all needed action stuff here based on the names
+      controlFunction = function (value) {
+        let params;
+        let position = value;
+        params = {
+          'go': 'to_pos',
+          'roller_pos': position
+        };
+        adapter.log.debug("RollerPosition: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/roller/0', params);
+      };
+    }
+
+    if (i == 'Relay0.AutoTimerOff' || i == 'Relay1.AutoTimerOff') {
+      const relayId = parseInt(i.substr(5), 10);
+      controlFunction = function (value) {
+        let params;
+        params = {
+          'auto_off': value
+        };
+        adapter.log.debug("Auto Timer off: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'Relay0.AutoTimerOn' || i == 'Relay1.AutoTimerOn') {
+      const relayId = parseInt(i.substr(5), 10);
+      controlFunction = function (value) {
+        let params;
+        params = {
+          'auto_on': value
+        };
+        adapter.log.debug("Auto Timer off: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    adapter.log.debug("Creating State " + stateId);
+    objectHelper.setOrUpdateObject(stateId, {
+      type: 'state',
+      common: common
+    }, ['name'], value, controlFunction);
+  }
+
+}
+
+function updateShelly2States(deviceId, callback) {
+
+  let devices = datapoints.getObjectByName('shelly2');
+
+  // shelly.doGet('http://192.168.20.159/settings', {}, (data, error) => {
+  // error = null;
+  shelly.callDevice(deviceId, '/settings', (error, data) => {
+    if (!error && data) {
+      let ids = {};
+      obj2str(data, ids);
+      for (let i in ids) {
+        let id = i;
+        let value = ids[i];
+        let rollerValue;
+        let rollerModus;
+        let controlFunction;
+        // historical mapping
+
+        switch (id) {
+          case 'relays0.ison':
+            id = 'Relay0.Switch';
             rollerValue = ids['rollers.state'];
             rollerModus = ids['mode'];
             if (rollerModus == 'roller' && (rollerValue == 'stop' || rollerValue == 'close')) { value = false; }
@@ -217,7 +537,7 @@ function shelly2Status(deviceId, callback) {
             id = 'Relay0.AutoTimerOff';
             break;
           case 'relays1.ison':
-            //id = 'Relay1.Switch';
+            id = 'Relay1.Switch';
             rollerValue = ids['rollers.state'];
             rollerModus = ids['mode'];
             if (rollerModus == 'roller' && (rollerValue == 'stop' || rollerValue == 'open')) { value = false; }
@@ -244,26 +564,15 @@ function shelly2Status(deviceId, callback) {
           default:
         }
 
-        let controlFunction;
-        /*
-        if (i == 'Relay0.Switch' || i == 'Relay1.Switch') { // Implement all needed action stuff here based on the names
-          const relayId = parseInt(i.substr(5), 10);
-          controlFunction = function (value) {
-            let params = {};
-            let timer = 0;
-            params = {
-              'turn': (value === true || value === 1) ? 'on' : 'off'
-            };
-            adapter.log.debug("Relay: " + JSON.stringify(params));
-            shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
-          };
+        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+          continue;
         }
-        */
-       
+        shellyStates[deviceId + '.' + id] = value;
+
         if (devices.hasOwnProperty(id)) {
           let stateId = deviceId + '.' + id;
           let common = devices[id];
-          adapter.log.debug(i + ' = ' + stateId);
+          // adapter.log.debug(i + ' = ' + stateId);
           objectHelper.setOrUpdateObject(stateId, {
             type: 'state',
             common: common
@@ -274,7 +583,7 @@ function shelly2Status(deviceId, callback) {
     }
   });
 
-  //shelly.doGet('http://192.168.20.159/status', (data, error) => {
+  // shelly.doGet('http://192.168.20.159/status', {}, (data, error) => {
   // error = null;
   shelly.callDevice(deviceId, '/settings', (error, data) => {
 
@@ -284,7 +593,10 @@ function shelly2Status(deviceId, callback) {
       for (let i in ids) {
         let id = i;
         let value = ids[i];
+        let controlFunction;
         // historical mapping
+
+
         switch (id) {
           case 'rollers.current_pos': // in Status
             id = 'Shutter.Position';
@@ -292,27 +604,27 @@ function shelly2Status(deviceId, callback) {
           case 'rollers.state':
             id = 'Shutter.state';
             break;
-          case 'wifi_sta.ip':
-            id = 'hostname';
-            break;
           default:
         }
+
+        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+          continue;
+        }
+        shellyStates[deviceId + '.' + id] = value;
 
         if (devices.hasOwnProperty(id)) {
           let stateId = deviceId + '.' + id;
           let common = devices[id];
-          adapter.log.debug(i + ' = ' + stateId);
+          // adapter.log.debug(i + ' = ' + stateId);
           objectHelper.setOrUpdateObject(stateId, {
             type: 'state',
             common: common
-          }, ['name'], value);
+          }, ['name'], value, controlFunction);
         }
 
       }
     }
   });
-
-  objectHelper.processObjectQueue(() => { });
 
 }
 
@@ -349,823 +661,6 @@ adapter.on('ready', function () {
 });
 
 
-// get values from array SensorIoBrokerIDs
-function getSensorIoBrokerIDsByDSId(id) {
-  return sensorIoBrokerIDs[id] || null;
-}
-
-// set values for sensorIoBrokerIDs  array
-function setSensorIoBrokerIDsByDSId(id, value) {
-  let val = getSensorIoBrokerIDsByDSId(id);
-  if (val) {
-    // merge objects
-    sensorIoBrokerIDs[id] = Object.assign(val, value);
-  } else if (value) {
-    // new object
-    sensorIoBrokerIDs[id] = value;
-  } else {
-    // empty object
-    sensorIoBrokerIDs[id] = {};
-  }
-}
-
-// get values from array SensorIoBrokerIDs
-function getSensorIoBrokerIDs(deviceId, sensorId) {
-  let id = getIoBrokerIdfromDeviceIdSenId(deviceId, sensorId);
-  return getSensorIoBrokerIDsByDSId(id);
-}
-
-// set values for sensorIoBrokerIDs  array
-function setSensorIoBrokerIDs(deviceId, sensorId, value) {
-  let id = getIoBrokerIdfromDeviceIdSenId(deviceId, sensorId);
-  setSensorIoBrokerIDsByDSId(id, value);
-}
-
-
-function delOldObjects(deviceId) {
-  if (deviceId.startsWith('SHSW-2')) {
-    shelly.callDevice(deviceId, '/roller/0', (error, data) => {
-      let channel;
-      //roller Modus
-      if (!error && data) {
-        // Shutter Modus, we delete Relay
-        channel = adapter.namespace + '.' + deviceId + '.' + 'Relay';
-      } else {
-        // relay modus, we delete Shutter
-        channel = adapter.namespace + '.' + deviceId + '.' + 'Shutter';
-      }
-      adapter.getAdapterObjects(function (obj) {
-        for (let id in obj) {
-          let o = obj[id];
-          if (id.startsWith(channel)) {
-            adapter.delObject(id, function () {
-              adapter.log.debug("Delete old object " + id);
-            });
-          }
-        }
-      });
-    });
-  }
-}
-
-// get Value by Sensor ID
-function getStateBySenId(sid, data) {
-  if (data && data.G) {
-    for (let i in data.G) {
-      let g = data.G[i];
-      let senId = g[1]; // Sensor ID
-      let senValue = g[2]; // Value
-      if (sid == senId) {
-        return senValue;
-      }
-    }
-  }
-  return undefined;
-}
-
-
-// array with all sen for a block ID
-function getSenByMissingBlkID(blk, sen) {
-  let arr = [];
-  let cnt = 0;
-  if (sen && blk) {
-    sen.forEach(function (s) {
-      let found = false;
-      blk.forEach(function (b) {
-        if (b.I == s.L) {
-          found = true;
-          return;
-        }
-      });
-      if (found === false) {
-        arr[++cnt] = s;
-      }
-    });
-  }
-  return arr;
-}
-
-// array with all sen for a block ID
-function getSenByBlkID(blockId, sen) {
-  let arr = [];
-  let cnt = 0;
-  if (sen) {
-    sen.forEach(function (s) {
-      if (blockId == s.L) {
-        arr[++cnt] = s;
-      }
-    });
-  }
-  return arr;
-}
-
-// array with all actions for a block ID
-function getActByBlkID(blockId, act) {
-  let arr = [];
-  let cnt = 0;
-  if (act) {
-    act.forEach(function (a) {
-      if (blockId == a.L) {
-        arr[++cnt] = a;
-      }
-    });
-  }
-  return arr;
-}
-
-
-function getDeviceIdSenIdfromIoBrokerId(ioBrokerId) {
-  const regex = /(.+)#S#(.+)/gm;
-  let m;
-  if ((m = regex.exec(ioBrokerId)) !== null) {
-    return {
-      id: m[1],
-      senId: m[1]
-    };
-  } else {
-    return {};
-  }
-}
-
-function getIoBrokerIdfromDeviceIdSenId(deviceId, senId) {
-  return deviceId + '#S#' + senId;
-}
-
-function getDeviceIdActIdfromIoBrokerId(ioBrokerId) {
-  const regex = /(.+)#A#(.+)/gm;
-  let m;
-  if ((m = regex.exec(ioBrokerId)) !== null) {
-    return {
-      id: m[1],
-      actId: m[1]
-    };
-  } else {
-    return {};
-  }
-}
-
-function getIoBrokerIdfromDeviceIdActId(deviceId, actId) {
-  return deviceId + '#A#' + actId;
-}
-
-function isObject(item) {
-  return (typeof item === "object" && !Array.isArray(item) && item !== null);
-}
-
-// create sensor
-function createSensorStates(deviceId, b, s, data) {
-
-  let dp = datapoints.getSensor(s);
-  if (dp) {
-    let tmpId;
-    if (dp.id) {
-      tmpId = b ? deviceId + '.' + b.D + '.' + dp.id : deviceId + '.' + dp.id; // Status ID in ioBroker
-
-    } else {
-      tmpId = b ? deviceId + '.' + b.D + '.' + dp.name : deviceId + '.' + dp.name; // Status ID in ioBroker
-    }
-    let value = getStateBySenId(s.I, data); // Status for Sensor ID
-    if (!getSensorIoBrokerIDs(deviceId, s.I)) {
-      setSensorIoBrokerIDs(deviceId, s.I, {
-        id: tmpId,
-        param: {},
-        value: value
-      });
-    }
-
-    // SHSW-44#06231A#1.Relay0.W -> State
-    let controlFunction;
-    if (dp.write === true) { // check if it is allwoed to change datapoint (state)
-      if (b && b.D.startsWith('Relay') && s.T === 'Switch') { // Implement all needed action stuff here based on the names
-        const relayId = parseInt(b.D.substr(5), 10);
-        controlFunction = function (value) {
-          let params;
-          let timer = 0;
-          let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'switchtimer' + s.I);
-          if (sensorIoBrokerID) {
-            timer = sensorIoBrokerID.value;
-          }
-          // if timer > 0 sec. call rest with timer paramater
-          if (timer > 0) {
-            params = {
-              'turn': (value === true || value === 1) ? 'on' : 'off',
-              'timer': timer
-            };
-          } else {
-            params = {
-              'turn': (value === true || value === 1) ? 'on' : 'off'
-            };
-          }
-          adapter.log.debug("Relay: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
-        };
-      }
-      if (b && b.D.startsWith('Relay') && s.T === 'SwitchTimer') {
-        controlFunction = function (value) {
-          setSensorIoBrokerIDs(deviceId, s.I, {
-            value: value || 0
-          });
-          let sen = getSensorIoBrokerIDs(deviceId, s.I);
-          if (sen && sen.id) {
-            adapter.setState(sen.id, {
-              val: value || 0,
-              ack: true
-            });
-          }
-        };
-        // call once at start
-        let sen = getSensorIoBrokerIDs(deviceId, s.I);
-        adapter.getState(sen.id, function (err, state) {
-          if (!err && state) {
-            controlFunction(state.val);
-          } else {
-            controlFunction(value || 0);
-          }
-        });
-      }
-      if (b && b.D.startsWith('Relay') && s.T === 'AutoTimerOn') {
-        const relayId = parseInt(b.D.substr(5), 10);
-        let turn = 0;
-        let sensorIoBrokerID;
-        for (let i in sensorIoBrokerIDs) {
-          if (sensorIoBrokerIDs[i].id == deviceId + '.' + b.D + '.Switch') {
-            sensorIoBrokerID = sensorIoBrokerIDs[i];
-            break;
-          }
-        }
-        if (sensorIoBrokerID) {
-          turn = sensorIoBrokerID.value;
-        }
-        controlFunction = function (value) {
-          setSensorIoBrokerIDs(deviceId, s.I, {
-            value: value || 0
-          });
-          let sen = getSensorIoBrokerIDs(deviceId, s.I);
-          if (sen && sen.id) {
-            adapter.setState(sen.id, {
-              val: value || 0,
-              ack: true
-            });
-          }
-          let params;
-          params = {
-            'auto_on': value
-          };
-          adapter.log.debug("Auto Timer on: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/settings/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
-        };
-        // call once at start
-        let sen = getSensorIoBrokerIDs(deviceId, s.I);
-        adapter.getState(sen.id, function (err, state) {
-          if (!err && state) {
-            controlFunction(state.val);
-          } else {
-            controlFunction(value || 0);
-          }
-        });
-      }
-      if (b && b.D.startsWith('Relay') && s.T === 'AutoTimerOff') {
-        const relayId = parseInt(b.D.substr(5), 10);
-        let turn = 0;
-        let sensorIoBrokerID;
-        for (let i in sensorIoBrokerIDs) {
-          if (sensorIoBrokerIDs[i].id == deviceId + '.' + b.D + '.Switch') {
-            sensorIoBrokerID = sensorIoBrokerIDs[i];
-            break;
-          }
-        }
-        if (sensorIoBrokerID) {
-          turn = sensorIoBrokerID.value;
-        }
-        controlFunction = function (value) {
-          setSensorIoBrokerIDs(deviceId, s.I, {
-            value: value || 0
-          });
-          let sen = getSensorIoBrokerIDs(deviceId, s.I);
-          if (sen && sen.id) {
-            adapter.setState(sen.id, {
-              val: value || 0,
-              ack: true
-            });
-          }
-          let params;
-          params = {
-            'auto_off': value
-          };
-          adapter.log.debug("Auto Timer off: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/settings/relay/' + relayId, params); // send REST call to devices IP with the given path and parameters
-        };
-        // call once at start
-        let sen = getSensorIoBrokerIDs(deviceId, s.I);
-        adapter.getState(sen.id, function (err, state) {
-          if (!err && state) {
-            controlFunction(state.val);
-          } else {
-            controlFunction(value || 0);
-          }
-        });
-      }
-      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterUp') {
-        controlFunction = function (value) {
-          if (value === true || value === 1) {
-            // only do something if value is true
-            let params = {};
-            let duration = 0;
-            let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
-            if (sensorIoBrokerID) {
-              duration = sensorIoBrokerID.value;
-            }
-            if (duration > 0) {
-              params = {
-                'go': (value === true || value === 1) ? 'open' : 'stop',
-                'duration': duration
-              };
-            } else {
-              params = {
-                'go': (value === true || value === 1) ? 'open' : 'stop'
-              };
-            }
-            let sen = getSensorIoBrokerIDs(deviceId, s.I);
-            if (sen && sen.id) {
-              setSensorIoBrokerIDs(deviceId, s.I, {
-                value: false
-              });
-              adapter.setState(sen.id, {
-                val: false,
-                ack: true
-              });
-              adapter.log.debug("RollerUp: " + JSON.stringify(params));
-              shelly.callDevice(deviceId, '/roller/0', params);
-            }
-          }
-        };
-      }
-      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDown') {
-        controlFunction = function (value) {
-          // only do something if value is true
-          if (value === true || value === 1) {
-            let params = {};
-            let duration = 0;
-            let sensorIoBrokerID = getSensorIoBrokerIDs(deviceId, 'rollerduration');
-            if (sensorIoBrokerID) {
-              duration = sensorIoBrokerID.value;
-            }
-            if (duration > 0) {
-              params = {
-                'go': (value === true || value === 1) ? 'close' : 'stop',
-                'duration': duration
-              };
-            } else {
-              params = {
-                'go': (value === true || value === 1) ? 'close' : 'stop'
-              };
-            }
-            let sen = getSensorIoBrokerIDs(deviceId, s.I);
-            if (sen && sen.id) {
-              setSensorIoBrokerIDs(deviceId, s.I, {
-                value: false
-              });
-              adapter.setState(sen.id, {
-                val: false,
-                ack: true
-              });
-              adapter.log.debug("RollerDown: " + JSON.stringify(params));
-              shelly.callDevice(deviceId, '/roller/0', params);
-            }
-          }
-        };
-      }
-      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterPosition') {
-        controlFunction = function (value) {
-          let params;
-          let position = value;
-          params = {
-            'go': 'to_pos',
-            'roller_pos': position
-          };
-          adapter.log.debug("RollerPosition: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/roller/0', params);
-        };
-      }
-      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterStop') {
-        controlFunction = function (value) {
-          if (value === true || value === 1) {
-            // only do something if value is true
-            let params = {
-              'go': 'stop'
-            };
-            // updateShutter(deviceId);
-            let sen = getSensorIoBrokerIDs(deviceId, s.I);
-            if (sen && sen.id) {
-              setSensorIoBrokerIDs(deviceId, s.I, {
-                value: false
-              });
-              adapter.setState(sen.id, {
-                val: false,
-                ack: true
-              });
-            }
-            adapter.log.debug("RollerStop: " + JSON.stringify(params));
-            shelly.callDevice(deviceId, '/roller/0', params);
-          }
-        };
-      }
-      if (b && b.D.startsWith('Shutter') && s.T === 'ShutterDuration') {
-        controlFunction = function (value) {
-          setSensorIoBrokerIDs(deviceId, s.I, {
-            value: value || 0
-          });
-          let sen = getSensorIoBrokerIDs(deviceId, s.I);
-          if (sen && sen.id) {
-            adapter.setState(sen.id, {
-              val: value || 0,
-              ack: true
-            });
-          }
-        };
-        // call at start once
-        controlFunction(value || 0);
-      }
-      if (b && b.D.startsWith('RGBW') && s.T === 'Red') { // Implement all needed action stuff here based on the names
-        const relayId = b.I;
-        controlFunction = function (value) {
-          let params;
-          params = {
-            'red': value
-          };
-          adapter.log.debug("RGBW Red: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
-        };
-      }
-      if (b && b.D.startsWith('RGBW') && s.T === 'Green') { // Implement all needed action stuff here based on the names
-        const relayId = b.I;
-        controlFunction = function (value) {
-          let params;
-          params = {
-            'green': value
-          };
-          adapter.log.debug("RGBW Green: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
-        };
-      }
-      if (b && b.D.startsWith('RGBW') && s.T === 'Blue') { // Implement all needed action stuff here based on the names
-        const relayId = b.I;
-        controlFunction = function (value) {
-          let params;
-          params = {
-            'blue': value
-          };
-          adapter.log.debug("RGBW Blue: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
-        };
-      }
-      if (b && b.D.startsWith('RGBW') && s.T === 'White') { // Implement all needed action stuff here based on the names
-        const relayId = b.I;
-        controlFunction = function (value) {
-          let params;
-          params = {
-            'white': value
-          };
-          adapter.log.debug("RGBW White: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
-        };
-      }
-      if (b && b.D.startsWith('RGBW') && s.T === 'VSwitch') { // Implement all needed action stuff here based on the names
-        const relayId = b.I;
-        controlFunction = function (value) {
-          let params;
-          params = {
-            'turn': (value === true || value === 1) ? 'on' : 'off'
-          };
-          adapter.log.debug("RGBW Switch: " + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/light/' + relayId, params); // send REST call to devices IP with the given path and parameters
-        };
-      }
-    }
-    if (dp.type === 'boolean') {
-      value = !!value; // convert to boolean
-    }
-    objectHelper.setOrUpdateObject(tmpId, {
-      type: 'state',
-      common: {
-        name: dp.name,
-        type: dp.type,
-        role: dp.role,
-        read: dp.read,
-        write: dp.write,
-        min: dp.min,
-        max: dp.max,
-        states: dp.states,
-        unit: dp.unit
-      }
-    }, ['name'], value, controlFunction);
-  }
-}
-
-function createDeviceStates(deviceId, description, ip, data) {
-  knownDevices[deviceId] = description; // remember the device data
-  adapter.log.debug('Create device object for ' + deviceId + ' if not exist');
-  objectHelper.setOrUpdateObject(deviceId, {
-    type: 'device',
-    common: {
-      name: 'Device ' + deviceId
-    },
-    native: {
-      ip: ip
-    }
-  }, ['name']);
-  adapter.log.debug('Create state object for ' + deviceId + '.online' + ' if not exist');
-  objectHelper.setOrUpdateObject(deviceId + '.online', {
-    type: 'state',
-    common: {
-      name: 'Device online status',
-      type: 'boolean',
-      role: 'indicator.reachable',
-      read: true,
-      write: false
-    }
-  }, true);
-
-  // get hostname for ip adresss
-  dns.reverse(ip, function (err, hostnames) {
-    let hostname = (!err && hostnames.length > 0) ? hostnames[0] : ip;
-    adapter.log.debug('Create state object for ' + deviceId + '.hostname' + ' if not exist');
-    objectHelper.setOrUpdateObject(deviceId + '.hostname', {
-      type: 'state',
-      common: {
-        name: 'Device hostname',
-        type: 'string',
-        role: 'info.ip',
-        read: true,
-        write: false
-      }
-    }, hostname);
-  });
-
-  if (description) {
-    let blk = description.blk || [];
-    // Loop over block
-    blk.forEach(function (b) {
-      // Block ID:         b.I
-      // Block Descrition: b.D
-
-      // Workaround, because, the block ID is wrong
-      if (b.D == 'RGBW' && b.I == 1) {
-        b.I = 0;
-      }
-
-      let sen = getSenByBlkID(b.I, description.sen); // Sensoren for this Block
-      let act = getActByBlkID(b.I, description.act); // Actions for this Block
-
-      // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
-      objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
-        type: 'channel',
-        common: {
-          name: b.D
-        }
-      }, ['name']);
-
-
-      // Loop over sensor for a block device
-      sen.forEach(function (s) {
-        createSensorStates(deviceId, b, s, data);
-
-        // Create Timer for Switch
-        if (b && b.D.startsWith('Relay') && s.T === 'Switch') {
-          /*
-          setSensorIoBrokerIDs(deviceId, s.I, {
-            sidTimer: 'switchtimer' + s.I
-          });
-          */
-
-          let sI = s.I;
-
-          s = {
-            'I': 'switchtimer' + sI,
-            'T': 'SwitchTimer',
-            'D': 'Timer',
-            'L': b.I
-          };
-          createSensorStates(deviceId, b, s, data);
-
-          s = {
-            'I': 'autotimeron' + sI,
-            'T': 'AutoTimerOn',
-            'D': 'Auto Timer On',
-            'L': b.I
-          };
-          createSensorStates(deviceId, b, s, data);
-
-          s = {
-            'I': 'autotimeroff' + sI,
-            'T': 'AutoTimerOff',
-            'D': 'Auto Timer Off',
-            'L': b.I
-          };
-          createSensorStates(deviceId, b, s, data);
-
-        }
-
-      });
-      // loop over action for block device
-      act.forEach(function (a) { });
-    });
-    // looking for sensor with no link to a block device
-    let sen = getSenByMissingBlkID(description.blk, description.sen) || [];
-    // loop over sensor with no link to a block device
-    sen.forEach(function (s) {
-      createSensorStates(deviceId, null, s, data);
-    });
-
-    // for shelly2 the roller/shuter pseudo states will be added
-    if (deviceId.startsWith('SHSW-2')) {
-      let b, s;
-
-      shelly.callDevice(deviceId, '/roller/0', (error, data) => {
-        // let str = error && Buffer.isBuffer(error) ? error.toString('utf8') : error;
-        if (!error && data) {
-          b = {
-            'I': 'roller', // Pseudo ID
-            'D': 'Shutter'
-          };
-          // Create Channel SHSW-44#06231A#1.Relay0 -> Channel
-          objectHelper.setOrUpdateObject(deviceId + '.' + b.D, {
-            type: 'channel',
-            common: {
-              name: b.D
-            }
-          }, ['name']);
-          // Dummy Sensor for roller/shuter way up
-          s = {
-            'I': 'rollerup', //id
-            'T': 'ShutterUp',
-            'D': 'Shutter',
-            'L': 'roller' // link to b.I
-          };
-          createSensorStates(deviceId, b, s, data);
-          // Dummy Sensor for roller/shuter way down
-          s = {
-            'I': 'rollerdown',
-            'T': 'ShutterDown',
-            'D': 'Shutter',
-            'L': 'roller'
-          };
-          createSensorStates(deviceId, b, s, data);
-          // Stop shutter
-          s = {
-            'I': 'rollerstop',
-            'T': 'ShutterStop',
-            'D': 'Shutter',
-            'L': 'roller'
-          };
-          createSensorStates(deviceId, b, s, data);
-          // duration, how long up and down is on
-          s = {
-            'I': 'rollerduration',
-            'T': 'ShutterDuration',
-            'D': 'Duration',
-            'L': 'roller'
-          };
-          createSensorStates(deviceId, b, s, data);
-          // Shutterpostion 
-          s = {
-            'I': 'rollerposition',
-            'T': 'ShutterPosition',
-            'D': 'Position',
-            'L': 'roller'
-          };
-          createSensorStates(deviceId, b, s, data);
-        }
-      });
-    }
-  }
-}
-
-// transfer Status array to an object
-function statusArrayToObject(data) {
-  let obj = {};
-  if (data && data.G) {
-    data.G.forEach(function (g) {
-      obj[g[1]] = g[2]; // id = val
-    });
-  }
-  return obj;
-}
-
-// update Shuter
-function updateShutter(deviceId) {
-
-  let valRelay0, valRelay1, valSwitch, senSwitch, value;
-  let valSwitchDown, senSwitchDown, valSwitchUp, senSwitchUp;
-  let valSwitchPause, senSwitchPause;
-  for (let prop in sensorIoBrokerIDs) {
-    if (prop.startsWith(deviceId)) {
-      let ioBrokerId = sensorIoBrokerIDs[prop].id; // get ioBroker Id
-      if (ioBrokerId.endsWith('Relay0.Switch')) {
-        valRelay0 = sensorIoBrokerIDs[prop].value;
-      }
-      if (ioBrokerId.endsWith('Relay1.Switch')) {
-        valRelay1 = sensorIoBrokerIDs[prop].value;
-      }
-      if (ioBrokerId.endsWith('Shutter.Close')) {
-        valSwitchDown = sensorIoBrokerIDs[prop].value;
-        senSwitchDown = sensorIoBrokerIDs[prop];
-      }
-      if (ioBrokerId.endsWith('Shutter.Open')) {
-        valSwitchUp = sensorIoBrokerIDs[prop].value;
-        senSwitchUp = sensorIoBrokerIDs[prop];
-      }
-      if (ioBrokerId.endsWith('Shutter.Pause')) {
-        valSwitchPause = sensorIoBrokerIDs[prop].value;
-        senSwitchPause = sensorIoBrokerIDs[prop];
-      }
-    }
-  }
-  if (senSwitchUp && senSwitchDown && senSwitchPause) {
-    value = (valRelay0 === true || valRelay0 === 1) ? true : false;
-    if (value != valSwitchUp) {
-      adapter.setState(senSwitchUp.id, {
-        val: value,
-        ack: true
-      });
-      senSwitchUp.value = value;
-    }
-    value = (valRelay1 === true || valRelay1 === 1) ? true : false;
-    if (value != valSwitchDown) {
-      adapter.setState(senSwitchDown.id, {
-        val: value,
-        ack: true
-      });
-      senSwitchDown.value = value;
-    }
-    value = (valRelay0 === true || valRelay0 === 1) || (valRelay1 === true || valRelay1 === 1) ? true : false;
-    if (value === false && value != valSwitchPause) {
-      adapter.setState(senSwitchPause.id, {
-        val: value,
-        ack: true
-      });
-    }
-    senSwitchPause.value = value;
-  }
-}
-
-
-// Update Status
-function updateDeviceStates(deviceId, data) {
-
-  // shelly1Status(deviceId);
-
-  shelly.callDevice(deviceId, '/status', (error, data2) => {
-    adapter.log.info('Status ' + deviceId + ': ' + JSON.stringify(data2));
-  });
-
-  // Workaround because of wrong ID in data in shutter modus
-  // [0,112,1],[0,112,0] - one direction
-  // [0,112,0],[0,112,1] - another direction
-  // It will be changed to (112 -> 122 in Array 2)
-  // [0,112,1],[0,122,0] - one direction
-  // [0,112,0],[0,122,1] - another direction
-  if (deviceId.startsWith('SHSW-2')) {
-    if (data.G && data.G[0] && data.G[1] && data.G[0][1] == 112 && data.G[1][1] == 112) {
-      data.G[1][1] = 122;
-    }
-  }
-
-  // tranfer Array to Object
-  let dataObj = statusArrayToObject(data);
-  Object.keys(dataObj).forEach((id) => {
-    let value = dataObj[id];
-    if (sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)]) {
-      let ioBrokerId = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].id; // get ioBroker Id
-      let oldValue = sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value;
-      const obj = objectHelper.getObject(ioBrokerId);
-      if (ioBrokerId) {
-        if (
-          obj.common &&
-          obj.common.type &&
-          obj.common.type === 'boolean'
-        ) {
-          value = !!value; // convert to boolean
-          oldValue = !!oldValue;
-        }
-        if (value != oldValue) {
-          adapter.setState(ioBrokerId, {
-            val: value,
-            ack: true
-          });
-          sensorIoBrokerIDs[getIoBrokerIdfromDeviceIdSenId(deviceId, id)].value = value;
-          // enter only if device == Shelly2 and the shutter objects are switches and not buttons
-          if (deviceId.startsWith('SHSW-2')) {
-            // updateShutter(deviceId);
-          }
-
-        }
-      }
-    }
-  });
-}
-
-
 
 
 function initDevices(deviceIPs, callback) {
@@ -1200,14 +695,7 @@ function initDevices(deviceIPs, callback) {
 function main() {
 
   objectHelper.init(adapter);
-
-  let status1 = { "wifi_sta": { "connected": true, "ssid": "AP Stueben", "ip": "192.168.20.159" }, "cloud": { "enabled": false, "connected": false }, "mqtt": { "connected": false }, "time": "07:52", "serial": 1, "has_update": false, "mac": "86F3EB9F5FBB", "relays": [{ "ison": false, "has_timer": false, "overpower": false, "is_valid": true }, { "ison": false, "has_timer": false, "overpower": false, "is_valid": true }], "rollers": [{ "state": "stop", "power": 0.00, "is_valid": true, "safety_switch": false, "stop_reason": "normal", "last_direction": "open", "current_pos": 46, "calibrating": false, "positioning": true }], "meters": [{ "power": 0.00, "is_valid": true, "timestamp": 1545205967, "counters": [0.000, 0.000, 0.000], "total": 0 }], "update": { "status": "idle", "has_update": false, "new_version": "20181217-130502/v1.4.2@cc724b51", "old_version": "20181217-130502/v1.4.2@cc724b51" }, "ram_total": 50488, "ram_free": 38416, "fs_size": 233681, "fs_free": 158381, "uptime": 5595 };
-  let status2 = { "wifi_sta": { "connected": true, "ssid": "AP Stueben", "ip": "192.168.20.159" }, "cloud": { "enabled": false, "connected": false }, "mqtt": { "connected": false }, "time": "07:57", "serial": 1, "has_update": false, "mac": "86F3EB9F5FBB", "relays": [{ "ison": false, "has_timer": false, "overpower": false, "is_valid": true }, { "ison": false, "has_timer": false, "overpower": false, "is_valid": true }], "rollers": [{ "state": "stop", "power": 0.00, "is_valid": true, "safety_switch": false, "stop_reason": "normal", "last_direction": "open", "current_pos": 46, "calibrating": false, "positioning": true }], "meters": [{ "power": 0.00, "is_valid": true, "timestamp": 1545206235, "counters": [0.000, 0.000, 0.000], "total": 0 }], "update": { "status": "idle", "has_update": false, "new_version": "20181217-130502/v1.4.2@cc724b51", "old_version": "20181217-130502/v1.4.2@cc724b51" }, "ram_total": 50488, "ram_free": 37988, "fs_size": 233681, "fs_free": 158381, "uptime": 5863 };
-  let settings = { "device": { "type": "SHSW-21", "mac": "86F3EB9F5FBB", "hostname": "shellyswitch-9F5FBB", "num_outputs": 2, "num_meters": 1, "num_rollers": 1 }, "wifi_ap": { "enabled": false, "ssid": "shellyswitch-9F5FBB", "key": "" }, "wifi_sta": { "enabled": true, "ssid": "AP Stueben", "ipv4_method": "dhcp", "ip": null, "gw": null, "mask": null, "dns": null }, "mqtt": { "enable": true, "server": "192.168.20.242:1882", "user": "mqttuser", "reconnect_timeout_max": 60.000000, "reconnect_timeout_min": 2.000000, "clean_session": true, "keep_alive": 60, "will_topic": "FlotteHN/Fahrzeug1/#", "will_message": "Mein Letzer Wille", "max_qos": 0, "retain": true }, "login": { "enabled": false, "unprotected": false, "username": "admin", "password": "admin" }, "pin_code": "@d1Gnm", "coiot_execute_enable": true, "name": "", "fw": "20181217-130502/v1.4.2@cc724b51", "build_info": { "build_id": "20181217-130502/v1.4.2@cc724b51", "build_timestamp": "2018-12-17T13:05:02Z", "build_version": "1.0" }, "cloud": { "enabled": false, "connected": false }, "timezone": "Europe/Berlin", "lat": 50.110901, "lng": 8.682130, "tzautodetect": true, "time": "08:21", "hwinfo": { "hw_revision": "prod-2018-07c", "batch_id": 4 }, "mode": "relay", "max_power": 1840, "relays": [{ "name": null, "ison": true, "has_timer": false, "overpower": false, "default_state": "switch", "btn_type": "toggle", "auto_on": 0.00, "auto_off": 0.00, "schedule": false, "schedule_rules": [], "sun": false, "sun_on_times": "0000000000000000000000000000", "sun_off_times": "0000000000000000000000000000" }, { "name": null, "ison": false, "has_timer": false, "overpower": false, "default_state": "switch", "btn_type": "toggle", "auto_on": 0.00, "auto_off": 0.00, "schedule": false, "schedule_rules": [], "sun": false, "sun_on_times": "0000000000000000000000000000", "sun_off_times": "0000000000000000000000000000" }], "rollers": [{ "maxtime": 20.00, "default_state": "stop", "swap": false, "input_mode": "openclose", "button_type": "toggle", "state": "stop", "power": 1.30, "is_valid": true, "safety_switch": false, "schedule": false, "schedule_rules": [], "sun": false, "sun_open_times": "0000000000000000000000000000", "sun_close_times": "0000000000000000000000000000", "obstacle_mode": "disabled", "obstacle_action": "stop", "obstacle_power": 200, "obstacle_delay": 1, "safety_mode": "while_opening", "safety_action": "stop", "safety_allowed_on_trigger": "none", "off_power": 2, "positioning": true }], "meters": [{ "power": 1.30, "is_valid": true, "timestamp": 1545207660, "counters": [0.002, 0.002, 0.002], "total": 0 }] };
-  let arr = [];
-
   setConnected(false);
-
 
   let options = {};
 
@@ -1224,32 +712,31 @@ function main() {
   }
 
   shelly = new Shelly(options);
- /*
-  obj2str(settings, arr);
+
+  // Test START
+  /*
+  createShellyStates('SHSW-2DUMMY', 'Test', '192.168.20.159');
   setInterval(() => {
-    shelly2Status('deviceId');
+    updateShellyStates('SHSW-2DUMMY');
+    // objectHelper.processObjectQueue(() => { });
   }, 5 * 1000);
   adapter.subscribeStates('*');
-*/
+  */
+  // Test ENDE
 
   shelly.on('update-device-status', (deviceId, status) => {
     adapter.log.debug('Status update received for ' + deviceId + ': ' + JSON.stringify(status));
 
-    if (deviceId.startsWith('SHSW-2')) {
-      shelly2Status(deviceId);
-      objectHelper.processObjectQueue(() => {});
-    }
-
     if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
       shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
-        createDeviceStates(deviceId, description, ip, status);
+        createShellyStates(deviceId, description, ip);
         objectHelper.processObjectQueue(() => {
           adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
         }); // if device is added later, create all objects
       });
       return;
     }
-    updateDeviceStates(deviceId, status);
+    updateShellyStates(deviceId);
   });
 
   shelly.on('device-connection-status', (deviceId, connected) => {
