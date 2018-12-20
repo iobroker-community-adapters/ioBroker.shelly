@@ -18,6 +18,8 @@ let shelly;
 
 const knownDevices = {};
 const shellyStates = {};
+const pollDevices = {};
+
 let isStopped = false;
 let connected = null;
 
@@ -194,7 +196,7 @@ function createShellyStates(deviceId, description, ip, callback) {
   if (deviceId.startsWith('SHSW-2')) {
     createShelly2States(deviceId);
   }
-  objectHelper.processObjectQueue(() => { 
+  objectHelper.processObjectQueue(() => {
     callback && callback();
   });
 }
@@ -726,6 +728,7 @@ function main() {
           //updateShellyStates(deviceId);
           // updateStates(deviceId);
         }); // if device is added later, create all objects
+        updateStates(deviceId);
         knownDevices[deviceId] = description;
       });
       return;
