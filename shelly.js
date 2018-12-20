@@ -184,7 +184,7 @@ function createShellyStates(deviceId, description, ip) {
   if (deviceId.startsWith('SHSW-2')) {
     createShelly2States(deviceId);
   }
-  objectHelper.processObjectQueue(() => { });
+  // objectHelper.processObjectQueue(() => { });
 }
 
 function updateShellyStates(deviceId) {
@@ -194,7 +194,7 @@ function updateShellyStates(deviceId) {
   if (deviceId.startsWith('SHSW-2')) {
     updateShelly2States(deviceId);
   }
-  objectHelper.processObjectQueue(() => { });
+  // objectHelper.processObjectQueue(() => { });
 }
 
 
@@ -284,23 +284,14 @@ function updateShelly1States(deviceId, callback) {
         // historical mapping
 
         switch (id) {
-          case 'relays0.ison':
+          case 'relays.ison':
             id = 'Relay0.Switch';
             break;
-          case 'relays0.auto_on':
+          case 'relays.auto_on':
             id = 'Relay0.AutoTimerOn';
             break;
-          case 'relays0.auto_off':
+          case 'relays.auto_off':
             id = 'Relay0.AutoTimerOff';
-            break;
-          case 'relays1.ison':
-            id = 'Relay1.Switch';
-            break;
-          case 'relays1.auto_on':
-            id = 'Relay1.AutoTimerOn';
-            break;
-          case 'relays1.auto_off':
-            id = 'Relay1.AutoTimerOff';
             break;
           default:
         }
@@ -326,6 +317,7 @@ function updateShelly1States(deviceId, callback) {
 
   // shelly.doGet('http://192.168.20.159/status', {}, (data, error) => {
   // error = null;
+  /*
   shelly.callDevice(deviceId, '/settings', (error, data) => {
 
     if (!error && data) {
@@ -359,7 +351,7 @@ function updateShelly1States(deviceId, callback) {
       }
     }
   });
-
+  */
 }
 
 
@@ -725,15 +717,23 @@ function main() {
   shelly = new Shelly(options);
 
   // Test START
-/*
-  createShellyStates('SHSW-1DUMMY', 'Test', '192.168.20.159');
-  objectHelper.processObjectQueue(() => { });
-setInterval(() => {
-  updateShellyStates('SHSW-2DUMMY');
-  // objectHelper.processObjectQueue(() => { });
-}, 5 * 1000);
-adapter.subscribeStates('*');
-*/
+  /*
+    createShellyStates('SHSW-1DUMMY', 'Test', '192.168.20.159');
+    objectHelper.processObjectQueue(() => { });
+  setInterval(() => {
+    updateShellyStates('SHSW-2DUMMY');
+    // objectHelper.processObjectQueue(() => { });
+  }, 5 * 1000);
+  adapter.subscribeStates('*');
+
+
+  shelly.doGet('http://192.168.20.243/settings', {}, (data, error) => {
+    let arr = [];
+    obj2str(data, arr);
+    let a = arr;
+  });
+
+  */
   // Test ENDE
 
   shelly.on('update-device-status', (deviceId, status) => {
@@ -751,6 +751,7 @@ adapter.subscribeStates('*');
       return;
     }
     updateShellyStates(deviceId);
+    objectHelper.processObjectQueue(() => { });
   });
 
   shelly.on('device-connection-status', (deviceId, connected) => {
