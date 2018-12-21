@@ -23,14 +23,13 @@ You will find more and detailed information about the device here : [Shelly](htt
 1. Install the adapter
 2. No configuration needed. Shelly devices will be detected and added automatically. Sometimes you have to restart the shelly device or control it once using the app before it appear initially in ioBroker.
 
-## Supported/Tested devices
+## Supported devices
 * Shelly1 (SHSW-1, Verified)
 * Shelly2 (SHSW-21/SHSW-22, Verified)
-
+* Shelly4Pro (SHSW-44, not verified and tested)
+* ShellyPlug (SHPLG-1, not verified and tested) 
 
 ## More details needed to implement (Debug log)
-* ShellyPlug (SHPLG-1)
-* Shelly4Pro (SHSW-44)
 * Shelly Sense (SHSEN-1)
 * ShellyBulb (SHBLB-1)
 * Shelly2LED (SH2LED-1)
