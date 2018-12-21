@@ -26,14 +26,15 @@ You will find more and detailed information about the device here : [Shelly](htt
 ## Supported/Tested devices
 * Shelly1 (SHSW-1, Verified)
 * Shelly2 (SHSW-21/SHSW-22, Verified)
-* ShellyPlug (SHPLG-1, Verified)
-* Shelly4Pro (SHSW-44, Reading works, Controlling not verified)
-* Shelly Sense (SHSEN-1, Reading not verified)
 
-## More details needed to fully implement (Debug log)
-* ShellyBulb (SHBLB-1, reading some data may work, no control)
-* Shelly2LED (SH2LED-1, reading some data may work, no control)
-* ShellyRGBW (SHRGBWW-01, reading some data may work, no control)
+
+## More details needed to implement (Debug log)
+* ShellyPlug (SHPLG-1)
+* Shelly4Pro (SHSW-44)
+* Shelly Sense (SHSEN-1)
+* ShellyBulb (SHBLB-1)
+* Shelly2LED (SH2LED-1)
+* ShellyRGBW (SHRGBWW-01)
 
 ## Changelog
 
