@@ -669,9 +669,9 @@ function initDevices(deviceIPs, callback) {
   });
 }
 
-function updateStates(deviceId) {
+function pollStates(deviceId) {
   updateShellyStates(deviceId, () => {
-    setTimeout(updateStates, 15 * 1000, deviceId);
+    setTimeout(pollStates, 15 * 1000, deviceId);
   });
 }
 
@@ -723,12 +723,11 @@ function main() {
     if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
       shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
         createShellyStates(deviceId, description, ip);
+        updateShellyStates(deviceId);
+        pollStates(deviceId);
         objectHelper.processObjectQueue(() => {
           adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
-          //updateShellyStates(deviceId);
-          // updateStates(deviceId);
         }); // if device is added later, create all objects
-        updateStates(deviceId);
         knownDevices[deviceId] = description;
       });
       return;
