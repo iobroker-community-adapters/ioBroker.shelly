@@ -12,13 +12,10 @@ const adapter = new utils.Adapter('shelly');
 const objectHelper = require(__dirname + '/lib/objectHelper'); // Get common adapter utils
 const datapoints = require(__dirname + '/lib/datapoints'); // Get common adapter utils
 const Shelly = require('shelly-iot');
-// use the following line instead above for the dummy data version!
-//const Shelly = require(__dirname + '/node_modules/shelly-iot/index-dummy.js');
 let shelly;
 
 const knownDevices = {};
 const shellyStates = {};
-const pollDevices = {};
 
 let isStopped = false;
 let connected = null;
@@ -133,7 +130,6 @@ function createChannel(deviceId, state) {
 }
 
 function createDevice(deviceId, description, ip) {
-
   adapter.log.debug("Creating device " + deviceId);
   objectHelper.setOrUpdateObject(deviceId, {
     type: 'device',
@@ -142,7 +138,6 @@ function createDevice(deviceId, description, ip) {
     },
     native: {}
   }, ['name']);
-
 
   adapter.log.debug('Create state object for ' + deviceId + '.online' + ' if not exist');
   objectHelper.setOrUpdateObject(deviceId + '.online', {
@@ -196,9 +191,6 @@ function createShellyStates(deviceId, description, ip, callback) {
   if (deviceId.startsWith('SHSW-2')) {
     createShelly2States(deviceId);
   }
-  objectHelper.processObjectQueue(() => {
-    callback && callback();
-  });
 }
 
 function updateShellyStates(deviceId, callback) {
@@ -208,7 +200,6 @@ function updateShellyStates(deviceId, callback) {
   if (deviceId.startsWith('SHSW-2')) {
     updateShelly2States(deviceId, callback);
   }
-  // objectHelper.processObjectQueue(() => { });
 }
 
 
@@ -290,8 +281,6 @@ function updateShelly1States(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly1');
 
-  // shelly.doGet('http://192.168.20.159/settings', {}, (data, error) => {
-  // error = null;
   shelly.callDevice(deviceId, '/settings', (error, data) => {
     if (!error && data) {
       let ids = {};
@@ -323,7 +312,6 @@ function updateShelly1States(deviceId, callback) {
         if (devices.hasOwnProperty(id)) {
           let stateId = deviceId + '.' + id;
           let common = devices[id];
-          // adapter.log.debug(i + ' = ' + stateId);
           objectHelper.setOrUpdateObject(stateId, {
             type: 'state',
             common: common
@@ -383,7 +371,7 @@ function createShelly2States(deviceId, callback) {
         let duration = 0;
         let durationId = deviceId + '.Shutter.Duration';
         adapter.getState(durationId, (err, state) => {
-          // if timer > 0 sec. call rest with timer paramater
+          // if duration > 0 sec. call rest with timer paramater
           duration = state ? state.val : 0;
           if (pos == 'Close') {
             if (duration > 0) {
@@ -485,6 +473,10 @@ function createShelly2States(deviceId, callback) {
       value = 0;
     }
 
+    if (i == 'Shutter.Duration') {
+      value = 0;
+    }
+
     adapter.log.debug("Creating State " + stateId);
     objectHelper.setOrUpdateObject(stateId, {
       type: 'state',
@@ -498,8 +490,6 @@ function updateShelly2States(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly2');
 
-  // shelly.doGet('http://192.168.20.159/settings', {}, (data, error) => {
-  // error = null;
   shelly.callDevice(deviceId, '/settings', (error, data) => {
     if (!error && data) {
       let ids = {};
@@ -539,9 +529,6 @@ function updateShelly2States(deviceId, callback) {
           case 'relays1.auto_off':
             id = 'Relay1.AutoTimerOff';
             break;
-          case 'rollers.state':
-            // id = 'Shutter.Close';
-            break;
           case 'rollers."maxtime':
             id = 'Shutter.Duration';
             break;
@@ -571,9 +558,6 @@ function updateShelly2States(deviceId, callback) {
       }
     }
 
-
-    // shelly.doGet('http://192.168.20.159/status', {}, (data, error) => {
-    // error = null;
     shelly.callDevice(deviceId, '/status', (error, data) => {
       if (!error && data) {
         let ids = {};
@@ -678,9 +662,10 @@ function initDevices(deviceIPs, callback) {
   });
 }
 
+// Polling Status every x seconds
 function pollStates(deviceId) {
   updateShellyStates(deviceId, () => {
-    setTimeout(pollStates, 10 * 1000, deviceId);
+    setTimeout(pollStates, adapter.config.polltime * 1000, deviceId);
   });
 }
 
@@ -706,26 +691,6 @@ function main() {
 
   shelly = new Shelly(options);
 
-  // Test START
-  /*
-    createShellyStates('SHSW-1DUMMY', 'Test', '192.168.20.159');
-    objectHelper.processObjectQueue(() => { });
-  setInterval(() => {
-    updateShellyStates('SHSW-2DUMMY');
-    // objectHelper.processObjectQueue(() => { });
-  }, 5 * 1000);
-  adapter.subscribeStates('*');
-
-
-  shelly.doGet('http://192.168.20.243/settings', {}, (data, error) => {
-    let arr = [];
-    obj2str(data, arr);
-    let a = arr;
-  });
-
-  */
-  // Test ENDE
-
   shelly.on('update-device-status', (deviceId, status) => {
     adapter.log.debug('Status update received for ' + deviceId + ': ' + JSON.stringify(status));
 
@@ -742,7 +707,7 @@ function main() {
       return;
     }
     updateShellyStates(deviceId);
-    objectHelper.processObjectQueue(() => { });
+    // objectHelper.processObjectQueue(() => { });
   });
 
   shelly.on('device-connection-status', (deviceId, connected) => {

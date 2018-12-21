@@ -107,6 +107,7 @@
     "pwd": false,
     "user": "admin",
     "password": "",
+    "polltime": 10,
     "keys": [{
       "hosts": "",
       "devids": ""
