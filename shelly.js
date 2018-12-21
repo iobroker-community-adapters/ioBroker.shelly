@@ -91,29 +91,39 @@ function getDeviceIdFromIoBrokerId(iobrokerId) {
 // { roller: { state1: true, state2: false}} 
 // -> roller.state1 = true and roller.state2 = false
 // *******************************************************************************
-function obj2str(data, obj, str) {
-  if (typeof data !== 'object') {
-    // adapter.log.debug(str + ' = ' + data);
-    obj[str] = data;
-  } else {
-    for (let i in data) {
-      let val = data[i];
-      if (str) {
-        if (Array.isArray(data)) {
-          if (data.length == 1) {
-            obj2str(val, obj, str);
+function getIoBrokerStatesFromObj(data) {
+
+  let obj = {};
+
+  function _obj2str(data, obj, str) {
+    if (typeof data !== 'object') {
+      // adapter.log.debug(str + ' = ' + data);
+      obj[str] = data;
+    } else {
+      for (let i in data) {
+        let val = data[i];
+        if (str) {
+          if (Array.isArray(data)) {
+            if (data.length == 1) {
+              _obj2str(val, obj, str);
+            } else {
+              _obj2str(val, obj, str + i);
+            }
           } else {
-            obj2str(val, obj, str + i);
+            _obj2str(val, obj, str + '.' + i);
           }
         } else {
-          obj2str(val, obj, str + '.' + i);
+          _obj2str(val, obj, i);
         }
-      } else {
-        obj2str(val, obj, i);
       }
     }
   }
+
+  _obj2str(data, obj);
+  return obj;
+  
 }
+
 
 function createChannel(deviceId, state) {
   let arr = state.split('.');
@@ -283,8 +293,7 @@ function updateShelly1States(deviceId, callback) {
 
   shelly.callDevice(deviceId, '/settings', (error, data) => {
     if (!error && data) {
-      let ids = {};
-      obj2str(data, ids);
+      let ids = getIoBrokerStatesFromObj(data);
       for (let i in ids) {
         let id = i;
         let value = ids[i];
@@ -492,8 +501,7 @@ function updateShelly2States(deviceId, callback) {
 
   shelly.callDevice(deviceId, '/settings', (error, data) => {
     if (!error && data) {
-      let ids = {};
-      obj2str(data, ids);
+      let ids = getIoBrokerStatesFromObj(data);
       for (let i in ids) {
         let id = i;
         let value = ids[i];
@@ -560,8 +568,7 @@ function updateShelly2States(deviceId, callback) {
 
     shelly.callDevice(deviceId, '/status', (error, data) => {
       if (!error && data) {
-        let ids = {};
-        obj2str(data, ids);
+        let ids = getIoBrokerStatesFromObj(data);
         for (let i in ids) {
           let id = i;
           let value = ids[i];
