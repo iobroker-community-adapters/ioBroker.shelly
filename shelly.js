@@ -220,6 +220,7 @@ function createShelly1States(deviceId, callback) {
     let common = devices[i];
     let stateId = deviceId + '.' + i;
     let controlFunction;
+    let value;
 
     createChannel(deviceId, i);
 
@@ -272,11 +273,15 @@ function createShelly1States(deviceId, callback) {
       };
     }
 
+    if (i == 'Relay0.Timer' || i == 'Relay1.Timer') {
+      value = 0;
+    }
+
     adapter.log.debug("Creating State " + stateId);
     objectHelper.setOrUpdateObject(stateId, {
       type: 'state',
       common: common
-    }, ['name'], controlFunction);
+    }, ['name'], value, controlFunction);
   }
 
 }
@@ -476,11 +481,15 @@ function createShelly2States(deviceId, callback) {
       };
     }
 
+    if (i == 'Relay0.Timer' || i == 'Relay1.Timer') {
+      value = 0;
+    }
+
     adapter.log.debug("Creating State " + stateId);
     objectHelper.setOrUpdateObject(stateId, {
       type: 'state',
       common: common
-    }, ['name'], controlFunction);
+    }, ['name'], value, controlFunction);
   }
 
 }
