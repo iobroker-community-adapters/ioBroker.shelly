@@ -680,7 +680,7 @@ function initDevices(deviceIPs, callback) {
 
 function pollStates(deviceId) {
   updateShellyStates(deviceId, () => {
-    setTimeout(pollStates, 15 * 1000, deviceId);
+    setTimeout(pollStates, 10 * 1000, deviceId);
   });
 }
 
