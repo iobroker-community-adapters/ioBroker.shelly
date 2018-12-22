@@ -198,18 +198,16 @@ function createShellyStates(deviceId, description, ip, callback) {
     createDevice(deviceId, description, ip);
     if (deviceId.startsWith('SHSW-1')) {
       createShelly1States(deviceId);
-    }
-    if (deviceId.startsWith('SHSW-2')) {
+    } else if (deviceId.startsWith('SHSW-2')) {
       createShelly2States(deviceId);
-    }
-    if (deviceId.startsWith('SHSW-4')) {
+    } else if (deviceId.startsWith('SHSW-4')) {
       createShelly4States(deviceId);
-    }
-    if (deviceId.startsWith('SHPLG-1')) {
+    } else if (deviceId.startsWith('SHPLG-1')) {
       createShellyPlugStates(deviceId);
-    }
-    if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
+    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
       createShellyRGBWWStates(deviceId);
+    } else {
+      displaySettings(deviceId);
     }
   }
 }
@@ -218,18 +216,16 @@ function updateShellyStates(deviceId, callback) {
   if (deviceId) {
     if (deviceId.startsWith('SHSW-1')) {
       updateShelly1States(deviceId, callback);
-    }
-    if (deviceId.startsWith('SHSW-2')) {
+    } else if (deviceId.startsWith('SHSW-2')) {
       updateShelly2States(deviceId, callback);
-    }
-    if (deviceId.startsWith('SHSW-4')) {
+    } else if (deviceId.startsWith('SHSW-4')) {
       updateShelly4States(deviceId, callback);
-    }
-    if (deviceId.startsWith('SHPLG-1')) {
+    } else if (deviceId.startsWith('SHPLG-1')) {
       updateShellyPlugStates(deviceId, callback);
-    }
-    if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
+    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
       updateShellyRGBWWStates(deviceId, callback);
+    } else {
+
     }
   }
 }
@@ -1065,6 +1061,23 @@ function updateShellyRGBWWStates(deviceId, callback) {
     callback && callback();
   });
 
+}
+
+// *******************************************************************************
+// Display Settings
+// *******************************************************************************
+function displaySettings(deviceId) {
+  shelly.callDevice(deviceId, '/settings', (error, data) => {
+    if (!error && data) {
+      adapter.log.debug("New Device Settings for " + deviceId + " : " + JSON.stringify(data));
+    }
+  });
+
+  shelly.callDevice(deviceId, '/status', (error, data) => {
+    if (!error && data) {
+      adapter.log.debug("New Device Status for " + deviceId + " : " + JSON.stringify(data));
+    }
+  });
 }
 
 
