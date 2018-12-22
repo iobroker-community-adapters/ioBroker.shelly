@@ -7,9 +7,9 @@
 
 // you have to require the utils module and call adapter function
 const dns = require('dns');
-const utils = require(__dirname + '/lib/utils'); // Get common adapter utils
+const utils   = require('@iobroker/adapter-core'); 
 const adapter = new utils.Adapter('shelly');
-const objectHelper = require(__dirname + '/lib/objectHelper'); // Get common adapter utils
+const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Get common adapter utils
 const datapoints = require(__dirname + '/lib/datapoints'); // Get common adapter utils
 const Shelly = require('shelly-iot');
 let shelly;

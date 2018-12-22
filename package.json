@@ -31,7 +31,9 @@
   "dependencies": {
     "ping": "^0.2.1",
     "request": "^2.79.0",
-    "shelly-iot": "^1.0.1"
+    "shelly-iot": "^1.0.1",
+    "@iobroker/adapter-core": "^1.0.1",
+    "@apollon/iobroker-tools": "^0.1.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
