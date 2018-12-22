@@ -37,7 +37,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
-### 2.0.0 (20.12.2018)
+### 2.0.1 (22.12.2018)
 * Major update because of problems with CoAP messages. 
 
 ### 1.0.2 (17.12.2018)
