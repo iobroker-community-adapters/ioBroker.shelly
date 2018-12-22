@@ -28,12 +28,12 @@ You will find more and detailed information about the device here : [Shelly](htt
 * Shelly2 (SHSW-21/SHSW-22, Verified)
 * Shelly4Pro (SHSW-44, not verified and tested)
 * ShellyPlug (SHPLG-1, not verified and tested) 
+* ShellyBulb (SHBLB-1, not verified and tested)
+* Shelly2LED (SH2LED-1, not verified and tested)
+* ShellyRGBW (SHRGBWW-01, not verified and tested)
 
 ## More details needed to implement (Debug log)
 * Shelly Sense (SHSEN-1)
-* ShellyBulb (SHBLB-1)
-* Shelly2LED (SH2LED-1)
-* ShellyRGBW (SHRGBWW-01)
 
 ## Changelog
 

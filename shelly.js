@@ -194,33 +194,43 @@ function createDevice(deviceId, description, ip) {
 }
 
 function createShellyStates(deviceId, description, ip, callback) {
-  createDevice(deviceId, description, ip);
-  if (deviceId.startsWith('SHSW-1')) {
-    createShelly1States(deviceId);
-  }
-  if (deviceId.startsWith('SHSW-2')) {
-    createShelly2States(deviceId);
-  }
-  if (deviceId.startsWith('SHSW-4')) {
-    createShelly4States(deviceId);
-  }
-  if (deviceId.startsWith('SHPLG-1')) {
-    createShellyPlugStates(deviceId);
+  if (deviceId) {
+    createDevice(deviceId, description, ip);
+    if (deviceId.startsWith('SHSW-1')) {
+      createShelly1States(deviceId);
+    }
+    if (deviceId.startsWith('SHSW-2')) {
+      createShelly2States(deviceId);
+    }
+    if (deviceId.startsWith('SHSW-4')) {
+      createShelly4States(deviceId);
+    }
+    if (deviceId.startsWith('SHPLG-1')) {
+      createShellyPlugStates(deviceId);
+    }
+    if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
+      createShellyRGBWWStates(deviceId);
+    }
   }
 }
 
 function updateShellyStates(deviceId, callback) {
-  if (deviceId.startsWith('SHSW-1')) {
-    updateShelly1States(deviceId, callback);
-  }
-  if (deviceId.startsWith('SHSW-2')) {
-    updateShelly2States(deviceId, callback);
-  }
-  if (deviceId.startsWith('SHSW-4')) {
-    updateShelly4States(deviceId, callback);
-  }
-  if (deviceId.startsWith('SHPLG-1')) {
-    updateShellyPlugStates(deviceId, callback);
+  if (deviceId) {
+    if (deviceId.startsWith('SHSW-1')) {
+      updateShelly1States(deviceId, callback);
+    }
+    if (deviceId.startsWith('SHSW-2')) {
+      updateShelly2States(deviceId, callback);
+    }
+    if (deviceId.startsWith('SHSW-4')) {
+      updateShelly4States(deviceId, callback);
+    }
+    if (deviceId.startsWith('SHPLG-1')) {
+      updateShellyPlugStates(deviceId, callback);
+    }
+    if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
+      updateShellyRGBWWStates(deviceId, callback);
+    }
   }
 }
 
@@ -889,6 +899,149 @@ function updateShellyPlugStates(deviceId, callback) {
             break;
           case 'meters0.power':
             id = 'Relay0.Power';
+            break;
+          default:
+        }
+
+        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+          continue;
+        }
+        shellyStates[deviceId + '.' + id] = value;
+
+        if (devices.hasOwnProperty(id)) {
+          let stateId = deviceId + '.' + id;
+          let common = devices[id];
+          objectHelper.setOrUpdateObject(stateId, {
+            type: 'state',
+            common: common
+          }, ['name'], value, controlFunction);
+        }
+
+      }
+    }
+    callback && callback();
+  });
+
+}
+
+
+// *******************************************************************************
+// Shelly RGBWW
+// *******************************************************************************
+function createShellyRGBWWStates(deviceId, callback) {
+
+  let devices = datapoints.getObjectByName('shellyrgbww');
+
+  for (let i in devices) {
+    let common = devices[i];
+    let stateId = deviceId + '.' + i;
+    let controlFunction;
+    let value;
+
+    createChannel(deviceId, i);
+
+    if (i == 'lights.Switch') { // Implement all needed action stuff here based on the names
+      controlFunction = function (value) {
+        let params = {};
+        let timer = 0;
+        let timerId = deviceId + '.lights.Timer';
+        adapter.getState(timerId, (err, state) => {
+          // if timer > 0 sec. call rest with timer paramater
+          timer = state ? state.val : 0;
+          if (timer > 0) {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off',
+              'timer': timer
+            };
+          } else {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off'
+            };
+          }
+          adapter.log.debug("Lights Switch: " + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/light/0', params); // send REST call to devices IP with the given path and parameters
+        });
+      };
+    }
+
+    if (i == 'lights.red' || i == 'lights.green' || i == 'lights.blue' || i == 'lights.white' || i == 'lights.gain' || i == 'lights.temp' || i == 'lights.brightness' || i == 'lights.effect') { // Implement all needed action stuff here based on the names
+      let id = i.replace('lights.', '');
+      controlFunction = function (value) {
+        let params = {};
+        params[id] = value;
+        adapter.log.debug("Set Colors: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/light/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'lights.AutoTimerOff') {
+      controlFunction = function (value) {
+        let params;
+        params = {
+          'auto_off': value
+        };
+        adapter.log.debug("Auto Timer off: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/light/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'lights.AutoTimerOn') {
+      controlFunction = function (value) {
+        let params;
+        params = {
+          'auto_on': value
+        };
+        adapter.log.debug("Auto Timer off: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/light/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'mode') {
+      controlFunction = function (value) {
+        let params;
+        params = {
+          'mode': value
+        };
+        adapter.log.debug("Modus: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'lights.Timer') {
+      value = 0;
+    }
+
+    adapter.log.debug("Creating State " + stateId);
+    objectHelper.setOrUpdateObject(stateId, {
+      type: 'state',
+      common: common
+    }, ['name'], value, controlFunction);
+  }
+
+}
+
+function updateShellyRGBWWStates(deviceId, callback) {
+
+  let devices = datapoints.getObjectByName('shellyrgbww');
+
+  shelly.callDevice(deviceId, '/settings', (error, data) => {
+    if (!error && data) {
+      let ids = getIoBrokerStatesFromObj(data);
+      for (let i in ids) {
+        let id = i;
+        let value = ids[i];
+        let controlFunction;
+        // historical mapping
+
+        switch (id) {
+          case 'lights.ison':
+            id = 'lights.Switch';
+            break;
+          case 'lights.auto_on':
+            id = 'lights.AutoTimerOn';
+            break;
+          case 'lights.auto_off':
+            id = 'lights.AutoTimerOff';
             break;
           default:
         }
