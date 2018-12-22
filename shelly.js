@@ -501,6 +501,17 @@ function createShelly2States(deviceId, callback) {
       };
     }
 
+    if (i == 'mode') {
+      controlFunction = function (value) {
+        let params;
+        params = {
+          'mode': value
+        };
+        adapter.log.debug("Modus: " + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
     if (i == 'Relay0.Timer' || i == 'Relay1.Timer') {
       value = 0;
     }
