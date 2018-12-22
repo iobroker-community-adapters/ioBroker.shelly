@@ -541,7 +541,7 @@ function createShelly2States(deviceId, callback) {
 function updateShelly2States(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly2');
-  
+
   shelly.callDevice(deviceId, '/settings', (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
@@ -1167,8 +1167,9 @@ function initDevices(deviceIPs, callback) {
 
 // Polling Status every x seconds
 function pollStates(deviceId) {
+  let polltime = adapter.config.polltime || 10;
   updateShellyStates(deviceId, () => {
-    setTimeout(pollStates, adapter.config.polltime * 1000, deviceId);
+    setTimeout(pollStates, polltime * 1000, deviceId);
   });
 }
 
