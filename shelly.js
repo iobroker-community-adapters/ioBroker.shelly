@@ -70,6 +70,10 @@ process.on('uncaughtException', function (err) {
 adapter.on('stateChange', function (id, state) {
   // Warning, state can be null if it was deleted
   if (state && !state.ack) {
+    let stateId = id.replace(adapter.namespace + '.', '');
+    if (shellyStates.hasOwnProperty(stateId)) {
+      delete shellyStates[stateId];
+    }
     adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
     objectHelper.handleStateChange(id, state);
   }
@@ -537,7 +541,7 @@ function createShelly2States(deviceId, callback) {
 function updateShelly2States(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly2');
-
+  
   shelly.callDevice(deviceId, '/settings', (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
@@ -1201,7 +1205,7 @@ function main() {
         objectHelper.processObjectQueue(() => {
           adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
         }); // if device is added later, create all objects
-        knownDevices[deviceId] = description;
+        knownDevices[deviceId] = true;
       });
       return;
     }
