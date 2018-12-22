@@ -208,7 +208,10 @@ function createShellyStates(deviceId, description, ip, callback) {
       createShellyRGBWWStates(deviceId);
     } else {
       displaySettings(deviceId);
+      callback && callback();
     }
+  } else {
+    callback && callback();
   }
 }
 
@@ -225,8 +228,10 @@ function updateShellyStates(deviceId, callback) {
     } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
       updateShellyRGBWWStates(deviceId, callback);
     } else {
-
+      callback && callback();
     }
+  } else {
+    callback && callback();
   }
 }
 
