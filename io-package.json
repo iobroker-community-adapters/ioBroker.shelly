@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "news": {
+      "2.0.2": {
+        "en": "Add Shelly H&T",
+        "de": "Shelly H&T Unterstützung"
+      },
       "2.0.1": {
         "en": "Major update because of problems with CoAP messages",
         "de": "Design Änderungen wegen Problemen mit CoAP "

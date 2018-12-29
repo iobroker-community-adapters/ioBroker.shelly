@@ -1,0 +1,5 @@
+# Files doesn't need to be checked
+gulpfile.js
+/lib/utils.js
+/admin/
+/test/

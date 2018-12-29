@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Shelly",
   "author": {
     "name": "Thorsten Stueben",
@@ -37,6 +37,9 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "gulp": "^3.9.1",
     "mocha": "^4.1.0"
   },

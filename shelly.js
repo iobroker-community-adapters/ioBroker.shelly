@@ -7,21 +7,23 @@
 
 // you have to require the utils module and call adapter function
 const dns = require('dns');
-const utils   = require('@iobroker/adapter-core'); 
+const utils = require('@iobroker/adapter-core');
 const adapter = new utils.Adapter('shelly');
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Get common adapter utils
 const datapoints = require(__dirname + '/lib/datapoints'); // Get common adapter utils
 const Shelly = require('shelly-iot');
-let shelly;
 
-const knownDevices = {};
-const shellyStates = {};
+let shelly;
+let knownDevices = {};
+let shellyStates = {};
 
 let isStopped = false;
 let connected = null;
 
+
 function decrypt(key, value) {
   let result = '';
+
   for (let i = 0; i < value.length; ++i) {
     result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
   }
@@ -30,7 +32,7 @@ function decrypt(key, value) {
 
 
 // is called when adapter shuts down - callback has to be called under any circumstances!
-adapter.on('unload', function (callback) {
+adapter.on('unload', (callback) => {
   try {
     setConnected(false);
     if (shelly) {
@@ -45,7 +47,7 @@ adapter.on('unload', function (callback) {
   }
 });
 
-process.on('SIGINT', function () {
+process.on('SIGINT', () => {
   if (shelly) {
     isStopped = true;
     shelly.stopListening();
@@ -53,7 +55,7 @@ process.on('SIGINT', function () {
   setConnected(false);
 });
 
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', (err) => {
   console.log('Exception: ' + err + '/' + err.toString());
   if (adapter && adapter.log) {
     adapter.log.warn('Exception: ' + err);
@@ -67,7 +69,7 @@ process.on('uncaughtException', function (err) {
 
 
 // is called if a subscribed state changes
-adapter.on('stateChange', function (id, state) {
+adapter.on('stateChange', (id, state) => {
   // Warning, state can be null if it was deleted
   if (state && !state.ack) {
     let stateId = id.replace(adapter.namespace + '.', '');
@@ -83,8 +85,8 @@ adapter.on('stateChange', function (id, state) {
 function getDeviceIdFromIoBrokerId(iobrokerId) {
   let deviceId;
   if (iobrokerId) {
-    let res = iobrokerId.replace(adapter.namespace + '.', '');
-    let arr = res.split('.');
+    const res = iobrokerId.replace(adapter.namespace + '.', '');
+    const arr = res.split('.');
     deviceId = arr[0];
   }
   return deviceId;
@@ -182,7 +184,7 @@ function createDevice(deviceId, description, ip) {
       }, hostname);
     });
   } catch (err) {
-    let hostname = '';
+    let hostname = ip || '';
     adapter.log.debug('Create state object for ' + deviceId + '.hostname' + ' if not exist');
     objectHelper.setOrUpdateObject(deviceId + '.hostname', {
       type: 'state',
@@ -197,8 +199,15 @@ function createDevice(deviceId, description, ip) {
   }
 }
 
-function createShellyStates(deviceId, description, ip, callback) {
+function createShellyStates(deviceId, description, ip, status, callback) {
+
+  if (typeof status === 'function') {
+    callback = status;
+    status = undefined;
+  }
+
   if (deviceId) {
+
     createDevice(deviceId, description, ip);
     if (deviceId.startsWith('SHSW-1')) {
       createShelly1States(deviceId);
@@ -210,7 +219,9 @@ function createShellyStates(deviceId, description, ip, callback) {
       createShellyPlugStates(deviceId);
     } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
       createShellyRGBWWStates(deviceId);
-    } else {
+    } else if (deviceId.startsWith('SHHT')) {
+      createShellyHTStates(deviceId);
+    }else {
       displaySettings(deviceId);
       callback && callback();
     }
@@ -219,7 +230,13 @@ function createShellyStates(deviceId, description, ip, callback) {
   }
 }
 
-function updateShellyStates(deviceId, callback) {
+function updateShellyStates(deviceId, status, callback) {
+
+  if (typeof status === 'function') {
+    callback = status;
+    status = undefined;
+  }
+
   if (deviceId) {
     if (deviceId.startsWith('SHSW-1')) {
       updateShelly1States(deviceId, callback);
@@ -231,6 +248,8 @@ function updateShellyStates(deviceId, callback) {
       updateShellyPlugStates(deviceId, callback);
     } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
       updateShellyRGBWWStates(deviceId, callback);
+    } else if (deviceId.startsWith('SHHT')) {
+      updateShellyHTStates(deviceId, status, callback);
     } else {
       callback && callback();
     }
@@ -257,7 +276,7 @@ function createShelly1States(deviceId, callback) {
 
     if (i == 'Relay0.Switch' || i == 'Relay1.Switch') { // Implement all needed action stuff here based on the names
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params = {};
         let timer = 0;
         let timerId = deviceId + '.Relay' + relayId + '.Timer';
@@ -282,7 +301,7 @@ function createShelly1States(deviceId, callback) {
 
     if (i == 'Relay0.AutoTimerOff' || i == 'Relay1.AutoTimerOff') {
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'auto_off': value
@@ -294,7 +313,7 @@ function createShelly1States(deviceId, callback) {
 
     if (i == 'Relay0.AutoTimerOn' || i == 'Relay1.AutoTimerOn') {
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'auto_on': value
@@ -382,7 +401,7 @@ function createShelly2States(deviceId, callback) {
 
     if (i == 'Relay0.Switch' || i == 'Relay1.Switch') { // Implement all needed action stuff here based on the names
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params = {};
         let timer = 0;
         let timerId = deviceId + '.Relay' + relayId + '.Timer';
@@ -407,7 +426,7 @@ function createShelly2States(deviceId, callback) {
 
     if (i == 'Shutter.Open' || i == 'Shutter.Close' || i == 'Shutter.Pause') { // Implement all needed action stuff here based on the names
       const pos = i.substr(8);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params = {};
         let duration = 0;
         let durationId = deviceId + '.Shutter.Duration';
@@ -450,7 +469,7 @@ function createShelly2States(deviceId, callback) {
     }
 
     if (i == 'Shutter.state') { // Implement all needed action stuff here based on the names
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params = {};
         let duration = 0;
         let durationId = deviceId + '.Shutter.Duration';
@@ -474,7 +493,7 @@ function createShelly2States(deviceId, callback) {
     }
 
     if (i == 'Shutter.Position') { // Implement all needed action stuff here based on the names
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         let position = value;
         params = {
@@ -488,7 +507,7 @@ function createShelly2States(deviceId, callback) {
 
     if (i == 'Relay0.AutoTimerOff' || i == 'Relay1.AutoTimerOff') {
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => (value) =>{
         let params;
         params = {
           'auto_off': value
@@ -500,7 +519,7 @@ function createShelly2States(deviceId, callback) {
 
     if (i == 'Relay0.AutoTimerOn' || i == 'Relay1.AutoTimerOn') {
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'auto_on': value
@@ -511,7 +530,7 @@ function createShelly2States(deviceId, callback) {
     }
 
     if (i == 'mode') {
-      controlFunction = function (value) {
+      controlFunction = (value) =>(value) => {
         let params;
         params = {
           'mode': value
@@ -666,7 +685,7 @@ function createShelly4States(deviceId, callback) {
 
     if (i == 'Relay0.Switch' || i == 'Relay1.Switch' || i == 'Relay2.Switch' || i == 'Relay3.Switch') { // Implement all needed action stuff here based on the names
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params = {};
         let timer = 0;
         let timerId = deviceId + '.Relay' + relayId + '.Timer';
@@ -691,7 +710,7 @@ function createShelly4States(deviceId, callback) {
 
     if (i == 'Relay0.AutoTimerOff' || i == 'Relay1.AutoTimerOff' || i == 'Relay2.AutoTimerOff' || i == 'Relay3.AutoTimerOff') {
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'auto_off': value
@@ -703,7 +722,7 @@ function createShelly4States(deviceId, callback) {
 
     if (i == 'Relay0.AutoTimerOn' || i == 'Relay1.AutoTimerOn' || i == 'Relay2.AutoTimerOn' || i == 'Relay3.AutoTimerOn') {
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'auto_on': value
@@ -830,7 +849,7 @@ function createShellyPlugStates(deviceId, callback) {
 
     if (i == 'Relay0.Switch') { // Implement all needed action stuff here based on the names
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params = {};
         let timer = 0;
         let timerId = deviceId + '.Relay' + relayId + '.Timer';
@@ -855,7 +874,7 @@ function createShellyPlugStates(deviceId, callback) {
 
     if (i == 'Relay0.AutoTimerOff') {
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'auto_off': value
@@ -867,7 +886,7 @@ function createShellyPlugStates(deviceId, callback) {
 
     if (i == 'Relay0.AutoTimerOn') {
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'auto_on': value
@@ -957,7 +976,7 @@ function createShellyRGBWWStates(deviceId, callback) {
     createChannel(deviceId, i);
 
     if (i == 'lights.Switch') { // Implement all needed action stuff here based on the names
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params = {};
         let timer = 0;
         let timerId = deviceId + '.lights.Timer';
@@ -982,7 +1001,7 @@ function createShellyRGBWWStates(deviceId, callback) {
 
     if (i == 'lights.red' || i == 'lights.green' || i == 'lights.blue' || i == 'lights.white' || i == 'lights.gain' || i == 'lights.temp' || i == 'lights.brightness' || i == 'lights.effect') { // Implement all needed action stuff here based on the names
       let id = i.replace('lights.', '');
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params = {};
         params[id] = value;
         adapter.log.debug("Set Colors: " + JSON.stringify(params));
@@ -991,7 +1010,7 @@ function createShellyRGBWWStates(deviceId, callback) {
     }
 
     if (i == 'lights.AutoTimerOff') {
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'auto_off': value
@@ -1002,7 +1021,7 @@ function createShellyRGBWWStates(deviceId, callback) {
     }
 
     if (i == 'lights.AutoTimerOn') {
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'auto_on': value
@@ -1013,7 +1032,7 @@ function createShellyRGBWWStates(deviceId, callback) {
     }
 
     if (i == 'mode') {
-      controlFunction = function (value) {
+      controlFunction = (value) => {
         let params;
         params = {
           'mode': value
@@ -1084,6 +1103,75 @@ function updateShellyRGBWWStates(deviceId, callback) {
 }
 
 // *******************************************************************************
+// Shelly H&T
+// *******************************************************************************
+function createShellyHTStates(deviceId, callback) {
+
+  let devices = datapoints.getObjectByName('shellyht');
+
+  for (let i in devices) {
+    let common = devices[i];
+    let stateId = deviceId + '.' + i;
+    let controlFunction;
+    let value;
+
+    createChannel(deviceId, i);
+
+    adapter.log.debug("Creating State " + stateId);
+    objectHelper.setOrUpdateObject(stateId, {
+      type: 'state',
+      common: common
+    }, ['name'], value, controlFunction);
+  }
+
+}
+
+function updateShellyHTStates(deviceId, status, callback) {
+
+  let devices = datapoints.getObjectByName('shellyht');
+  let ids = getIoBrokerStatesFromObj(status);
+
+  for (let i in ids) {
+    let id = i;
+    let value = ids[i];
+    let controlFunction;
+    // historical mapping
+
+    switch (id) {
+      case 'G02':
+        id = 'tmp.value';
+        break;
+      case 'G12':
+        id = 'hum.value';
+        value = value / 2;
+        break;
+      case 'G22':
+        id = 'bat.value';
+        break;
+      default:
+    }
+
+    if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+      continue;
+    }
+    shellyStates[deviceId + '.' + id] = value;
+
+    if (devices.hasOwnProperty(id)) {
+      let stateId = deviceId + '.' + id;
+      let common = devices[id];
+      objectHelper.setOrUpdateObject(stateId, {
+        type: 'state',
+        common: common
+      }, ['name'], value, controlFunction);
+    }
+
+  }
+  callback && callback();
+
+}
+
+
+// *******************************************************************************
 // Display Settings
 // *******************************************************************************
 function displaySettings(deviceId) {
@@ -1096,6 +1184,17 @@ function displaySettings(deviceId) {
   shelly.callDevice(deviceId, '/status', (error, data) => {
     if (!error && data) {
       adapter.log.debug("New Device Status for " + deviceId + " : " + JSON.stringify(data));
+    }
+  });
+}
+
+
+function isShellyOnine() {
+  adapter.getAdapterObjects((obj) => {
+    for(let id in obj) {
+      if(id.endsWith('.online') && obj[id].type == 'state') {
+       
+      }
     }
   });
 }
@@ -1131,6 +1230,7 @@ adapter.on('ready', function () {
       }
     }
     main();
+    isShellyOnine();
   });
 });
 
@@ -1175,7 +1275,6 @@ function pollStates(deviceId) {
 
 // main function
 function main() {
-
   objectHelper.init(adapter);
   setConnected(false);
 
@@ -1200,9 +1299,11 @@ function main() {
 
     if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
       shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
-        createShellyStates(deviceId, description, ip);
-        updateShellyStates(deviceId);
-        pollStates(deviceId);
+        createShellyStates(deviceId, description, ip, status);
+        updateShellyStates(deviceId, status);
+        if(!deviceId.startsWith('SHHT')) {
+          pollStates(deviceId); 
+        }
         objectHelper.processObjectQueue(() => {
           adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
         }); // if device is added later, create all objects
@@ -1210,7 +1311,7 @@ function main() {
       });
       return;
     }
-    updateShellyStates(deviceId);
+    updateShellyStates(deviceId, status);
     // objectHelper.processObjectQueue(() => { });
   });
 

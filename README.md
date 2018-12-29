@@ -31,11 +31,15 @@ You will find more and detailed information about the device here : [Shelly](htt
 * ShellyBulb (SHBLB-1, not verified and tested)
 * Shelly2LED (SH2LED-1, not verified and tested)
 * ShellyRGBW (SHRGBWW-01, not verified and tested)
+* Shelly H&T (SHHT-1, verified)
 
 ## More details needed to implement (Debug log)
 * Shelly Sense (SHSEN-1)
 
 ## Changelog
+
+### 2.0.2 (22.12.2018)
+* Add Shelly H&T. 
 
 ### 2.0.1 (22.12.2018)
 * Major update because of problems with CoAP messages. 
