@@ -339,8 +339,9 @@ function createShelly1States(deviceId, callback) {
 function updateShelly1States(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly1');
+  let parameter = {};
 
-  shelly.callDevice(deviceId, '/settings', (error, data) => {
+  shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
       for (let i in ids) {
@@ -560,8 +561,9 @@ function createShelly2States(deviceId, callback) {
 function updateShelly2States(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly2');
+  let parameter = {};
 
-  shelly.callDevice(deviceId, '/settings', (error, data) => {
+  shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
       for (let i in ids) {
@@ -628,7 +630,7 @@ function updateShelly2States(deviceId, callback) {
       }
     }
 
-    shelly.callDevice(deviceId, '/status', (error, data) => {
+    shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
       if (!error && data) {
         let ids = getIoBrokerStatesFromObj(data);
         for (let i in ids) {
@@ -748,8 +750,9 @@ function createShelly4States(deviceId, callback) {
 function updateShelly4States(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shelly4');
+  let parameter = {};
 
-  shelly.callDevice(deviceId, '/settings', (error, data) => {
+  shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
       for (let i in ids) {
@@ -912,8 +915,9 @@ function createShellyPlugStates(deviceId, callback) {
 function updateShellyPlugStates(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shplg1');
+  let parameter = {};
 
-  shelly.callDevice(deviceId, '/settings', (error, data) => {
+  shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
       for (let i in ids) {
@@ -1058,8 +1062,9 @@ function createShellyRGBWWStates(deviceId, callback) {
 function updateShellyRGBWWStates(deviceId, callback) {
 
   let devices = datapoints.getObjectByName('shellyrgbww');
+  let parameter = {};
 
-  shelly.callDevice(deviceId, '/settings', (error, data) => {
+  shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
       for (let i in ids) {
@@ -1177,13 +1182,15 @@ function updateShellyHTStates(deviceId, status, callback) {
 // Display Settings
 // *******************************************************************************
 function displaySettings(deviceId) {
-  shelly.callDevice(deviceId, '/settings', (error, data) => {
+  let parameter = {};
+
+  shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       adapter.log.debug("New Device Settings for " + deviceId + " : " + JSON.stringify(data));
     }
   });
 
-  shelly.callDevice(deviceId, '/status', (error, data) => {
+  shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
     if (!error && data) {
       adapter.log.debug("New Device Status for " + deviceId + " : " + JSON.stringify(data));
     }
