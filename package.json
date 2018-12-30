@@ -29,11 +29,11 @@
     "url": "https://github.com/schmupu/ioBroker.shelly"
   },
   "dependencies": {
+    "@apollon/iobroker-tools": "^0.1.0",
+    "@iobroker/adapter-core": "^1.0.1",
     "ping": "^0.2.1",
     "request": "^2.79.0",
-    "shelly-iot": "https://github.com/schmupu/shelly-iot",
-    "@iobroker/adapter-core": "^1.0.1",
-    "@apollon/iobroker-tools": "^0.1.0"
+    "shelly-iot": "git+https://github.com/schmupu/shelly-iot.git"
   },
   "devDependencies": {
     "chai": "^4.2.0",
