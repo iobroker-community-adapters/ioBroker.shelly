@@ -1136,8 +1136,6 @@ function updateShellyHTStates(deviceId, status, callback) {
   let devices = datapoints.getObjectByName('shellyht');
   let ids = getIoBrokerStatesFromObj(status);
 
-  adapter.log.info("Calling updateShellyHTStates for " + deviceId  + " with " + JSON.stringify(status));
-
   for (let i in ids) {
     let id = i;
     let value = ids[i];
