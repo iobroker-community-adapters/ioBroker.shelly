@@ -181,7 +181,7 @@ function createDevice(deviceId, description, ip) {
           read: true,
           write: false
         }
-      }, hostname);
+      }, ['name'], hostname);
     });
   } catch (err) {
     let hostname = ip || '';
@@ -195,7 +195,7 @@ function createDevice(deviceId, description, ip) {
         read: true,
         write: false
       }
-    }, hostname);
+    }, ['name'], hostname);
   }
 }
 
@@ -221,7 +221,7 @@ function createShellyStates(deviceId, description, ip, status, callback) {
       createShellyRGBWWStates(deviceId);
     } else if (deviceId.startsWith('SHHT')) {
       createShellyHTStates(deviceId);
-    }else {
+    } else {
       displaySettings(deviceId);
       callback && callback();
     }
@@ -379,7 +379,41 @@ function updateShelly1States(deviceId, callback) {
 
       }
     }
-    callback && callback();
+
+    shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
+      if (!error && data) {
+        let ids = getIoBrokerStatesFromObj(data);
+        for (let i in ids) {
+          let id = i;
+          let value = ids[i];
+          let controlFunction;
+          // historical mapping
+          switch (id) {
+            case 'wifi_sta.rssi':
+              id = 'rssi';
+              break;
+            default:
+          }
+
+          if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+            continue;
+          }
+          shellyStates[deviceId + '.' + id] = value;
+
+          if (devices.hasOwnProperty(id)) {
+            let stateId = deviceId + '.' + id;
+            let common = devices[id];
+            // adapter.log.debug(i + ' = ' + stateId);
+            objectHelper.setOrUpdateObject(stateId, {
+              type: 'state',
+              common: common
+            }, ['name'], value, controlFunction);
+          }
+
+        }
+      }
+      callback && callback();
+    });
   });
 
 }
@@ -508,7 +542,7 @@ function createShelly2States(deviceId, callback) {
 
     if (i == 'Relay0.AutoTimerOff' || i == 'Relay1.AutoTimerOff') {
       const relayId = parseInt(i.substr(5), 10);
-      controlFunction = (value) => (value) =>{
+      controlFunction = (value) => (value) => {
         let params;
         params = {
           'auto_off': value
@@ -531,7 +565,7 @@ function createShelly2States(deviceId, callback) {
     }
 
     if (i == 'mode') {
-      controlFunction = (value) =>(value) => {
+      controlFunction = (value) => (value) => {
         let params;
         params = {
           'mode': value
@@ -644,6 +678,9 @@ function updateShelly2States(deviceId, callback) {
               break;
             case 'rollers.state':
               id = 'Shutter.state';
+              break;
+            case 'wifi_sta.rssi':
+              id = 'rssi';
               break;
             default:
           }
@@ -829,7 +866,41 @@ function updateShelly4States(deviceId, callback) {
 
       }
     }
-    callback && callback();
+    shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
+      if (!error && data) {
+        let ids = getIoBrokerStatesFromObj(data);
+        for (let i in ids) {
+          let id = i;
+          let value = ids[i];
+          let controlFunction;
+          // historical mapping
+          switch (id) {
+            case 'wifi_sta.rssi':
+              id = 'rssi';
+              break;
+            default:
+          }
+
+          if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+            continue;
+          }
+          shellyStates[deviceId + '.' + id] = value;
+
+          if (devices.hasOwnProperty(id)) {
+            let stateId = deviceId + '.' + id;
+            let common = devices[id];
+            // adapter.log.debug(i + ' = ' + stateId);
+            objectHelper.setOrUpdateObject(stateId, {
+              type: 'state',
+              common: common
+            }, ['name'], value, controlFunction);
+          }
+
+        }
+      }
+      callback && callback();
+    });
+    // callback && callback();
   });
 
 }
@@ -958,7 +1029,41 @@ function updateShellyPlugStates(deviceId, callback) {
 
       }
     }
-    callback && callback();
+    shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
+      if (!error && data) {
+        let ids = getIoBrokerStatesFromObj(data);
+        for (let i in ids) {
+          let id = i;
+          let value = ids[i];
+          let controlFunction;
+          // historical mapping
+          switch (id) {
+            case 'wifi_sta.rssi':
+              id = 'rssi';
+              break;
+            default:
+          }
+
+          if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+            continue;
+          }
+          shellyStates[deviceId + '.' + id] = value;
+
+          if (devices.hasOwnProperty(id)) {
+            let stateId = deviceId + '.' + id;
+            let common = devices[id];
+            // adapter.log.debug(i + ' = ' + stateId);
+            objectHelper.setOrUpdateObject(stateId, {
+              type: 'state',
+              common: common
+            }, ['name'], value, controlFunction);
+          }
+
+        }
+      }
+      callback && callback();
+    });
+    // callback && callback();
   });
 
 }
@@ -1102,7 +1207,41 @@ function updateShellyRGBWWStates(deviceId, callback) {
 
       }
     }
-    callback && callback();
+    shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
+      if (!error && data) {
+        let ids = getIoBrokerStatesFromObj(data);
+        for (let i in ids) {
+          let id = i;
+          let value = ids[i];
+          let controlFunction;
+          // historical mapping
+          switch (id) {
+            case 'wifi_sta.rssi':
+              id = 'rssi';
+              break;
+            default:
+          }
+
+          if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+            continue;
+          }
+          shellyStates[deviceId + '.' + id] = value;
+
+          if (devices.hasOwnProperty(id)) {
+            let stateId = deviceId + '.' + id;
+            let common = devices[id];
+            // adapter.log.debug(i + ' = ' + stateId);
+            objectHelper.setOrUpdateObject(stateId, {
+              type: 'state',
+              common: common
+            }, ['name'], value, controlFunction);
+          }
+
+        }
+      }
+      callback && callback();
+    });
+    // callback && callback();
   });
 
 }
@@ -1135,6 +1274,7 @@ function updateShellyHTStates(deviceId, status, callback) {
 
   let devices = datapoints.getObjectByName('shellyht');
   let ids = getIoBrokerStatesFromObj(status);
+  let parameter = {};
 
   for (let i in ids) {
     let id = i;
@@ -1171,8 +1311,42 @@ function updateShellyHTStates(deviceId, status, callback) {
     }
 
   }
-  callback && callback();
 
+  shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
+    if (!error && data) {
+      let ids = getIoBrokerStatesFromObj(data);
+      for (let i in ids) {
+        let id = i;
+        let value = ids[i];
+        let controlFunction;
+        // historical mapping
+        switch (id) {
+          case 'wifi_sta.rssi':
+            id = 'rssi';
+            break;
+          default:
+        }
+
+        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+          continue;
+        }
+        shellyStates[deviceId + '.' + id] = value;
+
+        if (devices.hasOwnProperty(id)) {
+          let stateId = deviceId + '.' + id;
+          let common = devices[id];
+          // adapter.log.debug(i + ' = ' + stateId);
+          objectHelper.setOrUpdateObject(stateId, {
+            type: 'state',
+            common: common
+          }, ['name'], value, controlFunction);
+        }
+
+      }
+    }
+    callback && callback();
+  });
+  // callback && callback();
 }
 
 
@@ -1198,9 +1372,9 @@ function displaySettings(deviceId) {
 
 function isShellyOnine() {
   adapter.getAdapterObjects((obj) => {
-    for(let id in obj) {
-      if(id.endsWith('.online') && obj[id].type == 'state') {
-       
+    for (let id in obj) {
+      if (id.endsWith('.online') && obj[id].type == 'state') {
+
       }
     }
   });
@@ -1308,8 +1482,8 @@ function main() {
       shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
         createShellyStates(deviceId, description, ip, status);
         updateShellyStates(deviceId, status);
-        if(!deviceId.startsWith('SHHT')) {
-          pollStates(deviceId); 
+        if (!deviceId.startsWith('SHHT')) {
+          pollStates(deviceId);
         }
         objectHelper.processObjectQueue(() => {
           adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');

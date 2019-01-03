@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "news": {
+      "2.0.3": {
+        "en": "Shows RSSI Status for Shelly 1 & 2",
+        "de": "Status RSSI wird für Shelly 1 & 2 unterstützt"
+      },
       "2.0.2": {
         "en": "Add Shelly H&T",
         "de": "Shelly H&T Unterstützung"
