@@ -38,7 +38,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
-### 2.0.3 (22.12.2018)
+### 2.0.3 (02.01.2018)
 * Shows RSSI Status for Shelly 1 & 2. You need Firmware 1.4.4 
 
 ### 2.0.2 (22.12.2018)
