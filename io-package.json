@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "news": {
+      "2.0.4": {
+        "en": "Support of compact mode",
+        "de": "Unterstützung des compact mode"
+      },
       "2.0.3": {
         "en": "Shows RSSI Status for Shelly 1 & 2",
         "de": "Status RSSI wird für Shelly 1 & 2 unterstützt"
@@ -104,6 +108,7 @@
     "icon": "shelly.png",
     "materialize": true,
     "enabled": true,
+    "compact": true,
     "extIcon": "https://raw.githubusercontent.com/schmupu/ioBroker.shelly/master/admin/shelly.png",
     "keywords": ["shelly", "switch", "smarthome", "iobroker"],
     "readme": "https://github.com/schmupu/ioBroker.shelly/blob/master/README.md",

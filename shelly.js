@@ -8,78 +8,109 @@
 // you have to require the utils module and call adapter function
 const dns = require('dns');
 const utils = require('@iobroker/adapter-core');
-const adapter = new utils.Adapter('shelly');
+// const adapter = new utils.Adapter('shelly');
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Get common adapter utils
 const datapoints = require(__dirname + '/lib/datapoints'); // Get common adapter utils
 const Shelly = require('shelly-iot');
+const adapterName = require('./package.json').name.split('.').pop();
 
 let shelly;
 let knownDevices = {};
 let shellyStates = {};
-
 let isStopped = false;
 let connected = null;
+let adapter;
+
+
+function startAdapter(options) {
+  options = options || {};
+  options.name = adapterName;
+  adapter = new utils.Adapter(options);
+
+  // is called when adapter shuts down - callback has to be called under any circumstances!
+  adapter.on('unload', (callback) => {
+    try {
+      setConnected(false);
+      if (shelly) {
+        isStopped = true;
+        shelly.stopListening(callback);
+        return;
+      }
+      // adapter.log.info('cleaned everything up...');
+      callback();
+    } catch (e) {
+      callback();
+    }
+  });
+
+  process.on('SIGINT', () => {
+    if (shelly) {
+      isStopped = true;
+      shelly.stopListening();
+    }
+    setConnected(false);
+    adapter.terminate ? adapter.terminate() : process.exit();
+  });
+
+  process.on('uncaughtException', (err) => {
+    console.log('Exception: ' + err + '/' + err.toString());
+    if (adapter && adapter.log) {
+      adapter.log.warn('Exception: ' + err);
+    }
+    if (shelly) {
+      isStopped = true;
+      shelly.stopListening();
+    }
+    setConnected(false);
+    adapter.terminate ? adapter.terminate() : process.exit();
+  });
+
+
+  // is called if a subscribed state changes
+  adapter.on('stateChange', (id, state) => {
+    // Warning, state can be null if it was deleted
+    if (state && !state.ack) {
+      let stateId = id.replace(adapter.namespace + '.', '');
+      if (shellyStates.hasOwnProperty(stateId)) {
+        delete shellyStates[stateId];
+      }
+      adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
+      objectHelper.handleStateChange(id, state);
+    }
+  });
+
+
+  // is called when databases are connected and adapter received configuration.
+  // start here!
+  adapter.on('ready', function () {
+    // main();
+    adapter.getForeignObject('system.config', (err, obj) => {
+
+      if (adapter.config.password) {
+        if (obj && obj.native && obj.native.secret) {
+          //noinspection JSUnresolvedVariable
+          adapter.config.password = decrypt(obj.native.secret, adapter.config.password);
+        } else {
+          //noinspection JSUnresolvedVariable
+          adapter.config.password = decrypt('Zgfr56gFe87jJOM', adapter.config.password);
+        }
+      }
+      main();
+      isShellyOnine();
+    });
+  });
+
+  return adapter;
+}
 
 
 function decrypt(key, value) {
   let result = '';
-
   for (let i = 0; i < value.length; ++i) {
     result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
   }
   return result;
 }
-
-
-// is called when adapter shuts down - callback has to be called under any circumstances!
-adapter.on('unload', (callback) => {
-  try {
-    setConnected(false);
-    if (shelly) {
-      isStopped = true;
-      shelly.stopListening(callback);
-      return;
-    }
-    // adapter.log.info('cleaned everything up...');
-    callback();
-  } catch (e) {
-    callback();
-  }
-});
-
-process.on('SIGINT', () => {
-  if (shelly) {
-    isStopped = true;
-    shelly.stopListening();
-  }
-  setConnected(false);
-});
-
-process.on('uncaughtException', (err) => {
-  console.log('Exception: ' + err + '/' + err.toString());
-  if (adapter && adapter.log) {
-    adapter.log.warn('Exception: ' + err);
-  }
-  if (shelly) {
-    isStopped = true;
-    shelly.stopListening();
-  }
-  setConnected(false);
-});
-
-
-// is called if a subscribed state changes
-adapter.on('stateChange', (id, state) => {
-  // Warning, state can be null if it was deleted
-  if (state && !state.ack) {
-    let stateId = id.replace(adapter.namespace + '.', '');
-    if (shellyStates.hasOwnProperty(stateId)) {
-      delete shellyStates[stateId];
-    }
-    adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
-    objectHelper.handleStateChange(id, state);
-  }
-});
 
 
 function getDeviceIdFromIoBrokerId(iobrokerId) {
@@ -1395,28 +1426,6 @@ function setConnected(isConnected) {
   }
 }
 
-// is called when databases are connected and adapter received configuration.
-// start here!
-adapter.on('ready', function () {
-  // main();
-  adapter.getForeignObject('system.config', (err, obj) => {
-
-    if (adapter.config.password) {
-      if (obj && obj.native && obj.native.secret) {
-        //noinspection JSUnresolvedVariable
-        adapter.config.password = decrypt(obj.native.secret, adapter.config.password);
-      } else {
-        //noinspection JSUnresolvedVariable
-        adapter.config.password = decrypt('Zgfr56gFe87jJOM', adapter.config.password);
-      }
-    }
-    main();
-    isShellyOnine();
-  });
-});
-
-
-
 
 function initDevices(deviceIPs, callback) {
   if (!deviceIPs.length) {
@@ -1534,3 +1543,10 @@ function main() {
 }
 
 
+// If started as allInOne mode => return function to create instance
+if (typeof module !== undefined && module.parent) {
+  module.exports = startAdapter;
+} else {
+  // or start the instance directly
+  startAdapter();
+}
