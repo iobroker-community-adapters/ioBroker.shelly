@@ -43,28 +43,6 @@ function startAdapter(options) {
     }
   });
 
-  process.on('SIGINT', () => {
-    if (shelly) {
-      isStopped = true;
-      shelly.stopListening();
-    }
-    setConnected(false);
-    adapter.terminate ? adapter.terminate() : process.exit();
-  });
-
-  process.on('uncaughtException', (err) => {
-    console.log('Exception: ' + err + '/' + err.toString());
-    if (adapter && adapter.log) {
-      adapter.log.warn('Exception: ' + err);
-    }
-    if (shelly) {
-      isStopped = true;
-      shelly.stopListening();
-    }
-    setConnected(false);
-    adapter.terminate ? adapter.terminate() : process.exit();
-  });
-
 
   // is called if a subscribed state changes
   adapter.on('stateChange', (id, state) => {
@@ -102,6 +80,28 @@ function startAdapter(options) {
 
   return adapter;
 }
+
+process.on('SIGINT', () => {
+  if (shelly) {
+    isStopped = true;
+    shelly.stopListening();
+  }
+  setConnected(false);
+  adapter.terminate ? adapter.terminate() : process.exit();
+});
+
+process.on('uncaughtException', (err) => {
+  console.log('Exception: ' + err + '/' + err.toString());
+  if (adapter && adapter.log) {
+    adapter.log.warn('Exception: ' + err);
+  }
+  if (shelly) {
+    isStopped = true;
+    shelly.stopListening();
+  }
+  setConnected(false);
+  adapter.terminate ? adapter.terminate() : process.exit();
+});
 
 
 function decrypt(key, value) {
