@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "news": {
+      "2.0.5": {
+        "en": "First tryp CoAP, than http ",
+        "de": "Erst Status setzen über CoAP dann http" 
+      },
       "2.0.4": {
         "en": "Support of compact mode",
         "de": "Unterstützung des compact mode"

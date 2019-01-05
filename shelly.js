@@ -156,7 +156,12 @@ function getIoBrokerStatesFromObj(data) {
     }
   }
 
-  _obj2str(data, obj);
+  if (data) {
+    _obj2str(data, obj);
+  } else {
+    return null;
+  }
+
   return obj;
 
 }
@@ -270,9 +275,9 @@ function updateShellyStates(deviceId, status, callback) {
 
   if (deviceId) {
     if (deviceId.startsWith('SHSW-1')) {
-      updateShelly1States(deviceId, callback);
+      updateShelly1States(deviceId, status, callback);
     } else if (deviceId.startsWith('SHSW-2')) {
-      updateShelly2States(deviceId, callback);
+      updateShelly2States(deviceId, status, callback);
     } else if (deviceId.startsWith('SHSW-4')) {
       updateShelly4States(deviceId, callback);
     } else if (deviceId.startsWith('SHPLG-1')) {
@@ -367,10 +372,42 @@ function createShelly1States(deviceId, callback) {
 
 }
 
-function updateShelly1States(deviceId, callback) {
+function updateShelly1States(deviceId, status, callback) {
 
   let devices = datapoints.getObjectByName('shelly1');
   let parameter = {};
+  let ids = getIoBrokerStatesFromObj(status);
+
+  if (ids) {
+    for (let i in ids) {
+      let id = i;
+      let value = ids[i];
+      let controlFunction;
+      // historical mapping
+
+      switch (id) {
+        case 'G2':
+          id = 'Relay0.Switch';
+          break;
+        default:
+      }
+
+      if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+        continue;
+      }
+      shellyStates[deviceId + '.' + id] = value;
+
+      if (devices.hasOwnProperty(id)) {
+        let stateId = deviceId + '.' + id;
+        let common = devices[id];
+        objectHelper.setOrUpdateObject(stateId, {
+          type: 'state',
+          common: common
+        }, ['name'], value, controlFunction);
+      }
+
+    }
+  }
 
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
@@ -623,10 +660,46 @@ function createShelly2States(deviceId, callback) {
 
 }
 
-function updateShelly2States(deviceId, callback) {
+function updateShelly2States(deviceId, status, callback) {
 
   let devices = datapoints.getObjectByName('shelly2');
   let parameter = {};
+  let ids = getIoBrokerStatesFromObj(status);
+
+  if (ids) {
+    for (let i in ids) {
+      let id = i;
+      let value = ids[i];
+      let controlFunction;
+      // historical mapping
+
+      switch (id) {
+        case 'G02':
+          id = 'Relay0.Switch';
+          break;
+        case 'G12':
+          id = 'Relay1.Switch';
+          break;
+        default:
+      }
+
+      if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+        continue;
+      }
+      shellyStates[deviceId + '.' + id] = value;
+
+      if (devices.hasOwnProperty(id)) {
+        let stateId = deviceId + '.' + id;
+        let common = devices[id];
+        objectHelper.setOrUpdateObject(stateId, {
+          type: 'state',
+          common: common
+        }, ['name'], value, controlFunction);
+      }
+
+    }
+  }
+
 
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {

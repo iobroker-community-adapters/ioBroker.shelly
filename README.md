@@ -38,6 +38,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 2.0.5 (05.01.2018)
+* Set Status first by CoAP, than with http 
+
 ### 2.0.4 (04.01.2018)
 * Support js-controller compact mode 
 
