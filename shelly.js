@@ -388,6 +388,7 @@ function updateShelly1States(deviceId, status, callback) {
     switch (id) {
       case 'G2':
         id = 'Relay0.Switch';
+        value = value === 1 || value === true ? true : false;
         break;
       default:
     }
@@ -675,9 +676,11 @@ function updateShelly2States(deviceId, status, callback) {
     switch (id) {
       case 'G02':
         id = 'Relay0.Switch';
+        value = value === 1 || value === true ? true : false;
         break;
       case 'G12':
         id = 'Relay1.Switch';
+        value = value === 1 || value === true ? true : false;
         break;
       default:
     }
@@ -901,15 +904,19 @@ function updateShelly4States(deviceId, status, callback) {
     switch (id) {
       case 'G12':
         id = 'Relay0.Switch';
+        value = value === 1 || value === true ? true : false;
         break;
       case 'G32':
         id = 'Relay1.Switch';
+        value = value === 1 || value === true ? true : false;
         break;
       case 'G52':
         id = 'Relay2.Switch';
+        value = value === 1 || value === true ? true : false;
         break;
       case 'G72':
         id = 'Relay3.Switch';
+        value = value === 1 || value === true ? true : false;
         break;
       default:
     }
