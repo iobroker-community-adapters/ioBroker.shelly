@@ -38,11 +38,8 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
-### 2.0.5 (05.01.2018)
-* Set Status first by CoAP, than with http 
-
 ### 2.0.4 (04.01.2018)
-* Support js-controller compact mode 
+* Support of js-controller compact mode and performance optimizing 
 
 ### 2.0.3 (02.01.2018)
 * Shows RSSI Status for Shelly 1 & 2. You need Firmware 1.4.4 

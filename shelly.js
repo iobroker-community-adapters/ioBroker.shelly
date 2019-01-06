@@ -279,7 +279,7 @@ function updateShellyStates(deviceId, status, callback) {
     } else if (deviceId.startsWith('SHSW-2')) {
       updateShelly2States(deviceId, status, callback);
     } else if (deviceId.startsWith('SHSW-4')) {
-      updateShelly4States(deviceId, callback);
+      updateShelly4States(deviceId, status, callback);
     } else if (deviceId.startsWith('SHPLG-1')) {
       updateShellyPlugStates(deviceId, callback);
     } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
@@ -298,7 +298,7 @@ function updateShellyStates(deviceId, status, callback) {
 // *******************************************************************************
 // Shelly 1
 // *******************************************************************************
-function createShelly1States(deviceId, callback) {
+function createShelly1States(deviceId) {
 
   let devices = datapoints.getObjectByName('shelly1');
 
@@ -376,38 +376,37 @@ function updateShelly1States(deviceId, status, callback) {
 
   let devices = datapoints.getObjectByName('shelly1');
   let parameter = {};
+
+  // get status from CoAP Message
   let ids = getIoBrokerStatesFromObj(status);
+  for (let i in ids) {
+    let id = i;
+    let value = ids[i];
+    let controlFunction;
+    // historical mapping
 
-  if (ids) {
-    for (let i in ids) {
-      let id = i;
-      let value = ids[i];
-      let controlFunction;
-      // historical mapping
+    switch (id) {
+      case 'G2':
+        id = 'Relay0.Switch';
+        break;
+      default:
+    }
 
-      switch (id) {
-        case 'G2':
-          id = 'Relay0.Switch';
-          break;
-        default:
-      }
+    if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+      continue;
+    }
+    shellyStates[deviceId + '.' + id] = value;
 
-      if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
-        continue;
-      }
-      shellyStates[deviceId + '.' + id] = value;
-
-      if (devices.hasOwnProperty(id)) {
-        let stateId = deviceId + '.' + id;
-        let common = devices[id];
-        objectHelper.setOrUpdateObject(stateId, {
-          type: 'state',
-          common: common
-        }, ['name'], value, controlFunction);
-      }
-
+    if (devices.hasOwnProperty(id)) {
+      let stateId = deviceId + '.' + id;
+      let common = devices[id];
+      objectHelper.setOrUpdateObject(stateId, {
+        type: 'state',
+        common: common
+      }, ['name'], value, controlFunction);
     }
   }
+
 
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
@@ -490,7 +489,7 @@ function updateShelly1States(deviceId, status, callback) {
 // *******************************************************************************
 // Shelly 2
 // *******************************************************************************
-function createShelly2States(deviceId, callback) {
+function createShelly2States(deviceId) {
 
   let devices = datapoints.getObjectByName('shelly2');
 
@@ -664,43 +663,41 @@ function updateShelly2States(deviceId, status, callback) {
 
   let devices = datapoints.getObjectByName('shelly2');
   let parameter = {};
+
+  // CoAP Messages - switches on/on
   let ids = getIoBrokerStatesFromObj(status);
+  for (let i in ids) {
+    let id = i;
+    let value = ids[i];
+    let controlFunction;
+    // historical mapping
 
-  if (ids) {
-    for (let i in ids) {
-      let id = i;
-      let value = ids[i];
-      let controlFunction;
-      // historical mapping
+    switch (id) {
+      case 'G02':
+        id = 'Relay0.Switch';
+        break;
+      case 'G12':
+        id = 'Relay1.Switch';
+        break;
+      default:
+    }
 
-      switch (id) {
-        case 'G02':
-          id = 'Relay0.Switch';
-          break;
-        case 'G12':
-          id = 'Relay1.Switch';
-          break;
-        default:
-      }
+    if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+      continue;
+    }
+    shellyStates[deviceId + '.' + id] = value;
 
-      if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
-        continue;
-      }
-      shellyStates[deviceId + '.' + id] = value;
-
-      if (devices.hasOwnProperty(id)) {
-        let stateId = deviceId + '.' + id;
-        let common = devices[id];
-        objectHelper.setOrUpdateObject(stateId, {
-          type: 'state',
-          common: common
-        }, ['name'], value, controlFunction);
-      }
-
+    if (devices.hasOwnProperty(id)) {
+      let stateId = deviceId + '.' + id;
+      let common = devices[id];
+      objectHelper.setOrUpdateObject(stateId, {
+        type: 'state',
+        common: common
+      }, ['name'], value, controlFunction);
     }
   }
 
-
+  // http request to getting status
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
@@ -814,7 +811,7 @@ function updateShelly2States(deviceId, status, callback) {
 // *******************************************************************************
 // Shelly 4
 // *******************************************************************************
-function createShelly4States(deviceId, callback) {
+function createShelly4States(deviceId) {
 
   let devices = datapoints.getObjectByName('shelly4');
 
@@ -888,10 +885,49 @@ function createShelly4States(deviceId, callback) {
 
 }
 
-function updateShelly4States(deviceId, callback) {
+function updateShelly4States(deviceId, status, callback) {
 
   let devices = datapoints.getObjectByName('shelly4');
   let parameter = {};
+
+  // CoAP Messages - switches on/on
+  let ids = getIoBrokerStatesFromObj(status);
+  for (let i in ids) {
+    let id = i;
+    let value = ids[i];
+    let controlFunction;
+    // historical mapping
+
+    switch (id) {
+      case 'G12':
+        id = 'Relay0.Switch';
+        break;
+      case 'G32':
+        id = 'Relay1.Switch';
+        break;
+      case 'G52':
+        id = 'Relay2.Switch';
+        break;
+      case 'G72':
+        id = 'Relay3.Switch';
+        break;
+      default:
+    }
+
+    if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+      continue;
+    }
+    shellyStates[deviceId + '.' + id] = value;
+
+    if (devices.hasOwnProperty(id)) {
+      let stateId = deviceId + '.' + id;
+      let common = devices[id];
+      objectHelper.setOrUpdateObject(stateId, {
+        type: 'state',
+        common: common
+      }, ['name'], value, controlFunction);
+    }
+  }
 
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
@@ -1013,7 +1049,7 @@ function updateShelly4States(deviceId, callback) {
 // *******************************************************************************
 // Shelly Plug
 // *******************************************************************************
-function createShellyPlugStates(deviceId, callback) {
+function createShellyPlugStates(deviceId) {
 
   let devices = datapoints.getObjectByName('shplg1');
 
@@ -1176,7 +1212,7 @@ function updateShellyPlugStates(deviceId, callback) {
 // *******************************************************************************
 // Shelly RGBWW
 // *******************************************************************************
-function createShellyRGBWWStates(deviceId, callback) {
+function createShellyRGBWWStates(deviceId) {
 
   let devices = datapoints.getObjectByName('shellyrgbww');
 
@@ -1353,7 +1389,7 @@ function updateShellyRGBWWStates(deviceId, callback) {
 // *******************************************************************************
 // Shelly H&T
 // *******************************************************************************
-function createShellyHTStates(deviceId, callback) {
+function createShellyHTStates(deviceId) {
 
   let devices = datapoints.getObjectByName('shellyht');
 
@@ -1538,6 +1574,8 @@ function pollStates(deviceId) {
 
 // main function
 function main() {
+
+  adapter.log.info("Starting " + adapter.namespace + " in version " + adapter.version);
   objectHelper.init(adapter);
   setConnected(false);
 

@@ -1,15 +1,11 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.0.5",
+    "version": "2.0.4",
     "news": {
-      "2.0.5": {
-        "en": "First tryp CoAP, than http ",
-        "de": "Erst Status setzen über CoAP dann http" 
-      },
       "2.0.4": {
-        "en": "Support of compact mode",
-        "de": "Unterstützung des compact mode"
+        "en": "Support of js-controller compact mode and performance optimizing ",
+        "de": "Unterstützung des Compact Modus und Performance optimierung"
       },
       "2.0.3": {
         "en": "Shows RSSI Status for Shelly 1 & 2",
