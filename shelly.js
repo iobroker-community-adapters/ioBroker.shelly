@@ -242,8 +242,8 @@ function createShellyStates(deviceId, description, ip, status, callback) {
     status = undefined;
   }
 
-  if (deviceId) {
-
+  adapter.log.debug('Create Shelly States for ' + deviceId);
+  if (deviceId && typeof deviceId === 'string') {
     createDevice(deviceId, description, ip);
     if (deviceId.startsWith('SHSW-1')) {
       createShelly1States(deviceId);
@@ -273,7 +273,8 @@ function updateShellyStates(deviceId, status, callback) {
     status = undefined;
   }
 
-  if (deviceId) {
+  adapter.log.debug('Update Shelly States for ' + deviceId);
+  if (deviceId && typeof deviceId === 'string') {
     if (deviceId.startsWith('SHSW-1')) {
       updateShelly1States(deviceId, status, callback);
     } else if (deviceId.startsWith('SHSW-2')) {
@@ -1604,23 +1605,26 @@ function main() {
 
   shelly.on('update-device-status', (deviceId, status) => {
     adapter.log.debug('Status update received for ' + deviceId + ': ' + JSON.stringify(status));
-
-    if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
-      shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
-        createShellyStates(deviceId, description, ip, status);
-        updateShellyStates(deviceId, status);
-        if (!deviceId.startsWith('SHHT')) {
-          pollStates(deviceId);
-        }
-        objectHelper.processObjectQueue(() => {
-          adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
-        }); // if device is added later, create all objects
-        knownDevices[deviceId] = true;
-      });
-      return;
+    if (deviceId && typeof deviceId === 'string') {
+      if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
+        shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
+          createShellyStates(deviceId, description, ip, status);
+          updateShellyStates(deviceId, status);
+          if (!deviceId.startsWith('SHHT')) {
+            pollStates(deviceId);
+          }
+          objectHelper.processObjectQueue(() => {
+            adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
+          }); // if device is added later, create all objects
+          knownDevices[deviceId] = true;
+        });
+        return;
+      }
+      updateShellyStates(deviceId, status);
+      objectHelper.processObjectQueue(() => { });
+    } else {
+      adapter.log.debug('Device Id is missing ' + deviceId);
     }
-    updateShellyStates(deviceId, status);
-    objectHelper.processObjectQueue(() => { });
   });
 
   shelly.on('device-connection-status', (deviceId, connected) => {
@@ -1662,7 +1666,7 @@ function main() {
 
 
 // If started as allInOne mode => return function to create instance
-if (typeof module !== undefined && module.parent) {
+if (typeof module !== "undefined" && module.parent) {
   module.exports = startAdapter;
 } else {
   // or start the instance directly

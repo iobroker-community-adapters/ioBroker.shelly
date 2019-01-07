@@ -38,6 +38,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 2.0.5 (07.01.2018)
+* Fixing an error if Shelly device is not reachable (offline)
+
 ### 2.0.4 (04.01.2018)
 * Support of js-controller compact mode and performance optimizing. Relay status changes will be shown much faster in ioBroker for Shelly 1, 2 and 4Pro
 
