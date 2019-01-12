@@ -112,6 +112,16 @@ function decrypt(key, value) {
   return result;
 }
 
+function setOnlineStatus(deviceId, value) {
+  let stateId = deviceId + '.online';
+  if (shellyStates[stateId] !== value) {
+    shellyStates[stateId] = value;
+    objectHelper.setOrUpdateObject(stateId, {
+      type: 'state'
+    }, ['name'], value);
+  }
+}
+
 
 function getDeviceIdFromIoBrokerId(iobrokerId) {
   let deviceId;
@@ -409,7 +419,6 @@ function updateShelly1States(deviceId, status, callback) {
     }
   }
 
-
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
@@ -480,6 +489,9 @@ function updateShelly1States(deviceId, status, callback) {
           }
 
         }
+        setOnlineStatus(deviceId, true);
+      } else {
+        setOnlineStatus(deviceId, false);
       }
       callback && callback();
     });
@@ -767,6 +779,9 @@ function updateShelly2States(deviceId, status, callback) {
           }, ['name'], value, controlFunction);
         }
       }
+      setOnlineStatus(deviceId, true);
+    } else {
+      setOnlineStatus(deviceId, false);
     }
 
     shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
@@ -806,6 +821,9 @@ function updateShelly2States(deviceId, status, callback) {
           }
 
         }
+        setOnlineStatus(deviceId, true);
+      } else {
+        setOnlineStatus(deviceId, false);
       }
       callback && callback();
     });
@@ -1045,10 +1063,13 @@ function updateShelly4States(deviceId, status, callback) {
           }
 
         }
+        setOnlineStatus(deviceId, true);
+      } else {
+        setOnlineStatus(deviceId, false);
       }
       callback && callback();
     });
-    // callback && callback();
+
   });
 
 }
@@ -1208,6 +1229,9 @@ function updateShellyPlugStates(deviceId, callback) {
           }
 
         }
+        setOnlineStatus(deviceId, true);
+      } else {
+        setOnlineStatus(deviceId, false);
       }
       callback && callback();
     });
@@ -1386,6 +1410,9 @@ function updateShellyRGBWWStates(deviceId, callback) {
           }
 
         }
+        setOnlineStatus(deviceId, true);
+      } else {
+        setOnlineStatus(deviceId, false);
       }
       callback && callback();
     });

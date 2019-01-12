@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "news": {
+      "2.0.6": {
+        "en": "Getting faster online status for Shelly devices, excluded H&T",
+        "de": "Schnellere Ermittlung des Online Status"
+      },
       "2.0.5": {
         "en": "Fixing an error if Shelly device is not reachable (offline)",
         "de": "Fehlebehebung wenn Shelly ist offline"
