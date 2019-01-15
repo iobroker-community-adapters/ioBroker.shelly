@@ -1603,7 +1603,9 @@ function initDevices(deviceIPs, callback) {
 function pollStates(deviceId) {
   let polltime = adapter.config.polltime || 10;
   updateShellyStates(deviceId, () => {
-    setTimeout(pollStates, polltime * 1000, deviceId);
+    objectHelper.processObjectQueue(() => {
+      setTimeout(pollStates, polltime * 1000, deviceId);
+    });
   });
 }
 
