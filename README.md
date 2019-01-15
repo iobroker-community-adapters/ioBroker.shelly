@@ -39,7 +39,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 ## Changelog
 
 ### 2.0.6 (12.01.2018)
-* Getting faster online status for Shelly devices, excluded H&T
+* Getting faster online status for Shelly devices, excluded H&T. Fix of power status for Shelly Plug.
 
 ### 2.0.5 (07.01.2018)
 * Fixing an error if Shelly device is not reachable (offline)

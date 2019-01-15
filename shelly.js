@@ -1176,7 +1176,7 @@ function updateShellyPlugStates(deviceId, callback) {
           case 'relays.auto_off':
             id = 'Relay0.AutoTimerOff';
             break;
-          case 'meters0.power':
+          case 'meters.power':
             id = 'Relay0.Power';
             break;
           default:
