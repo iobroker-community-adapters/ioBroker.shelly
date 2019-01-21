@@ -3,3 +3,4 @@ gulpfile.js
 /lib/utils.js
 /admin/
 /test/
+/node_modules/
