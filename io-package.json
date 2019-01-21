@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.0.6",
+    "version": "2.0.7",
     "news": {
+      "2.0.7": {
+        "en": "Bugfixing for objects AutoTimerOn and AutoTimeroff",
+        "de": "Fehlerbehbung der Objekte AutoTimerOn und AutoTimeroff"
+      },
       "2.0.6": {
         "en": "Getting faster online status for Shelly devices, excluded H&T",
         "de": "Schnellere Ermittlung des Online Status"
@@ -118,7 +122,12 @@
     "enabled": true,
     "compact": true,
     "extIcon": "https://raw.githubusercontent.com/schmupu/ioBroker.shelly/master/admin/shelly.png",
-    "keywords": ["shelly", "switch", "smarthome", "iobroker"],
+    "keywords": [
+      "shelly",
+      "switch",
+      "smarthome",
+      "iobroker"
+    ],
     "readme": "https://github.com/schmupu/ioBroker.shelly/blob/master/README.md",
     "loglevel": "info",
     "type": "iot-systems",
@@ -129,13 +138,16 @@
     "user": "admin",
     "password": "",
     "polltime": 10,
-    "keys": [{
-      "hosts": "",
-      "devids": ""
-    }]
+    "keys": [
+      {
+        "hosts": "",
+        "devids": ""
+      }
+    ]
   },
   "objects": [],
-  "instanceObjects": [{
+  "instanceObjects": [
+    {
       "_id": "info",
       "type": "channel",
       "common": {

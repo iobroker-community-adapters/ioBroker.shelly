@@ -38,10 +38,13 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
-### 2.0.6 (12.01.2018)
+### 2.0.7 (21.01.2019)
+* Bugfixing for objects AutoTimerOn and AutoTimeroff
+
+### 2.0.6 (12.01.2019)
 * Getting faster online status for Shelly devices, excluded H&T. Fix of power status for Shelly Plug.
 
-### 2.0.5 (07.01.2018)
+### 2.0.5 (07.01.2019)
 * Fixing an error if Shelly device is not reachable (offline)
 
 ### 2.0.4 (04.01.2018)
