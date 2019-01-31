@@ -279,7 +279,7 @@ function updateShellyStates(deviceId, status, callback) {
 
   let now = Date.now();
   let sec = (now - knownDevices[deviceId].ts) / 1000; // seconds
-  let timeout = adapter.config.timeout || 0.25; // seconds
+  let timeout = adapter.config.timeout || 0.33; // seconds
 
   if (typeof status === 'function') {
     callback = status;

@@ -142,7 +142,7 @@
     "user": "admin",
     "password": "",
     "polltime": 10,
-    "timeout": 0.25,
+    "timeout": 0.33,
     "keys": [
       {
         "hosts": "",
