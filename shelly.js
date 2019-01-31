@@ -280,17 +280,16 @@ function updateShellyStates(deviceId, status, callback) {
   let now = Date.now();
   let sec = (now - knownDevices[deviceId].ts) / 1000;
 
-  // wir pollen maximal jede Sekunde den nuen Status
-  if (sec < 1) {
-    return callback && callback();
-  }
-
-  knownDevices[deviceId].ts = now;
-
   if (typeof status === 'function') {
     callback = status;
     status = undefined;
   }
+
+  // wir pollen maximal jede Sekunde den neuen Status
+  if (sec < 0.5) {
+    return callback && callback();
+  }
+  knownDevices[deviceId].ts = now;
 
   adapter.log.debug('Update Shelly States for ' + deviceId);
   if (deviceId && typeof deviceId === 'string') {
