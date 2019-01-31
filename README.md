@@ -38,6 +38,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 2.0.8 (31.01.2019)
+* Bugfixing, polling new Shelly status must be at least 1 sec ago 
+
 ### 2.0.7 (21.01.2019)
 * Bugfixing for objects AutoTimerOn and AutoTimeroff
 

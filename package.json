@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Shelly",
   "author": {
     "name": "Thorsten Stueben",
@@ -30,17 +30,18 @@
   },
   "dependencies": {
     "@apollon/iobroker-tools": "^0.1.0",
-    "@iobroker/adapter-core": "^1.0.1",
+    "@iobroker/adapter-core": "^1.0.3",
     "ping": "^0.2.1",
     "request": "^2.79.0",
     "shelly-iot": "^1.0.2"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "chai": "^4.2.0",
     "eslint": "^5.11.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "mocha": "^4.1.0"
   },
   "main": "shelly.js",

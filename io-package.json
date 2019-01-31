@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.0.7",
+    "version": "2.0.8",
     "news": {
+      "2.0.8": {
+        "en": "Bugfixing, polling new Shelly status must be at least 1 sec ago",
+        "de": "Fehlerbehbung, neuer Shelly Status darf maximal 1 mal pro Sek. gepolled werden"
+      },
       "2.0.7": {
         "en": "Bugfixing for objects AutoTimerOn and AutoTimeroff",
         "de": "Fehlerbehbung der Objekte AutoTimerOn und AutoTimeroff"

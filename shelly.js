@@ -175,7 +175,7 @@ function getIoBrokerStatesFromObj(data) {
 
 }
 
-  
+
 function createChannel(deviceId, state) {
   let arr = state.split('.');
   if (arr.length >= 2) {
@@ -276,6 +276,16 @@ function createShellyStates(deviceId, description, ip, status, callback) {
 }
 
 function updateShellyStates(deviceId, status, callback) {
+
+  let now = Date.now();
+  let sec = (now - knownDevices[deviceId].ts) / 1000;
+
+  // wir pollen maximal jede Sekunde den nuen Status
+  if (sec < 1) {
+    return callback && callback();
+  }
+
+  knownDevices[deviceId].ts = now;
 
   if (typeof status === 'function') {
     callback = status;
@@ -388,34 +398,37 @@ function updateShelly1States(deviceId, status, callback) {
   let parameter = {};
 
   // get status from CoAP Message
-  let ids = getIoBrokerStatesFromObj(status);
-  for (let i in ids) {
-    let id = i;
-    let value = ids[i];
-    let controlFunction;
-    // historical mapping
+  if (status) {
+    let ids = getIoBrokerStatesFromObj(status);
+    for (let i in ids) {
+      let id = i;
+      let value = ids[i];
+      let controlFunction;
+      // historical mapping
 
-    switch (id) {
-      case 'G2':
-        id = 'Relay0.Switch';
-        value = value === 1 || value === true ? true : false;
-        break;
-      default:
-    }
+      switch (id) {
+        case 'G2':
+          id = 'Relay0.Switch';
+          value = value === 1 || value === true ? true : false;
+          break;
+        default:
+      }
 
-    if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
-      continue;
-    }
-    shellyStates[deviceId + '.' + id] = value;
+      if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+        continue;
+      }
+      shellyStates[deviceId + '.' + id] = value;
 
-    if (devices.hasOwnProperty(id)) {
-      let stateId = deviceId + '.' + id;
-      let common = devices[id];
-      objectHelper.setOrUpdateObject(stateId, {
-        type: 'state',
-        common: common
-      }, ['name'], value, controlFunction);
+      if (devices.hasOwnProperty(id)) {
+        let stateId = deviceId + '.' + id;
+        let common = devices[id];
+        objectHelper.setOrUpdateObject(stateId, {
+          type: 'state',
+          common: common
+        }, ['name'], value, controlFunction);
+      }
     }
+    // return callback && callback();
   }
 
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
@@ -678,38 +691,42 @@ function updateShelly2States(deviceId, status, callback) {
   let parameter = {};
 
   // CoAP Messages - switches on/on
-  let ids = getIoBrokerStatesFromObj(status);
-  for (let i in ids) {
-    let id = i;
-    let value = ids[i];
-    let controlFunction;
-    // historical mapping
+  // if (status &&  knownDevices[deviceId].mode === 'relay') {
+  if (status) {
+    let ids = getIoBrokerStatesFromObj(status);
+    for (let i in ids) {
+      let id = i;
+      let value = ids[i];
+      let controlFunction;
+      // historical mapping
 
-    switch (id) {
-      case 'G02':
-        id = 'Relay0.Switch';
-        value = value === 1 || value === true ? true : false;
-        break;
-      case 'G12':
-        id = 'Relay1.Switch';
-        value = value === 1 || value === true ? true : false;
-        break;
-      default:
-    }
+      switch (id) {
+        case 'G02':
+          id = 'Relay0.Switch';
+          value = value === 1 || value === true ? true : false;
+          break;
+        case 'G12':
+          id = 'Relay1.Switch';
+          value = value === 1 || value === true ? true : false;
+          break;
+        default:
+      }
 
-    if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
-      continue;
-    }
-    shellyStates[deviceId + '.' + id] = value;
+      if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+        continue;
+      }
+      shellyStates[deviceId + '.' + id] = value;
 
-    if (devices.hasOwnProperty(id)) {
-      let stateId = deviceId + '.' + id;
-      let common = devices[id];
-      objectHelper.setOrUpdateObject(stateId, {
-        type: 'state',
-        common: common
-      }, ['name'], value, controlFunction);
+      if (devices.hasOwnProperty(id)) {
+        let stateId = deviceId + '.' + id;
+        let common = devices[id];
+        objectHelper.setOrUpdateObject(stateId, {
+          type: 'state',
+          common: common
+        }, ['name'], value, controlFunction);
+      }
     }
+    // return callback && callback();
   }
 
   // http request to getting status
@@ -719,16 +736,18 @@ function updateShelly2States(deviceId, status, callback) {
       for (let i in ids) {
         let id = i;
         let value = ids[i];
-        let rollerValue;
-        let rollerModus;
+        let rollerValue = ids['rollers.state'];
+        let rollerModus = ids['mode'];
         let controlFunction;
         // historical mapping
+
+        knownDevices[deviceId].mode = rollerModus;
 
         switch (id) {
           case 'relays0.ison':
             id = 'Relay0.Switch';
-            rollerValue = ids['rollers.state'];
-            rollerModus = ids['mode'];
+            // rollerValue = ids['rollers.state'];
+            // rollerModus = ids['mode'];
             if (rollerModus == 'roller' && (rollerValue == 'stop' || rollerValue == 'close')) { value = false; }
             if (rollerModus == 'roller' && rollerValue == 'open') { value = true; }
             break;
@@ -740,8 +759,8 @@ function updateShelly2States(deviceId, status, callback) {
             break;
           case 'relays1.ison':
             id = 'Relay1.Switch';
-            rollerValue = ids['rollers.state'];
-            rollerModus = ids['mode'];
+            // rollerValue = ids['rollers.state'];
+            // rollerModus = ids['mode'];
             if (rollerModus == 'roller' && (rollerValue == 'stop' || rollerValue == 'open')) { value = false; }
             if (rollerModus == 'roller' && rollerValue == 'close') { value = true; }
             break;
@@ -1625,6 +1644,10 @@ function main() {
     if (deviceId && typeof deviceId === 'string') {
       if (!knownDevices[deviceId]) { // device unknown so far, new one in network, create it
         shelly.getDeviceDescription(deviceId, (err, deviceId, description, ip) => {
+          knownDevices[deviceId] = {
+            ts: 0,
+            mode: undefined
+          };
           createShellyStates(deviceId, description, ip, status);
           updateShellyStates(deviceId, status);
           if (!deviceId.startsWith('SHHT')) {
@@ -1633,7 +1656,6 @@ function main() {
           objectHelper.processObjectQueue(() => {
             adapter.log.debug('Initialize device ' + deviceId + ' (' + Object.keys(knownDevices).length + ' now known)');
           }); // if device is added later, create all objects
-          knownDevices[deviceId] = true;
         });
         return;
       }
