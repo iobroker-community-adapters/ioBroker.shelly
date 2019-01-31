@@ -278,7 +278,8 @@ function createShellyStates(deviceId, description, ip, status, callback) {
 function updateShellyStates(deviceId, status, callback) {
 
   let now = Date.now();
-  let sec = (now - knownDevices[deviceId].ts) / 1000;
+  let sec = (now - knownDevices[deviceId].ts) / 1000; // seconds
+  let timeout = apdapter.config.timeout || 1; // seconds
 
   if (typeof status === 'function') {
     callback = status;
@@ -286,7 +287,7 @@ function updateShellyStates(deviceId, status, callback) {
   }
 
   // wir pollen maximal jede Sekunde den neuen Status
-  if (sec < 0.5) {
+  if (sec < timeout) {
     return callback && callback();
   }
   knownDevices[deviceId].ts = now;
