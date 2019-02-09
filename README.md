@@ -38,8 +38,8 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
-### 2.0.9 (09.02.2019)
-* New Status 'update available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug 
+### 2.1.0 (09.02.2019)
+* New Status 'new firmware available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug 
 
 ### 2.0.8 (31.01.2019)
 * Bugfixing, polling new Shelly status must be at least 1 sec ago 

@@ -486,7 +486,7 @@ function updateShelly1States(deviceId, status, callback) {
               id = 'rssi';
               break;
             case 'update.has_update':
-              id = 'update';
+              id = 'firmware';
               break;
             default:
           }
@@ -827,7 +827,7 @@ function updateShelly2States(deviceId, status, callback) {
               id = 'rssi';
               break;
             case 'update.has_update':
-              id = 'update';
+              id = 'firmware';
               break;
             default:
           }
@@ -1072,7 +1072,7 @@ function updateShelly4States(deviceId, status, callback) {
               id = 'rssi';
               break;
             case 'update.has_update':
-              id = 'update';
+              id = 'firmware';
               break;
             default:
           }
@@ -1241,7 +1241,7 @@ function updateShellyPlugStates(deviceId, callback) {
               id = 'rssi';
               break;
             case 'update.has_update':
-              id = 'update';
+              id = 'firmware';
               break;
             default:
           }
@@ -1425,7 +1425,7 @@ function updateShellyRGBWWStates(deviceId, callback) {
               id = 'rssi';
               break;
             case 'update.has_update':
-              id = 'update';
+              id = 'firmware';
               break;
             default:
           }
@@ -1536,7 +1536,7 @@ function updateShellyHTStates(deviceId, status, callback) {
             id = 'rssi';
             break;
           case 'update.has_update':
-            id = 'update';
+            id = 'firmware';
             break;
           default:
         }
