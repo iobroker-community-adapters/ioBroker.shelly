@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.0.8",
+    "version": "2.0.9",
     "news": {
+      "2.0.9": {
+        "en": "New Status 'update available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug",
+        "de": "Neuer Status für Shely1, Shelly2, Shelly4Pro and ShellyPlug"
+      },
       "2.0.8": {
         "en": "Bugfixing, polling new Shelly status must be at least 1 sec ago",
         "de": "Fehlerbehbung, neuer Shelly Status darf maximal 1 mal pro Sek. gepolled werden"

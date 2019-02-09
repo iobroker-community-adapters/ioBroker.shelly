@@ -472,6 +472,9 @@ function updateShelly1States(deviceId, status, callback) {
 
     shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
       if (!error && data) {
+        if(deviceId == 'SHSW-1#056EE0#1') {
+          let a = 1;
+        }
         let ids = getIoBrokerStatesFromObj(data);
         for (let i in ids) {
           let id = i;
@@ -481,6 +484,9 @@ function updateShelly1States(deviceId, status, callback) {
           switch (id) {
             case 'wifi_sta.rssi':
               id = 'rssi';
+              break;
+            case 'update.has_update':
+              id = 'update';
               break;
             default:
           }
@@ -820,6 +826,9 @@ function updateShelly2States(deviceId, status, callback) {
             case 'wifi_sta.rssi':
               id = 'rssi';
               break;
+            case 'update.has_update':
+              id = 'update';
+              break;
             default:
           }
 
@@ -1062,6 +1071,9 @@ function updateShelly4States(deviceId, status, callback) {
             case 'wifi_sta.rssi':
               id = 'rssi';
               break;
+            case 'update.has_update':
+              id = 'update';
+              break;
             default:
           }
 
@@ -1227,6 +1239,9 @@ function updateShellyPlugStates(deviceId, callback) {
           switch (id) {
             case 'wifi_sta.rssi':
               id = 'rssi';
+              break;
+            case 'update.has_update':
+              id = 'update';
               break;
             default:
           }
@@ -1409,6 +1424,9 @@ function updateShellyRGBWWStates(deviceId, callback) {
             case 'wifi_sta.rssi':
               id = 'rssi';
               break;
+            case 'update.has_update':
+              id = 'update';
+              break;
             default:
           }
 
@@ -1516,6 +1534,9 @@ function updateShellyHTStates(deviceId, status, callback) {
         switch (id) {
           case 'wifi_sta.rssi':
             id = 'rssi';
+            break;
+          case 'update.has_update':
+            id = 'update';
             break;
           default:
         }

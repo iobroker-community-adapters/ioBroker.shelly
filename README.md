@@ -28,15 +28,18 @@ You will find more and detailed information about the device here : [Shelly](htt
 * Shelly2 (SHSW-21/SHSW-22, Verified)
 * Shelly4Pro (SHSW-44, not verified and tested)
 * ShellyPlug (SHPLG-1, not verified and tested) 
-* ShellyBulb (SHBLB-1, not verified and tested)
-* Shelly2LED (SH2LED-1, not verified and tested)
 * ShellyRGBW (SHRGBWW-01, not verified and tested)
 * Shelly H&T (SHHT-1, verified)
 
 ## More details needed to implement (Debug log)
 * Shelly Sense (SHSEN-1)
+* ShellyBulb (SHBLB-1d)
+* Shelly2LED (SH2LED-1)
 
 ## Changelog
+
+### 2.0.9 (09.02.2019)
+* New Status 'update available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug 
 
 ### 2.0.8 (31.01.2019)
 * Bugfixing, polling new Shelly status must be at least 1 sec ago 
