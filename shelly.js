@@ -262,8 +262,10 @@ function createShellyStates(deviceId, description, ip, status, callback) {
       createShelly4States(deviceId);
     } else if (deviceId.startsWith('SHPLG-1')) {
       createShellyPlugStates(deviceId);
-    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith('SH2LED') || deviceId.startsWith('SHRGBW2')) {
+    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith('SH2LED')) {
       createShellyRGBWWStates(deviceId);
+    } else if (deviceId.startsWith('SHRGBW2')) {
+      createShellyRGBWW2States(deviceId);
     } else if (deviceId.startsWith('SHHT')) {
       createShellyHTStates(deviceId);
     } else {
@@ -302,8 +304,10 @@ function updateShellyStates(deviceId, status, callback) {
       updateShelly4States(deviceId, status, callback);
     } else if (deviceId.startsWith('SHPLG-1')) {
       updateShellyPlugStates(deviceId, callback);
-    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith('SH2LED') || deviceId.startsWith('SHRGBW2')) {
+    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith('SH2LED')) {
       updateShellyRGBWWStates(deviceId, callback);
+    } else if (deviceId.startsWith('SHRGBW2')) {
+      updateShellyRGBWW2States(deviceId, callback);
     } else if (deviceId.startsWith('SHHT')) {
       updateShellyHTStates(deviceId, status, callback);
     } else {
@@ -1456,6 +1460,271 @@ function updateShellyRGBWWStates(deviceId, callback) {
   });
 
 }
+
+// *******************************************************************************
+// Shelly RGBWW2
+// *******************************************************************************
+function createShellyRGBWW2States(deviceId) {
+
+  let devices = datapoints.getObjectByName('shellyrgbww2');
+
+  for (let i in devices) {
+    let common = devices[i];
+    let stateId = deviceId + '.' + i;
+    let controlFunction;
+    let value;
+
+    createChannel(deviceId, i);
+
+    if (i == 'color.Switch') { // Implement all needed action stuff here based on the names
+      controlFunction = (value) => {
+        let params = {};
+        let timer = 0;
+        let timerId = deviceId + '.color.Timer';
+        adapter.getState(timerId, (err, state) => {
+          // if timer > 0 sec. call rest with timer paramater
+          timer = state ? state.val : 0;
+          if (timer > 0) {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off',
+              'timer': timer
+            };
+          } else {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off'
+            };
+          }
+          adapter.log.debug('Color Switch: ' + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
+        });
+      };
+    }
+
+    if (i == 'white.Switch') { // Implement all needed action stuff here based on the names
+      controlFunction = (value) => {
+        let params = {};
+        let timer = 0;
+        let timerId = deviceId + '.white.Timer';
+        adapter.getState(timerId, (err, state) => {
+          // if timer > 0 sec. call rest with timer paramater
+          timer = state ? state.val : 0;
+          if (timer > 0) {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off',
+              'timer': timer
+            };
+          } else {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off'
+            };
+          }
+          adapter.log.debug('White Switch: ' + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/white/0', params); // send REST call to devices IP with the given path and parameters
+        });
+      };
+    }
+
+    if (i == 'color.red' || i == 'color.green' || i == 'color.blue' || i == 'color.white' || i == 'color.gain') { // Implement all needed action stuff here based on the names
+      let id = i.replace('color.', '');
+      controlFunction = (value) => {
+        let params = {};
+        params[id] = value;
+        adapter.log.debug('Set Colors: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'white.brightness') { // Implement all needed action stuff here based on the names
+      let id = i.replace('white.', '');
+      controlFunction = (value) => {
+        let params = {};
+        params[id] = value;
+        adapter.log.debug('Set White: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/white/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'color.effect') {
+      controlFunction = (value) => {
+        let params;
+        params = {
+          'effect': value
+        };
+        adapter.log.debug('Efect: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'color.AutoTimerOff') {
+      controlFunction = (value) => {
+        let params;
+        params = {
+          'auto_off': value
+        };
+        adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'color.AutoTimerOn') {
+      controlFunction = (value) => {
+        let params;
+        params = {
+          'auto_on': value
+        };
+        adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'white.AutoTimerOff') {
+      controlFunction = (value) => {
+        let params;
+        params = {
+          'auto_off': value
+        };
+        adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/white/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'white.AutoTimerOn') {
+      controlFunction = (value) => {
+        let params;
+        params = {
+          'auto_on': value
+        };
+        adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings/white/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'color.Timer') {
+      value = 0;
+    }
+
+    if (i == 'white.Timer') {
+      value = 0;
+    }
+
+    if (i == 'mode') {
+      controlFunction = (value) => {
+        let params;
+        params = {
+          'mode': value
+        };
+        adapter.log.debug('Modus: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/settings', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    adapter.log.debug('Creating State ' + stateId);
+    objectHelper.setOrUpdateObject(stateId, {
+      type: 'state',
+      common: common
+    }, ['name'], value, controlFunction);
+  }
+
+}
+
+function updateShellyRGBWW2States(deviceId, callback) {
+
+  let devices = datapoints.getObjectByName('shellyrgbww2');
+  let parameter = {};
+
+  shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
+    if (!error && data) {
+      let ids = getIoBrokerStatesFromObj(data);
+      for (let i in ids) {
+        let id = i;
+        let value = ids[i];
+        let controlFunction;
+        // historical mapping
+
+        switch (id) {
+          case 'color.ison':
+            id = 'color.Switch';
+            break;
+          case 'color.auto_on':
+            id = 'color.AutoTimerOn';
+            break;
+          case 'color.auto_off':
+            id = 'color.AutoTimerOff';
+            break;
+          case 'white.ison':
+            id = 'white.Switch';
+            break;
+          case 'white.auto_on':
+            id = 'white.AutoTimerOn';
+            break;
+          case 'white.auto_off':
+            id = 'white.AutoTimerOff';
+            break;
+          default:
+        }
+
+        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+          continue;
+        }
+        shellyStates[deviceId + '.' + id] = value;
+
+        if (devices.hasOwnProperty(id)) {
+          let stateId = deviceId + '.' + id;
+          let common = devices[id];
+          objectHelper.setOrUpdateObject(stateId, {
+            type: 'state',
+            common: common
+          }, ['name'], value, controlFunction);
+        }
+
+      }
+    }
+    shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
+      if (!error && data) {
+        let ids = getIoBrokerStatesFromObj(data);
+        for (let i in ids) {
+          let id = i;
+          let value = ids[i];
+          let controlFunction;
+          // historical mapping
+          switch (id) {
+            case 'wifi_sta.rssi':
+              id = 'rssi';
+              break;
+            case 'update.has_update':
+              id = 'firmware';
+              break;
+            default:
+          }
+
+          if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+            continue;
+          }
+          shellyStates[deviceId + '.' + id] = value;
+
+          if (devices.hasOwnProperty(id)) {
+            let stateId = deviceId + '.' + id;
+            let common = devices[id];
+            // adapter.log.debug(i + ' = ' + stateId);
+            objectHelper.setOrUpdateObject(stateId, {
+              type: 'state',
+              common: common
+            }, ['name'], value, controlFunction);
+          }
+
+        }
+        setOnlineStatus(deviceId, true);
+      } else {
+        setOnlineStatus(deviceId, false);
+      }
+      callback && callback();
+    });
+    // callback && callback();
+  });
+
+}
+
+
 
 // *******************************************************************************
 // Shelly H&T
