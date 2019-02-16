@@ -38,6 +38,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 2.1.1 (16.02.2019)
+* Support of Shelly RGBW2
+
 ### 2.1.0 (09.02.2019)
 * New Status 'new firmware available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug 
 

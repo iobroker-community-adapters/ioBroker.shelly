@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "news": {
+      "2.1.1": {
+        "en": "Support of Shelly RGBW2",
+        "de": "Shelly RGBW2 Unterstützung"
+      },
       "2.1.0": {
         "en": "New Status 'update available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug",
         "de": "Neuer Status für Shely1, Shelly2, Shelly4Pro and ShellyPlug"

@@ -262,7 +262,7 @@ function createShellyStates(deviceId, description, ip, status, callback) {
       createShelly4States(deviceId);
     } else if (deviceId.startsWith('SHPLG-1')) {
       createShellyPlugStates(deviceId);
-    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
+    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith('SH2LED') || deviceId.startsWith('SHRGBW2')) {
       createShellyRGBWWStates(deviceId);
     } else if (deviceId.startsWith('SHHT')) {
       createShellyHTStates(deviceId);
@@ -302,7 +302,7 @@ function updateShellyStates(deviceId, status, callback) {
       updateShelly4States(deviceId, status, callback);
     } else if (deviceId.startsWith('SHPLG-1')) {
       updateShellyPlugStates(deviceId, callback);
-    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith(' SH2LED')) {
+    } else if (deviceId.startsWith('SHRGBWW') || deviceId.startsWith('SHBLB') || deviceId.startsWith('SH2LED') || deviceId.startsWith('SHRGBW2')) {
       updateShellyRGBWWStates(deviceId, callback);
     } else if (deviceId.startsWith('SHHT')) {
       updateShellyHTStates(deviceId, status, callback);
@@ -472,7 +472,7 @@ function updateShelly1States(deviceId, status, callback) {
 
     shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
       if (!error && data) {
-        if(deviceId == 'SHSW-1#056EE0#1') {
+        if (deviceId == 'SHSW-1#056EE0#1') {
           let a = 1;
         }
         let ids = getIoBrokerStatesFromObj(data);
