@@ -1495,7 +1495,7 @@ function createShellyRGBWW2States(deviceId) {
             };
           }
           adapter.log.debug('Lights Switch: ' + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/light/0', params); // send REST call to devices IP with the given path and parameters
+          shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
         });
       };
     }
@@ -1506,7 +1506,7 @@ function createShellyRGBWW2States(deviceId) {
         let params = {};
         params[id] = value;
         adapter.log.debug('Set Colors: ' + JSON.stringify(params));
-        shelly.callDevice(deviceId, '/light/0', params); // send REST call to devices IP with the given path and parameters
+        shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
       };
     }
 
@@ -1517,7 +1517,7 @@ function createShellyRGBWW2States(deviceId) {
           'auto_off': value
         };
         adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
-        shelly.callDevice(deviceId, '/settings/light/0', params); // send REST call to devices IP with the given path and parameters
+        shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
       };
     }
 
@@ -1528,7 +1528,7 @@ function createShellyRGBWW2States(deviceId) {
           'auto_on': value
         };
         adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
-        shelly.callDevice(deviceId, '/settings/light/0', params); // send REST call to devices IP with the given path and parameters
+        shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
       };
     }
 

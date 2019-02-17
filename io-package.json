@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "shelly",
-    "version": "2.1.2",
+    "version": "2.1.3",
     "news": {
-      "2.1.2": {
+      "2.1.3": {
         "en": "Support of Shelly RGBW2",
         "de": "Shelly RGBW2 Unterstützung"
       },
