@@ -26,19 +26,21 @@ You will find more and detailed information about the device here : [Shelly](htt
 ## Supported devices
 * Shelly1 (SHSW-1, Verified)
 * Shelly2 (SHSW-21/SHSW-22, Verified)
+* ShellyRGBW (SHRGBWW-01, Verified)
+* ShellyRGBW2 (SHRGBW2-01, not verified and tested)
 * Shelly4Pro (SHSW-44, not verified and tested)
 * ShellyPlug (SHPLG-1, not verified and tested) 
-* ShellyRGBW (SHRGBWW-01, not verified and tested)
+* ShellyRGBW (SHRGBWW-01, Verified)
 * Shelly H&T (SHHT-1, verified)
 
 ## More details needed to implement (Debug log)
-* Shelly Sense (SHSEN-1)
+* ShellySense (SHSEN-1)
 * ShellyBulb (SHBLB-1d)
 * Shelly2LED (SH2LED-1)
 
 ## Changelog
 
-### 2.1.1 (16.02.2019)
+### 2.1.2 (16.02.2019)
 * Support of Shelly RGBW2
 
 ### 2.1.0 (09.02.2019)
