@@ -40,6 +40,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 2.1.4 (19.02.2019)
+* Support of Shelly RGBW2
+
 ### 2.1.3 (16.02.2019)
 * Support of Shelly RGBW2
 

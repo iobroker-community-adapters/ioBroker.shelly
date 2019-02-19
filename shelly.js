@@ -1481,6 +1481,7 @@ function createShellyRGBWW2States(deviceId) {
         let params = {};
         let timer = 0;
         let timerId = deviceId + '.lights.Timer';
+        let path = shellyStates[deviceId + '.mode'] == 'white' ? '/white/0' : '/color/0';
         adapter.getState(timerId, (err, state) => {
           // if timer > 0 sec. call rest with timer paramater
           timer = state ? state.val : 0;
@@ -1495,40 +1496,47 @@ function createShellyRGBWW2States(deviceId) {
             };
           }
           adapter.log.debug('Lights Switch: ' + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
+          // shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
+          shelly.callDevice(deviceId, path, params); // send REST call to devices IP with the given path and parameters
         });
       };
     }
 
-    if (i == 'lights.red' || i == 'lights.green' || i == 'lights.blue' || i == 'lights.white' || i == 'lights.gain' || i == 'lights.effect') { // Implement all needed action stuff here based on the names
+    if (i == 'lights.red' || i == 'lights.green' || i == 'lights.blue' || i == 'lights.white' || i == 'lights.brightness' || i == 'lights.gain' || i == 'lights.effect') { // Implement all needed action stuff here based on the names
       let id = i.replace('lights.', '');
+      let path = shellyStates[deviceId + '.mode'] == 'white' ? '/white/0' : '/color/0';
       controlFunction = (value) => {
         let params = {};
         params[id] = value;
         adapter.log.debug('Set Colors: ' + JSON.stringify(params));
-        shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
+        // shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
+        shelly.callDevice(deviceId, path, params); // send REST call to devices IP with the given path and parameters
       };
     }
 
     if (i == 'lights.AutoTimerOff') {
       controlFunction = (value) => {
         let params;
+        let path = shellyStates[deviceId + '.mode'] == 'white' ? '/settings/white/0' : '/settings/color/0';
         params = {
           'auto_off': value
         };
         adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
-        shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
+        // shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
+        shelly.callDevice(deviceId, path, params); // send REST call to devices IP with the given path and parameters
       };
     }
 
     if (i == 'lights.AutoTimerOn') {
       controlFunction = (value) => {
         let params;
+        let path = shellyStates[deviceId + '.mode'] == 'white' ? '/settings/white/0' : '/settings/color/0';
         params = {
           'auto_on': value
         };
         adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
-        shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
+        // shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
+        shelly.callDevice(deviceId, path, params); // send REST call to devices IP with the given path and parameters
       };
     }
 
@@ -1572,13 +1580,19 @@ function updateShellyRGBWW2States(deviceId, callback) {
 
         switch (id) {
           case 'lights.ison':
+          case 'lights0.ison':
             id = 'lights.Switch';
             break;
           case 'lights.auto_on':
+          case 'lights0.auto_on':
             id = 'lights.AutoTimerOn';
             break;
           case 'lights.auto_off':
+          case 'lights0.auto_off':
             id = 'lights.AutoTimerOff';
+            break;
+          case 'lights0.brightness':
+            id = 'lights.brightnessf';
             break;
           default:
         }
