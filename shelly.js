@@ -1476,12 +1476,11 @@ function createShellyRGBWW2States(deviceId) {
 
     createChannel(deviceId, i);
 
-    if (i == 'lights.Switch') { // Implement all needed action stuff here based on the names
+    if (i == 'color.Switch') { // Implement all needed action stuff here based on the names
       controlFunction = (value) => {
         let params = {};
         let timer = 0;
-        let timerId = deviceId + '.lights.Timer';
-        let path = shellyStates[deviceId + '.mode'] == 'white' ? '/white/0' : '/color/0';
+        let timerId = deviceId + '.color.Timer';
         adapter.getState(timerId, (err, state) => {
           // if timer > 0 sec. call rest with timer paramater
           timer = state ? state.val : 0;
@@ -1496,47 +1495,78 @@ function createShellyRGBWW2States(deviceId) {
             };
           }
           adapter.log.debug('Lights Switch: ' + JSON.stringify(params));
-          // shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
-          shelly.callDevice(deviceId, path, params); // send REST call to devices IP with the given path and parameters
+          shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
         });
       };
     }
 
-    if (i == 'lights.red' || i == 'lights.green' || i == 'lights.blue' || i == 'lights.white' || i == 'lights.brightness' || i == 'lights.gain' || i == 'lights.effect') { // Implement all needed action stuff here based on the names
+    if (i == 'color.red' || i == 'color.green' || i == 'color.blue' || i == 'color.white' || i == 'color.gain' || i == 'color.effect') { // Implement all needed action stuff here based on the names
       let id = i.replace('lights.', '');
-      let path = shellyStates[deviceId + '.mode'] == 'white' ? '/white/0' : '/color/0';
       controlFunction = (value) => {
         let params = {};
         params[id] = value;
         adapter.log.debug('Set Colors: ' + JSON.stringify(params));
-        // shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
-        shelly.callDevice(deviceId, path, params); // send REST call to devices IP with the given path and parameters
+        shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
       };
     }
 
-    if (i == 'lights.AutoTimerOff') {
+    if (i == 'color.AutoTimerOff') {
       controlFunction = (value) => {
         let params;
-        let path = shellyStates[deviceId + '.mode'] == 'white' ? '/settings/white/0' : '/settings/color/0';
         params = {
           'auto_off': value
         };
         adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
-        // shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
-        shelly.callDevice(deviceId, path, params); // send REST call to devices IP with the given path and parameters
+        shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
       };
     }
 
-    if (i == 'lights.AutoTimerOn') {
+    if (i == 'color.AutoTimerOn') {
       controlFunction = (value) => {
         let params;
-        let path = shellyStates[deviceId + '.mode'] == 'white' ? '/settings/white/0' : '/settings/color/0';
         params = {
           'auto_on': value
         };
         adapter.log.debug('Auto Timer off: ' + JSON.stringify(params));
-        // shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
-        shelly.callDevice(deviceId, path, params); // send REST call to devices IP with the given path and parameters
+        shelly.callDevice(deviceId, '/settings/color/0', params); // send REST call to devices IP with the given path and parameters
+      };
+    }
+
+    if (i == 'white0.Switch' || i == 'white1.Switch' || i == 'white2.Switch' ||i == 'white3.Switch') { // Implement all needed action stuff here based on the names
+      controlFunction = (value) => {
+        const relayId = parseInt(i.substr(5), 10);
+        let params = {};
+        let timer = 0;
+        let timerId = deviceId + '.white' + relayId + '.Timer';
+        adapter.getState(timerId, (err, state) => {
+          // if timer > 0 sec. call rest with timer paramater
+          timer = state ? state.val : 0;
+          if (timer > 0) {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off',
+              'timer': timer
+            };
+          } else {
+            params = {
+              'turn': (value === true || value === 1) ? 'on' : 'off'
+            };
+          }
+          adapter.log.debug('Lights Switch: ' + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/white/' + relayId, params); // send REST call to devices IP with the given path and parameters
+        });
+      };
+    }
+
+
+    if (i == 'white0.brightness' || i == 'white1.brightness' || i == 'white2.brightness' ||i == 'white3.brightness') { // Implement all needed action stuff here based on the names
+      controlFunction = (value) => {
+        const relayId = parseInt(i.substr(5), 10);
+        let params;
+        params = {
+          'brightness': value
+        };
+        adapter.log.debug('Set Colors: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/white/' + relayId, params); // send REST call to devices IP with the given path and parameters
       };
     }
 
@@ -1551,7 +1581,7 @@ function createShellyRGBWW2States(deviceId) {
       };
     }
 
-    if (i == 'lights.Timer') {
+    if (i == 'color.Timer' || i == 'white0.Timer' || i == 'white1.Timer'|| i == 'white2.Timer' || i == 'white3.Timer') {
       value = 0;
     }
 
@@ -1576,23 +1606,57 @@ function updateShellyRGBWW2States(deviceId, callback) {
         let id = i;
         let value = ids[i];
         let controlFunction;
+        let mode = ids.mode;
         // historical mapping
 
         switch (id) {
           case 'lights.ison':
-          case 'lights0.ison':
-            id = 'lights.Switch';
+            id = 'color.Switch';
+            break;
+            case 'lights.blue':
+            id = 'color.blue';
+            break;
+            case 'lights.red':
+            id = 'color.red';
+            break;
+            case 'lights.green':
+            id = 'color.green';
+            break;
+            case 'lights.effect':
+            id = 'color.effect';
+            break;
+            case 'lights.gain':
+            id = 'color.gain';
             break;
           case 'lights.auto_on':
-          case 'lights0.auto_on':
-            id = 'lights.AutoTimerOn';
+            id = 'color.AutoTimerOn';
             break;
           case 'lights.auto_off':
-          case 'lights0.auto_off':
-            id = 'lights.AutoTimerOff';
+            id = 'color.AutoTimerOff';
+            break;
+            case 'lights0.ison':
+            id = 'white0.Switch';
             break;
           case 'lights0.brightness':
-            id = 'lights.brightnessf';
+            id = 'white0.brightness';
+            break;
+            case 'lights1.ison':
+            id = 'white1.Switch';
+            break;
+          case 'lights1.brightness':
+            id = 'white1.brightness';
+            break;
+            case 'lights2.ison':
+            id = 'white2.Switch';
+            break;
+          case 'lights2.brightness':
+            id = 'white2.brightness';
+            break;
+            case 'lights3.ison':
+            id = 'white3.Switch';
+            break;
+          case 'lights3.brightness':
+            id = 'white3.brightness';
             break;
           default:
         }
