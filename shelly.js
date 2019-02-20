@@ -1501,7 +1501,7 @@ function createShellyRGBWW2States(deviceId) {
     }
 
     if (i == 'color.red' || i == 'color.green' || i == 'color.blue' || i == 'color.white' || i == 'color.gain' || i == 'color.effect') { // Implement all needed action stuff here based on the names
-      let id = i.replace('lights.', '');
+      let id = i.replace('color.', '');
       controlFunction = (value) => {
         let params = {};
         params[id] = value;
@@ -1532,7 +1532,7 @@ function createShellyRGBWW2States(deviceId) {
       };
     }
 
-    if (i == 'white0.Switch' || i == 'white1.Switch' || i == 'white2.Switch' ||i == 'white3.Switch') { // Implement all needed action stuff here based on the names
+    if (i == 'white0.Switch' || i == 'white1.Switch' || i == 'white2.Switch' || i == 'white3.Switch') { // Implement all needed action stuff here based on the names
       controlFunction = (value) => {
         const relayId = parseInt(i.substr(5), 10);
         let params = {};
@@ -1558,7 +1558,7 @@ function createShellyRGBWW2States(deviceId) {
     }
 
 
-    if (i == 'white0.brightness' || i == 'white1.brightness' || i == 'white2.brightness' ||i == 'white3.brightness') { // Implement all needed action stuff here based on the names
+    if (i == 'white0.brightness' || i == 'white1.brightness' || i == 'white2.brightness' || i == 'white3.brightness') { // Implement all needed action stuff here based on the names
       controlFunction = (value) => {
         const relayId = parseInt(i.substr(5), 10);
         let params;
@@ -1581,7 +1581,7 @@ function createShellyRGBWW2States(deviceId) {
       };
     }
 
-    if (i == 'color.Timer' || i == 'white0.Timer' || i == 'white1.Timer'|| i == 'white2.Timer' || i == 'white3.Timer') {
+    if (i == 'color.Timer' || i == 'white0.Timer' || i == 'white1.Timer' || i == 'white2.Timer' || i == 'white3.Timer') {
       value = 0;
     }
 
@@ -1608,24 +1608,23 @@ function updateShellyRGBWW2States(deviceId, callback) {
         let controlFunction;
         let mode = ids.mode;
         // historical mapping
-
         switch (id) {
           case 'lights.ison':
             id = 'color.Switch';
             break;
-            case 'lights.blue':
+          case 'lights.blue':
             id = 'color.blue';
             break;
-            case 'lights.red':
+          case 'lights.red':
             id = 'color.red';
             break;
-            case 'lights.green':
+          case 'lights.green':
             id = 'color.green';
             break;
-            case 'lights.effect':
+          case 'lights.effect':
             id = 'color.effect';
             break;
-            case 'lights.gain':
+          case 'lights.gain':
             id = 'color.gain';
             break;
           case 'lights.auto_on':
@@ -1634,25 +1633,25 @@ function updateShellyRGBWW2States(deviceId, callback) {
           case 'lights.auto_off':
             id = 'color.AutoTimerOff';
             break;
-            case 'lights0.ison':
+          case 'lights0.ison':
             id = 'white0.Switch';
             break;
           case 'lights0.brightness':
             id = 'white0.brightness';
             break;
-            case 'lights1.ison':
+          case 'lights1.ison':
             id = 'white1.Switch';
             break;
           case 'lights1.brightness':
             id = 'white1.brightness';
             break;
-            case 'lights2.ison':
+          case 'lights2.ison':
             id = 'white2.Switch';
             break;
           case 'lights2.brightness':
             id = 'white2.brightness';
             break;
-            case 'lights3.ison':
+          case 'lights3.ison':
             id = 'white3.Switch';
             break;
           case 'lights3.brightness':
