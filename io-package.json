@@ -4,7 +4,7 @@
     "version": "2.1.4",
     "news": {
       "2.1.4": {
-        "en": "Fix of Shelly RGBW2",
+        "en": "Bugfixing of Shelly RGBW2",
         "de": "Fehlerbehebung RGBW2"
       },
       "2.1.3": {
