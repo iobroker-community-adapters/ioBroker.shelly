@@ -1,10 +1,10 @@
 {
-    "Auto": "",
+    "Auto": "Auto",
     "Confirm Password": "bevestig wachtwoord",
     "Manual": "Met de hand",
     "Password": "Wachtwoord",
     "Password Enable": "Inloggen met wachtwoord",
     "User": "Gebruiker",
     "on save adapter restarts with new config immediately": "on save-adapter wordt onmiddellijk opnieuw opgestart met nieuwe config",
-    "shellydescription": ""
+    "shellydescription": "Shelly apparaten moeten zich in hetzelfde subnet bevindt als ioBroker voor het werken met ioBroker. ioBroker vindt Shelly apparaten door zijn eigen. Als er niet wordt herkend, kunt u opnieuw opstarten Shelly apparaten ooit."
 }

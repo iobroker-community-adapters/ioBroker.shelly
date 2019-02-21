@@ -1,10 +1,10 @@
 {
-    "Auto": "",
+    "Auto": "Auto",
     "Confirm Password": "Potwierdź hasło",
     "Manual": "Manual",
     "Password": "Hasło",
     "Password Enable": "Zaloguj się za pomocą hasła",
     "User": "Użytkownik",
     "on save adapter restarts with new config immediately": "on save adapter restarts with new config immediately",
-    "shellydescription": ""
+    "shellydescription": "Shelley urządzenia muszą być w tej samej podsieci, co ioBroker do pracy z ioBroker. ioBroker wyszukuje urządzenia Shelley jego własnego. Jeśli nie przyznają, proszę ponownie uruchomić urządzeń Shelley razy."
 }

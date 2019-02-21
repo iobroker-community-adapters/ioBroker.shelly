@@ -6,5 +6,5 @@
     "Password Enable": "Вход с паролем",
     "User": "пользователь",
     "on save adapter restarts with new config immediately": "При сохранении настроек адаптера он сразу же перезапускается",
-    "shellydescription": ""
+    "shellydescription": "Шелли устройства должны быть в той же подсети, что ioBroker для работы с ioBroker. ioBroker находит устройства Шелли его собственного. Если не признаются, пожалуйста, перезагрузите устройств Шелли раз."
 }
