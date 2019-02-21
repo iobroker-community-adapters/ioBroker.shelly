@@ -1,320 +1,105 @@
 {
-    "common": {
-        "name": "shelly",
-        "version": "2.1.3",
-        "news": {
-            "2.1.3": {
-                "en": "Support of Shelly RGBW2",
-                "de": "Shelly RGBW2 Unterstützung",
-                "ru": "Поддержка Шелли RGBW2",
-                "pt": "Suporte de Shelly RGBW2",
-                "nl": "Ondersteuning van Shelly RGBW2",
-                "fr": "Soutien de Shelly RGBW2",
-                "it": "Supporto di Shelly RGBW2",
-                "es": "Apoyo de Shelly RGBW2",
-                "pl": "Wsparcie Shelley RGBW2",
-                "zh-cn": "支助的雪莉RGBW2"
-            },
-            "2.1.0": {
-                "en": "New Status 'update available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug",
-                "de": "Neuer Status für Shely1, Shelly2, Shelly4Pro und ShellyPlug",
-                "ru": "Новый статус 'доступно обновление' для Shely1, Shelly2, Shelly4Pro и ShellyPlug",
-                "pt": "Novo Status de 'atualização disponível\" para Shely1, Shelly2, Shelly4Pro e ShellyPlug",
-                "nl": "Nieuwe Status 'update' voor Shely1, Shelly2, Shelly4Pro en ShellyPlug",
-                "fr": "Nouveau Statut de \"mise à jour disponible\" pour Shely1, Shelly2, Shelly4Pro et ShellyPlug",
-                "it": "Nuovo Status di 'aggiornamento' per Shely1, Shelly2, Shelly4Pro e ShellyPlug",
-                "es": "Nuevo Estado de \"actualización disponible\" para Shely1, Shelly2, Shelly4Pro y ShellyPlug",
-                "pl": "Nowy status \"dostępne aktualizacje\", aby Shely1, Shelly2, Shelly4Pro i ShellyPlug",
-                "zh-cn": "新的状态'更新可用'Shely1,Shelly2,Shelly4Pro和ShellyPlug"
-            },
-            "2.0.8": {
-                "en": "Bugfixing, polling new Shelly status must be at least 1 sec ago",
-                "de": "Fehlerbehbung, neuer Shelly Status darf maximal 1 mal pro Sek. gepolled werden",
-                "ru": "Исправление ошибок, опрос новый статус Шелли должно быть не менее 1 сек. назад",
-                "pt": "Correcções, as mesas de novo Shelly estado deve ser, pelo menos, 1 segundo atrás",
-                "nl": "Het oplossen van bugs, het ophalen van nieuwe Shelly status moet minstens 1 sec geleden",
-                "fr": "Bugfixing, les bureaux de vote de nouvelles Shelly statut doit être d'au moins 1 sec ago",
-                "it": "Bugfixing, polling nuovo Shelly stato deve essere di almeno 1 sec fa",
-                "es": "Solución de bugs, el sondeo de nuevo Shelly estado debe ser al menos 1 segundo atrás",
-                "pl": "Poprawki błędów, ankieta nowy status Shelley powinno być nie mniej niż 1 sek. temu",
-                "zh-cn": "之前，投票的新雪莉状态必须至少1秒前"
-            },
-            "2.0.7": {
-                "en": "Bugfixing for objects AutoTimerOn and AutoTimeroff",
-                "de": "Fehlerbehbung der Objekte AutoTimerOn und AutoTimeroff",
-                "ru": "Исправление ошибок для объектов AutoTimerOn и AutoTimeroff",
-                "pt": "Correcções para objetos AutoTimerOn e AutoTimeroff",
-                "nl": "Het oplossen van bugs voor objecten AutoTimerOn en AutoTimeroff",
-                "fr": "Bugfixing pour les objets AutoTimerOn et AutoTimeroff",
-                "it": "Bugfixing per gli oggetti AutoTimerOn e AutoTimeroff",
-                "es": "Solución de bugs para objetos AutoTimerOn y AutoTimeroff",
-                "pl": "Poprawki błędów dla obiektów AutoTimerOn i AutoTimeroff",
-                "zh-cn": "注对象AutoTimerOn和AutoTimeroff"
-            },
-            "2.0.6": {
-                "en": "Getting faster online status for Shelly devices, excluded H&T",
-                "de": "Schnellere Ermittlung des Online Status",
-                "ru": "Получение быстрее онлайн статус для устройств Шелли, основе H&Т",
-                "pt": "Chegando mais rápido do status on-line para Shelly dispositivos, excluídas H&T",
-                "nl": "Steeds sneller online status voor Shelly apparaten, uitgesloten H&T",
-                "fr": "De plus en plus rapides statut en ligne pour Shelly appareils, exclus H&T",
-                "it": "Sempre più veloci online di stato per Shelly dispositivi, esclusi H&T",
-                "es": "Llegar más rápido en línea el estado de Shelly dispositivos, excluidos de H&T",
-                "pl": "Coraz szybciej online status dla urządzeń Shelley, oparte H&T",
-                "zh-cn": "越来越快在线状态雪莉设备、排除H&T"
-            },
-            "2.0.5": {
-                "en": "Fixing an error if Shelly device is not reachable (offline)",
-                "de": "Fehlebehebung wenn Shelly ist offline",
-                "ru": "Исправление ошибки если Шелли устройства недоступен (оффлайн)",
-                "pt": "Corrigindo um erro se Shelly dispositivo não está acessível (offline)",
-                "nl": "Het verhelpen van een fout als Shelly apparaat is niet bereikbaar (offline)",
-                "fr": "La fixation d'une erreur si Shelly périphérique n'est pas accessible (hors ligne)",
-                "it": "Correggere un errore se Shelly dispositivo non è raggiungibile (offline)",
-                "es": "La fijación de un error si Shelly dispositivo no es accesible (sin conexión)",
-                "pl": "Poprawka błędu jeśli Shelley urządzenia jest niedostępny (offline)",
-                "zh-cn": "固定一个错误，如果谢莉设备是不可访问(离线)"
-            },
-            "2.0.4": {
-                "en": "Support of js-controller compact mode and performance optimizing ",
-                "de": "Unterstützung des Compact Modus und Performance optimierung",
-                "ru": "Поддержка JS-контроллер компактный режим и оптимизация производительности ",
-                "pt": "Apoio da js-controlador de modo compacto e optimização do desempenho ",
-                "nl": "Ondersteuning van de js-controller compacte modus en de prestaties te optimaliseren ",
-                "fr": "Soutien de js-contrôleur en mode compact et d'optimisation des performances ",
-                "it": "Supporto di js-controller compatto modalità e l'ottimizzazione delle prestazioni ",
-                "es": "El apoyo de la js-controlador de modo compacto y optimización del rendimiento ",
-                "pl": "Obsługa JS-kontroler tryb kompaktowy i optymalizacja wydajności ",
-                "zh-cn": "支持js-控制紧凑的模式和性能优化 "
-            },
-            "2.0.3": {
-                "en": "Shows RSSI Status for Shelly 1 & 2",
-                "de": "Status RSSI wird für Shelly 1 & 2 unterstützt",
-                "ru": "Показывает статус пупс для Шелли 1 & 2",
-                "pt": "Mostra RSSI Estado para Shelly 1 & 2",
-                "nl": "Laat RSSI Status voor Shelly 1 & 2",
-                "fr": "Montre RSSI Statut pour Shelly 1 & 2",
-                "it": "Mostra RSSI di Stato per Shelly 1 & 2",
-                "es": "Muestra RSSI del Estado para Shelly 1 & 2",
-                "pl": "Pokazuje status bobblehead dla Shelley 1 & 2",
-                "zh-cn": "表示RSSI状态雪莉1和2"
-            },
-            "2.0.2": {
-                "en": "Add Shelly H&T",
-                "de": "Shelly H&T Unterstützung",
-                "ru": "Добавить Шелли H&Т",
-                "pt": "Adicionar Shelly H&T",
-                "nl": "Toevoegen Shelly H&T",
-                "fr": "Ajouter Shelly H&T",
-                "it": "Aggiungere Shelly H&T",
-                "es": "Agregar Shelly H&T",
-                "pl": "Dodaj Shelley H&T",
-                "zh-cn": "加雪莉H&T"
-            },
-            "2.0.1": {
-                "en": "Major update because of problems with CoAP messages",
-                "de": "Design Änderungen wegen Problemen mit CoAP ",
-                "ru": "Крупное обновление из-за проблем с алкогольных сообщения",
-                "pt": "Grande atualização devido a problemas com o CoAP mensagens",
-                "nl": "Grote update gevolg van problemen met de CoAP berichten",
-                "fr": "Mise à jour majeure en raison de problèmes avec CoAP messages",
-                "it": "Importante aggiornamento a causa di problemi con CoAP messaggi",
-                "es": "Actualización importante debido a problemas con el CoAP mensajes",
-                "pl": "Ważną aktualizację z powodu problemów alkoholowych wiadomości",
-                "zh-cn": "主要的更新，因为问题与发消息"
-            },
-            "1.0.2": {
-                "en": "Work around for showing states in shutter/roller modus",
-                "de": "Work around und den Status im Rollladenmodus anzuzeigen",
-                "ru": "Обойти для показа государств в затвор/ролик модус",
-                "pt": "Contornar para mostrar estados do obturador do rolo modus",
-                "nl": "Werken rond voor het tonen van staten in sluitertijd/roller modus",
-                "fr": "Contourner pour montrer les états de l'obturateur/rouleau modus",
-                "it": "Lavoro in giro per la visualizzazione di stati di scatto/rullo modus",
-                "es": "Para mostrar los estados de obturador/rodillo modus",
-                "pl": "Ominąć, aby wyświetlić państw migawka/film modus",
-                "zh-cn": "工作周围，表示对于国家在闸门/滚工作"
-            },
-            "1.0.1": {
-                "en": "Add State Roller/Shuter position",
-                "de": "Status Rolllädenposition hinzugefügt",
-                "ru": "Добавить государственный ролика положение/шутер ",
-                "pt": "Adicionar Estado de Rolos/Shuter posição",
-                "nl": "Het toevoegen van State Rol/positie Shuter",
-                "fr": "Ajouter de l'État Rouleau/Shuter position",
-                "it": "Aggiungere Stato a Rulli/Shuter posizione",
-                "es": "Agregar Estado de Rodillos/Shuter posición",
-                "pl": "Dodaj państwowy filmowego pozycja/strzelanka ",
-                "zh-cn": "增加的状态的滚/树德的位置"
-            },
-            "1.0.0": {
-                "en": "Optimizations and Online status fixed",
-                "de": "Fehelr bei Anzeige des Online-Status behoben, Optimierungen",
-                "ru": "Оптимизации и онлайн-статус зафиксировано",
-                "pt": "Otimizações e status Online fixo",
-                "nl": "Optimalisatie en Online status vast",
-                "fr": "Les optimisations et le statut en Ligne fixe",
-                "it": "Ottimizzazioni e stato in Linea fissati",
-                "es": "Y optimizaciones de estado de Línea fija",
-                "pl": "Optymalizacji i online-status odnotowano",
-                "zh-cn": "优化和在线状态的固定"
-            },
-            "0.2.6": {
-                "en": "Two new datapoints (AutoTimerOn and AutoTimerOff) for Shelly 1/2",
-                "de": "Datapoints AutoTimerOn und AutoTimerOff für Shelly 1/2 hinzugefügt",
-                "ru": "Две новые точки данных (AutoTimerOn и AutoTimerOff) для Шелли 1/2",
-                "pt": "Dois novos pontos de dados (AutoTimerOn e AutoTimerOff) para Shelly 1/2",
-                "nl": "Twee nieuwe datapunten (AutoTimerOn en AutoTimerOff) voor Shelly 1/2",
-                "fr": "Deux nouveaux points de données (AutoTimerOn et AutoTimerOff) pour Shelly 1/2",
-                "it": "Due nuovi datapoint (AutoTimerOn e AutoTimerOff) per Shelly 1/2",
-                "es": "Dos nuevos puntos de datos (AutoTimerOn y AutoTimerOff) para Shelly 1/2",
-                "pl": "Dwa nowe punkty danych (AutoTimerOn i AutoTimerOff) dla Shelley 1/2",
-                "zh-cn": "两个新的数据点(AutoTimerOn和AutoTimerOff)为雪莉的1/2"
-            },
-            "0.2.5": {
-                "en": "Hostname instead of ip address will be shown",
-                "de": "Anzeige Hostname statt IP-Adresse",
-                "ru": "Имя хоста вместо IP-адреса будет показана",
-                "pt": "Nome do host em vez do endereço ip será mostrado",
-                "nl": "Hostnaam in plaats van het ip-adres zal worden weergegeven",
-                "fr": "Nom d'hôte au lieu de l'adresse ip sera affichée",
-                "it": "Hostname invece dell'indirizzo ip verrà mostrato",
-                "es": "Nombre de host en lugar de la dirección ip se muestra",
-                "pl": "Nazwa hosta zamiast adresu IP będzie wyświetlany",
-                "zh-cn": "主机名称而不是ip地址将显示"
-            },
-            "0.2.4": {
-                "en": "Channel name can be overwrite with own name",
-                "de": "Channelname kann mit eigenen Namen überschrieben werden",
-                "ru": "Имя канала можно перезаписать с собственным именем",
-                "pt": "O nome do canal pode ser substituir com nome próprio",
-                "nl": "Kanaal naam kan overschrijven met eigen naam",
-                "fr": "Nom de la chaîne peut être remplacer par nom propre",
-                "it": "Il nome del canale è possibile sovrascrivere con il proprio nome",
-                "es": "Nombre del canal se puede sobrescribir con nombre propio",
-                "pl": "Nazwa kanału można zastąpić własnym nazwiskiem",
-                "zh-cn": "通道的名称可以复盖与自己的名字"
-            },
-            "0.2.3": {
-                "en": "Bugfixing, shutter status display",
-                "de": "Feherbehebung, Rollädenanzeige angepasst",
-                "ru": "Исправление ошибок, индикации состояния затвора ",
-                "pt": "Correcções, exibição do status do obturador",
-                "nl": "Het oplossen van bugs, sluitertijd status display",
-                "fr": "Bugfixing, affichage de l'état de l'obturateur",
-                "it": "Bugfixing, di scatto display di stato",
-                "es": "Solución de bugs, obturador de la pantalla de estado",
-                "pl": "Poprawki błędów, wskazania stanu migawki ",
-                "zh-cn": "注，快门状况显示"
-            },
-            "0.2.2": {
-                "en": "Bugfixing, devault value for switch timer will be 0 sec",
-                "de": "Feherbehebung, beim Start ist switch timer 0 sec",
-                "ru": "Исправление ошибок, значение деваулт для таймера будет 0 сек",
-                "pt": "Correcções, devault valor para o parâmetro tempo de 0 sec",
-                "nl": "Het oplossen van bugs, devault waarde voor schakelklok 0 sec",
-                "fr": "Bugfixing, devault de la valeur de l'interrupteur de la minuterie sera de 0 sec",
-                "it": "Bugfixing, devault valore per il commutatore timer 0 sec",
-                "es": "Solución de bugs, valor de devault para cambiar el temporizador de 0 seg.",
-                "pl": "Poprawki błędów, wartość деваулт dla timera będzie 0 s",
-                "zh-cn": "之前,devault值为开计时器将是0秒"
-            },
-            "0.2.1": {
-                "en": "Username/Password support",
-                "de": "Username/Password support",
-                "ru": "Поддержка логин/пароль ",
-                "pt": "Nome de utilizador/palavra-Passe de suporte",
-                "nl": "Gebruikersnaam/Wachtwoord ondersteuning",
-                "fr": "Nom d'utilisateur/Mot de passe",
-                "it": "Nome utente/Password",
-                "es": "Nombre de usuario/Contraseña de apoyo",
-                "pl": "Wsparcie login/hasło ",
-                "zh-cn": "用户名和密码的支持"
-            },
-            "0.2.0": {
-                "en": "Roller/shutter modus supported",
-                "de": "Rollädenmodus wird unterstützt",
-                "ru": "Ролик/модус затвора поддерживается",
-                "pt": "Rolo/obturador modus suportados",
-                "nl": "Roller/shutter-modus ondersteund",
-                "fr": "Rouleau/obturateur mode de prises en charge",
-                "it": "Rullo otturatore modus supportato",
-                "es": "Rodillo/obturador modus compatibles",
-                "pl": "Film/modus migawki jest obsługiwany",
-                "zh-cn": "滚/闸门工作的支持"
-            },
-            "0.1.1": {
-                "en": "Bug fixing",
-                "de": "Fehlerbehebung",
-                "ru": "Исправление ошибок ",
-                "pt": "Resolução de Bug",
-                "nl": "Bug fixing",
-                "fr": "Correction d'un Bug",
-                "it": "Bug fixing",
-                "es": "Corrección de errores",
-                "pl": "Poprawka błędów ",
-                "zh-cn": "错误的固定"
-            },
-            "0.1.0": {
-                "en": "Initial Shelly Adapter Version",
-                "de": "Initiale Shelly Adapter Version",
-                "ru": "Версия Initiale Shelly Adapter",
-                "pt": "Versão do Adaptador Initiale Shelly",
-                "nl": "Initiale Shelly-adapterversie",
-                "it": "Versione dell'adattatore Initiale Shelly",
-                "fr": "Initiale Shelly Adaptateur Version",
-                "es": "Inicial Shelly Adaptador De La Versión",
-                "pl": "Początkowa Shelley Adapter Wersji",
-                "zh-cn": "初始雪莉器的版本"
-            }
-        },
-        "title": "Shelly",
-        "titleLang": {
-            "en": "Shelly",
-            "de": "Shelly",
-            "ru": "изобилующий раковинами",
-            "pt": "Shelly",
-            "nl": "schaalachtig",
-            "fr": "Shelly",
-            "it": "Shelly",
-            "es": "Shelly",
-            "pl": "Shelly",
-            "zh-cn": "谢莉"
-        },
-        "desc": {
-            "en": "Shelly Adapter",
-            "de": "Shelly Adapter",
-            "ru": "Шестигранный адаптер",
-            "pt": "Adaptador Shelly",
-            "nl": "Shelly-adapter",
-            "fr": "Adaptateur Shelly",
-            "it": "Adattatore Shelly",
-            "es": "Adaptador Shelly",
-            "pl": "Adapter Shelly",
-            "zh-cn": "雪莉适配器"
-        },
-        "license": "MIT",
-        "authors": [
-            "Thorsten Stueben <thorsten@stueben.de>",
-            "Apollon77 <iobroker@fischer-ka.de>"
-        ],
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "icon": "shelly.png",
-        "materialize": true,
-        "enabled": true,
-        "compact": true,
-        "extIcon": "https://raw.githubusercontent.com/schmupu/ioBroker.shelly/master/admin/shelly.png",
-        "keywords": [
-            "shelly",
-            "switch",
-            "smarthome",
-            "iobroker"
-        ],
-        "readme": "https://github.com/schmupu/ioBroker.shelly/blob/master/README.md",
-        "loglevel": "info",
-        "type": "iot-systems",
-        "restartAdapters": []
+  "common": {
+    "name": "shelly",
+    "version": "2.1.4",
+    "news": {
+      "2.1.4": {
+        "en": "Bugfixing of Shelly RGBW2",
+        "de": "Fehlerbehebung RGBW2"
+      },
+      "2.1.3": {
+        "en": "Support of Shelly RGBW2",
+        "de": "Shelly RGBW2 Unterstützung"
+      },
+      "2.1.0": {
+        "en": "New Status 'update available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug",
+        "de": "Neuer Status für Shely1, Shelly2, Shelly4Pro and ShellyPlug"
+      },
+      "2.0.8": {
+        "en": "Bugfixing, polling new Shelly status must be at least 1 sec ago",
+        "de": "Fehlerbehbung, neuer Shelly Status darf maximal 1 mal pro Sek. gepolled werden"
+      },
+      "2.0.7": {
+        "en": "Bugfixing for objects AutoTimerOn and AutoTimeroff",
+        "de": "Fehlerbehbung der Objekte AutoTimerOn und AutoTimeroff"
+      },
+      "2.0.6": {
+        "en": "Getting faster online status for Shelly devices, excluded H&T",
+        "de": "Schnellere Ermittlung des Online Status"
+      },
+      "2.0.5": {
+        "en": "Fixing an error if Shelly device is not reachable (offline)",
+        "de": "Fehlebehebung wenn Shelly ist offline"
+      },
+      "2.0.4": {
+        "en": "Support of js-controller compact mode and performance optimizing ",
+        "de": "Unterstützung des Compact Modus und Performance optimierung"
+      },
+      "2.0.3": {
+        "en": "Shows RSSI Status for Shelly 1 & 2",
+        "de": "Status RSSI wird für Shelly 1 & 2 unterstützt"
+      },
+      "2.0.2": {
+        "en": "Add Shelly H&T",
+        "de": "Shelly H&T Unterstützung"
+      },
+      "2.0.1": {
+        "en": "Major update because of problems with CoAP messages",
+        "de": "Design Änderungen wegen Problemen mit CoAP "
+      },
+      "1.0.2": {
+        "en": "Work around for showing states in shutter/roller modus",
+        "de": "Work around und den Status im Rollladenmodus anzuzeigen"
+      },
+      "1.0.1": {
+        "en": "Add State Roller/Shuter position",
+        "de": "Status Rolllädenposition hinzugefügt"
+      },
+      "1.0.0": {
+        "en": "Optimizations and Online status fixed",
+        "de": "Fehelr bei Anzeige des Online-Status behoben, Optimierungen"
+      },
+      "0.2.6": {
+        "en": "Two new datapoints (AutoTimerOn and AutoTimerOff) for Shelly 1/2",
+        "de": "Datapoints AutoTimerOn und AutoTimerOff für Shelly 1/2 hinzugefügt"
+      },
+      "0.2.5": {
+        "en": "Hostname instead of ip address will be shown",
+        "de": "Anzeige Hostname statt IP-Adresse"
+      },
+      "0.2.4": {
+        "en": "Channel name can be overwrite with own name",
+        "de": "Channelname kann mit eigenen Namen überschrieben werden"
+      },
+      "0.2.3": {
+        "en": "Bugfixing, shutter status display",
+        "de": "Feherbehebung, Rollädenanzeige angepasst"
+      },
+      "0.2.2": {
+        "en": "Bugfixing, devault value for switch timer will be 0 sec",
+        "de": "Feherbehebung, beim Start ist switch timer 0 sec"
+      },
+      "0.2.1": {
+        "en": "Username/Password support",
+        "de": "Username/Password support"
+      },
+      "0.2.0": {
+        "en": "Roller/shutter modus supported",
+        "de": "Rollädenmodus wird unterstützt"
+      },
+      "0.1.1": {
+        "en": "Bug fixing",
+        "de": "Fehlerbehebung"
+      },
+      "0.1.0": {
+        "en": "Initiale Shelly Adapter Version",
+        "de": "Initiale Shelly Adapter Version",
+        "ru": "Версия Initiale Shelly Adapter",
+        "pt": "Versão do Adaptador Initiale Shelly",
+        "nl": "Initiale Shelly-adapterversie",
+        "it": "Versione dell'adattatore Initiale Shelly",
+        "es": "Initiale Shelly Adapter Version"
+      }
     },
     "native": {
         "pwd": false,
