@@ -1,0 +1,10 @@
+{
+    "Auto": "Auto",
+    "Confirm Password": "Confirme a Senha",
+    "Manual": "Manual",
+    "Password": "Senha",
+    "Password Enable": "Login com senha",
+    "User": "Do utilizador",
+    "on save adapter restarts with new config immediately": "no adaptador de salvar reinicia com nova configuração imediatamente",
+    "shellydescription": "Shelly dispositivos devem estar na mesma sub-rede como ioBroker para trabalhar com ioBroker. ioBroker encontrar Shelly dispositivos pelo seu próprio. Se lá não são reconhecidos, por favor, reinicie Shelly dispositivos de uma vez."
+}

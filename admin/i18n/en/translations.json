@@ -1,0 +1,10 @@
+{
+    "Auto": "Auto",
+    "Confirm Password": "Confim Password",
+    "Manual": "Manual",
+    "Password": "Password",
+    "Password Enable": "Login with password",
+    "User": "User",
+    "on save adapter restarts with new config immediately": "on save adapter restarts with new config immediately",
+    "shellydescription": "Shelly devices must be in the same subnet as ioBroker for working with ioBroker. ioBroker finds Shelly devices  by his own. If there are not recognized, please reboot Shelly devices once."
+}
