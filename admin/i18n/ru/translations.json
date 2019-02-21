@@ -1,0 +1,10 @@
+{
+    "Auto": "Автоматически",
+    "Confirm Password": "Подтвердите Пароль",
+    "Manual": "Вручную",
+    "Password": "пароль",
+    "Password Enable": "Вход с паролем",
+    "User": "пользователь",
+    "on save adapter restarts with new config immediately": "При сохранении настроек адаптера он сразу же перезапускается",
+    "shellydescription": ""
+}

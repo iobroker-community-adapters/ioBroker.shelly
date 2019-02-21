@@ -1,185 +1,182 @@
 {
-  "common": {
-    "name": "shelly",
-    "version": "2.1.3",
-    "news": {
-      "2.1.3": {
-        "en": "Support of Shelly RGBW2",
-        "de": "Shelly RGBW2 Unterstützung"
-      },
-      "2.1.0": {
-        "en": "New Status 'update available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug",
-        "de": "Neuer Status für Shely1, Shelly2, Shelly4Pro and ShellyPlug"
-      },
-      "2.0.8": {
-        "en": "Bugfixing, polling new Shelly status must be at least 1 sec ago",
-        "de": "Fehlerbehbung, neuer Shelly Status darf maximal 1 mal pro Sek. gepolled werden"
-      },
-      "2.0.7": {
-        "en": "Bugfixing for objects AutoTimerOn and AutoTimeroff",
-        "de": "Fehlerbehbung der Objekte AutoTimerOn und AutoTimeroff"
-      },
-      "2.0.6": {
-        "en": "Getting faster online status for Shelly devices, excluded H&T",
-        "de": "Schnellere Ermittlung des Online Status"
-      },
-      "2.0.5": {
-        "en": "Fixing an error if Shelly device is not reachable (offline)",
-        "de": "Fehlebehebung wenn Shelly ist offline"
-      },
-      "2.0.4": {
-        "en": "Support of js-controller compact mode and performance optimizing ",
-        "de": "Unterstützung des Compact Modus und Performance optimierung"
-      },
-      "2.0.3": {
-        "en": "Shows RSSI Status for Shelly 1 & 2",
-        "de": "Status RSSI wird für Shelly 1 & 2 unterstützt"
-      },
-      "2.0.2": {
-        "en": "Add Shelly H&T",
-        "de": "Shelly H&T Unterstützung"
-      },
-      "2.0.1": {
-        "en": "Major update because of problems with CoAP messages",
-        "de": "Design Änderungen wegen Problemen mit CoAP "
-      },
-      "1.0.2": {
-        "en": "Work around for showing states in shutter/roller modus",
-        "de": "Work around und den Status im Rollladenmodus anzuzeigen"
-      },
-      "1.0.1": {
-        "en": "Add State Roller/Shuter position",
-        "de": "Status Rolllädenposition hinzugefügt"
-      },
-      "1.0.0": {
-        "en": "Optimizations and Online status fixed",
-        "de": "Fehelr bei Anzeige des Online-Status behoben, Optimierungen"
-      },
-      "0.2.6": {
-        "en": "Two new datapoints (AutoTimerOn and AutoTimerOff) for Shelly 1/2",
-        "de": "Datapoints AutoTimerOn und AutoTimerOff für Shelly 1/2 hinzugefügt"
-      },
-      "0.2.5": {
-        "en": "Hostname instead of ip address will be shown",
-        "de": "Anzeige Hostname statt IP-Adresse"
-      },
-      "0.2.4": {
-        "en": "Channel name can be overwrite with own name",
-        "de": "Channelname kann mit eigenen Namen überschrieben werden"
-      },
-      "0.2.3": {
-        "en": "Bugfixing, shutter status display",
-        "de": "Feherbehebung, Rollädenanzeige angepasst"
-      },
-      "0.2.2": {
-        "en": "Bugfixing, devault value for switch timer will be 0 sec",
-        "de": "Feherbehebung, beim Start ist switch timer 0 sec"
-      },
-      "0.2.1": {
-        "en": "Username/Password support",
-        "de": "Username/Password support"
-      },
-      "0.2.0": {
-        "en": "Roller/shutter modus supported",
-        "de": "Rollädenmodus wird unterstützt"
-      },
-      "0.1.1": {
-        "en": "Bug fixing",
-        "de": "Fehlerbehebung"
-      },
-      "0.1.0": {
-        "en": "Initiale Shelly Adapter Version",
-        "de": "Initiale Shelly Adapter Version",
-        "ru": "Версия Initiale Shelly Adapter",
-        "pt": "Versão do Adaptador Initiale Shelly",
-        "nl": "Initiale Shelly-adapterversie",
-        "fr": "Initiale Shelly Adapter Version",
-        "it": "Versione dell'adattatore Initiale Shelly",
-        "es": "Initiale Shelly Adapter Version",
-        "pl": "Initiale Shelly Adapter Version"
-      }
+    "common": {
+        "name": "shelly",
+        "version": "2.1.3",
+        "news": {
+            "2.1.3": {
+                "en": "Support of Shelly RGBW2",
+                "de": "Shelly RGBW2 Unterstützung"
+            },
+            "2.1.0": {
+                "en": "New Status 'update available' for Shely1, Shelly2, Shelly4Pro and ShellyPlug",
+                "de": "Neuer Status für Shely1, Shelly2, Shelly4Pro und ShellyPlug"
+            },
+            "2.0.8": {
+                "en": "Bugfixing, polling new Shelly status must be at least 1 sec ago",
+                "de": "Fehlerbehbung, neuer Shelly Status darf maximal 1 mal pro Sek. gepolled werden"
+            },
+            "2.0.7": {
+                "en": "Bugfixing for objects AutoTimerOn and AutoTimeroff",
+                "de": "Fehlerbehbung der Objekte AutoTimerOn und AutoTimeroff"
+            },
+            "2.0.6": {
+                "en": "Getting faster online status for Shelly devices, excluded H&T",
+                "de": "Schnellere Ermittlung des Online Status"
+            },
+            "2.0.5": {
+                "en": "Fixing an error if Shelly device is not reachable (offline)",
+                "de": "Fehlebehebung wenn Shelly ist offline"
+            },
+            "2.0.4": {
+                "en": "Support of js-controller compact mode and performance optimizing ",
+                "de": "Unterstützung des Compact Modus und Performance optimierung"
+            },
+            "2.0.3": {
+                "en": "Shows RSSI Status for Shelly 1 & 2",
+                "de": "Status RSSI wird für Shelly 1 & 2 unterstützt"
+            },
+            "2.0.2": {
+                "en": "Add Shelly H&T",
+                "de": "Shelly H&T Unterstützung"
+            },
+            "2.0.1": {
+                "en": "Major update because of problems with CoAP messages",
+                "de": "Design Änderungen wegen Problemen mit CoAP "
+            },
+            "1.0.2": {
+                "en": "Work around for showing states in shutter/roller modus",
+                "de": "Work around und den Status im Rollladenmodus anzuzeigen"
+            },
+            "1.0.1": {
+                "en": "Add State Roller/Shuter position",
+                "de": "Status Rolllädenposition hinzugefügt"
+            },
+            "1.0.0": {
+                "en": "Optimizations and Online status fixed",
+                "de": "Fehelr bei Anzeige des Online-Status behoben, Optimierungen"
+            },
+            "0.2.6": {
+                "en": "Two new datapoints (AutoTimerOn and AutoTimerOff) for Shelly 1/2",
+                "de": "Datapoints AutoTimerOn und AutoTimerOff für Shelly 1/2 hinzugefügt"
+            },
+            "0.2.5": {
+                "en": "Hostname instead of ip address will be shown",
+                "de": "Anzeige Hostname statt IP-Adresse"
+            },
+            "0.2.4": {
+                "en": "Channel name can be overwrite with own name",
+                "de": "Channelname kann mit eigenen Namen überschrieben werden"
+            },
+            "0.2.3": {
+                "en": "Bugfixing, shutter status display",
+                "de": "Feherbehebung, Rollädenanzeige angepasst"
+            },
+            "0.2.2": {
+                "en": "Bugfixing, devault value for switch timer will be 0 sec",
+                "de": "Feherbehebung, beim Start ist switch timer 0 sec"
+            },
+            "0.2.1": {
+                "en": "Username/Password support",
+                "de": "Username/Password support"
+            },
+            "0.2.0": {
+                "en": "Roller/shutter modus supported",
+                "de": "Rollädenmodus wird unterstützt"
+            },
+            "0.1.1": {
+                "en": "Bug fixing",
+                "de": "Fehlerbehebung"
+            },
+            "0.1.0": {
+                "en": "Initial Shelly Adapter Version",
+                "de": "Initiale Shelly Adapter Version",
+                "ru": "Версия Initiale Shelly Adapter",
+                "pt": "Versão do Adaptador Initiale Shelly",
+                "nl": "Initiale Shelly-adapterversie",
+                "it": "Versione dell'adattatore Initiale Shelly"
+            }
+        },
+        "title": "Shelly",
+        "titleLang": {
+            "en": "Shelly",
+            "de": "Shelly",
+            "ru": "изобилующий раковинами",
+            "pt": "Shelly",
+            "nl": "schaalachtig",
+            "fr": "Shelly",
+            "it": "Shelly",
+            "es": "Shelly",
+            "pl": "Shelly"
+        },
+        "desc": {
+            "en": "Shelly Adapter",
+            "de": "Shelly Adapter",
+            "ru": "Шестигранный адаптер",
+            "pt": "Adaptador Shelly",
+            "nl": "Shelly-adapter",
+            "fr": "Adaptateur Shelly",
+            "it": "Adattatore Shelly",
+            "es": "Adaptador Shelly",
+            "pl": "Adapter Shelly"
+        },
+        "license": "MIT",
+        "authors": [
+            "Thorsten Stueben <thorsten@stueben.de>",
+            "Apollon77 <iobroker@fischer-ka.de>"
+        ],
+        "platform": "Javascript/Node.js",
+        "mode": "daemon",
+        "icon": "shelly.png",
+        "materialize": true,
+        "enabled": true,
+        "compact": true,
+        "extIcon": "https://raw.githubusercontent.com/schmupu/ioBroker.shelly/master/admin/shelly.png",
+        "keywords": [
+            "shelly",
+            "switch",
+            "smarthome",
+            "iobroker"
+        ],
+        "readme": "https://github.com/schmupu/ioBroker.shelly/blob/master/README.md",
+        "loglevel": "info",
+        "type": "iot-systems",
+        "restartAdapters": []
     },
-    "title": "Shelly",
-    "titleLang": {
-      "en": "Shelly",
-      "de": "Shelly",
-      "ru": "изобилующий раковинами",
-      "pt": "Shelly",
-      "nl": "schaalachtig",
-      "fr": "Shelly",
-      "it": "Shelly",
-      "es": "Shelly",
-      "pl": "Shelly"
+    "native": {
+        "pwd": false,
+        "user": "admin",
+        "password": "",
+        "polltime": 10,
+        "timeout": 0.25,
+        "keys": [
+            {
+                "hosts": "",
+                "devids": ""
+            }
+        ]
     },
-    "desc": {
-      "en": "Shelly Adapter",
-      "de": "Shelly Adapter",
-      "ru": "Шестигранный адаптер",
-      "pt": "Adaptador Shelly",
-      "nl": "Shelly-adapter",
-      "fr": "Adaptateur Shelly",
-      "it": "Adattatore Shelly",
-      "es": "Adaptador Shelly",
-      "pl": "Adapter Shelly"
-    },
-    "license": "MIT",
-    "authors": [
-      "Thorsten Stueben <thorsten@stueben.de>",
-      "Apollon77 <iobroker@fischer-ka.de>"
-    ],
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "icon": "shelly.png",
-    "materialize": true,
-    "enabled": true,
-    "compact": true,
-    "extIcon": "https://raw.githubusercontent.com/schmupu/ioBroker.shelly/master/admin/shelly.png",
-    "keywords": [
-      "shelly",
-      "switch",
-      "smarthome",
-      "iobroker"
-    ],
-    "readme": "https://github.com/schmupu/ioBroker.shelly/blob/master/README.md",
-    "loglevel": "info",
-    "type": "iot-systems",
-    "restartAdapters": []
-  },
-  "native": {
-    "pwd": false,
-    "user": "admin",
-    "password": "",
-    "polltime": 10,
-    "timeout": 0.25,
-    "keys": [
-      {
-        "hosts": "",
-        "devids": ""
-      }
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "If listening for Shelly packets",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
     ]
-  },
-  "objects": [],
-  "instanceObjects": [
-    {
-      "_id": "info",
-      "type": "channel",
-      "common": {
-        "name": "Information"
-      },
-      "native": {}
-    },
-    {
-      "_id": "info.connection",
-      "type": "state",
-      "common": {
-        "role": "indicator.connected",
-        "name": "If listening for Shelly packets",
-        "type": "boolean",
-        "read": true,
-        "write": false,
-        "def": false
-      },
-      "native": {}
-    }
-  ]
 }
