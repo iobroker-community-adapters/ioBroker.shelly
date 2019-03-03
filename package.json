@@ -43,7 +43,8 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-react": "^7.12.4",
     "gulp": "^4.0.0",
-    "mocha": "^4.1.0"
+    "mocha": "^4.1.0",
+    "@iobroker/adapter-core": "^1.0.3"
   },
   "main": "shelly.js",
   "scripts": {
