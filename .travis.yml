@@ -5,18 +5,17 @@ os:
 sudo: required
 language: node_js
 node_js:
-  - '4'
   - '6'
   - '8'
   - '10'
 before_install:
   - 'if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CC=clang++; export CXX=clang++; export CXXFLAGS=-stdlib=libc++; fi'
-  - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX=g++-4.8; fi'
+  - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX=g++-4.9; fi'
 before_script:
   - export NPMVERSION=$(echo "$($(which npm) -v)"|cut -c1)
   - 'if [[ $NPMVERSION == 5 ]]; then npm install -g npm@5; fi'
   - npm -v
-  - npm install winston@2.3.1
+  - npm install winston@3.2.1
   - 'npm install https://github.com/ioBroker/ioBroker.js-controller/tarball/master --production'
 env:
   - DEBUG=true
@@ -25,5 +24,4 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
-
+      - g++-4.9
