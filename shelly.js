@@ -1872,6 +1872,7 @@ function updateShellySmokeStates(deviceId, status, callback) {
         break;
       case 'G12':
         id = 'smoke.value';
+        value =  (value === true || value === 1) ? true : false;
         break;
       case 'G22':
         id = 'bat.value';
