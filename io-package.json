@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "2.1.4",
+        "version": "2.1.5",
         "news": {
+            "2.1.5": {
+                "en": "Shelly Smoke support",
+                "de": "Shelly Smoke-Unterstützung",
+                "ru": "Поддержка Shelly Smoke",
+                "pt": "Suporte para Shelly Smoke",
+                "nl": "Shelly Smoke-ondersteuning",
+                "fr": "Soutien Shelly Smoke",
+                "it": "Shelly Smoke support",
+                "es": "Soporte Shelly Smoke",
+                "pl": "Wsparcie Shelly Smoke",
+                "zh-cn": "Shelly Smoke支持"
+            },
             "2.1.4": {
                 "en": "Bugfixing of Shelly RGBW2",
                 "de": "Fehlerbehebung RGBW2",

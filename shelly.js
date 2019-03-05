@@ -268,6 +268,8 @@ function createShellyStates(deviceId, description, ip, status, callback) {
       createShellyRGBWW2States(deviceId);
     } else if (deviceId.startsWith('SHHT')) {
       createShellyHTStates(deviceId);
+    } else if (deviceId.startsWith('SHSM-01')) {
+      createShellySmokeStates(deviceId);
     } else {
       displaySettings(deviceId);
       callback && callback();
@@ -310,6 +312,8 @@ function updateShellyStates(deviceId, status, callback) {
       updateShellyRGBWW2States(deviceId, callback);
     } else if (deviceId.startsWith('SHHT')) {
       updateShellyHTStates(deviceId, status, callback);
+    } else if (deviceId.startsWith('SHSM-01')) {
+      updateShellySmokeStates(deviceId, status, callback);
     } else {
       callback && callback();
     }
@@ -1825,6 +1829,112 @@ function updateShellyHTStates(deviceId, status, callback) {
   });
   // callback && callback();
 }
+
+// *******************************************************************************
+// Shelly Smoke
+// *******************************************************************************
+function createShellySmokeStates(deviceId) {
+
+  let devices = datapoints.getObjectByName('shellysmoke');
+
+  for (let i in devices) {
+    let common = devices[i];
+    let stateId = deviceId + '.' + i;
+    let controlFunction;
+    let value;
+
+    createChannel(deviceId, i);
+
+    adapter.log.debug('Creating State ' + stateId);
+    objectHelper.setOrUpdateObject(stateId, {
+      type: 'state',
+      common: common
+    }, ['name'], value, controlFunction);
+  }
+
+}
+
+function updateShellySmokeStates(deviceId, status, callback) {
+
+  let devices = datapoints.getObjectByName('shellysmoke');
+  let ids = getIoBrokerStatesFromObj(status);
+  let parameter = {};
+
+  for (let i in ids) {
+    let id = i;
+    let value = ids[i];
+    let controlFunction;
+    // historical mapping
+
+    switch (id) {
+      case 'G02':
+        id = 'tmp.value';
+        break;
+      case 'G12':
+        id = 'smoke.value';
+        break;
+      case 'G22':
+        id = 'bat.value';
+        break;
+      default:
+    }
+
+    if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+      continue;
+    }
+    shellyStates[deviceId + '.' + id] = value;
+
+    if (devices.hasOwnProperty(id)) {
+      let stateId = deviceId + '.' + id;
+      let common = devices[id];
+      objectHelper.setOrUpdateObject(stateId, {
+        type: 'state',
+        common: common
+      }, ['name'], value, controlFunction);
+    }
+
+  }
+
+  shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
+    if (!error && data) {
+      let ids = getIoBrokerStatesFromObj(data);
+      for (let i in ids) {
+        let id = i;
+        let value = ids[i];
+        let controlFunction;
+        // historical mapping
+        switch (id) {
+          case 'wifi_sta.rssi':
+            id = 'rssi';
+            break;
+          case 'update.has_update':
+            id = 'firmware';
+            break;
+          default:
+        }
+
+        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+          continue;
+        }
+        shellyStates[deviceId + '.' + id] = value;
+
+        if (devices.hasOwnProperty(id)) {
+          let stateId = deviceId + '.' + id;
+          let common = devices[id];
+          // adapter.log.debug(i + ' = ' + stateId);
+          objectHelper.setOrUpdateObject(stateId, {
+            type: 'state',
+            common: common
+          }, ['name'], value, controlFunction);
+        }
+
+      }
+    }
+    callback && callback();
+  });
+  // callback && callback();
+}
+
 
 
 // *******************************************************************************

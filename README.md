@@ -32,6 +32,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 * ShellyPlug (SHPLG-1, not verified and tested) 
 * ShellyRGBW (SHRGBWW-01, Verified)
 * Shelly H&T (SHHT-1, verified)
+* Shelly Smoke (SHSM-01, verified)
 
 ## More details needed to implement (Debug log)
 * ShellySense (SHSEN-1)
@@ -39,6 +40,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 * Shelly2LED (SH2LED-1)
 
 ## Changelog
+
+### 2.1.5 (05.03.2019)
+* Shelly Smoke Support
 
 ### 2.1.4 (20.02.2019)
 * Bugfixing of Shelly RGBW2 Support. If you have installed version 2.1.3, please delete all RGBW2 objects first, because the objects will be renamed from lights to color and white in version 2.1.4.   
