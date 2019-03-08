@@ -41,6 +41,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 2.1.6 (08.03.2019)
+* Shelly RGBWW2 bugfixing (color mode, white light fixed)
+
 ### 2.1.5 (05.03.2019)
 * Shelly Smoke Support
 

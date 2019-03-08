@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "2.1.5",
+        "version": "2.1.6",
         "news": {
+            "2.1.6": {
+                "en": "Shelly RGBWW2 bugfixing (color mode, white light fixed)",
+                "de": "Shelly RGBWW2 Bugfixing (Farbmodus, weißes Licht behoben)",
+                "ru": "Исправление ошибок в Shelly RGBWW2 (цветной режим, белый свет исправлен)",
+                "pt": "Shelly RGBWW2 bugfixing (modo de cor, luz branca fixa)",
+                "nl": "Shelly RGBWW2-bugfixing (kleurmodus, wit licht vast)",
+                "fr": "Shelly RGBWW2 correction de bug (mode couleur, lumière blanche fixe)",
+                "it": "Bugfix RGBWW2 di Shelly (modalità colore, luce bianca fissa)",
+                "es": "Corrección de errores de Shelly RGBWW2 (modo de color, luz blanca fija)",
+                "pl": "Naprawianie błędów Shelly RGBWW2 (tryb kolorów, białe światło naprawione)",
+                "zh-cn": "Shelly RGBWW2错误修正（颜色模式，白光固定）"
+            },
             "2.1.5": {
                 "en": "Shelly Smoke support",
                 "de": "Shelly Smoke-Unterstützung",

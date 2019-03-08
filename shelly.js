@@ -1622,6 +1622,9 @@ function updateShellyRGBWW2States(deviceId, callback) {
           case 'lights.green':
             id = 'color.green';
             break;
+          case 'lights.white':
+            id = 'color.white';
+            break;
           case 'lights.effect':
             id = 'color.effect';
             break;
@@ -1872,7 +1875,7 @@ function updateShellySmokeStates(deviceId, status, callback) {
         break;
       case 'G12':
         id = 'smoke.value';
-        value =  (value === true || value === 1) ? true : false;
+        value = (value === true || value === 1) ? true : false;
         break;
       case 'G22':
         id = 'bat.value';
