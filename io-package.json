@@ -4,16 +4,16 @@
         "version": "2.1.6",
         "news": {
             "2.1.6": {
-                "en": "Shelly RGBWW2 bugfixing (color mode, white light fixed)",
-                "de": "Shelly RGBWW2 Bugfixing (Farbmodus, weißes Licht behoben)",
-                "ru": "Исправление ошибок в Shelly RGBWW2 (цветной режим, белый свет исправлен)",
-                "pt": "Shelly RGBWW2 bugfixing (modo de cor, luz branca fixa)",
-                "nl": "Shelly RGBWW2-bugfixing (kleurmodus, wit licht vast)",
-                "fr": "Shelly RGBWW2 correction de bug (mode couleur, lumière blanche fixe)",
-                "it": "Bugfix RGBWW2 di Shelly (modalità colore, luce bianca fissa)",
-                "es": "Corrección de errores de Shelly RGBWW2 (modo de color, luz blanca fija)",
-                "pl": "Naprawianie błędów Shelly RGBWW2 (tryb kolorów, białe światło naprawione)",
-                "zh-cn": "Shelly RGBWW2错误修正（颜色模式，白光固定）"
+                "en": "Shelly RGBWW2 bug fixing (whit did not work in color mode)",
+                "de": "Shelly RGBWW2 Fehlerbehebung (Whit im Farbmodus nicht funktioniert)",
+                "ru": "Исправлена ​​ошибка в Shelly RGBWW2 (в цветном режиме она не работала)",
+                "pt": "Shelly RGBWW2 correção de bugs (whit não funcionou no modo de cor)",
+                "nl": "Shelly RGBWW2 bugfixing (whit werkte niet in kleurmodus)",
+                "fr": "Correction du bogue Shelly RGBWW2 (cela ne fonctionnait pas en mode couleur)",
+                "it": "Bug fix di Shelly RGBWW2 (whit non ha funzionato in modalità colore)",
+                "es": "Corrección de errores de Shelly RGBWW2 (no funcionó en el modo de color)",
+                "pl": "Naprawiono błąd Shelly RGBWW2 (odrobina nie działała w trybie kolorowym)",
+                "zh-cn": "雪莉RGBWW2错误修复（白色在彩色模式下无效）"
             },
             "2.1.5": {
                 "en": "Shelly Smoke support",
