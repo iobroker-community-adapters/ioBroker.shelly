@@ -1504,18 +1504,20 @@ function createShellyRGBWW2States(deviceId) {
     if (i == 'color.red' || i == 'color.green' || i == 'color.blue' || i == 'color.white' || i == 'color.gain' || i == 'color.effect') { // Implement all needed action stuff here based on the names
       let id = i.replace('color.', '');
       controlFunction = (value) => {
-        let params = {};
-        let colors = ['red', 'green', 'blue', 'white', 'gain', 'effect'];
-        for (let j in colors) {
-          let color = colors[j];
-          if (shellyStates[deviceId + '.color.' + color]) { params[color] = shellyStates[deviceId + '.color' + color]; }
+        if (!shellyStates.hasOwnProperty(deviceId + '.' + i) || shellyStates[deviceId + '.' + i] != value) {
+          let params = {};
+          let colors = ['red', 'green', 'blue', 'white', 'gain', 'effect'];
+          for (let j in colors) {
+            let color = colors[j];
+            if (shellyStates.hasOwnProperty(deviceId + '.color.' + color) && shellyStates[deviceId + '.color.' + color]) { params[color] = shellyStates[deviceId + '.color' + color]; }
+          }
+          params[id] = value;
+          if (knownDevices[deviceId].timeout) clearTimeout(knownDevices[deviceId].timeout);
+          knownDevices[deviceId].timeout = setTimeout(() => {
+            adapter.log.debug('Set Colors: ' + JSON.stringify(params));
+            shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
+          }, 500);
         }
-        params[id] = value;
-        if(knownDevices[deviceId].timeout) clearTimeout(knownDevices[deviceId].timeout);
-        knownDevices[deviceId].timeout = setTimeout(() => {
-          adapter.log.debug('Set Colors: ' + JSON.stringify(params));
-          shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
-        }, 500);
       };
     }
 
