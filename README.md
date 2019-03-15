@@ -41,6 +41,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 2.1.7 (15.03.2019)
+* Changing all RGBWW2 colors at the same time
+
 ### 2.1.6 (08.03.2019)
 * Shelly RGBWW2 bug fixing (whit did not work in color mode)
 

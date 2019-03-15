@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "2.1.6",
+        "version": "2.1.7",
         "news": {
+            "2.1.7": {
+                "en": "Changing all RGBWW2 colors at the same time",
+                "de": "Gleichzeitiges Ändern aller RGBWW2-Farben",
+                "ru": "Изменение всех цветов RGBWW2 одновременно",
+                "pt": "Alterando todas as cores RGBWW2 ao mesmo tempo",
+                "nl": "Alle RGBWW2-kleuren tegelijkertijd wijzigen",
+                "fr": "Changer toutes les couleurs RGBWW2 en même temps",
+                "it": "Cambiare tutti i colori RGBWW2 alla stessa ora",
+                "es": "Cambiando todos los colores RGBWW2 al mismo tiempo",
+                "pl": "Zmiana wszystkich kolorów RGBWW2 na ten sam czas",
+                "zh-cn": "将所有RGBWW2颜色更改为同一时间"
+            },
             "2.1.6": {
                 "en": "Shelly RGBWW2 bug fixing (whit did not work in color mode)",
                 "de": "Shelly RGBWW2 Fehlerbehebung (Whit im Farbmodus nicht funktioniert)",
