@@ -1505,22 +1505,20 @@ function createShellyRGBWW2States(deviceId) {
       let id = i.replace('color.', '');
       controlFunction = (value) => {
         adapter.log.info('Set Colors (0): id=' + i + ' , value=' + value);
-        if (!shellyStates.hasOwnProperty(deviceId + '.' + i) || shellyStates[deviceId + '.' + i] != value) {
-          let params = {};
-          let colors = ['red', 'green', 'blue', 'white', 'gain', 'effect'];
-          for (let j in colors) {
-            let color = colors[j];
-            if (shellyStates.hasOwnProperty(deviceId + '.color.' + color) && shellyStates[deviceId + '.color.' + color]) { params[color] = shellyStates[deviceId + '.color.' + color]; }
-          }
-          params[id] = value;
-          adapter.log.info('Set Colors (1): ' + JSON.stringify(params));
-          if (knownDevices[deviceId].timeout) clearTimeout(knownDevices[deviceId].timeout);
-          knownDevices[deviceId].timeout = setTimeout(() => {
-            adapter.log.debug('Set Colors: ' + JSON.stringify(params));
-            adapter.log.info('Set Colors (2): ' + JSON.stringify(params));
-            shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
-          }, 500);
+        let params = {};
+        let colors = ['red', 'green', 'blue', 'white', 'gain', 'effect'];
+        for (let j in colors) {
+          let color = colors[j];
+          if (shellyStates.hasOwnProperty(deviceId + '.color.' + color)) { params[color] = shellyStates[deviceId + '.color.' + color]; }
         }
+        params[id] = value;
+        adapter.log.info('Set Colors (1): ' + JSON.stringify(params));
+        if (knownDevices[deviceId].timeout) clearTimeout(knownDevices[deviceId].timeout);
+        knownDevices[deviceId].timeout = setTimeout(() => {
+          adapter.log.debug('Set Colors: ' + JSON.stringify(params));
+          adapter.log.info('Set Colors (2): ' + JSON.stringify(params));
+          shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
+        }, 1000);
       };
     }
 
