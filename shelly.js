@@ -1510,7 +1510,7 @@ function createShellyRGBWW2States(deviceId) {
           let colors = ['red', 'green', 'blue', 'white', 'gain', 'effect'];
           for (let j in colors) {
             let color = colors[j];
-            if (shellyStates.hasOwnProperty(deviceId + '.color.' + color) && shellyStates[deviceId + '.color.' + color]) { params[color] = shellyStates[deviceId + '.color' + color]; }
+            if (shellyStates.hasOwnProperty(deviceId + '.color.' + color) && shellyStates[deviceId + '.color.' + color]) { params[color] = shellyStates[deviceId + '.color.' + color]; }
           }
           params[id] = value;
           adapter.log.info('Set Colors (1): ' + JSON.stringify(params));
