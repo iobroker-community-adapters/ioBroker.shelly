@@ -1537,7 +1537,6 @@ function createShellyRGBWW2States(deviceId) {
       };
     }
 
-    /*
     if (i == 'color.rgbw') { // Implement all needed action stuff here based on the names
       let id = i.replace('color.', '');
       controlFunction = (value) => {
@@ -1552,7 +1551,6 @@ function createShellyRGBWW2States(deviceId) {
         shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
       };
     }
-    */
 
     if (i == 'color.AutoTimerOff') {
       controlFunction = (value) => {
