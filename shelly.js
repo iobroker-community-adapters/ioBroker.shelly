@@ -12,7 +12,7 @@ const utils = require('@iobroker/adapter-core');
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Get common adapter utils
 const datapoints = require(__dirname + '/lib/datapoints'); // Get common adapter utils
 const Shelly = require('shelly-iot');
-const colorconv = require(__dirname + '/lib/colorconv');
+// const colorconv = require(__dirname + '/lib/colorconv');
 const adapterName = require('./package.json').name.split('.').pop();
 
 let shelly;
@@ -1537,6 +1537,7 @@ function createShellyRGBWW2States(deviceId) {
       };
     }
 
+    /*
     if (i == 'color.rgbw') { // Implement all needed action stuff here based on the names
       let id = i.replace('color.', '');
       controlFunction = (value) => {
@@ -1551,6 +1552,7 @@ function createShellyRGBWW2States(deviceId) {
         shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
       };
     }
+    */
 
     if (i == 'color.AutoTimerOff') {
       controlFunction = (value) => {
@@ -1644,7 +1646,7 @@ function updateShellyRGBWW2States(deviceId, callback) {
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
-      ids.push('color.rgbw'); // add pseudo State
+      // if(ids) ids.push('color.rgbw'); // add pseudo State
       for (let i in ids) {
         let id = i;
         let value = ids[i];
@@ -1667,10 +1669,12 @@ function updateShellyRGBWW2States(deviceId, callback) {
           case 'lights.white':
             id = 'color.white';
             break;
+          /*
           case 'color.rgbw':
             id = 'color.rgbw';
             value = '#' + intToHex(ids['lights.red']) + intToHex(ids['lights.green']) + intToHex(ids['lights.blue']) + intToHex(ids['lights.white']);
             break;
+          */
           case 'lights.effect':
             id = 'color.effect';
             break;

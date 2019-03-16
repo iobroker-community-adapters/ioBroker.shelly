@@ -36,15 +36,15 @@
     "shelly-iot": "^1.0.2"
   },
   "devDependencies": {
+    "@iobroker/testing": "^1.1.10",
     "axios": "^0.18.0",
     "chai": "^4.2.0",
-    "eslint": "^5.14.0",
+    "eslint": "^5.15.2",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-react": "^7.12.4",
     "gulp": "^4.0.0",
-    "mocha": "^4.1.0",
-    "@iobroker/testing": "^1.1.10"
+    "mocha": "^4.1.0"
   },
   "main": "shelly.js",
   "scripts": {
