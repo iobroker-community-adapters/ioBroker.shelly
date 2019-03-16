@@ -1504,7 +1504,6 @@ function createShellyRGBWW2States(deviceId) {
     if (i == 'color.red' || i == 'color.green' || i == 'color.blue' || i == 'color.white' || i == 'color.gain' || i == 'color.effect') { // Implement all needed action stuff here based on the names
       let id = i.replace('color.', '');
       controlFunction = (value) => {
-        adapter.log.info('0.1 Set Colors (0): id=' + i + ' , value=' + value);
         let params = {};
         let colors = ['red', 'green', 'blue', 'white', 'gain', 'effect'];
         if(!knownDevices[deviceId].hasOwnProperty('params')) knownDevices[deviceId].params = {};
@@ -1514,12 +1513,11 @@ function createShellyRGBWW2States(deviceId) {
         }
         params[id] = value;
         knownDevices[deviceId].params[id] = value;
-        adapter.log.info('0.1 Set Colors (1): ' + JSON.stringify(params));
         if (knownDevices[deviceId].timeout) clearTimeout(knownDevices[deviceId].timeout);
         knownDevices[deviceId].timeout = setTimeout(() => {
+          if(knownDevices[deviceId].hasOwnProperty('timeout')) delete knownDevices[deviceId].timeout;
+          if(knownDevices[deviceId].hasOwnProperty('params'))  delete knownDevices[deviceId].params;
           adapter.log.debug('Set Colors: ' + JSON.stringify(params));
-          adapter.log.info('0.1 Set Colors (2): ' + JSON.stringify(params));
-          if(knownDevices[deviceId].hasOwnProperty('params')) delete knownDevices[deviceId].params;
           shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
         }, 500);
       };
