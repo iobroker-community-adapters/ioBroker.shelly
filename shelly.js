@@ -1644,9 +1644,11 @@ function updateShellyRGBWW2States(deviceId, callback) {
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
-      if(ids && ids.lights) {
-        if(!ids.color) ids.color = {}; 
-        ids.color.rgbw = '#' + intToHex(ids.lights.red) + intToHex(ids.lights.green) + intToHex(ids.lights.blue) + intToHex(ids.lights.white); 
+      if (ids && ids.lights) {
+        if (!ids.color) ids.color = {};
+        ids.color.rgbw = '#' + intToHex(ids.lights.red) + intToHex(ids.lights.green) + intToHex(ids.lights.blue) + intToHex(ids.lights.white);
+        adapter.log.info('2.1 Color RGBW updateShellyRGBWW2States: ' + JSON.stringify(ids.lights));
+        adapter.log.info('2.2 Color RGBW updateShellyRGBWW2States: ' + JSON.stringify(ids.color.rgbw));
       }
       for (let i in ids) {
         let id = i;
@@ -1707,6 +1709,11 @@ function updateShellyRGBWW2States(deviceId, callback) {
             id = 'white3.brightness';
             break;
           default:
+        }
+
+        if (id == 'colors.rgbw') {
+          adapter.log.info('2.3 Color RGBW updateShellyRGBWW2States: id=' + id + ' , value=' + value);
+          if (shellyStates.hasOwnProperty(deviceId + '.' + id)) adapter.log.info('2.4 Color RGBW updateShellyRGBWW2States: id=' + id + ' , value=' + shellyStates[deviceId + '.' + id]);
         }
 
         if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
