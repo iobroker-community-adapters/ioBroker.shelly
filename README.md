@@ -124,7 +124,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2018 Thorsten Stueben <thorsten@stueben.de>, Apollon77 <iobroker@fischer-ka.de>
+Copyright (c) 2018-2019 Thorsten Stueben <thorsten@stueben.de>, Apollon77 <iobroker@fischer-ka.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
