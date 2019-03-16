@@ -1644,11 +1644,8 @@ function updateShellyRGBWW2States(deviceId, callback) {
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
-      if (ids && ids.lights) {
-        if (!ids.color) ids.color = {};
-        ids.color.rgbw = '#' + intToHex(ids.lights.red) + intToHex(ids.lights.green) + intToHex(ids.lights.blue) + intToHex(ids.lights.white);
-        adapter.log.info('2.1 Color RGBW updateShellyRGBWW2States: ' + JSON.stringify(ids.lights));
-        adapter.log.info('2.2 Color RGBW updateShellyRGBWW2States: ' + JSON.stringify(ids.color.rgbw));
+      if (ids) {
+        ids['color.rgbw'] = '#' + intToHex(ids['lights.red']) + intToHex(ids['lights.green']) + intToHex(ids['lights.blue']) + intToHex(ids['lights.white']);
       }
       for (let i in ids) {
         let id = i;
