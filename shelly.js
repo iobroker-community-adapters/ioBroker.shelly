@@ -12,6 +12,7 @@ const utils = require('@iobroker/adapter-core');
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Get common adapter utils
 const datapoints = require(__dirname + '/lib/datapoints'); // Get common adapter utils
 const Shelly = require('shelly-iot');
+const colorconv = require(__dirname + '/lib/colorconv');
 const adapterName = require('./package.json').name.split('.').pop();
 
 let shelly;
@@ -74,6 +75,7 @@ function startAdapter(options) {
         }
       }
       main();
+      adapter.setState('shelly.0.SHSW-1#058F87#1.Relay0.Switch', true, false);
     });
   });
 
@@ -130,6 +132,18 @@ function getDeviceIdFromIoBrokerId(iobrokerId) {
     deviceId = arr[0];
   }
   return deviceId;
+}
+
+function intToHex(number) {
+  if (!number) number = 0;
+  let hex = number.toString(16);
+  hex = ('00' + hex).slice(-2).toUpperCase(); // 'a' -> '0A'
+  return hex;
+}
+
+function hextoInt(hex) {
+  if (!hex) hex = '00';
+  return parseInt(hex, 16);
 }
 
 // *******************************************************************************
@@ -1506,7 +1520,7 @@ function createShellyRGBWW2States(deviceId) {
       controlFunction = (value) => {
         let params = {};
         let colors = ['red', 'green', 'blue', 'white', 'gain', 'effect'];
-        if(!knownDevices[deviceId].hasOwnProperty('params')) knownDevices[deviceId].params = {};
+        if (!knownDevices[deviceId].hasOwnProperty('params')) knownDevices[deviceId].params = {};
         for (let j in colors) {
           let color = colors[j];
           if (knownDevices[deviceId].params.hasOwnProperty(color)) { params[color] = knownDevices[deviceId].params[color]; }
@@ -1515,11 +1529,26 @@ function createShellyRGBWW2States(deviceId) {
         knownDevices[deviceId].params[id] = value;
         if (knownDevices[deviceId].timeout) clearTimeout(knownDevices[deviceId].timeout);
         knownDevices[deviceId].timeout = setTimeout(() => {
-          if(knownDevices[deviceId].hasOwnProperty('timeout')) delete knownDevices[deviceId].timeout;
-          if(knownDevices[deviceId].hasOwnProperty('params'))  delete knownDevices[deviceId].params;
+          if (knownDevices[deviceId].hasOwnProperty('timeout')) delete knownDevices[deviceId].timeout;
+          if (knownDevices[deviceId].hasOwnProperty('params')) delete knownDevices[deviceId].params;
           adapter.log.debug('Set Colors: ' + JSON.stringify(params));
           shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
         }, 500);
+      };
+    }
+
+    if (i == 'color.rgbw') { // Implement all needed action stuff here based on the names
+      let id = i.replace('color.', '');
+      controlFunction = (value) => {
+        value = value || '#00000000';
+        let params = {
+          red: hextoInt(value.substr(1, 2)),
+          green: hextoInt(value.substr(3, 2)),
+          blue: hextoInt(value.substr(5, 2)),
+          white: hextoInt(value.substr(7, 2))
+        };
+        adapter.log.debug('Set RGBW Colors: ' + JSON.stringify(params));
+        shelly.callDevice(deviceId, '/color/0', params); // send REST call to devices IP with the given path and parameters
       };
     }
 
@@ -1615,6 +1644,7 @@ function updateShellyRGBWW2States(deviceId, callback) {
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
+      ids.push('color.rgbw'); // add pseudo State
       for (let i in ids) {
         let id = i;
         let value = ids[i];
@@ -1636,6 +1666,10 @@ function updateShellyRGBWW2States(deviceId, callback) {
             break;
           case 'lights.white':
             id = 'color.white';
+            break;
+          case 'color.rgbw':
+            id = 'color.rgbw';
+            value = '#' + intToHex(ids['lights.red']) + intToHex(ids['lights.green']) + intToHex(ids['lights.blue']) + intToHex(ids['lights.white']);
             break;
           case 'lights.effect':
             id = 'color.effect';
