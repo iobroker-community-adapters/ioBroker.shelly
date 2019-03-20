@@ -41,6 +41,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 2.1.8 (19.03.2019)
+* Consider roller (shutter) position in CoAP message 
+
 ### 2.1.7 (15.03.2019)
 * Changing all RGBWW2 colors at the same time
 * new RGBWW2 State color.rgbw with the format #RRGGBBWW

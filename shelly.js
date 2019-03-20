@@ -421,21 +421,18 @@ function updateShelly1States(deviceId, status, callback) {
 
   // get status from CoAP Message
   if (status) {
-    let ids = getIoBrokerStatesFromObj(status);
-    for (let i in ids) {
-      let id = i;
-      let value = ids[i];
+    for (let i in status.G) {
+      let id = status.G[i][1];
+      let value = status.G[i][2];
       let controlFunction;
-      // historical mapping
-
       switch (id) {
-        case 'G2':
+        case 112:
           id = 'Relay0.Switch';
           value = value === 1 || value === true ? true : false;
           break;
         default:
+          continue;
       }
-
       if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
         continue;
       }
@@ -452,7 +449,6 @@ function updateShelly1States(deviceId, status, callback) {
     }
     // return callback && callback();
   }
-
   shelly.callDevice(deviceId, '/settings', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);
@@ -461,7 +457,6 @@ function updateShelly1States(deviceId, status, callback) {
         let value = ids[i];
         let controlFunction;
         // historical mapping
-
         switch (id) {
           case 'relays.ison':
             id = 'Relay0.Switch';
@@ -718,37 +713,36 @@ function updateShelly2States(deviceId, status, callback) {
   // CoAP Messages - switches on/on
   // if (status &&  knownDevices[deviceId].mode === 'relay') {
   if (status) {
-    let ids = getIoBrokerStatesFromObj(status);
-    for (let i in ids) {
-      let id = i;
-      let value = ids[i];
-      let controlFunction;
-      // historical mapping
-
+    for (let i in status.G) {
+      let id = status.G[i][1];
+      let value = status.G[i][2];
       switch (id) {
-        case 'G02':
+        case 112:
           id = 'Relay0.Switch';
           value = value === 1 || value === true ? true : false;
           break;
-        case 'G12':
+        case 122:
           id = 'Relay1.Switch';
           value = value === 1 || value === true ? true : false;
           break;
+        case 113:
+          id = 'Shutter.Position';
+          value = value === -1 ? 101 : value;
+          break;
         default:
+          continue;
       }
-
       if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
         continue;
       }
       shellyStates[deviceId + '.' + id] = value;
-
       if (devices.hasOwnProperty(id)) {
         let stateId = deviceId + '.' + id;
         let common = devices[id];
         objectHelper.setOrUpdateObject(stateId, {
           type: 'state',
           common: common
-        }, ['name'], value, controlFunction);
+        }, ['name'], value);
       }
     }
     // return callback && callback();
@@ -1801,47 +1795,42 @@ function createShellyHTStates(deviceId) {
 }
 
 function updateShellyHTStates(deviceId, status, callback) {
-
   let devices = datapoints.getObjectByName('shellyht');
-  let ids = getIoBrokerStatesFromObj(status);
   let parameter = {};
+  if (status) {
+    for (let i in status.G) {
+      let id = status.G[i][1];
+      let value = status.G[i][2];
+      let controlFunction;
+      switch (id) {
+        case 33:
+          id = 'tmp.value';
+          break;
+        case 44:
+          id = 'hum.value';
+          value = value / 2;
+          break;
+        case 77:
+          id = 'bat.value';
+          break;
+        default:
+          continue;
+      }
+      if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+        continue;
+      }
+      shellyStates[deviceId + '.' + id] = value;
+      if (devices.hasOwnProperty(id)) {
+        let stateId = deviceId + '.' + id;
+        let common = devices[id];
+        objectHelper.setOrUpdateObject(stateId, {
+          type: 'state',
+          common: common
+        }, ['name'], value, controlFunction);
+      }
 
-  for (let i in ids) {
-    let id = i;
-    let value = ids[i];
-    let controlFunction;
-    // historical mapping
-
-    switch (id) {
-      case 'G02':
-        id = 'tmp.value';
-        break;
-      case 'G12':
-        id = 'hum.value';
-        value = value / 2;
-        break;
-      case 'G22':
-        id = 'bat.value';
-        break;
-      default:
     }
-
-    if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
-      continue;
-    }
-    shellyStates[deviceId + '.' + id] = value;
-
-    if (devices.hasOwnProperty(id)) {
-      let stateId = deviceId + '.' + id;
-      let common = devices[id];
-      objectHelper.setOrUpdateObject(stateId, {
-        type: 'state',
-        common: common
-      }, ['name'], value, controlFunction);
-    }
-
   }
-
   shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
     if (!error && data) {
       let ids = getIoBrokerStatesFromObj(data);

@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "2.1.7",
+        "version": "2.1.8",
         "news": {
+            "2.1.8": {
+                "en": "Consider roller (shutter) position in CoAP message",
+                "de": "Berücksichtigen Sie die Position des Rollens (Rollladen) in der CoAP-Meldung",
+                "ru": "Учитывайте положение ролика (затвора) в сообщении CoAP",
+                "pt": "Considere a posição do rolo (obturador) na mensagem CoAP",
+                "nl": "Overweeg de positie van de rol (sluiter) in CoAP-bericht",
+                "fr": "Considérer la position du rouleau (obturateur) dans le message CoAP",
+                "it": "Considerare la posizione del rullo (otturatore) nel messaggio CoAP",
+                "es": "Considere la posición del rodillo (obturador) en el mensaje CoAP",
+                "pl": "Rozważ położenie rolki (migawki) w komunikacie CoAP",
+                "zh-cn": "考虑CoAP消息中的滚轮（快门）位置"
+            },
             "2.1.7": {
                 "en": "Changing all RGBWW2 colors at the same time",
                 "de": "Gleichzeitiges Ändern aller RGBWW2-Farben",
