@@ -43,6 +43,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ### 2.1.8 (19.03.2019)
 * Consider roller (shutter) position in CoAP message 
+* Support of Shelly Sensor
 
 ### 2.1.7 (15.03.2019)
 * Changing all RGBWW2 colors at the same time

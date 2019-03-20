@@ -284,6 +284,8 @@ function createShellyStates(deviceId, description, ip, status, callback) {
       createShellyHTStates(deviceId);
     } else if (deviceId.startsWith('SHSM-01')) {
       createShellySmokeStates(deviceId);
+    } else if (deviceId.startsWith('SHSEN-1')) {
+      createShellySenStates(deviceId);
     } else {
       displaySettings(deviceId);
       callback && callback();
@@ -328,6 +330,8 @@ function updateShellyStates(deviceId, status, callback) {
       updateShellyHTStates(deviceId, status, callback);
     } else if (deviceId.startsWith('SHSM-01')) {
       updateShellySmokeStates(deviceId, status, callback);
+    } else if (deviceId.startsWith('SHSEN-1')) {
+      updateShellySenStates(deviceId, status, callback);
     } else {
       callback && callback();
     }
@@ -1871,9 +1875,10 @@ function updateShellyHTStates(deviceId, status, callback) {
   // callback && callback();
 }
 
-// *******************************************************************************
-// Shelly Smoke
-// *******************************************************************************
+/**
+ * Shelly Smoke
+ * @param {*} deviceId 
+ */
 function createShellySmokeStates(deviceId) {
 
   let devices = datapoints.getObjectByName('shellysmoke');
@@ -1895,6 +1900,12 @@ function createShellySmokeStates(deviceId) {
 
 }
 
+/**
+ * Shelly Smoke 
+ * @param {*} deviceId 
+ * @param {*} status 
+ * @param {*} callback 
+ */
 function updateShellySmokeStates(deviceId, status, callback) {
 
   let devices = datapoints.getObjectByName('shellysmoke');
@@ -1975,6 +1986,139 @@ function updateShellySmokeStates(deviceId, status, callback) {
     callback && callback();
   });
   // callback && callback();
+}
+
+/**
+ * Shelly Sensor
+ * @param {string} deviceId - Device ID
+ */
+function createShellySenStates(deviceId) {
+  let devices = datapoints.getObjectByName('shellysen');
+  for (let i in devices) {
+    let common = devices[i];
+    let stateId = deviceId + '.' + i;
+    let controlFunction;
+    let value;
+
+    createChannel(deviceId, i);
+
+    adapter.log.debug('Creating State ' + stateId);
+    objectHelper.setOrUpdateObject(stateId, {
+      type: 'state',
+      common: common
+    }, ['name'], value, controlFunction);
+  }
+}
+
+/**
+ * 
+ * @param {string} deviceId - Device Id like SHSEN-1#849BB9#1:
+ * @param {object} status - CoAP Status in Shelly 
+ * @param {function} callback - function 
+ */
+function updateShellySenStates(deviceId, status, callback) {
+  let devices = datapoints.getObjectByName('shellysen');
+  let parameter = {};
+  // CoAP Messages - switches on/on
+  // if (status &&  knownDevices[deviceId].mode === 'relay') {
+  if (status) {
+    for (let i in status.G) {
+      let id = status.G[i][1];
+      let value = status.G[i][2];
+      switch (id) {
+        case 11:
+          id = 'sensor.motion';
+          break;
+        case 22:
+          id = 'sensor.charger';
+          break;
+        case 33:
+          id = 'sensor.temperature';
+          break;
+        case 44:
+          id = 'sensor.humidity';
+          break;
+        case 66:
+          id = 'sensor.lux';
+          break;
+        case 77:
+          id = 'sensor.battery';
+          break;
+        default:
+          continue;
+      }
+      if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+        continue;
+      }
+      shellyStates[deviceId + '.' + id] = value;
+      if (devices.hasOwnProperty(id)) {
+        let stateId = deviceId + '.' + id;
+        let common = devices[id];
+        objectHelper.setOrUpdateObject(stateId, {
+          type: 'state',
+          common: common
+        }, ['name'], value);
+      }
+    }
+    // return callback && callback();
+  }
+  shelly.callDevice(deviceId, '/status', parameter, (error, data) => {
+    if (!error && data) {
+      let ids = getIoBrokerStatesFromObj(data);
+      for (let i in ids) {
+        let id = i;
+        let value = ids[i];
+        let controlFunction;
+        // historical mapping
+        switch (id) {
+          case 'motion': // in Status
+            id = 'sensor.motion';
+            break;
+          case 'charger':
+            id = 'sensor.charger';
+            break;
+          case 'tmp.value':
+            id = 'sensor.temperature';
+            break;
+          case 'hum.value':
+            id = 'sensor.humidity';
+            break;
+          case 'lux.value':
+            id = 'sensor.lux';
+            break;
+          case 'bat.value':
+            id = 'sensor.battery';
+            break;
+          case 'wifi_sta.rssi':
+            id = 'rssi';
+            break;
+          case 'update.has_update':
+            id = 'firmware';
+            break;
+          default:
+        }
+        if (shellyStates.hasOwnProperty(deviceId + '.' + id) && shellyStates[deviceId + '.' + id] == value) {
+          continue;
+        }
+        shellyStates[deviceId + '.' + id] = value;
+
+        if (devices.hasOwnProperty(id)) {
+          let stateId = deviceId + '.' + id;
+          let common = devices[id];
+          // adapter.log.debug(i + ' = ' + stateId);
+          objectHelper.setOrUpdateObject(stateId, {
+            type: 'state',
+            common: common
+          }, ['name'], value, controlFunction);
+        }
+
+      }
+      setOnlineStatus(deviceId, true);
+    } else {
+      setOnlineStatus(deviceId, false);
+    }
+    callback && callback();
+  });
 }
 
 
