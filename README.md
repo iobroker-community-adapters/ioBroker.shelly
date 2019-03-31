@@ -40,6 +40,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ## Changelog
 
+### 2.1.9 (31.03.2019)
+* Add status 'firmware update' for Shelly RGBW, RGBW2 and Bulb
+
 ### 2.1.8 (19.03.2019)
 * Consider roller (shutter) position in CoAP message 
 * Support of Shelly Sensor

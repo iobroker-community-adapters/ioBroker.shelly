@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "2.1.8",
+        "version": "2.1.9",
         "news": {
+            "2.1.9": {
+                "en": "Add status firmware update for Shelly RGBW, RGBW2 and Bulb",
+                "de": "Fügen Sie das Status-Firmware-Update für Shelly RGBW, RGBW2 und Bulb hinzu",
+                "ru": "Добавить обновление прошивки статуса для Shelly RGBW, RGBW2 и Bulb",
+                "pt": "Adicionar atualização de firmware de status para Shelly RGBW, RGBW2 e Bulb",
+                "nl": "Status-firmware-update toevoegen voor Shelly RGBW, RGBW2 en Bulb",
+                "fr": "Ajouter une mise à jour du micrologiciel d'état pour Shelly RGBW, RGBW2 et Bulb",
+                "it": "Aggiungi l'aggiornamento del firmware di stato per Shelly RGBW, RGBW2 e Bulb",
+                "es": "Agregar actualización de firmware de estado para Shelly RGBW, RGBW2 y Bulb",
+                "pl": "Dodaj aktualizację oprogramowania układowego statusu dla Shelly RGBW, RGBW2 i Bulb",
+                "zh-cn": "添加Shelly RGBW，RGBW2和Bulb的状态固件更新"
+            },
             "2.1.8": {
                 "en": "Consider roller (shutter) position in CoAP message",
                 "de": "Berücksichtigen Sie die Position des Rollens (Rollladen) in der CoAP-Meldung",
