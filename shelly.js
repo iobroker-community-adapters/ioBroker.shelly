@@ -268,7 +268,7 @@ function createShellyStates(deviceId, description, ip, status, callback) {
   adapter.log.debug('Create Shelly States for ' + deviceId);
   if (deviceId && typeof deviceId === 'string') {
     createDevice(deviceId, description, ip);
-    if (deviceId.startsWith('SHSW-1')) {
+    if (deviceId.startsWith('SHSW-1') || deviceId.startsWith('SHSW-PM')) {
       createShelly1States(deviceId);
     } else if (deviceId.startsWith('SHSW-2')) {
       createShelly2States(deviceId);
@@ -314,7 +314,7 @@ function updateShellyStates(deviceId, status, callback) {
 
   adapter.log.debug('Update Shelly States for ' + deviceId);
   if (deviceId && typeof deviceId === 'string') {
-    if (deviceId.startsWith('SHSW-1')) {
+    if (deviceId.startsWith('SHSW-1') || deviceId.startsWith('SHSW-PM')) {
       updateShelly1States(deviceId, status, callback);
     } else if (deviceId.startsWith('SHSW-2')) {
       updateShelly2States(deviceId, status, callback);
@@ -342,11 +342,13 @@ function updateShellyStates(deviceId, status, callback) {
 
 
 // *******************************************************************************
-// Shelly 1
+// Shelly 1 and Shelly 1PM
 // *******************************************************************************
 function createShelly1States(deviceId) {
 
-  let devices = datapoints.getObjectByName('shelly1');
+  let devices;
+  if (deviceId && deviceId.startsWith('SHSW-1')) devices = datapoints.getObjectByName('shelly1');
+  if (deviceId && deviceId.startsWith('SHSW-PM')) devices = datapoints.getObjectByName('shelly1pm');
 
   for (let i in devices) {
     let common = devices[i];
@@ -420,7 +422,9 @@ function createShelly1States(deviceId) {
 
 function updateShelly1States(deviceId, status, callback) {
 
-  let devices = datapoints.getObjectByName('shelly1');
+  let devices;
+  if (deviceId && deviceId.startsWith('SHSW-1')) devices = datapoints.getObjectByName('shelly1');
+  if (deviceId && deviceId.startsWith('SHSW-PM')) devices = datapoints.getObjectByName('shelly1pm');
   let parameter = {};
 
   // get status from CoAP Message
@@ -470,6 +474,9 @@ function updateShelly1States(deviceId, status, callback) {
             break;
           case 'relays.auto_off':
             id = 'Relay0.AutoTimerOff';
+            break;
+          case 'meters.power':
+            id = 'Power';
             break;
           default:
         }
@@ -541,7 +548,12 @@ function updateShelly1States(deviceId, status, callback) {
 // *******************************************************************************
 function createShelly2States(deviceId) {
 
-  let devices = datapoints.getObjectByName('shelly2');
+  let devices;
+  if (deviceId.startsWith('SHSW-25')) {
+    devices = datapoints.getObjectByName('shelly25');
+  } else {
+    devices = datapoints.getObjectByName('shelly2');
+  }
 
   for (let i in devices) {
     let common = devices[i];
@@ -711,7 +723,12 @@ function createShelly2States(deviceId) {
 
 function updateShelly2States(deviceId, status, callback) {
 
-  let devices = datapoints.getObjectByName('shelly2');
+  let devices;
+  if (deviceId.startsWith('SHSW-25')) {
+    devices = datapoints.getObjectByName('shelly25');
+  } else {
+    devices = datapoints.getObjectByName('shelly2');
+  }
   let parameter = {};
 
   // CoAP Messages - switches on/on
@@ -801,6 +818,12 @@ function updateShelly2States(deviceId, status, callback) {
             break;
           case 'meters.power':
             id = 'Power';
+            break;
+          case 'meters0.power':
+            id = 'relays0.Power';
+            break;
+          case 'meters1.power':
+            id = 'relays1.Power';
             break;
           default:
         }

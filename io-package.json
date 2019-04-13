@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "2.1.9",
+        "version": "2.2.0",
         "news": {
+            "2.2.0": {
+                "en": "Add devices Shelly 2.5 and Shelly 1 PM ",
+                "de": "Fügen Sie die Geräte Shelly 2.5 und Shelly 1 PM hinzu",
+                "ru": "Добавьте устройства Shelly 2.5 и Shelly 13:00.",
+                "pt": "Adicionar dispositivos Shelly 2.5 e Shelly 1 PM",
+                "nl": "Apparaten Shelly 2.5 en Shelly 1 PM toevoegen",
+                "fr": "Ajouter des appareils Shelly 2.5 et Shelly 13 heures",
+                "it": "Aggiungi i dispositivi Shelly 2.5 e Shelly 1 PM",
+                "es": "Agregar dispositivos Shelly 2.5 y Shelly 1 PM",
+                "pl": "Dodaj urządzenia Shelly 2.5 i Shelly 1 PM",
+                "zh-cn": "添加设备Shelly 2.5和Shelly 1 PM"
+            },
             "2.1.9": {
                 "en": "Add status firmware update for Shelly RGBW, RGBW2 and Bulb",
                 "de": "Fügen Sie das Status-Firmware-Update für Shelly RGBW, RGBW2 und Bulb hinzu",

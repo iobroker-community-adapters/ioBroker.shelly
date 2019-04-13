@@ -32,6 +32,8 @@ You will find more and detailed information about the device here : [Shelly](htt
 * ShellyRGBW (SHRGBWW-01, Verified)
 * Shelly H&T (SHHT-1, verified)
 * Shelly Smoke (SHSM-01, verified)
+* Shelly 1 1PM (SHSW-PM, verified)  
+* Shelly 2.5 (SHSW-25, verified)  
 
 ## More details needed to implement (Debug log)
 * ShellySense (SHSEN-1)
@@ -39,6 +41,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 * Shelly2LED (SH2LED-1)
 
 ## Changelog
+
+### 2.2.0 (13.04.2019)
+* Add devices Shelly 2.5 and Shelly 1 PM 
 
 ### 2.1.9 (31.03.2019)
 * Add status 'firmware update' for Shelly RGBW, RGBW2 and Bulb
