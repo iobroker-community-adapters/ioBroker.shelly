@@ -548,12 +548,9 @@ function updateShelly1States(deviceId, status, callback) {
 // *******************************************************************************
 function createShelly2States(deviceId) {
 
-  let devices;
-  if (deviceId.startsWith('SHSW-25')) {
-    devices = datapoints.getObjectByName('shelly25');
-  } else {
-    devices = datapoints.getObjectByName('shelly2');
-  }
+  let devices = {};
+  if (deviceId.startsWith('SHSW-21')) devices = datapoints.getObjectByName('shelly21');
+  if (deviceId.startsWith('SHSW-25')) devices = datapoints.getObjectByName('shelly25');
 
   for (let i in devices) {
     let common = devices[i];
@@ -723,12 +720,9 @@ function createShelly2States(deviceId) {
 
 function updateShelly2States(deviceId, status, callback) {
 
-  let devices;
-  if (deviceId.startsWith('SHSW-25')) {
-    devices = datapoints.getObjectByName('shelly25');
-  } else {
-    devices = datapoints.getObjectByName('shelly2');
-  }
+  let devices = {};
+  if (deviceId.startsWith('SHSW-21')) devices = datapoints.getObjectByName('shelly21');
+  if (deviceId.startsWith('SHSW-25')) devices = datapoints.getObjectByName('shelly25');
   let parameter = {};
 
   // CoAP Messages - switches on/on
@@ -820,10 +814,10 @@ function updateShelly2States(deviceId, status, callback) {
             id = 'Power';
             break;
           case 'meters0.power':
-            id = 'relays0.Power';
+            id = 'Relay0.Power';
             break;
           case 'meters1.power':
-            id = 'relays1.Power';
+            id = 'Relay1.Power';
             break;
           default:
         }
