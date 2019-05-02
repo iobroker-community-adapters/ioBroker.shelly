@@ -8,6 +8,7 @@ node_js:
   - '6'
   - '8'
   - '10'
+  - '12'
 before_install:
   - 'if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CC=clang++; export CXX=clang++; export CXXFLAGS=-stdlib=libc++; fi'
   - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CXX=g++-4.9; fi'
