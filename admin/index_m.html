@@ -165,6 +165,17 @@
         </div>
 
         <div class="row">
+          <div class="input-field col s8 m8 l3">
+            <select id="protocol" class="value">
+              <option value="mqtt">MQTT and http</option>
+              <option value="coap">CoAP and http</option>
+              <option value="both">MQTT, CoAP and http</option>
+            </select>
+            <label class="translate" for="protocol">Shelly protocol</label>
+          </div>
+        </div>
+
+        <div class="row">
           <div class="col s12 m8 l5">
             <select class="value" id="bind"></select>
             <label class="translate" for="bind">IP:</label>

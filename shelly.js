@@ -138,11 +138,16 @@ function main() {
   onlineCheck();
   adapter.subscribeStates('*');
   objectHelper.init(adapter);
+  
+  if (adapter.config.protocol === 'both' || adapter.config.protocol === 'mqtt') {
+    let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper);
+    serverMqtt.listen();
+  }
 
-  let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper);
-  serverMqtt.listen();
-  let serverCoap = new coapServer.CoAPServer(adapter, objectHelper);
-  serverCoap.listen();
+  if (adapter.config.protocol === 'both' || adapter.config.protocol === 'coap') {
+    let serverCoap = new coapServer.CoAPServer(adapter, objectHelper);
+    serverCoap.listen();
+  }
 
 }
 

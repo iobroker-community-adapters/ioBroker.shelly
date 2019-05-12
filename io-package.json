@@ -270,6 +270,7 @@
         "pwd": false,
         "polltime": 10,
         "timeout": 0.25,
+        "protocol": "both",
         "keys": [
             {
                 "hosts": "",
