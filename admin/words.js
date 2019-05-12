@@ -2,12 +2,92 @@
 'use strict';
 
 systemDictionary = {
-    "Auto": {                                        "en": "Auto",                                            "de": "Auto",                                            "ru": "Автоматически",                                   "pt": "Auto",                                            "nl": "Auto",                                            "fr": "Auto",                                            "it": "Auto",                                            "es": "Auto",                                            "pl": "Auto",                                            "zh-cn": "汽车"},
-    "Confirm Password": {                            "en": "Confim Password",                                 "de": "Bestätige das Passwort",                          "ru": "Подтвердите Пароль",                              "pt": "Confirme a Senha",                                "nl": "bevestig wachtwoord",                             "fr": "Confirmez le mot de passe",                       "it": "conferma password",                               "es": "Confirmar contraseña",                            "pl": "Potwierdź hasło",                                 "zh-cn": "Confim密码"},
-    "Manual": {                                      "en": "Manual",                                          "de": "Manual",                                          "ru": "Вручную",                                         "pt": "Manual",                                          "nl": "Met de hand",                                     "fr": "Manuel",                                          "it": "Manuale",                                         "es": "Manual",                                          "pl": "Manual",                                          "zh-cn": "手册"},
-    "Password": {                                    "en": "Password",                                        "de": "Passwort",                                        "ru": "пароль",                                          "pt": "Senha",                                           "nl": "Wachtwoord",                                      "fr": "Mot de passe",                                    "it": "Parola d'ordine",                                 "es": "Contraseña",                                      "pl": "Hasło",                                           "zh-cn": "密码"},
-    "Password Enable": {                             "en": "Login with password",                             "de": "Einloggen mit Passwort",                          "ru": "Вход с паролем",                                  "pt": "Login com senha",                                 "nl": "Inloggen met wachtwoord",                         "fr": "Se connecter avec mot de passe",                  "it": "Accedi con password",                             "es": "Iniciar sesión con contraseña",                   "pl": "Zaloguj się za pomocą hasła",                     "zh-cn": "登录密码"},
-    "User": {                                        "en": "User",                                            "de": "Benutzer",                                        "ru": "пользователь",                                    "pt": "Do utilizador",                                   "nl": "Gebruiker",                                       "fr": "Utilisateur",                                     "it": "Utente",                                          "es": "Usuario",                                         "pl": "Użytkownik",                                      "zh-cn": "用户"},
-    "on save adapter restarts with new config immediately": {"en": "on save adapter restarts with new config immediately", "de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.", "ru": "При сохранении настроек адаптера он сразу же перезапускается", "pt": "no adaptador de salvar reinicia com nova configuração imediatamente", "nl": "on save-adapter wordt onmiddellijk opnieuw opgestart met nieuwe config", "fr": "sur l'adaptateur de sauvegarde redémarre avec la nouvelle config immédiatement", "it": "su save adapter si riavvia immediatamente con la nuova configurazione", "es": "en el adaptador de guardar se reinicia con nueva configuración de inmediato", "pl": "on save adapter restarts with new config immediately", "zh-cn": "在保存适配器重新启动与新的配置立即"},
-    "shellydescription": {                           "en": "Shelly devices must be in the same subnet as ioBroker for working with ioBroker. ioBroker finds Shelly devices  by his own. If there are not recognized, please reboot Shelly devices once.", "de": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Die Shelly Devices werden automatisch von ioBroker erkannt. Sollte das nicht der Fall sein, bitte Shelly Device rebooten.", "ru": "Шелли устройства должны быть в той же подсети, что ioBroker для работы с ioBroker. ioBroker находит устройства Шелли его собственного. Если не признаются, пожалуйста, перезагрузите устройств Шелли раз.", "pt": "Shelly dispositivos devem estar na mesma sub-rede como ioBroker para trabalhar com ioBroker. ioBroker encontrar Shelly dispositivos pelo seu próprio. Se lá não são reconhecidos, por favor, reinicie Shelly dispositivos de uma vez.", "nl": "Shelly apparaten moeten zich in hetzelfde subnet bevindt als ioBroker voor het werken met ioBroker. ioBroker vindt Shelly apparaten door zijn eigen. Als er niet wordt herkend, kunt u opnieuw opstarten Shelly apparaten ooit.", "fr": "Shelly, les appareils doivent être dans le même sous-réseau que ioBroker pour travailler avec ioBroker. ioBroker trouve Shelly appareils par son propre. Si il ne sont pas reconnu, s'il vous plaît redémarrer Shelly appareils une fois.", "it": "Shelly dispositivi devono essere nella stessa sottorete ioBroker per lavorare con ioBroker. ioBroker trova Shelly dispositivi dai suoi. Se ci non sono riconosciute, si prega di riavviare Shelly dispositivi di una volta.", "es": "Shelly los dispositivos deben estar en la misma subred que ioBroker para trabajar con ioBroker. ioBroker encuentra Shelly dispositivos por su cuenta. Si no se reconoce, por favor reinicie Shelly los dispositivos de una vez.", "pl": "Shelley urządzenia muszą być w tej samej podsieci, co ioBroker do pracy z ioBroker. ioBroker wyszukuje urządzenia Shelley jego własnego. Jeśli nie przyznają, proszę ponownie uruchomić urządzeń Shelley razy.", "zh-cn": "雪莉设备必须在同一网作为ioBroker工作ioBroker的。 ioBroker找到雪莉设备由他自己的。 如果没有认识到，请重新启动Shelly设备的一次。"},
+  "Auto": {
+    "en": "Auto",
+    "de": "Auto",
+    "ru": "Автоматически",
+    "pt": "Auto",
+    "nl": "Auto",
+    "fr": "Auto",
+    "it": "Auto",
+    "es": "Auto",
+    "pl": "Auto"
+  },
+  "Manual": {
+    "en": "Manual",
+    "de": "Manual",
+    "ru": "Вручную",
+    "pt": "Manual",
+    "nl": "Met de hand",
+    "fr": "Manuel",
+    "it": "Manuale",
+    "es": "Manual",
+    "pl": "Manual"
+  },
+  "on save adapter restarts with new config immediately": {
+    "en": "on save adapter restarts with new config immediately",
+    "de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
+    "ru": "При сохранении настроек адаптера он сразу же перезапускается",
+    "pt": "no adaptador de salvar reinicia com nova configuração imediatamente",
+    "nl": "on save-adapter wordt onmiddellijk opnieuw opgestart met nieuwe config",
+    "fr": "sur l'adaptateur de sauvegarde redémarre avec la nouvelle config immédiatement",
+    "it": "su save adapter si riavvia immediatamente con la nuova configurazione",
+    "es": "en el adaptador de guardar se reinicia con nueva configuración de inmediato",
+    "pl": "on save adapter restarts with new config immediately"
+  },
+  "shellydescription": {
+    "en": "Shelly devices must be in the same subnet as ioBroker for working with ioBroker. ioBroker finds Shelly devices  by his own. If there are not recognized, please reboot Shelly devices once.",
+    "de": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Die Shelly Devices werden automatisch von ioBroker erkannt. Sollte das nicht der Fall sein, bitte Shelly Device rebooten.",
+    "ru": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Устройства Die Shelly были автоматизированы. Sollte das nicht der Fall sein, bitte Shelly Gerät rebooten.",
+    "pt": "Shelly Device deve ser substituído por Subnetz wie ioBroker befinden. Die Shelly Devices é um automatismo automático. Sollte das coisas do outono, bitte Shelly Gerät rebooten.",
+    "nl": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Die Shelly Devices were automatisch erkannt. Sollte das nicht der Fall sein, bitte Shelly Gerät rebooten.",
+    "fr": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Die Shelly Devices werden automatisch erkannt. Sollte dicht nicht der Fall sein, bitte Shelly Gerät rebooten.",
+    "it": "Dispositivo Shelly muss sich im gleichen Subnetz wie ioBroker befinden. Die Shelly Devices werden automatisch erkannt. Sollte das nicht der Fall sein, bitte Shelly Gerät rebooten.",
+    "es": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Die Shelly Devices werden automatisch erkannt. Sollte das nicht der Fall sein, bitte Shelly Gerät reiniciado.",
+    "pl": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Urządzenia Die Shelly werden automatisch erkannt. Sollte das nicht der Fall sein, bitte Shelly Gerät rebooten."
+  },
+  "User": {
+    "en": "User",
+    "de": "Benutzer",
+    "ru": "пользователь",
+    "pt": "Do utilizador",
+    "nl": "Gebruiker",
+    "fr": "Utilisateur",
+    "it": "Utente",
+    "es": "Usuario",
+    "pl": "Użytkownik"
+  },
+  "Password": {
+    "en": "Password",
+    "de": "Passwort",
+    "ru": "пароль",
+    "pt": "Senha",
+    "nl": "Wachtwoord",
+    "fr": "Mot de passe",
+    "it": "Parola d'ordine",
+    "es": "Contraseña",
+    "pl": "Hasło"
+  },
+  "Confirm Password": {
+    "en": "Confim Password",
+    "de": "Bestätige das Passwort",
+    "ru": "Подтвердите Пароль",
+    "pt": "Confirme a Senha",
+    "nl": "bevestig wachtwoord",
+    "fr": "Confirmez le mot de passe",
+    "it": "conferma password",
+    "es": "Confirmar contraseña",
+    "pl": "Potwierdź hasło"
+  },
+  "Password Enable": {
+    "en": "Login with password",
+    "de": "Einloggen mit Passwort",
+    "ru": "Вход с паролем",
+    "pt": "Login com senha",
+    "nl": "Inloggen met wachtwoord",
+    "fr": "Se connecter avec mot de passe",
+    "it": "Accedi con password",
+    "es": "Iniciar sesión con contraseña",
+    "pl": "Zaloguj się za pomocą hasła"
+  }
 };

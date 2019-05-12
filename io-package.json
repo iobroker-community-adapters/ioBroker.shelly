@@ -1,8 +1,11 @@
 {
     "common": {
         "name": "shelly",
-        "version": "2.2.0",
+        "version": "2.2.1",
         "news": {
+            "2.2.1": {
+                "en": "MQTT Support"
+            },
             "2.2.0": {
                 "en": "Add devices Shelly 2.5 and Shelly 1 PM ",
                 "de": "Fügen Sie die Geräte Shelly 2.5 und Shelly 1 PM hinzu",
@@ -257,9 +260,14 @@
         "restartAdapters": []
     },
     "native": {
+        "bind": "0.0.0.0",
+        "port": 1882,
+        "password": "mqttuser",
+        "user": "mqttuser",
+        "http_password": "",
+        "http_username": "admin",
+        "qos": 0,
         "pwd": false,
-        "user": "admin",
-        "password": "",
         "polltime": 10,
         "timeout": 0.25,
         "keys": [
