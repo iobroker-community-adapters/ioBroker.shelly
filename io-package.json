@@ -4,7 +4,16 @@
         "version": "2.2.1",
         "news": {
             "2.2.1": {
-                "en": "MQTT Support"
+                "en": "MQTT Support",
+                "de": "MQTT-Unterstützung",
+                "ru": "MQTT Поддержка",
+                "pt": "Suporte MQTT",
+                "nl": "MQTT-ondersteuning",
+                "fr": "Support MQTT",
+                "it": "Supporto MQTT",
+                "es": "Soporte MQTT",
+                "pl": "Obsługa MQTT",
+                "zh-cn": "MQTT支持"
             },
             "2.2.0": {
                 "en": "Add devices Shelly 2.5 and Shelly 1 PM ",
