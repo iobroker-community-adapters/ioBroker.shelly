@@ -194,30 +194,6 @@
                 "es": "Muestra RSSI del Estado para Shelly 1 & 2",
                 "pl": "Pokazuje status bobblehead dla Shelley 1 & 2",
                 "zh-cn": "表示RSSI状态雪莉1和2"
-            },
-            "2.0.2": {
-                "en": "Add Shelly H&T",
-                "de": "Shelly H&T Unterstützung",
-                "ru": "Добавить Шелли H&Т",
-                "pt": "Adicionar Shelly H&T",
-                "nl": "Toevoegen Shelly H&T",
-                "fr": "Ajouter Shelly H&T",
-                "it": "Aggiungere Shelly H&T",
-                "es": "Agregar Shelly H&T",
-                "pl": "Dodaj Shelley H&T",
-                "zh-cn": "加雪莉H&T"
-            },
-            "2.0.1": {
-                "en": "Major update because of problems with CoAP messages",
-                "de": "Design Änderungen wegen Problemen mit CoAP ",
-                "ru": "Крупное обновление из-за проблем с алкогольных сообщения",
-                "pt": "Grande atualização devido a problemas com o CoAP mensagens",
-                "nl": "Grote update gevolg van problemen met de CoAP berichten",
-                "fr": "Mise à jour majeure en raison de problèmes avec CoAP messages",
-                "it": "Importante aggiornamento a causa di problemi con CoAP messaggi",
-                "es": "Actualización importante debido a problemas con el CoAP mensajes",
-                "pl": "Ważną aktualizację z powodu problemów alkoholowych wiadomości",
-                "zh-cn": "主要的更新，因为问题与发消息"
             }
         },
         "title": "Shelly",

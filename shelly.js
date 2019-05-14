@@ -57,7 +57,6 @@ function startAdapter(options) {
   });
 
   adapter.on('ready', () => {
-
     adapter.getForeignObject('system.config', (err, obj) => {
       if (adapter.config.password) {
         if (obj && obj.native && obj.native.secret) {
@@ -79,7 +78,6 @@ function startAdapter(options) {
       }
       main();
     });
-
   });
 
   return adapter;
@@ -135,6 +133,7 @@ async function onlineCheck() {
 // Main
 // *****************************************************************************************************
 function main() {
+
   onlineCheck();
   adapter.subscribeStates('*');
   objectHelper.init(adapter);
