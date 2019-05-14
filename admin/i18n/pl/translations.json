@@ -1,6 +1,11 @@
 {
     "Auto": "Auto",
     "Confirm Password": "Potwierdź hasło",
+    "Http Password": "Hasło HTTP",
+    "Http Username": "Nazwa użytkownika HTTP",
+    "MQTT Listen IP": "MQTT Słuchaj IP",
+    "MQTT Password": "Hasło MQTT",
+    "MQTT Username": "Nazwa użytkownika MQTT",
     "Manual": "Manual",
     "Password": "Hasło",
     "Password Enable": "Zaloguj się za pomocą hasła",

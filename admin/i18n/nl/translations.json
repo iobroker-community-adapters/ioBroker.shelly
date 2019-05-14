@@ -1,6 +1,11 @@
 {
     "Auto": "Auto",
     "Confirm Password": "bevestig wachtwoord",
+    "Http Password": "Http Wachtwoord",
+    "Http Username": "Http gebruikersnaam",
+    "MQTT Listen IP": "MQTT Listen IP",
+    "MQTT Password": "MQTT-wachtwoord",
+    "MQTT Username": "MQTT-gebruikersnaam",
     "Manual": "Met de hand",
     "Password": "Wachtwoord",
     "Password Enable": "Inloggen met wachtwoord",

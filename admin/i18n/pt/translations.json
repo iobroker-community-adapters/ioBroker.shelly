@@ -1,6 +1,11 @@
 {
     "Auto": "Auto",
     "Confirm Password": "Confirme a Senha",
+    "Http Password": "Senha Http",
+    "Http Username": "Nome de Usuário Http",
+    "MQTT Listen IP": "MQTT Listen IP",
+    "MQTT Password": "Senha MQTT",
+    "MQTT Username": "Nome de Usuário MQTT",
     "Manual": "Manual",
     "Password": "Senha",
     "Password Enable": "Login com senha",

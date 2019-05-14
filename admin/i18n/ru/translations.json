@@ -1,6 +1,11 @@
 {
     "Auto": "Автоматически",
     "Confirm Password": "Подтвердите Пароль",
+    "Http Password": "Пароль Http",
+    "Http Username": "Http имя пользователя",
+    "MQTT Listen IP": "MQTT Listen IP",
+    "MQTT Password": "MQTT пароль",
+    "MQTT Username": "Имя пользователя MQTT",
     "Manual": "Вручную",
     "Password": "пароль",
     "Password Enable": "Вход с паролем",

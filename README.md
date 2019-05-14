@@ -43,7 +43,11 @@ You will find more and detailed information about the device here : [Shelly](htt
 ## Changelog
 
 ### 2.2.1 (12.05.2019)
-* MQTT Support 
+* (Stübi) Redesign of the adapter. You can choose now between CoAP and MQTT protocoll  
+* (Stübi) MQTT and CoAP suport for Shelly1 (SHSW-1, Verified)
+* (Stübi) MQTT and CoAP suport for Shelly2 (SHSW-21/SHSW-22, Verified)
+* (Stübi) MQTT and CoAP suport for Shelly 1 1PM (SHSW-PM, verified)  
+* (Stübi) MQTT and CoAP suport for Shelly 2.5 (SHSW-25, verified)  
 
 ### 2.2.0 (13.04.2019)
 * Add devices Shelly 2.5 and Shelly 1 PM 
