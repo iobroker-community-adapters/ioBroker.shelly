@@ -125,6 +125,7 @@ async function onlineCheck() {
       }
     }
   } catch (error) { /* */ }
+
   await sleep(60 * 1000);
   await onlineCheck();
 }
@@ -134,7 +135,7 @@ async function onlineCheck() {
 
 function main() {
   onlineCheck();
-  adapter.setState('info.connection', { val: true, ack: true});
+  adapter.setState('info.connection', { val: true, ack: true });
   adapter.subscribeStates('*');
   objectHelper.init(adapter);
   setTimeout(() => {
