@@ -129,15 +129,14 @@ async function onlineCheck() {
   await onlineCheck();
 }
 
-// *****************************************************************************************************
-// Main
-// *****************************************************************************************************
-function main() {
 
+
+
+function main() {
   onlineCheck();
+  adapter.setState('info.connection', { val: true, ack: true});
   adapter.subscribeStates('*');
   objectHelper.init(adapter);
-
   setTimeout(() => {
     if (adapter.config.protocol === 'both' || adapter.config.protocol === 'mqtt') {
       let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper);
@@ -151,7 +150,6 @@ function main() {
       serverCoap.listen();
     }
   });
-
 }
 
 // If started as allInOne mode => return function to create instance
