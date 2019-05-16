@@ -48,6 +48,8 @@ You will find more and detailed information about the device here : [Shelly](htt
 * (Stübi) MQTT and CoAP suport for Shelly2 (SHSW-21/SHSW-22, Verified)
 * (Stübi) MQTT and CoAP suport for Shelly 1 1PM (SHSW-PM, verified)  
 * (Stübi) MQTT and CoAP suport for Shelly 2.5 (SHSW-25, verified)  
+* (Stübi) MQTT and CoAP suport for Shelly H&T (SHHT-1, verified)
+* (Stübi) MQTT and CoAP suport for Shelly Smoke (SHSM-01, verified)
 
 ### 2.2.0 (13.04.2019)
 * Add devices Shelly 2.5 and Shelly 1 PM 
