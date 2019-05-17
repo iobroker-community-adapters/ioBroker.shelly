@@ -23,26 +23,26 @@ You will find more and detailed information about the device here : [Shelly](htt
 2. No configuration needed. Shelly devices will be detected and added automatically. Sometimes you have to restart the shelly device or control it once using the app before it appear initially in ioBroker.
 
 ## Supported devices
-* Shelly1 (SHSW-1, Verified)
-* Shelly2 (SHSW-21/SHSW-22, Verified)
-* ShellyRGBW (SHRGBWW-01, Verified)
-* ShellyRGBW2 (SHRGBW2-01, not verified and tested)
-* Shelly4Pro (SHSW-44, not verified and tested)
-* ShellyPlug (SHPLG-1, not verified and tested) 
-* ShellyRGBW (SHRGBWW-01, Verified)
-* ShellyBulb (SHBLB, Verified)
-* Shelly2LED (SH2LED, Verified)
-* ShellySense (SHSEN-1, Verified)
+* Shelly1 (SHSW-1, verified)
+* Shelly2 (SHSW-21/SHSW-22, verified)
+* ShellyBulb (SHBLB, verified)
 * Shelly H&T (SHHT-1, verified)
 * Shelly Smoke (SHSM-01, verified)
 * Shelly 1 1PM (SHSW-PM, verified)  
 * Shelly 2.5 (SHSW-25, verified)  
 
+* Shelly2LED (SH2LED, not verified)
+* ShellySense (SHSEN-1, not verified)
+* ShellyRGBW (SHRGBWW-01, not Verified)
+* ShellyRGBW2 (SHRGBW2-01, not verified)
+* Shelly4Pro (SHSW-44, not verified)
+* ShellyPlug (SHPLG-1, not verified) 
+
 ## More details needed to implement (Debug log
 
 ## Changelog
 
-### 2.2.1 (12.05.2019)
+### 3.0.0 (12.05.2019)
 * (Stübi) Redesign of the adapter. You can choose now between CoAP and MQTT protocoll  
 * (Stübi) MQTT and CoAP suport for Shelly1 (SHSW-1, Verified)
 * (Stübi) MQTT and CoAP suport for Shelly2 (SHSW-21/SHSW-22, Verified)
@@ -50,6 +50,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 * (Stübi) MQTT and CoAP suport for Shelly 2.5 (SHSW-25, verified)  
 * (Stübi) MQTT and CoAP suport for Shelly H&T (SHHT-1, verified)
 * (Stübi) MQTT and CoAP suport for Shelly Smoke (SHSM-01, verified)
+* (Stübi) MQTT and CoAP suport for Shelly Bulb (SHSM-01, verified)
 
 ### 2.2.0 (13.04.2019)
 * Add devices Shelly 2.5 and Shelly 1 PM 
