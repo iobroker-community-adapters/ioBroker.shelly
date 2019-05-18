@@ -47,7 +47,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 * ShellyRGBW2 (SHRGBW2, verified)
 * Shelly2LED (SH2LED, verified)
 * ShellyPlug (SHPLG-1, verified) 
-* ShellyPlug S (SHPLG-1, not verified) 
+* ShellyPlug S (SHPLG-1, verified) 
 * ShellySense (SHSEN-1, not verified)
 * Shelly4Pro (SHSW-44, not verified)
 
@@ -57,9 +57,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 ## Changelog
 
 ### 3.0.0 (12.05.2019)
-* (Stübi) Redesign of the adapter. You can choose now between CoAP and MQTT protocoll  
-* (Stübi) MQTT and CoAP suport for Shelly1 (SHSW-1, Verified)
-* (Stübi) MQTT and CoAP suport for Shelly2 (SHSW-21/SHSW-22, Verified)
+* (Stübi) Redesign of the adapter. You can choose now between CoAP and MQTT protocol  
+* (Stübi) MQTT and CoAP suport for Shelly1 (SHSW-1, verified)
+* (Stübi) MQTT and CoAP suport for Shelly2 (SHSW-21/SHSW-22, verified)
 * (Stübi) MQTT and CoAP suport for Shelly 1 1PM (SHSW-PM, verified)  
 * (Stübi) MQTT and CoAP suport for Shelly 2.5 (SHSW-25, verified)  
 * (Stübi) MQTT and CoAP suport for Shelly H&T (SHHT-1, verified)
@@ -68,9 +68,9 @@ You will find more and detailed information about the device here : [Shelly](htt
 * (Stübi) MQTT and CoAP suport for Shelly RGBW (SHRGBWW-01, verified)
 * (Stübi) MQTT and CoAP suport for Shelly RGBW2 (SHRGBW2, verified)
 * (Stübi) MQTT and CoAP suport for Shelly 2 LED (SH2LED, verified)
-* (Stübi) MQTT and CoAP suport for Shelly Plugin (SHPLG-1, verified)
+* (Stübi) MQTT and CoAP suport for Shelly Plug (SHPLG-1, verified)
+* (Stübi) MQTT and CoAP suport for Shelly Plug S (SHPLG-S, verified)
 * (Stübi) MQTT and CoAP suport for Shelly 4 Pro (SHSW-44, not verified)
-* (Stübi) MQTT and CoAP suport for Shelly Plugin S (SHPLG-S, not verified)
 * (Stübi) MQTT and CoAP suport for Shelly Sense (SHSEN-1, not verified)
 
 ### 2.2.0 (13.04.2019)
