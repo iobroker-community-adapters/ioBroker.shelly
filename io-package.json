@@ -249,13 +249,13 @@
         "port": 1882,
         "password": "mqttuser",
         "user": "mqttuser",
-        "http_password": "",
+        "http_password": "admin",
         "http_username": "admin",
         "qos": 0,
         "pwd": false,
         "polltime": 10,
         "timeout": 0.25,
-        "protocol": "both",
+        "protocol": "coap",
         "keys": [
             {
                 "hosts": "",
