@@ -30,13 +30,14 @@ You will find more and detailed information about the device here : [Shelly](htt
 * Shelly Smoke (SHSM-01, verified)
 * Shelly 1 1PM (SHSW-PM, verified)  
 * Shelly 2.5 (SHSW-25, verified)  
-
-* Shelly2LED (SH2LED, not verified)
+* ShellyRGBW (SHRGBWW-01, verified)
+* ShellyRGBW2 (SHRGBW2, verified)
+* Shelly2LED (SH2LED, verified)
+* ShellyPlug (SHPLG-1, verified) 
+* ShellyPlug S (SHPLG-1, not verified) 
 * ShellySense (SHSEN-1, not verified)
-* ShellyRGBW (SHRGBWW-01, not Verified)
-* ShellyRGBW2 (SHRGBW2-01, not verified)
 * Shelly4Pro (SHSW-44, not verified)
-* ShellyPlug (SHPLG-1, not verified) 
+
 
 ## More details needed to implement (Debug log
 
@@ -50,7 +51,12 @@ You will find more and detailed information about the device here : [Shelly](htt
 * (Stübi) MQTT and CoAP suport for Shelly 2.5 (SHSW-25, verified)  
 * (Stübi) MQTT and CoAP suport for Shelly H&T (SHHT-1, verified)
 * (Stübi) MQTT and CoAP suport for Shelly Smoke (SHSM-01, verified)
-* (Stübi) MQTT and CoAP suport for Shelly Bulb (SHSM-01, verified)
+* (Stübi) MQTT and CoAP suport for Shelly Bulb (SHBLB, verified)
+* (Stübi) MQTT and CoAP suport for Shelly RGBW (SHRGBWW-01, verified)
+* (Stübi) MQTT and CoAP suport for Shelly RGBW2 (SHRGBW2, verified)
+* (Stübi) MQTT and CoAP suport for Shelly 2 LED (SH2LED, verified)
+* (Stübi) MQTT and CoAP suport for Shelly Plugin (SHPLG-1, verified)
+* (Stübi) MQTT and CoAP suport for Shelly Plugin S (SHPLG-S, not verified)
 
 ### 2.2.0 (13.04.2019)
 * Add devices Shelly 2.5 and Shelly 1 PM 
