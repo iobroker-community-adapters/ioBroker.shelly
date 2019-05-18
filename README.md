@@ -56,6 +56,7 @@ You will find more and detailed information about the device here : [Shelly](htt
 * (Stübi) MQTT and CoAP suport for Shelly RGBW2 (SHRGBW2, verified)
 * (Stübi) MQTT and CoAP suport for Shelly 2 LED (SH2LED, verified)
 * (Stübi) MQTT and CoAP suport for Shelly Plugin (SHPLG-1, verified)
+* (Stübi) MQTT and CoAP suport for Shelly 4 Pro (SHSW-44, verified)
 * (Stübi) MQTT and CoAP suport for Shelly Plugin S (SHPLG-S, not verified)
 
 ### 2.2.0 (13.04.2019)
