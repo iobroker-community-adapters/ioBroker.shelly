@@ -22,7 +22,10 @@ If you use ioBroker in a docker container, the container has to run in host or m
 If you have problems with CoAP change to MQTT
 
 ### MQTT
-...
+For using MQTT you have to activate MQTT on your Shelly device. Call the Shelly configuration over you Web browser (not Shelly App).
+Go to the internet settings, and change here the MQTT settings. That means, you have to activate the MQTT protocol, add the MQTT Username, MQTT Password and the IP address of your ioBroker server followed by a port number. Example: 192.168.2.11:1882
+Now open the Shelly Adapter configuration in ioBroker. Choose MQTT as protocol, enter the MQTT username and MQTT password from the device. 
+If you entered a username and password for http connection on the Shelly device you have to enter this username and password here. Be careful, it is not the MQTT username and password.
 
 
 You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
