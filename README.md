@@ -9,11 +9,21 @@
 
 [![NPM](https://nodei.co/npm/iobroker.shelly.png?downloads=true)](https://nodei.co/npm/iobroker.shelly/)
 
-Requires node.js 6.0 or higher and Admin v3!
+Requires node.js 8.0 or higher and Admin v3!
 
-The adapter communicates with Shelly devices by REST api and the CoAP protocol with the default Shelly firmware (no flashing of firmware needed!).
+The adapter communicates with Shelly devices by REST api and the CoAP or MQTT protocol.    
+By the default Shelly firmware (no flashing of firmware needed!).
+
+### CoAP
+By default, the CoAP protocoll is used. You do not have to configure anything. Your Shelly devices 
+will be found by it self.  
 Because CoAP use multicast UDP packages, the Shelly devices has to be in the same subnet like ioBroker.
-If you use ioBroker in a docker container, the container has to run in host or macvlan modus.  
+If you use ioBroker in a docker container, the container has to run in host or macvlan modus.
+If you have problems with CoAP change to MQTT
+
+### MQTT
+...
+
 
 You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
 
