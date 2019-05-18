@@ -1,6 +1,6 @@
 {
     "Auto": "Auto",
-    "Confirm Password": "Bestätige das Passwort",
+    "Confirm Password": "Passwort bestätigen",
     "Http Password": "HTTP-Passwort",
     "Http Username": "HTTP-Benutzername",
     "MQTT Listen IP": "MQTT-Listen-IP",
@@ -10,6 +10,6 @@
     "Password": "Passwort",
     "Password Enable": "Einloggen mit Passwort",
     "User": "Benutzer",
-    "on save adapter restarts with new config immediately": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
-    "shellydescription": "Shelly Device muss sich im gleichen Subnetz wie ioBroker befinden. Die Shelly Devices werden automatisch von ioBroker erkannt. Sollte das nicht der Fall sein, bitte Shelly Device rebooten."
+    "on save adapter restarts with new config immediately": "Beim Speichern von Einstellungen wird der Adapter sofort neu gestartet.",
+    "shellydescription": "Shelly Geräte müssen sich im gleichen Subnetz wie ioBroker befinden und werden automatisch von ioBroker erkannt. Sollte das nicht der Fall sein, bitte Shelly Gerät rebooten."
 }
