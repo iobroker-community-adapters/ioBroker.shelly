@@ -22,13 +22,10 @@ function decrypt(key, value) {
   return result;
 }
 
-
 function startAdapter(options) {
   options = options || {};
   options.name = adapterName;
   adapter = new utils.Adapter(options);
-
-
 
   adapter.on('unload', (callback) => {
     try {
@@ -40,11 +37,8 @@ function startAdapter(options) {
     }
   });
 
-
   adapter.on('message', (msg) => {
-
     adapter.sendTo(msg.from, msg.command, 'Execute command ' + msg.command, msg.callback);
-
   });
 
   adapter.on('stateChange', (id, state) => {
@@ -79,7 +73,6 @@ function startAdapter(options) {
       main();
     });
   });
-
   return adapter;
 }
 
@@ -98,9 +91,7 @@ async function getAllDevices() {
         ids.push(id);
       }
     }
-  } catch (error) {
-    //
-  }
+  } catch (error) { /* */ }
   return ids;
 }
 
@@ -125,7 +116,6 @@ async function onlineCheck() {
       }
     }
   } catch (error) { /* */ }
-
   await sleep(60 * 1000);
   await onlineCheck();
 }
@@ -138,21 +128,22 @@ function main() {
   adapter.setState('info.connection', { val: true, ack: true });
   adapter.subscribeStates('*');
   objectHelper.init(adapter);
-
   setTimeout(() => {
     if (adapter.config.protocol === 'both' || adapter.config.protocol === 'mqtt') {
+      adapter.log.info('Stating Shelly adapter in MQTT modus. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
+      if(adapter.config.user.length === 0)  { adapter.log.error('MQTT Username is missing!'); }
+      if(adapter.config.password.length === 0)  { adapter.log.error('MQTT Password is missing!'); }
       let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper);
       serverMqtt.listen();
     }
   });
-
   setTimeout(() => {
     if (adapter.config.protocol === 'both' || adapter.config.protocol === 'coap') {
+      adapter.log.info('Stating Shelly adapter in CoAP modus.');
       let serverCoap = new coapServer.CoAPServer(adapter, objectHelper);
       serverCoap.listen();
     }
   });
-
 }
 
 // If started as allInOne mode => return function to create instance
