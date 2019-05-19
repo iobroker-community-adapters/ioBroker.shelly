@@ -16,26 +16,26 @@ By the default Shelly firmware (no flashing of firmware needed!). You will find 
 
 ## Installation
 You find a detailed installation documentation here:
-[Instalation Documentation](./docs/EN/INSTALL.md)
+[Installation Documentation](./docs/EN/INSTALL.md)
 
 ## Supported devices
-* Shelly1 (SHSW-1, verified)
-* Shelly2 (SHSW-21/SHSW-22, verified)
-* ShellyBulb (SHBLB, verified)
-* Shelly H&T (SHHT-1, verified)
-* Shelly Smoke (SHSM-01, verified)
-* Shelly 1 1PM (SHSW-PM, verified)  
-* Shelly 2.5 (SHSW-25, verified)  
-* ShellyRGBW (SHRGBWW-01, verified)
-* ShellyRGBW2 (SHRGBW2, verified)
-* Shelly2LED (SH2LED, verified)
-* ShellyPlug (SHPLG-1, verified) 
-* ShellyPlug S (SHPLG-1, verified) 
-* ShellySense (SHSEN-1, not verified)
-* Shelly4Pro (SHSW-44, not verified)
+|Shelly Device|Default (CoAP)|MQTT|
+|-------------|--------------|----|
+|Shelly1 (SHSW-1)|verified|verified|
+|Shelly2 (SHSW-21/SHSW-22)|verified|verified|
+|ShellyBulb (SHBLB)|verified|verified|
+|Shelly H&T (SHHT-1)|verified|verified|
+|Shelly Smoke (SHSM-01)|verified|verified|
+|Shelly 1 1PM (SHSW-PM) |verified|verified|
+|Shelly 2.5 (SHSW-25) |verified|verified|
+|ShellyRGBW (SHRGBWW-01)|verified|verified|
+|ShellyRGBW2 (SHRGBW2)|verified|verified|
+|Shelly2LED (SH2LED)|verified|verified|
+|ShellyPlug (SHPLG-1) |verified|verified|
+|ShellyPlug S (SHPLG-1) |verified|not verified|
+|ShellySense (SHSEN-1, not verified)|not verified|not verified|
+|Shelly4Pro (SHSW-44, not verified)|not verified|not verified|
 
-
-## More details needed to implement (Debug log
 
 ## Changelog
 

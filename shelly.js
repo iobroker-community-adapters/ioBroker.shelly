@@ -123,7 +123,7 @@ async function onlineCheck() {
 
 
 
-function main() {
+async function main() {
   onlineCheck();
   adapter.setState('info.connection', { val: true, ack: true });
   adapter.subscribeStates('*');
@@ -131,8 +131,8 @@ function main() {
   setTimeout(() => {
     if (adapter.config.protocol === 'both' || adapter.config.protocol === 'mqtt') {
       adapter.log.info('Stating Shelly adapter in MQTT modus. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
-      if(adapter.config.user.length === 0)  { adapter.log.error('MQTT Username is missing!'); }
-      if(adapter.config.password.length === 0)  { adapter.log.error('MQTT Password is missing!'); }
+      if (adapter.config.user.length === 0) { adapter.log.error('MQTT Username is missing!'); }
+      if (adapter.config.password.length === 0) { adapter.log.error('MQTT Password is missing!'); }
       let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper);
       serverMqtt.listen();
     }
