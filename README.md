@@ -12,28 +12,11 @@
 Requires node.js 8.0 or higher and Admin v3!
 
 The adapter communicates with Shelly devices by REST api and the CoAP or MQTT protocol.    
-By the default Shelly firmware (no flashing of firmware needed!).
-
-### CoAP
-By default, the CoAP protocoll is used. You do not have to configure anything. Your Shelly devices 
-will be found by it self.  
-Because CoAP use multicast UDP packages, the Shelly devices has to be in the same subnet like ioBroker.
-If you use ioBroker in a docker container, the container has to run in host or macvlan modus.
-If you have problems with CoAP change to MQTT
-
-### MQTT
-For using MQTT you have to activate MQTT on your Shelly device. Call the Shelly configuration over you Web browser (not Shelly App).
-Go to the internet settings, and change here the MQTT settings. That means, you have to activate the MQTT protocol, add the MQTT Username, MQTT Password and the IP address of your ioBroker server followed by a port number. Example: 192.168.2.11:1882
-Now open the Shelly Adapter configuration in ioBroker. Choose MQTT as protocol, enter the MQTT username and MQTT password from the device. 
-If you entered a username and password for http connection on the Shelly device you have to enter this username and password here. Be careful, it is not the MQTT username and password.
-
-
-You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
+By the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
 
 ## Installation
-
-1. Install the adapter
-2. No configuration needed. Shelly devices will be detected and added automatically. Sometimes you have to restart the shelly device or control it once using the app before it appear initially in ioBroker.
+You find a detailed installation documentation here:
+[Instalation Documentation](./docs/EN/INSTALL.md)
 
 ## Supported devices
 * Shelly1 (SHSW-1, verified)
@@ -119,48 +102,6 @@ You will find more and detailed information about the device here : [Shelly](htt
 
 ### 2.0.3 (02.01.2018)
 * Shows RSSI Status for Shelly 1 & 2. You need Firmware 1.4.4 
-
-### 2.0.2 (22.12.2018)
-* Add Shelly H&T. 
-
-### 2.0.1 (22.12.2018)
-* Major update because of problems with CoAP messages. 
-
-### 1.0.2 (17.12.2018)
-* Work around for showing states in shutter/roller modus
-
-### 1.0.1 (07.12.2018)
-* Add shutter/roller position
-
-### 1.0.0 (10.11.2018)
-* Optimizations and Online status fixed
-
-### 0.2.6 (31.10.2018)
-* Two new datapoints (AutoTimerOn and AutoTimerOn) for Shelly 1/2
-
-### 0.2.5 (13.10.2018)
-* Hostname instead of ip address will be shown
-
-### 0.2.4 (10.10.2018)
-* Channel name can be overwrite with own name
-
-### 0.2.3 (01.10.2018)
-* Bugfixing, shutter status display
-
-### 0.2.2 (30.09.2018)
-* Bugfixing, on start default value of timer and duration of relay and shutter will be 0 sec
-
-### 0.2.1 (28.09.2018)
-* Username/Password supported
-
-### 0.2.0 (28.09.2018)
-* Roller / Shutter for Shelly2 supported
-
-### 0.1.1 (21.09.2018)
-* Bugfixing
-
-### 0.1.0 (20.09.2018)
-* First Version. Supports all Shelly switches like Shelly 1, Shelly 2, Shelly 4 and the power sockets.
 
 
 ## License
