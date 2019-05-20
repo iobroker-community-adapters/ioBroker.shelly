@@ -144,6 +144,7 @@ async function main() {
       serverCoap.listen();
     }
   });
+
 }
 
 // If started as allInOne mode => return function to create instance
