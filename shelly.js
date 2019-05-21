@@ -128,8 +128,9 @@ async function main() {
   adapter.setState('info.connection', { val: true, ack: true });
   adapter.subscribeStates('*');
   objectHelper.init(adapter);
+  let protocol = adapter.config.protocol || 'coap'; 
   setTimeout(() => {
-    if (adapter.config.protocol === 'both' || adapter.config.protocol === 'mqtt') {
+    if (protocol === 'both' || protocol === 'mqtt') {
       adapter.log.info('Stating Shelly adapter in MQTT modus. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
       if (adapter.config.user.length === 0) { adapter.log.error('MQTT Username is missing!'); }
       if (adapter.config.password.length === 0) { adapter.log.error('MQTT Password is missing!'); }
@@ -138,7 +139,7 @@ async function main() {
     }
   });
   setTimeout(() => {
-    if (adapter.config.protocol === 'both' || adapter.config.protocol === 'coap') {
+    if (protocol === 'both' || protocol === 'coap' ) {
       adapter.log.info('Stating Shelly adapter in CoAP modus.');
       let serverCoap = new coapServer.CoAPServer(adapter, objectHelper);
       serverCoap.listen();
