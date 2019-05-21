@@ -1,9 +1,9 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.0.0",
+        "version": "3.0.1",
         "news": {
-            "3.0.0": {
+            "3.0.1": {
                 "en": "MQTT Support",
                 "de": "MQTT-Unterstützung",
                 "ru": "MQTT Поддержка",

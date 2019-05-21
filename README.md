@@ -33,28 +33,14 @@ You find a detailed installation documentation here:
 |Shelly2LED (SH2LED)|verified|verified|
 |ShellyPlug (SHPLG-1) |verified|verified|
 |ShellyPlug S (SHPLG-1) |verified|not verified|
-|ShellySense (SHSEN-1, not verified)|not verified|not verified|
-|Shelly4Pro (SHSW-44, not verified)|not verified|not verified|
+|ShellySense (SHSEN-1)|verified|not verified|
+|Shelly4Pro (SHSW-44)|verified|not verified|
 
 
 ## Changelog
 
-### 3.0.0 (12.05.2019)
-* (Stübi) Redesign of the adapter. You can choose now between CoAP and MQTT protocol  
-* (Stübi) MQTT and CoAP suport for Shelly1 (SHSW-1, verified)
-* (Stübi) MQTT and CoAP suport for Shelly2 (SHSW-21/SHSW-22, verified)
-* (Stübi) MQTT and CoAP suport for Shelly 1 1PM (SHSW-PM, verified)  
-* (Stübi) MQTT and CoAP suport for Shelly 2.5 (SHSW-25, verified)  
-* (Stübi) MQTT and CoAP suport for Shelly H&T (SHHT-1, verified)
-* (Stübi) MQTT and CoAP suport for Shelly Smoke (SHSM-01, verified)
-* (Stübi) MQTT and CoAP suport for Shelly Bulb (SHBLB, verified)
-* (Stübi) MQTT and CoAP suport for Shelly RGBW (SHRGBWW-01, verified)
-* (Stübi) MQTT and CoAP suport for Shelly RGBW2 (SHRGBW2, verified)
-* (Stübi) MQTT and CoAP suport for Shelly 2 LED (SH2LED, verified)
-* (Stübi) MQTT and CoAP suport for Shelly Plug (SHPLG-1, verified)
-* (Stübi) MQTT and CoAP suport for Shelly Plug S (SHPLG-S, verified)
-* (Stübi) MQTT and CoAP suport for Shelly 4 Pro (SHSW-44, not verified)
-* (Stübi) MQTT and CoAP suport for Shelly Sense (SHSEN-1, not verified)
+### 3.0.1 (21.05.2019)
+* (Stübi) Redesign of the adapter. You can choose now between CoAP and MQTT protocol. The Shellys use this protocolls to send there state changes to ioBroker in realtime. Out of the Box the Shelly works with the CoAP protocol. You do not have to configure anything. The Shelly will be found by the Shelly Adapter itself. If you want to use MQTT, you have configure all your Shelly devices. You find a detailed installing documentation here: [Installation Documentation](./docs/EN/INSTALL.md). If you have problems with the version 3.0.1 please change back to 2.2.0 and leave an Issue (bug report) here: [GitHub Issues](https://github.com/schmupu/ioBroker.shelly/issues). 
 
 ### 2.2.0 (13.04.2019)
 * Add devices Shelly 2.5 and Shelly 1 PM 
