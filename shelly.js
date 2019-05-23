@@ -70,6 +70,7 @@ function startAdapter(options) {
           adapter.config.http_password = decrypt('Zgfr56gFe87jJOM', adapter.config.http_password);
         }
       }
+      adapter.config.polltime = 5;
       main();
     });
   });
