@@ -1,11 +1,31 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.0.2",
+        "version": "3.0.3",
         "news": {
+            "3.0.3": {
+                "en": "MQTT QoS 1 and 2 support",
+                "de": "MQTT QoS 1 und 2",
+                "ru": "Поддержка MQTT QoS 1 и 2",
+                "pt": "Suporte MQTT QoS 1 e 2",
+                "nl": "MQTT QoS 1 en 2 ondersteuning",
+                "fr": "Prise en charge de MQTT QoS 1 et 2",
+                "it": "MQTT QoS 1 e 2 supporto",
+                "es": "MQTT QoS 1 y 2 soporte",
+                "pl": "Obsługa MQTT QoS 1 i 2",
+                "zh-cn": "MQTT QoS 1和2支持"
+            },
             "3.0.2": {
                 "en": "Bugfixing",
-                "de": "Fehlerbehebung"
+                "de": "Fehlerbehebung",
+                "ru": "Исправление ошибок",
+                "pt": "Corrigindo erro",
+                "nl": "bugfixing",
+                "fr": "Correction de bugs",
+                "it": "bugfixing",
+                "es": "Corrección de errores",
+                "pl": "Naprawa błędów",
+                "zh-cn": "Bugfixing"
             },
             "3.0.1": {
                 "en": "MQTT Support",

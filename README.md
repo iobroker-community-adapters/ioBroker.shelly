@@ -39,6 +39,9 @@ You find a detailed installation documentation here:
 
 ## Changelog
 
+### 3.0.2 (29.05.2019)
+* (Stübi) - Support of MQTT QoS 1 and 2 
+
 ### 3.0.2 (25.05.2019)
 * (Stübi) - Bugfixing and longpush and input states for Shelly 1, 2, 1pm, 2.5 and Shelly RGBWW2 added. Add state temperature to Shelly 1pm, 2.5 and Plug S.  
 
