@@ -280,6 +280,7 @@
         "polltime": 10,
         "timeout": 0.25,
         "protocol": "coap",
+        "auto_update": false,
         "keys": [
             {
                 "hosts": "",
