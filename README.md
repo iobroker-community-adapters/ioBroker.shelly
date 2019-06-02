@@ -39,7 +39,7 @@ You find a detailed installation documentation here:
 
 ## Changelog
 
-### 3.0.2 (29.05.2019)
+### 3.0.3 (02.06.2019)
 * (Stübi) - Support of MQTT QoS 1 and 2. Add auto firmware update to the menu 
 
 ### 3.0.2 (25.05.2019)
