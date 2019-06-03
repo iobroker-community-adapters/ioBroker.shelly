@@ -133,8 +133,8 @@ async function main() {
   setTimeout(() => {
     if (protocol === 'both' || protocol === 'mqtt') {
       adapter.log.info('Stating Shelly adapter in MQTT modus. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
-      if (adapter.config.user.length === 0) { adapter.log.error('MQTT Username is missing!'); }
-      if (adapter.config.password.length === 0) { adapter.log.error('MQTT Password is missing!'); }
+      if (!adapter.config.user || adapter.config.user.length === 0) { adapter.log.error('MQTT Username is missing!'); }
+      if (!adapter.config.password || adapter.config.password.length === 0) { adapter.log.error('MQTT Password is missing!'); }
       let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper);
       serverMqtt.listen();
     }
