@@ -307,7 +307,7 @@
         "auto_update": false,
         "keys": [
             {
-                "blacklist": "SHSW-1#ABCDEF#1"
+                "blacklist": "ABCDEF"
             }
         ]
     },

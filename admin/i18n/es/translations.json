@@ -15,6 +15,7 @@
     "Password": "Contraseña",
     "Password Enable": "Iniciar sesión con contraseña",
     "Shelly devices that shall not be displayed": "Dispositivos shelly que no se mostrarán",
+    "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Dispositivos de Shelly que no se mostrarán .. Ingrese el ID de dispositivo de Shelly como 8B22BD",
     "Shelly protocol": "Protocolo shelly",
     "User": "Usuario",
     "on save adapter restarts with new config immediately": "en el adaptador de guardar se reinicia con nueva configuración de inmediato",
