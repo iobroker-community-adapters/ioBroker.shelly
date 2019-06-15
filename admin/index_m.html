@@ -1,23 +1,26 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <!-- Materialze style -->
-  <link rel="stylesheet" type="text/css" href="../../css/adapter.css" />
+  <!-- these 4 files always have to be included -->
   <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
-
+  <link rel="stylesheet" type="text/css" href="../../css/adapter.css" />
   <script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
-
+  <!-- these files always have to be included -->
   <script type="text/javascript" src="../../js/translate.js"></script>
   <script type="text/javascript" src="../../lib/js/materialize.js"></script>
   <script type="text/javascript" src="../../js/adapter-settings.js"></script>
   <script type="text/javascript" src="words.js"></script>
 
-  <!-- you have to define 2 functions in the global scope: -->
+
   <script type="text/javascript">
-    var convertComma = null;
+    var devices = [];
+    var active = false;
+    var g_onChange;
+    var SEP = '_';
     var secret = null;
+
+    if (typeof _ !== 'function') _ = translateWord;
 
     function encrypt(key, value) {
       var result = '';
@@ -26,9 +29,7 @@
       }
       return result;
     }
-
     function decrypt(key, value) {
-
       var result = '';
       for (var i = 0; i < value.length; ++i) {
         result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
@@ -36,63 +37,9 @@
       return result;
     }
 
-    function setValue(id, value, onChange) {
-
-      var $value = $('#' + id + '.value');
-      if (value && $value.attr('data-crypt') == "1") {
-        value = decrypt(secret, value);
-      }
-
-      if ($value.attr('type') === 'checkbox') {
-        $value.prop('checked', value).change(function () {
-          onChange();
-        });
-      } else {
-        $value.val(value).on('change', function () {
-          onChange();
-        }).keyup(function () {
-          // Check that only numbers entered
-          if ($(this).hasClass('number')) {
-            var val = $(this).val();
-            if (val) {
-              var newVal = '';
-              for (var i = 0; i < val.length; i++) {
-                if ((val[i] >= '0' && val[i] <= '9') || val[i] === '-' || val[i] === '+' || val[i] === '.' || val[i] === ',') {
-                  if (val[i] === '.' && convertComma === true) val[i] = ',';
-                  if (val[i] === ',' && convertComma === false) val[i] = '.';
-                  newVal += val[i];
-                }
-              }
-
-              if (val != newVal) {
-                $(this).val(newVal);
-              }
-            }
-          }
-          $(this).trigger('change');
-        });
-      }
-    }
-
     function load(settings, onChange) {
-
-      // works only with newest admin adapter
-      if (typeof systemConfig !== 'undefined') {
-        convertComma = systemConfig.common.isFloatComma;
-      }
-
-      if (settings.saveLastValue === undefined) {
-        settings.saveLastValue = false;
-      }
-      if (settings.writeNulls === undefined) settings.writeNulls = true;
-
+      g_onChange = onChange;
       secret = (systemConfig.native ? systemConfig.native.secret : '') || 'Zgfr56gFe87jJOM';
-
-      for (var key in settings) {
-        if (settings.hasOwnProperty(key)) {
-          setValue(key, settings[key], onChange);
-        }
-      }
 
       getIPs(function (ips) {
         for (var i = 0; i < ips.length; i++) {
@@ -101,48 +48,156 @@
         $('#bind.value').val(settings.bind).select();
       });
 
+
+      $('#values').on('click', function () {
+        //checkDevices();
+      });
+
+      function checkDevices() {
+        console.log("Ceck devices");
+        var oldDev = table2values('values');
+        var newDev = [];
+        var tmpIp = [];
+        for (var i = 0; i < oldDev.length; i++) {
+          console.log(JSON.stringify(tmpIp));
+          if (!tmpIp.includes(oldDev[i].ip)) {
+            tmpIp.push(oldDev[i].ip);
+            newDev.push(oldDev[i]);
+            if (i === oldDev.length - 1) {
+              console.log("safe");
+              values2table('values', newDev, true);
+            }
+          }
+        }
+      };
+      //checkDevices();
+
+      socket.emit('getState', 'system.adapter.' + adapter + '.' + instance + '.alive', function (err, state) {
+        active = /*common.enabled ||*/ (state && state.val);
+      });
+
+      changed = true;
+      g_onChange = onChange;
+
+      function getVal(id) {
+        var ar = id.split(SEP);
+        var obj = settings;
+        for (var i = 0; i < ar.length - 1; i++) {
+          if (obj[ar[i]] === undefined) obj[ar[i]] = {};
+          obj = obj[ar[i]];
+        }
+        var val = obj[ar[ar.length - 1]];
+        var $val = $('#' + id + '.value');
+        if (val && $val.attr('data-crypt') == "1") {
+          val = decrypt(secret, val);
+        }
+        return val;
+      }
+
+      function forAllKeys(obj, s, cb) {
+        var sep = SEP; //'.';
+        if (typeof s === 'function') {
+          cb = s;
+          s = '';
+        }
+        for (var i in obj) {
+          if (typeof obj[i] === 'object') {
+            if (Array.isArray(obj[i])) continue;
+            forAllKeys(obj[i], s ? s + sep + i : i, cb)
+          } else {
+            cb && cb(s ? s + sep + i : i);
+          }
+        }
+      }
+
+      //for (var key in settings) {
+      forAllKeys(settings, function (key) {
+        // example: select elements with id=key and class=value and insert value
+        var val = getVal(key);
+        if ($('#' + key + '.value').attr('type') == 'checkbox') {
+          $('#' + key + '.value').prop('checked', val).change(function () {
+            if ($('#auth').prop('checked')) {
+              $('#secure').prop('checked', true);
+            }
+            onChange();
+            //showHideSettings();
+          });
+        } else {
+          $('#' + key + '.value').val(val).change(function () {
+            onChange();
+          }).keyup(function () {
+            onChange();
+          });
+        }
+      });
+      // Set default language
+      if (!settings.language) {
+        settings.language = systemLang || 'en';
+        $('#language').val(settings.language).trigger('change');
+      }
+      devices = settings.keys; // || [ {name: '', ip: "", mac: ""} ];
+      values2table('values', devices, onChange);
+      //changed = true;
       onChange(false);
-      if (M) M.updateTextFields();
+    }
+
+    function setVal(obj, id, val) {
+      var ar = id.split(SEP);
+      for (var i = 0; i < ar.length - 1; i++) {
+        if (obj[ar[i]] === undefined) obj[ar[i]] = {};
+        obj = obj[ar[i]];
+      }
+      obj[ar[ar.length - 1]] = val;
     }
 
     function save(callback) {
-      var settings = {};
+      var obj = {};
+      changed = true;
       $('.value').each(function () {
-        var $this = $(this);
-        var id = $this.attr('id');
-
-        if ($this.attr('type') === 'checkbox') {
-          settings[id] = $this.prop('checked');
-        } else {
-          settings[id] = $this.data('crypt') && $this.val() ? encrypt(secret, $this.val()) : $this.val();
+        var $this = $(this),
+          val;
+        switch ($this.attr('type')) {
+          case 'checkbox':
+            val = $this.prop('checked');
+            break;
+          case 'number':
+          case 'value':
+            val = ~~$this.val();
+            break;
+          default:
+            // val = $this.val();
+            val = $this.data('crypt') && $this.val() ? encrypt(secret, $this.val()) : $this.val();
         }
+        setVal(obj, $this.attr('id'), val);
       });
-
-      /*
-      if ($('#password').val() !== $('#password_confirm').val()) {
-        showMessage(_('Password confirmation is not equal with password'));
-        return;
-      }
-      */
-
-
-      callback(settings);
+      obj.keys = table2values('values');
+      callback(obj);
     }
   </script>
   <style>
-    .adapter-container>div {
-      margin-bottom: 0 !important;
+    .loader {
+      border: 4px solid #b8d1f3;
+      /* Light grey */
+      border-top: 4px solid #3498db;
+      /* Blue */
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      animation: spin 2s linear infinite;
     }
 
-    .page {
-      height: calc(100% - 50px) !important;
-    }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
 
-    .marg {
-      margin-top: 5em;
+      100% {
+        transform: rotate(360deg);
+      }
     }
   </style>
 </head>
+
 
 <body>
   <!-- you have to put your config page in a div with id adapter-container -->
@@ -151,38 +206,20 @@
     <div class="row">
       <div class="col s12">
         <ul class="tabs">
+          <li class="tab col s2"><a href="#tab-http" class="translate active">General settings</a></li>
           <li class="tab col s2"><a href="#tab-mqtt" class="translate active">MQTT settings</a></li>
-          <li class="tab col s2"><a href="#tab-http" class="translate active">http settings</a></li>
+          <li class="tab col s2"><a href="#tab-coap" class="translate active">CoAP settings</a></li>
         </ul>
       </div>
 
       <div id="tab-mqtt" class="col s12 page">
-
         <div class="row">
           <div class="input-field col s6">
             <img src="shelly.png" class="logo">
           </div>
         </div>
-
-        <div class="row">
-          <div class="input-field col s8 m8 l3">
-            <select id="protocol" class="value">
-              <option value="coap">CoAP and http</option>
-              <option value="mqtt">MQTT and http</option>
-              <!-- >option value="both">MQTT, CoAP and http</option -->
-            </select>
-            <label class="translate" for="protocol">Shelly protocol</label>
-          </div>
-     
-          <div class="input-field col s12">
-            <input class="value" id="auto_update" type="checkbox" />
-            <label for="auto_update" class="translate">Auto update of new firmware</label>
-          </div>
-        </div>
-
         <div class="row">
         </div>
-
         <div class="row">
           <div class="col s12 m8 l5">
             <select class="value" id="bind"></select>
@@ -193,21 +230,18 @@
             <label class="translate" for="port">Port:</label>
           </div>
         </div>
-
         <div class="row">
           <div class="input-field col s12 m6 l4">
-            <input id="user" type="text" size="30" class="value" />
-            <label class="translate" for="user">MQTT Username</label>
+            <input id="mqttusername" type="text" size="30" class="value" />
+            <label class="translate" for="mqttusername">MQTT Username</label>
           </div>
         </div>
-
         <div class="row">
           <div class="input-field col s12 m6 l4">
-            <input id="password" type="password" data-crypt="1" size="30" class="value" />
-            <label class="translate" for="password">MQTT Password</label>
+            <input id="mqttpassword" type="password" data-crypt="1" size="30" class="value" />
+            <label class="translate" for="mqttpassword">MQTT Password</label>
           </div>
         </div>
-
         <div class="row">
           <div id="qos" class="input-field col s12 m6 l3">
             <select id="qos" class="value">
@@ -218,38 +252,83 @@
             <label class="translate" for="qos">Default QoS:</label>
           </div>
         </div>
-
       </div>
 
-
-      <div id="tab-http" class="col s12 page">
-
+      <div id="tab-coap" class="col s12 page">
         <div class="row">
           <div class="input-field col s6">
             <img src="shelly.png" class="logo">
           </div>
         </div>
-
         <div class="row">
-          <div class="input-field col s12 m6 l4">
-            <input id="http_username" type="text" size="30" class="value" />
-            <label class="translate" for="http_username">Http Username</label>
+          <div class="col s12">
+            <p class="translate">Shelly devices that shall not be displayed</p>
           </div>
         </div>
-
-        <div class="row">
-          <div class="input-field col s12 m6 l4">
-            <input id="http_password" type="password" data-crypt="1" size="30" class="value" />
-            <label class="translate" for="http_password">Http Password</label>
+        <div id="values">
+          <div class="row">
+            <div class="col s12">
+              <a class="btn-floating waves-effect waves-light table-button-add"><i class="material-icons">add</i></a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <table class="table-values" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th data-name="_index" style="width: 40px" class="translate"></th>
+                    <th data-name="blacklist" style="width: 440px" data-style="width: 440px" class="translate"
+                      for="blacklist">Blacklist</th>
+                    <th data-buttons="delete" style="width: 40px"></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
           </div>
         </div>
-
-        <!--div class="input-field col s12 m6 l4">
-          <input id="password_confirm" type="password" size="30" class="value" />
-          <label class="translate" for="password_confirm">Confirm Password</label>
-        </div-->
-
       </div>
+
+      <div id="tab-http" class="col s12 page">
+        <div class="row">
+          <div class="input-field col s6">
+            <img src="shelly.png" class="logo">
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s8 m8 l3">
+            <select id="protocol" class="value">
+              <option value="coap">CoAP and http</option>
+              <option value="mqtt">MQTT and http</option>
+              <!-- >option value="both">MQTT, CoAP and http</option -->
+            </select>
+            <label class="translate" for="protocol">Shelly protocol</label>
+          </div>
+          <div class="input-field col s12">
+            <input class="value" id="auto_update" type="checkbox" />
+            <label for="auto_update" class="translate">Auto update of new firmware</label>
+          </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <p class="translate">Http Username and Http Password in section RESTRICTED LOGIN on your Shelly device</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6 l4">
+            <input id="httpusername" type="text" size="30" class="value" />
+            <label class="translate" for="httpusername">Http Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6 l4">
+            <input id="httppassword" type="password" data-crypt="1" size="30" class="value" />
+            <label class="translate" for="httppassword">Http Password</label>
+          </div>
+        </div>
+      </div>
+
 </body>
 
 </html>

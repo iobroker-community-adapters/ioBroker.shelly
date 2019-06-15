@@ -50,37 +50,21 @@ function startAdapter(options) {
     }
   });
 
-  adapter.on('ready', () => {
-    adapter.getForeignObject('system.config', (err, obj) => {
-      if (adapter.config.password) {
-        if (obj && obj.native && obj.native.secret) {
-          //noinspection JSUnresolvedVariable
-          adapter.config.password = decrypt(obj.native.secret, adapter.config.password);
-        } else {
-          //noinspection JSUnresolvedVariable
-          adapter.config.password = decrypt('Zgfr56gFe87jJOM', adapter.config.password);
-        }
-      }
-      if (adapter.config.http_password) {
-        if (obj && obj.native && obj.native.secret) {
-          //noinspection JSUnresolvedVariable
-          adapter.config.http_password = decrypt(obj.native.secret, adapter.config.http_password);
-        } else {
-          //noinspection JSUnresolvedVariable
-          adapter.config.http_password = decrypt('Zgfr56gFe87jJOM', adapter.config.http_password);
-        }
-      }
-      adapter.config.polltime = 5;
-      main();
-    });
+  adapter.on('ready', async () => {
+    try {
+      await migrateconfig();
+      await encryptPasswords();
+      await main();
+    } catch (error) {
+    }
   });
+
   return adapter;
 }
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
 
 async function getAllDevices() {
   let ids = [];
@@ -121,26 +105,75 @@ async function onlineCheck() {
   await onlineCheck();
 }
 
+async function encryptPasswords() {
+  return new Promise((resolve, reject) => {
+    adapter.getForeignObject('system.config', (err, obj) => {
+      if (err) reject(err);
+      if (adapter.config.mqttpassword) {
+        if (obj && obj.native && obj.native.secret) {
+          //noinspection JSUnresolvedVariable
+          adapter.config.mqttpassword = decrypt(obj.native.secret, adapter.config.mqttpassword);
+        } else {
+          //noinspection JSUnresolvedVariable
+          adapter.config.mqttpassword = decrypt('Zgfr56gFe87jJOM', adapter.config.mqttpassword);
+        }
+      }
+      if (adapter.config.httppassword) {
+        if (obj && obj.native && obj.native.secret) {
+          //noinspection JSUnresolvedVariable
+          adapter.config.httppassword = decrypt(obj.native.secret, adapter.config.httppassword);
+        } else {
+          //noinspection JSUnresolvedVariable
+          adapter.config.httppassword = decrypt('Zgfr56gFe87jJOM', adapter.config.httppassword);
+        }
+      }
+      adapter.config.polltime = 5;
+      resolve();
+    });
+  });
+}
 
-
+async function migrateconfig() {
+  let native = {};
+  if (adapter.config.http_username) {
+    native.httpusername = adapter.config.http_username;
+    native.http_username = '';
+  }
+  if (adapter.config.http_password) {
+    native.httppassword = adapter.config.http_password;
+    native.http_password = '';
+  };
+  if (adapter.config.user) {
+    native.mqttusername = adapter.config.user;
+    native.user = '';
+  }
+  if (adapter.config.password) {
+    native.mqttpassword = adapter.config.password;
+    native.password = '';
+  };
+  if (Object.keys(native).length) {
+    adapter.log.info('Migrate some data from old Shelly Adapter version. Restarting Shelly Adapter now!');
+    await adapter.extendForeignObjectAsync('system.adapter.' + adapter.namespace, { native: native });
+  }
+}
 
 async function main() {
   onlineCheck();
   adapter.setState('info.connection', { val: true, ack: true });
   adapter.subscribeStates('*');
   objectHelper.init(adapter);
-  let protocol = adapter.config.protocol || 'coap'; 
+  let protocol = adapter.config.protocol || 'coap';
   setTimeout(() => {
     if (protocol === 'both' || protocol === 'mqtt') {
       adapter.log.info('Stating Shelly adapter in MQTT modus. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
-      if (!adapter.config.user || adapter.config.user.length === 0) { adapter.log.error('MQTT Username is missing!'); }
-      if (!adapter.config.password || adapter.config.password.length === 0) { adapter.log.error('MQTT Password is missing!'); }
+      if (!adapter.config.mqttusername || adapter.config.mqttusername.length === 0) { adapter.log.error('MQTT Username is missing!'); }
+      if (!adapter.config.mqttpassword || adapter.config.mqttpassword.length === 0) { adapter.log.error('MQTT Password is missing!'); }
       let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper);
       serverMqtt.listen();
     }
   });
   setTimeout(() => {
-    if (protocol === 'both' || protocol === 'coap' ) {
+    if (protocol === 'both' || protocol === 'coap') {
       adapter.log.info('Stating Shelly adapter in CoAP modus.');
       let serverCoap = new coapServer.CoAPServer(adapter, objectHelper);
       serverCoap.listen();
