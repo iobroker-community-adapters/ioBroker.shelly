@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.0.5",
+        "version": "3.0.6",
         "news": {
+            "3.0.6": {
+                "en": "State reboot added",
+                "de": "Statusneustart hinzugefügt",
+                "ru": "Добавлена ​​перезагрузка",
+                "pt": "Estado de reinicialização adicionada",
+                "nl": "Staat opnieuw opstarten toegevoegd",
+                "fr": "Etat redémarrage ajouté",
+                "it": "Riavvio dello stato aggiunto",
+                "es": "Reinicio del estado añadido",
+                "pl": "Dodano ponowne uruchomienie stanu",
+                "zh-cn": "状态重启添加"
+            },
             "3.0.5": {
                 "en": "Bugfixing",
                 "de": "Fehlerbehebung",
