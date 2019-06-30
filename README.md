@@ -40,7 +40,7 @@ You find a detailed installation documentation here:
 ## Changelog
 
 ### 3.0.6 (29.06.2019)
-* (Stübi) - State reboot added 
+* (Stübi) - State reboot and uptime added 
 
 ### 3.0.5 (16.06.2019)
 * (Stübi) - Bugfixing 

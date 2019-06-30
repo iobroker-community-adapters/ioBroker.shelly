@@ -4,16 +4,16 @@
         "version": "3.0.6",
         "news": {
             "3.0.6": {
-                "en": "State reboot added",
-                "de": "Statusneustart hinzugefügt",
-                "ru": "Добавлена ​​перезагрузка",
-                "pt": "Estado de reinicialização adicionada",
-                "nl": "Staat opnieuw opstarten toegevoegd",
-                "fr": "Etat redémarrage ajouté",
-                "it": "Riavvio dello stato aggiunto",
-                "es": "Reinicio del estado añadido",
-                "pl": "Dodano ponowne uruchomienie stanu",
-                "zh-cn": "状态重启添加"
+                "en": "State reboot and uptime added",
+                "de": "Neustart und Betriebszeit hinzugefügt",
+                "ru": "Состояние перезагрузки и время работы добавлено",
+                "pt": "Estado de reinicialização e uptime adicionado",
+                "nl": "Staat opnieuw opstarten en uptime toegevoegd",
+                "fr": "Redémarrage d'état et temps de disponibilité ajouté",
+                "it": "Riavvio dello stato e uptime aggiunti",
+                "es": "Estado reinicio y tiempo de actividad añadido",
+                "pl": "Dodano stan ponownego uruchomienia i czas pracy",
+                "zh-cn": "状态重启和正常运行时间增加"
             },
             "3.0.5": {
                 "en": "Bugfixing",
