@@ -1,8 +1,11 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.0.6",
+        "version": "3.0.7",
         "news": {
+            "3.0.7": {
+                "en": "Speling Error correction"
+            },
             "3.0.6": {
                 "en": "State reboot and uptime added",
                 "de": "Neustart und Betriebszeit hinzugefügt",

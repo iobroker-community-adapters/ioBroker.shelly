@@ -39,6 +39,11 @@ You find a detailed installation documentation here:
 
 ## Changelog
 
+### 3.0.7 (03.07.2019)
+* (Stübi) - correct spelling error 
+* (Stübi) - Adjust IP address after IP change in CoAP Modus (Issue 70)
+* (Stübi) - Bugfixing for datapoint power
+
 ### 3.0.6 (29.06.2019)
 * (Stübi) - State reboot and uptime added 
 
