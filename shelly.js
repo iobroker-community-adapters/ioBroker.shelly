@@ -56,11 +56,24 @@ function startAdapter(options) {
       await encryptPasswords();
       await main();
     } catch (error) {
+      // ...
     }
   });
 
   return adapter;
 }
+
+process.on('SIGINT', () => {
+  adapter.terminate ? adapter.terminate() : process.exit();
+});
+
+process.on('uncaughtException', (err) => {
+  console.log('Exception: ' + err + '/' + err.toString());
+  if (adapter && adapter.log) {
+    adapter.log.warn('Exception: ' + err);
+  }
+  adapter.terminate ? adapter.terminate() : process.exit();
+});
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -142,7 +155,7 @@ async function migrateconfig() {
   if (adapter.config.http_password) {
     native.httppassword = adapter.config.http_password;
     native.http_password = '';
-  };
+  }
   if (adapter.config.user) {
     native.mqttusername = adapter.config.user;
     native.user = '';
@@ -150,7 +163,7 @@ async function migrateconfig() {
   if (adapter.config.password) {
     native.mqttpassword = adapter.config.password;
     native.password = '';
-  };
+  }
   if (Object.keys(native).length) {
     adapter.log.info('Migrate some data from old Shelly Adapter version. Restarting Shelly Adapter now!');
     await adapter.extendForeignObjectAsync('system.adapter.' + adapter.namespace, { native: native });
