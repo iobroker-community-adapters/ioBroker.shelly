@@ -35,16 +35,16 @@
     "mqtt-connection": "^4.0.0",
     "ping": "^0.2.2",
     "request": "^2.79.0",
-    "shelly-iot": "^1.0.2"
+    "shelly-iot": "^1.0.3"
   },
   "devDependencies": {
     "@iobroker/testing": "^1.2.5",
     "axios": "^0.18.1",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-react": "^7.13.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-react": "^7.14.2",
     "gulp": "^4.0.2",
     "mocha": "^4.1.0"
   },
