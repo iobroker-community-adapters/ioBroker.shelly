@@ -39,6 +39,9 @@ You find a detailed installation documentation here:
 
 ## Changelog
 
+### 3.0.7 (27.07.2019)
+* (Stübi) - Add state energy for CoAP  
+
 ### 3.0.7 (03.07.2019)
 * (Stübi) - correct spelling error 
 * (Stübi) - Adjust IP address after IP change in CoAP Modus (Issue 70)

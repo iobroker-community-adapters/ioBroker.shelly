@@ -1,8 +1,11 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.0.7",
+        "version": "3.0.8",
         "news": {
+            "3.0.8": {
+                "en": "Bugfixing and new features"
+            },
             "3.0.7": {
                 "en": "Speling Error correction"
             },
