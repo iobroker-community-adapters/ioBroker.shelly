@@ -45,6 +45,7 @@ You find a detailed installation documentation here:
 * (Stübi) - Add state energy for Shelly Plug S, Shelly PM and Shelly 2.5 in CoAP mode 
 * (Stübi) - Add state temperature for Shelly Plug S, Shelly PM and Shelly 2.5 in CoAP mode
 * (Stübi) - Add state overtemperature for Shelly Plug S, Shelly PM and Shelly 2.5 in CoAP and MQTT mode
+* (Stübi) - Bugfixing, if the Shelly HT sends a humidity over 100%, it will be set to 100%
 
 ### 3.0.7 (03.07.2019)
 * (Stübi) - correct spelling error 
