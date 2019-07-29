@@ -4,10 +4,28 @@
         "version": "3.0.8",
         "news": {
             "3.0.8": {
-                "en": "Bugfixing and new features"
+                "en": "Add device Shelly EM. Bugfixing and new features",
+                "de": "Gerät hinzufügen Shelly EM. Bugfixing und neue Funktionen",
+                "ru": "Добавьте устройство Shelly EM. Исправление ошибок и новые функции",
+                "pt": "Adicione o dispositivo Shelly EM. Correção de bugs e novos recursos",
+                "nl": "Apparaat toevoegen Shelly EM. Bugfixing en nieuwe functies",
+                "fr": "Ajouter l'appareil Shelly EM. Correction de bugs et nouvelles fonctionnalités",
+                "it": "Aggiungi dispositivo Shelly EM. Bugfixing e nuove funzionalità",
+                "es": "Añadir dispositivo Shelly EM. Corrección de errores y nuevas características.",
+                "pl": "Dodaj urządzenie Shelly EM. Poprawianie błędów i nowe funkcje",
+                "zh-cn": "添加设备Shelly EM。错误修正和新功能"
             },
             "3.0.7": {
-                "en": "Speling Error correction"
+                "en": "Speling Error correction",
+                "de": "Rechtschreibfehlerkorrektur",
+                "ru": "Исправление орфографических ошибок",
+                "pt": "Correção de erros de correção",
+                "nl": "Spelfoutcorrectie",
+                "fr": "Correction d'erreur d'orthographe",
+                "it": "Correzione dell'errore di ortografia",
+                "es": "Corrección de errores de speling",
+                "pl": "Korekcja błędu spelowania",
+                "zh-cn": "Speling纠错"
             },
             "3.0.6": {
                 "en": "State reboot and uptime added",
