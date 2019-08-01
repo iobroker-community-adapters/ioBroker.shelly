@@ -70,9 +70,10 @@ process.on('SIGINT', () => {
 process.on('uncaughtException', (err) => {
   console.log('Exception: ' + err + '/' + err.toString());
   if (adapter && adapter.log) {
-    adapter.log.warn('Exception: ' + err);
+    adapter.log.error('Exception: ' + err);
   }
-  adapter.terminate ? adapter.terminate() : process.exit();
+  process.exit();
+  // adapter.terminate ? adapter.terminate() : process.exit();
 });
 
 function sleep(ms) {
@@ -192,7 +193,6 @@ async function main() {
       serverCoap.listen();
     }
   });
-
 }
 
 // If started as allInOne mode => return function to create instance
