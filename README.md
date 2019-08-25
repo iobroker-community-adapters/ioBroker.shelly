@@ -43,6 +43,7 @@ You find a detailed installation documentation here:
 ### 3.0.9 (06.08.2019)
 * (Stübi) - Bugfixing, with the new firmware, Shelly HT sends the humidity by CoAP as it should. Division by 2 removed!
 * (Stübi) - Add status Duration in roller (shutter) mode for CoAP (not working with MQTT) 
+* (Stübi) - Changed role from level to level.brightness for state Gain
 
 ### 3.0.8 (27.07.2019)
 * (Stübi) - Add device Shelly EM 
