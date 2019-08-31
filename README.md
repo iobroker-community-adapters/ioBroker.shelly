@@ -36,9 +36,12 @@ You find a detailed installation documentation here:
 |ShellySense (SHSEN-1)|verified|not verified|
 |Shelly4Pro (SHSW-44)|verified|not verified|
 |Shelly EM (SHEM)|verified|verified|
-
+|Shelly Flood (SHWT-1)|verified|verified|
 
 ## Changelog
+
+### 3.1.0 (03.10.2019)
+* (Stübi) - Add device Shelly flood
 
 ### 3.0.9 (06.08.2019)
 * (Stübi) - Bugfixing, with the new firmware, Shelly HT sends the humidity by CoAP as it should. Division by 2 removed!

@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.0.9",
+        "version": "3.1.0",
         "news": {
+            "3.1.0": {
+                "en": "Add device Shelly Flood. Bugfixing and new features",
+                "de": "Gerät hinzufügen Shelly Flood. Bugfixing und neue Funktionen",
+                "ru": "Добавьте устройство Shelly Flood. Исправление ошибок и новые функции",
+                "pt": "Adicione o dispositivo Shelly Flood. Correção de bugs e novos recursos",
+                "nl": "Apparaat toevoegen Shelly Flood. Bugfixing en nieuwe functies",
+                "fr": "Ajouter l'appareil Shelly Flood. Correction de bugs et nouvelles fonctionnalités",
+                "it": "Aggiungi dispositivo Shelly Flood. Bugfixing e nuove funzionalità",
+                "es": "Añadir dispositivo Shelly Flood. Corrección de errores y nuevas características.",
+                "pl": "Dodaj urządzenie Shelly Flood. Poprawianie błędów i nowe funkcje",
+                "zh-cn": "添加设备Shelly Flood。错误修正和新功能"
+            },
             "3.0.9": {
                 "en": "Bugfixing",
                 "de": "Fehlerbehebung",
