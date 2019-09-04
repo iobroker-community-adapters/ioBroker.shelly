@@ -40,7 +40,7 @@ You find a detailed installation documentation here:
 
 ## Changelog
 
-### 3.1.0 (03.10.2019)
+### 3.1.0 (03.09.2019)
 * (Stübi) - Add device Shelly flood
 
 ### 3.0.9 (06.08.2019)
