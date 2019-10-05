@@ -46,6 +46,7 @@ function startAdapter(options) {
     if (state && !state.ack) {
       let stateId = id.replace(adapter.namespace + '.', '');
       adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
+      adapter.log.debug('stateChange ' + id + ' = ' + state.val);
       objectHelper.handleStateChange(id, state);
     }
   });

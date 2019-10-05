@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.1.0",
+        "version": "3.1.1",
         "news": {
+            "3.1.1": {
+                "en": "Add device Shelly Dimmer",
+                "de": "Gerät hinzufügen Shelly Dimmer",
+                "ru": "Добавить устройство Шелли Диммер",
+                "pt": "Adicionar dispositivo Shelly Dimmer",
+                "nl": "Apparaat toevoegen Shelly Dimmer",
+                "fr": "Ajouter l'appareil Shelly Dimmer",
+                "it": "Aggiungi dispositivo Shelly Dimmer",
+                "es": "Añadir dispositivo Shelly Dimmer",
+                "pl": "Dodaj urządzenie Shelly Dimmer",
+                "zh-cn": "添加设备Shelly Dimmer"
+            },
             "3.1.0": {
                 "en": "Add device Shelly Flood. Bugfixing and new features",
                 "de": "Gerät hinzufügen Shelly Flood. Bugfixing und neue Funktionen",
