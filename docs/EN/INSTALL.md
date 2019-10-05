@@ -22,7 +22,7 @@ Different to the MQTT protocoll where you can choose the Shelly devices that sha
 
 
 ### MQTT
-For using MQTT you have to activate MQTT on your Shelly device. Open in your webbrowser (not Shelly App) your Shelly device and activate the MQTT support. For that, go to the internet & security settings -> advanced - developer settings. Activate MQTT and enter a username, password the IP address of ioBroker and the port 1882 for example like 192.168.20.242:1882.
+For using MQTT you have to activate MQTT on your Shelly device. Open in your webbrowser (not Shelly App) your Shelly device and activate the MQTT support. For that, go to the internet & security settings -> advanced - developer settings. Activate MQTT and enter a username, password the IP address of ioBroker and the port 1882 for example like 192.168.20.242:1882. It is very important that you do not change tge "custom MQTT prefix". The Adapter will not work if you change the prefix, because the prefix is needed to identify the Shelly device type.
 
 ![shelly_mqtt1](../shelly_mqtt1.png) 
 
