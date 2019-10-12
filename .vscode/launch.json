@@ -13,7 +13,8 @@
             "args": [
                 "--debug", "--force", "--logs", "--trace-warnings"
             ],
-            "console": "integratedTerminal"
+            // "console": "integratedTerminal"
+            "outputCapture": "std"
         },
         {
             "type": "node",
