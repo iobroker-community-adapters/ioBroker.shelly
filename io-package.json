@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.1.3",
+        "version": "3.1.4",
         "news": {
+            "3.1.4": {
+                "en": "Auto update new firmware",
+                "de": "Automatische Aktualisierung neuer Firmware",
+                "ru": "Автообновление новой прошивки",
+                "pt": "Atualizar automaticamente o novo firmware",
+                "nl": "Automatische update van nieuwe firmware",
+                "fr": "Mise à jour automatique du nouveau firmware",
+                "it": "Aggiorna automaticamente il nuovo firmware",
+                "es": "Actualización automática de nuevo firmware",
+                "pl": "Automatycznie aktualizuj nowe oprogramowanie",
+                "zh-cn": "自动更新新固件"
+            },
             "3.1.3": {
                 "en": "Power and temperature state for Shelly dimmer",
                 "de": "Leistungs- und Temperaturzustand für Shelly-Dimmer",
@@ -220,7 +232,7 @@
         "polltime": 10,
         "timeout": 0.25,
         "protocol": "coap",
-        "auto_update": false,
+        "autoupdate": false,
         "keys": [
             {
                 "blacklist": "ABCDEF"
