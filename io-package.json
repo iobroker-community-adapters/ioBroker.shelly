@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.1.4",
+        "version": "3.1.5",
         "news": {
+            "3.1.5": {
+                "en": "Add device Shelly Plugs S2",
+                "de": "Gerät hinzufügen Shelly Plugs S2",
+                "ru": "Добавить устройство Shelly Plugs S2",
+                "pt": "Adicionar dispositivo Shelly Plugs S2",
+                "nl": "Apparaat toevoegen Shelly Plugs S2",
+                "fr": "Ajouter un appareil Shelly Plugs S2",
+                "it": "Aggiungi dispositivo Shelly Plugs S2",
+                "es": "Añadir dispositivo Shelly Plugs S2",
+                "pl": "Dodaj urządzenie Półki wtykowe S2",
+                "zh-cn": "添加设备Shelly Plugs S2"
+            },
             "3.1.4": {
                 "en": "Auto update new firmware",
                 "de": "Automatische Aktualisierung neuer Firmware",
