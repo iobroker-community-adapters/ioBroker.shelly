@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.1.5",
+        "version": "3.1.6",
         "news": {
+            "3.1.6": {
+                "en": "Add Shelly door/window sensor",
+                "de": "Shelly Tür- / Fenstersensor hinzugefügt",
+                "ru": "Добавить датчик двери / окна Shelly",
+                "pt": "Adicionar Shelly sensor de porta / janela",
+                "nl": "Voeg Shelly deur / raam sensor toe",
+                "fr": "Ajouter un capteur de porte / fenêtre Shelly",
+                "it": "Aggiungi sensore per porte / finestre Shelly",
+                "es": "Agregar sensor de puerta / ventana Shelly",
+                "pl": "Dodaj czujnik drzwi / okna Shelly",
+                "zh-cn": "添加雪莱门/窗传感器"
+            },
             "3.1.5": {
                 "en": "Add device Shelly Plugs S2",
                 "de": "Gerät hinzufügen Shelly Plugs S2",
