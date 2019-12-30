@@ -285,6 +285,19 @@
                 "def": false
             },
             "native": {}
-        }
+        },
+        {
+            "_id": "info.update",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "If listening for Shelly packets",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
     ]
 }

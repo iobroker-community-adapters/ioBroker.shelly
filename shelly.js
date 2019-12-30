@@ -70,8 +70,12 @@ process.on('SIGINT', () => {
 
 process.on('uncaughtException', (err) => {
   console.log('Exception: ' + err + '/' + err.toString());
+  console.log(err.message);
+  console.log(err.stack);
   if (adapter && adapter.log) {
     adapter.log.error('Exception: ' + err);
+    adapter.log.error('Exception: ' + err.message);
+    adapter.log.error('Exception: ' + err.stack);
   }
   process.exit();
   // adapter.terminate ? adapter.terminate() : process.exit();
