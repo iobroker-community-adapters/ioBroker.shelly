@@ -11,6 +11,8 @@ const mqttServer = require(__dirname + '/lib/mqtt');
 const coapServer = require(__dirname + '/lib/coap');
 const adapterName = require('./package.json').name.split('.').pop();
 const ping = require('ping');
+const events = require('events');
+const eventEmitter = new events.EventEmitter();
 
 let adapter;
 
@@ -48,6 +50,9 @@ function startAdapter(options) {
       adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
       adapter.log.debug('stateChange ' + id + ' = ' + state.val);
       objectHelper.handleStateChange(id, state);
+      if(stateId  === 'info.update') {
+        eventEmitter.emit('onFirmwareUpdate');
+      }
     }
   });
 
@@ -187,14 +192,14 @@ async function main() {
       adapter.log.info('Starting Shelly adapter in MQTT modus. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
       if (!adapter.config.mqttusername || adapter.config.mqttusername.length === 0) { adapter.log.error('MQTT Username is missing!'); }
       if (!adapter.config.mqttpassword || adapter.config.mqttpassword.length === 0) { adapter.log.error('MQTT Password is missing!'); }
-      let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper);
+      let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper, eventEmitter);
       serverMqtt.listen();
     }
   });
   setTimeout(() => {
     if (protocol === 'both' || protocol === 'coap') {
       adapter.log.info('Starting Shelly adapter in CoAP modus.');
-      let serverCoap = new coapServer.CoAPServer(adapter, objectHelper);
+      let serverCoap = new coapServer.CoAPServer(adapter, objectHelper, eventEmitter);
       serverCoap.listen();
     }
   });
