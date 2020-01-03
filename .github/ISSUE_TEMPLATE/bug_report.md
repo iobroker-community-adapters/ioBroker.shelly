@@ -23,7 +23,8 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots and logfiles to help explain your problem.
 
 **Versions:**  
- - Adapter version: <adapter-version>
+ - Shelly Adapter version: <adapter-version>
+ - Using CoAP or MQTT protocol: <COAP|MQTT>
  - JS-Controller version: <js-controller-version> <!-- determine this with `iobroker -v` on the console -->
  - Node version: <node-version> <!-- determine this with `node -v` on the console -->
  - Operating system: <os-name>
