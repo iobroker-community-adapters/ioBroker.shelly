@@ -20,11 +20,12 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Screenshots & Logfiles**  
-If applicable, add screenshots and logfiles to help explain your problem.
+If applicable, add screenshots and logfiles to help explain your problem. 
 
 **Versions:**  
  - Shelly Adapter version: <adapter-version>
- - Using CoAP or MQTT protocol: <COAP|MQTT>
+ - CoAP or MQTT protocol: <COAP|MQTT>
+ - Shelly Firmware version: <version of firmware>
  - JS-Controller version: <js-controller-version> <!-- determine this with `iobroker -v` on the console -->
  - Node version: <node-version> <!-- determine this with `node -v` on the console -->
  - Operating system: <os-name>
