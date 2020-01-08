@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.1.6",
+        "version": "3.1.7",
         "news": {
+            "3.1.7": {
+                "en": "Add state energy to Shelly Dimmer",
+                "de": "Status energy beim Shelly Dimmer hinzugefügt",
+                "ru": "Добавьте энергию состояния к Шелли Диммер",
+                "pt": "Adicione energia de estado ao Shelly Dimmer",
+                "nl": "Voeg staatsenergie toe aan Shelly Dimmer",
+                "fr": "Ajouter de l'énergie d'état à Shelly Dimmer",
+                "it": "Aggiungi energia statale a Shelly Dimmer",
+                "es": "Agregue energía de estado a Shelly Dimmer",
+                "pl": "Dodaj energię stanu do Shelly Dimmer",
+                "zh-cn": "为Shelly Dimmer增加状态能量"
+            },
             "3.1.6": {
                 "en": "Add Shelly door/window sensor",
                 "de": "Shelly Tür- / Fenstersensor hinzugefügt",
