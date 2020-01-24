@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "3.1.7",
+  "version": "3.1.8",
   "description": "Shelly",
   "author": {
     "name": "Thorsten Stueben",
@@ -35,7 +35,7 @@
     "mqtt-connection": "^4.0.0",
     "ping": "^0.2.2",
     "request": "^2.88.0",
-    "shelly-iot": "^1.0.3"
+    "shelly-iot": "^1.0.4"
   },
   "devDependencies": {
     "@iobroker/testing": "^2.0.0",

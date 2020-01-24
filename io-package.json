@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.1.7",
+        "version": "3.1.8",
         "news": {
+            "3.1,8": {
+                "en": "Bugfixing",
+                "de": "Fehlerbehebung",
+                "ru": "Исправление ошибок",
+                "pt": "Corrigindo erro",
+                "nl": "bugfixing",
+                "fr": "Correction de bugs",
+                "it": "bugfixing",
+                "es": "Corrección de errores",
+                "pl": "Naprawa błędów",
+                "zh-cn": "Bugfixing"
+            },
             "3.1.7": {
                 "en": "Add state energy to Shelly Dimmer",
                 "de": "Status energy beim Shelly Dimmer hinzugefügt",
