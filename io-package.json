@@ -1,9 +1,21 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.1.9",
+        "version": "3.1.10",
         "news": {
-            "3.1,9": {
+            "3.1.10": {
+                "en": "Add Shelly 3EM",
+                "de": "Shelly 3EM hinzufügen",
+                "ru": "Добавить Шелли 3EM",
+                "pt": "Adicionar Shelly 3EM",
+                "nl": "Voeg Shelly 3EM toe",
+                "fr": "Ajouter Shelly 3EM",
+                "it": "Aggiungi Shelly 3EM",
+                "es": "Agregar Shelly 3EM",
+                "pl": "Dodaj Shelly 3EM",
+                "zh-cn": "Add Shelly 3EM"
+            },
+            "3.1.9": {
                 "en": "Bugfixing",
                 "de": "Fehlerbehebung",
                 "ru": "Исправление ошибок",
