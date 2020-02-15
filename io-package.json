@@ -1,21 +1,21 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.1.10",
+        "version": "3.2.0",
         "news": {
-            "3.1.10": {
-                "en": "Add Shelly 3EM",
-                "de": "Shelly 3EM hinzufügen",
-                "ru": "Добавить Шелли 3EM",
-                "pt": "Adicionar Shelly 3EM",
-                "nl": "Voeg Shelly 3EM toe",
-                "fr": "Ajouter Shelly 3EM",
-                "it": "Aggiungi Shelly 3EM",
-                "es": "Agregar Shelly 3EM",
-                "pl": "Dodaj Shelly 3EM",
-                "zh-cn": "Add Shelly 3EM"
+            "3.2.0": {
+                "en": "Add Shelly Bulb Duo",
+                "de": "Fügen Sie Shelly Bulb Duo hinzu",
+                "ru": "Добавить Shelly Bulb Duo",
+                "pt": "Adicionar Shelly Bulb Duo",
+                "nl": "Voeg Shelly Bulb Duo toe",
+                "fr": "Ajouter Shelly Bulb Duo",
+                "it": "Aggiungi Shelly Bulb Duo",
+                "es": "Añadir Shelly Bulb Duo",
+                "pl": "Dodaj Shelly Bulb Duo",
+                "zh-cn": "添加雪莉灯泡二重奏"
             },
-            "3.1.9": {
+            "3.1,9": {
                 "en": "Bugfixing",
                 "de": "Fehlerbehebung",
                 "ru": "Исправление ошибок",
