@@ -40,12 +40,14 @@ You find a detailed installation documentation here:
 |Shelly Flood (SHWT-1)|verified|verified|
 |Shelly Dimmer (SHDM-1)|verified|verified|
 |Shelly Door/Window Sensor (SHDW-1)|verified|verified|
-|Shelly Bulb Duo (SHBDUO-1)|verified|verified|
+|Shelly Bulb Duo (SHBDUO-1)|not verified|not verified|
+|Shelly 3EM (SHEM)|verified|verified|
 
 ## Changelog
 
 ### 3.2.0 (13.02.2020)
-* (Stübi) - Add device Shelly Door/Windows sensor 
+* (Simon W.) - Add device Shelly 3EM
+* (Stübi)    - Add device Shelly Door/Windows sensor 
 
 ### 3.1.9 (25.01.2020)
 * (Stübi) - Bugfixing, auto update new firmware
