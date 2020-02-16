@@ -40,7 +40,7 @@ You find a detailed installation documentation here:
 |Shelly Flood (SHWT-1)|verified|verified|
 |Shelly Dimmer (SHDM-1)|verified|verified|
 |Shelly Door/Window Sensor (SHDW-1)|verified|verified|
-|Shelly Bulb Duo (SHBDUO-1)|not verified|not verified|
+|Shelly Bulb Duo (SHBDUO-1)|verified|not verified|
 |Shelly 3EM (SHEM)|verified|verified|
 
 ## Changelog
@@ -48,6 +48,7 @@ You find a detailed installation documentation here:
 ### 3.2.0 (13.02.2020)
 * (Simon W.) - Add device Shelly 3EM
 * (Stübi)    - Add device Shelly Door/Windows sensor 
+* (Stübi)    - Add external temperature sensor for Shelly 1PM
 
 ### 3.1.9 (25.01.2020)
 * (Stübi) - Bugfixing, auto update new firmware
