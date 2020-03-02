@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.2.0",
+        "version": "3.2.1",
         "news": {
+            "3.2.1": {
+                "en": "Bugfixing for Shelly 3EM ",
+                "de": "Bugfixing für Shelly 3EM",
+                "ru": "Исправление ошибок для Shelly 3EM",
+                "pt": "Correção de erros para Shelly 3EM",
+                "nl": "Bugfixing voor Shelly 3EM",
+                "fr": "Correction de bugs pour Shelly 3EM",
+                "it": "Bugfixing per Shelly 3EM",
+                "es": "Corrección de errores para Shelly 3EM",
+                "pl": "Naprawianie błędów dla Shelly 3EM",
+                "zh-cn": "Shelly 3EM的错误修复"
+            },
             "3.2.0": {
                 "en": "Add Shelly 3EM and Shelly Bulb Duo",
                 "de": "Fügen Sie Shelly 3EM und Shelly Bulb Duo hinzu",
