@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.2.1",
+        "version": "3.2.2",
         "news": {
+            "3.2.2": {
+                "en": "Bugfixing, if Shelly sends a string instead of number and boolean ",
+                "de": "Bugfixing, wenn Shelly einen String anstelle von number und boolean sendet",
+                "ru": "Исправление ошибок, если Шелли отправляет строку вместо числа и логическое значение",
+                "pt": "Correção de erros, se Shelly envia uma string em vez de number e boolean",
+                "nl": "Bugfixing, als Shelly een string verzendt in plaats van nummer en Boolean",
+                "fr": "Correction de bugs, si Shelly envoie une chaîne au lieu de nombre et booléen",
+                "it": "Bugfixing, se Shelly invia una stringa anziché numero e valore booleano",
+                "es": "Corrección de errores, si Shelly envía una cadena en lugar de un número y boolean",
+                "pl": "Naprawianie błędów, jeśli Shelly wysyła ciąg zamiast liczby i wartości logicznej",
+                "zh-cn": "错误修正，如果Shelly发送的是字符串而不是数字和布尔值"
+            },
             "3.2.1": {
                 "en": "Bugfixing for Shelly 3EM ",
                 "de": "Bugfixing für Shelly 3EM",

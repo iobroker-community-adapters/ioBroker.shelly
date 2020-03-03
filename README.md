@@ -45,6 +45,9 @@ You find a detailed installation documentation here:
 
 ## Changelog
 
+### 3.2.2 (03.03.2020)
+* (Stübi) - Bugfixing, if Shelly sends a string instead of number and boolean (Issue #131)
+
 ### 3.2.1 (02.03.2020)
 * (Stübi) - Bugfixing Shelly 3EMfor MQTT support 
 
