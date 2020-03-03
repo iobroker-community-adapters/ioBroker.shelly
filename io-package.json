@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.2.2",
+        "version": "3.2.3",
         "news": {
+            "3.2.3": {
+                "en": "Bugfixing for Shelly 3EM ",
+                "de": "Bugfixing für Shelly 3EM",
+                "ru": "Исправление ошибок для Shelly 3EM",
+                "pt": "Correção de erros para Shelly 3EM",
+                "nl": "Bugfixing voor Shelly 3EM",
+                "fr": "Correction de bugs pour Shelly 3EM",
+                "it": "Bugfixing per Shelly 3EM",
+                "es": "Corrección de errores para Shelly 3EM",
+                "pl": "Naprawianie błędów dla Shelly 3EM",
+                "zh-cn": "Shelly 3EM的错误修复"
+            },
             "3.2.2": {
                 "en": "Bugfixing, if Shelly sends a string instead of number and boolean ",
                 "de": "Bugfixing, wenn Shelly einen String anstelle von number und boolean sendet",
@@ -146,114 +158,6 @@
                 "es": "Añadir dispositivo Shelly Flood. Corrección de errores y nuevas características.",
                 "pl": "Dodaj urządzenie Shelly Flood. Poprawianie błędów i nowe funkcje",
                 "zh-cn": "添加设备Shelly Flood。错误修正和新功能"
-            },
-            "3.0.9": {
-                "en": "Bugfixing",
-                "de": "Fehlerbehebung",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "Bugfixing"
-            },
-            "3.0.8": {
-                "en": "Add device Shelly EM. Bugfixing and new features",
-                "de": "Gerät hinzufügen Shelly EM. Bugfixing und neue Funktionen",
-                "ru": "Добавьте устройство Shelly EM. Исправление ошибок и новые функции",
-                "pt": "Adicione o dispositivo Shelly EM. Correção de bugs e novos recursos",
-                "nl": "Apparaat toevoegen Shelly EM. Bugfixing en nieuwe functies",
-                "fr": "Ajouter l'appareil Shelly EM. Correction de bugs et nouvelles fonctionnalités",
-                "it": "Aggiungi dispositivo Shelly EM. Bugfixing e nuove funzionalità",
-                "es": "Añadir dispositivo Shelly EM. Corrección de errores y nuevas características.",
-                "pl": "Dodaj urządzenie Shelly EM. Poprawianie błędów i nowe funkcje",
-                "zh-cn": "添加设备Shelly EM。错误修正和新功能"
-            },
-            "3.0.7": {
-                "en": "Speling Error correction",
-                "de": "Rechtschreibfehlerkorrektur",
-                "ru": "Исправление орфографических ошибок",
-                "pt": "Correção de erros de correção",
-                "nl": "Spelfoutcorrectie",
-                "fr": "Correction d'erreur d'orthographe",
-                "it": "Correzione dell'errore di ortografia",
-                "es": "Corrección de errores de speling",
-                "pl": "Korekcja błędu spelowania",
-                "zh-cn": "Speling纠错"
-            },
-            "3.0.6": {
-                "en": "State reboot and uptime added",
-                "de": "Neustart und Betriebszeit hinzugefügt",
-                "ru": "Состояние перезагрузки и время работы добавлено",
-                "pt": "Estado de reinicialização e uptime adicionado",
-                "nl": "Staat opnieuw opstarten en uptime toegevoegd",
-                "fr": "Redémarrage d'état et temps de disponibilité ajouté",
-                "it": "Riavvio dello stato e uptime aggiunti",
-                "es": "Estado reinicio y tiempo de actividad añadido",
-                "pl": "Dodano stan ponownego uruchomienia i czas pracy",
-                "zh-cn": "状态重启和正常运行时间增加"
-            },
-            "3.0.5": {
-                "en": "Bugfixing",
-                "de": "Fehlerbehebung",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "Bugfixing"
-            },
-            "3.0.4": {
-                "en": "Bugfixing",
-                "de": "Fehlerbehebung",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "Bugfixing"
-            },
-            "3.0.3": {
-                "en": "MQTT QoS 1 and 2 support",
-                "de": "MQTT QoS 1 und 2",
-                "ru": "Поддержка MQTT QoS 1 и 2",
-                "pt": "Suporte MQTT QoS 1 e 2",
-                "nl": "MQTT QoS 1 en 2 ondersteuning",
-                "fr": "Prise en charge de MQTT QoS 1 et 2",
-                "it": "MQTT QoS 1 e 2 supporto",
-                "es": "MQTT QoS 1 y 2 soporte",
-                "pl": "Obsługa MQTT QoS 1 i 2",
-                "zh-cn": "MQTT QoS 1和2支持"
-            },
-            "3.0.2": {
-                "en": "Bugfixing",
-                "de": "Fehlerbehebung",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "Bugfixing"
-            },
-            "3.0.1": {
-                "en": "MQTT Support",
-                "de": "MQTT-Unterstützung",
-                "ru": "MQTT Поддержка",
-                "pt": "Suporte MQTT",
-                "nl": "MQTT-ondersteuning",
-                "fr": "Support MQTT",
-                "it": "Supporto MQTT",
-                "es": "Soporte MQTT",
-                "pl": "Obsługa MQTT",
-                "zh-cn": "MQTT支持"
             }
         },
         "title": "Shelly",
