@@ -210,6 +210,7 @@
     },
     "native": {
         "bind": "0.0.0.0",
+        "coapbind": "0.0.0.0",
         "port": 1882,
         "mqttpassword": "mqttuser",
         "mqttusername": "mqttuser",
