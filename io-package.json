@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.2.3",
+        "version": "3.2.4",
         "news": {
+            "3.2.4": {
+                "en": "Bugfixing for Shelly 1",
+                "de": "Bugfixing für Shelly 1",
+                "ru": "Исправление ошибок для Shelly 1",
+                "pt": "Correção de erros para Shelly 1",
+                "nl": "Bugfixing voor Shelly 1",
+                "fr": "Correction de bugs pour Shelly 1",
+                "it": "Bugfixing per Shelly 1",
+                "es": "Corrección de errores para Shelly 1",
+                "pl": "Naprawianie błędów dla Shelly 1",
+                "zh-cn": "Shelly 3EM的错误修复"
+            },
             "3.2.3": {
                 "en": "Bugfixing for Shelly 3EM ",
                 "de": "Bugfixing für Shelly 3EM",
