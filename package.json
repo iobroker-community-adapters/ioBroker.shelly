@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "description": "Shelly",
   "author": {
     "name": "Thorsten Stueben",
@@ -29,25 +29,25 @@
     "url": "https://github.com/schmupu/ioBroker.shelly"
   },
   "dependencies": {
-    "@apollon/iobroker-tools": "^0.1.0",
-    "@iobroker/adapter-core": "^2.0.0",
+    "@apollon/iobroker-tools": "^0.2.0",
+    "@iobroker/adapter-core": "^2.2.1",
     "mqtt": "3.0.0",
     "mqtt-connection": "^4.0.0",
-    "ping": "^0.2.2",
-    "request": "^2.88.0",
-    "shelly-iot": "^1.0.5",
-    "xmlbuilder": "^13.0.2"
+    "ping": "^0.2.3",
+    "request": "^2.88.2",
+    "shelly-iot": "^1.0.6",
+    "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
-    "@iobroker/testing": "^2.0.0",
-    "axios": "^0.19.0",
+    "@iobroker/testing": "^2.1.0",
+    "axios": "^0.19.2",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-react": "^7.17.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-react": "^7.19.0",
     "gulp": "^4.0.2",
-    "mocha": "^6.2.2"
+    "mocha": "^7.1.1"
   },
   "main": "shelly.js",
   "scripts": {

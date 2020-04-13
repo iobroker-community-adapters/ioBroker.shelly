@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.2.4",
+        "version": "3.2.5",
         "news": {
             "3.2.4": {
                 "en": "Bugfixing for Shelly 1",
@@ -218,7 +218,16 @@
         "readme": "https://github.com/schmupu/ioBroker.shelly/blob/master/README.md",
         "loglevel": "info",
         "type": "iot-systems",
-        "restartAdapters": []
+        "restartAdapters": [],
+        "connectionType": "local",
+        "dataSource": "push",
+        "plugins": {
+            "sentry": {
+                "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
+                "pathWhitelist": ["@apollon", "shelly-iot"]
+            }
+        }
+
     },
     "native": {
         "bind": "0.0.0.0",
