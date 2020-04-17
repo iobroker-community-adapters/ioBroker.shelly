@@ -36,6 +36,7 @@
     "ping": "^0.2.3",
     "request": "^2.88.2",
     "shelly-iot": "^1.0.6",
+    "xml2js": "0.4.19",
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
