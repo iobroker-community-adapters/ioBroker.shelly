@@ -3,6 +3,18 @@
         "name": "shelly",
         "version": "3.2.5",
         "news": {
+            "3.2,5": {
+                "en": "Bugfixing",
+                "de": "Fehlerbehebung",
+                "ru": "Исправление ошибок",
+                "pt": "Corrigindo erro",
+                "nl": "bugfixing",
+                "fr": "Correction de bugs",
+                "it": "bugfixing",
+                "es": "Corrección de errores",
+                "pl": "Naprawa błędów",
+                "zh-cn": "Bugfixing"
+            },
             "3.2.4": {
                 "en": "Bugfixing for Shelly 1",
                 "de": "Bugfixing für Shelly 1",
