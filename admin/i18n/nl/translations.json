@@ -11,6 +11,7 @@
     "MQTT Password": "MQTT-wachtwoord",
     "MQTT Username": "MQTT-gebruikersnaam",
     "MQTT settings": "MQTT-instellingen",
+    "COAP Listen IP": "COAP Listen IP",
     "Manual": "Met de hand",
     "Password": "Wachtwoord",
     "Password Enable": "Inloggen met wachtwoord",

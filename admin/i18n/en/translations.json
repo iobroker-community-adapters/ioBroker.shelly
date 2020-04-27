@@ -11,6 +11,7 @@
     "MQTT Password": "MQTT Password",
     "MQTT Username": "MQTT Username",
     "MQTT settings": "MQTT settings",
+    "COAP Listen IP": "COAP Listen IP",
     "Manual": "Manual",
     "Password": "Password",
     "Password Enable": "Login with password",
