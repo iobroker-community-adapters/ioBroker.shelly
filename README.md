@@ -52,7 +52,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 3.2.5 (13.04.2020)
+### 3.2.6 (27.04.2020)
 * (Apollon77)  - Update Dependencies incl shelly-lib to prevent exceptions
 * (Apollon77)  - Add Sentry for error/crash reporting (active with js-controller 3.0)
 * (Stübi       - Add for hue two new datapoints for Shelly Bulb and RGBW2
