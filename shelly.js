@@ -14,7 +14,6 @@ const ping = require('ping');
 const events = require('events');
 const eventEmitter = new events.EventEmitter();
 
-const colorconv = require(__dirname + '/lib/colorconv');
 
 let adapter;
 
