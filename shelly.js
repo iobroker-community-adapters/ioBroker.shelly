@@ -16,26 +16,6 @@ const eventEmitter = new events.EventEmitter();
 
 const colorconv = require(__dirname + '/lib/colorconv');
 
-/*
-let r = 117;
-let g = 255;
-let b = 177;
-*/
-let r = 117;
-let g = 255;
-let b = 177;
-let c1 = colorconv.rgbToHsl(r,g,b);
-let c2 = colorconv.rgbToHsv(r,g,b);
-let h1 = c1[0];
-let s1 = c1[1];
-let l1 = c1[2];
-let h2 = c2[0];
-let s2 = c2[1];
-let v2 = c2[2];
-
-let c3 = colorconv.hsvToRgb(h2,s2,v2);
-let c4 = colorconv.hslToRgb(h1,s1,l1);
-
 let adapter;
 
 function decrypt(key, value) {
