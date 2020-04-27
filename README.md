@@ -52,6 +52,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 3.2.7 (28.04.2020)
+* (Stübi) - Add power datapoints for Shelly RGBW2 (Issue #118)
+
 ### 3.2.6 (27.04.2020)
 * (Apollon77)  - Update Dependencies incl shelly-lib to prevent exceptions
 * (Apollon77)  - Add Sentry for error/crash reporting (active with js-controller 3.0)

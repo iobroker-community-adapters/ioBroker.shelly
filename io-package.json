@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.2.6",
+        "version": "3.2.7",
         "news": {
+            "3.2.7": {
+                "en": "Bugfixing and add state power for Shelly RGBW2 ",
+                "de": "Bugfixing und Hinzufügen von Statusleistung für Shelly RGBW2",
+                "ru": "Исправление ошибок и добавление государственной власти для Shelly RGBW2",
+                "pt": "Correção de erros e adicione potência de estado ao Shelly RGBW2",
+                "nl": "Bugfixing en het toevoegen van state power voor Shelly RGBW2",
+                "fr": "Correction de bugs et ajout de puissance d'état pour Shelly RGBW2",
+                "it": "Correzione di errori e aggiunta del potere statale per Shelly RGBW2",
+                "es": "Corrección de errores y agregar potencia de estado para Shelly RGBW2",
+                "pl": "Naprawianie błędów i dodawanie mocy stanu dla Shelly RGBW2",
+                "zh-cn": "修正Shelly RGBW2并添加状态电源"
+            },
             "3.2.6": {
                 "en": "Bugfixing",
                 "de": "Fehlerbehebung",
