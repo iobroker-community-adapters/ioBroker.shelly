@@ -25,6 +25,28 @@ function decrypt(key, value) {
   return result;
 }
 
+/**
+ * Change the external Sentry Logging. After changing the Logging
+ * the adapter restarts once
+ * @param {*} id : adapter.config.sentry_enable for example
+ */
+async function setSentryLogging(value) {
+  try {
+    value = value === true;
+    let idSentry = 'system.adapter.' + adapter.namespace + '.plugins.sentry.enabled';
+    let stateSentry = await adapter.getForeignStateAsync(idSentry);
+    if (stateSentry && stateSentry.val !== value) {
+      await adapter.setForeignStateAsync(idSentry, value);
+      adapter.log.info('Restarting Adapter because of changeing Sentry settings');
+      adapter.restart();
+      return true;
+    }
+  } catch (error) {
+    return false;
+  }
+  return false;
+}
+
 function startAdapter(options) {
   options = options || {};
   options.name = adapterName;
@@ -59,6 +81,8 @@ function startAdapter(options) {
 
   adapter.on('ready', async () => {
     try {
+      adapter.log.info('Starting Adapter ' + adapter.namespace + ' in version ' + adapter.version);
+      if (await setSentryLogging(adapter.config.sentry_enable)) return;
       await migrateconfig();
       await encryptPasswords();
       await main();
