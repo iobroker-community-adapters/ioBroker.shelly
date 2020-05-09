@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.2.7",
+        "version": "3.2.8",
         "news": {
+            "3.2.8": {
+                "en": "Add device Shelly Vintage",
+                "de": "Gerät hinzufügen Shelly Vintage",
+                "ru": "Добавить устройство Shelly Vintage",
+                "pt": "Adicionar dispositivo Shelly Vintage",
+                "nl": "Voeg apparaat Shelly Vintage toe",
+                "fr": "Ajouter un appareil Shelly Vintage",
+                "it": "Aggiungi dispositivo Shelly Vintage",
+                "es": "Añadir dispositivo Shelly Vintage",
+                "pl": "Dodaj urządzenie Shelly Vintage",
+                "zh-cn": "添加设备Shelly Vintage"
+            },
             "3.2.7": {
                 "en": "User can enable/disable sentry logging",
                 "de": "Der Benutzer kann die Wachprotokollierung aktivieren / deaktivieren",
@@ -248,10 +260,12 @@
         "plugins": {
             "sentry": {
                 "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
-                "pathWhitelist": ["@apollon", "shelly-iot"]
+                "pathWhitelist": [
+                    "@apollon",
+                    "shelly-iot"
+                ]
             }
         }
-
     },
     "native": {
         "bind": "0.0.0.0",

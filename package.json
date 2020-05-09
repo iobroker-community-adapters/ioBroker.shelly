@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "3.2.7",
+  "version": "3.2.8",
   "description": "Shelly",
   "author": {
     "name": "Thorsten Stueben",
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@apollon/iobroker-tools": "^0.2.0",
-    "@iobroker/adapter-core": "^2.2.1",
+    "@iobroker/adapter-core": "^2.4.0",
     "mqtt": "3.0.0",
     "mqtt-connection": "^4.0.0",
     "ping": "^0.2.3",
@@ -40,7 +40,7 @@
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
-    "@iobroker/testing": "^2.1.0",
+    "@iobroker/testing": "^2.2.0",
     "axios": "^0.19.2",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
