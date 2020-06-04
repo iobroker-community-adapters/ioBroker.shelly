@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.2.8",
+        "version": "3.2.9",
         "news": {
+            "3.2.9": {
+                "en": "Add state vibration and tilt to Shelly DW",
+                "de": "Füge Shelly DW Zustandsvibration und Neigung hinzu",
+                "ru": "Добавьте состояние вибрации и наклона к Shelly DW",
+                "pt": "Adicione vibração e inclinação ao Shelly DW",
+                "nl": "Voeg staatstrilling en kanteling toe aan Shelly DW",
+                "fr": "Ajoutez une vibration d'état et une inclinaison à Shelly DW",
+                "it": "Aggiungi vibrazione dello stato e inclinazione a Shelly DW",
+                "es": "Agregue vibración de estado e inclinación a Shelly DW",
+                "pl": "Dodaj wibracje i pochylenie stanu do Shelly DW",
+                "zh-cn": "为Shelly DW增加状态振动和倾斜"
+            },
             "3.2.8": {
                 "en": "Add device Shelly Vintage",
                 "de": "Gerät hinzufügen Shelly Vintage",

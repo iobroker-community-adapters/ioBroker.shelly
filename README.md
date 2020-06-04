@@ -53,6 +53,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 3.2.9 (04.06.2020)
+* (Stübi) - Add state vibration and tilt to Shelly DW
+
 ### 3.2.8 (09.05.2020)
 * (c7j3X) - Add device Shelly Vintage
 * (Stübi) - Add state vibration and tilt to Shelly DW
