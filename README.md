@@ -55,6 +55,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 3.2.9 (04.06.2020)
 * (Stübi) - Add state vibration and tilt to Shelly DW
+* (Stübi) - Add polltime to index_m.html  
 
 ### 3.2.8 (09.05.2020)
 * (c7j3X) - Add device Shelly Vintage

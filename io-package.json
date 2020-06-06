@@ -289,7 +289,7 @@
         "httpusername": "",
         "qos": 0,
         "pwd": false,
-        "polltime": 10,
+        "polltime": 5,
         "timeout": 0.25,
         "protocol": "coap",
         "autoupdate": false,

@@ -81,7 +81,9 @@ function startAdapter(options) {
 
   adapter.on('ready', async () => {
     try {
+      adapter.config.polltime = Number(adapter.config.polltime) || 5;
       adapter.log.info('Starting Adapter ' + adapter.namespace + ' in version ' + adapter.version);
+      adapter.log.info('Polltime of the shelly devices: ' + adapter.config.polltime + ' sec.');
       if (await setSentryLogging(adapter.config.sentry_enable)) return;
       await migrateconfig();
       await encryptPasswords();
@@ -176,7 +178,6 @@ async function encryptPasswords() {
           adapter.config.httppassword = decrypt('Zgfr56gFe87jJOM', adapter.config.httppassword);
         }
       }
-      adapter.config.polltime = 5;
       resolve();
     });
   });
