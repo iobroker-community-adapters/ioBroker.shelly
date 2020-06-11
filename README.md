@@ -59,6 +59,8 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Add polltime to index_m.html  
 * (Stübi) - Fix RGBW2 with FW 1.7 - Issue #161
 * (Stübi) - Add state Button Type to Shelly 2.5 - Issue #157
+* (Stübi) - Add firmware update button
+* (Stübi) - Fix auto firmware update
 
 ### 3.2.8 (09.05.2020)
 * (c7j3X) - Add device Shelly Vintage
