@@ -18,6 +18,17 @@ If you protect you Shelly device with a restricted login, you have to enter this
 
 Different to the MQTT protocoll where you can choose the Shelly devices that shall be shown in ioBroker, CoAP will show all devices in your network. If you want to exclude some Shelly devices, you can put them on a blacklist.
 
+#### Trouble Shooting 
+Sometimes Shelly devices will not be found by the Shelly adapter in CoAP mode. Please do following and disable the ioBroker Shelly Adapter instance. Do not uninstall the Shelly Adapter! But it is important to disable the Shelly instance. Now open a terminal window and enter following statements:
+
+```
+cd /opt/iobroker/node_modules/iobroker.shelly/
+node coaptest.js 
+```
+
+Now you shall see all CoAP messages from the Shelly. Look for you Shelly device in the output. If you can not find it, you have a network problem with UDP or multicast messages.  
+
+
 ![iobroker_coap](../iobroker_coap.png) 
 
 
