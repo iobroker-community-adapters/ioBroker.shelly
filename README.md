@@ -59,7 +59,8 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Add state vibration and tilt to Shelly DW
 * (Stübi) - Add polltime to index_m.html  
 * (Stübi) - Fix RGBW2 with FW 1.7 - Issue #161
-* (Stübi) - Add state Button Type to Shelly 2.5 - Issue #157
+* (Stübi) - Add state Button Type for Shelly  1, 1PM, 2, 2.5 - Issue #157
+* (Stübi) - Add state Button Reverse for Shelly 1, 1PM, 2, 2.5
 * (Stübi) - Add firmware update button
 * (Stübi) - Fix auto firmware update
 * (Stübi) - Add state external humidity to Shelly 1 / 1PM - Issue #160
