@@ -1,9 +1,9 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.2.9",
+        "version": "3.3.0",
         "news": {
-            "3.2.9": {
+            "3.3.0": {
                 "en": "Add state vibration and tilt to Shelly DW",
                 "de": "Füge Shelly DW Zustandsvibration und Neigung hinzu",
                 "ru": "Добавьте состояние вибрации и наклона к Shelly DW",

@@ -45,7 +45,7 @@ You find a detailed installation documentation here:
 |Shelly Bulb Duo (SHBDUO-1)|verified|not verified|
 |Shelly 3EM (SHEM)|verified|verified|
 |Shelly Vintage (SHVIN-1)|verified|verified|
-|Shelly IX3 (SHIX3-1)|verified|verified|
+|Shelly I3 (SHIX3-1)|verified|verified|
 
 ## What is Sentry and what is reported to the servers?
 Sentry.io is a way for developers to get an overview about errors from their applications. And exactly this is implemented in this adapter.
@@ -54,7 +54,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 3.2.9 (04.06.2020)
+### 3.3.0 (04.06.2020)
 * (Stübi) - Use only version with Shelly firmware greater equal v1.7.0 . Shelly firmware less v1.7.0 will not be supported by this Shelly adapter version anymore
 * (Stübi) - Add state vibration and tilt to Shelly DW
 * (Stübi) - Add polltime to index_m.html  
@@ -65,7 +65,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Fix auto firmware update
 * (Stübi) - Add state external humidity to Shelly 1 / 1PM - Issue #160
 * (Stübi) - Add helper library and cleanup source code
-* (Stübi) - Add Shelly IX3
+* (Stübi) - Add Shelly I3
 
 ### 3.2.8 (09.05.2020)
 * (c7j3X) - Add device Shelly Vintage
