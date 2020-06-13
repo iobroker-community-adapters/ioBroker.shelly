@@ -45,6 +45,7 @@ You find a detailed installation documentation here:
 |Shelly Bulb Duo (SHBDUO-1)|verified|not verified|
 |Shelly 3EM (SHEM)|verified|verified|
 |Shelly Vintage (SHVIN-1)|verified|verified|
+|Shelly IX3 (SHIX3-1)|verified|verified|
 
 ## What is Sentry and what is reported to the servers?
 Sentry.io is a way for developers to get an overview about errors from their applications. And exactly this is implemented in this adapter.
@@ -63,6 +64,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Fix auto firmware update
 * (Stübi) - Add state external humidity to Shelly 1 / 1PM - Issue #160
 * (Stübi) - Add helper library and cleanup source code
+* (Stübi) - Add Shelly IX3
 
 ### 3.2.8 (09.05.2020)
 * (c7j3X) - Add device Shelly Vintage
