@@ -15,6 +15,8 @@ module.exports = {
         'es6': true
     },
     'rules': {
+        'no-prototype-builtins': ['warn'],
+        'no-useless-escape': ['warn'],
         'no-console': ['warn'],
         'no-undef': ['error'],
         'no-unused-vars': ['warn'],
