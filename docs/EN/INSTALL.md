@@ -25,6 +25,20 @@ Sometimes Shelly devices will not be found by the Shelly adapter in CoAP mode. P
 cd /opt/iobroker/node_modules/iobroker.shelly/
 node coaptest.js 
 ```
+or 
+```
+# tcpdump with IP address of Shelly device on network device eth1
+sudo tcpdump -i eth1 src <IP-OF-SHELLY> and port 5683 -A   
+
+# tcpdump with IP address of Shelly device 
+sudo tcpdump src <IP-OF-SHELLY> and port 5683 -A
+
+# tcpdump of all Shelly devices on network device eth1
+sudo tcpdump  -i eth1 port 5683 -A
+
+ # tcpdump of all Shelly devices
+sudo tcpdump port 5683 -A
+```
 
 Now you shall see all CoAP messages from the Shelly. Look for you Shelly device in the output. If you can not find it, you have a network problem with UDP or multicast messages.  
 

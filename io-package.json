@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.3.0",
+        "version": "3.3.1",
         "news": {
+            "3.3.1": {
+                "en": "Bugfixing",
+                "de": "Bugfixing",
+                "ru": "Исправление ошибок",
+                "pt": "Corrigindo erro",
+                "nl": "Bugfixing",
+                "fr": "Correction de bugs",
+                "it": "bugfixing",
+                "es": "Corrección de errores",
+                "pl": "Naprawa błędów",
+                "zh-cn": "错误修正"
+            },
             "3.3.0": {
                 "en": "Add state vibration and tilt to Shelly DW",
                 "de": "Füge Shelly DW Zustandsvibration und Neigung hinzu",
