@@ -152,7 +152,7 @@ async function onlineCheck() {
       }
     }
   } catch (error) { /* */ }
-  await sleep(60 * 1000);
+  await sleep(adapter.config.polltime * 1000);
   await onlineCheck();
 }
 
