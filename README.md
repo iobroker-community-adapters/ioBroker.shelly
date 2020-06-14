@@ -57,7 +57,8 @@ When the adapter crashes or an other Code error happens, this error message that
 ### 3.3.1 (13.06.2020)
 * (Stübi) - Change readme
 * (Stübi) - Add state external humidity to Shelly 1 (Bug in  3.3.0)
-* (Stübi) - Change name of state color to lights for Shelly RGBW2 - Issue #169
+* (Stübi) - Renamed state color to lights for Shelly RGBW2 - Issue #169
+* (Stübi) - Renamed state light to lights for Shelly Dimmer
 * (Stübi) - Bugfixng Shelly RGBW, RGBW and Bulb. State ligths.rgbw did not work - Issue #169
 
 ### 3.3.0 (04.06.2020)
