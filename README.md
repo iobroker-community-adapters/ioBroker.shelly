@@ -54,6 +54,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 3.3.2 (13.06.2020)
+* (Stübi) - Bugfixing Shelly RGBW2
+
 ### 3.3.1 (13.06.2020)
 * (Stübi) - Change readme
 * (Stübi) - Add state external humidity to Shelly 1 (Bug in  3.3.0)
