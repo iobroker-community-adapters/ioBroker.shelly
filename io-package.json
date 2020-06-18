@@ -1,8 +1,11 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.3.2",
+        "version": "3.3.3",
         "news": {
+            "3.3.3": {
+              
+            },
             "3.3.2": {
                 "en": "Bugfixing",
                 "de": "Bugfixing",

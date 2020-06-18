@@ -46,6 +46,7 @@ You find a detailed installation documentation here:
 |Shelly 3EM (SHEM)|verified|verified|
 |Shelly Vintage (SHVIN-1)|verified|verified|
 |Shelly I3 (SHIX3-1)|verified|verified|
+|Shelly Button (SHBTN-1)|no|verified|
 
 ## What is Sentry and what is reported to the servers?
 Sentry.io is a way for developers to get an overview about errors from their applications. And exactly this is implemented in this adapter.
@@ -53,6 +54,9 @@ Sentry.io is a way for developers to get an overview about errors from their app
 When the adapter crashes or an other Code error happens, this error message that also appears in the ioBroker log is submitted to our own Sentry server hosted in germany. When you allowed iobroker GmbH to collect diagnostic data then also your installation ID (this is just a unique ID **without** any additional infos about you, email, name or such) is included. This allows Sentry to group errors and show how many unique users are affected by such an error. All of this helps me to provide error free adapters that basically never crashs.
 
 ## Changelog
+
+### 3.3.3 (18.06.2020)
+* (Stübi) - Add Shelly Button (only MQTT till now)
 
 ### 3.3.2 (13.06.2020)
 * (Stübi) - Bugfixing Shelly RGBW2
