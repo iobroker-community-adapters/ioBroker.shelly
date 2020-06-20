@@ -57,7 +57,7 @@ When the adapter crashes or an other Code error happens, this error message that
 ## Changelog
 
 ### 3.3.3 (18.06.2020)
-* (Stübi) - Add Shelly Button (only MQTT till now)
+* (Stübi) - Add Shelly Buttonx
 * (Stübi) - Add Shelly Gas 
 
 ### 3.3.2 (13.06.2020)

@@ -4,16 +4,16 @@
         "version": "3.3.3",
         "news": {
             "3.3.3": {
-                "en": "Bugfixing",
-                "de": "Bugfixing",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "Bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "错误修正"
+                "en": "Support of Shelly Button & Shelly Gas",
+                "de": "Unterstützung von Shelly Button & Shelly Gas",
+                "ru": "Поддержка Shelly Button & Shelly Gas",
+                "pt": "Suporte do botão Shelly e gás Shelly",
+                "nl": "Ondersteuning van Shelly Button & Shelly Gas",
+                "fr": "Prise en charge de Shelly Button et Shelly Gas",
+                "it": "Supporto di Shelly Button e Shelly Gas",
+                "es": "Soporte de Shelly Button y Shelly Gas",
+                "pl": "Obsługa przycisku Shelly i Shelly Gas",
+                "zh-cn": "支持Shelly Button和Shelly Gas"
             },
             "3.3.2": {
                 "en": "Bugfixing",
