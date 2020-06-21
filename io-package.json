@@ -277,7 +277,17 @@
                     "shelly-iot"
                 ]
             }
-        }
+        },
+        "globalDependencies": [
+            {
+                "admin": ">=4.0.1"
+            }
+        ],
+        "dependencies": [
+            {
+                "js-controller": ">=2.0.0"
+            }
+        ]
     },
     "native": {
         "bind": "0.0.0.0",
