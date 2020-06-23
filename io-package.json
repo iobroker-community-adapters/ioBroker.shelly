@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.3.3",
+        "version": "3.3.4",
         "news": {
+            "3.3.4": {
+                "en": "Support of Shelly Dimmer 2",
+                "de": "Unterstützung vonShelly Dimmer 2",
+                "ru": "Поддержка Shelly Dimmer 2",
+                "pt": "Suporte do botão Shelly Dimmer 2",
+                "nl": "Ondersteuning van Shelly Dimmer 2",
+                "fr": "Prise en charge de Shelly Dimmer 2",
+                "it": "Supporto di Shelly Dimmer 2",
+                "es": "Soporte de Shelly Dimmer 2",
+                "pl": "Obsługa przycisku SShelly Dimmer 2",
+                "zh-cn": "支持Shelly Button和Shelly Dimmer 2"
+            },
             "3.3.3": {
                 "en": "Support of Shelly Button & Shelly Gas",
                 "de": "Unterstützung von Shelly Button & Shelly Gas",
