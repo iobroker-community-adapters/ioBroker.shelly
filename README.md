@@ -59,6 +59,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 3.3.4 (23.06.2020)
 * (Stübi) - Add Shelly Dimmer 2
+* (Stübi) - Add states longpush and input to Shelly Dimmer 1
 
 ### 3.3.3 (18.06.2020)
 * (Stübi) - Add Shelly Button
