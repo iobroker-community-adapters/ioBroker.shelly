@@ -194,9 +194,6 @@ systemDictionary = {
     "pl": "Zaloguj się za pomocą hasła",
     "zh-cn": "登录密码"
   },
-  "Shelly devices that shall not be displayed": {
-    "es": "Dispositivos shelly que no se mostrarán"
-  },
   "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": {
     "en": "Shelly devices that shall not be displayed.. Enter device id of Shelly like 8B22BD",
     "de": "Shelly-Geräte, die nicht angezeigt werden sollen. Geben Sie die Geräte-ID von Shelly wie 8B22BD ein",
