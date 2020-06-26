@@ -14,6 +14,7 @@ const ping = require('ping');
 const events = require('events');
 const eventEmitter = new events.EventEmitter();
 
+let pollTimeout = null;
 
 let adapter;
 
@@ -53,6 +54,10 @@ function startAdapter(options) {
   adapter = new utils.Adapter(options);
 
   adapter.on('unload', (callback) => {
+    if (pollTimeout) {
+      clearTimeout(pollTimeout);
+      pollTimeout = null;
+    }
     try {
       adapter.log.info('Closing Adapter');
       callback();
@@ -132,6 +137,9 @@ async function getAllDevices() {
 }
 
 async function onlineCheck() {
+  if (pollTimeout) {
+    clearTimeout(pollTimeout);
+  }
   try {
     let idsOnline = await getAllDevices();
     for (let i in idsOnline) {
@@ -152,8 +160,10 @@ async function onlineCheck() {
       }
     }
   } catch (error) { /* */ }
-  await sleep(adapter.config.polltime * 1000);
-  await onlineCheck();
+  pollTimeout = setTimeout(() => {
+    pollTimeout = null;
+    onlineCheck();
+  }, adapter.config.polltime * 1000);
 }
 
 async function encryptPasswords() {
