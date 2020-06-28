@@ -63,6 +63,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Add states power and energy to Shelly Duo
 * (Stübi) - Get power and energy by CoAP instead of http for Shelly 1 PM
 * (Stübi) - Bugfixing Shelly Button 
+* (Stübi) - Bugfixing Shelly 1 humidity MQTT
 
 ### 3.3.3 (18.06.2020)
 * (Stübi) - Add Shelly Button
