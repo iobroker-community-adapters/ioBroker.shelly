@@ -78,7 +78,7 @@ function startAdapter(options) {
       adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
       adapter.log.debug('stateChange ' + id + ' = ' + state.val);
       objectHelper.handleStateChange(id, state);
-      if(stateId  === 'info.update') {
+      if (stateId === 'info.update') {
         eventEmitter.emit('onFirmwareUpdate');
       }
     }
