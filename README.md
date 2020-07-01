@@ -30,14 +30,14 @@ You find a detailed installation documentation here:
 |Shelly Smoke (SHSM-01)|supported since v3.3.0|supported since v3.3.0|
 |Shelly 1 1PM (SHSW-PM)|supported since v3.3.0|supported since v3.3.0|
 |Shelly 2.5 (SHSW-25)|supported since v3.3.0|supported since v3.3.0|
-|ShellyRGBW (SHRGBWW-01)|supported since v3.3.0|supported since v3.3.0|
+|ShellyRGBW (SHRGBWW-01)|not supported since v3.4.0|not supported since v3.4.0|
 |ShellyRGBW2 (SHRGBW2)|supported since v3.3.0|supported since v3.3.0|
 |Shelly2LED (SH2LED)|supported since v3.3.0|supported since v3.3.0|
 |ShellyPlug (SHPLG-1)|supported since v3.3.0|supported since v3.3.0|
 |ShellyPlug S (SHPLG-1)|supported since v3.3.0|supported since v3.3.0|
 |ShellyPlug 2 (SHPLG-2)|supported since v3.3.0|supported since v3.3.0|
 |ShellySense (SHSEN-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly4Pro (SHSW-44)|supported since v3.3.0|supported since v3.3.0|
+|Shelly4Pro (SHSW-44)|not supported since v3.4.0|not supported since v3.4.0|
 |Shelly EM (SHEM)|supported since v3.3.0|supported since v3.3.0|
 |Shelly Flood (SHWT-1)|supported since v3.3.0|supported since v3.3.0|
 |Shelly Dimmer (SHDM-1)|supported since v3.3.0|supported since v3.3.0|
@@ -64,6 +64,11 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Get power and energy by CoAP instead of http for Shelly 1 PM
 * (Stübi) - Bugfixing Shelly Button 
 * (Stübi) - Bugfixing Shelly 1 humidity MQTT
+* (Stübi) - Fixed typo error (external temperature) / Shelly 1, 1 PM 
+* (Stübi) - Fixed role for external temperature / Shelly 1, 1 PM 
+* (Stübi) - Changed CoAP concept, because Shelly will change the CoAP payload in one of the future firmware versions. This makes the adjustments later easier. 
+* (Stübi) - Shelly 4 Pro not supported anymore. If you need it please create an GitHub issue.
+* (Stübi) - Shelly RGBW not supported anymore. If you need it please create an GitHub issue .
 
 ### 3.3.3 (18.06.2020)
 * (Stübi) - Add Shelly Button
