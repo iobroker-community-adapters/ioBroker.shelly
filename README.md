@@ -37,7 +37,7 @@ You find a detailed installation documentation here:
 |ShellyPlug S (SHPLG-1)|supported since v3.3.0|supported since v3.3.0|
 |ShellyPlug 2 (SHPLG-2)|supported since v3.3.0|supported since v3.3.0|
 |ShellySense (SHSEN-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly4Pro (SHSW-44)|not supported since v3.4.0|not supported since v3.4.0|
+|Shelly4Pro (SHSW-44)|supported since v3.3.5|supported since v3.3.5|
 |Shelly EM (SHEM)|supported since v3.3.0|supported since v3.3.0|
 |Shelly Flood (SHWT-1)|supported since v3.3.0|supported since v3.3.0|
 |Shelly Dimmer (SHDM-1)|supported since v3.3.0|supported since v3.3.0|
@@ -56,6 +56,9 @@ Sentry.io is a way for developers to get an overview about errors from their app
 When the adapter crashes or an other Code error happens, this error message that also appears in the ioBroker log is submitted to our own Sentry server hosted in Germany. When you allowed ioBroker GmbH to collect diagnostic data then also your installation ID (this is just a unique ID **without** any additional infos about you, email, name or such) is included. This allows Sentry to group errors and show how many unique users are affected by such an error. All of this helps me to provide error free adapters that basically never crashs.
 
 ## Changelog
+
+### 3.3.5 (04.07.2020)
+* (Stübi) - Add Shelly 4 Pro
 
 ### 3.3.4 (23.06.2020)
 * (Stübi) - Add Shelly Dimmer 2

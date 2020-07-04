@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.3.4",
+        "version": "3.3.5",
         "news": {
+            "3.3.5": {
+                "en": "Add Shelly 4 Pro ",
+                "de": "Fügen Sie Shelly 4 Pro hinzu",
+                "ru": "Добавить Шелли 4 Pro",
+                "pt": "Adicionar Shelly 4 Pro",
+                "nl": "Voeg Shelly 4 Pro toe",
+                "fr": "Ajouter Shelly 4 Pro",
+                "it": "Aggiungi Shelly 4 Pro",
+                "es": "Añadir Shelly 4 Pro",
+                "pl": "Dodaj Shelly 4 Pro",
+                "zh-cn": "添加Shelly 4 Pro"
+            },
             "3.3.4": {
                 "en": "Support of Shelly Dimmer 2",
                 "de": "Unterstützung vonShelly Dimmer 2",
