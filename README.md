@@ -59,6 +59,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 3.3.5 (04.07.2020)
 * (Stübi) - Add Shelly 4 Pro
+* (Stübi) - Bugfixing Shelly RGBW2, sate lights.switch color mode
 
 ### 3.3.4 (23.06.2020)
 * (Stübi) - Add Shelly Dimmer 2
