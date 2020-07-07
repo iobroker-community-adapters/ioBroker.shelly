@@ -49,6 +49,7 @@ You find a detailed installation documentation here:
 |Shelly Button (SHBTN-1)|supported since v3.3.3|supported since v3.3.3|
 |Shelly Gas (SHGS-1)|supported since v3.3.3|supported since v3.3.3|
 |Shelly Dimmer 2 (SHDM-2)|supported since v3.3.4|supported since v3.3.4|
+|Shelly Door/Window Sensor 2 (SHDW-2)|supported since v3.3.5|supported since v3.3.5|
 
 ## What is Sentry and what is reported to the servers?
 Sentry.io is a way for developers to get an overview about errors from their applications. And exactly this is implemented in this adapter.
@@ -60,6 +61,7 @@ When the adapter crashes or an other Code error happens, this error message that
 ### 3.3.5 (04.07.2020)
 * (Stübi) - Add Shelly 4 Pro
 * (Stübi) - Bugfixing Shelly RGBW2, sate lights.switch color mode
+* (Stübi) - Add Shelly DW2
 
 ### 3.3.4 (23.06.2020)
 * (Stübi) - Add Shelly Dimmer 2
