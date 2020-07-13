@@ -62,10 +62,12 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Add Shelly 4 Pro
 * (Stübi) - Bugfixing Shelly RGBW2, sate lights.switch color mode
 * (Stübi) - Add Shelly DW2
+* (Stübi) - Add states longpush and input to Shelly Dimmer 1 (CoAP and MQTT)
+* (Stübi) - Add states longpush and input to Shelly Dimmer 2 (CoAP and MQTT)
 
 ### 3.3.4 (23.06.2020)
 * (Stübi) - Add Shelly Dimmer 2
-* (Stübi) - Add states longpush and input to Shelly Dimmer 1
+* (Stübi) - Add states longpush and input to Shelly Dimmer 1 (MQTT)
 * (Stübi) - Add states power and energy to Shelly Duo
 * (Stübi) - Get power and energy by CoAP instead of http for Shelly 1 PM
 * (Stübi) - Bugfixing Shelly Button 
