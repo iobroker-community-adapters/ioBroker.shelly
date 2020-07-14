@@ -64,6 +64,8 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Add Shelly DW2
 * (Stübi) - Add states longpush and input to Shelly Dimmer 1 (CoAP and MQTT)
 * (Stübi) - Add states longpush and input to Shelly Dimmer 2 (CoAP and MQTT)
+* (Stübi) - Add states longpush and input to Shelly 1, 1 PM, 2, 2.5 (CoAP)
+* (Stübi) - Add state input to Shelly RGBW2 (CoAP)
 
 ### 3.3.4 (23.06.2020)
 * (Stübi) - Add Shelly Dimmer 2
