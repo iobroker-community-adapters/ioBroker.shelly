@@ -10,7 +10,10 @@ on:
     branches:
       - '*'
     tags:
-      - 'v?[0-9]+.[0-9]+.[0-9]+'
+      # normal versions
+      - "v?[0-9]+.[0-9]+.[0-9]+"
+      # pre-releases
+      - "v?[0-9]+.[0-9]+.[0-9]+-**"
   pull_request: {}
 
 jobs:
@@ -53,7 +56,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 13.x]
+        node-version: [10.x, 12.x, 14.x]
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
@@ -93,11 +96,26 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Extract the version and commit body from the tag
+        # The body may be multiline, therefore we need to escape some characters
+        run: |
+          VERSION="${{ github.ref }}"
+          VERSION=${VERSION##*/}
+          VERSION=${VERSION##*v}
+          echo "::set-env name=VERSION::$VERSION"
+          BODY=$(git show -s --format=%b)
+          BODY="${BODY//'%'/'%25'}"
+          BODY="${BODY//$'\n'/'%0A'}"
+          BODY="${BODY//$'\r'/'%0D'}"
+          echo "::set-env name=BODY::$BODY"
 
       - name: Install Dependencies
         run: npm ci
@@ -109,10 +127,32 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm whoami
           npm publish
-  # Dummy job for skipped builds - without this, github reports the build as failed
-  skip-ci:
-    if: contains(github.event.head_commit.message, '[skip ci]')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Skip build
-        run: echo "Build skipped!"
+
+      - name: Create Github Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release v${{ env.VERSION }}
+          draft: false
+          # Prerelease versions create prereleases on Github
+          prerelease: ${{ contains(env.VERSION, '-') }}
+          body: ${{ env.BODY }}
+
+      - name: Notify Sentry.io about the release
+        run: |
+          npm i -g @sentry/cli
+          export SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
+          export SENTRY_URL=https://sentry.iobroker.net
+          export SENTRY_ORG=iobroker
+          export SENTRY_PROJECT=iobroker-tuya
+          export SENTRY_VERSION=iobroker.tuya@${{ env.VERSION }}
+          sentry-cli releases new $SENTRY_VERSION
+          sentry-cli releases finalize $SENTRY_VERSION
+
+        # Add the following line BEFORE finalize if repositories are connected in Sentry
+        # sentry-cli releases set-commits $SENTRY_VERSION --auto
+
+        # Add the following line BEFORE finalize if sourcemap uploads are needed
+        # sentry-cli releases files $SENTRY_VERSION upload-sourcemaps build/

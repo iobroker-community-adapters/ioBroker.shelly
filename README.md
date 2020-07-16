@@ -58,6 +58,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### __WORK IN PROGRESS__
+* (Apollon77) Update shelly-iot library to prevent some errors
+
 ### 3.3.5 (04.07.2020)
 * (Stübi) - Add Shelly 4 Pro
 * (Stübi) - Bugfixing Shelly RGBW2, sate lights.switch color mode
