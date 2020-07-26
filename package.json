@@ -34,6 +34,7 @@
     "mqtt": "3.0.0",
     "mqtt-connection": "^4.0.0",
     "ping": "^0.2.3",
+    "tcp-ping": "^0.1.1",
     "request": "^2.88.2",
     "shelly-iot": "^1.1.0",
     "xml2js": "0.4.23",

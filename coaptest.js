@@ -13,7 +13,7 @@ server.on('listening', function () {
 });
 
 server.on('message', function (message, remote) {
-    console.log(remote.address + ':' + remote.port +' - ' + message.toString('ascii'));
+    console.log(new Date().toISOString() + ' - ' + remote.address + ':' + remote.port + ' - ' + message.toString('ascii'));
 });
 console.log(HOST);
 server.bind(PORT, HOST);

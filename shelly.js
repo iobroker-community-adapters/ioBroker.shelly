@@ -11,6 +11,7 @@ const mqttServer = require(__dirname + '/lib/mqtt');
 const coapServer = require(__dirname + '/lib/coap');
 const adapterName = require('./package.json').name.split('.').pop();
 const ping = require('ping');
+const tcpp = require('tcp-ping');
 const events = require('events');
 const eventEmitter = new events.EventEmitter();
 
@@ -148,14 +149,23 @@ async function onlineCheck() {
       let idHostname = idParent + '.hostname';
       let stateHostaname = await adapter.getStateAsync(idHostname);
       let valHostname = stateHostaname ? stateHostaname.val : undefined;
+      let valPort = 80;
       if (valHostname) {
+        /*
         ping.sys.probe(valHostname, async (isAlive) => {
           let hostname = valHostname;
           let oldState = await adapter.getStateAsync(idOnline);
           let oldValue = oldState && oldState.val ? oldState.val === 'true' || oldState.val === true : false;
           if (oldValue != isAlive)
             await adapter.setStateAsync(idOnline, { val: isAlive, ack: true });
-
+        });
+        */
+        tcpp.probe(valHostname, valPort, async (error, isAlive) => {
+          let hostname = valHostname;
+          let oldState = await adapter.getStateAsync(idOnline);
+          let oldValue = oldState && oldState.val ? oldState.val === 'true' || oldState.val === true : false;
+          if (oldValue != isAlive)
+            await adapter.setStateAsync(idOnline, { val: isAlive, ack: true });
         });
       }
     }
