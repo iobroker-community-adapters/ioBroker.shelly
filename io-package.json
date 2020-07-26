@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.3.5",
+        "version": "3.3.6",
         "news": {
+            "3.3.6": {
+                "en": "Bugfixing",
+                "de": "Bugfixing",
+                "ru": "Исправление ошибок",
+                "pt": "Corrigindo erro",
+                "nl": "Bugfixing",
+                "fr": "Correction de bugs",
+                "it": "bugfixing",
+                "es": "Corrección de errores",
+                "pl": "Naprawa błędów",
+                "zh-cn": "错误修正"
+            },
             "3.3.5": {
                 "en": "Add Shelly 4 Pro ",
                 "de": "Fügen Sie Shelly 4 Pro hinzu",
@@ -230,18 +242,6 @@
                 "es": "Actualización automática de nuevo firmware",
                 "pl": "Automatycznie aktualizuj nowe oprogramowanie",
                 "zh-cn": "自动更新新固件"
-            },
-            "3.1.3": {
-                "en": "Power and temperature state for Shelly dimmer",
-                "de": "Leistungs- und Temperaturzustand für Shelly-Dimmer",
-                "ru": "Мощность и температурный режим для диммера Shelly",
-                "pt": "Estado de potência e temperatura do redutor Shelly",
-                "nl": "Vermogen en temperatuurstatus voor Shelly-dimmer",
-                "fr": "État de puissance et de température du gradateur Shelly",
-                "it": "Stato di potenza e temperatura per dimmer Shelly",
-                "es": "Estado de potencia y temperatura para dimmer Shelly",
-                "pl": "Stan mocy i temperatury ściemniacza Shelly",
-                "zh-cn": "Shelly调光器的功率和温度状态"
             }
         },
         "title": "Shelly",
