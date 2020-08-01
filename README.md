@@ -61,6 +61,7 @@ When the adapter crashes or an other Code error happens, this error message that
 ### 3.3.6 (26.07.2020)
 * (Stübi) - Bugfixing temperature for Shelly Dimmer (Issue #201)
 * (Stübi) - Tried to fix high CPU load by replacing ping with tpcping (Issue #196, #202)
+* (Stübi) - correct spelling mistake for Shelly DW2 (Issue #205)
 
 ### 3.3.5 (04.07.2020)
 * (Stübi) - Add Shelly 4 Pro
