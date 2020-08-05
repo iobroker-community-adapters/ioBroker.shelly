@@ -277,5 +277,17 @@ systemDictionary = {
     "es": "Polltime en seg.",
     "pl": "Ankieta w sek.",
     "zh-cn": "轮询时间（以秒为单位）"
+  },
+  "When MQTT reports an update, update the objects even if they have not changed. This behavior is different from the behavior in CoAP mode.": {
+    "en": "When MQTT reports an update, update the objects even if they have not changed. This behavior is different from the behavior in CoAP mode.",
+    "de": "Wenn MQTT eine Aktualisierung meldet, aktualisiere die Objekte, auch wenn sie sich nicht geändert haben. Dieses Verhalten unterscheidet sich vom verhalten im CoAP betrieb.",
+    "ru": "Когда MQTT сообщает об обновлении, обновляйте объекты, даже если они не изменились. Это поведение отличается от поведения в режиме CoAP.",
+    "pt": "Quando o MQTT relata uma actualização, actualiza os objectos mesmo que não tenham sido alterados. Este comportamento é diferente do comportamento no modo CoAP.",
+    "nl": "Wanneer MQTT een update meldt, moet u de objecten bijwerken, zelfs als ze niet zijn veranderd. Dit gedrag is anders dan het gedrag in de CoAP-modus.",
+    "fr": "Lorsque le MQTT signale une mise à jour, mettez à jour les objets même s'ils n'ont pas changé. Ce comportement est différent du comportement en mode CoAP.",
+    "it": "Quando MQTT segnala un aggiornamento, aggiornare gli oggetti anche se non sono cambiati. Questo comportamento è diverso dal comportamento in modalità CoAP.",
+    "es": "Cuando MQTT reporta una actualización, actualiza los objetos aunque no hayan cambiado. Este comportamiento es diferente del comportamiento en el modo CoAP.",
+    "pl": "Gdy MQTT zgłasza aktualizację, aktualizuj obiekty, nawet jeśli nie uległy one zmianie. To zachowanie różni się od zachowania w trybie CoAP.",
+    "zh-cn": "当MQTT报告更新时，即使对象没有变化也要更新。这种行为与CoAP模式下的行为不同。"
   }
 };
