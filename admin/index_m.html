@@ -254,6 +254,12 @@
             <label class="translate" for="qos">Default QoS:</label>
           </div>
         </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input class="value" id="updateUnchangedObjects" type="checkbox" />
+            <label for="updateUnchangedObjects" class="translate">When MQTT reports an update, update the objects even if they have not changed. This behavior is different from the behavior in CoAP mode.</label>
+          </div>
+        </div>  
       </div>
 
       <div id="tab-coap" class="col s12 page">
