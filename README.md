@@ -58,7 +58,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 4.4.0 (05.08.2020)
+### 4.0.0 (05.08.2020)
 * (Stübi) - Major Change!! If you use the CoAP protcoll only Shelly devices with Firmware 1.8.x or above supported! All devices with Firmeware below 1.8.x will not working with this release!
 
 ### 3.3.6 (26.07.2020)
