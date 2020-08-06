@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "3.3.6",
+        "version": "4.0.0",
         "news": {
+            "4.0.0": {
+                "en": "Major CoAP change",
+                "de": "Wichtige CoAP-Änderung",
+                "ru": "Существенное изменение CoAP",
+                "pt": "Mudança CoAP principal",
+                "nl": "Grote CoAP-wijziging",
+                "fr": "Changement majeur du CoAP",
+                "it": "Importante cambiamento CoAP",
+                "es": "Cambio importante de CoAP",
+                "pl": "Duża zmiana w CoAP",
+                "zh-cn": "CoAP的重大更改"
+            },
             "3.3.6": {
                 "en": "Bugfixing",
                 "de": "Bugfixing",
@@ -230,18 +242,6 @@
                 "es": "Añadir dispositivo Shelly Plugs S2",
                 "pl": "Dodaj urządzenie Półki wtykowe S2",
                 "zh-cn": "添加设备Shelly Plugs S2"
-            },
-            "3.1.4": {
-                "en": "Auto update new firmware",
-                "de": "Automatische Aktualisierung neuer Firmware",
-                "ru": "Автообновление новой прошивки",
-                "pt": "Atualizar automaticamente o novo firmware",
-                "nl": "Automatische update van nieuwe firmware",
-                "fr": "Mise à jour automatique du nouveau firmware",
-                "it": "Aggiorna automaticamente il nuovo firmware",
-                "es": "Actualización automática de nuevo firmware",
-                "pl": "Automatycznie aktualizuj nowe oprogramowanie",
-                "zh-cn": "自动更新新固件"
             }
         },
         "title": "Shelly",
