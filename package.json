@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "3.3.6",
+  "version": "4.0.0",
   "description": "Shelly",
   "author": {
     "name": "Thorsten Stueben",
@@ -45,12 +45,12 @@
     "@iobroker/testing": "^2.2.0",
     "axios": "^0.19.2",
     "chai": "^4.2.0",
-    "eslint": "^7.4.0",
+    "eslint": "^7.6.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react": "^7.20.5",
     "gulp": "^4.0.2",
-    "mocha": "^8.0.1"
+    "mocha": "^8.1.1"
   },
   "main": "shelly.js",
   "scripts": {
