@@ -146,8 +146,8 @@ jobs:
           export SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
           export SENTRY_URL=https://sentry.iobroker.net
           export SENTRY_ORG=iobroker
-          export SENTRY_PROJECT=iobroker-tuya
-          export SENTRY_VERSION=iobroker.tuya@${{ env.VERSION }}
+          export SENTRY_PROJECT=iobroker-shelly
+          export SENTRY_VERSION=iobroker.shelly@${{ env.VERSION }}
           sentry-cli releases new $SENTRY_VERSION
           sentry-cli releases finalize $SENTRY_VERSION
 
