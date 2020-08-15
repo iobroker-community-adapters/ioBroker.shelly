@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "4.0.0",
+        "version": "4.0.1",
         "news": {
+            "4.0.1": {
+                "en": "(Stübi) Major Change!! If you use the CoAP protocol only Shelly devices with Firmware 1.8.x or above supported! All devices with Firmware below 1.8.x except Shelly 4Pro will not working with this release!\nOfficial release to npm/latest",
+                "de": "(Stübi) Große Veränderung !! Wenn Sie das CoAP-Protokoll verwenden, werden nur Shelly-Geräte mit Firmware 1.8.x oder höher unterstützt! Alle Geräte mit Firmware unter 1.8.x außer Shelly 4Pro funktionieren mit dieser Version nicht!\nOffizielle Veröffentlichung bis npm / spätestens",
+                "ru": "(Stübi) Главное изменение !! Если вы используете протокол CoAP, поддерживаются только устройства Shelly с прошивкой 1.8.x или выше! Все устройства с прошивкой ниже 1.8.x, кроме Shelly 4Pro, не будут работать с этой версией!\nОфициальный релиз для npm / latest",
+                "pt": "(Stübi) Mudança importante !! Se você usar o protocolo CoAP, apenas dispositivos Shelly com Firmware 1.8.x ou superior são suportados! Todos os dispositivos com Firmware abaixo de 1.8.x, exceto Shelly 4Pro, não funcionarão com esta versão!\nLançamento oficial para npm / mais recente",
+                "nl": "(Stübi) Grote verandering !! Als u het CoAP-protocol gebruikt, worden alleen Shelly-apparaten met Firmware 1.8.x of hoger ondersteund! Alle apparaten met firmware onder 1.8.x behalve Shelly 4Pro werken niet met deze release!\nOfficiële release naar npm / latest",
+                "fr": "(Stübi) Changement majeur !! Si vous utilisez le protocole CoAP, seuls les appareils Shelly avec le micrologiciel 1.8.x ou supérieur sont pris en charge! Tous les appareils dont le micrologiciel est inférieur à 1.8.x à l'exception de Shelly 4Pro ne fonctionneront pas avec cette version!\nSortie officielle à npm / dernière",
+                "it": "(Stübi) Grande cambiamento !! Se utilizzi il protocollo CoAP sono supportati solo dispositivi Shelly con Firmware 1.8.xo superiore! Tutti i dispositivi con firmware inferiore a 1.8.x eccetto Shelly 4Pro non funzioneranno con questa versione!\nRilascio ufficiale a npm / più recente",
+                "es": "(Stübi) ¡¡Gran cambio !! Si utiliza el protocolo CoAP, solo se admiten dispositivos Shelly con firmware 1.8.xo superior. ¡Todos los dispositivos con firmware inferior a 1.8.x excepto Shelly 4Pro no funcionarán con esta versión!\nLanzamiento oficial a npm / más reciente",
+                "pl": "(Stübi) Duża zmiana !! Jeśli używasz protokołu CoAP, tylko urządzenia Shelly z obsługiwanym oprogramowaniem układowym 1.8.x lub nowszym! Wszystkie urządzenia z oprogramowaniem układowym poniżej 1.8.x, z wyjątkiem Shelly 4Pro, nie będą działać z tą wersją!\nOficjalne wydanie do npm / latest",
+                "zh-cn": "（Stübi）重大变化！！如果您使用CoAP协议，则仅支持固件1.8.x或更高版本的Shelly设备！除Shelly 4Pro之外，所有固件低于1.8.x的设备均不适用于此版本！\n正式发布到npm / latest"
+            },
             "4.0.0": {
                 "en": "Major CoAP change",
                 "de": "Wichtige CoAP-Änderung",
@@ -230,18 +242,6 @@
                 "es": "Agregar sensor de puerta / ventana Shelly",
                 "pl": "Dodaj czujnik drzwi / okna Shelly",
                 "zh-cn": "添加雪莱门/窗传感器"
-            },
-            "3.1.5": {
-                "en": "Add device Shelly Plugs S2",
-                "de": "Gerät hinzufügen Shelly Plugs S2",
-                "ru": "Добавить устройство Shelly Plugs S2",
-                "pt": "Adicionar dispositivo Shelly Plugs S2",
-                "nl": "Apparaat toevoegen Shelly Plugs S2",
-                "fr": "Ajouter un appareil Shelly Plugs S2",
-                "it": "Aggiungi dispositivo Shelly Plugs S2",
-                "es": "Añadir dispositivo Shelly Plugs S2",
-                "pl": "Dodaj urządzenie Półki wtykowe S2",
-                "zh-cn": "添加设备Shelly Plugs S2"
             }
         },
         "title": "Shelly",
