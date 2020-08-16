@@ -58,7 +58,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 4.0. (2020-08-16)
+### 4.0.2 (2020-08-16)
 * (Stübi) - Bugfixing Shelly DW2 (Issue #220)
 * (Stübi) - Bugfixing manually set object name is overwritten (Issue #224)
 
