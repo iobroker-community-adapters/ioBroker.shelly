@@ -218,42 +218,6 @@
                 "es": "Agregue Shelly 3EM y Shelly Bulb Duo",
                 "pl": "Dodaj Shelly 3EM i Shelly Bulb Duo",
                 "zh-cn": "添加Shelly 3EM和Shelly Bulb Duo"
-            },
-            "3.1,9": {
-                "en": "Bugfixing",
-                "de": "Fehlerbehebung",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "Bugfixing"
-            },
-            "3.1.7": {
-                "en": "Add state energy to Shelly Dimmer",
-                "de": "Status energy beim Shelly Dimmer hinzugefügt",
-                "ru": "Добавьте энергию состояния к Шелли Диммер",
-                "pt": "Adicione energia de estado ao Shelly Dimmer",
-                "nl": "Voeg staatsenergie toe aan Shelly Dimmer",
-                "fr": "Ajouter de l'énergie d'état à Shelly Dimmer",
-                "it": "Aggiungi energia statale a Shelly Dimmer",
-                "es": "Agregue energía de estado a Shelly Dimmer",
-                "pl": "Dodaj energię stanu do Shelly Dimmer",
-                "zh-cn": "为Shelly Dimmer增加状态能量"
-            },
-            "3.1.6": {
-                "en": "Add Shelly door/window sensor",
-                "de": "Shelly Tür- / Fenstersensor hinzugefügt",
-                "ru": "Добавить датчик двери / окна Shelly",
-                "pt": "Adicionar Shelly sensor de porta / janela",
-                "nl": "Voeg Shelly deur / raam sensor toe",
-                "fr": "Ajouter un capteur de porte / fenêtre Shelly",
-                "it": "Aggiungi sensore per porte / finestre Shelly",
-                "es": "Agregar sensor de puerta / ventana Shelly",
-                "pl": "Dodaj czujnik drzwi / okna Shelly",
-                "zh-cn": "添加雪莱门/窗传感器"
             }
         },
         "title": "Shelly",
