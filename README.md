@@ -60,6 +60,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 4.0. (2020-08-16)
 * (Stübi) - Bugfixing Shelly DW2 (Issue #220)
+* (Stübi) - Bugfixing manually set object name is overwritten (Issue #224)
 
 ### 4.0.1 (2020-08-15)
 * (Stübi) Major Change!! If you use the CoAP protocol only Shelly devices with Firmware 1.8.x or above supported! All devices with Firmware below 1.8.x except Shelly 4Pro will not working with this release!
