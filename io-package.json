@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "4.0.1",
+        "version": "4.0.2",
         "news": {
+            "4.0.2": {
+                "en": "Bugfixing",
+                "de": "Bugfixing",
+                "ru": "Исправление ошибок",
+                "pt": "Corrigindo erro",
+                "nl": "Bugfixing",
+                "fr": "Correction de bugs",
+                "it": "bugfixing",
+                "es": "Corrección de errores",
+                "pl": "Naprawa błędów",
+                "zh-cn": "错误修正"
+            },
             "4.0.1": {
                 "en": "(Stübi) Major Change!! If you use the CoAP protocol only Shelly devices with Firmware 1.8.x or above supported! All devices with Firmware below 1.8.x except Shelly 4Pro will not working with this release!\nOfficial release to npm/latest",
                 "de": "(Stübi) Große Veränderung !! Wenn Sie das CoAP-Protokoll verwenden, werden nur Shelly-Geräte mit Firmware 1.8.x oder höher unterstützt! Alle Geräte mit Firmware unter 1.8.x außer Shelly 4Pro funktionieren mit dieser Version nicht!\nOffizielle Veröffentlichung bis npm / spätestens",
