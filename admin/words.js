@@ -277,5 +277,17 @@ systemDictionary = {
     "es": "Polltime en seg.",
     "pl": "Ankieta w sek.",
     "zh-cn": "轮询时间（以秒为单位）"
+  },
+  "Update objects even if there is no value change.": {
+    "en": "Update objects even if there is no value change.",
+    "de": "Aktualisiere auch Objekte wenn es keine Änderungen an den Werten gibt.",
+    "ru": "Обновлять объекты, даже если нет изменения значения.",
+    "pt": "Atualize objetos mesmo se não houver alteração de valor.",
+    "nl": "Werk objecten bij, zelfs als er geen waardeverandering is.",
+    "fr": "Mettez à jour les objets même s'il n'y a pas de changement de valeur.",
+    "it": "Aggiorna gli oggetti anche se non ci sono cambiamenti di valore.",
+    "es": "Actualice los objetos incluso si no hay ningún cambio de valor.",
+    "pl": "Aktualizuj obiekty, nawet jeśli nie ma zmiany wartości.",
+    "zh-cn": "即使没有值更改，也要更新对象。"
   }
 };

@@ -42,6 +42,13 @@ sudo tcpdump port 5683 -A
 
 Now you shall see all CoAP messages from the Shelly. Look for you Shelly device in the output. If you can not find it, you have a network problem with UDP or multicast messages.  
 
+CoAP Messages looks like that:
+``` 
+UDP Server listening on 0.0.0.0:5683
+2020-08-19T19:33:29.484Z - 192.168.20.233:5683 - P-B3citsml	SHBTN-1#AXXXXXXXXXX#2RC{"G":[[0,9103,0],[0,2102,"S"],[0,2103,1],[0,3115,0],[0,3112,0],[0,3111,100],[0,9102,["button"]]]}
+2020-08-19T19:33:29.827Z - 192.168.20.233:5683 - P-C3citsml	SHBTN-1#AXXXXXXXXXX#2RC{"G":[[0,9103,0],[0,2102,"S"],[0,2103,1],[0,3115,0],[0,3112,0],[0,3111,100],[0,9102,["button"]]]}
+2020-08-19T19:33:33.942Z - 192.168.20.233:5683 - P-D3citsml	SHBTN-1#AXXXXXXXXXX#2RC{"G":[[0,9103,0],[0,2102,"S"],[0,2103,1],[0,3115,0],[0,3112,0],[0,3111,100],[0,9102,["button"]]]}
+``` 
 
 ![iobroker_coap](../iobroker_coap.png) 
 

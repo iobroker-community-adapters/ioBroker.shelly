@@ -303,6 +303,7 @@
         "timeout": 0.25,
         "protocol": "coap",
         "autoupdate": false,
+        "updateUnchangedObjects": false,
         "keys": [
             {
                 "blacklist": "ABCDEF"
