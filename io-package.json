@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "4.0.2",
+        "version": "4.0.3",
         "news": {
+            "4.0.3": {
+                "en": "Bugfixing",
+                "de": "Bugfixing",
+                "ru": "Исправление ошибок",
+                "pt": "Corrigindo erro",
+                "nl": "Bugfixing",
+                "fr": "Correction de bugs",
+                "it": "bugfixing",
+                "es": "Corrección de errores",
+                "pl": "Naprawa błędów",
+                "zh-cn": "错误修正"
+            },
             "4.0.2": {
                 "en": "Bugfixing",
                 "de": "Bugfixing",
@@ -206,18 +218,6 @@
                 "es": "Corrección de errores para Shelly 3EM",
                 "pl": "Naprawianie błędów dla Shelly 3EM",
                 "zh-cn": "Shelly 3EM的错误修复"
-            },
-            "3.2.0": {
-                "en": "Add Shelly 3EM and Shelly Bulb Duo",
-                "de": "Fügen Sie Shelly 3EM und Shelly Bulb Duo hinzu",
-                "ru": "Добавьте Shelly 3EM и Shelly Bulb Duo",
-                "pt": "Adicionar Shelly 3EM e Shelly Bulb Duo",
-                "nl": "Voeg Shelly 3EM en Shelly Bulb Duo toe",
-                "fr": "Ajouter Shelly 3EM et Shelly Bulb Duo",
-                "it": "Aggiungi Shelly 3EM e Shelly Bulb Duo",
-                "es": "Agregue Shelly 3EM y Shelly Bulb Duo",
-                "pl": "Dodaj Shelly 3EM i Shelly Bulb Duo",
-                "zh-cn": "添加Shelly 3EM和Shelly Bulb Duo"
             }
         },
         "title": "Shelly",
