@@ -5,7 +5,26 @@
 
 1. Requires node.js 8.0 or higher and Admin v3!
 2. Install the Shelly adapter
-2. If use the Shelly CoAP protocoll (default) you do not have to do soemething. If use MQTT as protocoll, you have to configure a few things in ioBroker and on your Shelly devices.
+2. If use the Shelly CoAP protocoll (default) you do not have to do something. If use MQTT as protocol, you have to configure a few things in ioBroker and on your Shelly devices.
+
+### General
+You can use the adapter in CoAP or MQTT mode. The default mode is CoAP and you do not have to do anything. 
+
+![iobroker_general](../iobroker_general.png) 
+
+Normally only if a value of a state change, you see the change in ioBroker. In this case "Update objects even if there is no value change." is deactivated.
+Example:
+* shelly.0.SHBTN-1#A4CF12F454A3#1.Button.Event = 'S' (Last Changed Timestamp: 01.02.2020 10:20:00)
+* shelly.0.SHBTN-1#A4CF12F454A3#1.Button.Event = 'S' (Last Changed Timestamp: 01.02.2020 **10:20:00**) - there is no change shown in ioBroker because value is the same
+* shelly.0.SHBTN-1#A4CF12F454A3#1.Button.Event = 'L' (Last Changed Timestamp: 01.02.2020 10:22:00)
+
+If you activate "Update objects even if there is no value change.", the state will be updated without a value change. The only thing that will be changed in this case is the "Last Changed Timestamp"
+Example: 
+* shelly.0.SHBTN-1#A4CF12F454A3#1.Button.Event = 'S' (Last Changed Timestamp: 01.02.2020 10:20:00)
+* shelly.0.SHBTN-1#A4CF12F454A3#1.Button.Event = 'S' (Last Changed Timestamp: 01.02.2020 **10:21:00**) - timestamp change  in ioBroker, value is the same
+* shelly.0.SHBTN-1#A4CF12F454A3#1.Button.Event = 'L' (Last Changed Timestamp: 01.02.2020 10:22:00)
+
+With "Update objects even if there is no value change." you can 
 
 ### CoAP
 By default, the CoAP protocoll is used. You do not have to configure anything. Your Shelly devices will be found by it self.  Because CoAP use multicast UDP packages, the Shelly devices has to be in the same subnet like ioBroker.
