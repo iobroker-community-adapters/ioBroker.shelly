@@ -62,6 +62,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Added a checkbox, to optionally enable updates of objects even if they have not changed (Issue #209)
 * (Stübi) - Calculate temperature fahrenheit for Shelly 1PM and Plug S in MQTT mode
 * (Stübi) - Fixed longpush time for MQTT (Shelly 1, 1PM, 2 and 2.5) 
+* (Stübi) - State for changing temperature unit for Shelly HT 
 
 ### 4.0.2 (2020-08-16)
 * (Stübi) - Bugfixing Shelly DW2 (Issue #220)
