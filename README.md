@@ -68,6 +68,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Bugfixing. Add missing states to MQTT, which exist for CoAP (Shelly 2, 2.5) 
 * (Stübi) - Polltime for http optimized. 
 * (Stübi) - removed min and max values for temperature states (Issue #236)
+* (Stübi) - Bugfixing. Add timer to Shelly 1, 1PM for CoAP and removed it for MQTT (Shelly 1, 1PM, 2, 2.5) because it is not supported by MQTT
 
 ### 4.0.2 (2020-08-16)
 * (Stübi) - Bugfixing Shelly DW2 (Issue #220)
