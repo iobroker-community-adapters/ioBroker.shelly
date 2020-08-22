@@ -64,7 +64,8 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Fixed longpush time for MQTT (Shelly 1, 1PM, 2 and 2.5) 
 * (Stübi) - Add State for changing temperature unit for Shelly HT and DW2
 * (Stübi) - Delete external temperature 4 and external humidity 4 states for Shelly 1 and 1PM because they do not exist
-* (Stübi) - Replaced state temperature_c and temperature_f with temperature and temperatureunit
+* (Stübi) - Renamed state temperature to temperatureC for Shelly 1, 1PM, 2, 2.5, Plug S
+* (Stübi) - Add tmperature in Celsius and Fahrenheit for Shelly HT and DW2
 * (Stübi) - Bugfixing. Add missing states to MQTT, which exist for CoAP (Shelly 2, 2.5) 
 * (Stübi) - Polltime for http optimized. 
 * (Stübi) - removed min and max values for temperature states (Issue #236)
