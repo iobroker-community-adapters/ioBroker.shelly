@@ -4,7 +4,7 @@
 ## Add a new Shelly device
 
 ### Skeletal structure
-Open you browser like chrome and call the following link http://\<ip-of-your-shelly\>/settings like http://192.168.20.131/settings . Now search in the result for type and hostname in the section device. It is important that you did not changed the hostname or MQTT prefix.
+Open you browser like chrome and call the following link http://\<ip-of-your-shelly\>/settings like http://192.168.20.131/settings . Now search in the result for type and hostname in the section device. It is important that you did not changed the hostname or MQTT prefix of your Shelly device. With a changed hostname or MQTT prefix the adapter does not work.
 
 ```
 {
@@ -21,8 +21,8 @@ Open you browser like chrome and call the following link http://\<ip-of-your-she
 The value in type describes the CoAP name, the value in hostname describes the MQTT name. The MQTT Name ends with a minus (-).    
 
 Example above: 
-- CoAP Name: **SHRGBW2**
-- MQTT Name: **shellyrgbw2**
+- CoAP Name from field type:    **SHRGBW2**
+- MQTT Name from filed hostname: **shellyrgbw2**
 
 Now create a new js file for the new Shelly device in the lib/devices directory. The name of the js file is called like the MQTT name. 
 
