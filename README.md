@@ -67,6 +67,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Replaced state temperature_c and temperature_f with temperature and temperatureunit
 * (Stübi) - Bugfixing. Add missing states to MQTT, which exist for CoAP (Shelly 2, 2.5) 
 * (Stübi) - Polltime for http optimized. 
+* (Stübi) - removed min and max values for temperature states (Issue #236)
 
 ### 4.0.2 (2020-08-16)
 * (Stübi) - Bugfixing Shelly DW2 (Issue #220)
