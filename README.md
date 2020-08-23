@@ -71,6 +71,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - removed min and max values for temperature states (Issue #236)
 * (Stübi) - Bugfixing. Add timer to Shelly 1, 1PM for CoAP and removed it for MQTT (Shelly 1, 1PM, 2, 2.5) because it is not supported by MQTT
 * (Stübi) - Add overpower value to Shelly 1, 1PM, 2, 2.5 and Plug, Plug S
+* (Stübi) - Removed channel name from Shelly 4 Pro (Issue #238)
 
 ### 4.0.2 (2020-08-16)
 * (Stübi) - Bugfixing Shelly DW2 (Issue #220)
