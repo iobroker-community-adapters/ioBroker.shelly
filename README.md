@@ -58,6 +58,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 4.0.4 (2020-08-23)
+* (Stübi) - optimize the destroy function
+
 ### 4.0.3 (2020-08-19)
 * (Stübi) - Add a checkbox, to optionally enable updates of objects even if they have not changed (Issue #209)
 * (Stübi) - Calculate temperature fahrenheit for Shelly 1PM and Plug S in MQTT mode
