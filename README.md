@@ -61,6 +61,7 @@ When the adapter crashes or an other Code error happens, this error message that
 ### 4.0.4 (2020-08-23)
 * (Stübi) - optimize the destroy function
 * (Stübi) - Bugfixing Relay0.Event error for Shelly I3 in MQTT mode (Issue #241)
+* (harrym67) - Shelly 2.5 Roller mode. According to Shelly API: changed existing state swap to swap_input and add state swap.
 
 ### 4.0.3 (2020-08-19)
 * (Stübi) - Add a checkbox, to optionally enable updates of objects even if they have not changed (Issue #209)
