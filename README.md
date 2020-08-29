@@ -65,6 +65,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Bugfixing Relay0.Event error for Shelly I3 in MQTT mode (Issue #241)
 * (harrym67) - Shelly 2.5 Roller mode. According to Shelly API: changed existing state swap to swap_input and add state swap.(Issue #240)
 * (Stübi) - Allow setting of customer MQTT prefix (Issue #244)
+* (harrym67) - Add Endpoint dim to Shelly Dimmer 2 (SHDM-2) (Issue #248)
 
 ### 4.0.3 (2020-08-19)
 * (Stübi) - Add a checkbox, to optionally enable updates of objects even if they have not changed (Issue #209)
