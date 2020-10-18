@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "4.0.4",
+        "version": "4.0.5-beta",
         "news": {
+            "4.0.5-beta": {
+                "en": "Bugfixing",
+                "de": "Bugfixing",
+                "ru": "Исправление ошибок",
+                "pt": "Corrigindo erro",
+                "nl": "Bugfixing",
+                "fr": "Correction de bugs",
+                "it": "bugfixing",
+                "es": "Corrección de errores",
+                "pl": "Naprawa błędów",
+                "zh-cn": "错误修正"
+            },
             "4.0.4": {
                 "en": "Bugfixing",
                 "de": "Bugfixing",
