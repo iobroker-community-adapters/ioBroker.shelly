@@ -61,6 +61,9 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### __WORK IN PROGRESS__
+* (Apollon77) update dependencies and shelly-iot lib
+
 ### 4.0.4 (2020-09-25)
 * (Stübi) - Bugfix EM3, unit of comsumed power Wh instead of kWH
 * (Stübi) - optimize the destroy function (Bugfixing)
