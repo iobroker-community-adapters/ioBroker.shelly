@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "shelly",
-        "version": "4.0.4-beta",
+        "version": "4.0.4",
         "news": {
+            "4.0.4": {
+                "en": "update dependencies and shelly-iot lib",
+                "de": "Abhängigkeiten und shelly-iot lib aktualisieren",
+                "ru": "обновить зависимости и библиотеку shelly-iot",
+                "pt": "atualizar dependências e lib shelly-iot",
+                "nl": "update afhankelijkheden en shelly-iot lib",
+                "fr": "mettre à jour les dépendances et la lib shelly-iot",
+                "it": "aggiorna le dipendenze e la libreria shelly-iot",
+                "es": "actualizar dependencias y shelly-iot lib",
+                "pl": "update zależności i shelly-iot lib",
+                "zh-cn": "更新依赖项和shelly-iot lib"
+            },
             "4.0.4-beta": {
                 "en": "Bugfixing",
                 "de": "Bugfixing",

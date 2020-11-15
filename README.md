@@ -61,7 +61,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### __WORK IN PROGRESS__
+### 4.0.4 (2020-11-15)
 * (Apollon77) update dependencies and shelly-iot lib
 
 ### 4.0.4 (2020-09-25)
