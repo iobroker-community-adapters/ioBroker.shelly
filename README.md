@@ -64,7 +64,7 @@ When the adapter crashes or an other Code error happens, this error message that
 ### 4.0.4 (2020-11-15)
 * (Apollon77) update dependencies and shelly-iot lib
 
-### 4.0.4 (2020-09-25)
+### 4.0.4-beta (2020-09-25)
 * (Stübi) - Bugfix EM3, unit of comsumed power Wh instead of kWH
 * (Stübi) - optimize the destroy function (Bugfixing)
 * (Stübi) - Bugfixing Relay0.Event error for Shelly I3 in MQTT mode (Issue #241)
