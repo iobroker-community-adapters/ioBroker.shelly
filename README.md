@@ -64,6 +64,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 4.0.5-beta (2020-11-27)
 * (Matze2010) - Add Support for Shelly Uni (SHSW-L)
+* (Matze2010) - Shelly 2.5 Roller: Support for favorite positions 
 
 ### 4.0.4 (2020-11-15)
 * (Apollon77) update dependencies and shelly-iot lib
