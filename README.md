@@ -74,6 +74,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Support of Shelly Button 1 (SHBTN-2) - Issue #316, #302, #303
 * (Stübi) - add state Total_Returned for Shelly EM3 - Issue #299
 * (Stübi) - add state transiton and fade_rate to Shelly Dimmer - Issue #260
+* (Stübi) - add state transiton for Shelly RGBW2 - Issue #289
 
 ### 4.0.4 (2020-11-15)
 * (Apollon77) update dependencies and shelly-iot lib
