@@ -31,7 +31,7 @@
   "dependencies": {
     "@apollon/iobroker-tools": "^0.2.0",
     "@iobroker/adapter-core": "^2.4.0",
-    "mqtt": "3.0.0",
+    "mqtt": "^4.2.6",
     "mqtt-connection": "^4.0.0",
     "ping": "^0.4.0",
     "tcp-ping": "^0.1.1",
@@ -42,10 +42,10 @@
   },
   "devDependencies": {
     "@alcalzone/release-script": "^1.8.3",
-    "@iobroker/testing": "^2.4.0",
+    "@iobroker/testing": "^2.4.2",
     "axios": "^0.21.1",
     "chai": "^4.2.0",
-    "eslint": "^7.16.0",
+    "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.22.0",
