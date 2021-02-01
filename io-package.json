@@ -1,9 +1,9 @@
 {
     "common": {
         "name": "shelly",
-        "version": "4.0.5-beta",
+        "version": "4.0.5",
         "news": {
-            "4.0.5-beta": {
+            "4.0.5": {
                 "en": "Add Shelly 1L",
                 "de": "Fügen Sie Shelly 1L hinzu",
                 "ru": "Добавить Шелли 1L",
