@@ -66,6 +66,10 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+
+### 4.0.6-beta (2021-02-02)
+* (Stübi) - add min, max to state transiton for Shelly RGBW2 
+
 ### 4.0.5 (2021-02-01)
 * (Matze2010) - Add Support for Shelly Uni (SHSW-L)
 * (Matze2010) - Shelly 2.5 Roller: Support for favorite positions 
