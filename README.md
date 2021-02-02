@@ -69,6 +69,7 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ### 4.0.6-beta (2021-02-02)
 * (Stübi) - add min, max to state transiton for Shelly RGBW2 
+* (Stübi) - if a property in the returned json for a http request does not exist, it will not shown as an error anymore
 
 ### 4.0.5 (2021-02-01)
 * (Matze2010) - Add Support for Shelly Uni (SHSW-L)
