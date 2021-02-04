@@ -56,6 +56,7 @@ You find a detailed installation documentation here:
 |Shelly 1L (SHSW-L)|supported since v4.0.5|supported since v4.0.5|
 |Shelly Color Bulb (SHCB-1)|supported since v4.0.5|supported since v4.0.5|
 |Shelly Button (SHBTN-2)|supported since v4.0.5|supported since v4.0.5|
+|Shelly Motion (SHMOS-01)|supported since ???|supported since ???|
 
 
 
