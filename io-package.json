@@ -15,6 +15,18 @@
                 "pl": "Naprawa błędów",
                 "zh-cn": "错误修正"
             },
+            "4.0.6": {
+                "en": "Bugfixing",
+                "de": "Bugfixing",
+                "ru": "Исправление ошибок",
+                "pt": "Corrigindo erro",
+                "nl": "Bugfixing",
+                "fr": "Correction de bugs",
+                "it": "bugfixing",
+                "es": "Corrección de errores",
+                "pl": "Naprawa błędów",
+                "zh-cn": "错误修正"
+            },
             "4.0.5": {
                 "en": "Add Shelly 1L",
                 "de": "Fügen Sie Shelly 1L hinzu",
