@@ -45,7 +45,7 @@
     "@iobroker/testing": "^2.4.2",
     "axios": "^0.21.1",
     "chai": "^4.3.0",
-    "eslint": "^7.20.0",
+    "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.22.0",
