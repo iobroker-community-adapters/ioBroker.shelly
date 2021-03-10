@@ -87,9 +87,15 @@ function startAdapter(options) {
 
   adapter.on('ready', async () => {
     try {
-      adapter.config.polltime = Number(adapter.config.polltime) || 5;
       adapter.log.info('Starting Adapter ' + adapter.namespace + ' in version ' + adapter.version);
-      adapter.log.info('Polltime of the shelly devices: ' + adapter.config.polltime + ' sec.');
+      /*
+      adapter.config.polltime = Number(adapter.config.polltime) || 0;
+      if (adapter.config.polltime > 0) {
+        adapter.log.info('Polltime of the shelly devices: ' + adapter.config.polltime + ' sec.');
+      } else {
+        adapter.log.info('Polltime of the shelly devices: ' + adapter.config.polltime + ' sec.');
+      }
+      */
       if (await setSentryLogging(adapter.config.sentry_enable)) return;
       await migrateconfig();
       await encryptPasswords();
@@ -123,6 +129,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+
 async function getAllDevices() {
   let ids = [];
   try {
@@ -133,10 +140,28 @@ async function getAllDevices() {
         ids.push(id);
       }
     }
-  } catch (error) { /* */ }
+  } catch (error) {
+    //
+  }
   return ids;
 }
 
+async function deleteObjects() {
+  try {
+    // Online States löschen
+    let idsOnline = await getAllDevices();
+    for (let i in idsOnline) {
+      let idOnline = idsOnline[i];
+      // let a = await adapter.delForeignStateAsync(idOnline);
+      let a = await adapter.delForeignObjectAsync(idOnline);
+      let idParent = idOnline.split('.').slice(0, -1).join('.');
+    }
+  } catch (error) {
+    //
+  }
+}
+
+/*
 async function onlineCheck() {
   if (pollTimeout) {
     clearTimeout(pollTimeout);
@@ -151,15 +176,6 @@ async function onlineCheck() {
       let valHostname = stateHostaname ? stateHostaname.val : undefined;
       let valPort = 80;
       if (valHostname) {
-        /*
-        ping.sys.probe(valHostname, async (isAlive) => {
-          let hostname = valHostname;
-          let oldState = await adapter.getStateAsync(idOnline);
-          let oldValue = oldState && oldState.val ? oldState.val === 'true' || oldState.val === true : false;
-          if (oldValue != isAlive)
-            await adapter.setStateAsync(idOnline, { val: isAlive, ack: true });
-        });
-        */
         tcpp.probe(valHostname, valPort, async (error, isAlive) => {
           let hostname = valHostname;
           let oldState = await adapter.getStateAsync(idOnline);
@@ -169,12 +185,15 @@ async function onlineCheck() {
         });
       }
     }
-  } catch (error) { /* */ }
+  } catch (error) { 
+    //
+  }
   pollTimeout = setTimeout(() => {
     pollTimeout = null;
     onlineCheck();
   }, adapter.config.polltime * 1000);
 }
+*/
 
 async function encryptPasswords() {
   return new Promise((resolve, reject) => {
@@ -228,7 +247,8 @@ async function migrateconfig() {
 }
 
 async function main() {
-  onlineCheck();
+  // onlineCheck();
+  await  deleteObjects() ;
   adapter.setState('info.connection', { val: true, ack: true });
   adapter.subscribeStates('*');
   objectHelper.init(adapter);

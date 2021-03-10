@@ -5,7 +5,6 @@
 
 1. Requires node.js 8.0 or higher and Admin v3!
 2. Install the Shelly adapter
-2. If use the Shelly CoAP protocoll (default) you do not have to do something. If use MQTT as protocol, you have to configure a few things in ioBroker and on your Shelly devices.
 
 ### General
 You can use the adapter in CoAP or MQTT mode. The default mode is CoAP and you do not have to do anything. 
@@ -27,7 +26,9 @@ Example:
 With "Update objects even if there is no value change." you can 
 
 ### CoAP
-By default, the CoAP protocoll is used. You do not have to configure anything. Your Shelly devices will be found by it self.  Because CoAP use multicast UDP packages, the Shelly devices has to be in the same subnet like ioBroker.
+By default, the CoAP protocoll is used. If you use the Shelly with firmware less equal 1.9.4 you do not have to configure anything. Your Shelly devices will be found by it self by ioBroker.
+If you are using the firmware versions above 1.9.4 you have to enter a CoIoT server for CoAP on your Shelly device. You have to enter the IP address of your ioBroker server followed by the port 5683 as CoIoT server. For example, ioBroker runs on the IP address 192.168.1.2. Now you have to enter 192.168.1.2:5683 and activate CoIoT.
+Because CoAP use multicast UDP packages, the Shelly devices has to be in the same subnet like ioBroker.
 If you use ioBroker in a docker container, the container has to run in host or macvlan modus. If ioBroker runs in the docker container in bridge modus your Shelly devices will not be found, 
 If you protect you Shelly device with a restricted login, you have to enter this username and password in the ioBroker configuration on the general settings tab. The username, password are not the cloud or MQTT login credentials!
 
