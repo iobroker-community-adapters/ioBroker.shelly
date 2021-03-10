@@ -146,6 +146,7 @@ async function getAllDevices() {
   return ids;
 }
 
+/*
 async function deleteObjects() {
   try {
     // Online States löschen
@@ -160,6 +161,7 @@ async function deleteObjects() {
     //
   }
 }
+*/
 
 /*
 async function onlineCheck() {
@@ -248,7 +250,7 @@ async function migrateconfig() {
 
 async function main() {
   // onlineCheck();
-  await  deleteObjects() ;
+  // await  deleteObjects() ;
   adapter.setState('info.connection', { val: true, ack: true });
   adapter.subscribeStates('*');
   objectHelper.init(adapter);
