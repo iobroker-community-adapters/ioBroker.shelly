@@ -7,8 +7,10 @@ server.on('status', (status) => console.log(status));
 setTimeout(async () => await server.listen(), 0);
 
 // Query devices directly
-const client = new CoIoTClient({ host: '192.168.25.155' });
+/*
+const client = new CoIoTClient({ host: '192.168.25.116' });
 setTimeout(async () => {
     const status = await client.getStatus();
     const description = await client.getDescription();
 }, 0);
+*/
