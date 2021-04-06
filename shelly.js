@@ -146,6 +146,21 @@ async function getAllDevices() {
   return ids;
 }
 
+async function setOnlineFalse() {
+  let ids = [];
+  try {
+    let objs = await adapter.getAdapterObjectsAsync();
+    for (let id in objs) {
+      let obj = objs[id];
+      if (id && id.endsWith('.online') && obj && obj.type === 'state') {
+        await adapter.setForeignStateAsync(id, { val: false, ack: true });
+      }
+    }
+  } catch (error) {
+    //
+  }
+}
+
 /*
 async function deleteObjects() {
   try {
@@ -249,12 +264,10 @@ async function migrateconfig() {
 }
 
 async function main() {
-  // onlineCheck();
-  // await  deleteObjects() ;
-  adapter.setState('info.connection', { val: true, ack: true });
   adapter.subscribeStates('*');
   objectHelper.init(adapter);
   let protocol = adapter.config.protocol || 'coap';
+  await setOnlineFalse();
   setImmediate(() => {
     if (protocol === 'both' || protocol === 'mqtt') {
       adapter.log.info('Starting Shelly adapter in MQTT modus. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
