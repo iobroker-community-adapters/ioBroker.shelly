@@ -34,7 +34,7 @@
     "coiot-coap": "^1.0.0",
     "mqtt": "^4.2.6",
     "mqtt-connection": "^4.1.0",
-    "ping": "^0.4.0",
+    "ping": "^0.4.1",
     "request": "^2.88.2",
     "shelly-iot": "^1.1.1",
     "tcp-ping": "^0.1.1",
