@@ -1,9 +1,9 @@
 {
     "common": {
         "name": "shelly",
-        "version": "4.0.8-beta1",
+        "version": "4.0.8",
         "news": {
-            "4.0.8-beta1": {
+            "4.0.8": {
                 "en": "Bugfixing",
                 "de": "Bugfixing",
                 "ru": "Исправление ошибок",
