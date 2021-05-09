@@ -69,6 +69,8 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
+### 4.0.9-beta-1 (2021-05-07)
+
 ### 4.0.8 (2021-05-06)
 * (Stübi) - Online Status (beta, does not work correct)
 * (Stübi) - Temperature greater min/max - Issue #370
