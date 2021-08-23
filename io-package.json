@@ -160,14 +160,14 @@
         "materialize": true,
         "enabled": true,
         "compact": true,
-        "extIcon": "https://raw.githubusercontent.com/schmupu/ioBroker.shelly/master/admin/shelly.png",
+        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
         "keywords": [
             "shelly",
             "switch",
             "smarthome",
             "iobroker"
         ],
-        "readme": "https://github.com/schmupu/ioBroker.shelly/blob/master/README.md",
+        "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
         "loglevel": "info",
         "type": "iot-systems",
         "restartAdapters": [],

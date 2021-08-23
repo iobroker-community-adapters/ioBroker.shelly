@@ -1,8 +1,8 @@
 ![Logo](admin/shelly.png)
 # ioBroker.shelly
 
-[![Build Status](https://travis-ci.org/schmupu/ioBroker.shelly.svg?branch=master)](https://travis-ci.org/schmupu/ioBroker.shelly)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/schmupu/ioBroker.shelly?branch=master&svg=true)](https://ci.appveyor.com/project/schmupu/ioBroker-shelly/)
+[![Build Status](https://travis-ci.org/iobroker-community-adapters/ioBroker.shelly.svg?branch=master)](https://travis-ci.org/iobroker-community-adapters/ioBroker.shelly)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/iobroker-community-adapters/ioBroker.shelly?branch=master&svg=true)](https://ci.appveyor.com/project/iobroker-community-adapters/ioBroker-shelly/)
 
 ![Number of Installations](http://iobroker.live/badges/shelly-installed.svg) ![Number of Installations](http://iobroker.live/badges/shelly-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.shelly.svg)](https://www.npmjs.com/package/iobroker.shelly)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.shelly.svg)](https://www.npmjs.com/package/iobroker.shelly)
@@ -293,7 +293,7 @@ When the adapter crashes or an other Code error happens, this error message that
 * (Stübi) - Bugfixing and longpush and input states for Shelly 1, 2, 1pm, 2.5 and Shelly RGBWW2 added. Add state temperature to Shelly 1pm, 2.5 and Plug S.  
 
 ### 3.0.1 (21.05.2019)
-* (Stübi) - Redesign of the adapter. You can choose now between CoAP and MQTT protocol. The Shellys use this protocolls to send there state changes to ioBroker in realtime. Out of the Box the Shelly works with the CoAP protocol. You do not have to configure anything. The Shelly will be found by the Shelly Adapter itself. If you want to use MQTT, you have configure all your Shelly devices. You find a detailed installing documentation here: [Installation Documentation](./docs/EN/INSTALL.md). If you have problems with the version 3.0.1 please change back to 2.2.0 and leave an Issue (bug report) here: [GitHub Issues](https://github.com/schmupu/ioBroker.shelly/issues). 
+* (Stübi) - Redesign of the adapter. You can choose now between CoAP and MQTT protocol. The Shellys use this protocolls to send there state changes to ioBroker in realtime. Out of the Box the Shelly works with the CoAP protocol. You do not have to configure anything. The Shelly will be found by the Shelly Adapter itself. If you want to use MQTT, you have configure all your Shelly devices. You find a detailed installing documentation here: [Installation Documentation](./docs/EN/INSTALL.md). If you have problems with the version 3.0.1 please change back to 2.2.0 and leave an Issue (bug report) here: [GitHub Issues](https://github.com/iobroker-community-adapters/ioBroker.shelly/issues). 
 
 ### 2.2.0 (13.04.2019)
 * Add devices Shelly 2.5 and Shelly 1 PM 

@@ -16,7 +16,7 @@
       "email": "iobroker@fischer-ka.de"
     }
   ],
-  "homepage": "https://github.com/schmupu/ioBroker.shelly",
+  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.shelly",
   "license": "MIT",
   "keywords": [
     "ioBroker",
@@ -26,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/schmupu/ioBroker.shelly"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.shelly"
   },
   "dependencies": {
     "@apollon/iobroker-tools": "^0.2.0",
@@ -62,7 +62,7 @@
     "release": "release-script"
   },
   "bugs": {
-    "url": "https://github.com/schmupu/ioBroker.shelly/issues"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.shelly/issues"
   },
   "readmeFilename": "README.md"
 }

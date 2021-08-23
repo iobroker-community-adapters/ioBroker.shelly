@@ -97,7 +97,7 @@ If you protect you Shelly device with a restricted login, you have to enter this
 ![iobroker_restrict_login](../iobroker_general_mqtt.png) 
 
 ### New not supported Shelly devices - What to do
-I you have a Shelly device which are not supported by the Shelly Adapter, please inform the developer and create an [Issue](https://github.com/schmupu/ioBroker.shelly/issues) on GitHub with following information: 
+I you have a Shelly device which are not supported by the Shelly Adapter, please inform the developer and create an [Issue](https://github.com/iobroker-community-adapters/ioBroker.shelly/issues) on GitHub with following information: 
 
 
 **1. CoAP Messages**
