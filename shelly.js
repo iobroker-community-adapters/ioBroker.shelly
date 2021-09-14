@@ -15,6 +15,8 @@ const tcpp = require('tcp-ping');
 const events = require('events');
 const eventEmitter = new events.EventEmitter();
 
+let serverMqtt = null;
+let serverCoap = null;
 let pollTimeout = null;
 
 let adapter;
@@ -61,6 +63,20 @@ function startAdapter(options) {
     }
     try {
       adapter.log.info('Closing Adapter');
+      if (serverCoap) {
+        try {
+          serverCoap.destroy();
+        } catch (err) {
+          // ignore
+        }
+      }
+      if (serverMqtt) {
+        try {
+          serverMqtt.destroy();
+        } catch (err) {
+          // ignore
+        }
+      }
       callback();
     } catch (e) {
       // adapter.log.error('Error');
@@ -202,7 +218,7 @@ async function onlineCheck() {
         });
       }
     }
-  } catch (error) { 
+  } catch (error) {
     //
   }
   pollTimeout = setTimeout(() => {
@@ -273,14 +289,14 @@ async function main() {
       adapter.log.info('Starting Shelly adapter in MQTT modus. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
       if (!adapter.config.mqttusername || adapter.config.mqttusername.length === 0) { adapter.log.error('MQTT Username is missing!'); }
       if (!adapter.config.mqttpassword || adapter.config.mqttpassword.length === 0) { adapter.log.error('MQTT Password is missing!'); }
-      let serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper, eventEmitter);
+      serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper, eventEmitter);
       serverMqtt.listen();
     }
   });
   setImmediate(() => {
     if (protocol === 'both' || protocol === 'coap') {
       adapter.log.info('Starting Shelly adapter in CoAP modus.');
-      let serverCoap = new coapServer.CoAPServer(adapter, objectHelper, eventEmitter);
+      serverCoap = new coapServer.CoAPServer(adapter, objectHelper, eventEmitter);
       serverCoap.listen();
     }
   });

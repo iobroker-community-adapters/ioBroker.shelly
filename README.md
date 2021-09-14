@@ -69,7 +69,10 @@ When the adapter crashes or an other Code error happens, this error message that
 
 ## Changelog
 
-### 4.0.9-beta-1 (2021-05-07)
+### __WORK IN PROGRESS__
+* (HGlab) several fixes and adjustments
+* (turbolift) fix temperature maximum warning
+* (Apollon77) Destroy Coap and MQTT server on unload
 
 ### 4.0.8 (2021-05-06)
 * (Stübi) - Online Status (beta, does not work correct)
