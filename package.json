@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@alcalzone/release-script": "^2.2.1",
-    "@iobroker/testing": "^2.5.1",
+    "@iobroker/testing": "^2.5.2",
     "axios": "^0.21.4",
     "chai": "^4.3.4",
     "eslint": "^7.32.0",
