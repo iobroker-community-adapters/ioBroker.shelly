@@ -44,7 +44,7 @@
   "devDependencies": {
     "@alcalzone/release-script": "^3.4.1",
     "@iobroker/testing": "^2.5.2",
-    "axios": "^0.21.4",
+    "axios": "^0.24.0",
     "chai": "^4.3.4",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
