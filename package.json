@@ -43,10 +43,12 @@
   },
   "devDependencies": {
     "@alcalzone/release-script": "^3.4.1",
+    "@alcalzone/release-script-plugin-iobroker": "^3.4.1",
+    "@alcalzone/release-script-plugin-license": "^3.4.1",
     "@iobroker/testing": "^2.5.2",
     "axios": "^0.24.0",
     "chai": "^4.3.4",
-    "eslint": "^7.32.0",
+    "eslint": "^8.1.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-react": "^7.26.1",
