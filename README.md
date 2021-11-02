@@ -1,13 +1,13 @@
 ![Logo](admin/shelly.png)
 # ioBroker.shelly
 
-[![Build Status](https://travis-ci.org/iobroker-community-adapters/ioBroker.shelly.svg?branch=master)](https://travis-ci.org/iobroker-community-adapters/ioBroker.shelly)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/iobroker-community-adapters/ioBroker.shelly?branch=master&svg=true)](https://ci.appveyor.com/project/iobroker-community-adapters/ioBroker-shelly/)
+![Number of Installations](http://iobroker.live/badges/shelly-installed.svg)
+![Number of Installations](http://iobroker.live/badges/shelly-stable.svg)
+[![NPM version](http://img.shields.io/npm/v/iobroker.shelly.svg)](https://www.npmjs.com/package/iobroker.shelly)
 
-![Number of Installations](http://iobroker.live/badges/shelly-installed.svg) ![Number of Installations](http://iobroker.live/badges/shelly-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.shelly.svg)](https://www.npmjs.com/package/iobroker.shelly)
+![Test and Release](https://github.com/iobroker-community-adapters/ioBroker.shelly/workflows/Test%20and%20Release/badge.svg)
+[![Translation status](https://weblate.iobroker.net/widgets/adapters/-/homekit-controller/svg-badge.svg)](https://weblate.iobroker.net/engage/adapters/?utm_source=widget)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.shelly.svg)](https://www.npmjs.com/package/iobroker.shelly)
-
-[![NPM](https://nodei.co/npm/iobroker.shelly.png?downloads=true)](https://nodei.co/npm/iobroker.shelly/)
 
 Requires node.js 8.0 or higher and Admin v3!
 
@@ -18,7 +18,7 @@ If you use the CoAP protocol Shelly devices with Firmware 1.8.0 or above works o
 
 Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fot CoAP. You have to enter the IP address of your ioBroker server followed by the port 5683 on your Shelly device. For example, ioBroker runs on the IP address 192.168.1.2. Now you have to enter 192.168.1.2:5683 and activate CoIoT.
 
-**This adapter uses Sentry libraries to automatically report exceptions and code errors to me as the developer.** More details see below!
+**This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
 
 ## Installation
 You find a detailed installation documentation here:
@@ -59,13 +59,6 @@ You find a detailed installation documentation here:
 |Shelly Color Bulb (SHCB-1)|supported since v4.0.5|supported since v4.0.5|
 |Shelly Button (SHBTN-2)|supported since v4.0.5|supported since v4.0.5|
 |Shelly Motion (SHMOS-01)|supported since v4.0.6|supported since v4.0.6|
-
-
-
-## What is Sentry and what is reported to the servers?
-Sentry.io is a way for developers to get an overview about errors from their applications. And exactly this is implemented in this adapter.
-
-When the adapter crashes or an other Code error happens, this error message that also appears in the ioBroker log is submitted to our own Sentry server hosted in Germany. When you allowed ioBroker GmbH to collect diagnostic data then also your installation ID (this is just a unique ID **without** any additional infos about you, email, name or such) is included. This allows Sentry to group errors and show how many unique users are affected by such an error. All of this helps me to provide error free adapters that basically never crashs.
 
 ## Changelog
 
