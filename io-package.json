@@ -137,6 +137,7 @@
     "restartAdapters": [],
     "connectionType": "local",
     "dataSource": "push",
+    "tier": 2,
     "plugins": {
       "sentry": {
         "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
