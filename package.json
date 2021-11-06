@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "4.0.9-beta-1",
+  "version": "4.1.0",
   "description": "Shelly",
   "author": {
     "name": "Thorsten Stueben",
@@ -36,7 +36,7 @@
     "mqtt-connection": "^4.1.0",
     "ping": "^0.4.1",
     "request": "^2.88.2",
-    "shelly-iot": "^1.1.1",
+    "shelly-iot": "^1.1.2",
     "tcp-ping": "^0.1.1",
     "xml2js": "0.4.23",
     "xmlbuilder": "^15.1.1"
@@ -48,7 +48,7 @@
     "@iobroker/testing": "^2.5.2",
     "axios": "^0.24.0",
     "chai": "^4.3.4",
-    "eslint": "^8.1.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-react": "^7.26.1",
