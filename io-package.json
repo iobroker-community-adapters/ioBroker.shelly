@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "4.1.0",
+    "version": "4.1.1",
     "news": {
+      "4.1.1": {
+        "en": "Try to prevent State changes after adapter is stopped",
+        "de": "Versuchen Sie, Statusänderungen nach dem Stoppen des Adapters zu verhindern",
+        "ru": "Попытайтесь предотвратить изменение состояния после остановки адаптера",
+        "pt": "Tente evitar mudanças de estado após o adaptador ser interrompido",
+        "nl": "Probeer statusveranderingen te voorkomen nadat de adapter is gestopt",
+        "fr": "Essayez d'empêcher les changements d'état après l'arrêt de l'adaptateur",
+        "it": "Prova a prevenire le modifiche allo stato dopo l'arresto dell'adattatore",
+        "es": "Intente evitar cambios de estado después de que se detenga el adaptador",
+        "pl": "Spróbuj zapobiec zmianom stanu po zatrzymaniu adaptera",
+        "zh-cn": "尝试在适配器停止后防止状态更改"
+      },
       "4.1.0": {
         "en": "several fixes and adjustments\nfix temperature maximum warning\nDestroy Coap and MQTT server on unload",
         "de": "mehrere Fixes und Anpassungen\nTemperaturmaximalwarnung fixieren\nZerstöre Coap- und MQTT-Server beim Entladen",
@@ -74,18 +86,6 @@
         "es": "Añadir Shelly 1L",
         "pl": "Dodaj Shelly 1L",
         "zh-cn": "添加Shelly 1L"
-      },
-      "4.0.4": {
-        "en": "update dependencies and shelly-iot lib",
-        "de": "Abhängigkeiten und shelly-iot lib aktualisieren",
-        "ru": "обновить зависимости и библиотеку shelly-iot",
-        "pt": "atualizar dependências e lib shelly-iot",
-        "nl": "update afhankelijkheden en shelly-iot lib",
-        "fr": "mettre à jour les dépendances et la lib shelly-iot",
-        "it": "aggiorna le dipendenze e la libreria shelly-iot",
-        "es": "actualizar dependencias y shelly-iot lib",
-        "pl": "update zależności i shelly-iot lib",
-        "zh-cn": "更新依赖项和shelly-iot lib"
       }
     },
     "title": "Shelly",

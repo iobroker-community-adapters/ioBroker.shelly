@@ -61,6 +61,9 @@ You find a detailed installation documentation here:
 |Shelly Motion (SHMOS-01)|supported since v4.0.6|supported since v4.0.6|
 
 ## Changelog
+### 4.1.1 (2021-11-13)
+* (Apollon77) Try to prevent State changes after adapter is stopped
+
 ### 4.1.0 (2021-11-06)
 * (HGlab) several fixes and adjustments
 * (turbolift) fix temperature maximum warning
