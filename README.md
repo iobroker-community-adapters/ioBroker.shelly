@@ -61,6 +61,10 @@ You find a detailed installation documentation here:
 |Shelly Motion (SHMOS-01)|supported since v4.0.6|supported since v4.0.6|
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (sbormann) Fix the online checks to stay online
+
 ### 4.1.1 (2021-11-13)
 * (Apollon77) Try to prevent State changes after adapter is stopped
 
