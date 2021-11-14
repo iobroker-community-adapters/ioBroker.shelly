@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "4.1.1",
+    "version": "4.1.2",
     "news": {
+      "4.1.2": {
+        "en": "Fix the online checks to stay online",
+        "de": "Beheben Sie die Online-Checks, um online zu bleiben",
+        "ru": "Исправьте онлайн-чеки, чтобы оставаться в сети",
+        "pt": "Corrija as verificações online para permanecer online",
+        "nl": "Los de online cheques op om online te blijven",
+        "fr": "Corrigez les chèques en ligne pour rester en ligne",
+        "it": "Risolvi i controlli online per rimanere online",
+        "es": "Arregle los cheques en línea para permanecer en línea",
+        "pl": "Napraw czeki online, aby pozostać online",
+        "zh-cn": "修复在线检查以保持在线状态"
+      },
       "4.1.1": {
         "en": "Try to prevent State changes after adapter is stopped",
         "de": "Versuchen Sie, Statusänderungen nach dem Stoppen des Adapters zu verhindern",
@@ -74,18 +86,6 @@
         "es": "Corrección de errores",
         "pl": "Naprawa błędów",
         "zh-cn": "错误修正"
-      },
-      "4.0.5": {
-        "en": "Add Shelly 1L",
-        "de": "Fügen Sie Shelly 1L hinzu",
-        "ru": "Добавить Шелли 1L",
-        "pt": "Adicionar Shelly 1L",
-        "nl": "Voeg Shelly 1L",
-        "fr": "Ajouter Shelly 1L",
-        "it": "Aggiungi Shelly 1L",
-        "es": "Añadir Shelly 1L",
-        "pl": "Dodaj Shelly 1L",
-        "zh-cn": "添加Shelly 1L"
       }
     },
     "title": "Shelly",
