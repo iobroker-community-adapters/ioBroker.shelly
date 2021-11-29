@@ -9,3 +9,7 @@ test
 .travis.yml
 appveyor.yml
 package-lock.json
+
+
+# ioBroker dev-server
+.dev-server/
