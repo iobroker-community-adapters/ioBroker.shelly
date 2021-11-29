@@ -61,6 +61,12 @@ You find a detailed installation documentation here:
 |Shelly Motion (SHMOS-01)|supported since v4.0.6|supported since v4.0.6|
 
 ## Changelog
+
+<!--
+  Placeholder for the next version (at the beginning of the line):
+  ## **WORK IN PROGRESS**
+-->
+
 ### 4.1.2 (2021-11-14)
 * (sbormann) Fix the online checks to stay online
 
