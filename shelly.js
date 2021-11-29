@@ -286,7 +286,7 @@ async function main() {
   await setOnlineFalse();
   setImmediate(() => {
     if (protocol === 'both' || protocol === 'mqtt') {
-      adapter.log.info('Starting Shelly adapter in MQTT modus. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
+      adapter.log.info('Starting Shelly adapter in MQTT mode. Listening on ' + adapter.config.bind + ':' + adapter.config.port);
       if (!adapter.config.mqttusername || adapter.config.mqttusername.length === 0) { adapter.log.error('MQTT Username is missing!'); }
       if (!adapter.config.mqttpassword || adapter.config.mqttpassword.length === 0) { adapter.log.error('MQTT Password is missing!'); }
       serverMqtt = new mqttServer.MQTTServer(adapter, objectHelper, eventEmitter);

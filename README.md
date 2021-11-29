@@ -69,6 +69,7 @@ You find a detailed installation documentation here:
 
 ### **WORK IN PROGRESS**
 
+* (klein0r) Shelly Plus Support (1 PM)
 * (klein0r) Updated logo
 
 ### 4.1.2 (2021-11-14)
