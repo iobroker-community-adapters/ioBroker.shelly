@@ -9,10 +9,9 @@
 [![Translation status](https://weblate.iobroker.net/widgets/adapters/-/homekit-controller/svg-badge.svg)](https://weblate.iobroker.net/engage/adapters/?utm_source=widget)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.shelly.svg)](https://www.npmjs.com/package/iobroker.shelly)
 
-Requires node.js 8.0 or higher and Admin v3!
-
 The adapter communicates with Shelly devices by REST api and the CoAP or MQTT protocol.    
-By the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
+
+Uses the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
 
 If you use the CoAP protocol Shelly devices with Firmware 1.8.0 or above works only with the Shelly Adapter 4.0.0 or above. If you use devices with Firmware below 1.8.0 except of the Shelly 4Pro you have have to use Shelly Adapter 3.3.6 or below. The Shelly Adapter 4.0.0 or above would not work in this case! 
 
@@ -66,6 +65,10 @@ You find a detailed installation documentation here:
   Placeholder for the next version (at the beginning of the line):
   ## **WORK IN PROGRESS**
 -->
+
+## **WORK IN PROGRESS**
+
+* (klein0r) Updated logo
 
 ### 4.1.2 (2021-11-14)
 * (sbormann) Fix the online checks to stay online
