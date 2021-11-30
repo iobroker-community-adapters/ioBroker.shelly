@@ -23,7 +23,7 @@ Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fo
 You find a detailed installation documentation here:
 [Installation Documentation](./docs/EN/INSTALL.md)
 
-## Supported devices
+## Supported devices (Gen 1)
 |Shelly Device|CoAP|MQTT|
 |-------------|--------------|----|
 |Shelly1 (SHSW-1)|supported since v3.3.0|supported since v3.3.0|
@@ -58,6 +58,11 @@ You find a detailed installation documentation here:
 |Shelly Color Bulb (SHCB-1)|supported since v4.0.5|supported since v4.0.5|
 |Shelly Button (SHBTN-2)|supported since v4.0.5|supported since v4.0.5|
 |Shelly Motion (SHMOS-01)|supported since v4.0.6|supported since v4.0.6|
+
+## Supported devices (Gen 2)
+|Shelly Device|CoAP|MQTT|
+|-------------|--------------|----|
+|Shelly Plus 1|---|supported since v5.0.0|
 |Shelly Plus 1 PM|---|supported since v5.0.0|
 
 ## Changelog
@@ -69,7 +74,7 @@ You find a detailed installation documentation here:
 
 ### **WORK IN PROGRESS**
 
-* (klein0r) Shelly Plus Support (1 PM)
+* (klein0r) Shelly Plus Support (1, 1 PM)
 * (klein0r) Updated logo
 
 ### 4.1.2 (2021-11-14)
