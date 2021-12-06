@@ -8,11 +8,12 @@ const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Get com
 const mqttServer = require(__dirname + '/lib/mqtt');
 const coapServer = require(__dirname + '/lib/coap');
 const adapterName = require('./package.json').name.split('.').pop();
-const tcpp = require('tcp-ping');
+const tcpPing = require('tcp-ping');
 const events = require('events');
 const eventEmitter = new events.EventEmitter();
 
 class Shelly extends utils.Adapter {
+
     constructor(options) {
         super({
             ...options,
@@ -22,6 +23,8 @@ class Shelly extends utils.Adapter {
         this.serverMqtt = null;
         this.serverCoap = null;
         this.pollTimeout = null;
+
+        this.onlineDevices = {};
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
@@ -45,13 +48,17 @@ class Shelly extends utils.Adapter {
             // Check sentry configuration
             if (await this.setSentryLogging(this.config.sentry_enable)) return;
 
+            // Upgrade older configs
             await this.migrateConfig();
 
             this.subscribeStates('*');
             objectHelper.init(this);
 
             const protocol = this.config.protocol || 'coap';
+
+            // Start online check
             await this.setOnlineFalse();
+            this.onlineCheck();
 
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
@@ -109,6 +116,8 @@ class Shelly extends utils.Adapter {
             this.pollTimeout = null;
         }
 
+        this.setOnlineFalse();
+
         try {
             this.log.info('Closing Adapter');
 
@@ -136,6 +145,8 @@ class Shelly extends utils.Adapter {
     }
 
     async onlineCheck() {
+        const valPort = 80;
+
         if (this.pollTimeout) {
             this.clearTimeout(this.pollTimeout);
             this.pollTimeout = null;
@@ -149,19 +160,39 @@ class Shelly extends utils.Adapter {
                 const idHostname = idParent + '.hostname';
                 const stateHostaname = await this.getStateAsync(idHostname);
                 const valHostname = stateHostaname ? stateHostaname.val : undefined;
-                const valPort = 80;
+
                 if (valHostname) {
-                    tcpp.probe(valHostname, valPort, async (error, isAlive) => {
+                    this.log.debug(`onlineCheck of ${idHostname} on ${valHostname}:${valPort}`);
+
+                    tcpPing.probe(valHostname, valPort, async (error, isAlive) => {
+                        if (isAlive) {
+                            this.onlineDevices[idParent] = true;
+                        } else if (Object.prototype.hasOwnProperty.call(this.onlineDevices, idParent)) {
+                            delete this.onlineDevices[idParent];
+                        }
+
                         const oldState = await this.getStateAsync(idOnline);
-                        const oldValue = oldState && oldState.val ? oldState.val === 'true' || oldState.val === true : false;
+                        const oldValue = oldState && oldState.val ? (oldState.val === 'true' || oldState.val === true) : false;
+
                         if (oldValue != isAlive) {
+                            this.log.debug(`onlineCheck of ${idHostname} changed to ${isAlive}`);
                             await this.setStateAsync(idOnline, { val: isAlive, ack: true });
                         }
                     });
+
+                } else {
+                    this.log.warn(`onlineCheck of ${idHostname} failed - state is empty (no hostname)`);
                 }
             }
-        } catch (error) {
-            //
+        } catch (e) {
+            this.log.error(e.toString());
+        }
+
+        // Check online devices
+        if (Object.keys(this.onlineDevices).length > 0) {
+            this.setStateAsync('info.connection', true, true);
+        } else {
+            this.setStateAsync('info.connection', false, true);
         }
 
         this.pollTimeout = this.setTimeout(() => {
@@ -187,16 +218,10 @@ class Shelly extends utils.Adapter {
     }
 
     async setOnlineFalse() {
-        try {
-            const objs = await this.getAdapterObjectsAsync();
-            for (const id in objs) {
-                const obj = objs[id];
-                if (id && id.endsWith('.online') && obj && obj.type === 'state') {
-                    await this.setForeignStateAsync(id, { val: false, ack: true });
-                }
-            }
-        } catch (error) {
-            //
+        const idsOnline = await this.getAllDevices();
+        for (const i in idsOnline) {
+            const idOnline = idsOnline[i];
+            await this.setForeignStateAsync(idOnline, { val: false, ack: true });
         }
     }
 
