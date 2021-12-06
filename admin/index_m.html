@@ -18,28 +18,11 @@
     var active = false;
     var g_onChange;
     var SEP = '_';
-    var secret = null;
 
     if (typeof _ !== 'function') _ = translateWord;
 
-    function encrypt(key, value) {
-      var result = '';
-      for (var i = 0; i < value.length; ++i) {
-        result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
-      }
-      return result;
-    }
-    function decrypt(key, value) {
-      var result = '';
-      for (var i = 0; i < value.length; ++i) {
-        result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
-      }
-      return result;
-    }
-
     function load(settings, onChange) {
       g_onChange = onChange;
-      secret = (systemConfig.native ? systemConfig.native.secret : '') || 'Zgfr56gFe87jJOM';
 
       getIPs(function (ips) {
         for (var i = 0; i < ips.length; i++) {
@@ -90,9 +73,7 @@
         }
         var val = obj[ar[ar.length - 1]];
         var $val = $('#' + id + '.value');
-        if (val && $val.attr('data-crypt') == "1") {
-          val = decrypt(secret, val);
-        }
+
         return val;
       }
 
@@ -167,8 +148,7 @@
             val = ~~$this.val();
             break;
           default:
-            // val = $this.val();
-            val = $this.data('crypt') && $this.val() ? encrypt(secret, $this.val()) : $this.val();
+            val = $this.val();
         }
         setVal(obj, $this.attr('id'), val);
       });
@@ -240,7 +220,7 @@
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l4">
-            <input id="mqttpassword" type="password" data-crypt="1" size="30" class="value" />
+            <input id="mqttpassword" type="password" size="30" class="value" />
             <label class="translate" for="mqttpassword">MQTT Password</label>
           </div>
         </div>
@@ -331,7 +311,7 @@
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l4">
-            <input id="httppassword" type="password" data-crypt="1" size="30" class="value" />
+            <input id="httppassword" type="password" size="30" class="value" />
             <label class="translate" for="httppassword">Http Password</label>
           </div>
         </div>

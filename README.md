@@ -81,6 +81,8 @@ You find a detailed installation documentation here:
 * (klein0r) Shelly Plus Support (1, 1 PM)
 * (klein0r) Shelly Pro Support (4 PM)
 * (klein0r) Updated logo
+* (klein0r) Use class definition instead
+* (klein0r) Use internal encryption methods **(BREAKING CHANGE)**
 
 ### 4.1.2 (2021-11-14)
 * (sbormann) Fix the online checks to stay online

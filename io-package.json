@@ -158,6 +158,14 @@
       }
     ]
   },
+  "protectedNative": [
+    "mqttpassword",
+    "httppassword"
+  ],
+  "encryptedNative": [
+    "mqttpassword",
+    "httppassword"
+  ],
   "native": {
     "bind": "0.0.0.0",
     "coapbind": "0.0.0.0",
