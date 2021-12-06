@@ -20,10 +20,12 @@ Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fo
 **This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
 
 ## Installation
+
 You find a detailed installation documentation here:
 [Installation Documentation](./docs/EN/INSTALL.md)
 
 ## Supported devices (Gen 1)
+
 |Shelly Device|CoAP|MQTT|
 |-------------|--------------|----|
 |Shelly1 (SHSW-1)|supported since v3.3.0|supported since v3.3.0|
@@ -60,10 +62,12 @@ You find a detailed installation documentation here:
 |Shelly Motion (SHMOS-01)|supported since v4.0.6|supported since v4.0.6|
 
 ## Supported devices (Gen 2)
+
 |Shelly Device|CoAP|MQTT|
 |-------------|--------------|----|
 |Shelly Plus 1|---|supported since v5.0.0|
 |Shelly Plus 1 PM|---|supported since v5.0.0|
+|Shelly Pro 4 PM|---|supported since v5.0.0|
 
 ## Changelog
 
@@ -75,6 +79,7 @@ You find a detailed installation documentation here:
 ### **WORK IN PROGRESS**
 
 * (klein0r) Shelly Plus Support (1, 1 PM)
+* (klein0r) Shelly Pro Support (4 PM)
 * (klein0r) Updated logo
 
 ### 4.1.2 (2021-11-14)
