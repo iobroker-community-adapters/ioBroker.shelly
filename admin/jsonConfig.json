@@ -1,0 +1,232 @@
+
+{
+    "i18n": true,
+    "type": "tabs",
+    "items": {
+        "_general": {
+            "type": "panel",
+            "label": "General settings",
+            "items": {
+                "protocol": {
+                    "type": "select",
+                    "options": [
+                        {
+                            "label": {
+                                "en": "CoAP and HTTP",
+                                "de": "CoAP und HTTP",
+                                "ru": "CoAP и HTTP",
+                                "pt": "CoAP e HTTP",
+                                "nl": "CoAP en HTTP",
+                                "fr": "CoAP et HTTP",
+                                "it": "CoAP e HTTP",
+                                "es": "CoAP y HTTP",
+                                "pl": "CoAP i HTTP",
+                                "zh-cn": "CoAP 和 HTTP"
+                            },
+                            "value": "coap"
+                        },
+                        {
+                            "label": {
+                                "en": "MQTT and HTTP",
+                                "de": "MQTT und HTTP",
+                                "ru": "MQTT и HTTP",
+                                "pt": "MQTT e HTTP",
+                                "nl": "MQTT en HTTP",
+                                "fr": "MQTT et HTTP",
+                                "it": "MQTT e HTTP",
+                                "es": "MQTT y HTTP",
+                                "pl": "MQTT i HTTP",
+                                "zh-cn": "MQTT 和 HTTP"
+                            },
+                            "value": "mqtt"
+                        }
+                    ],
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Shelly protocol"
+                },
+                "httpusername": {
+                    "newLine": true,
+                    "type": "text",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Http Username"
+                },
+                "httppassword": {
+                    "type": "password",
+                    "repeat": false,
+                    "visible": true,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Http Password"
+                },
+                "polltime": {
+                    "newLine": true,
+                    "type": "number",
+                    "min": 5,
+                    "max": 86400,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Polltime in sec."
+                },
+                "autoupdate": {
+                    "newLine": true,
+                    "type": "checkbox",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "label": "Auto update of new firmware"
+                },
+                "updateUnchangedObjects": {
+                    "newLine": true,
+                    "type": "checkbox",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "label": "Update objects even if there is no value change."
+                },
+                "sentry_enable": {
+                    "newLine": true,
+                    "type": "checkbox",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "label": "Allow to transfer errors if the adapter crash. Private data like usernames, passwords, tokens, ... will be NOT be transferd."
+                }
+            }
+        },
+        "_mqtt": {
+            "type": "panel",
+            "label": "MQTT settings",
+            "items": {
+                "bind": {
+                    "newLine": true,
+                    "type": "ip",
+                    "listenOnAllPorts": true,
+                    "sm": 12,
+                    "md": 8,
+                    "lg": 6,
+                    "label": "MQTT Listen IP"
+                },
+                "port": {
+                    "type": "number",
+                    "min": 1,
+                    "max": 65535,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 1,
+                    "label": "Port"
+                },
+                "mqttusername": {
+                    "newLine": true,
+                    "type": "text",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "MQTT Username"
+                },
+                "mqttpassword": {
+                    "type": "password",
+                    "repeat": false,
+                    "visible": true,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "MQTT Password"
+                },
+                "qos": {
+                    "newLine": true,
+                    "type": "select",
+                    "options": [
+                        {
+                            "label": {
+                                "en": "0 - At most once",
+                                "de": "0 - Höchstens einmal",
+                                "ru": "0 - Не более одного раза",
+                                "pt": "0 - no máximo uma vez",
+                                "nl": "0 - Maximaal één keer",
+                                "fr": "0 - Au plus une fois",
+                                "it": "0 - Al massimo una volta",
+                                "es": "0: como máximo una vez",
+                                "pl": "0 - Co najwyżej raz",
+                                "zh-cn": "0 - 最多一次"
+                            },
+                            "value": 0
+                        },
+                        {
+                            "label": {
+                                "en": "1 - At least once",
+                                "de": "1 - Mindestens einmal",
+                                "ru": "1 - Хотя бы один раз",
+                                "pt": "1 - pelo menos uma vez",
+                                "nl": "1 - Minstens één keer",
+                                "fr": "1 - Au moins une fois",
+                                "it": "1 - Almeno una volta",
+                                "es": "1 - Al menos una vez",
+                                "pl": "1 - Przynajmniej raz",
+                                "zh-cn": "1 - 至少一次"
+                            },
+                            "value": 1
+                        },
+                        {
+                            "label": {
+                                "en": "2 - Exactly once",
+                                "de": "2 - Genau einmal",
+                                "ru": "2 - Ровно один раз",
+                                "pt": "2 - Exatamente uma vez",
+                                "nl": "2 - Precies één keer",
+                                "fr": "2 - Exactement une fois",
+                                "it": "2 - Esattamente una volta",
+                                "es": "2 - Exactamente una vez",
+                                "pl": "2 - Dokładnie raz",
+                                "zh-cn": "2 - 恰好一次"
+                            },
+                            "value": 2
+                        }
+                    ],
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Default QoS:"
+                }
+            }
+        },
+        "_coap": {
+            "type": "panel",
+            "label": "CoAP settings",
+            "items": {
+                "coapbind": {
+                    "newLine": true,
+                    "type": "ip",
+                    "listenOnAllPorts": true,
+                    "sm": 12,
+                    "md": 8,
+                    "lg": 6,
+                    "label": "COAP Listen IP"
+                },
+                "blacklist": {
+                    "type": "table",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "label": "Blacklist",
+                    "items": [
+                        {
+                            "type": "text",
+                            "attr": "id",
+                            "width": "100%",
+                            "title": "Device Id",
+                            "filter": true,
+                            "sort": true,
+                            "default": ""
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -102,16 +102,16 @@
       "zh-cn": "谢莉"
     },
     "desc": {
-      "en": "Shelly Adapter",
-      "de": "Shelly Adapter",
-      "ru": "Шестигранный адаптер",
-      "pt": "Adaptador Shelly",
-      "nl": "Shelly-adapter",
-      "fr": "Adaptateur Shelly",
-      "it": "Adattatore Shelly",
-      "es": "Adaptador Shelly",
-      "pl": "Adapter Shelly",
-      "zh-cn": "雪莉适配器"
+      "en": "Integrate your Shelly devices",
+      "de": "Integrieren Sie Ihre Shelly-Geräte",
+      "ru": "Интегрируйте свои устройства Shelly",
+      "pt": "Integre seus dispositivos Shelly",
+      "nl": "Integreer uw Shelly-apparaten",
+      "fr": "Intégrez vos appareils Shelly",
+      "it": "Integra i tuoi dispositivi Shelly",
+      "es": "Integre sus dispositivos Shelly",
+      "pl": "Zintegruj swoje urządzenia Shelly",
+      "zh-cn": "集成您的 Shelly 设备"
     },
     "license": "MIT",
     "authors": [
@@ -121,7 +121,6 @@
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "shelly.png",
-    "materialize": true,
     "enabled": true,
     "compact": true,
     "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
@@ -147,9 +146,12 @@
         ]
       }
     },
+    "adminUI": {
+      "config": "json"
+    },
     "globalDependencies": [
       {
-        "admin": ">=4.0.1"
+        "admin": ">=5.1.25"
       }
     ],
     "dependencies": [

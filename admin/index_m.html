@@ -67,9 +67,9 @@
         <div class="row">
             <div class="col s12">
                 <ul class="tabs">
-                    <li class="tab col s2"><a href="#tab-http" class="translate active">General settings</a></li>
-                    <li class="tab col s2"><a href="#tab-mqtt" class="translate active">MQTT settings</a></li>
-                    <li class="tab col s2"><a href="#tab-coap" class="translate active">CoAP settings</a></li>
+                    <li class="tab col s2"><a href="#tab-general" class="translate active">General settings</a></li>
+                    <li class="tab col s2"><a href="#tab-mqtt" class="translate">MQTT settings</a></li>
+                    <li class="tab col s2"><a href="#tab-coap" class="translate">CoAP settings</a></li>
                 </ul>
             </div>
         <div id="tab-mqtt" class="col s12 page">
@@ -79,7 +79,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s12 m8 l5">
+                <div class="col s12 m8 l6">
                     <select class="value" id="bind"></select>
                     <label class="translate" for="bind">MQTT Listen IP</label>
                 </div>
@@ -89,13 +89,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12 m6 l4">
+                <div class="input-field col s12 m6 l6">
                     <input id="mqttusername" type="text" size="30" class="value" />
                     <label class="translate" for="mqttusername">MQTT Username</label>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12 m6 l4">
+                <div class="input-field col s12 m6 l6">
                     <input id="mqttpassword" type="password" size="30" class="value" />
                     <label class="translate" for="mqttpassword">MQTT Password</label>
                 </div>
@@ -118,7 +116,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col s12 m8 l5">
+                <div class="col s12 m8 l6">
                     <select class="value" id="coapbind"></select>
                     <label class="translate" for="coapbind">COAP Listen IP</label>
                 </div>
@@ -144,7 +142,7 @@
                 </div>
             </div>
         </div>
-        <div id="tab-http" class="col s12 page">
+        <div id="tab-general" class="col s12 page">
             <div class="row">
                 <div class="input-field col s6">
                     <img src="shelly.png" class="logo">
@@ -153,15 +151,11 @@
             <div class="row">
                 <div class="input-field col s8 m8 l3">
                     <select id="protocol" class="value">
-                        <option value="coap">CoAP and http</option>
-                        <option value="mqtt">MQTT and http</option>
+                        <option value="coap">CoAP and HTTP</option>
+                        <option value="mqtt">MQTT and HTTP</option>
                         <!-- >option value="both">MQTT, CoAP and http</option -->
                     </select>
                     <label class="translate" for="protocol">Shelly protocol</label>
-                </div>
-                <div class="input-field col s12">
-                    <input class="value" id="autoupdate" type="checkbox" />
-                    <label for="autoupdate" class="translate">Auto update of new firmware</label>
                 </div>
             </div>
             <div class="row">
@@ -170,23 +164,26 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12 m6 l4">
+                <div class="input-field col s12 m6 l6">
                     <input id="httpusername" type="text" size="30" class="value" />
                     <label class="translate" for="httpusername">Http Username</label>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12 m6 l4">
+                <div class="input-field col s12 m6 l6">
                     <input id="httppassword" type="password" size="30" class="value" />
                     <label class="translate" for="httppassword">Http Password</label>
                 </div>
             </div>
             <div class="row">
-                <div class="col s12 m4 l3">
+                <div class="col s12 m6 l6">
                     <input class="value number" id="polltime" type="text" />
                     <label class="translate" for="polltime">Polltime in sec.</label>
                 </div>
             </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input class="value" id="autoupdate" type="checkbox" />
+                    <label for="autoupdate" class="translate">Auto update of new firmware</label>
+                </div>
             <div class="row">
                 <div class="input-field col s12">
                     <input class="value" id="updateUnchangedObjects" type="checkbox" />

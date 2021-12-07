@@ -83,6 +83,7 @@ You find a detailed installation documentation here:
 * (klein0r) Updated logo
 * (klein0r) Use class definition instead
 * (klein0r) Use internal encryption methods **(BREAKING CHANGE)**
+* (klein0r) Admin 5 config
 
 ### 4.1.2 (2021-11-14)
 * (sbormann) Fix the online checks to stay online
