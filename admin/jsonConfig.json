@@ -52,7 +52,7 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "Http Username"
+                    "label": "HTTP Username"
                 },
                 "httppassword": {
                     "type": "password",
@@ -61,7 +61,7 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "Http Password"
+                    "label": "HTTP Password"
                 },
                 "polltime": {
                     "newLine": true,
@@ -71,7 +71,7 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "Polltime in sec."
+                    "label": "Poll time in seconds"
                 },
                 "autoupdate": {
                     "newLine": true,
@@ -87,7 +87,7 @@
                     "sm": 12,
                     "md": 12,
                     "lg": 12,
-                    "label": "Update objects even if there is no value change."
+                    "label": "Update objects even if there is no value change"
                 },
                 "sentry_enable": {
                     "newLine": true,
@@ -191,7 +191,7 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "Default QoS:"
+                    "label": "Default QoS"
                 }
             }
         },
@@ -206,7 +206,7 @@
                     "sm": 12,
                     "md": 8,
                     "lg": 6,
-                    "label": "COAP Listen IP"
+                    "label": "COAP listen IP"
                 },
                 "blacklist": {
                     "type": "table",
