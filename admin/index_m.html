@@ -35,6 +35,16 @@
             onChange(false);
 
             values2table('blacklist', settings.blacklist || [{id: 'ABCDEF'}], onChange);
+            
+            getIPs(function (ips) {
+                for (var i = 0; i < ips.length; i++) {
+                    $('#bind').append('<option value="' + ips[i].address + '">' + ips[i].name + '</option>');
+                    $('#coapbind').append('<option value="' + ips[i].address + '">' + ips[i].name + '</option>');
+                }
+
+                $('#bind.value').val(settings.bind).select();
+                $('#coapbind.value').val(settings.coapbind).select();
+            });
 
             if (M) M.updateTextFields();
         }
