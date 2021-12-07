@@ -181,9 +181,9 @@
     "protocol": "coap",
     "autoupdate": false,
     "updateUnchangedObjects": false,
-    "keys": [
+    "blacklist": [
       {
-        "blacklist": "ABCDEF"
+        "id": "ABCDEF"
       }
     ],
     "sentry_enable": true

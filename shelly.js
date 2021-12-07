@@ -285,6 +285,10 @@ class Shelly extends utils.Adapter {
             native.mqttpassword = this.config.password;
             native.password = '';
         }
+        if (this.config.keys) {
+            native.blacklist = this.config.keys.map(b => { return { id: b.blacklist } });
+            native.keys = null;
+        }
         if (Object.keys(native).length) {
             this.log.info('Migrate some data from old Shelly Adapter version. Restarting Shelly Adapter now!');
             await this.extendForeignObjectAsync('system.adapter.' + this.namespace, { native: native });
