@@ -30,6 +30,8 @@ class Shelly extends utils.Adapter {
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('message', this.onMessage.bind(this));
         this.on('unload', this.onUnload.bind(this));
+
+        this.on('deviceStatusUpdate', this.onDeviceStatusUpdate.bind(this));
     }
 
     async onReady() {
@@ -152,11 +154,13 @@ class Shelly extends utils.Adapter {
         }
 
         try {
-            const idsOnline = await this.getAllDevices();
-            for (const i in idsOnline) {
-                const idOnline = idsOnline[i];
-                const idParent = idOnline.split('.').slice(0, -1).join('.');
-                const idHostname = idParent + '.hostname';
+            const deviceIds = await this.getAllDevices();
+            for (const d in deviceIds) {
+                const deviceId = deviceIds[d];
+
+                const idOnline = deviceId + '.online';
+                const idHostname = deviceId + '.hostname';
+
                 const stateHostaname = await this.getStateAsync(idHostname);
                 const valHostname = stateHostaname ? stateHostaname.val : undefined;
 
@@ -164,11 +168,7 @@ class Shelly extends utils.Adapter {
                     this.log.debug(`onlineCheck of ${idHostname} on ${valHostname}:${valPort}`);
 
                     tcpPing.probe(valHostname, valPort, async (error, isAlive) => {
-                        if (isAlive) {
-                            this.onlineDevices[idParent] = true;
-                        } else if (Object.prototype.hasOwnProperty.call(this.onlineDevices, idParent)) {
-                            delete this.onlineDevices[idParent];
-                        }
+                        this.emit('deviceStatusUpdate', deviceId, isAlive);
 
                         const oldState = await this.getStateAsync(idOnline);
                         const oldValue = oldState && oldState.val ? (oldState.val === 'true' || oldState.val === true) : false;
@@ -187,39 +187,46 @@ class Shelly extends utils.Adapter {
             this.log.error(e.toString());
         }
 
-        // Check online devices
-        if (Object.keys(this.onlineDevices).length > 0) {
-            this.setStateAsync('info.connection', true, true);
-        } else {
-            this.setStateAsync('info.connection', false, true);
-        }
-
         this.pollTimeout = this.setTimeout(() => {
             this.pollTimeout = null;
             this.onlineCheck();
         }, this.config.polltime * 1000);
     }
 
-    async getAllDevices() {
-        const ids = [];
-        try {
-            const objs = await this.getAdapterObjectsAsync();
-            for (const id in objs) {
-                const obj = objs[id];
-                if (id && id.endsWith('.online') && obj && obj.type === 'state') {
-                    ids.push(id);
-                }
-            }
-        } catch (error) {
-            //
+    async onDeviceStatusUpdate(deviceId, status) {
+        this.log.debug(`onDeviceStatusUpdate: ${deviceId}: ${status}`);
+
+        const oldOnlineDevices = Object.keys(this.onlineDevices).length;
+
+        if (status) {
+            this.onlineDevices[deviceId] = true;
+        } else if (Object.prototype.hasOwnProperty.call(this.onlineDevices, deviceId)) {
+            delete this.onlineDevices[deviceId];
         }
-        return ids;
+
+        const newOnlineDevices = Object.keys(this.onlineDevices).length;
+
+        // Check online devices
+        if (oldOnlineDevices !== newOnlineDevices) {
+            if (newOnlineDevices > 0) {
+                this.setStateAsync('info.connection', true, true);
+            } else {
+                this.setStateAsync('info.connection', false, true);
+            }
+        }
+    }
+
+    async getAllDevices() {
+        const devices = await this.getDevicesAsync();
+        return devices.map(device => device._id);
     }
 
     async setOnlineFalse() {
-        const idsOnline = await this.getAllDevices();
-        for (const i in idsOnline) {
-            const idOnline = idsOnline[i];
+        const deviceIds = await this.getAllDevices();
+        for (const d in deviceIds) {
+            const deviceId = deviceIds[d];
+            const idOnline = deviceId + '.online';
+
             await this.setForeignStateAsync(idOnline, { val: false, ack: true });
         }
     }
