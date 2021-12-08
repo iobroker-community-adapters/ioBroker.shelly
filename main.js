@@ -46,10 +46,20 @@ class Shelly extends utils.Adapter {
             */
 
             // Check sentry configuration
-            if (await this.setSentryLogging(this.config.sentry_enable)) return;
+            if (await this.setSentryLogging(this.config.sentry_enable)) {
+                this.log.info('Restarting Adapter because of changeing Sentry settings');
+                this.restart();
+
+                return;
+            }
 
             // Upgrade older configs
-            await this.migrateConfig();
+            if (await this.migrateConfig()) {
+                this.log.info('Restarting Adapter because of config migration');
+                this.restart();
+
+                return;
+            }
 
             this.subscribeStates('*');
             objectHelper.init(this);
@@ -255,9 +265,6 @@ class Shelly extends utils.Adapter {
             if (stateSentry && stateSentry.val !== value) {
                 await this.setForeignStateAsync(idSentry, value);
 
-                this.log.info('Restarting Adapter because of changeing Sentry settings');
-                this.restart();
-
                 return true;
             }
         } catch (error) {
@@ -289,10 +296,15 @@ class Shelly extends utils.Adapter {
             native.blacklist = this.config.keys.map(b => { return { id: b.blacklist } });
             native.keys = null;
         }
+
         if (Object.keys(native).length) {
             this.log.info('Migrate some data from old Shelly Adapter version. Restarting Shelly Adapter now!');
             await this.extendForeignObjectAsync('system.adapter.' + this.namespace, { native: native });
+            
+            return true;
         }
+
+        return false;
     }
 }
 
