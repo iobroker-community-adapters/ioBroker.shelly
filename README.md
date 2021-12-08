@@ -9,10 +9,9 @@
 [![Translation status](https://weblate.iobroker.net/widgets/adapters/-/homekit-controller/svg-badge.svg)](https://weblate.iobroker.net/engage/adapters/?utm_source=widget)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.shelly.svg)](https://www.npmjs.com/package/iobroker.shelly)
 
-Requires node.js 8.0 or higher and Admin v3!
-
 The adapter communicates with Shelly devices by REST api and the CoAP or MQTT protocol.    
-By the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
+
+Uses the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
 
 If you use the CoAP protocol Shelly devices with Firmware 1.8.0 or above works only with the Shelly Adapter 4.0.0 or above. If you use devices with Firmware below 1.8.0 except of the Shelly 4Pro you have have to use Shelly Adapter 3.3.6 or below. The Shelly Adapter 4.0.0 or above would not work in this case! 
 
@@ -21,10 +20,12 @@ Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fo
 **This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
 
 ## Installation
+
 You find a detailed installation documentation here:
 [Installation Documentation](./docs/EN/INSTALL.md)
 
-## Supported devices
+## Supported devices (Gen 1)
+
 |Shelly Device|CoAP|MQTT|
 |-------------|--------------|----|
 |Shelly1 (SHSW-1)|supported since v3.3.0|supported since v3.3.0|
@@ -60,7 +61,30 @@ You find a detailed installation documentation here:
 |Shelly Button (SHBTN-2)|supported since v4.0.5|supported since v4.0.5|
 |Shelly Motion (SHMOS-01)|supported since v4.0.6|supported since v4.0.6|
 
+## Supported devices (Gen 2)
+
+|Shelly Device|CoAP|MQTT|
+|-------------|--------------|----|
+|Shelly Plus 1|---|supported since v5.0.0|
+|Shelly Plus 1 PM|---|supported since v5.0.0|
+|Shelly Pro 4 PM|---|supported since v5.0.0|
+
 ## Changelog
+
+<!--
+  Placeholder for the next version (at the beginning of the line):
+  ### **WORK IN PROGRESS**
+-->
+
+### **WORK IN PROGRESS**
+Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ and Admin 5.1.25+
+* (klein0r) Shelly Plus Support (1, 1 PM)
+* (klein0r) Shelly Pro Support (4 PM)
+* (klein0r) Updated logo
+* (klein0r) Use class definition instead
+* (klein0r) Use internal encryption methods
+* (klein0r) Admin 5 config
+
 ### 4.1.2 (2021-11-14)
 * (sbormann) Fix the online checks to stay online
 
