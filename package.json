@@ -82,7 +82,7 @@
     "sinon-chai": "^3.7.0",
     "typescript": "~4.4.4"
   },
-  "main": "shelly.js",
+  "main": "main.js",
   "files": [
     "admin{,/!(src)/**}/!(tsconfig|tsconfig.*).json",
     "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
