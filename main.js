@@ -45,11 +45,8 @@ class Shelly extends utils.Adapter {
             }
             */
 
-            // Upgrade older configs
+            // Upgrade older config
             if (await this.migrateConfig()) {
-                this.log.info('Restarting Adapter because of config migration');
-                this.restart();
-
                 return;
             }
 
