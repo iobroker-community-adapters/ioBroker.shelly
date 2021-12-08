@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "4.1.2",
+  "version": "5.0.0",
   "description": "Shelly",
   "author": {
     "name": "Thorsten Stueben",
