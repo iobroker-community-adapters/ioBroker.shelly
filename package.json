@@ -87,7 +87,8 @@
     "test:unit": "mocha test/unit --exit",
     "test:integration": "mocha test/integration --exit",
     "lint": "eslint --ext .js,.jsx",
-    "release": "release-script patch --yes",
+    "release": "release-script",
+    "release-patch": "release-script patch --yes",
     "release-minor": "release-script minor --yes",
     "release-major": "release-script major --yes"
   },
