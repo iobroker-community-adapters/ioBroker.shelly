@@ -82,7 +82,7 @@ Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ an
 * (klein0r) Shelly Pro Support (4 PM)
 * (klein0r) Updated logo
 * (klein0r) Use class definition instead
-* (klein0r) Use internal encryption methods **(BREAKING CHANGE)**
+* (klein0r) Use internal encryption methods
 * (klein0r) Admin 5 config
 
 ### 4.1.2 (2021-11-14)
