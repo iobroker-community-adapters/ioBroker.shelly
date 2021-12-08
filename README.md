@@ -75,7 +75,7 @@ You find a detailed installation documentation here:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 4.1.3 (2021-12-08)
+### **WORK IN PROGRESS**
 Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ and Admin 5.1.25+
 * (klein0r) Shelly Plus Support (1, 1 PM)
 * (klein0r) Shelly Pro Support (4 PM)
