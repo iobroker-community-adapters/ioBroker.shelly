@@ -45,14 +45,6 @@ class Shelly extends utils.Adapter {
             }
             */
 
-            // Check sentry configuration
-            if (await this.setSentryLogging(this.config.sentry_enable)) {
-                this.log.info('Restarting Adapter because of changeing Sentry settings');
-                this.restart();
-
-                return;
-            }
-
             // Upgrade older configs
             if (await this.migrateConfig()) {
                 this.log.info('Restarting Adapter because of config migration');
@@ -251,28 +243,6 @@ class Shelly extends utils.Adapter {
         }
     }
     */
-
-    /**
-    * Change the external Sentry Logging. After changing the Logging
-    * the adapter restarts once
-    * @param {*} id : this.config.sentry_enable for example
-    */
-    async setSentryLogging(value) {
-        try {
-            value = value === true;
-            const idSentry = 'system.adapter.' + this.namespace + '.plugins.sentry.enabled';
-            const stateSentry = await this.getForeignStateAsync(idSentry);
-            if (stateSentry && stateSentry.val !== value) {
-                await this.setForeignStateAsync(idSentry, value);
-
-                return true;
-            }
-        } catch (error) {
-            return false;
-        }
-
-        return false;
-    }
 
     async migrateConfig() {
         const native = {};

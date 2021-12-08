@@ -88,14 +88,6 @@
                     "md": 12,
                     "lg": 12,
                     "label": "Update objects even if there is no value change"
-                },
-                "sentry_enable": {
-                    "newLine": true,
-                    "type": "checkbox",
-                    "sm": 12,
-                    "md": 12,
-                    "lg": 12,
-                    "label": "Allow to transfer errors if the adapter crash. Private data like usernames, passwords, tokens, ... will be NOT be transferd."
                 }
             }
         },
