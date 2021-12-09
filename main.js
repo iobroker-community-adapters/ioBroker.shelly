@@ -5,8 +5,8 @@
 
 const utils = require('@iobroker/adapter-core');
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Get common adapter utils
-const mqttServer = require(__dirname + '/lib/mqtt');
-const coapServer = require(__dirname + '/lib/coap');
+const mqttServer = require(__dirname + '/lib/protocol/mqtt');
+const coapServer = require(__dirname + '/lib/protocol/coap');
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
 const EventEmitter = require('events').EventEmitter;
@@ -37,8 +37,6 @@ class Shelly extends utils.Adapter {
 
     async onReady() {
         try {
-            this.log.info('Starting Adapter ' + this.namespace + ' in version ' + this.version);
-
             // Upgrade older config
             if (await this.migrateConfig()) {
                 return;
