@@ -9,8 +9,7 @@ const mqttServer = require(__dirname + '/lib/mqtt');
 const coapServer = require(__dirname + '/lib/coap');
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
-const events = require('events');
-const eventEmitter = new events.EventEmitter();
+const EventEmitter = require('events').EventEmitter;
 
 class Shelly extends utils.Adapter {
 
@@ -26,6 +25,8 @@ class Shelly extends utils.Adapter {
 
         this.onlineDevices = {};
 
+        this.eventEmitter = new EventEmitter();
+
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('message', this.onMessage.bind(this));
@@ -37,15 +38,6 @@ class Shelly extends utils.Adapter {
     async onReady() {
         try {
             this.log.info('Starting Adapter ' + this.namespace + ' in version ' + this.version);
-
-            /*
-            this.config.polltime = Number(this.config.polltime) || 0;
-            if (this.config.polltime > 0) {
-                this.log.info('Polltime of the shelly devices: ' + this.config.polltime + ' sec.');
-            } else {
-                this.log.info('Polltime of the shelly devices: ' + this.config.polltime + ' sec.');
-            }
-            */
 
             // Upgrade older config
             if (await this.migrateConfig()) {
@@ -68,7 +60,7 @@ class Shelly extends utils.Adapter {
                     if (!this.config.mqttusername || this.config.mqttusername.length === 0) { this.log.error('MQTT Username is missing!'); }
                     if (!this.config.mqttpassword || this.config.mqttpassword.length === 0) { this.log.error('MQTT Password is missing!'); }
 
-                    this.serverMqtt = new mqttServer.MQTTServer(this, objectHelper, eventEmitter);
+                    this.serverMqtt = new mqttServer.MQTTServer(this, objectHelper, this.eventEmitter);
                     this.serverMqtt.listen();
                 }
             });
@@ -76,7 +68,7 @@ class Shelly extends utils.Adapter {
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'coap') {
                     this.log.info('Starting in CoAP mode.');
-                    this.serverCoap = new coapServer.CoAPServer(this, objectHelper, eventEmitter);
+                    this.serverCoap = new coapServer.CoAPServer(this, objectHelper, this.eventEmitter);
                     this.serverCoap.listen();
                 }
             });
