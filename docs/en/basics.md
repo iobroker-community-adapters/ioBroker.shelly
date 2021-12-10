@@ -25,18 +25,23 @@ You can use the adapter in CoAP or MQTT mode. The default mode is CoAP and you d
 
 ### Restricted login
 
-If you protect your Shelly devices with a restricted login, you have to enter the configured username and password in the ioBroker configuration on the *general settings* tab.
+To protect your Shelly devices with a restricted login, choose a username and a password in the ioBroker configuration on the *general settings* tab.
 
 ![iobroker_general_restrict_login](../iobroker_general_restrict_login.png)
 
-- Ensure to configure the same username and password on all your Shelly devices
-- The username, password are not the cloud or MQTT login credentials!
+Activate the login restriction on all your Shelly devices:
+
+1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
+2. Go to ```Internet & Security settings -> Restricted Login```
+3. Activate the checkbox and enter the previously configured username and password
+4. Save the configuration - the Shelly will reboot automatically
+5. Ensure to configure the same username and password on all your Shelly devices
 
 ![shelly_restrict_login](../shelly_restrict_login.png)
 
 ### State changes
 
-By default, only if a value of a state changes, you see the change. In this case *Update objects even if there is no value change* is deactivated.
+By default, only if a value of a state changes, you will see the change. In this case *Update objects even if there is no value change* is deactivated.
 
 Example:
 
@@ -58,28 +63,31 @@ By default, the CoAP protocol is used.
 
 If you use the Shelly with firmware less equal 1.9.4 you don't have to configure anything. Your Shelly devices will be found by it self by ioBroker.
 
-**If you are using the firmware versions above 1.9.4 you have to enter a CoIoT server for CoAP on your Shelly device.** Enter the IP address of your ioBroker server followed by the port 5683 as CoIoT server. For example, if ioBroker runs on address 192.168.1.2, you have to enter 192.168.1.2:5683 and activate CoIoT.
+**If you are using the firmware versions above 1.9.4 you have to enter a CoIoT server for CoAP on your Shelly device.** Enter the IP address of your ioBroker server followed by the port 5683 as CoIoT server. For example, if ioBroker runs on address ```192.168.1.2```, you have to enter ```192.168.1.2:5683``` and activate CoIoT.
 
 **Important: Because CoAP use multicast UDP packages, the Shelly devices has to be in the same subnet as your ioBroker server.**
 
-If you use ioBroker in a docker container, the container has to run in host or macvlan modus. If ioBroker runs in the docker container in bridge mode your Shelly devices will not be found, 
+If you use ioBroker in a docker container, the container has to run in network mode ```host``` or ```macvlan```. If the docker container is running in ```bridge``` mode, your Shelly devices will not be found.
 
 ![iobroker_restrict_login](../iobroker_general_coap.png)
 
-CoAP will show all devices in your network. If you want to exclude some Shelly devices, you can put them on a blacklist. Just enter the serial number to the blacklist table:
+CoAP will add all devices in your network. If you want to exclude some Shelly devices, you can put them on a blacklist. Just enter the serial numbers to the blacklist table:
 
 ![iobroker_coap](../iobroker_coap.png)
 
 #### Trouble Shooting
 
-In some cases, Shelly devices will not be found by the Shelly adapter in CoAP mode. Please try following and disable the ioBroker Shelly Adapter instance. **Do not uninstall the Shelly Adapter!** But it is important to disable the Shelly instance. Now open a terminal window and enter following statements:
+In some cases, Shelly devices will not be found by the Shelly adapter in CoAP mode. Please try the following:
+
+1. Disable the ioBroker Shelly adapter instance. **Do not uninstall the Shelly Adapter!** But it is important to disable the Shelly instance.
+2. Open a terminal window and run following commands on the ioBroker server:
 
 ```
 cd /opt/iobroker/node_modules/iobroker.shelly/
 node coaptest.js 
 ```
 
-or you can use tcpdump for sniffing the CoAP Messages. 
+You can use ```tcpdump``` for sniffing the CoAP Messages:
 
 ```
 # Install tcpdump if it is not installed
@@ -99,7 +107,7 @@ sudo tcpdump  -i eth1 port 5683 -A
 sudo tcpdump port 5683 -A
 ```
 
-Now you shall see all CoAP messages from the Shelly. Look for you Shelly device in the output. If you can not find it, you have a network problem with UDP or multicast messages.  
+Now you shall see all CoAP messages from the Shelly. If you don't see any messages, you have a network problem with UDP or multicast messages.  
 
 CoAP Messages look like that:
 
@@ -112,7 +120,7 @@ UDP Server listening on 0.0.0.0:5683
 
 ### MQTT
 
-1. Open the Shelly Adapter configuration in ioBroker.
+1. Open the Shelly Adapter configuration in ioBroker
 2. Choose ```MQTT and HTTP``` as *protocol* in the *general settings*
 3. Open the **mqtt settings** tab
 4. Choose a secure username and password (you have to configure these information on your Shelly devices)
@@ -125,10 +133,10 @@ Activate MQTT on all your Shelly devices:
 
 1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
 2. Go to ```Internet & Security settings -> Advanced - Developer settings```
-3. Activate MQTT and enter the previously configured username, password and the ip address of your ioBroker installation - followed by port 1882 (e.g. ```192.168.20.242:1882```).
+3. Activate MQTT and enter the previously configured username, password and the ip address of your ioBroker installation - followed by port 1882 (e.g. ```192.168.20.242:1882```)
 4. Save the configuration - the Shelly will reboot automatically
 
-- Do not change the ```custom MQTT prefix``` (the Adapter will not work if you change the prefix).
+- For Gen1 devices: Do not change the ```custom MQTT prefix``` (the Adapter will not work if you change the prefix)
 
 ![shelly_mqtt1](../shelly_mqtt1.png)
 
