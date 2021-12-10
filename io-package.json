@@ -118,6 +118,10 @@
       "Thorsten Stueben <thorsten@stueben.de>",
       "Apollon77 <iobroker@fischer-ka.de>"
     ],
+    "docs": {
+      "en": "docs/en/basics.md",
+      "de": "docs/de/basics.md"
+    },
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "shelly.png",

@@ -3,11 +3,12 @@
 
 ## Installation
 
-1. Requires node.js 8.0 or higher and Admin v3!
+1. Requires node.js 12.0 (or later) and Admin v5.2.25
 2. Install the Shelly adapter
 
 ### General
-You can use the adapter in CoAP or MQTT mode. The default mode is CoAP and you do not have to do anything. 
+
+You can use the adapter in CoAP or MQTT mode. The default mode is CoAP and you do not have to do anything.
 
 ![iobroker_general](../iobroker_general.png) 
 
