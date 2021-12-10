@@ -21,9 +21,9 @@ Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fo
 
 ## Documentation
 
-[🇺🇸 Documentation](./docs/en/configuration.md)
+[🇺🇸 Documentation](./docs/en/basics.md)
 
-[🇩🇪 Dokumentation](./docs/de/configuration.md)
+[🇩🇪 Dokumentation](./docs/de/basics.md)
 
 ## Supported devices (Gen 1)
 

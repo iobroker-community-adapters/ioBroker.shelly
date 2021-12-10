@@ -1,3 +1,5 @@
+![Logo](../../admin/shelly.png)
+
 # New (not supported) Shelly devices - What to do
 
 I you have a Shelly device which is not supported by the Shelly adapter, please inform the developer and create a new [Issue](https://github.com/iobroker-community-adapters/ioBroker.shelly/issues) on GitHub with following information:
