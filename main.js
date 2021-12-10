@@ -9,8 +9,7 @@ const mqttServer = require(__dirname + '/lib/mqtt');
 const coapServer = require(__dirname + '/lib/coap');
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
-const events = require('events');
-const eventEmitter = new events.EventEmitter();
+const EventEmitter = require('events').EventEmitter;
 
 class Shelly extends utils.Adapter {
 
@@ -26,24 +25,19 @@ class Shelly extends utils.Adapter {
 
         this.onlineDevices = {};
 
+        this.eventEmitter = new EventEmitter();
+
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('message', this.onMessage.bind(this));
         this.on('unload', this.onUnload.bind(this));
+
+        this.on('deviceStatusUpdate', this.onDeviceStatusUpdate.bind(this));
     }
 
     async onReady() {
         try {
             this.log.info('Starting Adapter ' + this.namespace + ' in version ' + this.version);
-
-            /*
-            this.config.polltime = Number(this.config.polltime) || 0;
-            if (this.config.polltime > 0) {
-                this.log.info('Polltime of the shelly devices: ' + this.config.polltime + ' sec.');
-            } else {
-                this.log.info('Polltime of the shelly devices: ' + this.config.polltime + ' sec.');
-            }
-            */
 
             // Upgrade older config
             if (await this.migrateConfig()) {
@@ -66,7 +60,7 @@ class Shelly extends utils.Adapter {
                     if (!this.config.mqttusername || this.config.mqttusername.length === 0) { this.log.error('MQTT Username is missing!'); }
                     if (!this.config.mqttpassword || this.config.mqttpassword.length === 0) { this.log.error('MQTT Password is missing!'); }
 
-                    this.serverMqtt = new mqttServer.MQTTServer(this, objectHelper, eventEmitter);
+                    this.serverMqtt = new mqttServer.MQTTServer(this, objectHelper, this.eventEmitter);
                     this.serverMqtt.listen();
                 }
             });
@@ -74,7 +68,7 @@ class Shelly extends utils.Adapter {
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'coap') {
                     this.log.info('Starting in CoAP mode.');
-                    this.serverCoap = new coapServer.CoAPServer(this, objectHelper, eventEmitter);
+                    this.serverCoap = new coapServer.CoAPServer(this, objectHelper, this.eventEmitter);
                     this.serverCoap.listen();
                 }
             });
@@ -152,11 +146,13 @@ class Shelly extends utils.Adapter {
         }
 
         try {
-            const idsOnline = await this.getAllDevices();
-            for (const i in idsOnline) {
-                const idOnline = idsOnline[i];
-                const idParent = idOnline.split('.').slice(0, -1).join('.');
-                const idHostname = idParent + '.hostname';
+            const deviceIds = await this.getAllDevices();
+            for (const d in deviceIds) {
+                const deviceId = deviceIds[d];
+
+                const idOnline = deviceId + '.online';
+                const idHostname = deviceId + '.hostname';
+
                 const stateHostaname = await this.getStateAsync(idHostname);
                 const valHostname = stateHostaname ? stateHostaname.val : undefined;
 
@@ -164,11 +160,7 @@ class Shelly extends utils.Adapter {
                     this.log.debug(`onlineCheck of ${idHostname} on ${valHostname}:${valPort}`);
 
                     tcpPing.probe(valHostname, valPort, async (error, isAlive) => {
-                        if (isAlive) {
-                            this.onlineDevices[idParent] = true;
-                        } else if (Object.prototype.hasOwnProperty.call(this.onlineDevices, idParent)) {
-                            delete this.onlineDevices[idParent];
-                        }
+                        this.emit('deviceStatusUpdate', deviceId, isAlive);
 
                         const oldState = await this.getStateAsync(idOnline);
                         const oldValue = oldState && oldState.val ? (oldState.val === 'true' || oldState.val === true) : false;
@@ -187,39 +179,46 @@ class Shelly extends utils.Adapter {
             this.log.error(e.toString());
         }
 
-        // Check online devices
-        if (Object.keys(this.onlineDevices).length > 0) {
-            this.setStateAsync('info.connection', true, true);
-        } else {
-            this.setStateAsync('info.connection', false, true);
-        }
-
         this.pollTimeout = this.setTimeout(() => {
             this.pollTimeout = null;
             this.onlineCheck();
         }, this.config.polltime * 1000);
     }
 
-    async getAllDevices() {
-        const ids = [];
-        try {
-            const objs = await this.getAdapterObjectsAsync();
-            for (const id in objs) {
-                const obj = objs[id];
-                if (id && id.endsWith('.online') && obj && obj.type === 'state') {
-                    ids.push(id);
-                }
-            }
-        } catch (error) {
-            //
+    async onDeviceStatusUpdate(deviceId, status) {
+        this.log.debug(`onDeviceStatusUpdate: ${deviceId}: ${status}`);
+
+        const oldOnlineDevices = Object.keys(this.onlineDevices).length;
+
+        if (status) {
+            this.onlineDevices[deviceId] = true;
+        } else if (Object.prototype.hasOwnProperty.call(this.onlineDevices, deviceId)) {
+            delete this.onlineDevices[deviceId];
         }
-        return ids;
+
+        const newOnlineDevices = Object.keys(this.onlineDevices).length;
+
+        // Check online devices
+        if (oldOnlineDevices !== newOnlineDevices) {
+            if (newOnlineDevices > 0) {
+                this.setStateAsync('info.connection', true, true);
+            } else {
+                this.setStateAsync('info.connection', false, true);
+            }
+        }
+    }
+
+    async getAllDevices() {
+        const devices = await this.getDevicesAsync();
+        return devices.map(device => device._id);
     }
 
     async setOnlineFalse() {
-        const idsOnline = await this.getAllDevices();
-        for (const i in idsOnline) {
-            const idOnline = idsOnline[i];
+        const deviceIds = await this.getAllDevices();
+        for (const d in deviceIds) {
+            const deviceId = deviceIds[d];
+            const idOnline = deviceId + '.online';
+
             await this.setForeignStateAsync(idOnline, { val: false, ack: true });
         }
     }

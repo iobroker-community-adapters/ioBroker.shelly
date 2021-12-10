@@ -1,0 +1,90 @@
+name: Bug report
+title: "Bug report"
+description: "Create a report to help improve this ioBroker adapter"
+body:
+  - type: markdown
+    attributes:
+      value: >
+        **Thank you for wanting to report a bug in this adapter!**
+
+        If this is the first time you are doing this, please take a few moments to read
+        through the [README](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md).
+
+        You are about to report a bug in **Shelly Adapter**. Do not proceed if your issues
+        occurs with ioBroker, any third party adapters, unofficial or outdated
+        adapter versions.
+
+        Do also not seek support here ("I need help with ...", "I have a
+        question ...", "Can someone walk me through ..."), that belongs into the
+        [ioBroker forum at forum.iobroker.net](https://forum.iobroker.net/).
+
+        And finally, make sure any bug you want to report is still present with the **current**
+        adapter (beta) version.
+
+        Thank you for your collaboration!
+  - type: input
+    attributes:
+      label: Shelly device
+      description: Please provide the exact device which has a problem
+    validations:
+      required: false
+  - type: input
+    attributes:
+      label: Protocol (CoAP / MQTT)
+      description: Which protocol was configured when this issue occurs
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: The problem
+      description: >-
+        Describe the issue you are experiencing here. Tell us what you were trying to do
+        step by step, and what happened that you did not expect.
+
+        Provide a clear and concise description of what the problem is and include as many
+        details as possible.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## Environment
+  - type: input
+    attributes:
+      label: Version of nodejs
+      description: Can be found in the host section of ioBroker admin
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Version of ioBroker js-controller
+      description: Can be found in the host section of ioBroker admin
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Version of Adapter
+      description: Can be found in the adapters tab of ioBroker admin
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Operating system running ioBroker
+      description: >-
+        Linux, Windows, MacOS, something else? With version please?
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## Logs and other files needed for analysis
+  - type: checkboxes
+    attributes:
+      label: Checklist of files to include below
+      options:
+        - label: iobroker.current.log (Please share the logs in debug mode)
+          required: true
+        - label: Contents of the JavaScript browser console (always include in cases of issues with the user interface)
+  - type: textarea
+    attributes:
+      label: Additional information & file uploads
