@@ -1,4 +1,5 @@
 ![Logo](../../admin/shelly.png)
+
 # ioBroker.shelly
 
 ## Add a new Shelly device
