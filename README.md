@@ -79,6 +79,7 @@ Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fo
 
 ### **WORK IN PROGRESS**
 * (klein0r) Code refactoring
+* (klein0r) Updated documentation
 
 ### 5.0.0 (2021-12-08)
 Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ and Admin 5.1.25+
