@@ -9,7 +9,7 @@
 [![Translation status](https://weblate.iobroker.net/widgets/adapters/-/homekit-controller/svg-badge.svg)](https://weblate.iobroker.net/engage/adapters/?utm_source=widget)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.shelly.svg)](https://www.npmjs.com/package/iobroker.shelly)
 
-The adapter communicates with Shelly devices by REST api and the CoAP or MQTT protocol.    
+The adapter communicates with Shelly devices by REST API and the CoAP or MQTT protocol.    
 
 Uses the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
 
@@ -19,10 +19,11 @@ Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fo
 
 **This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
 
-## Installation
+## Documentation
 
-You find a detailed installation documentation here:
-[Installation Documentation](./docs/EN/INSTALL.md)
+[🇺🇸 Documentation](./docs/en/basics.md)
+
+[🇩🇪 Dokumentation](./docs/de/basics.md)
 
 ## Supported devices (Gen 1)
 
@@ -78,6 +79,7 @@ You find a detailed installation documentation here:
 
 ### **WORK IN PROGRESS**
 * (klein0r) Code refactoring
+* (klein0r) Updated documentation
 
 ### 5.0.0 (2021-12-08)
 Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ and Admin 5.1.25+
