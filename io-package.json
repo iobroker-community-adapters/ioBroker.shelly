@@ -116,7 +116,8 @@
     "license": "MIT",
     "authors": [
       "Thorsten Stueben <thorsten@stueben.de>",
-      "Apollon77 <iobroker@fischer-ka.de>"
+      "Apollon77 <iobroker@fischer-ka.de>",
+      "Matthias Kleine <info@haus-automatisierung.com>"
     ],
     "docs": {
       "en": "docs/en/basics.md",

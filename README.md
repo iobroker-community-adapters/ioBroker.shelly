@@ -372,9 +372,12 @@ Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ an
 * Shows RSSI Status for Shelly 1 & 2. You need Firmware 1.4.4
 
 ## License
+
 The MIT License (MIT)
 
-Copyright (c) 2018-2021 Thorsten Stueben <thorsten@stueben.de>, Apollon77 <iobroker@fischer-ka.de>
+Copyright (c) 2018-2021 Thorsten Stueben <thorsten@stueben.de>,
+                        Apollon77 <iobroker@fischer-ka.de> and
+                        Matthias Kleine <info@haus-automatisierung.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
