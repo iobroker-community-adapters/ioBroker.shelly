@@ -206,6 +206,10 @@ class Shelly extends utils.Adapter {
         }
     }
 
+    isOnline(deviceId) {
+        return Object.prototype.hasOwnProperty.call(this.onlineDevices, deviceId);
+    }
+
     async getAllDevices() {
         const devices = await this.getDevicesAsync();
         return devices.map(device => device._id);
