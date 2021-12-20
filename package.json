@@ -49,7 +49,7 @@
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
-    "@alcalzone/release-script": "^3.4.1",
+    "@alcalzone/release-script": "^3.4.2",
     "@alcalzone/release-script-plugin-iobroker": "^3.4.1",
     "@alcalzone/release-script-plugin-license": "^3.4.1",
     "@iobroker/testing": "^2.5.2",
