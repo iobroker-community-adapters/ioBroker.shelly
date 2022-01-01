@@ -1,254 +1,232 @@
 {
-    "common": {
-        "name": "shelly",
-        "version": "4.0.9-beta-1",
-        "news": {
-            "4.0.9-beta-1": {
-                "en": "Bugfixing",
-                "de": "Bugfixing",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "Bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "错误修正"
-            },
-            "4.0.8": {
-                "en": "Bugfixing",
-                "de": "Bugfixing",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "Bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "错误修正"
-            },
-            "4.0.7": {
-                "en": "Bugfixing",
-                "de": "Bugfixing",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "Bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "错误修正"
-            },
-            "4.0.6": {
-                "en": "Bugfixing",
-                "de": "Bugfixing",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "Bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "错误修正"
-            },
-            "4.0.5": {
-                "en": "Add Shelly 1L",
-                "de": "Fügen Sie Shelly 1L hinzu",
-                "ru": "Добавить Шелли 1L",
-                "pt": "Adicionar Shelly 1L",
-                "nl": "Voeg Shelly 1L",
-                "fr": "Ajouter Shelly 1L",
-                "it": "Aggiungi Shelly 1L",
-                "es": "Añadir Shelly 1L",
-                "pl": "Dodaj Shelly 1L",
-                "zh-cn": "添加Shelly 1L"
-            },
-            "4.0.4": {
-                "en": "update dependencies and shelly-iot lib",
-                "de": "Abhängigkeiten und shelly-iot lib aktualisieren",
-                "ru": "обновить зависимости и библиотеку shelly-iot",
-                "pt": "atualizar dependências e lib shelly-iot",
-                "nl": "update afhankelijkheden en shelly-iot lib",
-                "fr": "mettre à jour les dépendances et la lib shelly-iot",
-                "it": "aggiorna le dipendenze e la libreria shelly-iot",
-                "es": "actualizar dependencias y shelly-iot lib",
-                "pl": "update zależności i shelly-iot lib",
-                "zh-cn": "更新依赖项和shelly-iot lib"
-            },
-            "4.0.3": {
-                "en": "Bugfixing",
-                "de": "Bugfixing",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "Bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "错误修正"
-            },
-            "4.0.2": {
-                "en": "Bugfixing",
-                "de": "Bugfixing",
-                "ru": "Исправление ошибок",
-                "pt": "Corrigindo erro",
-                "nl": "Bugfixing",
-                "fr": "Correction de bugs",
-                "it": "bugfixing",
-                "es": "Corrección de errores",
-                "pl": "Naprawa błędów",
-                "zh-cn": "错误修正"
-            },
-            "4.0.1": {
-                "en": "(Stübi) Major Change!! If you use the CoAP protocol only Shelly devices with Firmware 1.8.x or above supported! All devices with Firmware below 1.8.x except Shelly 4Pro will not working with this release!\nOfficial release to npm/latest",
-                "de": "(Stübi) Große Veränderung !! Wenn Sie das CoAP-Protokoll verwenden, werden nur Shelly-Geräte mit Firmware 1.8.x oder höher unterstützt! Alle Geräte mit Firmware unter 1.8.x außer Shelly 4Pro funktionieren mit dieser Version nicht!\nOffizielle Veröffentlichung bis npm / spätestens",
-                "ru": "(Stübi) Главное изменение !! Если вы используете протокол CoAP, поддерживаются только устройства Shelly с прошивкой 1.8.x или выше! Все устройства с прошивкой ниже 1.8.x, кроме Shelly 4Pro, не будут работать с этой версией!\nОфициальный релиз для npm / latest",
-                "pt": "(Stübi) Mudança importante !! Se você usar o protocolo CoAP, apenas dispositivos Shelly com Firmware 1.8.x ou superior são suportados! Todos os dispositivos com Firmware abaixo de 1.8.x, exceto Shelly 4Pro, não funcionarão com esta versão!\nLançamento oficial para npm / mais recente",
-                "nl": "(Stübi) Grote verandering !! Als u het CoAP-protocol gebruikt, worden alleen Shelly-apparaten met Firmware 1.8.x of hoger ondersteund! Alle apparaten met firmware onder 1.8.x behalve Shelly 4Pro werken niet met deze release!\nOfficiële release naar npm / latest",
-                "fr": "(Stübi) Changement majeur !! Si vous utilisez le protocole CoAP, seuls les appareils Shelly avec le micrologiciel 1.8.x ou supérieur sont pris en charge! Tous les appareils dont le micrologiciel est inférieur à 1.8.x à l'exception de Shelly 4Pro ne fonctionneront pas avec cette version!\nSortie officielle à npm / dernière",
-                "it": "(Stübi) Grande cambiamento !! Se utilizzi il protocollo CoAP sono supportati solo dispositivi Shelly con Firmware 1.8.xo superiore! Tutti i dispositivi con firmware inferiore a 1.8.x eccetto Shelly 4Pro non funzioneranno con questa versione!\nRilascio ufficiale a npm / più recente",
-                "es": "(Stübi) ¡¡Gran cambio !! Si utiliza el protocolo CoAP, solo se admiten dispositivos Shelly con firmware 1.8.xo superior. ¡Todos los dispositivos con firmware inferior a 1.8.x excepto Shelly 4Pro no funcionarán con esta versión!\nLanzamiento oficial a npm / más reciente",
-                "pl": "(Stübi) Duża zmiana !! Jeśli używasz protokołu CoAP, tylko urządzenia Shelly z obsługiwanym oprogramowaniem układowym 1.8.x lub nowszym! Wszystkie urządzenia z oprogramowaniem układowym poniżej 1.8.x, z wyjątkiem Shelly 4Pro, nie będą działać z tą wersją!\nOficjalne wydanie do npm / latest",
-                "zh-cn": "（Stübi）重大变化！！如果您使用CoAP协议，则仅支持固件1.8.x或更高版本的Shelly设备！除Shelly 4Pro之外，所有固件低于1.8.x的设备均不适用于此版本！\n正式发布到npm / latest"
-            },
-            "4.0.0": {
-                "en": "Major CoAP change",
-                "de": "Wichtige CoAP-Änderung",
-                "ru": "Существенное изменение CoAP",
-                "pt": "Mudança CoAP principal",
-                "nl": "Grote CoAP-wijziging",
-                "fr": "Changement majeur du CoAP",
-                "it": "Importante cambiamento CoAP",
-                "es": "Cambio importante de CoAP",
-                "pl": "Duża zmiana w CoAP",
-                "zh-cn": "CoAP的重大更改"
-            }
-        },
-        "title": "Shelly",
-        "titleLang": {
-            "en": "Shelly",
-            "de": "Shelly",
-            "ru": "изобилующий раковинами",
-            "pt": "Shelly",
-            "nl": "schaalachtig",
-            "fr": "Shelly",
-            "it": "Shelly",
-            "es": "Shelly",
-            "pl": "Shelly",
-            "zh-cn": "谢莉"
-        },
-        "desc": {
-            "en": "Shelly Adapter",
-            "de": "Shelly Adapter",
-            "ru": "Шестигранный адаптер",
-            "pt": "Adaptador Shelly",
-            "nl": "Shelly-adapter",
-            "fr": "Adaptateur Shelly",
-            "it": "Adattatore Shelly",
-            "es": "Adaptador Shelly",
-            "pl": "Adapter Shelly",
-            "zh-cn": "雪莉适配器"
-        },
-        "license": "MIT",
-        "authors": [
-            "Thorsten Stueben <thorsten@stueben.de>",
-            "Apollon77 <iobroker@fischer-ka.de>"
-        ],
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "icon": "shelly.png",
-        "materialize": true,
-        "enabled": true,
-        "compact": true,
-        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
-        "keywords": [
-            "shelly",
-            "switch",
-            "smarthome",
-            "iobroker"
-        ],
-        "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
-        "loglevel": "info",
-        "type": "iot-systems",
-        "restartAdapters": [],
-        "connectionType": "local",
-        "dataSource": "push",
-        "plugins": {
-            "sentry": {
-                "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
-                "pathWhitelist": [
-                    "@apollon",
-                    "shelly-iot"
-                ]
-            }
-        },
-        "globalDependencies": [
-            {
-                "admin": ">=4.0.1"
-            }
-        ],
-        "dependencies": [
-            {
-                "js-controller": ">=2.0.0"
-            }
+  "common": {
+    "name": "shelly",
+    "version": "5.0.0",
+    "news": {
+      "5.0.0": {
+        "en": "Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ and Admin 5.1.25+\n* Shelly Plus Support (1, 1 PM)\n* Shelly Pro Support (4 PM)\n* Updated logo\n* Use class definition instead\n* Use internal encryption methods\n* Admin 5 config",
+        "de": "Wichtig: Der Adapter benötigt jetzt mindestens Node.js 12.x, js-controller 3.3+ und Admin 5.1.25+\n* Shelly Plus-Support (1, 1 PM)\n* Shelly Pro-Support (4 PM)\n* Aktualisiertes Logo\n* Verwenden Sie stattdessen die Klassendefinition\n* Verwenden Sie interne Verschlüsselungsmethoden\n* Admin-5-Konfiguration",
+        "ru": "Важно: теперь для адаптера требуется как минимум Node.js 12.x, js-controller 3.3+ и Admin 5.1.25+.\n* Поддержка Shelly Plus (1, 1 PM)\n* Поддержка Shelly Pro (4 PM)\n* Обновлен логотип\n* Вместо этого используйте определение класса\n* Используйте внутренние методы шифрования\n* Конфигурация администратора 5",
+        "pt": "Importante: o adaptador agora requer pelo menos Node.js 12.x, js-controller 3.3+ e Admin 5.1.25+\n* Suporte Shelly Plus (1, 1 PM)\n* Suporte Shelly Pro (4 PM)\n* Logotipo atualizado\n* Use a definição de classe em vez disso\n* Use métodos de criptografia interna\n* Configuração Admin 5",
+        "nl": "Belangrijk: de adapter vereist nu minimaal Node.js 12.x, js-controller 3.3+ en Admin 5.1.25+\n* Shelly Plus-ondersteuning (1, 1 PM)\n* Shelly Pro-ondersteuning (4 PM)\n* Bijgewerkt logo\n* Gebruik in plaats daarvan klassedefinitie\n* Gebruik interne coderingsmethoden\n* Beheerder 5 configuratie",
+        "fr": "Important : l'adaptateur nécessite désormais au moins Node.js 12.x, js-controller 3.3+ et Admin 5.1.25+\n* Assistance Shelly Plus (1, 1 PM)\n* Assistance Shelly Pro (4 PM)\n* Logo mis à jour\n* Utiliser la définition de classe à la place\n* Utiliser des méthodes de cryptage internes\n* Configuration de l'administrateur 5",
+        "it": "Importante: l'adattatore ora richiede almeno Node.js 12.x, js-controller 3.3+ e Admin 5.1.25+\n* Supporto Shelly Plus (1, 1 PM)\n* Supporto Shelly Pro (4 PM)\n* Logo aggiornato\n* Usa invece la definizione di classe\n* Usa metodi di crittografia interni\n* Configurazione amministratore 5",
+        "es": "Importante: el adaptador ahora requiere al menos Node.js 12.x, js-controller 3.3+ y Admin 5.1.25+\n* Soporte Shelly Plus (1, 1 PM)\n* Soporte de Shelly Pro (4 PM)\n* Logotipo actualizado\n* Utilice la definición de clase en su lugar\n* Utilice métodos de encriptación internos\n* Configuración de administrador 5",
+        "pl": "Ważne: Adapter wymaga teraz co najmniej Node.js 12.x, js-controller 3.3+ i Admin 5.1.25+\n* Wsparcie Shelly Plus (1, 1 PM)\n* Wsparcie Shelly Pro (4 PM)\n* Zaktualizowane logo\n* Zamiast tego użyj definicji klasy\n* Użyj wewnętrznych metod szyfrowania\n* Konfiguracja administratora 5",
+        "zh-cn": "重要提示：适配器现在至少需要 Node.js 12.x、js-controller 3.3+ 和 Admin 5.1.25+\n* Shelly Plus 支持 (1, 1 PM)\n* Shelly Pro 支持 (4 PM)\n* 更新标志\n* 使用类定义代替\n* 使用内部加密方法\n* 管理员 5 配置"
+      },
+      "4.1.2": {
+        "en": "Fix the online checks to stay online",
+        "de": "Beheben Sie die Online-Checks, um online zu bleiben",
+        "ru": "Исправьте онлайн-чеки, чтобы оставаться в сети",
+        "pt": "Corrija as verificações online para permanecer online",
+        "nl": "Los de online cheques op om online te blijven",
+        "fr": "Corrigez les chèques en ligne pour rester en ligne",
+        "it": "Risolvi i controlli online per rimanere online",
+        "es": "Arregle los cheques en línea para permanecer en línea",
+        "pl": "Napraw czeki online, aby pozostać online",
+        "zh-cn": "修复在线检查以保持在线状态"
+      },
+      "4.1.1": {
+        "en": "Try to prevent State changes after adapter is stopped",
+        "de": "Versuchen Sie, Statusänderungen nach dem Stoppen des Adapters zu verhindern",
+        "ru": "Попытайтесь предотвратить изменение состояния после остановки адаптера",
+        "pt": "Tente evitar mudanças de estado após o adaptador ser interrompido",
+        "nl": "Probeer statusveranderingen te voorkomen nadat de adapter is gestopt",
+        "fr": "Essayez d'empêcher les changements d'état après l'arrêt de l'adaptateur",
+        "it": "Prova a prevenire le modifiche allo stato dopo l'arresto dell'adattatore",
+        "es": "Intente evitar cambios de estado después de que se detenga el adaptador",
+        "pl": "Spróbuj zapobiec zmianom stanu po zatrzymaniu adaptera",
+        "zh-cn": "尝试在适配器停止后防止状态更改"
+      },
+      "4.1.0": {
+        "en": "several fixes and adjustments\nfix temperature maximum warning\nDestroy Coap and MQTT server on unload",
+        "de": "mehrere Fixes und Anpassungen\nTemperaturmaximalwarnung fixieren\nZerstöre Coap- und MQTT-Server beim Entladen",
+        "ru": "несколько исправлений и корректировок\nисправить предупреждение о максимальной температуре\nУничтожить Coap и сервер MQTT при выгрузке",
+        "pt": "várias correções e ajustes\nfixar aviso de temperatura máxima\nDestrua o servidor Coap e MQTT ao descarregar",
+        "nl": "verschillende fixes en aanpassingen\nfix temperatuur maximum waarschuwing\nVernietig Coap en MQTT-server bij het verwijderen",
+        "fr": "plusieurs corrections et ajustements\navertissement maximum de température fixe\nDétruire le serveur Coap et MQTT lors du déchargement",
+        "it": "diverse correzioni e regolazioni\nfissare l'avviso di temperatura massima\nDistruggi il server Coap e MQTT allo scaricamento",
+        "es": "varias correcciones y ajustes\nFijar temperatura máxima advertencia\nDestruye Coap y el servidor MQTT al descargar",
+        "pl": "kilka poprawek i korekt\nnaprawić ostrzeżenie o maksymalnej temperaturze\nZniszcz serwer Coap i MQTT przy rozładowaniu",
+        "zh-cn": "几个修复和调整\n修复温度最高警告\n卸载时销毁 Coap 和 MQTT 服务器"
+      },
+      "4.0.9-beta-1": {
+        "en": "Bugfixing",
+        "de": "Bugfixing",
+        "ru": "Исправление ошибок",
+        "pt": "Corrigindo erro",
+        "nl": "Bugfixing",
+        "fr": "Correction de bugs",
+        "it": "bugfixing",
+        "es": "Corrección de errores",
+        "pl": "Naprawa błędów",
+        "zh-cn": "错误修正"
+      },
+      "4.0.8": {
+        "en": "Bugfixing",
+        "de": "Bugfixing",
+        "ru": "Исправление ошибок",
+        "pt": "Corrigindo erro",
+        "nl": "Bugfixing",
+        "fr": "Correction de bugs",
+        "it": "bugfixing",
+        "es": "Corrección de errores",
+        "pl": "Naprawa błędów",
+        "zh-cn": "错误修正"
+      },
+      "4.0.7": {
+        "en": "Bugfixing",
+        "de": "Bugfixing",
+        "ru": "Исправление ошибок",
+        "pt": "Corrigindo erro",
+        "nl": "Bugfixing",
+        "fr": "Correction de bugs",
+        "it": "bugfixing",
+        "es": "Corrección de errores",
+        "pl": "Naprawa błędów",
+        "zh-cn": "错误修正"
+      }
+    },
+    "title": "Shelly",
+    "titleLang": {
+      "en": "Shelly",
+      "de": "Shelly",
+      "ru": "изобилующий раковинами",
+      "pt": "Shelly",
+      "nl": "schaalachtig",
+      "fr": "Shelly",
+      "it": "Shelly",
+      "es": "Shelly",
+      "pl": "Shelly",
+      "zh-cn": "谢莉"
+    },
+    "desc": {
+      "en": "Integrate your Shelly devices",
+      "de": "Integrieren Sie Ihre Shelly-Geräte",
+      "ru": "Интегрируйте свои устройства Shelly",
+      "pt": "Integre seus dispositivos Shelly",
+      "nl": "Integreer uw Shelly-apparaten",
+      "fr": "Intégrez vos appareils Shelly",
+      "it": "Integra i tuoi dispositivi Shelly",
+      "es": "Integre sus dispositivos Shelly",
+      "pl": "Zintegruj swoje urządzenia Shelly",
+      "zh-cn": "集成您的 Shelly 设备"
+    },
+    "license": "MIT",
+    "authors": [
+      "Thorsten Stueben <thorsten@stueben.de>",
+      "Apollon77 <iobroker@fischer-ka.de>"
+    ],
+    "docs": {
+      "en": "docs/en/basics.md",
+      "de": "docs/de/basics.md"
+    },
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "shelly.png",
+    "enabled": true,
+    "compact": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
+    "keywords": [
+      "shelly",
+      "switch",
+      "smarthome",
+      "iobroker"
+    ],
+    "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
+    "loglevel": "info",
+    "type": "iot-systems",
+    "restartAdapters": [],
+    "connectionType": "local",
+    "dataSource": "push",
+    "tier": 2,
+    "plugins": {
+      "sentry": {
+        "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
+        "pathWhitelist": [
+          "@apollon",
+          "shelly-iot"
         ]
+      }
     },
-    "native": {
-        "bind": "0.0.0.0",
-        "coapbind": "0.0.0.0",
-        "port": 1882,
-        "mqttpassword": "mqttuser",
-        "mqttusername": "mqttuser",
-        "httppassword": "admin",
-        "httpusername": "",
-        "qos": 0,
-        "pwd": false,
-        "polltime": 5,
-        "timeout": 0.25,
-        "protocol": "coap",
-        "autoupdate": false,
-        "updateUnchangedObjects": false,
-        "keys": [
-            {
-                "blacklist": "ABCDEF"
-            }
-        ],
-        "sentry_enable": true
+    "adminUI": {
+      "config": "json"
     },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "If listening for Shelly packets",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.update",
-            "type": "state",
-            "common": {
-                "role": "button",
-                "name": "Update All",
-                "type": "boolean",
-                "read": false,
-                "write": true
-            },
-            "native": {}
-        }
+    "globalDependencies": [
+      {
+        "admin": ">=5.1.25"
+      }
+    ],
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.0"
+      }
     ]
+  },
+  "protectedNative": [
+    "mqttpassword",
+    "httppassword"
+  ],
+  "encryptedNative": [
+    "mqttpassword",
+    "httppassword"
+  ],
+  "native": {
+    "bind": "0.0.0.0",
+    "coapbind": "0.0.0.0",
+    "port": 1882,
+    "mqttpassword": "mqttuser",
+    "mqttusername": "mqttuser",
+    "httppassword": "admin",
+    "httpusername": "",
+    "qos": 0,
+    "pwd": false,
+    "polltime": 5,
+    "timeout": 0.25,
+    "protocol": "coap",
+    "autoupdate": false,
+    "updateUnchangedObjects": false,
+    "blacklist": [
+      {
+        "id": "ABCDEF"
+      }
+    ]
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "If listening for Shelly packets",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.update",
+      "type": "state",
+      "common": {
+        "role": "button",
+        "name": "Update All",
+        "type": "boolean",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    }
+  ]
 }
