@@ -70,6 +70,14 @@ Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fo
 |Shelly Plus 1 PM|---|supported since v5.0.0|
 |Shelly Pro 4 PM|---|supported since v5.0.0|
 
+## Troubleshooting after installation
+
+### TypeError: xmlserializer.Builder is not a constructor
+execute
+
+`cd /opt/iobroker/node_modules/iobroker.shelly
+npm install xml2js@0.4.23`
+
 ## Changelog
 
 <!--
