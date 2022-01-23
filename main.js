@@ -4,7 +4,7 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Get common adapter utils
+const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
 const mqttServer = require(__dirname + '/lib/protocol/mqtt');
 const coapServer = require(__dirname + '/lib/protocol/coap');
 const adapterName = require('./package.json').name.split('.').pop();
@@ -51,6 +51,7 @@ class Shelly extends utils.Adapter {
             await this.setOnlineFalse();
             this.onlineCheck();
 
+            // Start MQTT server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
                     this.log.info('Starting in MQTT mode. Listening on ' + this.config.bind + ':' + this.config.port);
@@ -63,6 +64,7 @@ class Shelly extends utils.Adapter {
                 }
             });
 
+            // Start CoAP server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'coap') {
                     this.log.info('Starting in CoAP mode.');
@@ -92,7 +94,7 @@ class Shelly extends utils.Adapter {
             objectHelper.handleStateChange(id, state);
 
             if (stateId === 'info.update') {
-                eventEmitter.emit('onFirmwareUpdate');
+                this.eventEmitter.emit('onFirmwareUpdate');
             }
         }
     }
@@ -148,7 +150,6 @@ class Shelly extends utils.Adapter {
             for (const d in deviceIds) {
                 const deviceId = deviceIds[d];
 
-                const idOnline = deviceId + '.online';
                 const idHostname = deviceId + '.hostname';
 
                 const stateHostaname = await this.getStateAsync(idHostname);
@@ -159,18 +160,7 @@ class Shelly extends utils.Adapter {
 
                     tcpPing.probe(valHostname, valPort, async (error, isAlive) => {
                         this.emit('deviceStatusUpdate', deviceId, isAlive);
-
-                        const oldState = await this.getStateAsync(idOnline);
-                        const oldValue = oldState && oldState.val ? (oldState.val === 'true' || oldState.val === true) : false;
-
-                        if (oldValue != isAlive) {
-                            this.log.debug(`onlineCheck of ${idHostname} changed to ${isAlive}`);
-                            await this.setStateAsync(idOnline, { val: isAlive, ack: true });
-                        }
                     });
-
-                } else {
-                    this.log.warn(`onlineCheck of ${idHostname} failed - state is empty (no hostname)`);
                 }
             }
         } catch (e) {
@@ -180,13 +170,23 @@ class Shelly extends utils.Adapter {
         this.pollTimeout = this.setTimeout(() => {
             this.pollTimeout = null;
             this.onlineCheck();
-        }, this.config.polltime * 1000);
+        }, 60 * 1000); // Restart online check
     }
 
     async onDeviceStatusUpdate(deviceId, status) {
         this.log.debug(`onDeviceStatusUpdate: ${deviceId}: ${status}`);
 
-        const oldOnlineDevices = Object.keys(this.onlineDevices).length;
+        // Update online status
+        const idOnline = deviceId + '.online';
+        const onlineState = await this.getStateAsync(idOnline);
+        const prevValue = onlineState && onlineState.val ? (onlineState.val === 'true' || onlineState.val === true) : false;
+
+        if (prevValue != status) {
+            await this.setStateAsync(idOnline, { val: status, ack: true });
+        }
+
+        // Update connection state
+        const oldOnlineDeviceCount = Object.keys(this.onlineDevices).length;
 
         if (status) {
             this.onlineDevices[deviceId] = true;
@@ -194,11 +194,12 @@ class Shelly extends utils.Adapter {
             delete this.onlineDevices[deviceId];
         }
 
-        const newOnlineDevices = Object.keys(this.onlineDevices).length;
+        const newOnlineDeviceCount = Object.keys(this.onlineDevices).length;
 
         // Check online devices
-        if (oldOnlineDevices !== newOnlineDevices) {
-            if (newOnlineDevices > 0) {
+        if (oldOnlineDeviceCount !== newOnlineDeviceCount) {
+            this.log.debug(`Online devices: ${JSON.stringify(Object.keys(this.onlineDevices))}`);
+            if (newOnlineDeviceCount > 0) {
                 this.setStateAsync('info.connection', true, true);
             } else {
                 this.setStateAsync('info.connection', false, true);
