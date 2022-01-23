@@ -176,6 +176,13 @@ class Shelly extends utils.Adapter {
     async onDeviceStatusUpdate(deviceId, status) {
         this.log.debug(`onDeviceStatusUpdate: ${deviceId}: ${status}`);
 
+        // Check if device object exists
+        const knownDevices = await this.getAllDevices();
+        if (knownDevices.indexOf(deviceId) === -1) {
+            // this.log.debug(`${deviceId} is not in list of known devices: ${JSON.stringify(knownDevices)}`);
+            return;
+        }
+
         // Update online status
         const idOnline = deviceId + '.online';
         const onlineState = await this.getStateAsync(idOnline);
@@ -213,7 +220,7 @@ class Shelly extends utils.Adapter {
 
     async getAllDevices() {
         const devices = await this.getDevicesAsync();
-        return devices.map(device => device._id);
+        return devices.map(device => this.removeNamespace(device._id));
     }
 
     async setOnlineFalse() {
@@ -222,26 +229,15 @@ class Shelly extends utils.Adapter {
             const deviceId = deviceIds[d];
             const idOnline = deviceId + '.online';
 
-            await this.setForeignStateAsync(idOnline, { val: false, ack: true });
+            await this.setStateAsync(idOnline, { val: false, ack: true });
+            this.setStateAsync('info.connection', false, true);
         }
     }
 
-    /*
-    async deleteObjects() {
-        try {
-            // delete online States
-            const idsOnline = await this.getAllDevices();
-            for (const i in idsOnline) {
-                const idOnline = idsOnline[i];
-                //let a = await this.delForeignStateAsync(idOnline);
-                const a = await this.delForeignObjectAsync(idOnline);
-                const idParent = idOnline.split('.').slice(0, -1).join('.');
-            }
-        } catch (error) {
-            //
-        }
+    removeNamespace(id) {
+        const re = new RegExp(this.namespace + '*\\.', 'g');
+        return id.replace(re, '');
     }
-    */
 
     async migrateConfig() {
         const native = {};
