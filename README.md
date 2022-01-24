@@ -385,7 +385,7 @@ Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ an
 
 The MIT License (MIT)
 
-Copyright (c) 2018-2021 Thorsten Stueben <thorsten@stueben.de>,
+Copyright (c) 2018-2022 Thorsten Stueben <thorsten@stueben.de>,
                         Apollon77 <iobroker@fischer-ka.de> and
                         Matthias Kleine <info@haus-automatisierung.com>
 
