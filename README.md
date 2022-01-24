@@ -84,6 +84,9 @@ npm install xml2js@0.4.23`
 -->
 
 ### **WORK IN PROGRESS**
+* (klein0r) Fixed online state management and adapter indicator
+* (klein0r) Fixed long push data type for some devices
+* (klein0r) Fixed fahrenheit temperature states
 * (klein0r) Code refactoring
 * (klein0r) Updated documentation
 
