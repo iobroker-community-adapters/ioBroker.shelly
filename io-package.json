@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "5.0.0",
+    "version": "5.1.0",
     "news": {
+      "5.1.0": {
+        "en": "Added input states for generation 2 devices\nFixed online state management and adapter indicator\nFixed long push data type for some devices\nFixed fahrenheit temperature states\nCode refactoring\nUpdated documentation",
+        "de": "Eingangszustände für Geräte der Generation 2 hinzugefügt\nOnline-Statusverwaltung und Adapteranzeige behoben\nDatentyp „Long Push“ für einige Geräte korrigiert\nTemperaturzustände in Fahrenheit behoben\nCode Refactoring\nAktualisierte Dokumentation",
+        "ru": "Добавлены состояния ввода для устройств поколения 2.\nИсправлено онлайн-управление состоянием и индикатор адаптера.\nИсправлен тип данных long push для некоторых устройств\nИсправлены состояния температуры по Фаренгейту\nРефакторинг кода\nОбновленная документация",
+        "pt": "Adicionados estados de entrada para dispositivos de geração 2\nGerenciamento de estado online fixo e indicador de adaptador\nCorrigido o tipo de dados push longo para alguns dispositivos\nEstados de temperatura Fahrenheit fixos\nRefatoração de código\nDocumentação atualizada",
+        "nl": "Invoerstatussen toegevoegd voor apparaten van generatie 2\nVast online statusbeheer en adapterindicator\nVaste lange push-gegevenstype voor sommige apparaten\nVaste Fahrenheit-temperatuurstatussen\nCode refactoring\nBijgewerkte documentatie",
+        "fr": "Ajout d'états d'entrée pour les appareils de génération 2\nGestion de l'état en ligne fixe et indicateur d'adaptateur\nCorrection du type de données push long pour certains appareils\nÉtats de température Fahrenheit fixes\nRefonte du code\nDocumentation mise à jour",
+        "it": "Aggiunti stati di input per i dispositivi di seconda generazione\nRisolto il problema con la gestione dello stato online e l'indicatore dell'adattatore\nRisolto il problema con il tipo di dati push lungo per alcuni dispositivi\nRisolti gli stati di temperatura Fahrenheit\nRefactoring del codice\nDocumentazione aggiornata",
+        "es": "Estados de entrada agregados para dispositivos de generación 2\nSe corrigió la gestión del estado en línea y el indicador del adaptador.\nSe corrigió el tipo de datos de pulsación larga para algunos dispositivos\nEstados fijos de temperatura Fahrenheit\nCódigo de refactorización\nDocumentación actualizada",
+        "pl": "Dodano stany wejściowe dla urządzeń generacji 2\nNaprawiono zarządzanie stanem online i wskaźnik adaptera\nNaprawiono typ danych typu long push dla niektórych urządzeń\nNaprawiono stany temperatury w stopniach Fahrenheita\nRefaktoryzacja kodu\nZaktualizowana dokumentacja",
+        "zh-cn": "为第 2 代设备添加了输入状态\n修复在线状态管理和适配器指示器\n修复了某些设备的长推数据类型\n固定华氏温度状态\n代码重构\n更新的文档"
+      },
       "5.0.0": {
         "en": "Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ and Admin 5.1.25+\n* Shelly Plus Support (1, 1 PM)\n* Shelly Pro Support (4 PM)\n* Updated logo\n* Use class definition instead\n* Use internal encryption methods\n* Admin 5 config",
         "de": "Wichtig: Der Adapter benötigt jetzt mindestens Node.js 12.x, js-controller 3.3+ und Admin 5.1.25+\n* Shelly Plus-Support (1, 1 PM)\n* Shelly Pro-Support (4 PM)\n* Aktualisiertes Logo\n* Verwenden Sie stattdessen die Klassendefinition\n* Verwenden Sie interne Verschlüsselungsmethoden\n* Admin-5-Konfiguration",
@@ -64,18 +76,6 @@
         "zh-cn": "错误修正"
       },
       "4.0.8": {
-        "en": "Bugfixing",
-        "de": "Bugfixing",
-        "ru": "Исправление ошибок",
-        "pt": "Corrigindo erro",
-        "nl": "Bugfixing",
-        "fr": "Correction de bugs",
-        "it": "bugfixing",
-        "es": "Corrección de errores",
-        "pl": "Naprawa błędów",
-        "zh-cn": "错误修正"
-      },
-      "4.0.7": {
         "en": "Bugfixing",
         "de": "Bugfixing",
         "ru": "Исправление ошибок",

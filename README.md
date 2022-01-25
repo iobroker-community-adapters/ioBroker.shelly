@@ -82,8 +82,7 @@ npm install xml2js@0.4.23`
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 5.1.0 (2022-01-25)
 * (klein0r) Added input states for generation 2 devices
 * (klein0r) Fixed online state management and adapter indicator
 * (klein0r) Fixed long push data type for some devices
