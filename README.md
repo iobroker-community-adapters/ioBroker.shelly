@@ -13,12 +13,6 @@ The adapter communicates with Shelly devices by REST API and the CoAP or MQTT pr
 
 Uses the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
 
-If you use the CoAP protocol Shelly devices with Firmware 1.8.0 or above works only with the Shelly Adapter 4.0.0 or above. If you use devices with Firmware below 1.8.0 except of the Shelly 4Pro you have have to use Shelly Adapter 3.3.6 or below. The Shelly Adapter 4.0.0 or above would not work in this case! 
-
-Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fot CoAP. You have to enter the IP address of your ioBroker server followed by the port 5683 on your Shelly device. For example, ioBroker runs on the IP address 192.168.1.2. Now you have to enter 192.168.1.2:5683 and activate CoIoT.
-
-**This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
-
 ## Documentation
 
 [🇺🇸 Documentation](./docs/en/basics.md)
@@ -29,21 +23,21 @@ Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fo
 
 |Shelly Device|CoAP|MQTT|
 |-------------|--------------|----|
-|Shelly1 (SHSW-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly2 (SHSW-21/SHSW-22)|supported since v3.3.0|supported since v3.3.0|
-|ShellyBulb (SHBLB)|supported since v3.3.0|supported since v3.3.0|
+|Shelly 1 (SHSW-1)|supported since v3.3.0|supported since v3.3.0|
+|Shelly 2 (SHSW-21/SHSW-22)|supported since v3.3.0|supported since v3.3.0|
+|Shelly Bulb (SHBLB)|supported since v3.3.0|supported since v3.3.0|
 |Shelly H&T (SHHT-1)|supported since v3.3.0|supported since v3.3.0|
 |Shelly Smoke (SHSM-01)|supported since v3.3.0|supported since v3.3.0|
 |Shelly 1 1PM (SHSW-PM)|supported since v3.3.0|supported since v3.3.0|
 |Shelly 2.5 (SHSW-25)|supported since v3.3.0|supported since v3.3.0|
-|ShellyRGBW (SHRGBWW-01)|not supported since v3.4.0|not supported since v3.4.0|
-|ShellyRGBW2 (SHRGBW2)|supported since v3.3.0|supported since v3.3.0|
+|Shelly RGBW (SHRGBWW-01)|not supported since v3.4.0|not supported since v3.4.0|
+|Shelly RGBW 2 (SHRGBW2)|supported since v3.3.0|supported since v3.3.0|
 |Shelly2LED (SH2LED)|supported since v3.3.0|supported since v3.3.0|
-|ShellyPlug (SHPLG-1)|supported since v3.3.0|supported since v3.3.0|
-|ShellyPlug S (SHPLG-1)|supported since v3.3.0|supported since v3.3.0|
-|ShellyPlug 2 (SHPLG-2)|supported since v3.3.0|supported since v3.3.0|
-|ShellySense (SHSEN-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly4Pro (SHSW-44)|supported since v3.3.5|supported since v3.3.5|
+|Shelly Plug (SHPLG-1)|supported since v3.3.0|supported since v3.3.0|
+|Shelly Plug S (SHPLG-1)|supported since v3.3.0|supported since v3.3.0|
+|Shelly Plug 2 (SHPLG-2)|supported since v3.3.0|supported since v3.3.0|
+|Shelly Sense (SHSEN-1)|supported since v3.3.0|supported since v3.3.0|
+|Shelly 4 Pro (SHSW-44)|supported since v3.3.5|supported since v3.3.5|
 |Shelly EM (SHEM)|supported since v3.3.0|supported since v3.3.0|
 |Shelly Flood (SHWT-1)|supported since v3.3.0|supported since v3.3.0|
 |Shelly Dimmer (SHDM-1)|supported since v3.3.0|supported since v3.3.0|
@@ -66,9 +60,13 @@ Attention, new firmware versions above 1.9.4 you have to enter a CoIoT server fo
 
 |Shelly Device|CoAP|MQTT|
 |-------------|--------------|----|
-|Shelly Plus 1|---|supported since v5.0.0|
-|Shelly Plus 1 PM|---|supported since v5.0.0|
-|Shelly Pro 4 PM|---|supported since v5.0.0|
+|Shelly Plus 1 (shellyplus1)|---|supported since v5.0.0|
+|Shelly Plus 1 PM (shellyplus1pm)|---|supported since v5.0.0|
+|Shelly Pro 4 PM (shellypro4pm)|---|supported since v5.0.0|
+
+## Sentry
+
+**This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
 
 ## Troubleshooting after installation
 
@@ -86,6 +84,10 @@ npm install xml2js@0.4.23`
 -->
 
 ### **WORK IN PROGRESS**
+* (klein0r) Added input states for generation 2 devices
+* (klein0r) Fixed online state management and adapter indicator
+* (klein0r) Fixed long push data type for some devices
+* (klein0r) Fixed fahrenheit temperature states
 * (klein0r) Code refactoring
 * (klein0r) Updated documentation
 
@@ -380,9 +382,12 @@ Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ an
 * Shows RSSI Status for Shelly 1 & 2. You need Firmware 1.4.4
 
 ## License
+
 The MIT License (MIT)
 
-Copyright (c) 2018-2021 Thorsten Stueben <thorsten@stueben.de>, Apollon77 <iobroker@fischer-ka.de>
+Copyright (c) 2018-2022 Thorsten Stueben <thorsten@stueben.de>,
+                        Apollon77 <iobroker@fischer-ka.de> and
+                        Matthias Kleine <info@haus-automatisierung.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
