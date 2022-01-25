@@ -9,9 +9,9 @@
 3. Öffne das Tab **MQTT Einstellungen**
 4. Wähle einen Benutzernamen und ein sicheres Passwort (Du musst diese Informationen auf den Shelly-Geräten hinterlegen)
 
-![iobroker_general](../iobroker_general_mqtt.png)
+![iobroker_general](./img/iobroker_general_mqtt.png)
 
-![iobroker_mqtt](../iobroker_mqtt.png)
+![iobroker_mqtt](./img/iobroker_mqtt.png)
 
 Aktiviere MQTT auf deinen Shelly-Geräten:
 
@@ -22,6 +22,6 @@ Aktiviere MQTT auf deinen Shelly-Geräten:
 
 - Bei Gen1-Geräten: Ändere nicht den ```custom MQTT prefix``` (der Adapter wird nicht funktionieren, wenn Du diesen Wert anpasst)
 
-![shelly_mqtt1](../shelly_mqtt1.png)
+![shelly gen1](../shelly_mqtt-gen1.png)
 
-![shelly_mqtt2](../shelly_mqtt2.png)
+![shelly gen2](../shelly_mqtt-gen2.png)

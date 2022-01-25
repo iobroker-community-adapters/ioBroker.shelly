@@ -19,7 +19,7 @@ Für mehr Informationen, siehe *supported devices*.
 
 Der Adapter kann über CoAP oder MQTT mit den Geräten kommunizieren. Der Standard ist CoAP - in diesem Fall muss nichts weiter konfiguriert werden. **Falls Gen2-Geräte integriert werden sollen, muss MQTT konfiguriert werden!**
 
-![iobroker_general](../iobroker_general.png)
+![iobroker_general](./img/iobroker_general.png)
 
 ## Inhaltsverzeichnis
 

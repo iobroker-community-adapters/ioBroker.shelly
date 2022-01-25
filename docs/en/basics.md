@@ -19,7 +19,7 @@ Check the list of *supported devices* for more details.
 
 You can use the adapter in CoAP or MQTT mode. The default mode is CoAP and you do not have to do anything. **If you want to use Gen2 devices, you must use MQTT!**
 
-![iobroker_general](../iobroker_general.png)
+![iobroker_general](./img/iobroker_general.png)
 
 ## Table of contents
 

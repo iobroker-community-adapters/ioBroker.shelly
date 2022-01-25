@@ -6,7 +6,7 @@
 
 Um die Shelly-Geräte vor unbefugtem Zugriff zu schützen, setze in der ioBroker Konfiguration einen beliebigen Benutzernamen und Passwort im Tab *Allgemeine Einstellungen*.
 
-![iobroker_general_restrict_login](../iobroker_general_restrict_login.png)
+![iobroker_general_restrict_login](./img/iobroker_general_restrict_login.png)
 
 Aktiviere den geschützten Zugriff auf allen Shelly-Gerätem:
 
@@ -16,4 +16,6 @@ Aktiviere den geschützten Zugriff auf allen Shelly-Gerätem:
 4. Speichere die Konfiguration - der Shelly startet automatisch neu
 5. Stelle sicher, dass auf allen Shelly-Geräten die identischen Zugangsdaten konfiguriert werden
 
-![shelly_restrict_login](../shelly_restrict_login.png)
+![shelly gen 1](../shelly_restrict_login-gen1.png)
+
+![shelly gen 2](../shelly_restrict_login-gen2.png)
