@@ -120,8 +120,20 @@
       "Matthias Kleine <info@haus-automatisierung.com>"
     ],
     "docs": {
-      "en": "docs/en/basics.md",
-      "de": "docs/de/basics.md"
+      "en": [
+        "docs/en/basics.md",
+        "docs/de/protocol-coap.md",
+        "docs/de/protocol-mqtt.md",
+        "docs/de/restricted-login.md",
+        "docs/de/state-changes.md"
+      ],
+      "de": [
+        "docs/de/basics.md",
+        "docs/en/protocol-coap.md",
+        "docs/en/protocol-mqtt.md",
+        "docs/en/restricted-login.md",
+        "docs/de/state-changes.md"
+      ]
     },
     "platform": "Javascript/Node.js",
     "mode": "daemon",

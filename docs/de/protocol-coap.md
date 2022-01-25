@@ -20,6 +20,17 @@ CoAP fügt alle Geräte in deinem Netzwerk hinzu. Falls Du einzelne Geräte auss
 
 ![iobroker_coap](../iobroker_coap.png)
 
+### Wichtige Hinweise
+
+#### Shelly Firmware 1.8.0 (oder neuer)
+
+- Falls Du das CoAP-Protokoll nutzt, muss ab dieser Version der Adapter in Version 4.0.0 (oder neuer) genutzt werden.
+- Für Geräte mit älterer Firmware (außer Shelly 4 Pro) muss der Adapter in Version 3.3.6 (oder älter) genutzt werden. Die Adapter-Version 4.0.0 (oder neuer) ist nicht mit älteren Firmware-Versionen kompatibel!
+
+#### Shelly Firmware 1.9.4 (oder neuer)
+
+- Ab dieser Version muss ein CoIoT-Server auf jedem Shelly hinterlegt werden, falls das CoAP-Protokoll genutzt wird. Mehr Details im CoAP-Abschnitt in dieser Dokumentation.
+
 ### Fehlersuche
 
 In manchen Fällen kann es vorkommen, dass der Shelly-Adapter nicht alle Geräte im CoAP-Modus findet. Versuche dann folgendes:

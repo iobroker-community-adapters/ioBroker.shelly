@@ -20,6 +20,17 @@ CoAP will add all devices in your network. If you want to exclude some Shelly de
 
 ![iobroker_coap](../iobroker_coap.png)
 
+### Important notes
+
+#### Shelly Firmware 1.8.0 (or later)
+
+- If you use the CoAP protocol, you have to use adapter version 4.0.0 or above.
+- If you use devices with firmware below 1.8.0 (except Shelly 4 Pro) you have have to use adapter version 3.3.6 or below. The adapter version 4.0.0 (or later) would not work in this case!
+
+#### Shelly Firmware 1.9.4 (or later)
+
+- You have to enter a CoIoT server for CoAP. For more information, see CoAp section in this documentation.
+
 ### Trouble Shooting
 
 In some cases, Shelly devices will not be found by the Shelly adapter in CoAP mode. Please try the following:
