@@ -195,7 +195,7 @@
     "httpusername": "",
     "qos": 0,
     "pwd": false,
-    "polltime": 5,
+    "polltime": 15,
     "timeout": 0.25,
     "protocol": "coap",
     "autoupdate": false,
