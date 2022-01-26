@@ -21,7 +21,7 @@ class Shelly extends utils.Adapter {
 
         this.serverMqtt = null;
         this.serverCoap = null;
-        this.pollTimeout = null;
+        this.onlineCheckTimeout = null;
 
         this.onlineDevices = {};
 
@@ -104,9 +104,9 @@ class Shelly extends utils.Adapter {
     }
 
     onUnload(callback) {
-        if (this.pollTimeout) {
-            this.clearTimeout(this.pollTimeout);
-            this.pollTimeout = null;
+        if (this.onlineCheckTimeout) {
+            this.clearTimeout(this.onlineCheckTimeout);
+            this.onlineCheckTimeout = null;
         }
 
         this.setOnlineFalse();
@@ -140,9 +140,9 @@ class Shelly extends utils.Adapter {
     async onlineCheck() {
         const valPort = 80;
 
-        if (this.pollTimeout) {
-            this.clearTimeout(this.pollTimeout);
-            this.pollTimeout = null;
+        if (this.onlineCheckTimeout) {
+            this.clearTimeout(this.onlineCheckTimeout);
+            this.onlineCheckTimeout = null;
         }
 
         try {
@@ -167,19 +167,21 @@ class Shelly extends utils.Adapter {
             this.log.error(e.toString());
         }
 
-        this.pollTimeout = this.setTimeout(() => {
-            this.pollTimeout = null;
+        this.onlineCheckTimeout = this.setTimeout(() => {
+            this.onlineCheckTimeout = null;
             this.onlineCheck();
-        }, 60 * 1000); // Restart online check
+        }, 60 * 1000); // Restart online check in 60 Seconds
     }
 
     async onDeviceStatusUpdate(deviceId, status) {
+        if (!deviceId) return;
+
         this.log.debug(`onDeviceStatusUpdate: ${deviceId}: ${status}`);
 
         // Check if device object exists
         const knownDevices = await this.getAllDevices();
         if (knownDevices.indexOf(deviceId) === -1) {
-            // this.log.debug(`${deviceId} is not in list of known devices: ${JSON.stringify(knownDevices)}`);
+            this.log.silly(`${deviceId} is not in list of known devices: ${JSON.stringify(knownDevices)}`);
             return;
         }
 
