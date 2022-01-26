@@ -85,6 +85,7 @@ npm install xml2js@0.4.23`
 ### **WORK IN PROGRESS**
 * (klein0r) Fixed firmware auto update
 * (klein0r) Updated timeouts
+* (klein0r) Added color for device objects as online indicator
 
 ### 5.1.0 (2022-01-25)
 * (klein0r) Added input states for generation 2 devices
