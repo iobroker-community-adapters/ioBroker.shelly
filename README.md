@@ -82,7 +82,7 @@ npm install xml2js@0.4.23`
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 5.1.1 (2022-01-26)
 * (klein0r) Fixed firmware auto update
 * (klein0r) Updated timeouts
 * (klein0r) Added command source for shelly 2.5

@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "5.1.0",
+    "version": "5.1.1",
     "news": {
+      "5.1.1": {
+        "en": "Fixed firmware auto update\nUpdated timeouts\nAdded command source for shelly 2.5\nAdded color for device objects as online indicator",
+        "de": "Automatisches Firmware-Update behoben\nAktualisierte Zeitüberschreitungen\nBefehlsquelle für Shelly 2.5 hinzugefügt\nFarbe für Geräteobjekte als Online-Anzeige hinzugefügt",
+        "ru": "Исправлено автоматическое обновление прошивки\nОбновленные тайм-ауты\nДобавлен источник команд для shelly 2.5.\nДобавлен цвет для объектов устройства в качестве онлайн-индикатора.",
+        "pt": "Atualização automática de firmware corrigida\nTempos limite atualizados\nFonte de comando adicionada para shelly 2.5\nCor adicionada para objetos de dispositivo como indicador online",
+        "nl": "Vaste automatische firmware-update\nBijgewerkte time-outs\nCommandobron toegevoegd voor shelly 2.5\nKleur toegevoegd voor apparaatobjecten als online indicator",
+        "fr": "Correction de la mise à jour automatique du firmware\nDélais d'attente mis à jour\nAjout de la source de commande pour shelly 2.5\nAjout de couleur pour les objets de l'appareil en tant qu'indicateur en ligne",
+        "it": "Risolto il problema con l'aggiornamento automatico del firmware\nTimeout aggiornati\nAggiunta la sorgente dei comandi per shelly 2.5\nAggiunto colore per gli oggetti del dispositivo come indicatore online",
+        "es": "Actualización automática de firmware fijo\nTiempos de espera actualizados\nFuente de comando agregada para Shelly 2.5\nSe agregó color para los objetos del dispositivo como indicador en línea.",
+        "pl": "Naprawiono automatyczną aktualizację oprogramowania\nZaktualizowano limity czasu\nDodano źródło poleceń dla Shelly 2.5\nDodano kolor dla obiektów urządzenia jako wskaźnika online",
+        "zh-cn": "固定固件自动更新\n更新超时\n为 shelly 2.5 添加了命令源\n为设备对象添加了颜色作为在线指示器"
+      },
       "5.1.0": {
         "en": "Added input states for generation 2 devices\nFixed online state management and adapter indicator\nFixed long push data type for some devices\nFixed fahrenheit temperature states\nCode refactoring\nUpdated documentation",
         "de": "Eingangszustände für Geräte der Generation 2 hinzugefügt\nOnline-Statusverwaltung und Adapteranzeige behoben\nDatentyp „Long Push“ für einige Geräte korrigiert\nTemperaturzustände in Fahrenheit behoben\nCode Refactoring\nAktualisierte Dokumentation",
@@ -64,18 +76,6 @@
         "zh-cn": "几个修复和调整\n修复温度最高警告\n卸载时销毁 Coap 和 MQTT 服务器"
       },
       "4.0.9-beta-1": {
-        "en": "Bugfixing",
-        "de": "Bugfixing",
-        "ru": "Исправление ошибок",
-        "pt": "Corrigindo erro",
-        "nl": "Bugfixing",
-        "fr": "Correction de bugs",
-        "it": "bugfixing",
-        "es": "Corrección de errores",
-        "pl": "Naprawa błędów",
-        "zh-cn": "错误修正"
-      },
-      "4.0.8": {
         "en": "Bugfixing",
         "de": "Bugfixing",
         "ru": "Исправление ошибок",
