@@ -82,6 +82,10 @@ npm install xml2js@0.4.23`
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (klein0r) Fixed Shelly UNI ADC voltage
+* (klein0r) Logging improvements for offline devices
+
 ### 5.1.1 (2022-01-26)
 * (klein0r) Fixed firmware auto update
 * (klein0r) Updated timeouts
