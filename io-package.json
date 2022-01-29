@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "5.1.1",
+    "version": "5.1.2",
     "news": {
+      "5.1.2": {
+        "en": "Fixed Shelly UNI ADC voltage\nFixed dimmer brightness values handling\nLogging improvements for offline devices",
+        "de": "Feste Shelly UNI ADC-Spannung\nDie Handhabung der Dimmer-Helligkeitswerte wurde korrigiert\nProtokollierungsverbesserungen für Offline-Geräte",
+        "ru": "Фиксированное напряжение Shelly UNI ADC\nИсправлена обработка значений яркости диммера\nУлучшения ведения журналов для автономных устройств",
+        "pt": "Tensão Shelly UNI ADC fixa\nManipulação de valores de brilho de dimmer fixo\nMelhorias de registro para dispositivos offline",
+        "nl": "Vaste Shelly UNI ADC-spanning\nVaste dimmer helderheidswaarden verwerking\nLogboekverbeteringen voor offline apparaten",
+        "fr": "Tension Shelly UNI ADC fixe\nGestion des valeurs de luminosité du gradateur fixe\nAméliorations de la journalisation pour les appareils hors ligne",
+        "it": "Tensione Shelly UNI ADC fissa\nRisolto il problema con la gestione dei valori di luminosità più deboli\nMiglioramenti alla registrazione per i dispositivi offline",
+        "es": "Voltaje fijo Shelly UNI ADC\nManejo de valores de brillo de dimmer fijo\nMejoras en el registro para dispositivos sin conexión",
+        "pl": "Naprawiono napięcie Shelly UNI ADC\nNaprawiono obsługę wartości jasności ściemniacza\nUlepszenia logowania dla urządzeń offline",
+        "zh-cn": "固定 Shelly UNI ADC 电压\n固定调光器亮度值处理\n离线设备的日志记录改进"
+      },
       "5.1.1": {
         "en": "Fixed firmware auto update\nUpdated timeouts\nAdded command source for shelly 2.5\nAdded color for device objects as online indicator",
         "de": "Automatisches Firmware-Update behoben\nAktualisierte Zeitüberschreitungen\nBefehlsquelle für Shelly 2.5 hinzugefügt\nFarbe für Geräteobjekte als Online-Anzeige hinzugefügt",
@@ -74,18 +86,6 @@
         "es": "varias correcciones y ajustes\nFijar temperatura máxima advertencia\nDestruye Coap y el servidor MQTT al descargar",
         "pl": "kilka poprawek i korekt\nnaprawić ostrzeżenie o maksymalnej temperaturze\nZniszcz serwer Coap i MQTT przy rozładowaniu",
         "zh-cn": "几个修复和调整\n修复温度最高警告\n卸载时销毁 Coap 和 MQTT 服务器"
-      },
-      "4.0.9-beta-1": {
-        "en": "Bugfixing",
-        "de": "Bugfixing",
-        "ru": "Исправление ошибок",
-        "pt": "Corrigindo erro",
-        "nl": "Bugfixing",
-        "fr": "Correction de bugs",
-        "it": "bugfixing",
-        "es": "Corrección de errores",
-        "pl": "Naprawa błędów",
-        "zh-cn": "错误修正"
       }
     },
     "title": "Shelly",
