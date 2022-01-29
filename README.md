@@ -84,6 +84,7 @@ npm install xml2js@0.4.23`
 -->
 ### **WORK IN PROGRESS**
 * (klein0r) Fixed Shelly UNI ADC voltage
+* (klein0r) Fixed dimmer brightness values handling
 * (klein0r) Logging improvements for offline devices
 
 ### 5.1.1 (2022-01-26)
