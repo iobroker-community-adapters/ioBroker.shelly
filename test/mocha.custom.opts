@@ -1,2 +1,0 @@
---require test/mocha.setup.js
-{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}
