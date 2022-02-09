@@ -42,7 +42,7 @@
     "digest-fetch": "^1.2.1",
     "mqtt": "^4.3.5",
     "mqtt-connection": "^4.1.0",
-    "node-fetch": "^2.6.7",
+    "node-fetch": "^3.2.0",
     "shelly-iot": "^1.1.2",
     "tcp-ping": "^0.1.1",
     "xml2js": "0.4.23",
