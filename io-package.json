@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "5.1.2",
+    "version": "5.1.3",
     "news": {
+      "5.1.3": {
+        "en": "Changed common.states strings to objects\nJust perform firmware update if an available update was detected\nExtended logging for CoAP",
+        "de": "common.states-Strings in Objekte geändert\nFühren Sie einfach ein Firmware-Update durch, wenn ein verfügbares Update erkannt wurde\nErweiterte Protokollierung für CoAP",
+        "ru": "Изменены строки common.states на объекты\nПросто выполните обновление прошивки, если было обнаружено доступное обновление.\nРасширенное ведение журнала для CoAP",
+        "pt": "Strings common.states alteradas para objetos\nBasta realizar a atualização do firmware se uma atualização disponível foi detectada\nRegistro estendido para CoAP",
+        "nl": "Common.states-tekenreeksen gewijzigd in objecten\nVoer gewoon een firmware-update uit als er een beschikbare update is gedetecteerd\nUitgebreide logging voor CoAP",
+        "fr": "Modification des chaînes common.states en objets\nEffectuez simplement la mise à jour du micrologiciel si une mise à jour disponible a été détectée\nJournalisation étendue pour CoAP",
+        "it": "Modificate le stringhe common.states in oggetti\nBasta eseguire l'aggiornamento del firmware se è stato rilevato un aggiornamento disponibile\nRegistrazione estesa per CoAP",
+        "es": "Se cambiaron las cadenas common.states a objetos.\nSimplemente realice una actualización de firmware si se detectó una actualización disponible\nRegistro extendido para CoAP",
+        "pl": "Zmieniono ciągi common.states na obiekty\nPo prostu wykonaj aktualizację oprogramowania układowego, jeśli zostanie wykryta dostępna aktualizacja\nRozszerzone logowanie dla CoAP",
+        "zh-cn": "将 common.states 字符串更改为对象\n如果检测到可用更新，只需执行固件更新\nCoAP 的扩展日志记录"
+      },
       "5.1.2": {
         "en": "Fixed Shelly UNI ADC voltage\nFixed dimmer brightness values handling\nLogging improvements for offline devices",
         "de": "Feste Shelly UNI ADC-Spannung\nDie Handhabung der Dimmer-Helligkeitswerte wurde korrigiert\nProtokollierungsverbesserungen für Offline-Geräte",
@@ -74,18 +86,6 @@
         "es": "Intente evitar cambios de estado después de que se detenga el adaptador",
         "pl": "Spróbuj zapobiec zmianom stanu po zatrzymaniu adaptera",
         "zh-cn": "尝试在适配器停止后防止状态更改"
-      },
-      "4.1.0": {
-        "en": "several fixes and adjustments\nfix temperature maximum warning\nDestroy Coap and MQTT server on unload",
-        "de": "mehrere Fixes und Anpassungen\nTemperaturmaximalwarnung fixieren\nZerstöre Coap- und MQTT-Server beim Entladen",
-        "ru": "несколько исправлений и корректировок\nисправить предупреждение о максимальной температуре\nУничтожить Coap и сервер MQTT при выгрузке",
-        "pt": "várias correções e ajustes\nfixar aviso de temperatura máxima\nDestrua o servidor Coap e MQTT ao descarregar",
-        "nl": "verschillende fixes en aanpassingen\nfix temperatuur maximum waarschuwing\nVernietig Coap en MQTT-server bij het verwijderen",
-        "fr": "plusieurs corrections et ajustements\navertissement maximum de température fixe\nDétruire le serveur Coap et MQTT lors du déchargement",
-        "it": "diverse correzioni e regolazioni\nfissare l'avviso di temperatura massima\nDistruggi il server Coap e MQTT allo scaricamento",
-        "es": "varias correcciones y ajustes\nFijar temperatura máxima advertencia\nDestruye Coap y el servidor MQTT al descargar",
-        "pl": "kilka poprawek i korekt\nnaprawić ostrzeżenie o maksymalnej temperaturze\nZniszcz serwer Coap i MQTT przy rozładowaniu",
-        "zh-cn": "几个修复和调整\n修复温度最高警告\n卸载时销毁 Coap 和 MQTT 服务器"
       }
     },
     "title": "Shelly",

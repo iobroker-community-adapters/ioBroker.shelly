@@ -82,7 +82,7 @@ npm install xml2js@0.4.23`
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 5.1.3 (2022-02-13)
 
 * (klein0r) Changed common.states strings to objects
 * (klein0r) Just perform firmware update if an available update was detected
