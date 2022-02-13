@@ -63,6 +63,7 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 |Shelly Plus 1 (shellyplus1)|---|supported since v5.0.0|
 |Shelly Plus 1 PM (shellyplus1pm)|---|supported since v5.0.0|
 |Shelly Pro 1 (shellypro1)|---|supported since v5.2.0|
+|Shelly Pro 1 PM (shellypro1pm)|---|supported since v5.2.0|
 |Shelly Pro 4 PM (shellypro4pm)|---|supported since v5.0.0|
 
 ## Sentry
@@ -86,6 +87,7 @@ npm install xml2js@0.4.23`
 ### **WORK IN PROGRESS**
 
 * (klein0r) Added Shelly Pro 1
+* (klein0r) Added Shelly Pro 1 PM
 
 ### 5.1.3 (2022-02-13)
 
