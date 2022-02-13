@@ -84,7 +84,9 @@ npm install xml2js@0.4.23`
 -->
 ### **WORK IN PROGRESS**
 
+* (klein0r) Changed common.states strings to objects
 * (klein0r) Just perform firmware update if an available update was detected
+* (klein0r) Extended logging for CoAP
 
 ### 5.1.2 (2022-01-29)
 * (klein0r) Fixed Shelly UNI ADC voltage
