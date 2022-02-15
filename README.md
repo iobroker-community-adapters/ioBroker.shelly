@@ -92,6 +92,7 @@ npm install xml2js@0.4.23`
 * (klein0r) Added Shelly Pro 1 PM
 * (klein0r) Added Shelly Pro 2
 * (klein0r) Added Shelly Pro 2 PM
+* (klein0r) Replaced node-fetch with axios (also for digest auth)
 
 ### 5.1.3 (2022-02-13)
 

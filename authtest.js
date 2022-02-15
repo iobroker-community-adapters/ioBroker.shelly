@@ -6,17 +6,25 @@ const crypto = require('crypto');
 // https://github.com/axios/axios/issues/686#issuecomment-611210438
 
 async function get(base, uri) {
-    let count = 0;
+    return new Promise((resolve, reject) => {
+        let count = 0;
 
-    const data = await axios(
+        axios(
             {
                 method: 'get',
                 responseType: 'text',
+                transformResponse: (res) => {
+                    return res;
+                },
                 baseURL: base,
                 timeout: 2000,
                 url: uri
             }
         )
+        .then(response => {
+            console.log(`Received response: ${response.data}`);
+            resolve(response.data);
+        })
         .catch(err => {
             if (err.response.status === 401) {
                 const authDetails = err.response.headers['www-authenticate'].split(', ').map(v => v.split('='));
@@ -45,10 +53,13 @@ async function get(base, uri) {
                 console.log(`HA2: ${HA2}`);
                 console.log(`Authorization-Header: ${authorization}`);
 
-                return axios(
+                axios(
                     {
                         method: 'get',
                         responseType: 'text',
+                        transformResponse: (res) => {
+                            return res;
+                        },
                         baseURL: base,
                         timeout: 2000,
                         url: uri,
@@ -56,23 +67,24 @@ async function get(base, uri) {
                             'Authorization': authorization
                         }
                     }
-                );
+                ).then(response => {
+                    console.log(`Received auth response: ${response.data}`);
+                    resolve(response.data);
+                })
+                .catch(reject);
+            } else {
+                // Rethrow err if reponse status != 401
+                reject(err);
             }
-
-            // Rethrow err if reponse status != 401
-            throw err;
         })
-        .catch(err => {
-            throw err;
-        });
-
-    return data.data;
+        .catch(reject);
+    });
 };
 
 async function test() {
     try {
         const responseData = await get('http://192.168.188.24', '/rpc/Shelly.GetStatus');
-        console.log(`Response: ${JSON.stringify(typeof responseData)}`);
+        console.log(`Response: ${JSON.stringify(responseData)}`);
     } catch (err) {
         console.log(`Error: ${JSON.stringify(err)}`);
     }
