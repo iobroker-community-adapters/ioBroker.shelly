@@ -87,6 +87,10 @@ npm install xml2js@0.4.23`
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Fixed datatype error of Shelly 1/PM ext switch
+
 ### 5.2.0 (2022-02-16)
 
 * (klein0r) Added Shelly Pro 1
