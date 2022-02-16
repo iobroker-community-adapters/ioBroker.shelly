@@ -62,6 +62,7 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 |-------------|--------------|----|
 |Shelly Plus 1 (shellyplus1)|---|supported since v5.0.0|
 |Shelly Plus 1 PM (shellyplus1pm)|---|supported since v5.0.0|
+|Shelly Plus 2 PM (shellyplus2pm)|---|supported since v5.2.0|
 |Shelly Pro 1 (shellypro1)|---|supported since v5.2.0|
 |Shelly Pro 1 PM (shellypro1pm)|---|supported since v5.2.0|
 |Shelly Pro 2 (shellypro2)|---|supported since v5.2.0|
@@ -96,7 +97,7 @@ npm install xml2js@0.4.23`
 * (klein0r) Allow to change device and channel names of generation 2 devices
 * (klein0r) Added auto on/off timers for generation 2 devices
 * (klein0r) Added input mode, events and initial state for generation 2 devices
-* (klein0r) Added support for covers / shutters
+* (klein0r) Added support of covers / shutters for generation 2 devices
 * (klein0r) Replaced node-fetch with axios (also for digest auth)
 
 ### 5.1.3 (2022-02-13)
