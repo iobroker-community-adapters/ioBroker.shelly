@@ -26,7 +26,7 @@ async function get(base, uri) {
             resolve(response.data);
         })
         .catch(err => {
-            if (err.response.status === 401) {
+            if (err && err.response && err.response.status === 401) {
                 const authDetails = err.response.headers['www-authenticate'].split(', ').map(v => v.split('='));
 
                 console.log(`Response: ${JSON.stringify(authDetails)}`);
