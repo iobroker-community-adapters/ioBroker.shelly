@@ -93,7 +93,7 @@ npm install xml2js@0.4.23`
 * (klein0r) Added Shelly Pro 2
 * (klein0r) Added Shelly Pro 2 PM
 * (klein0r) Added Shelly Plus 2 PM
-* (klein0r) Allow to change names of generation 2 devices
+* (klein0r) Allow to change device and channel names of generation 2 devices
 * (klein0r) Replaced node-fetch with axios (also for digest auth)
 
 ### 5.1.3 (2022-02-13)
