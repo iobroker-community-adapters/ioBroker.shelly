@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "5.1.3",
+    "version": "5.2.0",
     "news": {
+      "5.2.0": {
+        "en": "Added Shelly Pro 1\nAdded Shelly Pro 1 PM\nAdded Shelly Pro 2\nAdded Shelly Pro 2 PM\nAdded Shelly Plus 2 PM\nAllow to change device and channel names of generation 2 devices\nAdded auto on/off timers for generation 2 devices\nAdded input mode, events and initial state for generation 2 devices\nAdded support of covers / shutters for generation 2 devices\nReplaced node-fetch with axios (also for digest auth)",
+        "de": "Shelly Pro 1 hinzugefügt\nShelly Pro 13 Uhr hinzugefügt\nShelly Pro 2 hinzugefügt\nShelly Pro 14 Uhr hinzugefügt\nShelly Plus 14 Uhr hinzugefügt\nErmöglicht das Ändern von Geräte- und Kanalnamen von Geräten der Generation 2\nAuto-On/Off-Timer für Geräte der Generation 2 hinzugefügt\nEingabemodus, Ereignisse und Anfangszustand für Geräte der Generation 2 hinzugefügt\nUnterstützung von Abdeckungen/Verschlüssen für Geräte der Generation 2 hinzugefügt\nNode-Fetch durch Axios ersetzt (auch für Digest-Authentifizierung)",
+        "ru": "Добавлен Шелли Про 1\nДобавлен Шелли Про 13:00\nДобавлен Шелли Про 2\nДобавлен Шелли Про 14:00\nДобавлен Шелли Плюс 14:00\nРазрешить изменять имена устройств и каналов устройств поколения 2\nДобавлены таймеры автоматического включения/выключения для устройств 2-го поколения.\nДобавлен режим ввода, события и начальное состояние для устройств поколения 2.\nДобавлена поддержка крышек/жалюзи для устройств поколения 2\nNode-fetch заменен на axios (также для дайджест-аутентификации)",
+        "pt": "Adicionado Shelly Pro 1\nAdicionado Shelly Pro 13:00\nAdicionado Shelly Pro 2\nAdicionado Shelly Pro 14:00\nAdicionado Shelly Plus 14:00\nPermitir alterar nomes de dispositivos e canais de dispositivos de geração 2\nAdicionados temporizadores automáticos de ligar/desligar para dispositivos de geração 2\nAdicionado modo de entrada, eventos e estado inicial para dispositivos de geração 2\nAdicionado suporte de tampas / persianas para dispositivos de geração 2\nSubstituição de busca de nó por axios (também para autenticação de resumo)",
+        "nl": "Shelly Pro 1 toegevoegd\nShelly Pro om 13:00 uur toegevoegd\nShelly Pro 2 toegevoegd\nShelly Pro 14.00 uur toegevoegd\nShelly Plus 14.00 uur toegevoegd\nToestaan om apparaat- en kanaalnamen van generatie 2-apparaten te wijzigen\nAutomatische aan/uit-timers toegevoegd voor apparaten van generatie 2\nInvoermodus, gebeurtenissen en beginstatus toegevoegd voor apparaten van generatie 2\nOndersteuning toegevoegd voor covers / shutters voor generatie 2 apparaten\nNode-fetch vervangen door axios (ook voor digest auth)",
+        "fr": "Ajout de Shelly Pro 1\nAjout de Shelly Pro 1 PM\nAjout de Shelly Pro 2\nAjout de Shelly Pro 2 PM\nAjout de Shelly Plus 2 PM\nAutoriser la modification des noms d'appareils et de canaux des appareils de génération 2\nAjout de minuteries marche/arrêt automatiques pour les appareils de génération 2\nAjout du mode d'entrée, des événements et de l'état initial pour les appareils de génération 2\nAjout de la prise en charge des couvertures/obturateurs pour les appareils de génération 2\nNode-fetch remplacé par axios (également pour Digest Auth)",
+        "it": "Aggiunto Shelly Pro 1\nAggiunto Shelly Pro 13:00\nAggiunto Shelly Pro 2\nAggiunto Shelly Pro 14:00\nAggiunto Shelly Plus 14:00\nConsenti di cambiare i nomi dei dispositivi e dei canali dei dispositivi di generazione 2\nAggiunti timer di accensione/spegnimento automatici per i dispositivi di seconda generazione\nAggiunta modalità di input, eventi e stato iniziale per i dispositivi di seconda generazione\nAggiunto supporto per coperture/persiane per dispositivi di generazione 2\nSostituito node-fetch con axios (anche per digest auth)",
+        "es": "Añadido Shelly Pro 1\nSe agregó Shelly Pro a la 1 p. m.\nAñadido Shelly Pro 2\nSe agregó Shelly Pro a las 2 p. m.\nSe agregó Shelly Plus a las 2 p. m.\nPermitir cambiar los nombres de los dispositivos y canales de los dispositivos de generación 2\nTemporizadores de encendido/apagado automático agregados para dispositivos de generación 2\nModo de entrada agregado, eventos y estado inicial para dispositivos de generación 2\nSe agregó soporte de cubiertas / persianas para dispositivos de generación 2\nSe reemplazó la búsqueda de nodos con axios (también para autenticación de resumen)",
+        "pl": "Dodano Shelly Pro 1\nDodano Shelly Pro o 13:00\nDodano Shelly Pro 2\nDodano Shelly Pro 14:00\nDodano Shelly Plus 14:00\nZezwalaj na zmianę nazw urządzeń i kanałów urządzeń generacji 2\nDodano zegary automatycznego włączania/wyłączania dla urządzeń generacji 2\nDodano tryb wejścia, zdarzenia i stan początkowy dla urządzeń generacji 2\nDodano obsługę osłon / rolet dla urządzeń generacji 2\nZamieniono pobieranie węzła na axios (również dla auth skrótu)",
+        "zh-cn": "添加了 Shelly Pro 1\n添加了 Shelly Pro 下午 1 点\n添加了 Shelly Pro 2\n添加了 Shelly Pro 2 PM\n添加了 Shelly Plus 2 PM\n允许更改第 2 代设备的设备和通道名称\n为第 2 代设备添加了自动开/关计时器\n为第 2 代设备添加了输入模式、事件和初始状态\n增加了对第 2 代设备的盖板/百叶窗的支持\n将 node-fetch 替换为 axios（也用于摘要身份验证）"
+      },
       "5.1.3": {
         "en": "Changed common.states strings to objects\nJust perform firmware update if an available update was detected\nExtended logging for CoAP",
         "de": "common.states-Strings in Objekte geändert\nFühren Sie einfach ein Firmware-Update durch, wenn ein verfügbares Update erkannt wurde\nErweiterte Protokollierung für CoAP",
@@ -74,18 +86,6 @@
         "es": "Arregle los cheques en línea para permanecer en línea",
         "pl": "Napraw czeki online, aby pozostać online",
         "zh-cn": "修复在线检查以保持在线状态"
-      },
-      "4.1.1": {
-        "en": "Try to prevent State changes after adapter is stopped",
-        "de": "Versuchen Sie, Statusänderungen nach dem Stoppen des Adapters zu verhindern",
-        "ru": "Попытайтесь предотвратить изменение состояния после остановки адаптера",
-        "pt": "Tente evitar mudanças de estado após o adaptador ser interrompido",
-        "nl": "Probeer statusveranderingen te voorkomen nadat de adapter is gestopt",
-        "fr": "Essayez d'empêcher les changements d'état après l'arrêt de l'adaptateur",
-        "it": "Prova a prevenire le modifiche allo stato dopo l'arresto dell'adattatore",
-        "es": "Intente evitar cambios de estado después de que se detenga el adaptador",
-        "pl": "Spróbuj zapobiec zmianom stanu po zatrzymaniu adaptera",
-        "zh-cn": "尝试在适配器停止后防止状态更改"
       }
     },
     "title": "Shelly",
