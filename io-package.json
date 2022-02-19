@@ -138,7 +138,7 @@
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "shelly.png",
-    "enabled": true,
+    "enabled": false,
     "compact": true,
     "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
     "keywords": [
