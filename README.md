@@ -63,6 +63,7 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 |Shelly Plus 1 (shellyplus1)|---|supported since v5.0.0|
 |Shelly Plus 1 PM (shellyplus1pm)|---|supported since v5.0.0|
 |Shelly Plus 2 PM (shellyplus2pm)|---|supported since v5.2.0|
+|Shelly Plus I4 (shellyplusi4)|---|supported since v5.3.0|
 |Shelly Pro 1 (shellypro1)|---|supported since v5.2.0|
 |Shelly Pro 1 PM (shellypro1pm)|---|supported since v5.2.0|
 |Shelly Pro 2 (shellypro2)|---|supported since v5.2.0|
@@ -89,6 +90,7 @@ npm install xml2js@0.4.23`
 -->
 ### **WORK IN PROGRESS**
 
+* (klein0r) Added Shelly Plus I4
 * (klein0r) Fixed datatype error of Shelly 1/PM ext switch
 
 ### 5.2.0 (2022-02-16)
