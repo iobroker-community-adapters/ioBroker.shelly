@@ -21,6 +21,7 @@ class Shelly extends utils.Adapter {
 
         this.serverMqtt = null;
         this.serverCoap = null;
+        this.firmwareUpdateTimeout = null;
         this.onlineCheckTimeout = null;
 
         this.onlineDevices = {};
@@ -50,6 +51,8 @@ class Shelly extends utils.Adapter {
             // Start online check
             await this.setOnlineFalse();
             this.onlineCheck();
+
+            this.autoFirmwareUpdate();
 
             // Start MQTT server
             setImmediate(() => {
@@ -94,6 +97,8 @@ class Shelly extends utils.Adapter {
             objectHelper.handleStateChange(id, state);
 
             if (stateId === 'info.update') {
+                this.log.debug(`[firmwareUpdate] info.update state changed - starting update on every device`);
+
                 this.eventEmitter.emit('onFirmwareUpdate');
             }
         }
@@ -110,6 +115,11 @@ class Shelly extends utils.Adapter {
         }
 
         this.setOnlineFalse();
+
+        if (this.firmwareUpdateTimeout) {
+            this.clearTimeout(this.firmwareUpdateTimeout);
+            this.firmwareUpdateTimeout = null;
+        }
 
         try {
             this.log.info('Closing Adapter');
@@ -245,6 +255,19 @@ class Shelly extends utils.Adapter {
         }
 
         this.setStateAsync('info.connection', false, true);
+    }
+
+    autoFirmwareUpdate() {
+        if (this.config.autoupdate) {
+            this.log.debug(`[firmwareUpdate] Auto-Update enabled - starting update on every device`);
+
+            this.eventEmitter.emit('onFirmwareUpdate');
+
+            this.firmwareUpdateTimeout = this.setTimeout(() => {
+                this.firmwareUpdateTimeout = null;
+                this.autoFirmwareUpdate();
+            }, 15 * 60 * 1000); // Restart firmware update in 60 Seconds
+        }
     }
 
     removeNamespace(id) {
