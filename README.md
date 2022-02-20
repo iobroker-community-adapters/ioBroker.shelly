@@ -92,6 +92,7 @@ npm install xml2js@0.4.23`
 
 * (klein0r) Added Shelly Plus I4
 * (klein0r) Added more objects for power metering channels (current, voltage, limits, ...)
+* (klein0r) Moved device temperature of generation 2 devices to relays (this is the official way)
 * (klein0r) Fixed datatype error of Shelly 1/PM ext switch
 
 ### 5.2.0 (2022-02-16)
