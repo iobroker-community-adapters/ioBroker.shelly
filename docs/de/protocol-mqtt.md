@@ -4,6 +4,15 @@
 
 ## MQTT
 
+### Wichtige Hinweise
+
+- Es ist nicht möglich, den Shelly-Adapter mit einem existierenden MQTT-Broker in deinem Netzwerk zu verbinden
+- Der Shelly-Adapter startet einen eigenen MQTT-Broker, welcher auf dem Port ``1882`` gestartet wird, um einen Konflikt mit anderen MQTT-Brokern auf dem gleichen System zu vermeiden
+- Der Standard-Port des MQTT-Brokers kann in der Konfiguration des Adapters angepasst werden
+- Es ist kein Wissen über das MQTT-Protokoll erforderlich - sämtliche Kommunikation wird intern behandelt
+
+### Konfiguration
+
 1. Öffne die Shelly-Adapter Konfiguration im ioBroker
 2. Wähle ```MQTT und HTTP``` als *Protokoll* in den *Allgemeinen Einstellungen*
 3. Öffne das Tab **MQTT Einstellungen**
@@ -25,3 +34,5 @@ Aktiviere MQTT auf deinen Shelly-Geräten:
 ![shelly gen1](../shelly_mqtt-gen1.png)
 
 ![shelly gen2](../shelly_mqtt-gen2.png)
+
+**Für Generation 2 Geräte müssen alle RPC-Optionen aktiviert werden (siehe Screenshot)!**

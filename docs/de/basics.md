@@ -27,3 +27,4 @@ Der Adapter kann über CoAP oder MQTT mit den Geräten kommunizieren. Der Standa
 - [MQTT Protokoll](protocol-mqtt.md)
 - [Geschützter Login](restricted-login.md)
 - [Zustandsänderungen](state-changes.md)
+- [FAQ](faq.md)

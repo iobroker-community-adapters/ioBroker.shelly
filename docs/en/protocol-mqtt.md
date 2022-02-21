@@ -4,6 +4,15 @@
 
 ## MQTT
 
+### Important notes
+
+- It is not possible to connect the Shelly adapter to an existing MQTT broker in your network
+- The Shelly adapter starts an own broker which is running on the (non default) port ``1882`` to avoid conflicts with other MQTT brokers on the same system
+- You can change the port of the MQTT broker in the adapter settings
+- You don't need any knowledge about MQTT to use it - everything is handled internally
+
+### Configuration
+
 1. Open the Shelly Adapter configuration in ioBroker
 2. Choose ```MQTT and HTTP``` as *protocol* in the *general settings*
 3. Open the **mqtt settings** tab
@@ -25,3 +34,5 @@ Activate MQTT on all your Shelly devices:
 ![shelly gen1](../shelly_mqtt-gen1.png)
 
 ![shelly gen2](../shelly_mqtt-gen2.png)
+
+**You have to enable all RPC notification options for gen 2 devices (see screenshot)!**

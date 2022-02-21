@@ -27,3 +27,4 @@ You can use the adapter in CoAP or MQTT mode. The default mode is CoAP and you d
 - [MQTT protocol](protocol-mqtt.md)
 - [Restricted login](restricted-login.md)
 - [State changes](state-changes.md)
+- [FAQ](faq.md)
