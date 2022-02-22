@@ -202,11 +202,6 @@ class Shelly extends utils.Adapter {
 
         if (prevValue != status) {
             await this.setStateAsync(idOnline, { val: status, ack: true });
-            await this.extendObjectAsync(deviceId, {
-                common: {
-                    color: status ? '#46a100' : '#ff0400'
-                }
-            });
         }
 
         // Update connection state
@@ -249,7 +244,7 @@ class Shelly extends utils.Adapter {
             await this.setStateAsync(idOnline, { val: false, ack: true });
             await this.extendObjectAsync(deviceId, {
                 common: {
-                    color: '#ff0400'
+                    color: null // Remove color from previous versions
                 }
             });
         }
