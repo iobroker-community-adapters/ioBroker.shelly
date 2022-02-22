@@ -17,3 +17,9 @@ Du kannst die Konfiguration in deiner Shelly-Instanz jederzeit ändern. Alle Obj
 ## Ist es möglich, den Shelly-Adapter mit einem bestehenden MQTT-Broker zu verbinden?
 
 Es ist nicht möglich, den Shelly-Adapter mit einem existierenden MQTT-Broker in deinem Netzwerk zu verbinden. Der Shelly-Adapter startet einen eigenen MQTT-Broker, welcher auf dem Port ``1882`` gestartet wird, um einen Konflikt mit anderen MQTT-Brokern auf dem gleichen System zu vermeiden.
+
+## Kann ich weiterhin die Cloud-Verbindung nutzen, wenn ich mit dem Shelly-Adapter arbeite?
+
+Falls Du Geräte der ersten Generation verwendest, kann man MQTT und die Shelly-Cloud nicht gleichzeitig verwenden. In diesem Fall musst Du CoAP für die Integration nutzen, wenn Du die Cloud-Verbindung gleichzeitig nutzen möchtest.
+
+Geräte der Generation 2 können per MQTT verbunden werden und gleichzeitig die Cloud-Verbindung aufrecht erhalten.
