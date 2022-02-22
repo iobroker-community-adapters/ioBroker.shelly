@@ -144,8 +144,8 @@
     "keywords": [
       "shelly",
       "switch",
-      "smarthome",
-      "iobroker"
+      "coap",
+      "mqtt"
     ],
     "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
     "loglevel": "info",
