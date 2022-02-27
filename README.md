@@ -95,7 +95,8 @@ npm install xml2js@0.4.23`
 * (klein0r) Moved device temperature of generation 2 devices to relays (this is the official way)
 * (klein0r) Added Sys channel (eco mode, timezone, ...) for generation 1 devices
 * (klein0r) Fixed datatype error of Shelly 1/PM ext switch
-* (klein0r) Added option to enable/disable WiFi access point for generation 2 devices
+* (klein0r) Added option to enable/disable WiFi access point (generation 2 devices)
+* (klein0r) Added power limits for covers (generation 2 devices)
 * (klein0r) Removed colors for online state indication on device objects
 
 ### 5.2.0 (2022-02-16)
