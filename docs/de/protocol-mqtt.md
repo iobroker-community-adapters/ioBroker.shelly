@@ -31,8 +31,8 @@ Aktiviere MQTT auf deinen Shelly-Geräten:
 
 - Bei Gen1-Geräten: Ändere nicht den ```custom MQTT prefix``` (der Adapter wird nicht funktionieren, wenn Du diesen Wert anpasst)
 
-![shelly gen1](../shelly_mqtt-gen1.png)
+![shelly gen1](./img/shelly_mqtt-gen1.png)
 
-![shelly gen2](../shelly_mqtt-gen2.png)
+![shelly gen2](./img/shelly_mqtt-gen2.png)
 
 **Für Generation 2 Geräte müssen alle RPC-Optionen aktiviert werden (siehe Screenshot)!**

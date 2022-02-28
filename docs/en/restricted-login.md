@@ -20,7 +20,7 @@ Activate the login restriction on all your Shelly devices.
 4. Save the configuration - the Shelly will reboot automatically
 5. Ensure to configure the same username and password on all your Shelly devices
 
-![shelly gen 1](../shelly_restrict_login-gen1.png)
+![shelly gen 1](./img/shelly_restrict_login-gen1.png)
 
 ### Gen 2
 
@@ -29,4 +29,4 @@ Activate the login restriction on all your Shelly devices.
 3. Enable the authentication feature and enter the previously configured password
 4. Save the configuration
 
-![shelly gen 2](../shelly_restrict_login-gen2.png)
+![shelly gen 2](./img/shelly_restrict_login-gen2.png)

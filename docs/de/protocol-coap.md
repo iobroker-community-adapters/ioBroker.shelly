@@ -20,7 +20,7 @@ CoAP fügt alle Geräte in deinem Netzwerk hinzu. Falls Du einzelne Geräte auss
 
 ![iobroker_coap](./img/iobroker_coap.png)
 
-![shelly_coap](../shelly_coap.png)
+![shelly_coap](./img/shelly_coap.png)
 
 ### Wichtige Hinweise
 

@@ -20,7 +20,7 @@ CoAP will add all devices in your network. If you want to exclude some Shelly de
 
 ![iobroker_coap](./img/iobroker_coap.png)
 
-![shelly_coap](../shelly_coap.png)
+![shelly_coap](./img/shelly_coap.png)
 
 ### Important notes
 

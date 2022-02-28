@@ -20,7 +20,7 @@ Aktiviere den geschützten Zugriff auf allen Shelly-Geräten.
 4. Speichere die Konfiguration - der Shelly startet automatisch neu
 5. Stelle sicher, dass auf allen Shelly-Geräten die identischen Zugangsdaten konfiguriert werden
 
-![shelly gen 1](../shelly_restrict_login-gen1.png)
+![shelly gen 1](./img/shelly_restrict_login-gen1.png)
 
 ### Gen 2
 
@@ -29,4 +29,4 @@ Aktiviere den geschützten Zugriff auf allen Shelly-Geräten.
 3. Aktiviere das Passwort-Feature und gibt das gerade konfigurierte Passwort ein
 4. Speichere die KOnfiguration
 
-![shelly gen 2](../shelly_restrict_login-gen2.png)
+![shelly gen 2](./img/shelly_restrict_login-gen2.png)

@@ -31,8 +31,8 @@ Activate MQTT on all your Shelly devices:
 
 - For Gen1 devices: Do not change the ```custom MQTT prefix``` (the Adapter will not work if you change the prefix)
 
-![shelly gen1](../shelly_mqtt-gen1.png)
+![shelly gen1](./img/shelly_mqtt-gen1.png)
 
-![shelly gen2](../shelly_mqtt-gen2.png)
+![shelly gen2](./img/shelly_mqtt-gen2.png)
 
 **You have to enable all RPC notification options for gen 2 devices (see screenshot)!**
