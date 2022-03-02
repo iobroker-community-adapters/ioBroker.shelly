@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "5.3.0",
+    "version": "5.3.1",
     "news": {
+      "5.3.1": {
+        "en": "Don't ack new values directly after change",
+        "de": "Bestätigen Sie neue Werte nicht direkt nach der Änderung",
+        "ru": "Не подтверждайте новые значения сразу после изменения",
+        "pt": "Não aceite novos valores diretamente após a alteração",
+        "nl": "Bevestig nieuwe waarden niet direct na wijziging",
+        "fr": "Ne confirmez pas les nouvelles valeurs directement après le changement",
+        "it": "Non ack nuovi valori subito dopo la modifica",
+        "es": "No reconozca nuevos valores directamente después del cambio",
+        "pl": "Nie potwierdzaj nowych wartości bezpośrednio po zmianie",
+        "zh-cn": "不要在更改后直接确认新值"
+      },
       "5.3.0": {
         "en": "Added Shelly Plus I4\nAdded more objects for power metering channels (current, voltage, limits, ...)\nMoved device temperature of generation 2 devices to relays (this is the official way)\nAdded Sys channel (eco mode, timezone, ...) for generation 1 devices\nFixed datatype error of Shelly 1/PM ext switch\nAdded option to enable/disable WiFi access point (generation 2 devices)\nAdded power limits and position control for covers (generation 2 devices)\nRemoved colors for online state indication on device objects",
         "de": "Shelly Plus I4 hinzugefügt\nWeitere Objekte für Leistungsmesskanäle hinzugefügt (Strom, Spannung, Grenzwerte, ...)\nGerätetemperatur von Geräten der Generation 2 auf Relais verschoben (dies ist der offizielle Weg)\nSys-Kanal (Eco-Modus, Zeitzone, ...) für Geräte der Generation 1 hinzugefügt\nDatentypfehler von Shelly 1/PM ext switch behoben\nOption zum Aktivieren/Deaktivieren des WLAN-Zugangspunkts hinzugefügt (Generation 2-Geräte)\nLeistungsbegrenzungen und Positionskontrolle für Abdeckungen hinzugefügt (Generation 2 Geräte)\nFarben für die Anzeige des Online-Status auf Geräteobjekten entfernt",
@@ -74,18 +86,6 @@
         "es": "Estados de entrada agregados para dispositivos de generación 2\nSe corrigió la gestión del estado en línea y el indicador del adaptador.\nSe corrigió el tipo de datos de pulsación larga para algunos dispositivos\nEstados fijos de temperatura Fahrenheit\nCódigo de refactorización\nDocumentación actualizada",
         "pl": "Dodano stany wejściowe dla urządzeń generacji 2\nNaprawiono zarządzanie stanem online i wskaźnik adaptera\nNaprawiono typ danych typu long push dla niektórych urządzeń\nNaprawiono stany temperatury w stopniach Fahrenheita\nRefaktoryzacja kodu\nZaktualizowana dokumentacja",
         "zh-cn": "为第 2 代设备添加了输入状态\n修复在线状态管理和适配器指示器\n修复了某些设备的长推数据类型\n固定华氏温度状态\n代码重构\n更新的文档"
-      },
-      "5.0.0": {
-        "en": "Important: The adapter now requires at least Node.js 12.x, js-controller 3.3+ and Admin 5.1.25+\n* Shelly Plus Support (1, 1 PM)\n* Shelly Pro Support (4 PM)\n* Updated logo\n* Use class definition instead\n* Use internal encryption methods\n* Admin 5 config",
-        "de": "Wichtig: Der Adapter benötigt jetzt mindestens Node.js 12.x, js-controller 3.3+ und Admin 5.1.25+\n* Shelly Plus-Support (1, 1 PM)\n* Shelly Pro-Support (4 PM)\n* Aktualisiertes Logo\n* Verwenden Sie stattdessen die Klassendefinition\n* Verwenden Sie interne Verschlüsselungsmethoden\n* Admin-5-Konfiguration",
-        "ru": "Важно: теперь для адаптера требуется как минимум Node.js 12.x, js-controller 3.3+ и Admin 5.1.25+.\n* Поддержка Shelly Plus (1, 1 PM)\n* Поддержка Shelly Pro (4 PM)\n* Обновлен логотип\n* Вместо этого используйте определение класса\n* Используйте внутренние методы шифрования\n* Конфигурация администратора 5",
-        "pt": "Importante: o adaptador agora requer pelo menos Node.js 12.x, js-controller 3.3+ e Admin 5.1.25+\n* Suporte Shelly Plus (1, 1 PM)\n* Suporte Shelly Pro (4 PM)\n* Logotipo atualizado\n* Use a definição de classe em vez disso\n* Use métodos de criptografia interna\n* Configuração Admin 5",
-        "nl": "Belangrijk: de adapter vereist nu minimaal Node.js 12.x, js-controller 3.3+ en Admin 5.1.25+\n* Shelly Plus-ondersteuning (1, 1 PM)\n* Shelly Pro-ondersteuning (4 PM)\n* Bijgewerkt logo\n* Gebruik in plaats daarvan klassedefinitie\n* Gebruik interne coderingsmethoden\n* Beheerder 5 configuratie",
-        "fr": "Important : l'adaptateur nécessite désormais au moins Node.js 12.x, js-controller 3.3+ et Admin 5.1.25+\n* Assistance Shelly Plus (1, 1 PM)\n* Assistance Shelly Pro (4 PM)\n* Logo mis à jour\n* Utiliser la définition de classe à la place\n* Utiliser des méthodes de cryptage internes\n* Configuration de l'administrateur 5",
-        "it": "Importante: l'adattatore ora richiede almeno Node.js 12.x, js-controller 3.3+ e Admin 5.1.25+\n* Supporto Shelly Plus (1, 1 PM)\n* Supporto Shelly Pro (4 PM)\n* Logo aggiornato\n* Usa invece la definizione di classe\n* Usa metodi di crittografia interni\n* Configurazione amministratore 5",
-        "es": "Importante: el adaptador ahora requiere al menos Node.js 12.x, js-controller 3.3+ y Admin 5.1.25+\n* Soporte Shelly Plus (1, 1 PM)\n* Soporte de Shelly Pro (4 PM)\n* Logotipo actualizado\n* Utilice la definición de clase en su lugar\n* Utilice métodos de encriptación internos\n* Configuración de administrador 5",
-        "pl": "Ważne: Adapter wymaga teraz co najmniej Node.js 12.x, js-controller 3.3+ i Admin 5.1.25+\n* Wsparcie Shelly Plus (1, 1 PM)\n* Wsparcie Shelly Pro (4 PM)\n* Zaktualizowane logo\n* Zamiast tego użyj definicji klasy\n* Użyj wewnętrznych metod szyfrowania\n* Konfiguracja administratora 5",
-        "zh-cn": "重要提示：适配器现在至少需要 Node.js 12.x、js-controller 3.3+ 和 Admin 5.1.25+\n* Shelly Plus 支持 (1, 1 PM)\n* Shelly Pro 支持 (4 PM)\n* 更新标志\n* 使用类定义代替\n* 使用内部加密方法\n* 管理员 5 配置"
       }
     },
     "title": "Shelly",
