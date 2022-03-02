@@ -88,6 +88,10 @@ npm install xml2js@0.4.23`
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Don't ack new values directly after change
+
 ### 5.3.0 (2022-02-27)
 * (klein0r) Added Shelly Plus I4
 * (klein0r) Added more objects for power metering channels (current, voltage, limits, ...)
