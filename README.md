@@ -88,6 +88,10 @@ npm install xml2js@0.4.23`
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Added cover position status for generation 2 devices
+
 ### 5.3.1 (2022-03-02)
 
 * (klein0r) Don't ack new values directly after change
