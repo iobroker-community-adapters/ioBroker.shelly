@@ -58,3 +58,28 @@ These functions will be executed when the value of the state changes. You can us
 You cannot define/execute multiple ``xxxx_cmd`` types for one state.
 
 For CoAP, there is no ``cmd`` function.
+
+To **hide** a specific function, you can use the ``no_display`` flag on each type. Example:
+
+```javascript
+'Relay0.Timer': {
+    coap: {
+        http_publish: '/settings',
+        http_publish_funct: async (value, self) => { return await shellyHelper.getSetDuration(self, 'Relay0.Timer'); }
+    },
+    mqtt: {
+        no_display: true
+    },
+    common: {
+        'name': 'Duration',
+        'type': 'number',
+        'role': 'level.timer',
+        'read': true,
+        'write': true,
+        'def': 0,
+        'unit': 's'
+    }
+}
+```
+
+This object won't be available when using MQTT.
