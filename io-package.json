@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "5.3.1",
+    "version": "5.3.2",
     "news": {
+      "5.3.2": {
+        "en": "Added cover position status for generation 2 devices\nAdded cover power, voltage, current and energy for generation 2 devices\nUpdated switch roles for material ui (switch.power to switch)",
+        "de": "Positionsstatus der Abdeckung für Geräte der Generation 2 hinzugefügt\nAbdeckung von Leistung, Spannung, Strom und Energie für Geräte der Generation 2 hinzugefügt\nAktualisierte Switch-Rollen für die Material-Benutzeroberfläche (switch.power to switch)",
+        "ru": "Добавлен статус положения крышки для устройств поколения 2.\nДобавлено покрытие мощности, напряжения, тока и энергии для устройств поколения 2.\nОбновлены роли переключения для пользовательского интерфейса материалов (switch.power для переключения).",
+        "pt": "Adicionado status de posição da tampa para dispositivos de geração 2\nAdicionada potência de cobertura, tensão, corrente e energia para dispositivos de geração 2\nFunções de switch atualizadas para interface de usuário de material (switch.power para switch)",
+        "nl": "Status omslagpositie toegevoegd voor apparaten van generatie 2\nToegevoegd dekkingsvermogen, spanning, stroom en energie voor apparaten van generatie 2\nBijgewerkte schakelrollen voor materiële ui (switch.power to switch)",
+        "fr": "Ajout de l'état de la position de couverture pour les appareils de génération 2\nAjout de la puissance, de la tension, du courant et de l'énergie de couverture pour les appareils de génération 2\nRôles de commutateur mis à jour pour l'interface utilisateur matérielle (switch.power to switch)",
+        "it": "Aggiunto lo stato della posizione della copertura per i dispositivi di seconda generazione\nAggiunta potenza di copertura, voltaggio, corrente ed energia per i dispositivi di seconda generazione\nRuoli di commutazione aggiornati per l'interfaccia utente materiale (switch.power to switch)",
+        "es": "Se agregó el estado de la posición de la cubierta para los dispositivos de generación 2\nSe agregó cobertura de potencia, voltaje, corriente y energía para dispositivos de generación 2\nRoles de cambio actualizados para material ui (switch.power to switch)",
+        "pl": "Dodano status pozycji okładki dla urządzeń generacji 2\nDodano moc osłony, napięcie, prąd i energię dla urządzeń generacji 2\nZaktualizowano role przełączników w interfejsie materiałów (switch.power to switch)",
+        "zh-cn": "为第 2 代设备添加了封面位置状态\n增加了第 2 代设备的功率、电压、电流和能量\n更新了材质 ui 的切换角色（switch.power 切换）"
+      },
       "5.3.1": {
         "en": "Don't ack new values directly after change",
         "de": "Bestätigen Sie neue Werte nicht direkt nach der Änderung",
@@ -74,18 +86,6 @@
         "es": "Actualización automática de firmware fijo\nTiempos de espera actualizados\nFuente de comando agregada para Shelly 2.5\nSe agregó color para los objetos del dispositivo como indicador en línea.",
         "pl": "Naprawiono automatyczną aktualizację oprogramowania\nZaktualizowano limity czasu\nDodano źródło poleceń dla Shelly 2.5\nDodano kolor dla obiektów urządzenia jako wskaźnika online",
         "zh-cn": "固定固件自动更新\n更新超时\n为 shelly 2.5 添加了命令源\n为设备对象添加了颜色作为在线指示器"
-      },
-      "5.1.0": {
-        "en": "Added input states for generation 2 devices\nFixed online state management and adapter indicator\nFixed long push data type for some devices\nFixed fahrenheit temperature states\nCode refactoring\nUpdated documentation",
-        "de": "Eingangszustände für Geräte der Generation 2 hinzugefügt\nOnline-Statusverwaltung und Adapteranzeige behoben\nDatentyp „Long Push“ für einige Geräte korrigiert\nTemperaturzustände in Fahrenheit behoben\nCode Refactoring\nAktualisierte Dokumentation",
-        "ru": "Добавлены состояния ввода для устройств поколения 2.\nИсправлено онлайн-управление состоянием и индикатор адаптера.\nИсправлен тип данных long push для некоторых устройств\nИсправлены состояния температуры по Фаренгейту\nРефакторинг кода\nОбновленная документация",
-        "pt": "Adicionados estados de entrada para dispositivos de geração 2\nGerenciamento de estado online fixo e indicador de adaptador\nCorrigido o tipo de dados push longo para alguns dispositivos\nEstados de temperatura Fahrenheit fixos\nRefatoração de código\nDocumentação atualizada",
-        "nl": "Invoerstatussen toegevoegd voor apparaten van generatie 2\nVast online statusbeheer en adapterindicator\nVaste lange push-gegevenstype voor sommige apparaten\nVaste Fahrenheit-temperatuurstatussen\nCode refactoring\nBijgewerkte documentatie",
-        "fr": "Ajout d'états d'entrée pour les appareils de génération 2\nGestion de l'état en ligne fixe et indicateur d'adaptateur\nCorrection du type de données push long pour certains appareils\nÉtats de température Fahrenheit fixes\nRefonte du code\nDocumentation mise à jour",
-        "it": "Aggiunti stati di input per i dispositivi di seconda generazione\nRisolto il problema con la gestione dello stato online e l'indicatore dell'adattatore\nRisolto il problema con il tipo di dati push lungo per alcuni dispositivi\nRisolti gli stati di temperatura Fahrenheit\nRefactoring del codice\nDocumentazione aggiornata",
-        "es": "Estados de entrada agregados para dispositivos de generación 2\nSe corrigió la gestión del estado en línea y el indicador del adaptador.\nSe corrigió el tipo de datos de pulsación larga para algunos dispositivos\nEstados fijos de temperatura Fahrenheit\nCódigo de refactorización\nDocumentación actualizada",
-        "pl": "Dodano stany wejściowe dla urządzeń generacji 2\nNaprawiono zarządzanie stanem online i wskaźnik adaptera\nNaprawiono typ danych typu long push dla niektórych urządzeń\nNaprawiono stany temperatury w stopniach Fahrenheita\nRefaktoryzacja kodu\nZaktualizowana dokumentacja",
-        "zh-cn": "为第 2 代设备添加了输入状态\n修复在线状态管理和适配器指示器\n修复了某些设备的长推数据类型\n固定华氏温度状态\n代码重构\n更新的文档"
       }
     },
     "title": "Shelly",

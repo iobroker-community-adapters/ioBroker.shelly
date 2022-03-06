@@ -88,7 +88,7 @@ npm install xml2js@0.4.23`
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 5.3.2 (2022-03-06)
 * (klein0r) Added cover position status for generation 2 devices
 * (klein0r) Added cover power, voltage, current and energy for generation 2 devices
 * (klein0r) Updated switch roles for material ui (switch.power to switch)
