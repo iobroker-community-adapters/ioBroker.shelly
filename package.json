@@ -41,7 +41,6 @@
     "axios": "^0.26.1",
     "coiot-coap": "^1.0.0",
     "crypto": "^1.0.1",
-    "mqtt": "^4.3.7",
     "mqtt-connection": "^4.1.0",
     "shelly-iot": "^1.1.2",
     "tcp-ping": "^0.1.1",
