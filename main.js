@@ -5,8 +5,8 @@
 
 const utils = require('@iobroker/adapter-core');
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
-const mqttServer = require(__dirname + '/lib/protocol/mqtt');
-const coapServer = require(__dirname + '/lib/protocol/coap');
+const protocolMqtt = require(__dirname + '/lib/protocol/mqtt');
+const protocolCoap = require(__dirname + '/lib/protocol/coap');
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
 const EventEmitter = require('events').EventEmitter;
@@ -18,6 +18,8 @@ class Shelly extends utils.Adapter {
             ...options,
             name: adapterName,
         });
+
+        this.isUnloaded = false;
 
         this.serverMqtt = null;
         this.serverCoap = null;
@@ -62,7 +64,7 @@ class Shelly extends utils.Adapter {
                     if (!this.config.mqttusername || this.config.mqttusername.length === 0) { this.log.error('MQTT Username is missing!'); }
                     if (!this.config.mqttpassword || this.config.mqttpassword.length === 0) { this.log.error('MQTT Password is missing!'); }
 
-                    this.serverMqtt = new mqttServer.MQTTServer(this, objectHelper, this.eventEmitter);
+                    this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
                     this.serverMqtt.listen();
                 }
             });
@@ -71,7 +73,7 @@ class Shelly extends utils.Adapter {
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'coap') {
                     this.log.info('Starting in CoAP mode.');
-                    this.serverCoap = new coapServer.CoAPServer(this, objectHelper, this.eventEmitter);
+                    this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
                     this.serverCoap.listen();
                 }
             });
@@ -91,13 +93,12 @@ class Shelly extends utils.Adapter {
         if (state && !state.ack) {
             const stateId = id.replace(this.namespace + '.', '');
 
-            this.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
-            this.log.debug('stateChange ' + id + ' = ' + state.val);
+            this.log.debug(`[onStateChange] ${id}: ${JSON.stringify(state)}`);
 
             objectHelper.handleStateChange(id, state);
 
             if (stateId === 'info.update') {
-                this.log.debug(`[firmwareUpdate] info.update state changed - starting update on every device`);
+                this.log.debug(`[onStateChange] info.update state changed - starting update on every device`);
 
                 this.eventEmitter.emit('onFirmwareUpdate');
             }
@@ -109,6 +110,8 @@ class Shelly extends utils.Adapter {
     }
 
     onUnload(callback) {
+        this.isUnloaded = true;
+
         if (this.onlineCheckTimeout) {
             this.clearTimeout(this.onlineCheckTimeout);
             this.onlineCheckTimeout = null;
@@ -122,10 +125,11 @@ class Shelly extends utils.Adapter {
         }
 
         try {
-            this.log.info('Closing Adapter');
+            this.log.debug('[onUnload] Closing adapter');
 
             if (this.serverCoap) {
                 try {
+                    this.log.debug(`[onUnload] Stopping CoAP server`);
                     this.serverCoap.destroy();
                 } catch (err) {
                     // ignore
@@ -134,6 +138,7 @@ class Shelly extends utils.Adapter {
 
             if (this.serverMqtt) {
                 try {
+                    this.log.debug(`[onUnload] Stopping MQTT server`);
                     this.serverMqtt.destroy();
                 } catch (err) {
                     // ignore
@@ -166,7 +171,7 @@ class Shelly extends utils.Adapter {
                 const valHostname = stateHostaname ? stateHostaname.val : undefined;
 
                 if (valHostname) {
-                    this.log.debug(`onlineCheck of ${idHostname} on ${valHostname}:${valPort}`);
+                    this.log.debug(`[onlineCheck] Checking ${idHostname} on ${valHostname}:${valPort}`);
 
                     tcpPing.probe(valHostname, valPort, async (error, isAlive) => {
                         this.emit('deviceStatusUpdate', deviceId, isAlive);
@@ -184,14 +189,15 @@ class Shelly extends utils.Adapter {
     }
 
     async onDeviceStatusUpdate(deviceId, status) {
+        if (this.isUnloaded) return;
         if (!deviceId) return;
 
-        this.log.debug(`onDeviceStatusUpdate: ${deviceId}: ${status}`);
+        this.log.debug(`[onDeviceStatusUpdate] ${deviceId}: ${status}`);
 
         // Check if device object exists
         const knownDevices = await this.getAllDevices();
         if (knownDevices.indexOf(deviceId) === -1) {
-            this.log.silly(`${deviceId} is not in list of known devices: ${JSON.stringify(knownDevices)}`);
+            this.log.silly(`[onDeviceStatusUpdate] ${deviceId} is not in list of known devices: ${JSON.stringify(knownDevices)}`);
             return;
         }
 
@@ -217,7 +223,7 @@ class Shelly extends utils.Adapter {
 
         // Check online devices
         if (oldOnlineDeviceCount !== newOnlineDeviceCount) {
-            this.log.debug(`Online devices: ${JSON.stringify(Object.keys(this.onlineDevices))}`);
+            this.log.debug(`[onDeviceStatusUpdate] Online devices: ${JSON.stringify(Object.keys(this.onlineDevices))}`);
             if (newOnlineDeviceCount > 0) {
                 this.setStateAsync('info.connection', true, true);
             } else {
@@ -253,6 +259,7 @@ class Shelly extends utils.Adapter {
     }
 
     autoFirmwareUpdate() {
+        if (this.isUnloaded) return;
         if (this.config.autoupdate) {
             this.log.debug(`[firmwareUpdate] Auto-Update enabled - starting update on every device`);
 
