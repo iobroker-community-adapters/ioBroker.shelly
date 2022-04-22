@@ -89,6 +89,7 @@ npm install xml2js@0.4.23`
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+* (klein0r) Optimized unload process to avoid errors
 * (klein0r) Improved logging
 
 ### 5.3.2 (2022-03-06)
