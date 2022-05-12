@@ -202,12 +202,15 @@ class Shelly extends utils.Adapter {
         }
 
         // Update online status
-        const idOnline = deviceId + '.online';
+        const idOnline = `${deviceId}.online`;
         const onlineState = await this.getStateAsync(idOnline);
-        const prevValue = onlineState && onlineState.val ? (onlineState.val === 'true' || onlineState.val === true) : false;
 
-        if (prevValue != status) {
-            await this.setStateAsync(idOnline, { val: status, ack: true });
+        if (onlineState) {
+            const prevValue = onlineState.val ? (onlineState.val === 'true' || onlineState.val === true) : false;
+
+            if (prevValue != status) {
+                await this.setStateAsync(idOnline, { val: status, ack: true });
+            }
         }
 
         // Update connection state
