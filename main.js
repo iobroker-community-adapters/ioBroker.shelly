@@ -266,6 +266,7 @@ class Shelly extends utils.Adapter {
             });
         }
 
+        this.onlineDevices = {};
         this.setStateAsync('info.connection', false, true);
     }
 
