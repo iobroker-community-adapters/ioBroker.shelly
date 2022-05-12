@@ -248,9 +248,17 @@ class Shelly extends utils.Adapter {
         const deviceIds = await this.getAllDevices();
         for (const d in deviceIds) {
             const deviceId = deviceIds[d];
-            const idOnline = deviceId + '.online';
+            const idOnline = `${deviceId}.online`;
+            const onlineState = await this.getStateAsync(idOnline);
 
-            await this.setStateAsync(idOnline, { val: false, ack: true });
+            if (onlineState) {
+                const prevValue = onlineState.val ? (onlineState.val === 'true' || onlineState.val === true) : false;
+
+                if (prevValue) {
+                    await this.setStateAsync(idOnline, { val: false, ack: true });
+                }
+            }
+
             await this.extendObjectAsync(deviceId, {
                 common: {
                     color: null // Remove color from previous versions
