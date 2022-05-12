@@ -1,7 +1,7 @@
 /* jshint -W097 */// jshint strict:false
 /*jslint node: true */
 /*jshint expr: true*/
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 const shellyHelper = require('../lib/shelly-helper');
 
 describe('Test Shelly Helper', function() {
@@ -17,9 +17,9 @@ describe('Test Shelly Helper', function() {
         expect(shellyHelper.uptimeString(86399)).to.be.equal('23:59:59');
         expect(shellyHelper.uptimeString(86400)).to.be.equal('1D00:00:00');
         expect(shellyHelper.uptimeString(172800)).to.be.equal('2D00:00:00');
-        expect(shellyHelper.uptimeString(190478)).to.be.equal('2D04:54:38'); 
+        expect(shellyHelper.uptimeString(190478)).to.be.equal('2D04:54:38');
 
-        expect(shellyHelper.uptimeString("10")).to.be.equal('00:00:10');
+        expect(shellyHelper.uptimeString('10')).to.be.equal('00:00:10');
     });
 
 });
