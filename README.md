@@ -89,7 +89,8 @@ npm install xml2js@0.4.23`
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-* (klein0r) Uptime is now a number (seconds since boot)
+* (klein0r) **Breaking**: Configuration is only working in the new Admin 5 UI
+* (klein0r) **Breaking**: Uptime is now a number (seconds since boot)
 * (klein0r) Optimized unload process to avoid errors
 * (klein0r) Improved logging
 
