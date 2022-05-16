@@ -88,6 +88,14 @@
                     "md": 12,
                     "lg": 12,
                     "label": "Update objects even if there is no value change"
+                },
+                "logDebugMessages": {
+                    "newLine": true,
+                    "type": "checkbox",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "label": "Log Debug Messages"
                 }
             }
         },

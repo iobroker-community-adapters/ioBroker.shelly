@@ -17,5 +17,6 @@
     "Poll time in seconds": "以秒为单位的轮询时间",
     "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Shelly设备不显示..输入Shelly的设备ID，如8B22BD",
     "Shelly protocol": "雪莉协议",
-    "Update objects even if there is no value change": "即使值没有变化也要更新对象"
+    "Update objects even if there is no value change": "即使值没有变化也要更新对象",
+    "Log Debug Messages": "记录调试消息"
 }

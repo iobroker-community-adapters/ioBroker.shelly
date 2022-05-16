@@ -17,5 +17,6 @@
     "Poll time in seconds": "Czas ankiety w sekundach",
     "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Urządzenia Shelly, które nie będą wyświetlane. Wpisz identyfikator urządzenia Shelly, taki jak 8B22BD",
     "Shelly protocol": "Protokół Shelly",
-    "Update objects even if there is no value change": "Aktualizuj obiekty, nawet jeśli nie ma zmiany wartości"
+    "Update objects even if there is no value change": "Aktualizuj obiekty, nawet jeśli nie ma zmiany wartości",
+    "Log Debug Messages": "Zapisuj komunikaty debugowania"
 }

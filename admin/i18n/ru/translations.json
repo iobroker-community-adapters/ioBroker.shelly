@@ -17,5 +17,6 @@
     "Poll time in seconds": "Время опроса в секундах",
     "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Устройства Шелли, которые не должны отображаться. Введите идентификатор устройства Шелли, например 8B22BD",
     "Shelly protocol": "Протокол Шелли",
-    "Update objects even if there is no value change": "Обновлять объекты, даже если нет изменения значения"
+    "Update objects even if there is no value change": "Обновлять объекты, даже если нет изменения значения",
+    "Log Debug Messages": "Журнал отладочных сообщений"
 }

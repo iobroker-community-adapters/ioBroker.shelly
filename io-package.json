@@ -1,245 +1,244 @@
 {
-  "common": {
-    "name": "shelly",
-    "version": "5.3.2",
-    "news": {
-      "5.3.2": {
-        "en": "Added cover position status for generation 2 devices\nAdded cover power, voltage, current and energy for generation 2 devices\nUpdated switch roles for material ui (switch.power to switch)",
-        "de": "Positionsstatus der Abdeckung für Geräte der Generation 2 hinzugefügt\nAbdeckung von Leistung, Spannung, Strom und Energie für Geräte der Generation 2 hinzugefügt\nAktualisierte Switch-Rollen für die Material-Benutzeroberfläche (switch.power to switch)",
-        "ru": "Добавлен статус положения крышки для устройств поколения 2.\nДобавлено покрытие мощности, напряжения, тока и энергии для устройств поколения 2.\nОбновлены роли переключения для пользовательского интерфейса материалов (switch.power для переключения).",
-        "pt": "Adicionado status de posição da tampa para dispositivos de geração 2\nAdicionada potência de cobertura, tensão, corrente e energia para dispositivos de geração 2\nFunções de switch atualizadas para interface de usuário de material (switch.power para switch)",
-        "nl": "Status omslagpositie toegevoegd voor apparaten van generatie 2\nToegevoegd dekkingsvermogen, spanning, stroom en energie voor apparaten van generatie 2\nBijgewerkte schakelrollen voor materiële ui (switch.power to switch)",
-        "fr": "Ajout de l'état de la position de couverture pour les appareils de génération 2\nAjout de la puissance, de la tension, du courant et de l'énergie de couverture pour les appareils de génération 2\nRôles de commutateur mis à jour pour l'interface utilisateur matérielle (switch.power to switch)",
-        "it": "Aggiunto lo stato della posizione della copertura per i dispositivi di seconda generazione\nAggiunta potenza di copertura, voltaggio, corrente ed energia per i dispositivi di seconda generazione\nRuoli di commutazione aggiornati per l'interfaccia utente materiale (switch.power to switch)",
-        "es": "Se agregó el estado de la posición de la cubierta para los dispositivos de generación 2\nSe agregó cobertura de potencia, voltaje, corriente y energía para dispositivos de generación 2\nRoles de cambio actualizados para material ui (switch.power to switch)",
-        "pl": "Dodano status pozycji okładki dla urządzeń generacji 2\nDodano moc osłony, napięcie, prąd i energię dla urządzeń generacji 2\nZaktualizowano role przełączników w interfejsie materiałów (switch.power to switch)",
-        "zh-cn": "为第 2 代设备添加了封面位置状态\n增加了第 2 代设备的功率、电压、电流和能量\n更新了材质 ui 的切换角色（switch.power 切换）"
-      },
-      "5.3.1": {
-        "en": "Don't ack new values directly after change",
-        "de": "Bestätigen Sie neue Werte nicht direkt nach der Änderung",
-        "ru": "Не подтверждайте новые значения сразу после изменения",
-        "pt": "Não aceite novos valores diretamente após a alteração",
-        "nl": "Bevestig nieuwe waarden niet direct na wijziging",
-        "fr": "Ne confirmez pas les nouvelles valeurs directement après le changement",
-        "it": "Non ack nuovi valori subito dopo la modifica",
-        "es": "No reconozca nuevos valores directamente después del cambio",
-        "pl": "Nie potwierdzaj nowych wartości bezpośrednio po zmianie",
-        "zh-cn": "不要在更改后直接确认新值"
-      },
-      "5.3.0": {
-        "en": "Added Shelly Plus I4\nAdded more objects for power metering channels (current, voltage, limits, ...)\nMoved device temperature of generation 2 devices to relays (this is the official way)\nAdded Sys channel (eco mode, timezone, ...) for generation 1 devices\nFixed datatype error of Shelly 1/PM ext switch\nAdded option to enable/disable WiFi access point (generation 2 devices)\nAdded power limits and position control for covers (generation 2 devices)\nRemoved colors for online state indication on device objects",
-        "de": "Shelly Plus I4 hinzugefügt\nWeitere Objekte für Leistungsmesskanäle hinzugefügt (Strom, Spannung, Grenzwerte, ...)\nGerätetemperatur von Geräten der Generation 2 auf Relais verschoben (dies ist der offizielle Weg)\nSys-Kanal (Eco-Modus, Zeitzone, ...) für Geräte der Generation 1 hinzugefügt\nDatentypfehler von Shelly 1/PM ext switch behoben\nOption zum Aktivieren/Deaktivieren des WLAN-Zugangspunkts hinzugefügt (Generation 2-Geräte)\nLeistungsbegrenzungen und Positionskontrolle für Abdeckungen hinzugefügt (Generation 2 Geräte)\nFarben für die Anzeige des Online-Status auf Geräteobjekten entfernt",
-        "ru": "Добавлен Шелли Плюс I4\nДобавлено больше объектов для каналов учета электроэнергии (ток, напряжение, пределы, ...)\nТемпература устройства устройств поколения 2 перенесена на реле (это официальный способ)\nДобавлен канал Sys (эко-режим, часовой пояс, ...) для устройств поколения 1.\nИсправлена ошибка типа данных переключателя расширения Shelly 1/PM.\nДобавлена возможность включения/отключения точки доступа WiFi (устройства 2-го поколения)\nДобавлены ограничения мощности и контроль положения для крышек (устройства 2-го поколения)\nУдалены цвета для индикации онлайн-состояния на объектах устройств.",
-        "pt": "Adicionado Shelly Plus I4\nAdicionados mais objetos para canais de medição de energia (corrente, tensão, limites, ...)\nMovimentada a temperatura do dispositivo dos dispositivos da geração 2 para os relés (esta é a maneira oficial)\nAdicionado canal Sys (modo eco, fuso horário, ...) para dispositivos de geração 1\nCorrigido o erro de tipo de dados do switch Shelly 1/PM ext\nAdicionada opção para ativar/desativar ponto de acesso WiFi (dispositivos de geração 2)\nAdicionados limites de energia e controle de posição para tampas (dispositivos de geração 2)\nCores removidas para indicação de estado online em objetos de dispositivo",
-        "nl": "Shelly Plus I4 toegevoegd\nMeer objecten toegevoegd voor vermogensmeetkanalen (stroom, spanning, limieten, ...)\nApparaattemperatuur van apparaten van generatie 2 verplaatst naar relais (dit is de officiële manier)\nSys-kanaal toegevoegd (eco-modus, tijdzone, ...) voor generatie 1-apparaten\nVaste datatypefout van Shelly 1/PM ext switch\nOptie toegevoegd om WiFi-toegangspunt in/uit te schakelen (generatie 2-apparaten)\nToegevoegde vermogenslimieten en positieregeling voor afdekkingen (generatie 2-apparaten)\nKleuren verwijderd voor online statusindicatie op apparaatobjecten",
-        "fr": "Ajout de Shelly Plus I4\nAjout de plus d'objets pour les canaux de mesure de puissance (courant, tension, limites, ...)\nDéplacement de la température de l'appareil des appareils de génération 2 vers les relais (c'est la méthode officielle)\nAjout du canal Sys (mode éco, fuseau horaire, ...) pour les appareils de génération 1\nErreur de type de données fixe du commutateur Shelly 1/PM ext\nAjout d'une option pour activer/désactiver le point d'accès WiFi (appareils de génération 2)\nAjout de limites de puissance et de contrôle de position pour les couvercles (appareils de génération 2)\nSuppression des couleurs pour l'indication d'état en ligne sur les objets de l'appareil",
-        "it": "Aggiunto Shelly Plus I4\nAggiunti più oggetti per i canali di misurazione della potenza (corrente, tensione, limiti, ...)\nSpostata la temperatura del dispositivo dei dispositivi di generazione 2 sui relè (questo è il modo ufficiale)\nAggiunto canale Sys (modalità eco, fuso orario, ...) per i dispositivi di prima generazione\nRisolto l'errore del tipo di dati dello switch Shelly 1/PM ext\nAggiunta opzione per abilitare/disabilitare il punto di accesso WiFi (dispositivi di seconda generazione)\nAggiunti limiti di potenza e controllo della posizione per le coperture (dispositivi di seconda generazione)\nRimossi i colori per l'indicazione dello stato online sugli oggetti del dispositivo",
-        "es": "Añadido Shelly Plus I4\nSe agregaron más objetos para los canales de medición de energía (corriente, voltaje, límites, ...)\nSe movió la temperatura del dispositivo de los dispositivos de generación 2 a los relés (esta es la forma oficial)\nSe agregó el canal Sys (modo eco, zona horaria, ...) para dispositivos de generación 1\nSe corrigió el error de tipo de datos del interruptor externo Shelly 1/PM\nOpción agregada para habilitar/deshabilitar el punto de acceso WiFi (dispositivos de generación 2)\nSe agregaron límites de potencia y control de posición para cubiertas (dispositivos de generación 2)\nColores eliminados para la indicación de estado en línea en los objetos del dispositivo",
-        "pl": "Dodano Shelly Plus I4\nDodano więcej obiektów dla kanałów pomiaru mocy (prąd, napięcie, limity, ...)\nPrzeniesiono temperaturę urządzeń generacji 2 na przekaźniki (jest to oficjalny sposób)\nDodano kanał Sys (tryb ekologiczny, strefa czasowa, ...) dla urządzeń generacji 1\nNaprawiono błąd typu danych przełącznika Shelly 1/PM ext\nDodano opcję włączania/wyłączania punktu dostępowego Wi-Fi (urządzenia generacji 2)\nDodano limity mocy i kontrolę położenia osłon (urządzenia generacji 2)\nUsunięto kolory dla wskazania stanu online na obiektach urządzenia",
-        "zh-cn": "添加了 Shelly Plus I4\n为功率计量通道添加了更多对象（电流、电压、限制……）\n将第 2 代设备的设备温度移动到继电器（这是官方方式）\n为第 1 代设备添加了系统通道（生态模式、时区...）\n修复了 Shelly 1/PM ext 开关的数据类型错误\n添加了启用/禁用 WiFi 接入点的选项（第 2 代设备）\n增加了盖子的功率限制和位置控制（第 2 代设备）\n移除了设备对象上在线状态指示的颜色"
-      },
-      "5.2.0": {
-        "en": "Added Shelly Pro 1\nAdded Shelly Pro 1 PM\nAdded Shelly Pro 2\nAdded Shelly Pro 2 PM\nAdded Shelly Plus 2 PM\nAllow to change device and channel names of generation 2 devices\nAdded auto on/off timers for generation 2 devices\nAdded input mode, events and initial state for generation 2 devices\nAdded support of covers / shutters for generation 2 devices\nReplaced node-fetch with axios (also for digest auth)",
-        "de": "Shelly Pro 1 hinzugefügt\nShelly Pro 1 PM hinzugefügt\nShelly Pro 2 hinzugefügt\nShelly Pro 2 PM hinzugefügt\nShelly Plus 2 PM hinzugefügt\nErmöglicht das Ändern von Geräte- und Kanalnamen von Geräten der Generation 2\nAuto-On/Off-Timer für Geräte der Generation 2 hinzugefügt\nEingabemodus, Ereignisse und Anfangszustand für Geräte der Generation 2 hinzugefügt\nUnterstützung von Abdeckungen/Verschlüssen für Geräte der Generation 2 hinzugefügt\nNode-Fetch durch Axios ersetzt (auch für Digest-Authentifizierung)",
-        "ru": "Добавлен Шелли Про 1\nДобавлен Шелли Про 1\nДобавлен Шелли Про 2\nДобавлен Шелли Про 2\nДобавлен Шелли Плюс 2\nРазрешить изменять имена устройств и каналов устройств поколения 2\nДобавлены таймеры автоматического включения/выключения для устройств 2-го поколения.\nДобавлен режим ввода, события и начальное состояние для устройств поколения 2.\nДобавлена поддержка крышек/жалюзи для устройств поколения 2\nNode-fetch заменен на axios (также для дайджест-аутентификации)",
-        "pt": "Adicionado Shelly Pro 1\nAdicionado Shelly Pro 1\nAdicionado Shelly Pro 2\nAdicionado Shelly Pro 2\nAdicionado Shelly Plus 2\nPermitir alterar nomes de dispositivos e canais de dispositivos de geração 2\nAdicionados temporizadores automáticos de ligar/desligar para dispositivos de geração 2\nAdicionado modo de entrada, eventos e estado inicial para dispositivos de geração 2\nAdicionado suporte de tampas / persianas para dispositivos de geração 2\nSubstituição de busca de nó por axios (também para autenticação de resumo)",
-        "nl": "Shelly Pro 1 toegevoegd\nShelly Pro om 1 toegevoegd\nShelly Pro 2 toegevoegd\nShelly Pro 2 toegevoegd\nShelly Plus 2 toegevoegd\nToestaan om apparaat- en kanaalnamen van generatie 2-apparaten te wijzigen\nAutomatische aan/uit-timers toegevoegd voor apparaten van generatie 2\nInvoermodus, gebeurtenissen en beginstatus toegevoegd voor apparaten van generatie 2\nOndersteuning toegevoegd voor covers / shutters voor generatie 2 apparaten\nNode-fetch vervangen door axios (ook voor digest auth)",
-        "fr": "Ajout de Shelly Pro 1\nAjout de Shelly Pro 1\nAjout de Shelly Pro 2\nAjout de Shelly Pro 2 PM\nAjout de Shelly Plus 2 PM\nAutoriser la modification des noms d'appareils et de canaux des appareils de génération 2\nAjout de minuteries marche/arrêt automatiques pour les appareils de génération 2\nAjout du mode d'entrée, des événements et de l'état initial pour les appareils de génération 2\nAjout de la prise en charge des couvertures/obturateurs pour les appareils de génération 2\nNode-fetch remplacé par axios (également pour Digest Auth)",
-        "it": "Aggiunto Shelly Pro 1\nAggiunto Shelly Pro 1\nAggiunto Shelly Pro 2\nAggiunto Shelly Pro 2 PM\nAggiunto Shelly Plus 2\nConsenti di cambiare i nomi dei dispositivi e dei canali dei dispositivi di generazione 2\nAggiunti timer di accensione/spegnimento automatici per i dispositivi di seconda generazione\nAggiunta modalità di input, eventi e stato iniziale per i dispositivi di seconda generazione\nAggiunto supporto per coperture/persiane per dispositivi di generazione 2\nSostituito node-fetch con axios (anche per digest auth)",
-        "es": "Añadido Shelly Pro 1\nSe agregó Shelly Pro 1\nAñadido Shelly Pro 2\nSe agregó Shelly Pro 2 PM\nSe agregó Shelly Plus 2\nPermitir cambiar los nombres de los dispositivos y canales de los dispositivos de generación 2\nTemporizadores de encendido/apagado automático agregados para dispositivos de generación 2\nModo de entrada agregado, eventos y estado inicial para dispositivos de generación 2\nSe agregó soporte de cubiertas / persianas para dispositivos de generación 2\nSe reemplazó la búsqueda de nodos con axios (también para autenticación de resumen)",
-        "pl": "Dodano Shelly Pro 1\nDodano Shelly Pro o 1\nDodano Shelly Pro 2\nDodano Shelly Pro 2\nDodano Shelly Plus 2\nZezwalaj na zmianę nazw urządzeń i kanałów urządzeń generacji 2\nDodano zegary automatycznego włączania/wyłączania dla urządzeń generacji 2\nDodano tryb wejścia, zdarzenia i stan początkowy dla urządzeń generacji 2\nDodano obsługę osłon / rolet dla urządzeń generacji 2\nZamieniono pobieranie węzła na axios (również dla auth skrótu)",
-        "zh-cn": "添加了 Shelly Pro 1\n添加了 Shelly Pro 下午 1 点\n添加了 Shelly Pro 2\n添加了 Shelly Pro 2 PM\n添加了 Shelly Plus 2 PM\n允许更改第 2 代设备的设备和通道名称\n为第 2 代设备添加了自动开/关计时器\n为第 2 代设备添加了输入模式、事件和初始状态\n增加了对第 2 代设备的盖板/百叶窗的支持\n将 node-fetch 替换为 axios（也用于摘要身份验证）"
-      },
-      "5.1.3": {
-        "en": "Changed common.states strings to objects\nJust perform firmware update if an available update was detected\nExtended logging for CoAP",
-        "de": "common.states-Strings in Objekte geändert\nFühren Sie einfach ein Firmware-Update durch, wenn ein verfügbares Update erkannt wurde\nErweiterte Protokollierung für CoAP",
-        "ru": "Изменены строки common.states на объекты\nПросто выполните обновление прошивки, если было обнаружено доступное обновление.\nРасширенное ведение журнала для CoAP",
-        "pt": "Strings common.states alteradas para objetos\nBasta realizar a atualização do firmware se uma atualização disponível foi detectada\nRegistro estendido para CoAP",
-        "nl": "Common.states-tekenreeksen gewijzigd in objecten\nVoer gewoon een firmware-update uit als er een beschikbare update is gedetecteerd\nUitgebreide logging voor CoAP",
-        "fr": "Modification des chaînes common.states en objets\nEffectuez simplement la mise à jour du micrologiciel si une mise à jour disponible a été détectée\nJournalisation étendue pour CoAP",
-        "it": "Modificate le stringhe common.states in oggetti\nBasta eseguire l'aggiornamento del firmware se è stato rilevato un aggiornamento disponibile\nRegistrazione estesa per CoAP",
-        "es": "Se cambiaron las cadenas common.states a objetos.\nSimplemente realice una actualización de firmware si se detectó una actualización disponible\nRegistro extendido para CoAP",
-        "pl": "Zmieniono ciągi common.states na obiekty\nPo prostu wykonaj aktualizację oprogramowania układowego, jeśli zostanie wykryta dostępna aktualizacja\nRozszerzone logowanie dla CoAP",
-        "zh-cn": "将 common.states 字符串更改为对象\n如果检测到可用更新，只需执行固件更新\nCoAP 的扩展日志记录"
-      },
-      "5.1.2": {
-        "en": "Fixed Shelly UNI ADC voltage\nFixed dimmer brightness values handling\nLogging improvements for offline devices",
-        "de": "Feste Shelly UNI ADC-Spannung\nDie Handhabung der Dimmer-Helligkeitswerte wurde korrigiert\nProtokollierungsverbesserungen für Offline-Geräte",
-        "ru": "Фиксированное напряжение Shelly UNI ADC\nИсправлена обработка значений яркости диммера\nУлучшения ведения журналов для автономных устройств",
-        "pt": "Tensão Shelly UNI ADC fixa\nManipulação de valores de brilho de dimmer fixo\nMelhorias de registro para dispositivos offline",
-        "nl": "Vaste Shelly UNI ADC-spanning\nVaste dimmer helderheidswaarden verwerking\nLogboekverbeteringen voor offline apparaten",
-        "fr": "Tension Shelly UNI ADC fixe\nGestion des valeurs de luminosité du gradateur fixe\nAméliorations de la journalisation pour les appareils hors ligne",
-        "it": "Tensione Shelly UNI ADC fissa\nRisolto il problema con la gestione dei valori di luminosità più deboli\nMiglioramenti alla registrazione per i dispositivi offline",
-        "es": "Voltaje fijo Shelly UNI ADC\nManejo de valores de brillo de dimmer fijo\nMejoras en el registro para dispositivos sin conexión",
-        "pl": "Naprawiono napięcie Shelly UNI ADC\nNaprawiono obsługę wartości jasności ściemniacza\nUlepszenia logowania dla urządzeń offline",
-        "zh-cn": "固定 Shelly UNI ADC 电压\n固定调光器亮度值处理\n离线设备的日志记录改进"
-      },
-      "5.1.1": {
-        "en": "Fixed firmware auto update\nUpdated timeouts\nAdded command source for shelly 2.5\nAdded color for device objects as online indicator",
-        "de": "Automatisches Firmware-Update behoben\nAktualisierte Zeitüberschreitungen\nBefehlsquelle für Shelly 2.5 hinzugefügt\nFarbe für Geräteobjekte als Online-Anzeige hinzugefügt",
-        "ru": "Исправлено автоматическое обновление прошивки\nОбновленные тайм-ауты\nДобавлен источник команд для shelly 2.5.\nДобавлен цвет для объектов устройства в качестве онлайн-индикатора.",
-        "pt": "Atualização automática de firmware corrigida\nTempos limite atualizados\nFonte de comando adicionada para shelly 2.5\nCor adicionada para objetos de dispositivo como indicador online",
-        "nl": "Vaste automatische firmware-update\nBijgewerkte time-outs\nCommandobron toegevoegd voor shelly 2.5\nKleur toegevoegd voor apparaatobjecten als online indicator",
-        "fr": "Correction de la mise à jour automatique du firmware\nDélais d'attente mis à jour\nAjout de la source de commande pour shelly 2.5\nAjout de couleur pour les objets de l'appareil en tant qu'indicateur en ligne",
-        "it": "Risolto il problema con l'aggiornamento automatico del firmware\nTimeout aggiornati\nAggiunta la sorgente dei comandi per shelly 2.5\nAggiunto colore per gli oggetti del dispositivo come indicatore online",
-        "es": "Actualización automática de firmware fijo\nTiempos de espera actualizados\nFuente de comando agregada para Shelly 2.5\nSe agregó color para los objetos del dispositivo como indicador en línea.",
-        "pl": "Naprawiono automatyczną aktualizację oprogramowania\nZaktualizowano limity czasu\nDodano źródło poleceń dla Shelly 2.5\nDodano kolor dla obiektów urządzenia jako wskaźnika online",
-        "zh-cn": "固定固件自动更新\n更新超时\n为 shelly 2.5 添加了命令源\n为设备对象添加了颜色作为在线指示器"
-      }
-    },
-    "title": "Shelly",
-    "titleLang": {
-      "en": "Shelly",
-      "de": "Shelly",
-      "ru": "изобилующий раковинами",
-      "pt": "Shelly",
-      "nl": "schaalachtig",
-      "fr": "Shelly",
-      "it": "Shelly",
-      "es": "Shelly",
-      "pl": "Shelly",
-      "zh-cn": "谢莉"
-    },
-    "desc": {
-      "en": "Integrate your Shelly devices",
-      "de": "Integrieren Sie Ihre Shelly-Geräte",
-      "ru": "Интегрируйте свои устройства Shelly",
-      "pt": "Integre seus dispositivos Shelly",
-      "nl": "Integreer uw Shelly-apparaten",
-      "fr": "Intégrez vos appareils Shelly",
-      "it": "Integra i tuoi dispositivi Shelly",
-      "es": "Integre sus dispositivos Shelly",
-      "pl": "Zintegruj swoje urządzenia Shelly",
-      "zh-cn": "集成您的 Shelly 设备"
-    },
-    "license": "MIT",
-    "authors": [
-      "Thorsten Stueben <thorsten@stueben.de>",
-      "Apollon77 <iobroker@fischer-ka.de>",
-      "Matthias Kleine <info@haus-automatisierung.com>"
-    ],
-    "docs": {
-      "en": [
-        "docs/en/basics.md",
-        "docs/en/protocol-coap.md",
-        "docs/en/protocol-mqtt.md",
-        "docs/en/restricted-login.md",
-        "docs/en/state-changes.md"
-      ],
-      "de": [
-        "docs/de/basics.md",
-        "docs/de/protocol-coap.md",
-        "docs/de/protocol-mqtt.md",
-        "docs/de/restricted-login.md",
-        "docs/de/state-changes.md"
-      ]
-    },
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "icon": "shelly.png",
-    "enabled": false,
-    "compact": true,
-    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
-    "keywords": [
-      "shelly",
-      "switch",
-      "coap",
-      "mqtt"
-    ],
-    "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
-    "loglevel": "info",
-    "type": "iot-systems",
-    "restartAdapters": [],
-    "connectionType": "local",
-    "dataSource": "push",
-    "tier": 2,
-    "plugins": {
-      "sentry": {
-        "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
-        "pathWhitelist": [
-          "@apollon",
-          "shelly-iot"
+    "common": {
+        "name": "shelly",
+        "version": "5.3.2",
+        "news": {
+            "5.3.2": {
+                "en": "Added cover position status for generation 2 devices\nAdded cover power, voltage, current and energy for generation 2 devices\nUpdated switch roles for material ui (switch.power to switch)",
+                "de": "Positionsstatus der Abdeckung für Geräte der Generation 2 hinzugefügt\nAbdeckung von Leistung, Spannung, Strom und Energie für Geräte der Generation 2 hinzugefügt\nAktualisierte Switch-Rollen für die Material-Benutzeroberfläche (switch.power to switch)",
+                "ru": "Добавлен статус положения крышки для устройств поколения 2.\nДобавлено покрытие мощности, напряжения, тока и энергии для устройств поколения 2.\nОбновлены роли переключения для пользовательского интерфейса материалов (switch.power для переключения).",
+                "pt": "Adicionado status de posição da tampa para dispositivos de geração 2\nAdicionada potência de cobertura, tensão, corrente e energia para dispositivos de geração 2\nFunções de switch atualizadas para interface de usuário de material (switch.power para switch)",
+                "nl": "Status omslagpositie toegevoegd voor apparaten van generatie 2\nToegevoegd dekkingsvermogen, spanning, stroom en energie voor apparaten van generatie 2\nBijgewerkte schakelrollen voor materiële ui (switch.power to switch)",
+                "fr": "Ajout de l'état de la position de couverture pour les appareils de génération 2\nAjout de la puissance, de la tension, du courant et de l'énergie de couverture pour les appareils de génération 2\nRôles de commutateur mis à jour pour l'interface utilisateur matérielle (switch.power to switch)",
+                "it": "Aggiunto lo stato della posizione della copertura per i dispositivi di seconda generazione\nAggiunta potenza di copertura, voltaggio, corrente ed energia per i dispositivi di seconda generazione\nRuoli di commutazione aggiornati per l'interfaccia utente materiale (switch.power to switch)",
+                "es": "Se agregó el estado de la posición de la cubierta para los dispositivos de generación 2\nSe agregó cobertura de potencia, voltaje, corriente y energía para dispositivos de generación 2\nRoles de cambio actualizados para material ui (switch.power to switch)",
+                "pl": "Dodano status pozycji okładki dla urządzeń generacji 2\nDodano moc osłony, napięcie, prąd i energię dla urządzeń generacji 2\nZaktualizowano role przełączników w interfejsie materiałów (switch.power to switch)",
+                "zh-cn": "为第 2 代设备添加了封面位置状态\n增加了第 2 代设备的功率、电压、电流和能量\n更新了材质 ui 的切换角色（switch.power 切换）"
+            },
+            "5.3.1": {
+                "en": "Don't ack new values directly after change",
+                "de": "Bestätigen Sie neue Werte nicht direkt nach der Änderung",
+                "ru": "Не подтверждайте новые значения сразу после изменения",
+                "pt": "Não aceite novos valores diretamente após a alteração",
+                "nl": "Bevestig nieuwe waarden niet direct na wijziging",
+                "fr": "Ne confirmez pas les nouvelles valeurs directement après le changement",
+                "it": "Non ack nuovi valori subito dopo la modifica",
+                "es": "No reconozca nuevos valores directamente después del cambio",
+                "pl": "Nie potwierdzaj nowych wartości bezpośrednio po zmianie",
+                "zh-cn": "不要在更改后直接确认新值"
+            },
+            "5.3.0": {
+                "en": "Added Shelly Plus I4\nAdded more objects for power metering channels (current, voltage, limits, ...)\nMoved device temperature of generation 2 devices to relays (this is the official way)\nAdded Sys channel (eco mode, timezone, ...) for generation 1 devices\nFixed datatype error of Shelly 1/PM ext switch\nAdded option to enable/disable WiFi access point (generation 2 devices)\nAdded power limits and position control for covers (generation 2 devices)\nRemoved colors for online state indication on device objects",
+                "de": "Shelly Plus I4 hinzugefügt\nWeitere Objekte für Leistungsmesskanäle hinzugefügt (Strom, Spannung, Grenzwerte, ...)\nGerätetemperatur von Geräten der Generation 2 auf Relais verschoben (dies ist der offizielle Weg)\nSys-Kanal (Eco-Modus, Zeitzone, ...) für Geräte der Generation 1 hinzugefügt\nDatentypfehler von Shelly 1/PM ext switch behoben\nOption zum Aktivieren/Deaktivieren des WLAN-Zugangspunkts hinzugefügt (Generation 2-Geräte)\nLeistungsbegrenzungen und Positionskontrolle für Abdeckungen hinzugefügt (Generation 2 Geräte)\nFarben für die Anzeige des Online-Status auf Geräteobjekten entfernt",
+                "ru": "Добавлен Шелли Плюс I4\nДобавлено больше объектов для каналов учета электроэнергии (ток, напряжение, пределы, ...)\nТемпература устройства устройств поколения 2 перенесена на реле (это официальный способ)\nДобавлен канал Sys (эко-режим, часовой пояс, ...) для устройств поколения 1.\nИсправлена ошибка типа данных переключателя расширения Shelly 1/PM.\nДобавлена возможность включения/отключения точки доступа WiFi (устройства 2-го поколения)\nДобавлены ограничения мощности и контроль положения для крышек (устройства 2-го поколения)\nУдалены цвета для индикации онлайн-состояния на объектах устройств.",
+                "pt": "Adicionado Shelly Plus I4\nAdicionados mais objetos para canais de medição de energia (corrente, tensão, limites, ...)\nMovimentada a temperatura do dispositivo dos dispositivos da geração 2 para os relés (esta é a maneira oficial)\nAdicionado canal Sys (modo eco, fuso horário, ...) para dispositivos de geração 1\nCorrigido o erro de tipo de dados do switch Shelly 1/PM ext\nAdicionada opção para ativar/desativar ponto de acesso WiFi (dispositivos de geração 2)\nAdicionados limites de energia e controle de posição para tampas (dispositivos de geração 2)\nCores removidas para indicação de estado online em objetos de dispositivo",
+                "nl": "Shelly Plus I4 toegevoegd\nMeer objecten toegevoegd voor vermogensmeetkanalen (stroom, spanning, limieten, ...)\nApparaattemperatuur van apparaten van generatie 2 verplaatst naar relais (dit is de officiële manier)\nSys-kanaal toegevoegd (eco-modus, tijdzone, ...) voor generatie 1-apparaten\nVaste datatypefout van Shelly 1/PM ext switch\nOptie toegevoegd om WiFi-toegangspunt in/uit te schakelen (generatie 2-apparaten)\nToegevoegde vermogenslimieten en positieregeling voor afdekkingen (generatie 2-apparaten)\nKleuren verwijderd voor online statusindicatie op apparaatobjecten",
+                "fr": "Ajout de Shelly Plus I4\nAjout de plus d'objets pour les canaux de mesure de puissance (courant, tension, limites, ...)\nDéplacement de la température de l'appareil des appareils de génération 2 vers les relais (c'est la méthode officielle)\nAjout du canal Sys (mode éco, fuseau horaire, ...) pour les appareils de génération 1\nErreur de type de données fixe du commutateur Shelly 1/PM ext\nAjout d'une option pour activer/désactiver le point d'accès WiFi (appareils de génération 2)\nAjout de limites de puissance et de contrôle de position pour les couvercles (appareils de génération 2)\nSuppression des couleurs pour l'indication d'état en ligne sur les objets de l'appareil",
+                "it": "Aggiunto Shelly Plus I4\nAggiunti più oggetti per i canali di misurazione della potenza (corrente, tensione, limiti, ...)\nSpostata la temperatura del dispositivo dei dispositivi di generazione 2 sui relè (questo è il modo ufficiale)\nAggiunto canale Sys (modalità eco, fuso orario, ...) per i dispositivi di prima generazione\nRisolto l'errore del tipo di dati dello switch Shelly 1/PM ext\nAggiunta opzione per abilitare/disabilitare il punto di accesso WiFi (dispositivi di seconda generazione)\nAggiunti limiti di potenza e controllo della posizione per le coperture (dispositivi di seconda generazione)\nRimossi i colori per l'indicazione dello stato online sugli oggetti del dispositivo",
+                "es": "Añadido Shelly Plus I4\nSe agregaron más objetos para los canales de medición de energía (corriente, voltaje, límites, ...)\nSe movió la temperatura del dispositivo de los dispositivos de generación 2 a los relés (esta es la forma oficial)\nSe agregó el canal Sys (modo eco, zona horaria, ...) para dispositivos de generación 1\nSe corrigió el error de tipo de datos del interruptor externo Shelly 1/PM\nOpción agregada para habilitar/deshabilitar el punto de acceso WiFi (dispositivos de generación 2)\nSe agregaron límites de potencia y control de posición para cubiertas (dispositivos de generación 2)\nColores eliminados para la indicación de estado en línea en los objetos del dispositivo",
+                "pl": "Dodano Shelly Plus I4\nDodano więcej obiektów dla kanałów pomiaru mocy (prąd, napięcie, limity, ...)\nPrzeniesiono temperaturę urządzeń generacji 2 na przekaźniki (jest to oficjalny sposób)\nDodano kanał Sys (tryb ekologiczny, strefa czasowa, ...) dla urządzeń generacji 1\nNaprawiono błąd typu danych przełącznika Shelly 1/PM ext\nDodano opcję włączania/wyłączania punktu dostępowego Wi-Fi (urządzenia generacji 2)\nDodano limity mocy i kontrolę położenia osłon (urządzenia generacji 2)\nUsunięto kolory dla wskazania stanu online na obiektach urządzenia",
+                "zh-cn": "添加了 Shelly Plus I4\n为功率计量通道添加了更多对象（电流、电压、限制……）\n将第 2 代设备的设备温度移动到继电器（这是官方方式）\n为第 1 代设备添加了系统通道（生态模式、时区...）\n修复了 Shelly 1/PM ext 开关的数据类型错误\n添加了启用/禁用 WiFi 接入点的选项（第 2 代设备）\n增加了盖子的功率限制和位置控制（第 2 代设备）\n移除了设备对象上在线状态指示的颜色"
+            },
+            "5.2.0": {
+                "en": "Added Shelly Pro 1\nAdded Shelly Pro 1 PM\nAdded Shelly Pro 2\nAdded Shelly Pro 2 PM\nAdded Shelly Plus 2 PM\nAllow to change device and channel names of generation 2 devices\nAdded auto on/off timers for generation 2 devices\nAdded input mode, events and initial state for generation 2 devices\nAdded support of covers / shutters for generation 2 devices\nReplaced node-fetch with axios (also for digest auth)",
+                "de": "Shelly Pro 1 hinzugefügt\nShelly Pro 1 PM hinzugefügt\nShelly Pro 2 hinzugefügt\nShelly Pro 2 PM hinzugefügt\nShelly Plus 2 PM hinzugefügt\nErmöglicht das Ändern von Geräte- und Kanalnamen von Geräten der Generation 2\nAuto-On/Off-Timer für Geräte der Generation 2 hinzugefügt\nEingabemodus, Ereignisse und Anfangszustand für Geräte der Generation 2 hinzugefügt\nUnterstützung von Abdeckungen/Verschlüssen für Geräte der Generation 2 hinzugefügt\nNode-Fetch durch Axios ersetzt (auch für Digest-Authentifizierung)",
+                "ru": "Добавлен Шелли Про 1\nДобавлен Шелли Про 1\nДобавлен Шелли Про 2\nДобавлен Шелли Про 2\nДобавлен Шелли Плюс 2\nРазрешить изменять имена устройств и каналов устройств поколения 2\nДобавлены таймеры автоматического включения/выключения для устройств 2-го поколения.\nДобавлен режим ввода, события и начальное состояние для устройств поколения 2.\nДобавлена поддержка крышек/жалюзи для устройств поколения 2\nNode-fetch заменен на axios (также для дайджест-аутентификации)",
+                "pt": "Adicionado Shelly Pro 1\nAdicionado Shelly Pro 1\nAdicionado Shelly Pro 2\nAdicionado Shelly Pro 2\nAdicionado Shelly Plus 2\nPermitir alterar nomes de dispositivos e canais de dispositivos de geração 2\nAdicionados temporizadores automáticos de ligar/desligar para dispositivos de geração 2\nAdicionado modo de entrada, eventos e estado inicial para dispositivos de geração 2\nAdicionado suporte de tampas / persianas para dispositivos de geração 2\nSubstituição de busca de nó por axios (também para autenticação de resumo)",
+                "nl": "Shelly Pro 1 toegevoegd\nShelly Pro om 1 toegevoegd\nShelly Pro 2 toegevoegd\nShelly Pro 2 toegevoegd\nShelly Plus 2 toegevoegd\nToestaan om apparaat- en kanaalnamen van generatie 2-apparaten te wijzigen\nAutomatische aan/uit-timers toegevoegd voor apparaten van generatie 2\nInvoermodus, gebeurtenissen en beginstatus toegevoegd voor apparaten van generatie 2\nOndersteuning toegevoegd voor covers / shutters voor generatie 2 apparaten\nNode-fetch vervangen door axios (ook voor digest auth)",
+                "fr": "Ajout de Shelly Pro 1\nAjout de Shelly Pro 1\nAjout de Shelly Pro 2\nAjout de Shelly Pro 2 PM\nAjout de Shelly Plus 2 PM\nAutoriser la modification des noms d'appareils et de canaux des appareils de génération 2\nAjout de minuteries marche/arrêt automatiques pour les appareils de génération 2\nAjout du mode d'entrée, des événements et de l'état initial pour les appareils de génération 2\nAjout de la prise en charge des couvertures/obturateurs pour les appareils de génération 2\nNode-fetch remplacé par axios (également pour Digest Auth)",
+                "it": "Aggiunto Shelly Pro 1\nAggiunto Shelly Pro 1\nAggiunto Shelly Pro 2\nAggiunto Shelly Pro 2 PM\nAggiunto Shelly Plus 2\nConsenti di cambiare i nomi dei dispositivi e dei canali dei dispositivi di generazione 2\nAggiunti timer di accensione/spegnimento automatici per i dispositivi di seconda generazione\nAggiunta modalità di input, eventi e stato iniziale per i dispositivi di seconda generazione\nAggiunto supporto per coperture/persiane per dispositivi di generazione 2\nSostituito node-fetch con axios (anche per digest auth)",
+                "es": "Añadido Shelly Pro 1\nSe agregó Shelly Pro 1\nAñadido Shelly Pro 2\nSe agregó Shelly Pro 2 PM\nSe agregó Shelly Plus 2\nPermitir cambiar los nombres de los dispositivos y canales de los dispositivos de generación 2\nTemporizadores de encendido/apagado automático agregados para dispositivos de generación 2\nModo de entrada agregado, eventos y estado inicial para dispositivos de generación 2\nSe agregó soporte de cubiertas / persianas para dispositivos de generación 2\nSe reemplazó la búsqueda de nodos con axios (también para autenticación de resumen)",
+                "pl": "Dodano Shelly Pro 1\nDodano Shelly Pro o 1\nDodano Shelly Pro 2\nDodano Shelly Pro 2\nDodano Shelly Plus 2\nZezwalaj na zmianę nazw urządzeń i kanałów urządzeń generacji 2\nDodano zegary automatycznego włączania/wyłączania dla urządzeń generacji 2\nDodano tryb wejścia, zdarzenia i stan początkowy dla urządzeń generacji 2\nDodano obsługę osłon / rolet dla urządzeń generacji 2\nZamieniono pobieranie węzła na axios (również dla auth skrótu)",
+                "zh-cn": "添加了 Shelly Pro 1\n添加了 Shelly Pro 下午 1 点\n添加了 Shelly Pro 2\n添加了 Shelly Pro 2 PM\n添加了 Shelly Plus 2 PM\n允许更改第 2 代设备的设备和通道名称\n为第 2 代设备添加了自动开/关计时器\n为第 2 代设备添加了输入模式、事件和初始状态\n增加了对第 2 代设备的盖板/百叶窗的支持\n将 node-fetch 替换为 axios（也用于摘要身份验证）"
+            },
+            "5.1.3": {
+                "en": "Changed common.states strings to objects\nJust perform firmware update if an available update was detected\nExtended logging for CoAP",
+                "de": "common.states-Strings in Objekte geändert\nFühren Sie einfach ein Firmware-Update durch, wenn ein verfügbares Update erkannt wurde\nErweiterte Protokollierung für CoAP",
+                "ru": "Изменены строки common.states на объекты\nПросто выполните обновление прошивки, если было обнаружено доступное обновление.\nРасширенное ведение журнала для CoAP",
+                "pt": "Strings common.states alteradas para objetos\nBasta realizar a atualização do firmware se uma atualização disponível foi detectada\nRegistro estendido para CoAP",
+                "nl": "Common.states-tekenreeksen gewijzigd in objecten\nVoer gewoon een firmware-update uit als er een beschikbare update is gedetecteerd\nUitgebreide logging voor CoAP",
+                "fr": "Modification des chaînes common.states en objets\nEffectuez simplement la mise à jour du micrologiciel si une mise à jour disponible a été détectée\nJournalisation étendue pour CoAP",
+                "it": "Modificate le stringhe common.states in oggetti\nBasta eseguire l'aggiornamento del firmware se è stato rilevato un aggiornamento disponibile\nRegistrazione estesa per CoAP",
+                "es": "Se cambiaron las cadenas common.states a objetos.\nSimplemente realice una actualización de firmware si se detectó una actualización disponible\nRegistro extendido para CoAP",
+                "pl": "Zmieniono ciągi common.states na obiekty\nPo prostu wykonaj aktualizację oprogramowania układowego, jeśli zostanie wykryta dostępna aktualizacja\nRozszerzone logowanie dla CoAP",
+                "zh-cn": "将 common.states 字符串更改为对象\n如果检测到可用更新，只需执行固件更新\nCoAP 的扩展日志记录"
+            },
+            "5.1.2": {
+                "en": "Fixed Shelly UNI ADC voltage\nFixed dimmer brightness values handling\nLogging improvements for offline devices",
+                "de": "Feste Shelly UNI ADC-Spannung\nDie Handhabung der Dimmer-Helligkeitswerte wurde korrigiert\nProtokollierungsverbesserungen für Offline-Geräte",
+                "ru": "Фиксированное напряжение Shelly UNI ADC\nИсправлена обработка значений яркости диммера\nУлучшения ведения журналов для автономных устройств",
+                "pt": "Tensão Shelly UNI ADC fixa\nManipulação de valores de brilho de dimmer fixo\nMelhorias de registro para dispositivos offline",
+                "nl": "Vaste Shelly UNI ADC-spanning\nVaste dimmer helderheidswaarden verwerking\nLogboekverbeteringen voor offline apparaten",
+                "fr": "Tension Shelly UNI ADC fixe\nGestion des valeurs de luminosité du gradateur fixe\nAméliorations de la journalisation pour les appareils hors ligne",
+                "it": "Tensione Shelly UNI ADC fissa\nRisolto il problema con la gestione dei valori di luminosità più deboli\nMiglioramenti alla registrazione per i dispositivi offline",
+                "es": "Voltaje fijo Shelly UNI ADC\nManejo de valores de brillo de dimmer fijo\nMejoras en el registro para dispositivos sin conexión",
+                "pl": "Naprawiono napięcie Shelly UNI ADC\nNaprawiono obsługę wartości jasności ściemniacza\nUlepszenia logowania dla urządzeń offline",
+                "zh-cn": "固定 Shelly UNI ADC 电压\n固定调光器亮度值处理\n离线设备的日志记录改进"
+            },
+            "5.1.1": {
+                "en": "Fixed firmware auto update\nUpdated timeouts\nAdded command source for shelly 2.5\nAdded color for device objects as online indicator",
+                "de": "Automatisches Firmware-Update behoben\nAktualisierte Zeitüberschreitungen\nBefehlsquelle für Shelly 2.5 hinzugefügt\nFarbe für Geräteobjekte als Online-Anzeige hinzugefügt",
+                "ru": "Исправлено автоматическое обновление прошивки\nОбновленные тайм-ауты\nДобавлен источник команд для shelly 2.5.\nДобавлен цвет для объектов устройства в качестве онлайн-индикатора.",
+                "pt": "Atualização automática de firmware corrigida\nTempos limite atualizados\nFonte de comando adicionada para shelly 2.5\nCor adicionada para objetos de dispositivo como indicador online",
+                "nl": "Vaste automatische firmware-update\nBijgewerkte time-outs\nCommandobron toegevoegd voor shelly 2.5\nKleur toegevoegd voor apparaatobjecten als online indicator",
+                "fr": "Correction de la mise à jour automatique du firmware\nDélais d'attente mis à jour\nAjout de la source de commande pour shelly 2.5\nAjout de couleur pour les objets de l'appareil en tant qu'indicateur en ligne",
+                "it": "Risolto il problema con l'aggiornamento automatico del firmware\nTimeout aggiornati\nAggiunta la sorgente dei comandi per shelly 2.5\nAggiunto colore per gli oggetti del dispositivo come indicatore online",
+                "es": "Actualización automática de firmware fijo\nTiempos de espera actualizados\nFuente de comando agregada para Shelly 2.5\nSe agregó color para los objetos del dispositivo como indicador en línea.",
+                "pl": "Naprawiono automatyczną aktualizację oprogramowania\nZaktualizowano limity czasu\nDodano źródło poleceń dla Shelly 2.5\nDodano kolor dla obiektów urządzenia jako wskaźnika online",
+                "zh-cn": "固定固件自动更新\n更新超时\n为 shelly 2.5 添加了命令源\n为设备对象添加了颜色作为在线指示器"
+            }
+        },
+        "title": "Shelly",
+        "titleLang": {
+            "en": "Shelly",
+            "de": "Shelly",
+            "ru": "изобилующий раковинами",
+            "pt": "Shelly",
+            "nl": "schaalachtig",
+            "fr": "Shelly",
+            "it": "Shelly",
+            "es": "Shelly",
+            "pl": "Shelly",
+            "zh-cn": "谢莉"
+        },
+        "desc": {
+            "en": "Integrate your Shelly devices",
+            "de": "Integrieren Sie Ihre Shelly-Geräte",
+            "ru": "Интегрируйте свои устройства Shelly",
+            "pt": "Integre seus dispositivos Shelly",
+            "nl": "Integreer uw Shelly-apparaten",
+            "fr": "Intégrez vos appareils Shelly",
+            "it": "Integra i tuoi dispositivi Shelly",
+            "es": "Integre sus dispositivos Shelly",
+            "pl": "Zintegruj swoje urządzenia Shelly",
+            "zh-cn": "集成您的 Shelly 设备"
+        },
+        "license": "MIT",
+        "authors": [
+            "Thorsten Stueben <thorsten@stueben.de>",
+            "Apollon77 <iobroker@fischer-ka.de>",
+            "Matthias Kleine <info@haus-automatisierung.com>"
+        ],
+        "docs": {
+            "en": [
+                "docs/en/basics.md",
+                "docs/en/protocol-coap.md",
+                "docs/en/protocol-mqtt.md",
+                "docs/en/restricted-login.md",
+                "docs/en/state-changes.md"
+            ],
+            "de": [
+                "docs/de/basics.md",
+                "docs/de/protocol-coap.md",
+                "docs/de/protocol-mqtt.md",
+                "docs/de/restricted-login.md",
+                "docs/de/state-changes.md"
+            ]
+        },
+        "platform": "Javascript/Node.js",
+        "mode": "daemon",
+        "icon": "shelly.png",
+        "enabled": false,
+        "compact": true,
+        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
+        "keywords": [
+            "shelly",
+            "switch",
+            "coap",
+            "mqtt"
+        ],
+        "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
+        "loglevel": "info",
+        "type": "iot-systems",
+        "restartAdapters": [],
+        "connectionType": "local",
+        "dataSource": "push",
+        "tier": 2,
+        "plugins": {
+            "sentry": {
+                "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
+                "pathWhitelist": [
+                    "@apollon",
+                    "shelly-iot"
+                ]
+            }
+        },
+        "adminUI": {
+            "config": "json"
+        },
+        "globalDependencies": [
+            {
+                "admin": ">=5.1.25"
+            }
+        ],
+        "dependencies": [
+            {
+                "js-controller": ">=3.3.0"
+            }
         ]
-      }
     },
-    "adminUI": {
-      "config": "json"
-    },
-    "globalDependencies": [
-      {
-        "admin": ">=5.1.25"
-      }
+    "protectedNative": [
+        "mqttpassword",
+        "httppassword"
     ],
-    "dependencies": [
-      {
-        "js-controller": ">=3.3.0"
-      }
-    ]
-  },
-  "protectedNative": [
-    "mqttpassword",
-    "httppassword"
-  ],
-  "encryptedNative": [
-    "mqttpassword",
-    "httppassword"
-  ],
-  "native": {
-    "bind": "0.0.0.0",
-    "coapbind": "0.0.0.0",
-    "port": 1882,
-    "mqttpassword": "mqttuser",
-    "mqttusername": "mqttuser",
-    "httppassword": "admin",
-    "httpusername": "",
-    "qos": 0,
-    "pwd": false,
-    "polltime": 15,
-    "timeout": 0.25,
-    "protocol": "coap",
-    "autoupdate": false,
-    "updateUnchangedObjects": false,
-    "blacklist": [
-      {
-        "id": "SHBDUO-1#123456789#2"
-      }
-    ]
-  },
-  "objects": [],
-  "instanceObjects": [
-    {
-      "_id": "info",
-      "type": "channel",
-      "common": {
-        "name": "Information"
-      },
-      "native": {}
+    "encryptedNative": [
+        "mqttpassword",
+        "httppassword"
+    ],
+    "native": {
+        "bind": "0.0.0.0",
+        "coapbind": "0.0.0.0",
+        "port": 1882,
+        "mqttpassword": "mqttuser",
+        "mqttusername": "mqttuser",
+        "httppassword": "admin",
+        "httpusername": "",
+        "qos": 0,
+        "polltime": 15,
+        "protocol": "coap",
+        "autoupdate": false,
+        "updateUnchangedObjects": false,
+        "logDebugMessages": false,
+        "blacklist": [
+            {
+                "id": "SHBDUO-1#123456789#2"
+            }
+        ]
     },
-    {
-      "_id": "info.connection",
-      "type": "state",
-      "common": {
-        "role": "indicator.connected",
-        "name": "If listening for Shelly packets",
-        "type": "boolean",
-        "read": true,
-        "write": false,
-        "def": false
-      },
-      "native": {}
-    },
-    {
-      "_id": "info.update",
-      "type": "state",
-      "common": {
-        "role": "button",
-        "name": "Update All",
-        "type": "boolean",
-        "read": false,
-        "write": true
-      },
-      "native": {}
-    }
-  ]
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "If listening for Shelly packets",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.update",
+            "type": "state",
+            "common": {
+                "role": "button",
+                "name": "Update All",
+                "type": "boolean",
+                "read": false,
+                "write": true
+            },
+            "native": {}
+        }
+    ]
 }

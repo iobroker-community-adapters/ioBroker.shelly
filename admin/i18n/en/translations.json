@@ -17,5 +17,6 @@
     "Poll time in seconds": "Poll time in seconds",
     "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Shelly devices that shall not be displayed.. Enter device id of Shelly like 8B22BD",
     "Shelly protocol": "Shelly protocol",
-    "Update objects even if there is no value change": "Update objects even if there is no value change"
+    "Update objects even if there is no value change": "Update objects even if there is no value change",
+    "Log Debug Messages": "Log debug messages"
 }
