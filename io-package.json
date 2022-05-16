@@ -186,19 +186,19 @@
         "httppassword"
     ],
     "native": {
-        "bind": "0.0.0.0",
-        "coapbind": "0.0.0.0",
-        "port": 1882,
-        "mqttpassword": "mqttuser",
-        "mqttusername": "mqttuser",
-        "httppassword": "admin",
-        "httpusername": "",
-        "qos": 0,
-        "polltime": 15,
         "protocol": "coap",
+        "httpusername": "",
+        "httppassword": "admin",
+        "polltime": 15,
         "autoupdate": false,
         "updateUnchangedObjects": false,
         "logDebugMessages": false,
+        "bind": "0.0.0.0",
+        "port": 1882,
+        "mqttusername": "mqttuser",
+        "mqttpassword": "mqttuser",
+        "qos": 0,
+        "coapbind": "0.0.0.0",
         "blacklist": [
             {
                 "id": "SHBDUO-1#123456789#2"
