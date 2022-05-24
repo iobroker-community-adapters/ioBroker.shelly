@@ -18,5 +18,7 @@
     "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Shelly-apparaten die niet worden weergegeven. Voer de apparaat-ID van Shelly in zoals 8B22BD",
     "Shelly protocol": "Shelly-protocol",
     "Update objects even if there is no value change": "Werk objecten bij, zelfs als er geen waardewijziging is",
-    "Log Debug Messages": "Foutopsporingsberichten loggen"
+    "Log Debug Messages": "Foutopsporingsberichten loggen",
+    "Will be used to authenticate against all Shelly devices": "Wordt gebruikt voor authenticatie tegen alle Shelly-apparaten",
+    "You have to configure the same password on all devices": "U moet op alle apparaten hetzelfde wachtwoord configureren"
 }

@@ -18,5 +18,7 @@
     "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Shelly devices that shall not be displayed.. Enter device id of Shelly like 8B22BD",
     "Shelly protocol": "Shelly protocol",
     "Update objects even if there is no value change": "Update objects even if there is no value change",
-    "Log Debug Messages": "Log debug messages"
+    "Log Debug Messages": "Log debug messages",
+    "Will be used to authenticate against all Shelly devices": "Will be used to authenticate against all Shelly devices",
+    "You have to configure the same password on all devices": "You have to configure the same password on all devices"
 }

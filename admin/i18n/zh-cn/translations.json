@@ -18,5 +18,7 @@
     "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Shelly设备不显示..输入Shelly的设备ID，如8B22BD",
     "Shelly protocol": "雪莉协议",
     "Update objects even if there is no value change": "即使值没有变化也要更新对象",
-    "Log Debug Messages": "记录调试消息"
+    "Log Debug Messages": "记录调试消息",
+    "Will be used to authenticate against all Shelly devices": "将用于对所有 Shelly 设备进行身份验证",
+    "You have to configure the same password on all devices": "您必须在所有设备上配置相同的密码"
 }

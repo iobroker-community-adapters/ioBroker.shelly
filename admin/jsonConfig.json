@@ -52,7 +52,9 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "HTTP Username"
+                    "label": "HTTP Username",
+                    "help": "Will be used to authenticate against all Shelly devices",
+                    "helpLink": "/#tab-adapters/readme/shelly"
                 },
                 "httppassword": {
                     "type": "password",
@@ -61,7 +63,8 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "HTTP Password"
+                    "label": "HTTP Password",
+                    "help": "You have to configure the same password on all devices"
                 },
                 "polltime": {
                     "newLine": true,
