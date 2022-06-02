@@ -3,67 +3,63 @@ name: Test and Release
 # Run this job on all pushes and pull requests
 # as well as tags with a semantic version
 on:
-    push:
-        branches:
-            - '*'
-        tags:
-            # normal versions
-            - 'v[0-9]+.[0-9]+.[0-9]+'
-            # pre-releases
-            - 'v[0-9]+.[0-9]+.[0-9]+-**'
-        pull_request: {}
+  push:
+    branches:
+      - "*"
+    tags:
+      # normal versions
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      # pre-releases
+      - "v[0-9]+.[0-9]+.[0-9]+-**"
+    pull_request: {}
 
 jobs:
-    # Performs quick checks before the expensive test runs
-    check-and-lint:
-        if: contains(github.event.head_commit.message, '[skip ci]') == false
+  # Performs quick checks before the expensive test runs
+  check-and-lint:
+    if: contains(github.event.head_commit.message, '[skip ci]') == false
 
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: ioBroker/testing-action-check@v1
-              with:
-                  node-version: '14.x'
-                  lint: true
+    steps:
+      - uses: ioBroker/testing-action-check@v1
+        with:
+          node-version: '14.x'
+          lint: true
+          lint-command: 'npm run lint .'
 
-    adapter-tests:
-        if: contains(github.event.head_commit.message, '[skip ci]') == false
+  adapter-tests:
+    if: contains(github.event.head_commit.message, '[skip ci]') == false
 
-        runs-on: ${{ matrix.os }}
-        strategy:
-            matrix:
-                node-version: [14.x, 16.x, 18.x]
-                os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
-        steps:
-            - uses: ioBroker/testing-action-adapter@v1
-              with:
-                  node-version: ${{ matrix.node-version }}
-                  os: ${{ matrix.os }}
+    steps:
+      - uses: ioBroker/testing-action-adapter@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          os: ${{ matrix.os }}
+          extra-tests: npm run test:js
 
-    deploy:
-        needs: [check-and-lint, adapter-tests]
+  deploy:
+    needs: [check-and-lint, adapter-tests]
 
-        if: |
-            contains(github.event.head_commit.message, '[skip ci]') == false &&
-            github.event_name == 'push' &&
-            startsWith(github.ref, 'refs/tags/v')
+    if: |
+      contains(github.event.head_commit.message, '[skip ci]') == false &&
+      github.event_name == 'push' &&
+      startsWith(github.ref, 'refs/tags/v')
 
-        runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: ioBroker/testing-action-deploy@v1
-              with:
-                  node-version: '14.x'
-                  npm-token: ${{ secrets.NPM_TOKEN }}
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: ioBroker/testing-action-deploy@v1
+        with:
+          node-version: '14.x'
+          npm-token: ${{ secrets.NPM_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-                  # When using Sentry for error reporting, Sentry can be informed about new releases
-                  # To enable create a API-Token in Sentry (User settings, API keys)
-                  # Enter this token as a GitHub secret (with name SENTRY_AUTH_TOKEN) in the repository options
-                  # Then uncomment and customize the following block:
-                  sentry-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
-                  sentry-project: 'iobroker-shelly'
-                  sentry-version-prefix: 'iobroker.shelly'
-                  # If your sentry project is linked to a GitHub repository, you can enable the following option
-                  # sentry-github-integration: true
+          sentry-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          sentry-project: 'iobroker-shelly'
+          sentry-version-prefix: 'iobroker.shelly'
