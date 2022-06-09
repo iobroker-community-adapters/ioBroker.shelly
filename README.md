@@ -104,6 +104,7 @@ npm install xml2js@0.4.23`
 ### **WORK IN PROGRESS**
 Important: The adapter now requires at least Node.js 14.5
 * (klein0r) Added Shelly TRV
+* (klein0r) Added channel names for Shelly 3EM
 * (klein0r) Added device status states
 * (klein0r) Debug mode (MQTT) for Gen 2 devices
 * (klein0r) **Breaking**: Configuration is only working in the new Admin 5 UI
