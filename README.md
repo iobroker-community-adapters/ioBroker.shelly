@@ -68,6 +68,7 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 |Shelly Color Bulb (SHCB-1)|supported since v4.0.5|supported since v4.0.5|
 |Shelly Button (SHBTN-2)|supported since v4.0.5|supported since v4.0.5|
 |Shelly Motion (SHMOS-01)|supported since v4.0.6|supported since v4.0.6|
+|Shelly TRV (SHTRV-01)|supported since v6.0.0|supported since v6.0.0|
 
 ## Supported devices (Gen 2)
 
