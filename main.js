@@ -90,14 +90,14 @@ class Shelly extends utils.Adapter {
         if (state && !state.ack) {
             const stateId = id.replace(this.namespace + '.', '');
 
-            this.log.debug(`[onStateChange] ${id}: ${JSON.stringify(state)}`);
-
-            objectHelper.handleStateChange(id, state);
-
             if (stateId === 'info.update') {
-                this.log.debug(`[onStateChange] info.update state changed - starting update on every device`);
+                this.log.debug(`[onStateChange] "info.update" state changed - starting update on every device`);
 
                 this.eventEmitter.emit('onFirmwareUpdate');
+            } else {
+                this.log.debug(`[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`);
+
+                objectHelper.handleStateChange(id, state);
             }
         }
     }
