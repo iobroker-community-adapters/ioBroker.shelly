@@ -35,6 +35,8 @@ const shelly1 = {
 
 Each state is defined as an object attribute. It contains the ``common`` attributes for the ioBroker state and the defition for each protocol.
 
+### Receive data
+
 To **receive** values via different protocols, you can add the following properties to the device definition:
 
 - ``coap_publish`` + ``coap_publish_funct``
@@ -42,11 +44,13 @@ To **receive** values via different protocols, you can add the following propert
 
 The ``xxxx_publish`` attribute contains the trigger of the action which should be listened to. When a new message arrives, it is possible to manipulate the received value in the ``xxxx_publish_funct`` attribute, by defining a new function which returns the value, which should be stored in the state.
 
-If the requested value isn't published automatically by the client device, you can request it via HTTP manually by using:
+If the requested value isn't published automatically by the client device, you can request/poll it via HTTP manually by using:
 
 - ``http_publish`` + ``http_publish_funct``
 
-These commands will be executed regularly in the ``httpIoBrokerState()`` to get current state from the device via http. *Authentication is handled automatically.* When you use the same URL more than once, the request will be executed just one time.
+These commands will be executed regularly in the ``httpIoBrokerState()`` to get current state from the device via http. **Authentication is handled automatically!** When you use the same URL more than once, the request will be executed just one time.
+
+### Send data
 
 To **publish** values/changes to the client, you can use:
 
@@ -55,9 +59,10 @@ To **publish** values/changes to the client, you can use:
 
 These functions will be executed when the value of the state changes. You can use ``xxxx_cmd_funct`` to manipulate the state before the command is executed by defining a new function which returns the value, which should be send to the client.
 
-You cannot define/execute multiple ``xxxx_cmd`` types for one state.
+Important notes:
 
-For CoAP, there is no ``cmd`` function.
+- You cannot define/execute multiple ``xxxx_cmd`` types for one state
+- For CoAP, there is no ``coap_cmd`` function like ``coap_cmd_funct``
 
 To **hide** a specific function, you can use the ``no_display`` flag on each type. Example:
 
