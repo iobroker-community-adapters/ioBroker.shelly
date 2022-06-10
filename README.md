@@ -108,6 +108,7 @@ Important: The adapter now requires at least Node.js 14.5
 * (klein0r) Added channel names for Shelly 3EM
 * (klein0r) Added device status states
 * (klein0r) Debug mode (MQTT) for Gen 2 devices
+* (klein0r) Just publish data to Shelly device, if value changed
 * (klein0r) **Breaking**: Configuration is only working in the new Admin 5 UI
 * (klein0r) **Breaking**: Uptime is now a number (seconds since boot)
 * (klein0r) Display total power for Shelly RGBW 2
