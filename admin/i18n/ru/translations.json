@@ -20,5 +20,6 @@
     "Update objects even if there is no value change": "Обновлять объекты, даже если нет изменения значения",
     "Log Debug Messages": "Журнал отладочных сообщений",
     "Will be used to authenticate against all Shelly devices": "Будет использоваться для аутентификации на всех устройствах Shelly.",
-    "You have to configure the same password on all devices": "Вы должны настроить один и тот же пароль на всех устройствах"
+    "You have to configure the same password on all devices": "Вы должны настроить один и тот же пароль на всех устройствах",
+    "Save HTTP responses (for debugging)": "Сохранять ответы HTTP (для отладки)"
 }

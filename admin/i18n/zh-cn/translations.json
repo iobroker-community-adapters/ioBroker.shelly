@@ -20,5 +20,6 @@
     "Update objects even if there is no value change": "即使值没有变化也要更新对象",
     "Log Debug Messages": "记录调试消息",
     "Will be used to authenticate against all Shelly devices": "将用于对所有 Shelly 设备进行身份验证",
-    "You have to configure the same password on all devices": "您必须在所有设备上配置相同的密码"
+    "You have to configure the same password on all devices": "您必须在所有设备上配置相同的密码",
+    "Save HTTP responses (for debugging)": "保存 HTTP 响应（用于调试）"
 }

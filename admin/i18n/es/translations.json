@@ -20,5 +20,6 @@
     "Update objects even if there is no value change": "Actualizar objetos incluso si no hay cambio de valor",
     "Log Debug Messages": "Registrar mensajes de depuración",
     "Will be used to authenticate against all Shelly devices": "Se usará para autenticarse en todos los dispositivos Shelly",
-    "You have to configure the same password on all devices": "Tienes que configurar la misma contraseña en todos los dispositivos"
+    "You have to configure the same password on all devices": "Tienes que configurar la misma contraseña en todos los dispositivos",
+    "Save HTTP responses (for debugging)": "Guardar respuestas HTTP (para depuración)"
 }

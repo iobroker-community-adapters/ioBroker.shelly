@@ -20,5 +20,6 @@
     "Update objects even if there is no value change": "Werk objecten bij, zelfs als er geen waardewijziging is",
     "Log Debug Messages": "Foutopsporingsberichten loggen",
     "Will be used to authenticate against all Shelly devices": "Wordt gebruikt voor authenticatie tegen alle Shelly-apparaten",
-    "You have to configure the same password on all devices": "U moet op alle apparaten hetzelfde wachtwoord configureren"
+    "You have to configure the same password on all devices": "U moet op alle apparaten hetzelfde wachtwoord configureren",
+    "Save HTTP responses (for debugging)": "Bewaar HTTP-antwoorden (voor foutopsporing)"
 }

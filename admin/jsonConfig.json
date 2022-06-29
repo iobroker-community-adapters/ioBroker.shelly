@@ -80,25 +80,33 @@
                     "newLine": true,
                     "type": "checkbox",
                     "sm": 12,
-                    "md": 12,
-                    "lg": 12,
+                    "md": 6,
+                    "lg": 6,
                     "label": "Auto update of new firmware"
                 },
                 "updateUnchangedObjects": {
                     "newLine": true,
                     "type": "checkbox",
                     "sm": 12,
-                    "md": 12,
-                    "lg": 12,
+                    "md": 6,
+                    "lg": 6,
                     "label": "Update objects even if there is no value change"
                 },
                 "logDebugMessages": {
                     "newLine": true,
                     "type": "checkbox",
                     "sm": 12,
-                    "md": 12,
-                    "lg": 12,
+                    "md": 6,
+                    "lg": 6,
                     "label": "Log Debug Messages"
+                },
+                "saveHttpResponses": {
+                    "newLine": true,
+                    "type": "checkbox",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Save HTTP responses (for debugging)"
                 }
             }
         },
