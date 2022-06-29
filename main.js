@@ -31,8 +31,6 @@ class Shelly extends utils.Adapter {
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('message', this.onMessage.bind(this));
         this.on('unload', this.onUnload.bind(this));
-
-        this.on('deviceStatusUpdate', this.onDeviceStatusUpdate.bind(this));
     }
 
     async onReady() {
@@ -171,7 +169,7 @@ class Shelly extends utils.Adapter {
                     this.log.debug(`[onlineCheck] Checking ${idHostname} on ${valHostname}:${valPort}`);
 
                     tcpPing.probe(valHostname, valPort, async (error, isAlive) => {
-                        this.emit('deviceStatusUpdate', deviceId, isAlive);
+                        this.deviceStatusUpdate(deviceId, isAlive);
                     });
                 }
             }
@@ -185,16 +183,16 @@ class Shelly extends utils.Adapter {
         }, 60 * 1000); // Restart online check in 60 Seconds
     }
 
-    async onDeviceStatusUpdate(deviceId, status) {
+    async deviceStatusUpdate(deviceId, status) {
         if (this.isUnloaded) return;
         if (!deviceId) return;
 
-        this.log.debug(`[onDeviceStatusUpdate] ${deviceId}: ${status}`);
+        this.log.debug(`[deviceStatusUpdate] ${deviceId}: ${status}`);
 
         // Check if device object exists
         const knownDevices = await this.getAllDevices();
         if (knownDevices.indexOf(deviceId) === -1) {
-            this.log.silly(`[onDeviceStatusUpdate] ${deviceId} is not in list of known devices: ${JSON.stringify(knownDevices)}`);
+            this.log.silly(`[deviceStatusUpdate] ${deviceId} is not in list of known devices: ${JSON.stringify(knownDevices)}`);
             return;
         }
 
@@ -203,11 +201,14 @@ class Shelly extends utils.Adapter {
         const onlineState = await this.getStateAsync(idOnline);
 
         if (onlineState) {
+            // Compare to previous value
             const prevValue = onlineState.val ? (onlineState.val === 'true' || onlineState.val === true) : false;
 
             if (prevValue != status) {
                 await this.setStateAsync(idOnline, { val: status, ack: true });
             }
+        } else {
+            await this.setStateAsync(idOnline, { val: status, ack: true });
         }
 
         // Update connection state
@@ -223,7 +224,7 @@ class Shelly extends utils.Adapter {
 
         // Check online devices
         if (oldOnlineDeviceCount !== newOnlineDeviceCount) {
-            this.log.debug(`[onDeviceStatusUpdate] Online devices: ${JSON.stringify(Object.keys(this.onlineDevices))}`);
+            this.log.debug(`[deviceStatusUpdate] Online devices: ${JSON.stringify(Object.keys(this.onlineDevices))}`);
             if (newOnlineDeviceCount > 0) {
                 this.setStateAsync('info.connection', true, true);
             } else {
