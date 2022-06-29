@@ -113,6 +113,7 @@ Important: The adapter now requires at least Node.js 14.5
 * (klein0r) **Breaking**: Uptime is now a number (seconds since boot)
 * (klein0r) Display total power for Shelly RGBW 2
 * (klein0r) Save HTTP responses to file system for debugging (if enabled)
+* (klein0r) Download scripts from generation 2 devices to files
 * (klein0r) Optimized unload process to avoid errors
 * (klein0r) Improved logging
 

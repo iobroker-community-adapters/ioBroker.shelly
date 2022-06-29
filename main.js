@@ -40,6 +40,8 @@ class Shelly extends utils.Adapter {
                 return;
             }
 
+            await this.mkdirAsync(this.namespace, 'scripts');
+
             this.subscribeStates('*');
             objectHelper.init(this);
 
@@ -92,6 +94,10 @@ class Shelly extends utils.Adapter {
                 this.log.debug(`[onStateChange] "info.update" state changed - starting update on every device`);
 
                 this.eventEmitter.emit('onFirmwareUpdate');
+            } else if (stateId === 'info.downloadScripts') {
+                this.log.debug(`[onStateChange] "info.downloadScripts" state changed - starting script download of every device`);
+
+                this.eventEmitter.emit('onScriptDownload');
             } else {
                 this.log.debug(`[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`);
 

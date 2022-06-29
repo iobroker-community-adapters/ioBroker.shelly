@@ -240,9 +240,20 @@
             "_id": "info.connection",
             "type": "state",
             "common": {
-                "role": "indicator.connected",
-                "name": "If listening for Shelly packets",
+                "name": {
+                    "en": "Devices connected",
+                    "de": "Geräte verbunden",
+                    "ru": "Приборы подключены",
+                    "pt": "Dispositivos conectados",
+                    "nl": "Vertaling:",
+                    "fr": "Appareils connectés",
+                    "it": "Dispositivi connessi",
+                    "es": "Dispositivos conectados",
+                    "pl": "Device połączone",
+                    "zh-cn": "联系人"
+                },
                 "type": "boolean",
+                "role": "indicator.connected",
                 "read": true,
                 "write": false,
                 "def": false
@@ -253,9 +264,43 @@
             "_id": "info.update",
             "type": "state",
             "common": {
-                "role": "button",
-                "name": "Update All",
+                "name": {
+                    "en": "Update all devices",
+                    "de": "Alle Geräte aktualisieren",
+                    "ru": "Обновить все устройства",
+                    "pt": "Atualizar todos os dispositivos",
+                    "nl": "Update alle apparaten",
+                    "fr": "Mettre à jour tous les appareils",
+                    "it": "Aggiornare tutti i dispositivi",
+                    "es": "Actualizar todos los dispositivos",
+                    "pl": "Ulepszenia",
+                    "zh-cn": "更新所有装置"
+                },
                 "type": "boolean",
+                "role": "button",
+                "read": false,
+                "write": true
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.downloadScripts",
+            "type": "state",
+            "common": {
+                "name": {
+                    "en": "Download scripts from all devices",
+                    "de": "Skripte von allen Geräten herunterladen",
+                    "ru": "Скачать скрипты со всех устройств",
+                    "pt": "Baixar scripts de todos os dispositivos",
+                    "nl": "Download scripts van alle apparaten",
+                    "fr": "Télécharger les scripts de tous les appareils",
+                    "it": "Scarica gli script da tutti i dispositivi",
+                    "es": "Descargar scripts de todos los dispositivos",
+                    "pl": "Skrypty z wszystkich urządzeń",
+                    "zh-cn": "所有装置的配件"
+                },
+                "type": "boolean",
+                "role": "button",
                 "read": false,
                 "write": true
             },
