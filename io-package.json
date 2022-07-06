@@ -121,18 +121,20 @@
         ],
         "docs": {
             "en": [
-                "docs/en/basics.md",
+                "docs/en/README.md",
                 "docs/en/protocol-coap.md",
                 "docs/en/protocol-mqtt.md",
                 "docs/en/restricted-login.md",
-                "docs/en/state-changes.md"
+                "docs/en/state-changes.md",
+                "docs/en/debug.md"
             ],
             "de": [
-                "docs/de/basics.md",
+                "docs/de/README.md",
                 "docs/de/protocol-coap.md",
                 "docs/de/protocol-mqtt.md",
                 "docs/de/restricted-login.md",
-                "docs/de/state-changes.md"
+                "docs/de/state-changes.md",
+                "docs/de/debug.md"
             ]
         },
         "platform": "Javascript/Node.js",

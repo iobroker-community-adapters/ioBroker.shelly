@@ -31,47 +31,4 @@ CoAP fügt alle Geräte in deinem Netzwerk hinzu. Falls Du einzelne Geräte auss
 
 #### Shelly Firmware 1.9.4 (oder neuer)
 
-- Ab dieser Version muss ein CoIoT-Server auf jedem Shelly hinterlegt werden, falls das CoAP-Protokoll genutzt wird. Mehr Details im CoAP-Abschnitt in dieser Dokumentation.
-
-### Fehlersuche
-
-In manchen Fällen kann es vorkommen, dass der Shelly-Adapter nicht alle Geräte im CoAP-Modus findet. Versuche dann folgendes:
-
-1. Stoppe deine Instanz des Shelly-Adapters. **Es ist nicht nötig, den Adapter zu deinstallieren!**
-2. Öffne ein Terminal-Fenster und führe die folgenden Befehle auf dem ioBroker-Server aus:
-
-```
-cd /opt/iobroker/node_modules/iobroker.shelly/
-node coaptest.js 
-```
-
-Alternativ kann ```tcpdump``` verwendet werden:
-
-```
-# Install tcpdump if it is not installed
-sudo apt-get update
-sudo apt-get install tcpdump
-
-# tcpdump with IP address of Shelly device on network device eth1
-sudo tcpdump -i eth1 src <IP-OF-SHELLY> and port 5683 -A   
-
-# tcpdump with IP address of Shelly device 
-sudo tcpdump src <IP-OF-SHELLY> and port 5683 -A
-
-# tcpdump of all Shelly devices on network device eth1
-sudo tcpdump  -i eth1 port 5683 -A
-
- # tcpdump of all Shelly devices
-sudo tcpdump port 5683 -A
-```
-
-Nun solltest Du alle CoAP-Nachrichten von den Shelly-Geräten sehen. Solltest Du keine Nachrichten sehen, hast Du ein Netzwerkproblem mit UDP oder Multicast-Nachrichten.
-
-CoAP-Nachrichten sehen wie folgt aus:
-
-``` 
-UDP Server listening on 0.0.0.0:5683
-2020-08-19T19:33:29.484Z - 192.168.20.233:5683 - P-B3citsml	SHBTN-1#AXXXXXXXXXX#2RC{"G":[[0,9103,0],[0,2102,"S"],[0,2103,1],[0,3115,0],[0,3112,0],[0,3111,100],[0,9102,["button"]]]}
-2020-08-19T19:33:29.827Z - 192.168.20.233:5683 - P-C3citsml	SHBTN-1#AXXXXXXXXXX#2RC{"G":[[0,9103,0],[0,2102,"S"],[0,2103,1],[0,3115,0],[0,3112,0],[0,3111,100],[0,9102,["button"]]]}
-2020-08-19T19:33:33.942Z - 192.168.20.233:5683 - P-D3citsml	SHBTN-1#AXXXXXXXXXX#2RC{"G":[[0,9103,0],[0,2102,"S"],[0,2103,1],[0,3115,0],[0,3112,0],[0,3111,100],[0,9102,["button"]]]}
-``` 
+- Ab dieser Version muss ein CoIoT-Server auf jedem Shelly hinterlegt werden, falls das CoAP-Protokoll genutzt wird (unicast).

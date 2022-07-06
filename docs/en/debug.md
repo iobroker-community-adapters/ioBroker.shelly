@@ -9,7 +9,7 @@
 ### Requirements
 
 - Gen 2 device
-- Shelly adapter instance in mqtt mode
+- Shelly adapter instance in mqtt mode (version >= 6.0.0)
 
 ### Enable debugging
 

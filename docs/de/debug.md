@@ -9,7 +9,7 @@
 ### Anforderungen
 
 - Gen 2 Gerät
-- Shelly Adapter-Instanz im MQTT-Modus
+- Shelly Adapter-Instanz im MQTT-Modus (Version >= 6.0.0)
 
 ### Debugging aktivieren
 
