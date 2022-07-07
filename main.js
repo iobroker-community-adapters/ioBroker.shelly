@@ -101,7 +101,9 @@ class Shelly extends utils.Adapter {
             } else {
                 this.log.debug(`[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`);
 
-                objectHelper.handleStateChange(id, state);
+                if (objectHelper) {
+                    objectHelper.handleStateChange(id, state);
+                }
             }
         }
     }
