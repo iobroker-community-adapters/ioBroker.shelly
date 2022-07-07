@@ -104,18 +104,10 @@ npm install xml2js@0.4.23`
 -->
 ### **WORK IN PROGRESS**
 Important: The adapter now requires at least Node.js 14.5
-* (klein0r) Added Shelly TRV
-* (klein0r) Added channel names for Shelly 3EM
-* (klein0r) Added device status states
-* (klein0r) Debug mode (MQTT) for Gen 2 devices
+* (klein0r) Added Shelly TRV (beta)
 * (klein0r) Just publish data to Shelly device, if value changed
 * (klein0r) **Breaking**: Configuration is only working in the new Admin 5 UI
 * (klein0r) **Breaking**: Uptime is now a number (seconds since boot)
-* (klein0r) Display total power for Shelly RGBW 2
-* (klein0r) Save HTTP responses to file system for debugging (if enabled)
-* (klein0r) Download scripts from generation 2 devices to files
-* (klein0r) Optimized unload process to avoid errors
-* (klein0r) Improved logging
 
 ### 5.3.2 (2022-03-06)
 * (klein0r) Added cover position status for generation 2 devices
