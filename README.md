@@ -102,6 +102,9 @@ npm install xml2js@0.4.23`
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (klein0r) Added mqtt status states and checks for generation 2 devices
+
 ### 6.0.0 (2022-07-07)
 Important: The adapter now requires at least Node.js 14.5
 * (klein0r) Added Shelly TRV (beta)
