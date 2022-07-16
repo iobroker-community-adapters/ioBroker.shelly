@@ -29,10 +29,12 @@ Activate MQTT on all your Shelly devices:
 3. Activate MQTT and enter the previously configured username, password and the ip address of your ioBroker installation - followed by port 1882 (e.g. ```192.168.20.242:1882```)
 4. Save the configuration - the Shelly will reboot automatically
 
-- For Gen1 devices: Do not change the ```custom MQTT prefix``` (the Adapter will not work if you change the prefix)
+**Do not change the ```(custom) MQTT prefix``` - the adapter will not work if you change the prefix!**
 
 ![shelly gen1](./img/shelly_mqtt-gen1.png)
 
-![shelly gen2](./img/shelly_mqtt-gen2.png)
+- **Do not change the "client id" in this configuration**
+- **You have to enable all RPC notification options for gen 2 devices (see screenshot)!**
+- SSL has to be disabled!
 
-**You have to enable all RPC notification options for gen 2 devices (see screenshot)!**
+![shelly gen2](./img/shelly_mqtt-gen2.png)
