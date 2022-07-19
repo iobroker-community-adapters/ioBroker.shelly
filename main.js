@@ -81,7 +81,6 @@ class Shelly extends utils.Adapter {
     }
 
     /**
-     * Is called if a subscribed state changes
      * @param {string} id
      * @param {ioBroker.State | null | undefined} state
      */
@@ -108,10 +107,16 @@ class Shelly extends utils.Adapter {
         }
     }
 
-    onMessage(msg) {
-        this.sendTo(msg.from, msg.command, 'Execute command ' + msg.command, msg.callback);
+    /**
+     * @param {ioBroker.Message} obj
+     */
+    onMessage(obj) {
+        this.sendTo(obj.from, obj.command, 'Execute command ' + obj.command, obj.callback);
     }
 
+    /**
+     * @param {() => void} callback
+     */
     onUnload(callback) {
         this.isUnloaded = true;
 
