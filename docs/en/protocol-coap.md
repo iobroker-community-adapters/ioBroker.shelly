@@ -4,25 +4,31 @@
 
 ## CoAP
 
-By default, the CoAP protocol is used.
+![iobroker_general_coap](./img/iobroker_general_coap.png)
 
-If you use the Shelly with firmware less equal 1.9.4 you don't have to configure anything. Your Shelly devices will be found by it self by ioBroker.
+The CoAP protocol is used by default.
 
-**If you are using the firmware versions above 1.9.4 you have to enter a CoIoT server for CoAP on your Shelly device.** Enter the IP address of your ioBroker server followed by the port ```5683``` as CoIoT server. For example, if ioBroker runs on address ```192.168.1.2```, you have to enter ```192.168.1.2:5683``` and activate CoIoT.
+**If you are using the firmware versions above 1.9.4 you have to enter a CoIoT server for CoAP on your Shelly device (unicast).**
 
-**Important: Because CoAP use multicast UDP packages, the Shelly devices has to be in the same subnet as your ioBroker server.**
+Enter the IP address of your ioBroker server as CoIoT server - followed  by port ```5683```. Example: If ioBroker runs on address ```192.168.1.2```, you have to enter ```192.168.1.2:5683``` and activate CoIoT.
 
-If you use ioBroker in a docker container, the container has to run in network mode ```host``` or ```macvlan```. If the docker container is running in ```bridge``` mode, your Shelly devices will not be found.
-
-![iobroker_restrict_login](./img/iobroker_general_coap.png)
+![shelly_coap](./img/shelly_coap.png)
 
 CoAP will add all devices in your network. If you want to exclude some Shelly devices, you can put them on a blacklist. Just enter the serial numbers to the blacklist table:
 
 ![iobroker_coap](./img/iobroker_coap.png)
 
-![shelly_coap](./img/shelly_coap.png)
+### Older firmware versions
+
+If you use Shelly devices with firmware version 1.9.4 (or older) you don't have to configure anything. Your Shelly devices will be discovered by ioBroker automatically.
+
+**Important: Because CoAP use multicast UDP packages, the Shelly devices has to be in the same subnet as your ioBroker server.**
 
 ### Important notes
+
+#### Docker
+
+If you use ioBroker in a docker container, the container has to run in network mode ```host``` or ```macvlan```. If the docker container is running in ```bridge``` mode, your Shelly devices will not be found.
 
 #### Shelly Firmware 1.8.0 (or later)
 

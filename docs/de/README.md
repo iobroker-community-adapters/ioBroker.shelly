@@ -4,7 +4,7 @@
 
 ## Anforderungen
 
-1. nodejs 12.0 (oder neuer)
+1. nodejs 14.5 (oder neuer)
 2. js-controller 3.3.0 (oder neuer)
 4. Admin Adapter 5.1.25 (oder neuer)
 
