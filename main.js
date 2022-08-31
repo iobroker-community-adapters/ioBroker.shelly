@@ -169,7 +169,7 @@ class Shelly extends utils.Adapter {
         }
 
         try {
-            const deviceIds = await this.getAllDevices();
+            const deviceIds = await this.getAllDeviceIds();
             for (const d in deviceIds) {
                 const deviceId = deviceIds[d];
 
@@ -203,9 +203,9 @@ class Shelly extends utils.Adapter {
         this.log.debug(`[deviceStatusUpdate] ${deviceId}: ${status}`);
 
         // Check if device object exists
-        const knownDevices = await this.getAllDevices();
-        if (knownDevices.indexOf(deviceId) === -1) {
-            this.log.silly(`[deviceStatusUpdate] ${deviceId} is not in list of known devices: ${JSON.stringify(knownDevices)}`);
+        const knownDeviceIds = await this.getAllDeviceIds();
+        if (knownDeviceIds.indexOf(deviceId) === -1) {
+            this.log.silly(`[deviceStatusUpdate] ${deviceId} is not in list of known devices: ${JSON.stringify(knownDeviceIds)}`);
             return;
         }
 
@@ -250,13 +250,13 @@ class Shelly extends utils.Adapter {
         return Object.prototype.hasOwnProperty.call(this.onlineDevices, deviceId);
     }
 
-    async getAllDevices() {
+    async getAllDeviceIds() {
         const devices = await this.getDevicesAsync();
         return devices.map(device => this.removeNamespace(device._id));
     }
 
     async setOnlineFalse() {
-        const deviceIds = await this.getAllDevices();
+        const deviceIds = await this.getAllDeviceIds();
         for (const d in deviceIds) {
             const deviceId = deviceIds[d];
             const idOnline = `${deviceId}.online`;
