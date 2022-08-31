@@ -22,7 +22,7 @@
 ![Stable](http://iobroker.live/badges/shelly-stable.svg)
 ![Installed](http://iobroker.live/badges/shelly-installed.svg)
 
-The adapter communicates with Shelly devices by REST API and the CoAP or MQTT protocol.    
+The adapter communicates with Shelly devices by REST API and the CoAP or MQTT protocol.
 
 Uses the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
 
@@ -34,55 +34,55 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 
 ## Supported devices (Gen 1)
 
-|Shelly Device|CoAP|MQTT|
-|-------------|--------------|----|
-|Shelly 1 (SHSW-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly 2 (SHSW-21/SHSW-22)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Bulb (SHBLB)|supported since v3.3.0|supported since v3.3.0|
-|Shelly H&T (SHHT-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Smoke (SHSM-01)|supported since v3.3.0|supported since v3.3.0|
-|Shelly 1 1PM (SHSW-PM)|supported since v3.3.0|supported since v3.3.0|
-|Shelly 2.5 (SHSW-25)|supported since v3.3.0|supported since v3.3.0|
-|Shelly RGBW (SHRGBWW-01)|not supported since v3.4.0|not supported since v3.4.0|
-|Shelly RGBW 2 (SHRGBW2)|supported since v3.3.0|supported since v3.3.0|
-|Shelly2LED (SH2LED)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Plug (SHPLG-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Plug S (SHPLG-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Plug 2 (SHPLG-2)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Sense (SHSEN-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly 4 Pro (SHSW-44)|supported since v3.3.5|supported since v3.3.5|
-|Shelly EM (SHEM)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Flood (SHWT-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Dimmer (SHDM-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Door/Window Sensor (SHDW-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Bulb Duo (SHBDUO-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly 3EM (SHEM|supported since v3.3.0|supported since v3.3.0|
-|Shelly Vintage (SHVIN-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly I3 (SHIX3-1)|supported since v3.3.0|supported since v3.3.0|
-|Shelly Button (SHBTN-1)|supported since v3.3.3|supported since v3.3.3|
-|Shelly Gas (SHGS-1)|supported since v3.3.3|supported since v3.3.3|
-|Shelly Dimmer 2 (SHDM-2)|supported since v3.3.4|supported since v3.3.4|
-|Shelly Door/Window Sensor 2 (SHDW-2)|supported since v3.3.5|supported since v3.3.5|
-|Shelly Uni (SHUNI-1)|supported since v4.0.4|supported since v4.0.4|
-|Shelly 1L (SHSW-L)|supported since v4.0.5|supported since v4.0.5|
-|Shelly Color Bulb (SHCB-1)|supported since v4.0.5|supported since v4.0.5|
-|Shelly Button (SHBTN-2)|supported since v4.0.5|supported since v4.0.5|
-|Shelly Motion (SHMOS-01)|supported since v4.0.6|supported since v4.0.6|
-|Shelly TRV (SHTRV-01)|supported since v6.0.0|supported since v6.0.0|
+| Shelly Device                        | CoAP      | MQTT      |
+| ------------------------------------ | --------- | --------- |
+| Shelly 1 (SHSW-1)                    | >= v3.3.0 | >= v3.3.0 |
+| Shelly 2 (SHSW-21/SHSW-22)           | >= v3.3.0 | >= v3.3.0 |
+| Shelly Bulb (SHBLB)                  | >= v3.3.0 | >= v3.3.0 |
+| Shelly H&T (SHHT-1)                  | >= v3.3.0 | >= v3.3.0 |
+| Shelly Smoke (SHSM-01)               | >= v3.3.0 | >= v3.3.0 |
+| Shelly 1 1PM (SHSW-PM)               | >= v3.3.0 | >= v3.3.0 |
+| Shelly 2.5 (SHSW-25)                 | >= v3.3.0 | >= v3.3.0 |
+| Shelly RGBW (SHRGBWW-01)             | < v3.4.0  | < v3.4.0  |
+| Shelly RGBW 2 (SHRGBW2)              | >= v3.3.0 | >= v3.3.0 |
+| Shelly2LED (SH2LED)                  | >= v3.3.0 | >= v3.3.0 |
+| Shelly Plug (SHPLG-1)                | >= v3.3.0 | >= v3.3.0 |
+| Shelly Plug S (SHPLG-1)              | >= v3.3.0 | >= v3.3.0 |
+| Shelly Plug 2 (SHPLG-2)              | >= v3.3.0 | >= v3.3.0 |
+| Shelly Sense (SHSEN-1)               | >= v3.3.0 | >= v3.3.0 |
+| Shelly 4 Pro (SHSW-44)               | >= v3.3.5 | >= v3.3.5 |
+| Shelly EM (SHEM)                     | >= v3.3.0 | >= v3.3.0 |
+| Shelly Flood (SHWT-1)                | >= v3.3.0 | >= v3.3.0 |
+| Shelly Dimmer (SHDM-1)               | >= v3.3.0 | >= v3.3.0 |
+| Shelly Door/Window Sensor (SHDW-1)   | >= v3.3.0 | >= v3.3.0 |
+| Shelly Bulb Duo (SHBDUO-1)           | >= v3.3.0 | >= v3.3.0 |
+| Shelly 3EM (SHEM                     | >= v3.3.0 | >= v3.3.0 |
+| Shelly Vintage (SHVIN-1)             | >= v3.3.0 | >= v3.3.0 |
+| Shelly I3 (SHIX3-1)                  | >= v3.3.0 | >= v3.3.0 |
+| Shelly Button (SHBTN-1)              | >= v3.3.3 | >= v3.3.3 |
+| Shelly Gas (SHGS-1)                  | >= v3.3.3 | >= v3.3.3 |
+| Shelly Dimmer 2 (SHDM-2)             | >= v3.3.4 | >= v3.3.4 |
+| Shelly Door/Window Sensor 2 (SHDW-2) | >= v3.3.5 | >= v3.3.5 |
+| Shelly Uni (SHUNI-1)                 | >= v4.0.4 | >= v4.0.4 |
+| Shelly 1L (SHSW-L)                   | >= v4.0.5 | >= v4.0.5 |
+| Shelly Color Bulb (SHCB-1)           | >= v4.0.5 | >= v4.0.5 |
+| Shelly Button (SHBTN-2)              | >= v4.0.5 | >= v4.0.5 |
+| Shelly Motion (SHMOS-01)             | >= v4.0.6 | >= v4.0.6 |
+| Shelly TRV (SHTRV-01)                | >= v6.0.0 | >= v6.0.0 |
 
 ## Supported devices (Gen 2)
 
-|Shelly Device|CoAP|MQTT|
-|-------------|--------------|----|
-|Shelly Plus 1 (shellyplus1)|---|supported since v5.0.0|
-|Shelly Plus 1 PM (shellyplus1pm)|---|supported since v5.0.0|
-|Shelly Plus 2 PM (shellyplus2pm)|---|supported since v5.2.0|
-|Shelly Plus I4 (shellyplusi4)|---|supported since v5.3.0|
-|Shelly Pro 1 (shellypro1)|---|supported since v5.2.0|
-|Shelly Pro 1 PM (shellypro1pm)|---|supported since v5.2.0|
-|Shelly Pro 2 (shellypro2)|---|supported since v5.2.0|
-|Shelly Pro 2 PM (shellypro2pm)|---|supported since v5.2.0|
-|Shelly Pro 4 PM (shellypro4pm)|---|supported since v5.0.0|
+| Shelly Device                    | CoAP | MQTT      |
+| -------------------------------- | ---- | --------- |
+| Shelly Plus 1 (shellyplus1)      | ❌   | >= v5.0.0 |
+| Shelly Plus 1 PM (shellyplus1pm) | ❌   | >= v5.0.0 |
+| Shelly Plus 2 PM (shellyplus2pm) | ❌   | >= v5.2.0 |
+| Shelly Plus I4 (shellyplusi4)    | ❌   | >= v5.3.0 |
+| Shelly Pro 1 (shellypro1)        | ❌   | >= v5.2.0 |
+| Shelly Pro 1 PM (shellypro1pm)   | ❌   | >= v5.2.0 |
+| Shelly Pro 2 (shellypro2)        | ❌   | >= v5.2.0 |
+| Shelly Pro 2 PM (shellypro2pm)   | ❌   | >= v5.2.0 |
+| Shelly Pro 4 PM (shellypro4pm)   | ❌   | >= v5.0.0 |
 
 ## Sentry
 
@@ -91,10 +91,10 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 ## Troubleshooting after installation
 
 ### TypeError: xmlserializer.Builder is not a constructor
+
 execute
 
-`cd /opt/iobroker/node_modules/iobroker.shelly
-npm install xml2js@0.4.23`
+`cd /opt/iobroker/node_modules/iobroker.shelly npm install xml2js@0.4.23`
 
 ## Changelog
 
