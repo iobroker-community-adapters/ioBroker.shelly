@@ -64,7 +64,9 @@ Important notes:
 - You cannot define/execute multiple ``xxxx_cmd`` types for one state
 - For CoAP, there is no ``coap_cmd`` function like ``coap_cmd_funct``
 
-To **hide** a specific function, you can use the ``no_display`` flag on each type. Example:
+### Hide values
+
+To **hide** a specific state, you can use the ``no_display`` flag on each type. Example:
 
 ```javascript
 'Relay0.Timer': {
@@ -88,3 +90,33 @@ To **hide** a specific function, you can use the ``no_display`` flag on each typ
 ```
 
 This object won't be available when using MQTT.
+
+### Hide by mode
+
+Some shellies support different modes (like "relay" vs "shutter" or "color" vs "white"). You can hide options (depending on the mode) by using ``device_mode``:
+
+```javascript
+'lights.Switch': {
+        device_mode: 'color',
+        coap: {
+            coap_publish: '1101', // CoAP >= FW 1.8
+            coap_publish_funct: async (value) => { return value == 1 ? true : false; },
+            http_cmd: '/color/0',
+            http_cmd_funct: (value) => { return value === true ? { turn: 'on' } : { turn: 'off' }; },
+        },
+        mqtt: {
+            mqtt_publish: 'shellies/<mqttprefix>/color/0',
+            mqtt_publish_funct: (value) => { return value === 'on'; },
+            mqtt_cmd: 'shellies/<mqttprefix>/color/0/command',
+            mqtt_cmd_funct: (value) => { return value === true ? 'on' : 'off'; },
+        },
+        common: {
+            'name': 'Switch',
+            'type': 'boolean',
+            'role': 'switch',
+            'read': true,
+            'write': true,
+            'def': false
+        }
+    },
+```
