@@ -115,6 +115,7 @@ execute
 -->
 ### **WORK IN PROGRESS**
 * (klein0r) Added mqtt status states and checks for generation 2 devices
+* (klein0r) Send unchanged state to device, ack state if value is unchanged
 
 ### 6.0.0 (2022-07-07)
 Important: The adapter now requires at least Node.js 14.5
