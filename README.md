@@ -118,6 +118,7 @@ execute
 * (klein0r) Send unchanged state to device, ack state if value is unchanged
 * (klein0r) Fixed total power of RGBW2 when in color mode
 * (klein0r) Added device modes (just display relevant states for current mode)
+* (klein0r) **Breaking** Moved "mode" setting of some devices to "Sys.deviceMode"
 
 ### 6.0.0 (2022-07-07)
 Important: The adapter now requires at least Node.js 14.5
