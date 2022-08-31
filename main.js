@@ -239,9 +239,9 @@ class Shelly extends utils.Adapter {
         if (oldOnlineDeviceCount !== newOnlineDeviceCount) {
             this.log.debug(`[deviceStatusUpdate] Online devices: ${JSON.stringify(Object.keys(this.onlineDevices))}`);
             if (newOnlineDeviceCount > 0) {
-                this.setStateAsync('info.connection', true, true);
+                await this.setStateAsync('info.connection', { val: true, ack: true });
             } else {
-                this.setStateAsync('info.connection', false, true);
+                await this.setStateAsync('info.connection', { val: false, ack: true });
             }
         }
     }
@@ -278,7 +278,7 @@ class Shelly extends utils.Adapter {
         }
 
         this.onlineDevices = {};
-        this.setStateAsync('info.connection', false, true);
+        await this.setStateAsync('info.connection', { val: false, ack: true });
     }
 
     autoFirmwareUpdate() {
