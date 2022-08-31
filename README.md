@@ -37,38 +37,42 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 | Shelly Device                        | CoAP      | MQTT      | Tested firmware version                 |
 | ------------------------------------ | --------- | --------- | --------------------------------------- |
 | Shelly 1 (SHSW-1)                    | >= v3.3.0 | >= v3.3.0 | 20220809-123240/v1.12-g99f7e0b          |
+| Shelly 1 1PM (SHSW-PM)               | >= v3.3.0 | >= v3.3.0 | 20220809-124723/v1.12-g99f7e0b          |
+| Shelly 1L (SHSW-L)                   | >= v4.0.5 | >= v4.0.5 | n/a                                     |
 | Shelly 2 (SHSW-21/SHSW-22)           | >= v3.3.0 | >= v3.3.0 | 20220809-123410/v1.12-g99f7e0b          |
-| Shelly Bulb (SHBLB)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
-| Shelly H&T (SHHT-1)                  | >= v3.3.0 | >= v3.3.0 | 20220324-134040/v1.11.8-HT-fix-g60b9bd1 |
-| Shelly Smoke (SHSM-01)               | >= v3.3.0 | >= v3.3.0 | n/a                                     |
-| Shelly 1 1PM (SHSW-PM)               | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly 2.5 (SHSW-25)                 | >= v3.3.0 | >= v3.3.0 | 20220809-123456/v1.12-g99f7e0b          |
+| Shelly 4 Pro (SHSW-44)               | >= v3.3.5 | >= v3.3.5 | n/a                                     |
+| Shelly Dimmer (SHDM-1)               | >= v3.3.0 | >= v3.3.0 | 20220825-080609/v1.12-Dimmer1-g0ed8d76  |
+| Shelly Dimmer 2 (SHDM-2)             | >= v3.3.4 | >= v3.3.4 | n/a                                     |
 | Shelly RGBW (SHRGBWW-01)             | < v3.4.0  | < v3.4.0  | n/a                                     |
 | Shelly RGBW 2 (SHRGBW2)              | >= v3.3.0 | >= v3.3.0 | 20220809-124336/v1.12-g99f7e0b          |
+| Shelly i3 (SHIX3-1)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
+| Shelly EM (SHEM)                     | >= v3.3.0 | >= v3.3.0 | n/a                                     |
+| Shelly 3EM (SHEM-3)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
+| Shelly H&T (SHHT-1)                  | >= v3.3.0 | >= v3.3.0 | 20220324-134040/v1.11.8-HT-fix-g60b9bd1 |
+| Shelly Smoke (SHSM-01)               | >= v3.3.0 | >= v3.3.0 | 20220809-123549/v1.12-g99f7e0b          |
+| Shelly Flood (SHWT-1)                | >= v3.3.0 | >= v3.3.0 | 20220809-123830/v1.12-g99f7e0b          |
+| Shelly Gas (SHGS-1)                  | >= v3.3.3 | >= v3.3.3 | n/a                                     |
+| Shelly Door/Window Sensor (SHDW-1)   | >= v3.3.0 | >= v3.3.0 | n/a                                     |
+| Shelly Door/Window Sensor 2 (SHDW-2) | >= v3.3.5 | >= v3.3.5 | n/a                                     |
 | Shelly2LED (SH2LED)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly Plug (SHPLG-1)                | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly Plug S (SHPLG-S)              | >= v3.3.0 | >= v3.3.0 | 20220809-124506/v1.12-g99f7e0b          |
 | Shelly Plug 2 (SHPLG-2)              | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly Sense (SHSEN-1)               | >= v3.3.0 | >= v3.3.0 | n/a                                     |
-| Shelly 4 Pro (SHSW-44)               | >= v3.3.5 | >= v3.3.5 | n/a                                     |
-| Shelly EM (SHEM)                     | >= v3.3.0 | >= v3.3.0 | n/a                                     |
-| Shelly Flood (SHWT-1)                | >= v3.3.0 | >= v3.3.0 | 20220809-123830/v1.12-g99f7e0b          |
-| Shelly Dimmer (SHDM-1)               | >= v3.3.0 | >= v3.3.0 | 20220825-080609/v1.12-Dimmer1-g0ed8d76  |
-| Shelly Door/Window Sensor (SHDW-1)   | >= v3.3.0 | >= v3.3.0 | n/a                                     |
+| Shelly Bulb (SHBLB)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly Bulb Duo (SHBDUO-1)           | >= v3.3.0 | >= v3.3.0 | 20220809-123026/v1.12-g99f7e0b          |
-| Shelly 3EM (SHEM                     | >= v3.3.0 | >= v3.3.0 | n/a                                     |
-| Shelly Vintage (SHVIN-1)             | >= v3.3.0 | >= v3.3.0 | n/a                                     |
-| Shelly I3 (SHIX3-1)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
-| Shelly Button (SHBTN-1)              | >= v3.3.3 | >= v3.3.3 | n/a                                     |
-| Shelly Gas (SHGS-1)                  | >= v3.3.3 | >= v3.3.3 | n/a                                     |
-| Shelly Dimmer 2 (SHDM-2)             | >= v3.3.4 | >= v3.3.4 | n/a                                     |
-| Shelly Door/Window Sensor 2 (SHDW-2) | >= v3.3.5 | >= v3.3.5 | n/a                                     |
-| Shelly Uni (SHUNI-1)                 | >= v4.0.4 | >= v4.0.4 | n/a                                     |
-| Shelly 1L (SHSW-L)                   | >= v4.0.5 | >= v4.0.5 | n/a                                     |
 | Shelly Color Bulb (SHCB-1)           | >= v4.0.5 | >= v4.0.5 | n/a                                     |
+| Shelly Vintage (SHVIN-1)             | >= v3.3.0 | >= v3.3.0 | n/a                                     |
+| Shelly Uni (SHUNI-1)                 | >= v4.0.4 | >= v4.0.4 | n/a                                     |
+| Shelly Button (SHBTN-1)              | >= v3.3.3 | >= v3.3.3 | n/a                                     |
 | Shelly Button (SHBTN-2)              | >= v4.0.5 | >= v4.0.5 | n/a                                     |
 | Shelly Motion (SHMOS-01)             | >= v4.0.6 | >= v4.0.6 | 20220811-152232/v2.1.8@5afc928c         |
 | Shelly TRV (SHTRV-01)                | >= v6.0.0 | >= v6.0.0 | n/a                                     |
+
+NOT Supported:
+
+- USB powered UVC LED strip
 
 ## Supported devices (Gen 2)
 
@@ -77,12 +81,19 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 | Shelly Plus 1 (shellyplus1)      | ❌   | >= v5.0.0 | 20220830-130249/0.11.0-gfa1bc37 |
 | Shelly Plus 1 PM (shellyplus1pm) | ❌   | >= v5.0.0 | 20220830-130414/0.11.0-gfa1bc37 |
 | Shelly Plus 2 PM (shellyplus2pm) | ❌   | >= v5.2.0 | 20220830-130540/0.11.0-gfa1bc37 |
-| Shelly Plus I4 (shellyplusi4)    | ❌   | >= v5.3.0 | n/a                             |
+| Shelly Plus i4 (shellyplusi4)    | ❌   | >= v5.3.0 | n/a                             |
 | Shelly Pro 1 (shellypro1)        | ❌   | >= v5.2.0 | 20220830-131408/0.11.0-gfa1bc37 |
 | Shelly Pro 1 PM (shellypro1pm)   | ❌   | >= v5.2.0 | 20220830-131534/0.11.0-gfa1bc37 |
 | Shelly Pro 2 (shellypro2)        | ❌   | >= v5.2.0 | 20220830-131701/0.11.0-gfa1bc37 |
 | Shelly Pro 2 PM (shellypro2pm)   | ❌   | >= v5.2.0 | 20220830-131827/0.11.0-gfa1bc37 |
 | Shelly Pro 4 PM (shellypro4pm)   | ❌   | >= v5.0.0 | 20220830-132254/0.11.0-gfa1bc37 |
+
+NOT Supported:
+
+- Shelly Motion 2
+- Shelly Plus H&T
+- Shelly Plus Wall Dimmer US
+- Shelly Plus Plug US
 
 ## Sentry
 
