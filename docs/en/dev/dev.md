@@ -1,4 +1,4 @@
-![Logo](../../admin/shelly.png)
+![Logo](../../../admin/shelly.png)
 
 # ioBroker.shelly DEV documentation
 
