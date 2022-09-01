@@ -47,7 +47,7 @@
     "@alcalzone/release-script": "^3.5.9",
     "@alcalzone/release-script-plugin-iobroker": "^3.5.9",
     "@alcalzone/release-script-plugin-license": "^3.5.9",
-    "@iobroker/adapter-dev": "^1.0.0",
+    "@iobroker/adapter-dev": "^1.0.1",
     "@iobroker/testing": "^3.0.2",
     "@types/chai": "^4.3.3",
     "@types/chai-as-promised": "^7.1.5",
