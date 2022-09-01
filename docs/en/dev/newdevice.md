@@ -1,4 +1,4 @@
-![Logo](../../admin/shelly.png)
+![Logo](../../../admin/shelly.png)
 
 # New (not supported) Shelly devices - What to do
 

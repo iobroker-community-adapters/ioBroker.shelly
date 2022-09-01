@@ -2,6 +2,15 @@
 
 # ioBroker.shelly
 
+## Table of contents
+
+- [CoAP protocol](protocol-coap.md)
+- [MQTT protocol](protocol-mqtt.md)
+- [Restricted login](restricted-login.md)
+- [State changes](state-changes.md)
+- [Debug](debug.md)
+- [FAQ](faq.md)
+
 ## Requirements
 
 1. nodejs 14.5 (or later)
@@ -20,12 +29,3 @@ Check the list of *supported devices* for more details.
 You can use the adapter in CoAP or MQTT mode. The default mode is CoAP and you do not have to do anything. **If you want to use Gen2 devices, you must use MQTT!**
 
 ![iobroker_general](./img/iobroker_general.png)
-
-## Table of contents
-
-- [CoAP protocol](protocol-coap.md)
-- [MQTT protocol](protocol-mqtt.md)
-- [Restricted login](restricted-login.md)
-- [State changes](state-changes.md)
-- [Debug](debug.md)
-- [FAQ](faq.md)
