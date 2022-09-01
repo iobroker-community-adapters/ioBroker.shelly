@@ -1,7 +1,7 @@
 {
   "name": "iobroker.shelly",
   "version": "6.0.0",
-  "description": "Shelly",
+  "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
   "author": {
     "name": "Thorsten Stueben",
     "email": "thorsten@stueben.de"
@@ -20,13 +20,17 @@
   "license": "MIT",
   "keywords": [
     "ioBroker",
-    "Shelly",
     "Smart Home",
-    "switch"
+    "home automation",
+    "Shelly",
+    "IoT",
+    "CoAP",
+    "CoIoT",
+    "MQTT"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/iobroker-community-adapters/ioBroker.shelly"
+    "url": "git+https://github.com/iobroker-community-adapters/ioBroker.shelly.git"
   },
   "engines": {
     "node": ">=14.5.0"

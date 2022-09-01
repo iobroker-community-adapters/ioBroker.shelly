@@ -144,10 +144,11 @@
     "compact": true,
     "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
     "keywords": [
-      "shelly",
-      "switch",
-      "coap",
-      "mqtt"
+      "Shelly",
+      "IoT",
+      "CoAP",
+      "CoIoT",
+      "MQTT"
     ],
     "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
     "loglevel": "info",
@@ -175,7 +176,7 @@
     ],
     "dependencies": [
       {
-        "js-controller": ">=3.3.0"
+        "js-controller": ">=3.3.22"
       }
     ]
   },
