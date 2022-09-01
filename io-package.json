@@ -92,26 +92,26 @@
     "titleLang": {
       "en": "Shelly",
       "de": "Shelly",
-      "ru": "изобилующий раковинами",
+      "ru": "Shelly",
       "pt": "Shelly",
-      "nl": "schaalachtig",
+      "nl": "Shelly",
       "fr": "Shelly",
       "it": "Shelly",
       "es": "Shelly",
       "pl": "Shelly",
-      "zh-cn": "谢莉"
+      "zh-cn": "Shelly"
     },
     "desc": {
-      "en": "Integrate your Shelly devices",
-      "de": "Integrieren Sie Ihre Shelly-Geräte",
-      "ru": "Интегрируйте свои устройства Shelly",
-      "pt": "Integre seus dispositivos Shelly",
-      "nl": "Integreer uw Shelly-apparaten",
-      "fr": "Intégrez vos appareils Shelly",
-      "it": "Integra i tuoi dispositivi Shelly",
-      "es": "Integre sus dispositivos Shelly",
-      "pl": "Zintegruj swoje urządzenia Shelly",
-      "zh-cn": "集成您的 Shelly 设备"
+      "en": "Integrate Shelly devices via CoAP or MQTT",
+      "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
+      "ru": "Интеграция Shelly устройств через CoAP или MQTT",
+      "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
+      "nl": "Integrate Shelly apparatuur via CoAP of MQT",
+      "fr": "Dispositifs Shelly intégrés via CoAP ou MQTT",
+      "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
+      "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
+      "pl": "Integracja Shelly poprzez CoAP lub MQTT",
+      "zh-cn": "通过联合方案或技合中心将全套装置纳入"
     },
     "license": "MIT",
     "authors": [
@@ -181,7 +181,9 @@
     ]
   },
   "protectedNative": [
+    "mqttusername",
     "mqttpassword",
+    "httpusername",
     "httppassword"
   ],
   "encryptedNative": [
@@ -190,8 +192,8 @@
   ],
   "native": {
     "protocol": "coap",
-    "httpusername": "",
-    "httppassword": "admin",
+    "httpusername": "admin",
+    "httppassword": "",
     "polltime": 15,
     "autoupdate": false,
     "updateUnchangedObjects": false,
