@@ -20,6 +20,6 @@ It is not possible to connect the Shelly adapter to an existing MQTT broker in y
 
 ## Can I still use the cloud connection when using the adapter?
 
-If you use generation 1 devices, you are not able to use MQTT and the Shelly cloud at the same time. You have to use CoAP for integration if you want to keep the cloud connection.
+If you use **generation 1** devices, it is not possible to use MQTT and the Shelly cloud at the same time. You have to use CoAP for integration if you want to keep the cloud connection.
 
-Generation 2 devices are able to connect via MQTT and keep the cloud connection running.
+**Generation 2** devices are able to connect via MQTT and keep the cloud connection running.

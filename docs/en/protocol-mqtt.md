@@ -17,7 +17,7 @@
 ### Configuration
 
 1. Open the Shelly Adapter configuration in ioBroker
-2. Choose ```MQTT and HTTP``` as *protocol* in the *general settings*
+2. Choose ```MQTT (and HTTP)``` as *protocol* in the *general settings*
 3. Open the **MQTT Settings** tab
 4. Choose a username and a secure password (you have to configure these information on all Shelly devices)
 

@@ -12,7 +12,7 @@ Nein, Du musst nur die Shelly-Geräte so konfigurieren, wie [hier](protocol-mqtt
 
 ## Kann ich zwischen CoAP und MQTT umschalten?
 
-Du kannst die Konfiguration in deiner Shelly-Instanz jederzeit ändern. Alle Objekte und Zustände werden gleich bleiben. Es ändert sich nur die Kommunikation mit den Geräten.
+Du kannst die Konfiguration in der Shelly-Instanz jederzeit ändern. Alle Objekte und Zustände werden gleich bleiben. Es ändert sich nur die Kommunikation mit den Geräten.
 
 ## Ist es möglich, den Shelly-Adapter mit einem bestehenden MQTT-Broker zu verbinden?
 
@@ -20,6 +20,6 @@ Es ist nicht möglich, den Shelly-Adapter mit einem existierenden MQTT-Broker in
 
 ## Kann ich weiterhin die Cloud-Verbindung nutzen, wenn ich mit dem Shelly-Adapter arbeite?
 
-Falls Du Geräte der ersten Generation verwendest, kann man MQTT und die Shelly-Cloud nicht gleichzeitig verwenden. In diesem Fall musst Du CoAP für die Integration nutzen, wenn Du die Cloud-Verbindung gleichzeitig nutzen möchtest.
+Falls Du Geräte der **Generation 1** verwendest, kann man MQTT und die Shelly-Cloud nicht gleichzeitig verwenden. In diesem Fall musst CoAP für die Integration genutzt werden, wenn die Cloud-Verbindung gleichzeitig bestehen soll.
 
-Geräte der Generation 2 können per MQTT verbunden werden und gleichzeitig die Cloud-Verbindung aufrecht erhalten.
+Geräte der **Generation 2** können per MQTT verbunden werden und gleichzeitig die Cloud-Verbindung aufrecht erhalten.

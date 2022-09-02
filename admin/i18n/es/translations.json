@@ -21,5 +21,6 @@
     "Log Debug Messages": "Registrar mensajes de depuración",
     "Will be used to authenticate against all Shelly devices": "Se usará para autenticarse en todos los dispositivos Shelly",
     "You have to configure the same password on all devices": "Tienes que configurar la misma contraseña en todos los dispositivos",
-    "Save HTTP responses (for debugging)": "Guardar respuestas HTTP (para depuración)"
+    "Save HTTP responses (for debugging)": "Guardar respuestas HTTP (para depuración)",
+    "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)": "CoAP es compatible con dispositivos Gen1, MQTT es compatible con todos los dispositivos (Gen1 y Gen2)"
 }

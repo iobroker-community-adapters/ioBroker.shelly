@@ -12,39 +12,40 @@
                     "options": [
                         {
                             "label": {
-                                "en": "CoAP and HTTP",
-                                "de": "CoAP und HTTP",
-                                "ru": "CoAP и HTTP",
-                                "pt": "CoAP e HTTP",
-                                "nl": "CoAP en HTTP",
-                                "fr": "CoAP et HTTP",
-                                "it": "CoAP e HTTP",
-                                "es": "CoAP y HTTP",
-                                "pl": "CoAP i HTTP",
-                                "zh-cn": "CoAP 和 HTTP"
+                                "en": "MQTT (and HTTP)",
+                                "de": "MQTT (und HTTP)",
+                                "ru": "MQTT (и HTTP)",
+                                "pt": "MQTT (e HTTP)",
+                                "nl": "MQTT (en HTTP)",
+                                "fr": "MQTT (et HTTP)",
+                                "it": "MQTT (e HTTP)",
+                                "es": "MQTT (y HTTP)",
+                                "pl": "MQTT (i HTTP)",
+                                "zh-cn": "MQTT (和 HTTP)"
                             },
-                            "value": "coap"
+                            "value": "mqtt"
                         },
                         {
                             "label": {
-                                "en": "MQTT and HTTP",
-                                "de": "MQTT und HTTP",
-                                "ru": "MQTT и HTTP",
-                                "pt": "MQTT e HTTP",
-                                "nl": "MQTT en HTTP",
-                                "fr": "MQTT et HTTP",
-                                "it": "MQTT e HTTP",
-                                "es": "MQTT y HTTP",
-                                "pl": "MQTT i HTTP",
-                                "zh-cn": "MQTT 和 HTTP"
+                                "en": "CoAP (and HTTP)",
+                                "de": "CoAP (und HTTP)",
+                                "ru": "CoAP (и HTTP)",
+                                "pt": "CoAP (e HTTP)",
+                                "nl": "CoAP (en HTTP)",
+                                "fr": "CoAP (et HTTP)",
+                                "it": "CoAP (e HTTP)",
+                                "es": "CoAP (y HTTP)",
+                                "pl": "CoAP (i HTTP)",
+                                "zh-cn": "CoAP (和 HTTP)"
                             },
-                            "value": "mqtt"
+                            "value": "coap"
                         }
                     ],
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "Shelly protocol"
+                    "label": "Shelly protocol",
+                    "help": "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)"
                 },
                 "httpusername": {
                     "newLine": true,
@@ -111,6 +112,7 @@
             }
         },
         "_mqtt": {
+            "hidden": "data.protocol !== 'mqtt'",
             "type": "panel",
             "label": "MQTT settings",
             "items": {
@@ -207,6 +209,7 @@
             }
         },
         "_coap": {
+            "hidden": "data.protocol !== 'coap'",
             "type": "panel",
             "label": "CoAP settings",
             "items": {
