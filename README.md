@@ -113,7 +113,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.1.0 (2022-09-02)
 * (klein0r) **Breaking:** Added device modes (just display relevant states for current mode)
 * (klein0r) **Breaking:** Moved "mode" setting of some devices to "Sys.deviceMode"
 * (klein0r) Added ext temperature offset configuration
@@ -152,18 +152,6 @@ Important: The adapter now requires at least Node.js 14.5
 * (klein0r) Added option to enable/disable WiFi access point (generation 2 devices)
 * (klein0r) Added power limits and position control for covers (generation 2 devices)
 * (klein0r) Removed colors for online state indication on device objects
-
-### 5.2.0 (2022-02-16)
-* (klein0r) Added Shelly Pro 1
-* (klein0r) Added Shelly Pro 1 PM
-* (klein0r) Added Shelly Pro 2
-* (klein0r) Added Shelly Pro 2 PM
-* (klein0r) Added Shelly Plus 2 PM
-* (klein0r) Allow to change device and channel names of generation 2 devices
-* (klein0r) Added auto on/off timers for generation 2 devices
-* (klein0r) Added input mode, events and initial state for generation 2 devices
-* (klein0r) Added support of covers / shutters for generation 2 devices
-* (klein0r) Replaced node-fetch with axios (also for digest auth)
 
 ## License
 
