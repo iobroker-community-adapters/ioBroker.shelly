@@ -21,11 +21,15 @@
 
 Check the list of *supported devices* for more details.
 
-- **Gen1**: ESP8266 devices, CoAP or MQTT
-- **Gen2**: ESP32 devices, RCP or MQTT
+- **Gen1**: ESP8266 devices, [CoAP](protocol-coap.md) or [MQTT](protocol-mqtt.md)
+- **Gen2**: ESP32 devices, [MQTT](protocol-mqtt.md)
 
 ## General
 
-You can use the adapter in CoAP or MQTT mode. The default mode is CoAP and you do not have to do anything. **If you want to use Gen2 devices, you must use MQTT!**
+You can use the adapter in CoAP or MQTT mode. 
+
+- The default mode is MQTT (see [documentation](protocol-mqtt.md) for details)
+- CoAP is just compatible with devices of generation 1
+- **If you want to use Gen2 devices, you must use MQTT!**
 
 ![iobroker_general](./img/iobroker_general.png)

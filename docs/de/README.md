@@ -21,11 +21,15 @@
 
 Für mehr Informationen, siehe *supported devices*.
 
-- **Gen1**: ESP8266 Geräte, CoAP oder MQTT
-- **Gen2**: ESP32 Geräte, RCP oder MQTT
+- **Gen1**: ESP8266 Geräte, [CoAP](protocol-coap.md) oder [MQTT](protocol-mqtt.md)
+- **Gen2**: ESP32 Geräte, [MQTT](protocol-mqtt.md)
 
 ## Allgemein
 
-Der Adapter kann über CoAP oder MQTT mit den Geräten kommunizieren. Der Standard ist CoAP - in diesem Fall muss nichts weiter konfiguriert werden. **Falls Gen2-Geräte integriert werden sollen, muss MQTT konfiguriert werden!**
+Der Adapter kann über CoAP oder MQTT mit den Geräten kommunizieren.
+
+- Der Standard-Modus ist MQTT (siehe [Dokumentation](protocol-mqtt.md) für mehr Informationen)
+- CoAP ist ausschließlich mit Generation 1 Geräten kompatibel!
+- **Falls Gen2-Geräte integriert werden sollen, muss MQTT konfiguriert werden!**
 
 ![iobroker_general](./img/iobroker_general.png)

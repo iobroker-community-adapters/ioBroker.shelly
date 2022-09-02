@@ -72,6 +72,7 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 
 NOT Supported:
 
+- Shelly Motion 2
 - USB powered UVC LED strip
 
 ## Supported devices (Gen 2)
@@ -90,7 +91,6 @@ NOT Supported:
 
 NOT Supported:
 
-- Shelly Motion 2
 - Shelly Plus H&T
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
