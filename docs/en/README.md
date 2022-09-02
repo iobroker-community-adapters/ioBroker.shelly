@@ -4,8 +4,8 @@
 
 ## Table of contents
 
-- [CoAP protocol](protocol-coap.md)
 - [MQTT protocol](protocol-mqtt.md)
+- [CoAP protocol](protocol-coap.md)
 - [Restricted login](restricted-login.md)
 - [State changes](state-changes.md)
 - [Debug](debug.md)
@@ -14,7 +14,7 @@
 ## Requirements
 
 1. nodejs 14.5 (or later)
-2. js-controller 3.3.0 (or later)
+2. js-controller 3.3.22 (or later)
 4. Admin Adapter 5.1.25 (or later)
 
 ## Device generations

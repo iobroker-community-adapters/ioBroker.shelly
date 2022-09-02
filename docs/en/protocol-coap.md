@@ -6,8 +6,6 @@
 
 ![iobroker_general_coap](./img/iobroker_general_coap.png)
 
-The CoAP protocol is used by default.
-
 **If you are using the firmware versions above 1.9.4 you have to enter a CoIoT server for CoAP on your Shelly device (unicast).**
 
 Enter the IP address of your ioBroker server as CoIoT server - followed  by port ```5683```. Example: If ioBroker runs on address ```192.168.1.2```, you have to enter ```192.168.1.2:5683``` and activate CoIoT.

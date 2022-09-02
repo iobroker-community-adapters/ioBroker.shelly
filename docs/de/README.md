@@ -4,8 +4,8 @@
 
 ## Inhaltsverzeichnis
 
-- [CoAP Protokoll](protocol-coap.md)
 - [MQTT Protokoll](protocol-mqtt.md)
+- [CoAP Protokoll](protocol-coap.md)
 - [Geschützter Login](restricted-login.md)
 - [Zustandsänderungen](state-changes.md)
 - [Debug](debug.md)
@@ -14,7 +14,7 @@
 ## Anforderungen
 
 1. nodejs 14.5 (oder neuer)
-2. js-controller 3.3.0 (oder neuer)
+2. js-controller 3.3.22 (oder neuer)
 4. Admin Adapter 5.1.25 (oder neuer)
 
 ## Geräte-Generationen
