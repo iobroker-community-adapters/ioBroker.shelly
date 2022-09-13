@@ -12,7 +12,7 @@ Activate the login restriction on all your Shelly devices.
 
 **Generation 2 devices don't provide a username option. If you use Gen 1 and Gen 2 devices, use the same password on all devices.**
 
-### Gen 1
+### Generation 1 devices
 
 1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
 2. Go to ```Internet & Security settings -> Restricted Login```
@@ -22,7 +22,7 @@ Activate the login restriction on all your Shelly devices.
 
 ![shelly gen 1](./img/shelly_restrict_login-gen1.png)
 
-### Gen 2
+### Generation 2 devices (Plus and Pro)
 
 1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
 2. Go to ```Device -> Authentication```

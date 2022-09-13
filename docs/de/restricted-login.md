@@ -12,7 +12,7 @@ Aktiviere den geschützten Zugriff auf allen Shelly-Geräten.
 
 **Generation 2 bieten keine Option für einen Benutzernamen. Falls Du Gen 1 und Gen 2 Geräte nutzt, konfiguriere auf allen Geräten das gleiche Passwort.**
 
-### Gen 1
+### Generation 1 Geräte
 
 1. Öffne die Shelly-Webkonfiguration in einem Browser (nicht in der Shelly App!)
 2. Gehe zu ```Internet & Security settings -> Restricted Login```
@@ -22,11 +22,11 @@ Aktiviere den geschützten Zugriff auf allen Shelly-Geräten.
 
 ![shelly gen 1](./img/shelly_restrict_login-gen1.png)
 
-### Gen 2
+### Generation 2 Geräte (Plus und Pro)
 
 1. Öffne die Shelly-Webkonfiguration in einem Browser (nicht in der Shelly App!)
 2. Gehe zu ```Device -> Authentication```
-3. Aktiviere das Passwort-Feature und gibt das gerade konfigurierte Passwort ein
-4. Speichere die KOnfiguration
+3. Aktiviere das Passwort-Feature und gib das gerade konfigurierte Passwort ein
+4. Speichere die Konfiguration
 
 ![shelly gen 2](./img/shelly_restrict_login-gen2.png)
