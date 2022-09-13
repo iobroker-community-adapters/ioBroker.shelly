@@ -114,7 +114,7 @@ execute
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-* (klein0r) Fixed channel name handling for Shelly i3
+* (klein0r) Fixed channel name and long push duration handling for Shelly i3
 
 ### 6.1.0 (2022-09-02)
 * (klein0r) **Breaking:** Added device modes (just display relevant states for current mode)
