@@ -272,8 +272,8 @@ class Shelly extends utils.Adapter {
 
             await this.extendObjectAsync(deviceId, {
                 common: {
-                    color: null // Remove color from previous versions
-                }
+                    color: null, // Remove color from previous versions
+                },
             });
         }
 
