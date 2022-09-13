@@ -22,12 +22,12 @@ const shelly1 = {
             mqtt_cmd_funct: (value) => { return value === true ? 'on' : 'off'; },
         },
         common: {
-            'name': 'Switch',
-            'type': 'boolean',
-            'role': 'switch',
-            'read': true,
-            'write': true,
-            'def': false
+            name: 'Switch',
+            type: 'boolean',
+            role: 'switch',
+            read: true,
+            write: true,
+            def: false
         }
     }
 };
@@ -78,13 +78,13 @@ To **hide** a specific state, you can use the ``no_display`` flag on each type. 
         no_display: true
     },
     common: {
-        'name': 'Duration',
-        'type': 'number',
-        'role': 'level.timer',
-        'read': true,
-        'write': true,
-        'def': 0,
-        'unit': 's'
+        name: 'Duration',
+        type: 'number',
+        role: 'level.timer',
+        read: true,
+        write: true,
+        def: 0,
+        unit: 's'
     }
 }
 ```
@@ -111,12 +111,12 @@ Some shellies support different modes (like "relay" vs "shutter" or "color" vs "
             mqtt_cmd_funct: (value) => { return value === true ? 'on' : 'off'; },
         },
         common: {
-            'name': 'Switch',
-            'type': 'boolean',
-            'role': 'switch',
-            'read': true,
-            'write': true,
-            'def': false
+            name: 'Switch',
+            type: 'boolean',
+            role: 'switch',
+            read: true,
+            write: true,
+            def: false
         }
     },
 ```
