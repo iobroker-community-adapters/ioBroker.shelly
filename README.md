@@ -46,7 +46,7 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 | Shelly Dimmer 2 (SHDM-2)             | >= v3.3.4 | >= v3.3.4 | n/a                                     |
 | Shelly RGBW (SHRGBWW-01)             | < v3.4.0  | < v3.4.0  | n/a                                     |
 | Shelly RGBW 2 (SHRGBW2)              | >= v3.3.0 | >= v3.3.0 | 20220809-124336/v1.12-g99f7e0b          |
-| Shelly i3 (SHIX3-1)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
+| Shelly i3 (SHIX3-1)                  | >= v3.3.0 | >= v3.3.0 | 20220809-125301/v1.12-g99f7e0b          |
 | Shelly EM (SHEM)                     | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly 3EM (SHEM-3)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly H&T (SHHT-1)                  | >= v3.3.0 | >= v3.3.0 | 20220324-134040/v1.11.8-HT-fix-g60b9bd1 |
