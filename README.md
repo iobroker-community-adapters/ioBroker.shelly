@@ -113,6 +113,9 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (klein0r) Fixed channel name handling for Shelly i3
+
 ### 6.1.0 (2022-09-02)
 * (klein0r) **Breaking:** Added device modes (just display relevant states for current mode)
 * (klein0r) **Breaking:** Moved "mode" setting of some devices to "Sys.deviceMode"
