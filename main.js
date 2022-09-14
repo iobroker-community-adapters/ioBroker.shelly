@@ -49,8 +49,6 @@ class Shelly extends utils.Adapter {
 
             await this.setOnlineFalse();
 
-            this.autoFirmwareUpdate();
-
             // Start MQTT server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
@@ -76,8 +74,16 @@ class Shelly extends utils.Adapter {
                 }
             });
 
+            if (this.config.autoupdate) {
+                this.log.info(`[firmwareUpdate] Auto-Update enabled - devices will be updated automatically`);
+
+                this.setTimeout(() => {
+                    this.autoFirmwareUpdate();
+                }, 10 * 1000); // Wait 10 Seconds for devices to connect
+            }
+
         } catch (error) {
-            // ...
+            this.log.error(`[onReady] Startup error: ${error}`);
         }
     }
 
@@ -284,7 +290,7 @@ class Shelly extends utils.Adapter {
     autoFirmwareUpdate() {
         if (this.isUnloaded) return;
         if (this.config.autoupdate) {
-            this.log.debug(`[firmwareUpdate] Auto-Update enabled - starting update on every device`);
+            this.log.debug(`[firmwareUpdate] Starting update on every device`);
 
             this.eventEmitter.emit('onFirmwareUpdate');
 

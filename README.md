@@ -79,8 +79,8 @@ NOT Supported:
 
 | Shelly Device                    | CoAP | MQTT      | Tested firmware version         |
 | -------------------------------- | ---- | --------- | ------------------------------- |
-| Shelly Plus 1 (shellyplus1)      | ❌   | >= v5.0.0 | 20220830-130249/0.11.0-gfa1bc37 |
-| Shelly Plus 1 PM (shellyplus1pm) | ❌   | >= v5.0.0 | 20220830-130414/0.11.0-gfa1bc37 |
+| Shelly Plus 1 (shellyplus1)      | ❌   | >= v5.0.0 | 20220909-120354/0.11.1-g56f689f |
+| Shelly Plus 1 PM (shellyplus1pm) | ❌   | >= v5.0.0 | 20220909-120529/0.11.1-g56f689f |
 | Shelly Plus 2 PM (shellyplus2pm) | ❌   | >= v5.2.0 | 20220830-130540/0.11.0-gfa1bc37 |
 | Shelly Plus i4 (shellyplusi4)    | ❌   | >= v5.3.0 | n/a                             |
 | Shelly Pro 1 (shellypro1)        | ❌   | >= v5.2.0 | 20220830-131408/0.11.0-gfa1bc37 |
@@ -115,6 +115,7 @@ execute
 -->
 ### **WORK IN PROGRESS**
 * (klein0r) Fixed channel name and long push duration handling for Shelly i3
+* (klein0r) Fixed (automatic) firmware update process for generation 2 devices
 * (klein0r) Added temperature offset configuration for Shelly UNI
 * (klein0r) Updated online indicator handling
 * (klein0r) Fixed temperature of Shelly Door / Window 2
