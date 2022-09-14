@@ -64,7 +64,7 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 | Shelly Bulb Duo (SHBDUO-1)           | >= v3.3.0 | >= v3.3.0 | 20220809-123026/v1.12-g99f7e0b          |
 | Shelly Color Bulb (SHCB-1)           | >= v4.0.5 | >= v4.0.5 | 20220809-122808/v1.12-g99f7e0b          |
 | Shelly Vintage (SHVIN-1)             | >= v3.3.0 | >= v3.3.0 | n/a                                     |
-| Shelly Uni (SHUNI-1)                 | >= v4.0.4 | >= v4.0.4 | n/a                                     |
+| Shelly Uni (SHUNI-1)                 | >= v4.0.4 | >= v4.0.4 | 20220809-125434/v1.12-g99f7e0b          |
 | Shelly Button (SHBTN-1)              | >= v3.3.3 | >= v3.3.3 | n/a                                     |
 | Shelly Button (SHBTN-2)              | >= v4.0.5 | >= v4.0.5 | n/a                                     |
 | Shelly Motion (SHMOS-01)             | >= v4.0.6 | >= v4.0.6 | 20220811-152232/v2.1.8@5afc928c         |
@@ -115,6 +115,7 @@ execute
 -->
 ### **WORK IN PROGRESS**
 * (klein0r) Fixed channel name and long push duration handling for Shelly i3
+* (klein0r) Added temperature offset configuration for Shelly UNI
 * (klein0r) Translated (some) object names
 
 ### 6.1.0 (2022-09-02)
