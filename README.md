@@ -54,7 +54,7 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 | Shelly Flood (SHWT-1)                | >= v3.3.0 | >= v3.3.0 | 20220809-123830/v1.12-g99f7e0b          |
 | Shelly Gas (SHGS-1)                  | >= v3.3.3 | >= v3.3.3 | n/a                                     |
 | Shelly Door/Window Sensor (SHDW-1)   | >= v3.3.0 | >= v3.3.0 | n/a                                     |
-| Shelly Door/Window Sensor 2 (SHDW-2) | >= v3.3.5 | >= v3.3.5 | 20211109-125737/v1.11.7-g682a0db        |
+| Shelly Door/Window Sensor 2 (SHDW-2) | >= v3.3.5 | >= v3.3.5 | 20220209-093605/v1.11.8-g8c7bb8d        |
 | Shelly2LED (SH2LED)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly Plug (SHPLG-1)                | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly Plug S (SHPLG-S)              | >= v3.3.0 | >= v3.3.0 | 20220809-124506/v1.12-g99f7e0b          |
