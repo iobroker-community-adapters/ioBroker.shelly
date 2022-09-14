@@ -116,6 +116,7 @@ execute
 ### **WORK IN PROGRESS**
 * (klein0r) Fixed channel name and long push duration handling for Shelly i3
 * (klein0r) Added temperature offset configuration for Shelly UNI
+* (klein0r) Updated online indicator handling
 * (klein0r) Translated (some) object names
 
 ### 6.1.0 (2022-09-02)

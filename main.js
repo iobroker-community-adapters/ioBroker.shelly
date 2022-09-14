@@ -47,9 +47,7 @@ class Shelly extends utils.Adapter {
 
             const protocol = this.config.protocol || 'coap';
 
-            // Start online check
             await this.setOnlineFalse();
-            this.onlineCheck();
 
             this.autoFirmwareUpdate();
 
@@ -72,6 +70,9 @@ class Shelly extends utils.Adapter {
                     this.log.info('Starting in CoAP mode.');
                     this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
                     this.serverCoap.listen();
+
+                    // Start online check
+                    this.onlineCheck();
                 }
             });
 
@@ -160,6 +161,9 @@ class Shelly extends utils.Adapter {
         }
     }
 
+    /**
+     * Online-Check via TCP ping (when using CoAP)
+     */
     async onlineCheck() {
         const valPort = 80;
 
@@ -263,11 +267,7 @@ class Shelly extends utils.Adapter {
             const onlineState = await this.getStateAsync(idOnline);
 
             if (onlineState) {
-                const prevValue = onlineState.val ? (onlineState.val === 'true' || onlineState.val === true) : false;
-
-                if (prevValue) {
-                    await this.setStateAsync(idOnline, { val: false, ack: true });
-                }
+                await this.setStateAsync(idOnline, { val: false, ack: true });
             }
 
             await this.extendObjectAsync(deviceId, {
@@ -302,23 +302,23 @@ class Shelly extends utils.Adapter {
 
     async migrateConfig() {
         const native = {};
-        if (this.config.http_username) {
+        if (this.config?.http_username) {
             native.httpusername = this.config.http_username;
             native.http_username = '';
         }
-        if (this.config.http_password) {
+        if (this.config?.http_password) {
             native.httppassword = this.config.http_password;
             native.http_password = '';
         }
-        if (this.config.user) {
+        if (this.config?.user) {
             native.mqttusername = this.config.user;
             native.user = '';
         }
-        if (this.config.password) {
+        if (this.config?.password) {
             native.mqttpassword = this.config.password;
             native.password = '';
         }
-        if (this.config.keys) {
+        if (this.config?.keys) {
             native.blacklist = this.config.keys.map(b => { return { id: b.blacklist }; });
             native.keys = null;
         }
