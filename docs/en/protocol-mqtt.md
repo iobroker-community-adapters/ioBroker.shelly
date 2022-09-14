@@ -46,3 +46,39 @@ Activate MQTT on all your Shelly devices.
 - SSL has to be disabled!
 
 ![shelly_mqtt gen2](./img/shelly_mqtt-gen2.png)
+
+### MQTTS / TLS
+
+1. Generate a new private and public key (e.g. with ``openssl``):
+
+```
+$ openssl genrsa -out broker.pem 2048
+
+$ openssl req -new -key broker.pem -out csr.pem
+
+    You are about to be asked to enter information that will be incorporated
+    into your certificate request.
+    What you are about to enter is what is called a Distinguished Name or a DN.
+    There are quite a few fields but you can leave some blank
+    For some fields there will be a default value,
+    If you enter '.', the field will be left blank.
+    -----
+    Country Name (2 letter code) []:DE
+    State or Province Name (full name) []:Germany
+    Locality Name (eg, city) []:Paderborn
+    Organization Name (eg, company) []:iobroker
+    Organizational Unit Name (eg, section) []:
+    Common Name (eg, fully qualified host name) []:localhost
+    Email Address []:info@haus-automatisierung.com
+
+    Please enter the following 'extra' attributes
+    to be sent with your certificate request
+    A challenge password []:
+
+$ openssl x509 -req -in csr.pem -signkey broker.pem -out public.pem
+
+$ cat broker.pem
+$ cat public.pem
+```
+
+2. Save these certificates to the 

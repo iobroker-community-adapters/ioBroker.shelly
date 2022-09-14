@@ -205,6 +205,35 @@
                     "md": 6,
                     "lg": 6,
                     "label": "Default QoS"
+                },
+                "useMqtts": {
+                    "newLine": true,
+                    "type": "checkbox",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Use MQTTS (TLS)"
+                },
+                "mqttCertPublic": {
+                    "newLine": true,
+                    "type": "certificate",
+                    "hidden": "!data.useMqtts",
+                    "certType": "public",
+                    "validator": "!data.useMqtts || data.mqttCertPublic",
+                    "label": "Public certificate",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6
+                },
+                "mqttCertPrivate": {
+                    "hidden": "!data.useMqtts",
+                    "type": "certificate",
+                    "certType": "private",
+                    "validator": "!data.useMqtts || data.mqttCertPrivate",
+                    "label": "Private certificate",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6
                 }
             }
         },

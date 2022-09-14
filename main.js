@@ -25,6 +25,8 @@ class Shelly extends utils.Adapter {
 
         this.onlineDevices = {};
 
+        this.mqttCertificates = [];
+
         this.eventEmitter = new EventEmitter();
 
         this.on('ready', this.onReady.bind(this));
@@ -47,13 +49,19 @@ class Shelly extends utils.Adapter {
 
             const protocol = this.config.protocol || 'coap';
 
+            // Save certificate
+            if (protocol === 'mqtt' && this.config.useMqtts) {
+                this.mqttCertificates = await this.getCertificatesAsync(this.config.mqttCertPublic, this.config.mqttCertPrivate);
+                this.log.debug(`Loaded configured MQTT certificates - public: "${this.config.mqttCertPublic}", private: "${this.config.mqttCertPrivate}"`);
+            }
+
             await this.setOnlineFalse();
 
             this.autoFirmwareUpdate();
 
             // Start MQTT server
             setImmediate(() => {
-                if (protocol === 'both' || protocol === 'mqtt') {
+                if (protocol === 'mqtt') {
                     this.log.info(`Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port}`);
 
                     if (!this.config.mqttusername || this.config.mqttusername.length === 0) { this.log.error('MQTT Username is missing!'); }
@@ -66,7 +74,7 @@ class Shelly extends utils.Adapter {
 
             // Start CoAP server
             setImmediate(() => {
-                if (protocol === 'both' || protocol === 'coap') {
+                if (protocol === 'coap') {
                     this.log.info('Starting in CoAP mode.');
                     this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
                     this.serverCoap.listen();
@@ -78,6 +86,14 @@ class Shelly extends utils.Adapter {
 
         } catch (error) {
             // ...
+        }
+    }
+
+    getMqttCertificates() {
+        if (this.mqttCertificates && this.mqttCertificates.length > 0) {
+            return this.mqttCertificates[0];
+        } else {
+            this.log.error('[getMqttCertificates] Unable to get certificates');
         }
     }
 
