@@ -88,10 +88,10 @@ NOT Supported:
 | Shelly Pro 2 (shellypro2)        | ❌   | >= v5.2.0 | 20220830-131701/0.11.0-gfa1bc37 |
 | Shelly Pro 2 PM (shellypro2pm)   | ❌   | >= v5.2.0 | 20220830-131827/0.11.0-gfa1bc37 |
 | Shelly Pro 4 PM (shellypro4pm)   | ❌   | >= v5.0.0 | 20220830-132254/0.11.0-gfa1bc37 |
+| Shelly Plus H&T                  | ❌   | >= v6.2.0 | 20220830-130838/0.11.0-gfa1bc37 |
 
 NOT Supported:
 
-- Shelly Plus H&T
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
 
@@ -115,6 +115,7 @@ execute
 -->
 ### **WORK IN PROGRESS**
 * (klein0r) Added Shelly Motion 2
+* (klein0r) Added Shelly Plus H&T
 * (klein0r) Fixed channel name and long push duration handling for Shelly i3
 * (klein0r) Fixed (automatic) firmware update process for generation 2 devices
 * (klein0r) Get correct IP address in Docker environment
