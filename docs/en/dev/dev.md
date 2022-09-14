@@ -11,9 +11,9 @@ const shelly1 = {
     'Relay0.Switch': {
         coap: {
             coap_publish: '1101', // Coap >= FW 1.8
-            coap_publish_funct: (value) => { return value == 1 ? true : false; },
+            coap_publish_funct: (value) => { return value == 1; },
             http_cmd: '/relay/0',
-            http_cmd_funct: async (value, self) => { return value === true ? { turn: 'on', timer: await shellyHelper.getSetDuration(self, 'Relay0.Timer') } : { turn: 'off', timer: await shellyHelper.getSetDuration(self, 'Relay0.Timer') }; }
+            http_cmd_funct: async (value, self) => { return value === true ? { turn: 'on', timer: await shellyHelper.getSetDuration(self, 'Relay0.Timer') } : { turn: 'off', timer: await shellyHelper.getSetDuration(self, 'Relay0.Timer') }; },
         },
         mqtt: {
             mqtt_publish: 'shellies/<mqttprefix>/relay/0',
@@ -32,15 +32,15 @@ const shelly1 = {
                 it: 'Interruttore',
                 es: 'Interruptor',
                 pl: 'Switch',
-                'zh-cn': '目 录'
+                'zh-cn': '目 录',
             },
             type: 'boolean',
             role: 'switch',
             read: true,
             write: true,
-            def: false
-        }
-    }
+            def: false,
+        },
+    },
 };
 ```
 
@@ -80,35 +80,37 @@ Important notes:
 To **hide** a specific state, you can use the ``no_display`` flag on each type. Example:
 
 ```javascript
-'Relay0.Timer': {
-    coap: {
-        http_publish: '/settings',
-        http_publish_funct: async (value, self) => { return await shellyHelper.getSetDuration(self, 'Relay0.Timer'); }
-    },
-    mqtt: {
-        no_display: true
-    },
-    common: {
-        name: {
-            en: 'Duration',
-            de: 'Dauer',
-            ru: 'Продолжительность',
-            pt: 'Duração',
-            nl: 'Vertaling:',
-            fr: 'Durée',
-            it: 'Durata',
-            es: 'Duración',
-            pl: 'Duracja',
-            'zh-cn": "期间'
+const shelly1 = {
+    'Relay0.Timer': {
+        coap: {
+            http_publish: '/settings',
+            http_publish_funct: async (value, self) => { return await shellyHelper.getSetDuration(self, 'Relay0.Timer'); },
         },
-        type: 'number',
-        role: 'level.timer',
-        read: true,
-        write: true,
-        def: 0,
-        unit: 's'
-    }
-}
+        mqtt: {
+            no_display: true,
+        },
+        common: {
+            name: {
+                en: 'Duration',
+                de: 'Dauer',
+                ru: 'Продолжительность',
+                pt: 'Duração',
+                nl: 'Vertaling:',
+                fr: 'Durée',
+                it: 'Durata',
+                es: 'Duración',
+                pl: 'Duracja',
+                'zh-cn": "期间',
+            },
+            type: 'number',
+            role: 'level.timer',
+            read: true,
+            write: true,
+            def: 0,
+            unit: 's',
+        },
+    },
+};
 ```
 
 This object won't be available when using MQTT.
@@ -118,11 +120,12 @@ This object won't be available when using MQTT.
 Some shellies support different modes (like "relay" vs "shutter" or "color" vs "white"). You can hide options (depending on the mode) by using ``device_mode``:
 
 ```javascript
-'lights.Switch': {
+const shelly1 = {
+    'lights.Switch': {
         device_mode: 'color',
         coap: {
             coap_publish: '1101', // CoAP >= FW 1.8
-            coap_publish_funct: async (value) => { return value == 1 ? true : false; },
+            coap_publish_funct: async (value) => { return value == 1; },
             http_cmd: '/color/0',
             http_cmd_funct: (value) => { return value === true ? { turn: 'on' } : { turn: 'off' }; },
         },
@@ -143,13 +146,14 @@ Some shellies support different modes (like "relay" vs "shutter" or "color" vs "
                 it: 'Interruttore',
                 es: 'Interruptor',
                 pl: 'Switch',
-                'zh-cn': '目 录'
+                'zh-cn': '目 录',
             },
             type: 'boolean',
             role: 'switch',
             read: true,
             write: true,
-            def: false
-        }
+            def: false,
+        },
     },
+};
 ```
