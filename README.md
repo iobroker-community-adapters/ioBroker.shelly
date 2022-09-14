@@ -69,10 +69,10 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 | Shelly Button (SHBTN-2)              | >= v4.0.5 | >= v4.0.5 | n/a                                     |
 | Shelly Motion (SHMOS-01)             | >= v4.0.6 | >= v4.0.6 | 20220811-152232/v2.1.8@5afc928c         |
 | Shelly TRV (SHTRV-01)                | >= v6.0.0 | >= v6.0.0 | n/a                                     |
+| Shelly Motion 2 (SHMOS-02)           | => v6.2.0 | >= v6.2.0 | 20220811-152232/v2.1.8@5afc928c         |
 
 NOT Supported:
 
-- Shelly Motion 2
 - USB powered UVC LED strip
 
 ## Supported devices (Gen 2)
@@ -114,6 +114,7 @@ execute
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+* (klein0r) Added Shelly Motion 2
 * (klein0r) Fixed channel name and long push duration handling for Shelly i3
 * (klein0r) Fixed (automatic) firmware update process for generation 2 devices
 * (klein0r) Get correct IP address in Docker environment
