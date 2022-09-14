@@ -183,13 +183,13 @@ class Shelly extends utils.Adapter {
             for (const d in deviceIds) {
                 const deviceId = deviceIds[d];
 
-                const idHostname = deviceId + '.hostname';
+                const idHostname = `${deviceId}.hostname`;
 
                 const stateHostaname = await this.getStateAsync(idHostname);
                 const valHostname = stateHostaname ? stateHostaname.val : undefined;
 
                 if (valHostname) {
-                    this.log.debug(`[onlineCheck] Checking ${idHostname} on ${valHostname}:${valPort}`);
+                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
                     tcpPing.probe(valHostname, valPort, async (error, isAlive) => {
                         this.deviceStatusUpdate(deviceId, isAlive);

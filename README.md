@@ -116,6 +116,7 @@ execute
 ### **WORK IN PROGRESS**
 * (klein0r) Fixed channel name and long push duration handling for Shelly i3
 * (klein0r) Fixed (automatic) firmware update process for generation 2 devices
+* (klein0r) Get correct IP address in Docker environment
 * (klein0r) Added temperature offset configuration for Shelly UNI
 * (klein0r) Updated online indicator handling
 * (klein0r) Fixed temperature of Shelly Door / Window 2
