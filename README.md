@@ -83,6 +83,7 @@ NOT Supported:
 | Shelly Plus 1 PM (shellyplus1pm) | ❌   | >= v5.0.0 | 20220909-120529/0.11.1-g56f689f |
 | Shelly Plus 2 PM (shellyplus2pm) | ❌   | >= v5.2.0 | 20220830-130540/0.11.0-gfa1bc37 |
 | Shelly Plus i4 (shellyplusi4)    | ❌   | >= v5.3.0 | n/a                             |
+| Shelly Plus i4 DC (shellyplusi4) | ❌   | >= v5.3.0 | 20220830-130959/0.11.0-gfa1bc37 |
 | Shelly Pro 1 (shellypro1)        | ❌   | >= v5.2.0 | 20220830-131408/0.11.0-gfa1bc37 |
 | Shelly Pro 1 PM (shellypro1pm)   | ❌   | >= v5.2.0 | 20220830-131534/0.11.0-gfa1bc37 |
 | Shelly Pro 2 (shellypro2)        | ❌   | >= v5.2.0 | 20220830-131701/0.11.0-gfa1bc37 |
@@ -93,7 +94,6 @@ NOT Supported:
 
 NOT Supported:
 
-- Shelly Plus i4 DC
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
 
@@ -125,6 +125,7 @@ execute
 * (klein0r) Added temperature offset configuration for Shelly UNI
 * (klein0r) Updated online indicator handling
 * (klein0r) Fixed temperature of Shelly Door / Window 2
+* (klein0r) Added icons for some states
 * (klein0r) Translated (some) object names
 
 ### 6.1.0 (2022-09-02)

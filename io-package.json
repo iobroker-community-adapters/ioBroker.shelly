@@ -272,16 +272,16 @@
       "type": "state",
       "common": {
         "name": {
-          "en": "Update all devices",
-          "de": "Alle Geräte aktualisieren",
-          "ru": "Обновить все устройства",
-          "pt": "Atualizar todos os dispositivos",
-          "nl": "Update alle apparaten",
-          "fr": "Mettre à jour tous les appareils",
-          "it": "Aggiornare tutti i dispositivi",
-          "es": "Actualizar todos los dispositivos",
-          "pl": "Ulepszenia",
-          "zh-cn": "更新所有装置"
+          "en": "Update firmware version on all devices",
+          "de": "Firmware-Version auf allen Geräten aktualisieren",
+          "ru": "Обновление версии прошивки на всех устройствах",
+          "pt": "Atualizar a versão de firmware em todos os dispositivos",
+          "nl": "Update firmaware versie op alle apparaten",
+          "fr": "Mettre à jour la version du firmware sur tous les appareils",
+          "it": "Aggiorna la versione firmware su tutti i dispositivi",
+          "es": "Actualizar la versión de firmware en todos los dispositivos",
+          "pl": "Oficjalna wersja oprogramowania",
+          "zh-cn": "所有装置的更新软件版本"
         },
         "type": "boolean",
         "role": "button",
