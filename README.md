@@ -115,7 +115,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.2.0 (2022-09-15)
 * (klein0r) Added Shelly Motion 2
 * (klein0r) Added Shelly Plus H&T
 * (klein0r) Added Shelly Pro 3
@@ -157,16 +157,6 @@ Important: The adapter now requires at least Node.js 14.5
 
 ### 5.3.1 (2022-03-02)
 * (klein0r) Don't ack new values directly after change
-
-### 5.3.0 (2022-02-27)
-* (klein0r) Added Shelly Plus I4
-* (klein0r) Added more objects for power metering channels (current, voltage, limits, ...)
-* (klein0r) Moved device temperature of generation 2 devices to relays (this is the official way)
-* (klein0r) Added Sys channel (eco mode, timezone, ...) for generation 1 devices
-* (klein0r) Fixed datatype error of Shelly 1/PM ext switch
-* (klein0r) Added option to enable/disable WiFi access point (generation 2 devices)
-* (klein0r) Added power limits and position control for covers (generation 2 devices)
-* (klein0r) Removed colors for online state indication on device objects
 
 ## License
 
