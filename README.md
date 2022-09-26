@@ -115,6 +115,9 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (klein0r) Added knowledge base urls for all devices
+
 ### 6.2.0 (2022-09-15)
 * (klein0r) Added Shelly Motion 2
 * (klein0r) Added Shelly Plus H&T
