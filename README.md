@@ -52,7 +52,7 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 | Shelly H&T (SHHT-1)                  | >= v3.3.0 | >= v3.3.0 | 20220324-134040/v1.11.8-HT-fix-g60b9bd1 |
 | Shelly Smoke (SHSM-01)               | >= v3.3.0 | >= v3.3.0 | 20220809-123549/v1.12-g99f7e0b          |
 | Shelly Flood (SHWT-1)                | >= v3.3.0 | >= v3.3.0 | 20220809-123830/v1.12-g99f7e0b          |
-| Shelly Gas (SHGS-1)                  | >= v3.3.3 | >= v3.3.3 | n/a                                     |
+| Shelly Gas (SHGS-1)                  | >= v3.3.3 | >= v3.3.3 | 20220809-125346/v1.12-g99f7e0b          |
 | Shelly Door/Window Sensor (SHDW-1)   | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly Door/Window Sensor 2 (SHDW-2) | >= v3.3.5 | >= v3.3.5 | 20220209-093605/v1.11.8-g8c7bb8d        |
 | Shelly2LED (SH2LED)                  | >= v3.3.0 | >= v3.3.0 | n/a                                     |
@@ -65,10 +65,10 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 | Shelly Color Bulb (SHCB-1)           | >= v4.0.5 | >= v4.0.5 | 20220809-122808/v1.12-g99f7e0b          |
 | Shelly Vintage (SHVIN-1)             | >= v3.3.0 | >= v3.3.0 | n/a                                     |
 | Shelly Uni (SHUNI-1)                 | >= v4.0.4 | >= v4.0.4 | 20220809-125434/v1.12-g99f7e0b          |
-| Shelly Button (SHBTN-1)              | >= v3.3.3 | >= v3.3.3 | n/a                                     |
+| Shelly Button (SHBTN-1)              | >= v3.3.3 | >= v3.3.3 | 20220809-124206/v1.12-g99f7e0b          |
 | Shelly Button (SHBTN-2)              | >= v4.0.5 | >= v4.0.5 | n/a                                     |
 | Shelly Motion (SHMOS-01)             | >= v4.0.6 | >= v4.0.6 | 20220811-152232/v2.1.8@5afc928c         |
-| Shelly TRV (SHTRV-01)                | >= v6.0.0 | >= v6.0.0 | n/a                                     |
+| Shelly TRV (SHTRV-01)                | >= v6.0.0 | >= v6.0.0 | 20220811-152343/v2.1.8@5afc928c         |
 | Shelly Motion 2 (SHMOS-02)           | => v6.2.0 | >= v6.2.0 | 20220811-152232/v2.1.8@5afc928c         |
 
 NOT Supported:
