@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@apollon/iobroker-tools": "^0.2.1",
-    "@iobroker/adapter-core": "^2.6.2",
+    "@iobroker/adapter-core": "^2.6.6",
     "axios": "^0.27.2",
     "coiot-coap": "^1.0.0",
     "crypto": "^1.0.1",
