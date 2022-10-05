@@ -79,17 +79,17 @@ NOT Supported:
 
 | Shelly Device                    | CoAP | MQTT      | Tested firmware version         |
 | -------------------------------- | ---- | --------- | ------------------------------- |
-| Shelly Plus 1 (shellyplus1)      | ❌   | >= v5.0.0 | 20220909-120354/0.11.1-g56f689f |
-| Shelly Plus 1 PM (shellyplus1pm) | ❌   | >= v5.0.0 | 20220909-120529/0.11.1-g56f689f |
-| Shelly Plus 2 PM (shellyplus2pm) | ❌   | >= v5.2.0 | 20220830-130540/0.11.0-gfa1bc37 |
+| Shelly Plus 1 (shellyplus1)      | ❌   | >= v5.0.0 | 20221004-113139/0.11.2-g2ea2af3 |
+| Shelly Plus 1 PM (shellyplus1pm) | ❌   | >= v5.0.0 | 20221004-113326/0.11.2-g2ea2af3 |
+| Shelly Plus 2 PM (shellyplus2pm) | ❌   | >= v5.2.0 | 20221004-113507/0.11.2-g2ea2af3 |
 | Shelly Plus i4 (shellyplusi4)    | ❌   | >= v5.3.0 | n/a                             |
 | Shelly Plus i4 DC (shellyplusi4) | ❌   | >= v5.3.0 | 20220830-130959/0.11.0-gfa1bc37 |
-| Shelly Pro 1 (shellypro1)        | ❌   | >= v5.2.0 | 20220830-131408/0.11.0-gfa1bc37 |
-| Shelly Pro 1 PM (shellypro1pm)   | ❌   | >= v5.2.0 | 20220830-131534/0.11.0-gfa1bc37 |
-| Shelly Pro 2 (shellypro2)        | ❌   | >= v5.2.0 | 20220830-131701/0.11.0-gfa1bc37 |
-| Shelly Pro 2 PM (shellypro2pm)   | ❌   | >= v5.2.0 | 20220830-131827/0.11.0-gfa1bc37 |
-| Shelly Pro 3 (shellypro3)        | ❌   | >= v6.2.0 | 20220830-131957/0.11.0-gfa1bc37 |
-| Shelly Pro 4 PM (shellypro4pm)   | ❌   | >= v5.0.0 | 20220830-132254/0.11.0-gfa1bc37 |
+| Shelly Pro 1 (shellypro1)        | ❌   | >= v5.2.0 | 20221004-114457/0.11.2-g2ea2af3 |
+| Shelly Pro 1 PM (shellypro1pm)   | ❌   | >= v5.2.0 | 20221004-114624/0.11.2-g2ea2af3 |
+| Shelly Pro 2 (shellypro2)        | ❌   | >= v5.2.0 | 20221004-114751/0.11.2-g2ea2af3 |
+| Shelly Pro 2 PM (shellypro2pm)   | ❌   | >= v5.2.0 | 20221004-114917/0.11.2-g2ea2af3 |
+| Shelly Pro 3 (shellypro3)        | ❌   | >= v6.2.0 | 20221004-115048/0.11.2-g2ea2af3 |
+| Shelly Pro 4 PM (shellypro4pm)   | ❌   | >= v5.0.0 | 20221004-115342/0.11.2-g2ea2af3 |
 | Shelly Plus H&T (shellyplusht)   | ❌   | >= v6.2.0 | 20220830-130838/0.11.0-gfa1bc37 |
 
 NOT Supported:
