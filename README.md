@@ -116,6 +116,7 @@ execute
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+* (klein0r) Added temperature data of Shelly Motion 2
 * (klein0r) Added knowledge base urls for all devices
 
 ### 6.2.0 (2022-09-15)
