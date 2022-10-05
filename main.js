@@ -82,8 +82,8 @@ class Shelly extends utils.Adapter {
                 }, 10 * 1000); // Wait 10 Seconds for devices to connect
             }
 
-        } catch (error) {
-            this.log.error(`[onReady] Startup error: ${error}`);
+        } catch (err) {
+            this.log.error(`[onReady] Startup error: ${err}`);
         }
     }
 
