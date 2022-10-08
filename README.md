@@ -116,6 +116,7 @@ execute
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+* (klein0r) Warn user if a device is not protected via restricted login
 * (klein0r) Added duration for generation 2 devices in cover mode
 * (klein0r) Added temperature data of Shelly Motion 2
 * (klein0r) Added knowledge base urls for all devices
