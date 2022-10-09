@@ -75,6 +75,10 @@ Important notes:
 - You cannot define/execute multiple ``xxxx_cmd`` types for one state
 - For CoAP, there is no ``coap_cmd`` function like ``coap_cmd_funct``
 
+### Init values
+
+If you want to define an initial value to a state, you can define a static value or call a function to calculate a value with the properties ``init_value`` and ``init_funct``.
+
 ### Hide values
 
 To **hide** a specific state, you can use the ``no_display`` flag on each type. Example:
@@ -157,3 +161,21 @@ const shelly1 = {
     },
 };
 ```
+
+## Onboarding Process
+
+Required information:
+
+- ``DeviceID`` (used in object IDs)
+- IP address (used for http requests in ``httpIoBrokerState``)
+
+
+### CoAP
+
+TODO
+
+### MQTT
+
+1. Device connects to internal MQTT broker
+2. Password and username of instance configuration are validated
+3. 
