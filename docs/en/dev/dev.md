@@ -10,7 +10,7 @@ Example:
 const shelly1 = {
     'Relay0.Switch': {
         coap: {
-            coap_publish: '1101', // Coap >= FW 1.8
+            coap_publish: '1101',
             coap_publish_funct: (value) => { return value == 1; },
             http_cmd: '/relay/0',
             http_cmd_funct: async (value, self) => { return value === true ? { turn: 'on', timer: await shellyHelper.getSetDuration(self, 'Relay0.Timer') } : { turn: 'off', timer: await shellyHelper.getSetDuration(self, 'Relay0.Timer') }; },
@@ -104,7 +104,7 @@ const shelly1 = {
                 it: 'Durata',
                 es: 'Duración',
                 pl: 'Duracja',
-                'zh-cn": "期间',
+                'zh-cn': '期间',
             },
             type: 'number',
             role: 'level.timer',
@@ -128,7 +128,7 @@ const shelly1 = {
     'lights.Switch': {
         device_mode: 'color',
         coap: {
-            coap_publish: '1101', // CoAP >= FW 1.8
+            coap_publish: '1101',
             coap_publish_funct: async (value) => { return value == 1; },
             http_cmd: '/color/0',
             http_cmd_funct: (value) => { return value === true ? { turn: 'on' } : { turn: 'off' }; },
