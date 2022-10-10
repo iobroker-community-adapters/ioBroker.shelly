@@ -79,6 +79,11 @@ Important notes:
 
 If you want to define an initial value to a state, you can define a static value or call a function to calculate a value with the properties ``init_value`` and ``init_funct``.
 
+The init function will be called, every time ``createObjects()`` is executed. This happens
+
+- On device init
+- When the device mode changes
+
 ### Hide values
 
 To **hide** a specific state, you can use the ``no_display`` flag on each type. Example:
