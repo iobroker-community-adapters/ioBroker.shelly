@@ -230,8 +230,6 @@ class Shelly extends utils.Adapter {
             if (prevValue != status) {
                 await this.setStateAsync(idOnline, { val: status, ack: true });
             }
-        } else {
-            await this.setStateAsync(idOnline, { val: status, ack: true });
         }
 
         // Update connection state
