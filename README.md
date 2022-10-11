@@ -115,7 +115,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.2.1 (2022-10-11)
 * (klein0r) Warn user if a device is not protected via restricted login
 * (klein0r) Added duration for generation 2 devices in cover mode
 * (klein0r) Added temperature data of Shelly Motion 2
@@ -160,9 +160,6 @@ Important: The adapter now requires at least Node.js 14.5
 * (klein0r) Added cover position status for generation 2 devices
 * (klein0r) Added cover power, voltage, current and energy for generation 2 devices
 * (klein0r) Updated switch roles for material ui (switch.power to switch)
-
-### 5.3.1 (2022-03-02)
-* (klein0r) Don't ack new values directly after change
 
 ## License
 

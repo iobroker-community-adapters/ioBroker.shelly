@@ -1,4 +1,7 @@
 # Older changes
+## 5.3.1 (2022-03-02)
+* (klein0r) Don't ack new values directly after change
+
 ## 5.3.0 (2022-02-27)
 * (klein0r) Added Shelly Plus I4
 * (klein0r) Added more objects for power metering channels (current, voltage, limits, ...)
