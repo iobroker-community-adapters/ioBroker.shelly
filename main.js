@@ -52,7 +52,7 @@ class Shelly extends utils.Adapter {
             // Start MQTT server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
-                    this.log.info(`Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port}`);
+                    this.log.info(`Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port} (QoS ${this.config.qos})`);
 
                     if (!this.config.mqttusername || this.config.mqttusername.length === 0) { this.log.error('MQTT Username is missing!'); }
                     if (!this.config.mqttpassword || this.config.mqttpassword.length === 0) { this.log.error('MQTT Password is missing!'); }
@@ -65,7 +65,7 @@ class Shelly extends utils.Adapter {
             // Start CoAP server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'coap') {
-                    this.log.info('Starting in CoAP mode.');
+                    this.log.info(`Starting in CoAP mode. Listening on ${this.config.coapbind}:5683`);
                     this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
                     this.serverCoap.listen();
 
