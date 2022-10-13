@@ -115,7 +115,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.2.2 (2022-10-13)
 
 * (klein0r) Fixed state updates for CoAP integration
 
@@ -159,11 +159,6 @@ Important: The adapter now requires at least Node.js 14.5
 * (klein0r) Download scripts from generation 2 devices to files
 * (klein0r) Optimized unload process to avoid errors
 * (klein0r) Added device status states
-
-### 5.3.2 (2022-03-06)
-* (klein0r) Added cover position status for generation 2 devices
-* (klein0r) Added cover power, voltage, current and energy for generation 2 devices
-* (klein0r) Updated switch roles for material ui (switch.power to switch)
 
 ## License
 

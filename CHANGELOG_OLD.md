@@ -1,4 +1,9 @@
 # Older changes
+## 5.3.2 (2022-03-06)
+* (klein0r) Added cover position status for generation 2 devices
+* (klein0r) Added cover power, voltage, current and energy for generation 2 devices
+* (klein0r) Updated switch roles for material ui (switch.power to switch)
+
 ## 5.3.1 (2022-03-02)
 * (klein0r) Don't ack new values directly after change
 
