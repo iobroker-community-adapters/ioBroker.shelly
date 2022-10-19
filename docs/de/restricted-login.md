@@ -8,9 +8,18 @@ Um die Shelly-Geräte vor unbefugtem Zugriff zu schützen, setze in der ioBroker
 
 ![iobroker_general_restrict_login](./img/iobroker_general_restrict_login.png)
 
-Aktiviere den geschützten Zugriff auf allen Shelly-Geräten.
+Aktiviere danach den geschützten Zugriff auf allen Shelly-Geräten.
 
 **Generation 2 bieten keine Option für einen Benutzernamen. Falls Du Gen 1 und Gen 2 Geräte nutzt, konfiguriere auf allen Geräten das gleiche Passwort.**
+
+### Warnungen
+
+Ist ein Geräte-Passwort im ioBroker konfiguriert, wird der Adapter eine Warnung ins Log schreiben, welche darauf hinweist, falls einige Shelly-Geräte ungeschützt sind!
+
+Um keine Warnungen mehr zu erhalten, kann entweder
+
+- das Passwort in der Konfiguration des Adapters entfernt werden (= kein Passwort nötig) oder
+- auf allen Shelly-Geräten der geschützte Zugriff aktiviert werden
 
 ### Generation 1 Geräte
 
