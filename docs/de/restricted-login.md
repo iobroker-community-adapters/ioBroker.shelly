@@ -14,7 +14,7 @@ Aktiviere danach den geschützten Zugriff auf allen Shelly-Geräten.
 
 ### Warnungen
 
-Ist ein Geräte-Passwort im ioBroker konfiguriert, wird der Adapter eine Warnung ins Log schreiben, welche darauf hinweist, falls einige Shelly-Geräte ungeschützt sind!
+Ist ein Geräte-Passwort im ioBroker konfiguriert, wird der Adapter Warnungen ins Log schreiben, falls einige Shelly-Geräte ungeschützt sind!
 
 Um keine Warnungen mehr zu erhalten, kann entweder
 
