@@ -39,7 +39,6 @@
     "@apollon/iobroker-tools": "^0.2.1",
     "@iobroker/adapter-core": "^2.6.7",
     "axios": "^0.27.2",
-    "coiot-coap": "^1.0.0",
     "crypto": "^1.0.1",
     "mqtt-connection": "^4.1.0",
     "shelly-iot": "^1.1.2",
