@@ -46,3 +46,12 @@ Activate MQTT on all your Shelly devices.
 - SSL has to be disabled!
 
 ![shelly_mqtt gen2](./img/shelly_mqtt-gen2.png)
+
+### Quality of Service (QoS)
+
+There are 3 QoS levels in MQTT:
+
+- At most once (0) - no guarantee of delivery (fire and forget)
+- At least once (1) - guarantees that a message is delivered at least one time to the receiver
+- Exactly once (2) - guarantees that each message is received only once by the intended recipients
+

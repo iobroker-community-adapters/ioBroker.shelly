@@ -46,3 +46,7 @@ Aktiviere MQTT auf deinen Shelly-Geräten.
 - SSL darf nicht aktiviert werden
 
 ![shelly_mqtt gen2](./img/shelly_mqtt-gen2.png)
+
+### Quality of Service (QoS)
+
+TODO (see en)
