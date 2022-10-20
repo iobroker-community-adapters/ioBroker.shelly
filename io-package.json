@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.2.2",
+    "version": "6.2.3",
     "news": {
+      "6.2.3": {
+        "en": "Use unique ID for each command - generation 2 devices\nFix: Ack state if value is unchanged",
+        "de": "Verwenden Sie einzigartige ID für jeden Befehl - Generation 2 Geräte\nFix: Ack-Zustand, wenn der Wert unverändert ist",
+        "ru": "Используйте уникальный ID для каждой команды - генерация 2 устройств\nИсправление: Ack состояние, если значение не изменяется",
+        "pt": "Use ID único para cada comando - geração 2 dispositivos\nFix: Ack state se o valor for inalterado",
+        "nl": "Gebruik unieke ID voor elk commando, generatie 2 apparaten\nAck staat als waarde onveranderd is",
+        "fr": "Utiliser l'ID unique pour chaque commande - les appareils de génération 2\nFixe: Ack état si la valeur est inchangée",
+        "it": "Utilizzare ID unico per ogni comando - generazione 2 dispositivi\nFisso: Ack stato se il valore è invariato",
+        "es": "Use ID única para cada comando - generación 2 dispositivos\nFijación: estado de ack si el valor no se cambia",
+        "pl": "Wykorzystywanie unikalnego identyfikatora dla każdego komendy – genera 2 urządzeń\nFix: Czy wartość jest niezmieniona",
+        "uk": "Використовуйте унікальний ідентифікатор для кожної команди - генерації 2 пристроїв\nВиправлення: Стан ck, якщо значення не змінюється",
+        "zh-cn": "B. 每名指挥者使用独一无二的装置\nFix:如果价值不变,则一克国"
+      },
       "6.2.2": {
         "en": "Fixed state updates for CoAP integration",
         "de": "Feste Zustandsaktualisierungen für die CoAP-Integration",
@@ -75,18 +88,6 @@
         "es": "Se agregó el estado de la posición de la cubierta para los dispositivos de generación 2\nSe agregó cobertura de potencia, voltaje, corriente y energía para dispositivos de generación 2\nRoles de cambio actualizados para material ui (switch.power to switch)",
         "pl": "Dodano status pozycji okładki dla urządzeń generacji 2\nDodano moc osłony, napięcie, prąd i energię dla urządzeń generacji 2\nZaktualizowano role przełączników w interfejsie materiałów (switch.power to switch)",
         "zh-cn": "为第 2 代设备添加了封面位置状态\n增加了第 2 代设备的功率、电压、电流和能量\n更新了材质 ui 的切换角色（switch.power 切换）"
-      },
-      "5.3.1": {
-        "en": "Don't ack new values directly after change",
-        "de": "Bestätigen Sie neue Werte nicht direkt nach der Änderung",
-        "ru": "Не подтверждайте новые значения сразу после изменения",
-        "pt": "Não aceite novos valores diretamente após a alteração",
-        "nl": "Bevestig nieuwe waarden niet direct na wijziging",
-        "fr": "Ne confirmez pas les nouvelles valeurs directement après le changement",
-        "it": "Non ack nuovi valori subito dopo la modifica",
-        "es": "No reconozca nuevos valores directamente después del cambio",
-        "pl": "Nie potwierdzaj nowych wartości bezpośrednio po zmianie",
-        "zh-cn": "不要在更改后直接确认新值"
       }
     },
     "title": "Shelly",
