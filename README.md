@@ -115,6 +115,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Fix: Ack state if value is unchanged
+
 ### 6.2.2 (2022-10-13)
 
 * (klein0r) Fixed state updates for CoAP integration
