@@ -117,6 +117,7 @@ execute
 -->
 ### **WORK IN PROGRESS**
 
+* (klein0r) Use unique ID for each command - generation 2 devices
 * (klein0r) Fix: Ack state if value is unchanged
 
 ### 6.2.2 (2022-10-13)
