@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.2.3",
+    "version": "6.2.4",
     "news": {
+      "6.2.4": {
+        "en": "IP address of CoAP devices is unknown in some cases\nOptimized destroy process",
+        "de": "IP-Adresse von CoAP-Geräten ist in einigen Fällen unbekannt\nOptimierter Zerstörungsprozess",
+        "ru": "IP-адрес устройств CoAP неизведан в некоторых случаях\nОптимизированный процесс уничтожения",
+        "pt": "O endereço IP de dispositivos CoAP é desconhecido em alguns casos\nProcesso de destruição otimizado",
+        "nl": "IP adres van CoAP apparatuur is onbekend in sommige gevallen\nVernietigingsproces",
+        "fr": "L'adresse IP des appareils CoAP est inconnue dans certains cas\nProcessus de destruction optimisé",
+        "it": "L'indirizzo IP dei dispositivi CoAP è sconosciuto in alcuni casi\nProcesso di distruzione ottimizzato",
+        "es": "IP address of CoAP devices is unknown in some cases\nProceso de destrucción optimizado",
+        "pl": "Adres IP CoAP nie jest znany w niektórych przypadkach\nOptymizacja niszczeń",
+        "uk": "IP-адреса пристроїв CoAP невідомо в деяких випадках\nОптимальний процес знищення",
+        "zh-cn": "在某些情况下,IP处理联合设施设备的情况不明。\n销毁进程"
+      },
       "6.2.3": {
         "en": "Use unique ID for each command - generation 2 devices\nFix: Ack state if value is unchanged",
         "de": "Verwenden Sie einzigartige ID für jeden Befehl - Generation 2 Geräte\nFix: Ack-Zustand, wenn der Wert unverändert ist",
@@ -76,18 +89,6 @@
         "es": "Importante: El adaptador ahora requiere por lo menos Node.js 14.5\n* Añadido Shelly TRV (beta)\n* Sólo publicar datos al dispositivo Shelly, si el valor cambió\n* Romper: La configuración solo funciona en el nuevo Admin 5 UI\n* Romper: El tiempo de trabajo es ahora un número (segundos desde el arranque)",
         "pl": "Zastosowanie: Dostosowanie wymaga co najmniej 14,5\nShelly TRV (beta) (ang.)\n* Opublikował dane na urządzeniach Shelly, jeśli wartość zmieniła się\n* Breaking: Konfiguracja działa tylko w nowym Admin 5 UI\n* Breaking: Aktualnie jest numerem (drugim od startu)",
         "zh-cn": "重要的是:适应者现在至少需要第14.5号。\n* 增加她全盘的TRV(beta)\n* A/64/50。 如果价值变化,只向Shelly装置公布数据。\n* A/64/50。 处理: 合并只在新的第5号“UI”中工作。\n* A/64/50。 处理: 现在是数个(自那时以来)"
-      },
-      "5.3.2": {
-        "en": "Added cover position status for generation 2 devices\nAdded cover power, voltage, current and energy for generation 2 devices\nUpdated switch roles for material ui (switch.power to switch)",
-        "de": "Positionsstatus der Abdeckung für Geräte der Generation 2 hinzugefügt\nAbdeckung von Leistung, Spannung, Strom und Energie für Geräte der Generation 2 hinzugefügt\nAktualisierte Switch-Rollen für die Material-Benutzeroberfläche (switch.power to switch)",
-        "ru": "Добавлен статус положения крышки для устройств поколения 2.\nДобавлено покрытие мощности, напряжения, тока и энергии для устройств поколения 2.\nОбновлены роли переключения для пользовательского интерфейса материалов (switch.power для переключения).",
-        "pt": "Adicionado status de posição da tampa para dispositivos de geração 2\nAdicionada potência de cobertura, tensão, corrente e energia para dispositivos de geração 2\nFunções de switch atualizadas para interface de usuário de material (switch.power para switch)",
-        "nl": "Status omslagpositie toegevoegd voor apparaten van generatie 2\nToegevoegd dekkingsvermogen, spanning, stroom en energie voor apparaten van generatie 2\nBijgewerkte schakelrollen voor materiële ui (switch.power to switch)",
-        "fr": "Ajout de l'état de la position de couverture pour les appareils de génération 2\nAjout de la puissance, de la tension, du courant et de l'énergie de couverture pour les appareils de génération 2\nRôles de commutateur mis à jour pour l'interface utilisateur matérielle (switch.power to switch)",
-        "it": "Aggiunto lo stato della posizione della copertura per i dispositivi di seconda generazione\nAggiunta potenza di copertura, voltaggio, corrente ed energia per i dispositivi di seconda generazione\nRuoli di commutazione aggiornati per l'interfaccia utente materiale (switch.power to switch)",
-        "es": "Se agregó el estado de la posición de la cubierta para los dispositivos de generación 2\nSe agregó cobertura de potencia, voltaje, corriente y energía para dispositivos de generación 2\nRoles de cambio actualizados para material ui (switch.power to switch)",
-        "pl": "Dodano status pozycji okładki dla urządzeń generacji 2\nDodano moc osłony, napięcie, prąd i energię dla urządzeń generacji 2\nZaktualizowano role przełączników w interfejsie materiałów (switch.power to switch)",
-        "zh-cn": "为第 2 代设备添加了封面位置状态\n增加了第 2 代设备的功率、电压、电流和能量\n更新了材质 ui 的切换角色（switch.power 切换）"
       }
     },
     "title": "Shelly",

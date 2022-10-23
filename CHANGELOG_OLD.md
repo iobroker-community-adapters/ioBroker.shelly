@@ -1,4 +1,12 @@
 # Older changes
+## 6.1.0 (2022-09-02)
+* (klein0r) **Breaking:** Added device modes (just display relevant states for current mode)
+* (klein0r) **Breaking:** Moved "mode" setting of some devices to "Sys.deviceMode"
+* (klein0r) Added ext temperature offset configuration
+* (klein0r) Added mqtt status states and checks for generation 2 devices
+* (klein0r) Send unchanged state to device, ack state if value is unchanged
+* (klein0r) Fixed total power of RGBW2 when in color mode
+
 ## 6.0.0 (2022-07-07)
 Important: The adapter now requires at least Node.js 14.5
 * (klein0r) Added Shelly TRV (beta)

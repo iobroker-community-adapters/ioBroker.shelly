@@ -115,7 +115,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.2.4 (2022-10-23)
 
 * (klein0r) IP address of CoAP devices is unknown in some cases
 * (klein0r) Optimized destroy process
@@ -147,14 +147,6 @@ execute
 * (klein0r) Fixed temperature of Shelly Door / Window 2
 * (klein0r) Added icons for some states
 * (klein0r) Translated (some) object names
-
-### 6.1.0 (2022-09-02)
-* (klein0r) **Breaking:** Added device modes (just display relevant states for current mode)
-* (klein0r) **Breaking:** Moved "mode" setting of some devices to "Sys.deviceMode"
-* (klein0r) Added ext temperature offset configuration
-* (klein0r) Added mqtt status states and checks for generation 2 devices
-* (klein0r) Send unchanged state to device, ack state if value is unchanged
-* (klein0r) Fixed total power of RGBW2 when in color mode
 
 ## License
 
