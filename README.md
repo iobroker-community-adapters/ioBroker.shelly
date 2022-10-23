@@ -115,6 +115,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Optimized destroy process
+
 ### 6.2.3 (2022-10-20)
 
 * (klein0r) Use unique ID for each command - generation 2 devices
