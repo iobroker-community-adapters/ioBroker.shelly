@@ -117,6 +117,7 @@ execute
 -->
 ### **WORK IN PROGRESS**
 
+* (klein0r) IP address of CoAP devices is unknown in some cases
 * (klein0r) Optimized destroy process
 
 ### 6.2.3 (2022-10-20)
