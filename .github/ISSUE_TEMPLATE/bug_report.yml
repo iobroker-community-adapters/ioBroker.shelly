@@ -22,6 +22,16 @@ body:
         adapter (beta) version.
 
         Thank you for your collaboration!
+  - type: checkboxes
+    attributes:
+      label: I'm sure that
+      options:
+        - label: This issue is still present in the **current beta version** of this adapter
+          required: true
+        - label: There is no other (open) issue with the same topic (used the search)
+          required: true
+        - label: This issue is not described in the adapter documentation / FAQ
+          required: true
   - type: input
     attributes:
       label: Shelly device
