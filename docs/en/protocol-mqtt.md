@@ -42,10 +42,12 @@ Activate MQTT on all your Shelly devices.
 4. Apply the configuration - the Shelly will reboot automatically
 
 - **Do not change the "client id" in this configuration**
-- **You have to enable all RPC notification options for gen 2 devices (see screenshot)!**
+- **You have to enable all RPC notification options for gen 2 devices (see screenshots)!**
 - SSL has to be disabled!
 
 ![shelly_mqtt gen2](./img/shelly_mqtt-gen2.png)
+
+![shelly_mqtt gen2](./img/shelly_mqtt-gen2-old.png)
 
 ### Quality of Service (QoS)
 

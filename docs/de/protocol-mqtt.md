@@ -42,10 +42,12 @@ Aktiviere MQTT auf deinen Shelly-Geräten.
 4. Speichere die Konfiguration - der Shelly startet automatisch neu
 
 - **Ändere nicht die "client id" in dieser Konfiguration**
-- **Für Generation 2 Geräte müssen alle RPC-Optionen aktiviert werden (siehe Screenshot)!**
+- **Für Generation 2 Geräte müssen alle RPC-Optionen aktiviert werden (siehe Screenshots)!**
 - SSL darf nicht aktiviert werden
 
 ![shelly_mqtt gen2](./img/shelly_mqtt-gen2.png)
+
+![shelly_mqtt gen2](./img/shelly_mqtt-gen2-old.png)
 
 ### Quality of Service (QoS)
 
