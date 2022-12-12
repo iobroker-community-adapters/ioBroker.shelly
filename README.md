@@ -118,6 +118,7 @@ execute
 ### **WORK IN PROGRESS**
 
 * (klein0r) Updated knowledge base urls
+* (klein0r) Added Ukrainian language
 
 ### 6.2.4 (2022-10-23)
 
