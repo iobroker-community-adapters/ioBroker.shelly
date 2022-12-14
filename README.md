@@ -117,6 +117,7 @@ execute
 -->
 ### **WORK IN PROGRESS**
 
+* (jlegen) Improved Shelly TRV integration
 * (klein0r) Updated knowledge base urls
 * (klein0r) Added Ukrainian language
 
