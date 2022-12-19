@@ -1,5 +1,5 @@
 {
-    "Allow to transfer errors if the adapter crash. Private data like usernames, passwords, tokens, ... will be NOT be transferd.": "Erlaube das weiterleiten von Fehlern wenn der Adapter abstürtzt. Private Daten wie z.B. Benutzername, Passwort, Token, ... werden NICHT übertragen.",
+    "Allow to transfer errors if the adapter crash. Private data like usernames, passwords, tokens, ... will be NOT be transferd.": "Erlaube das Weiterleiten von Fehlern wenn der Adapter abstürzt. Private Daten wie z.B. Benutzername, Passwort, Token, ... werden NICHT übertragen.",
     "Auto update of new firmware": "Automatisches Aktualisieren von neuer Firmware",
     "COAP listen IP": "COAP-Listen-IP",
     "CoAP and HTTP": "CoAP und HTTP",
@@ -15,7 +15,7 @@
     "MQTT and HTTP": "MQTT und HTTP",
     "MQTT settings": "MQTT-Einstellungen",
     "Poll time in seconds": "Abfragezeit in Sekunden",
-    "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Shelly-Geräte, die nicht angezeigt werden sollen. Geben Sie die Geräte-ID von Shelly wie 8B22BD ein",
+    "Shelly devices that shall not be displayed. Enter device id of Shelly like 8B22BD": "Shelly-Geräte, die nicht angezeigt werden sollen. Geben Sie die Geräte-ID des Shelly-Gerätes wie z.B. 8B22BD ein",
     "Shelly protocol": "Shelly-Protokoll",
     "Update objects even if there is no value change": "Objekte aktualisieren, auch wenn keine Wertänderung vorliegt",
     "Log Debug Messages": "Debug-Meldungen protokollieren",
