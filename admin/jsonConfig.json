@@ -7,7 +7,30 @@
             "type": "panel",
             "label": "General settings",
             "items": {
+                "_documentationLink": {
+                    "type": "staticLink",
+                    "href": "https://github.com/iobroker-community-adapters/ioBroker.shelly/tree/master/docs/en",
+                    "label": {
+                        "en": "Please read the documentation carefully before using this adapter",
+                        "de": "Bitte lies die Dokumentation sorgfältig vor der Verwendung dieses Adapters",
+                        "ru": "Пожалуйста, внимательно прочитайте документацию перед использованием этого адаптера",
+                        "pt": "Por favor, leia a documentação cuidadosamente antes de usar este adaptador",
+                        "nl": "Lees de documentatie zorgvuldig voor je deze adapter gebruikt",
+                        "fr": "Veuillez lire attentivement la documentation avant d'utiliser cet adaptateur",
+                        "it": "Si prega di leggere attentamente la documentazione prima di utilizzare questo adattatore",
+                        "es": "Por favor lea la documentación cuidadosamente antes de usar este adaptador",
+                        "pl": "Przeczytałem dokument przed użyciem tego adaptera",
+                        "uk": "Будь ласка, уважно прочитайте документацію перед використанням цього адаптера",
+                        "zh-cn": "请仔细阅读文件,然后利用这一适应者。"
+                    },
+                    "button": true,
+                    "icon": "info",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12
+                },
                 "protocol": {
+                    "newLine": true,
                     "type": "select",
                     "options": [
                         {
@@ -21,6 +44,7 @@
                                 "it": "MQTT (e HTTP)",
                                 "es": "MQTT (y HTTP)",
                                 "pl": "MQTT (i HTTP)",
+                                "uk": "MQTT (і HTTP)",
                                 "zh-cn": "MQTT (和 HTTP)"
                             },
                             "value": "mqtt"
@@ -36,6 +60,7 @@
                                 "it": "CoAP (e HTTP)",
                                 "es": "CoAP (y HTTP)",
                                 "pl": "CoAP (i HTTP)",
+                                "uk": "CoAP (і HTTP)",
                                 "zh-cn": "CoAP (和 HTTP)"
                             },
                             "value": "coap"
@@ -166,6 +191,7 @@
                                 "it": "0 - Al massimo una volta",
                                 "es": "0: como máximo una vez",
                                 "pl": "0 - Co najwyżej raz",
+                                "uk": "0 - Принаймні",
                                 "zh-cn": "0 - 最多一次"
                             },
                             "value": 0
@@ -181,6 +207,7 @@
                                 "it": "1 - Almeno una volta",
                                 "es": "1 - Al menos una vez",
                                 "pl": "1 - Przynajmniej raz",
+                                "uk": "1 - принаймні один",
                                 "zh-cn": "1 - 至少一次"
                             },
                             "value": 1
@@ -196,6 +223,7 @@
                                 "it": "2 - Esattamente una volta",
                                 "es": "2 - Exactamente una vez",
                                 "pl": "2 - Dokładnie raz",
+                                "uk": "2 - Точно один",
                                 "zh-cn": "2 - 恰好一次"
                             },
                             "value": 2
@@ -233,7 +261,19 @@
                             "type": "text",
                             "attr": "id",
                             "width": "100%",
-                            "title": "Device Id",
+                            "title": {
+                                "en": "Device ID or IP address",
+                                "de": "Geräte-ID oder IP-Adresse",
+                                "ru": "ID устройства или IP адрес",
+                                "pt": "ID do dispositivo ou endereço IP",
+                                "nl": "ID of IP adres",
+                                "fr": "ID ou adresse IP",
+                                "it": "ID dispositivo o indirizzo IP",
+                                "es": "ID de dispositivo o dirección IP",
+                                "pl": "Device ID lub adres IP",
+                                "uk": "IP-адреса",
+                                "zh-cn": "Device ID或IP地址"
+                            },
                             "filter": true,
                             "sort": true,
                             "default": ""
