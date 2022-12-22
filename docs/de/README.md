@@ -2,6 +2,8 @@
 
 # ioBroker.shelly
 
+This is the German documentation - [🇺🇸 English version](../en/README.md)
+
 ## Inhaltsverzeichnis
 
 - [MQTT Protokoll](protocol-mqtt.md)
@@ -15,7 +17,7 @@
 
 1. nodejs 14.5 (oder neuer)
 2. js-controller 3.3.22 (oder neuer)
-4. Admin Adapter 5.1.25 (oder neuer)
+4. Admin Adapter 6.0.0 (oder neuer)
 
 ## Geräte-Generationen
 
@@ -31,5 +33,7 @@ Der Adapter kann über CoAP oder MQTT mit den Geräten kommunizieren.
 - Der Standard-Modus ist MQTT (siehe [Dokumentation](protocol-mqtt.md) für mehr Informationen)
 - CoAP ist ausschließlich mit Generation 1 Geräten kompatibel!
 - **Falls Gen2-Geräte integriert werden sollen, muss MQTT konfiguriert werden!**
+
+Fragen? Schaue zuerst in die [FAQ](faq.md)!
 
 ![iobroker_general](./img/iobroker_general.png)
