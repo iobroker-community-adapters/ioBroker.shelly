@@ -115,6 +115,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Updated MQTT topic prefix handling
+
 ### 6.3.0 (2022-12-22)
 
 * (klein0r) Added more TRV features
