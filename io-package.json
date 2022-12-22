@@ -1,326 +1,326 @@
 {
-    "common": {
-        "name": "shelly",
-        "version": "6.2.4",
-        "news": {
-            "6.2.4": {
-                "en": "IP address of CoAP devices is unknown in some cases\nOptimized destroy process",
-                "de": "IP-Adresse von CoAP-Geräten ist in einigen Fällen unbekannt\nOptimierter Zerstörungsprozess",
-                "ru": "IP-адрес устройств CoAP неизведан в некоторых случаях\nОптимизированный процесс уничтожения",
-                "pt": "O endereço IP de dispositivos CoAP é desconhecido em alguns casos\nProcesso de destruição otimizado",
-                "nl": "IP adres van CoAP apparatuur is onbekend in sommige gevallen\nVernietigingsproces",
-                "fr": "L'adresse IP des appareils CoAP est inconnue dans certains cas\nProcessus de destruction optimisé",
-                "it": "L'indirizzo IP dei dispositivi CoAP è sconosciuto in alcuni casi\nProcesso di distruzione ottimizzato",
-                "es": "IP address of CoAP devices is unknown in some cases\nProceso de destrucción optimizado",
-                "pl": "Adres IP CoAP nie jest znany w niektórych przypadkach\nOptymizacja niszczeń",
-                "uk": "IP-адреса пристроїв CoAP невідомо в деяких випадках\nОптимальний процес знищення",
-                "zh-cn": "在某些情况下,IP处理联合设施设备的情况不明。\n销毁进程"
-            },
-            "6.2.3": {
-                "en": "Use unique ID for each command - generation 2 devices\nFix: Ack state if value is unchanged",
-                "de": "Verwenden Sie einzigartige ID für jeden Befehl - Generation 2 Geräte\nFix: Ack-Zustand, wenn der Wert unverändert ist",
-                "ru": "Используйте уникальный ID для каждой команды - генерация 2 устройств\nИсправление: Ack состояние, если значение не изменяется",
-                "pt": "Use ID único para cada comando - geração 2 dispositivos\nFix: Ack state se o valor for inalterado",
-                "nl": "Gebruik unieke ID voor elk commando, generatie 2 apparaten\nAck staat als waarde onveranderd is",
-                "fr": "Utiliser l'ID unique pour chaque commande - les appareils de génération 2\nFixe: Ack état si la valeur est inchangée",
-                "it": "Utilizzare ID unico per ogni comando - generazione 2 dispositivi\nFisso: Ack stato se il valore è invariato",
-                "es": "Use ID única para cada comando - generación 2 dispositivos\nFijación: estado de ack si el valor no se cambia",
-                "pl": "Wykorzystywanie unikalnego identyfikatora dla każdego komendy – genera 2 urządzeń\nFix: Czy wartość jest niezmieniona",
-                "uk": "Використовуйте унікальний ідентифікатор для кожної команди - генерації 2 пристроїв\nВиправлення: Стан ck, якщо значення не змінюється",
-                "zh-cn": "B. 每名指挥者使用独一无二的装置\nFix:如果价值不变,则一克国"
-            },
-            "6.2.2": {
-                "en": "Fixed state updates for CoAP integration",
-                "de": "Feste Zustandsaktualisierungen für die CoAP-Integration",
-                "ru": "Исправлены государственные обновления для интеграции CoAP",
-                "pt": "Atualizações de estado fixo para integração CoAP",
-                "nl": "Vertaling:",
-                "fr": "Mises à jour fixes de l'état pour l'intégration CoAP",
-                "it": "Aggiornamenti fissi dello stato per l'integrazione CoAP",
-                "es": "Actualizaciones de estado fijas para la integración de CoAP",
-                "pl": "Fixed state updates for CoAP (ang.)",
-                "uk": "Виправлені оновлення стану для інтеграції CoAP",
-                "zh-cn": "九. 共同方案一体化国家最新资料"
-            },
-            "6.2.1": {
-                "en": "Warn user if a device is not protected via restricted login\nAdded duration for generation 2 devices in cover mode\nAdded temperature data of Shelly Motion 2\nAdded knowledge base urls for all devices",
-                "de": "Warnbenutzer, wenn ein Gerät nicht über einen eingeschränkten Login geschützt ist\nZusätzliche Dauer für 2 Geräte im Cover-Modus\nTemperaturdaten von Shelly Motion 2 hinzugefügt\nHinzugefügt Wissensbasis URLs für alle Geräte",
-                "ru": "Теплый пользователь, если устройство не защищено с помощью ограниченного входа\nДобавлена продолжительность для поколения 2 устройства в режиме обложки\nДобавлены температурные данные Shelly Motion 2\nДобавлена база знаний URL для всех устройств",
-                "pt": "Usuário alerta se um dispositivo não estiver protegido via login restrito\nDuração adicional para a geração 2 dispositivos no modo de cobertura\nDados de temperatura adicionados de Shelly Motion 2\nAdicionados urls base de conhecimento para todos os dispositivos",
-                "nl": "Als een apparaat niet beschermd wordt via beperkt login\nVertaling:\nVoeg de temperatuurgegevens toe van Shelly Motion 2\nVoeg kennis toe voor alle apparaten",
-                "fr": "Internaute averti si un appareil n'est pas protégé via un login restreint\nDurée ajoutée pour les appareils de génération 2 en mode couverture\nDonnées de température ajoutées de Shelly Motion 2\nAjout des urls de base de connaissances pour tous les appareils",
-                "it": "Avvertente se un dispositivo non è protetto tramite login limitato\nDurata aggiuntiva per dispositivi di generazione 2 in modalità di copertura\nDati di temperatura aggiunti di Shelly Motion 2\nUlteriori informazioni base urls per tutti i dispositivi",
-                "es": "Avisar al usuario si un dispositivo no está protegido a través de acceso restringido\nDuración agregada para la generación 2 dispositivos en modo de cubierta\nDatos de temperatura añadidos de movimiento de Shelly 2\nUrales de base de conocimiento añadido para todos los dispositivos",
-                "pl": "Użytkownik Warna, jeśli urządzenie nie jest chronione poprzez ograniczone loginy\nDodany czas na pokolenie dwóch urządzeń w trybie przechowywania\nDane dotyczące temperatury Shelly Motion 2\nZapytane podstawy wiedzy dla wszystkich urządzeń",
-                "zh-cn": "如果一个装置不受限制的伐木加以保护,则警告用户\n增加生产2种装置的期间\n全氟化气体的增温数据 2\n增加所有装置的知识库",
-                "uk": "Попередити користувача, якщо пристрій не захищено через обмежений вхід\nДодано тривалість для пристроїв покоління 2 у режимі покриття\nДодано дані про температуру Shelly Motion 2\nДодано URL-адреси бази знань для всіх пристроїв"
-            },
-            "6.2.0": {
-                "en": "Added Shelly Motion 2\nAdded Shelly Plus H&T\nAdded Shelly Pro 3\nFixed channel name and long push duration handling for Shelly i3\nFixed (automatic) firmware update process for generation 2 devices\nGet correct IP address in Docker environment\nAdded temperature offset configuration for Shelly UNI\nUpdated online indicator handling\nFixed temperature of Shelly Door / Window 2\nAdded icons for some states\nTranslated (some) object names",
-                "de": "Shelly Motion 2 hinzugefügt\nHinzugefügt Shelly Plus H&T\nHinzugefügt Shelly Pro 3\nFester Kanalname und lange Schubdauer Handling für Shelly i3\nFeste (automatische) Firmware-Update-Prozess für Generation 2 Geräte\nErhalten Sie richtige IP-Adresse in Docker Umgebung\nTemperaturoffset-Konfiguration für Shelly UNI hinzugefügt\nAktualisierte Online-Indikatorenhandling\nFeste Temperatur von Shelly Door / Fenster 2\nIcons für einige Staaten hinzugefügt\nÜbersetzte (einige) Objektnamen",
-                "ru": "Добавлено Shelly Motion 2\nДобавлено Shelly Plus H&T\nДобавлено Shelly Pro 3\nФиксированное название канала и длительный ход движения для Shelly i3\nИсправлен (автоматический) процесс обновления прошивки для генерации 2 устройств\nПолучите правильный IP-адрес в среде Docker\nДобавлена настройка компенсации температуры для Shelly UNI\nОбновленная обработка индикаторов онлайн\nФиксированная температура Shelly Door / Window 2\nДобавлены иконки для некоторых государств\nПеревод (некоторые) названия объектов",
-                "pt": "Adicionado Shelly Motion 2\nAdicionado Shelly Plus H&T\nAdicionado Shelly Pro 3\nNome do canal fixo e longo prazo de manipulação para Shelly i3\nProcesso de atualização de firmware fixo (automático) para dispositivos de geração 2\nObter o endereço IP correto no ambiente Docker\nConfiguração de deslocamento de temperatura adicionada para Shelly UNI\nManipulação de indicadores on-line atualizado\nTemperatura fixa da porta de Shelly / janela 2\nÍcones adicionados para alguns estados\nTraduzido (alguns) nomes de objetos",
-                "nl": "Voeg Shelly Motion 2 toe\nAdded Shelly Plus HT\nVertaling:\nVertaling:\nVertaling:\nZorg voor correct IP-adres van Docker\nVoegde de temperatuur configuatie toe voor Shelly Unil\nUpdate online indicator\nQuality over Quantity (QoQ) Releases Vertaling:\nIcoon toegevoegd voor sommige staten\nVertaald door:",
-                "fr": "Ajouté Shelly Motion 2\nAjouté Shelly Plus HΔT\nAjouté Shelly Pro 3\nNom de canal fixe et longue durée de manipulation pour Shelly i3\nProcessus de mise à jour de firmware fixe (automatique) pour les appareils de génération 2\nObtenez l'adresse IP correcte dans l'environnement Docker\nConfiguration de compensation de température ajoutée pour Shelly UNI\nMise à jour de la manipulation des indicateurs en ligne\nTempérature fixe de la porte Shelly / fenêtre 2\nAjout d'icônes pour certains états\nTranslated (some) object names",
-                "it": "Aggiunto Shelly Motion 2\nAggiunto Shelly Plus H&T\nAggiunto Shelly Pro 3\nNome del canale fisso e lunga durata di gestione per Shelly i3\nProcesso di aggiornamento firmware fisso (automatico) per dispositivi di generazione 2\nRicevi l'indirizzo IP corretto nell'ambiente Docker\nConfigurazione offset a temperatura aggiuntiva per Shelly UNI\nGestione degli indicatori online aggiornata\nTemperatura fissa di Shelly Door / Finestra 2\nAggiunto icone per alcuni stati\nTradotto (alcuni) nomi oggetti",
-                "es": "Moción de Shelly 2\nAñadido Shelly Plus H\nAñadido Shelly Pro 3\nNombre de canal fijo y manejo de duración de empuje largo para Shelly i3\nProceso de actualización de firmware fijo (automático) para dispositivos de generación 2\nObtener dirección IP correcta en entorno Docker\nConfiguración de compensación de temperatura adicional para Shelly UNI\nGestión actualizada de indicadores en línea\nTemperatura fija de Puerta de Shelly / Ventana 2\nIconos añadidos para algunos estados\nNombres de objeto traducidos (algunos)",
-                "pl": "Oficjalna strona Shelly Motion 2\nOficjalna strona Shelly Plus H&T\nOficjalna strona Shelly Pro 3\nFixed channel name and long push handling\nFixed (automatyczny) proces aktualizacji oprogramowania dla generacji 2\nPoprawny adres IP w środowisku Dockera\nPoniższa konfiguracja o temperaturze offsetowej Shelly UNI\nUproszczony wskaźnik online\nFixed temperature of Shelly Door / Window 2 (ang.)\nIkony do niektórych stanów\nPrzetłumaczone (niepełne) nazwy obiektów",
-                "zh-cn": "增 编\n增 编\n增 编\n固定的渠道名称和长期推销时间\n制造2种装置的固定软件更新过程\nGet正确地处理Docker环境中的IP地址\n增加的温度抵消了整个工发组织希塞组合\n最新在线指标处理\n全套温度/温得2\n增加一些州的理由\n联系(有些)物体名称",
-                "uk": "Додано Shelly Motion 2\nДодано Shelly Plus H&T\nДодано Shelly Pro 3\nВиправлено обробку назви каналу та тривалості натискання для Shelly i3\nВиправлений (автоматичний) процес оновлення мікропрограми для пристроїв покоління 2\nОтримайте правильну IP-адресу в середовищі Docker\nДодано конфігурацію зміщення температури для Shelly UNI\nОновлена ​​обробка онлайн-індикаторів\nФіксована температура Shelly Door/Window 2\nДодано значки для деяких штатів\nПерекладені (деякі) назви об'єктів"
-            },
-            "6.1.0": {
-                "en": "**Breaking:** Added device modes (just display relevant states for current mode)\n**Breaking:** Moved \"mode\" setting of some devices to \"Sys.deviceMode\"\nAdded ext temperature offset configuration\nAdded mqtt status states and checks for generation 2 devices\nSend unchanged state to device, ack state if value is unchanged\nFixed total power of RGBW2 when in color mode",
-                "de": "Breaking: Gerätemodi hinzugefügt (nur relevante Zustände für den aktuellen Modus anzeigen)\nBruch: Verschiebemoduseinstellung einiger Geräte nach Sys.deviceMode\nZusätzliche Ext-Temperatur-Offset-Konfiguration\nMqtt Statuszustände hinzugefügt und Kontrollen für Generation 2 Geräte\nSenden Sie unverändert Zustand an Gerät, ack Zustand, wenn Wert unverändert\nFeste Gesamtleistung von RGBW2 im Farbmodus",
-                "ru": "Перерыв: Добавлены режимы устройства (просто отображать соответствующие состояния для текущего режима)\nПерерыв: Перемещение режима настройки некоторых устройств для Sys.deviceMode\nДобавлена ext температура офсетная конфигурация\nДобавлены состояния mqtt и проверки для устройств поколения 2\nОтправьте неизмененное состояние на устройство, укажите состояние, если значение не изменится\nФиксированная общая мощность RGBW2 когда в цветовом режиме",
-                "pt": "Quebra: modos de dispositivo adicionados (apenas exibir estados relevantes para o modo atual)\nQuebrando: Configuração de modo movido de alguns dispositivos para Sys.deviceMode\nConfiguração de deslocamento de temperatura ext adicionada\nEstados de status mqtt adicionados e verificações para a geração 2 dispositivos\nEnviar estado inalterado para dispositivo, ack estado se o valor é inalterado\nPotência total fixa de RGBW2 quando no modo de cor",
-                "nl": "Toegevoegde apparaten\nBreaking: Verplaatste modus die wat apparatuur naar Sys.deviceMode\nVertaling:\nVermeld Mqt status staat en controle voor generatie 2 apparaten\nStuur onveranderde staat naar apparatuur als de waarde onveranderd is\nVertaling:",
-                "fr": "Disjonction: Ajout de modes de périphérique (juste afficher les états pertinents pour le mode courant)\nBreaking: Réglage de mode déplacé de certains appareils vers Sys.deviceMode\nAjout de la configuration de décalage de température\nAjout des états de statut mqtt et des contrôles pour les appareils de génération 2\nEnvoyer l'état inchangé à l'appareil, état ack si la valeur est inchangée\nPuissance totale fixe de RGBW2 en mode couleur",
-                "it": "Interruzione: Aggiunte modalità dispositivo (solo visualizzare stati rilevanti per la modalità corrente)\nBreaking: Impostazione modalità spostata di alcuni dispositivi a Sys.deviceMode\nConfigurazione offset della temperatura ext\nAggiunti stati di stato di mqtt e controlli per la generazione 2 dispositivi\nInvia stato invariato al dispositivo, ack stato se il valore è invariato\nPotenza totale fissa di RGBW2 quando in modalità colore",
-                "es": "Breaking: Añadidos modos de dispositivo (sólo mostrar estados relevantes para el modo actual)\nRomper: Modo de movimiento de algunos dispositivos a Sys.deviceMode\nConfiguración offset de temperatura\nEstado de estado de mqtt y cheques de generación 2 dispositivos\nEnviar estado sin cambios en el dispositivo, estado de la cubierta si el valor no se cambia\nPotencia total fija de RGBW2 cuando en modo de color",
-                "pl": "Przekrój: tryby urządzenie do urządzeniech (w skrócie odpowiednie stany dla trybu bieżącego)\nBreaking: Przestrzeń niektórych urządzeń do Sys.deviceMode\nZapewnienie temperatury offset\nAdded mqtt oznacza stany i sprawozdanie dla dwóch urządzeń generacji\nStan niezmieniony do urządzenia, czy wartość jest niezmieniona\nCałkowita moc RGBW2 w trybie kolorowym",
-                "zh-cn": "处理:增编装置模式(以目前方式显示相关国家)\n处理: 某些装置的放置方式给Sys.device Mode\n增加的外热温度抵消组合\n添加的米克特地位州和制造2种装置的检查\n如果价值不变,那么装置状况没有改变。\n在以色色彩的方式确定RGBW2的全部权力",
-                "uk": "**Порушення:** Додано режими пристрою (просто відображати релевантні стани для поточного режиму)\n**Порушення:** налаштування \"режиму\" деяких пристроїв перенесено на \"Sys.deviceMode\"\nДодана конфігурація зсуву зовнішньої температури\nДодано стани та перевірки стану mqtt для пристроїв покоління 2\nНадіслати незмінний стан на пристрій, підтвердити стан, якщо значення не змінилося\nВиправлена ​​сумарна потужність RGBW2 у кольоровому режимі"
-            },
-            "6.0.0": {
-                "en": "Important: The adapter now requires at least Node.js 14.5\n* Added Shelly TRV (beta)\n* Just publish data to Shelly device, if value changed\n* **Breaking**: Configuration is only working in the new Admin 5 UI\n* **Breaking**: Uptime is now a number (seconds since boot)",
-                "de": "Wichtig: Der Adapter benötigt nun mindestens Node.js 14.5\n* Hinzugefügt Shelly TRV (beta)\n* Veröffentlichen Sie einfach Daten auf Shelly Gerät, wenn Wert geändert\n* Bruch: Konfiguration funktioniert nur im neuen Admin 5 UI\n* Bruch: Uptime ist jetzt eine Nummer (Sekunden seit dem Boot)",
-                "ru": "Важно: адаптер теперь требует по крайней мере Node.js 14.5\n* Добавлена Shelly TRV (beta)\n* Просто публикуйте данные на устройство Shelly, если значение изменилось\n* Перерыв: Конфигурация работает только в новом Admin 5 UI\n* Перерыв: Uptime теперь номер (в секундах с загрузки)",
-                "pt": "Importante: O adaptador agora requer pelo menos Node.js 14.5\n* Adicionado Shelly TRV (beta)\n* Basta publicar dados no dispositivo Shelly, se o valor mudou\n* Quebrando: A configuração só está funcionando na nova interface do usuário Admin 5\n* Quebrando: O tempo de atividade é agora um número (segundos desde a inicialização)",
-                "nl": "De adapter vereist nu tenminste Node\n♪ Added Shelly TRV (beta)\n♪ Gewoon gegevens uitgeven aan Shelly apparaat, als de waarde veranderd is\n♪ Breaking: Configuratie werkt alleen in de nieuwe administratie 5 UI\n♪ Breaking: Uptime is nu een nummer (seconds sinds boot)",
-                "fr": "Important: L'adaptateur nécessite maintenant au moins Node.js 14.5\n* Ajout de Shelly TRV (beta)\n* Il suffit de publier des données sur Shelly périphérique, si la valeur a changé\n* Breaking: La configuration ne fonctionne que dans la nouvelle interface Admin 5\n* Breaking: L'heure de mise est maintenant un nombre (secondes depuis le démarrage)",
-                "it": "Importante: l'adattatore ora richiede almeno Node.js 14.5\n* Aggiunto Shelly TRV (beta)\n# Basta pubblicare i dati sul dispositivo Shelly, se il valore cambia\n# Breaking: La configurazione funziona solo nel nuovo Admin 5 UI\n# Breaking: L'aggiornamento è ora un numero (secondi dal boot)",
-                "es": "Importante: El adaptador ahora requiere por lo menos Node.js 14.5\n* Añadido Shelly TRV (beta)\n* Sólo publicar datos al dispositivo Shelly, si el valor cambió\n* Romper: La configuración solo funciona en el nuevo Admin 5 UI\n* Romper: El tiempo de trabajo es ahora un número (segundos desde el arranque)",
-                "pl": "Zastosowanie: Dostosowanie wymaga co najmniej 14,5\nShelly TRV (beta) (ang.)\n* Opublikował dane na urządzeniach Shelly, jeśli wartość zmieniła się\n* Breaking: Konfiguracja działa tylko w nowym Admin 5 UI\n* Breaking: Aktualnie jest numerem (drugim od startu)",
-                "zh-cn": "重要的是:适应者现在至少需要第14.5号。\n* 增加她全盘的TRV(beta)\n* A/64/50。 如果价值变化,只向Shelly装置公布数据。\n* A/64/50。 处理: 合并只在新的第5号“UI”中工作。\n* A/64/50。 处理: 现在是数个(自那时以来)",
-                "uk": "Важливо: для адаптера тепер потрібна принаймні Node.js 14.5\n* Додано Shelly TRV (бета)\n* Просто опублікуйте дані на пристрої Shelly, якщо значення змінилося\n* **Несправність**: конфігурація працює лише в новому інтерфейсі користувача Admin 5\n* **Порушення**: час безвідмовної роботи тепер число (у секундах після завантаження)"
-            }
-        },
-        "title": "Shelly",
-        "titleLang": {
-            "en": "Shelly",
-            "de": "Shelly",
-            "ru": "Shelly",
-            "pt": "Shelly",
-            "nl": "Shelly",
-            "fr": "Shelly",
-            "it": "Shelly",
-            "es": "Shelly",
-            "pl": "Shelly",
-            "zh-cn": "Shelly",
-            "uk": "Шеллі"
-        },
-        "desc": {
-            "en": "Integrate Shelly devices via CoAP or MQTT",
-            "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
-            "ru": "Интеграция Shelly устройств через CoAP или MQTT",
-            "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
-            "nl": "Integrate Shelly apparatuur via CoAP of MQT",
-            "fr": "Dispositifs Shelly intégrés via CoAP ou MQTT",
-            "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
-            "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
-            "pl": "Integracja Shelly poprzez CoAP lub MQTT",
-            "zh-cn": "通过联合方案或技合中心将全套装置纳入",
-            "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT"
-        },
-        "license": "MIT",
-        "authors": [
-            "Thorsten Stueben <thorsten@stueben.de>",
-            "Apollon77 <iobroker@fischer-ka.de>",
-            "Matthias Kleine <info@haus-automatisierung.com>"
-        ],
-        "docs": {
-            "en": [
-                "docs/en/README.md",
-                "docs/en/protocol-coap.md",
-                "docs/en/protocol-mqtt.md",
-                "docs/en/restricted-login.md",
-                "docs/en/state-changes.md",
-                "docs/en/faq.md",
-                "docs/en/debug.md"
-            ],
-            "de": [
-                "docs/de/README.md",
-                "docs/de/protocol-coap.md",
-                "docs/de/protocol-mqtt.md",
-                "docs/de/restricted-login.md",
-                "docs/de/state-changes.md",
-                "docs/de/faq.md",
-                "docs/de/debug.md"
-            ]
-        },
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "icon": "shelly.png",
-        "enabled": false,
-        "compact": true,
-        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
-        "keywords": [
-            "Shelly",
-            "IoT",
-            "CoAP",
-            "CoIoT",
-            "MQTT"
-        ],
-        "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
-        "loglevel": "info",
-        "type": "iot-systems",
-        "restartAdapters": [],
-        "connectionType": "local",
-        "dataSource": "push",
-        "tier": 2,
-        "plugins": {
-            "sentry": {
-                "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
-                "pathWhitelist": [
-                    "@apollon",
-                    "shelly-iot"
-                ]
-            }
-        },
-        "adminUI": {
-            "config": "json"
-        },
-        "globalDependencies": [
-            {
-                "admin": ">=6.0.0"
-            }
-        ],
-        "dependencies": [
-            {
-                "js-controller": ">=3.3.22"
-            }
-        ]
+  "common": {
+    "name": "shelly",
+    "version": "6.3.0",
+    "news": {
+      "6.3.0": {
+        "en": "Added more TRV features\nImproved Shelly TRV integration\nUpdated knowledge base urls\nAdded Ukrainian language",
+        "de": "Weitere TRV-Funktionen\nVerbesserte Shelly TRV Integration\nAktualisierte Wissensbasis urls\nUkrainische Sprache",
+        "ru": "Добавлено больше возможностей TRV\nУлучшена интеграция Shelly TRV\nОбновленная база знаний urls\nДобавлен украинский язык",
+        "pt": "Adicionado mais TRV recursos\nMelhor integração do Shelly TRV\nURLs de base de conhecimento atualizadas\nAdicionado idioma ucraniano",
+        "nl": "Voegde meer TRV kenmerken toe\nImproviseren Shelly TR integratie\nVerouderde kennis basis uilen\nVoeg Oekraïense taal toe",
+        "fr": "Ajout d'autres fonctionnalités TRV\nAmélioration de l ' intégration de Shelly TRV\nBase de connaissances actualisées urls\nAjout de la langue ukrainienne",
+        "it": "Aggiunto più funzioni TRV\nIntegrazione migliorata di Shelly TRV\nRiferimenti di base di conoscenze aggiornate\nAggiunto lingua ucraina",
+        "es": "Más características de TRV\nMejor integración Shelly TRV\nUrls de base de conocimientos actualizados\nIdioma ucraniano añadido",
+        "pl": "Added TRV\nPoprawa integracji z Shelly TRV\nPodstawa wiedzy\nJęzyk ukraiński",
+        "uk": "Додаткові функції TRV\nПокращена інтеграція Shelly TRV\nОновлені знання бази виворіт\nУкраїнська мова",
+        "zh-cn": "增加的TRV特征\nB. 改善整个TRV一体化\n最新知识库\n增加乌克兰语"
+      },
+      "6.2.4": {
+        "en": "IP address of CoAP devices is unknown in some cases\nOptimized destroy process",
+        "de": "IP-Adresse von CoAP-Geräten ist in einigen Fällen unbekannt\nOptimierter Zerstörungsprozess",
+        "ru": "IP-адрес устройств CoAP неизведан в некоторых случаях\nОптимизированный процесс уничтожения",
+        "pt": "O endereço IP de dispositivos CoAP é desconhecido em alguns casos\nProcesso de destruição otimizado",
+        "nl": "IP adres van CoAP apparatuur is onbekend in sommige gevallen\nVernietigingsproces",
+        "fr": "L'adresse IP des appareils CoAP est inconnue dans certains cas\nProcessus de destruction optimisé",
+        "it": "L'indirizzo IP dei dispositivi CoAP è sconosciuto in alcuni casi\nProcesso di distruzione ottimizzato",
+        "es": "IP address of CoAP devices is unknown in some cases\nProceso de destrucción optimizado",
+        "pl": "Adres IP CoAP nie jest znany w niektórych przypadkach\nOptymizacja niszczeń",
+        "uk": "IP-адреса пристроїв CoAP невідомо в деяких випадках\nОптимальний процес знищення",
+        "zh-cn": "在某些情况下,IP处理联合设施设备的情况不明。\n销毁进程"
+      },
+      "6.2.3": {
+        "en": "Use unique ID for each command - generation 2 devices\nFix: Ack state if value is unchanged",
+        "de": "Verwenden Sie einzigartige ID für jeden Befehl - Generation 2 Geräte\nFix: Ack-Zustand, wenn der Wert unverändert ist",
+        "ru": "Используйте уникальный ID для каждой команды - генерация 2 устройств\nИсправление: Ack состояние, если значение не изменяется",
+        "pt": "Use ID único para cada comando - geração 2 dispositivos\nFix: Ack state se o valor for inalterado",
+        "nl": "Gebruik unieke ID voor elk commando, generatie 2 apparaten\nAck staat als waarde onveranderd is",
+        "fr": "Utiliser l'ID unique pour chaque commande - les appareils de génération 2\nFixe: Ack état si la valeur est inchangée",
+        "it": "Utilizzare ID unico per ogni comando - generazione 2 dispositivi\nFisso: Ack stato se il valore è invariato",
+        "es": "Use ID única para cada comando - generación 2 dispositivos\nFijación: estado de ack si el valor no se cambia",
+        "pl": "Wykorzystywanie unikalnego identyfikatora dla każdego komendy – genera 2 urządzeń\nFix: Czy wartość jest niezmieniona",
+        "uk": "Використовуйте унікальний ідентифікатор для кожної команди - генерації 2 пристроїв\nВиправлення: Стан ck, якщо значення не змінюється",
+        "zh-cn": "B. 每名指挥者使用独一无二的装置\nFix:如果价值不变,则一克国"
+      },
+      "6.2.2": {
+        "en": "Fixed state updates for CoAP integration",
+        "de": "Feste Zustandsaktualisierungen für die CoAP-Integration",
+        "ru": "Исправлены государственные обновления для интеграции CoAP",
+        "pt": "Atualizações de estado fixo para integração CoAP",
+        "nl": "Vertaling:",
+        "fr": "Mises à jour fixes de l'état pour l'intégration CoAP",
+        "it": "Aggiornamenti fissi dello stato per l'integrazione CoAP",
+        "es": "Actualizaciones de estado fijas para la integración de CoAP",
+        "pl": "Fixed state updates for CoAP (ang.)",
+        "uk": "Виправлені оновлення стану для інтеграції CoAP",
+        "zh-cn": "九. 共同方案一体化国家最新资料"
+      },
+      "6.2.1": {
+        "en": "Warn user if a device is not protected via restricted login\nAdded duration for generation 2 devices in cover mode\nAdded temperature data of Shelly Motion 2\nAdded knowledge base urls for all devices",
+        "de": "Warnbenutzer, wenn ein Gerät nicht über einen eingeschränkten Login geschützt ist\nZusätzliche Dauer für 2 Geräte im Cover-Modus\nTemperaturdaten von Shelly Motion 2 hinzugefügt\nHinzugefügt Wissensbasis URLs für alle Geräte",
+        "ru": "Теплый пользователь, если устройство не защищено с помощью ограниченного входа\nДобавлена продолжительность для поколения 2 устройства в режиме обложки\nДобавлены температурные данные Shelly Motion 2\nДобавлена база знаний URL для всех устройств",
+        "pt": "Usuário alerta se um dispositivo não estiver protegido via login restrito\nDuração adicional para a geração 2 dispositivos no modo de cobertura\nDados de temperatura adicionados de Shelly Motion 2\nAdicionados urls base de conhecimento para todos os dispositivos",
+        "nl": "Als een apparaat niet beschermd wordt via beperkt login\nVertaling:\nVoeg de temperatuurgegevens toe van Shelly Motion 2\nVoeg kennis toe voor alle apparaten",
+        "fr": "Internaute averti si un appareil n'est pas protégé via un login restreint\nDurée ajoutée pour les appareils de génération 2 en mode couverture\nDonnées de température ajoutées de Shelly Motion 2\nAjout des urls de base de connaissances pour tous les appareils",
+        "it": "Avvertente se un dispositivo non è protetto tramite login limitato\nDurata aggiuntiva per dispositivi di generazione 2 in modalità di copertura\nDati di temperatura aggiunti di Shelly Motion 2\nUlteriori informazioni base urls per tutti i dispositivi",
+        "es": "Avisar al usuario si un dispositivo no está protegido a través de acceso restringido\nDuración agregada para la generación 2 dispositivos en modo de cubierta\nDatos de temperatura añadidos de movimiento de Shelly 2\nUrales de base de conocimiento añadido para todos los dispositivos",
+        "pl": "Użytkownik Warna, jeśli urządzenie nie jest chronione poprzez ograniczone loginy\nDodany czas na pokolenie dwóch urządzeń w trybie przechowywania\nDane dotyczące temperatury Shelly Motion 2\nZapytane podstawy wiedzy dla wszystkich urządzeń",
+        "zh-cn": "如果一个装置不受限制的伐木加以保护,则警告用户\n增加生产2种装置的期间\n全氟化气体的增温数据 2\n增加所有装置的知识库",
+        "uk": "Попередити користувача, якщо пристрій не захищено через обмежений вхід\nДодано тривалість для пристроїв покоління 2 у режимі покриття\nДодано дані про температуру Shelly Motion 2\nДодано URL-адреси бази знань для всіх пристроїв"
+      },
+      "6.2.0": {
+        "en": "Added Shelly Motion 2\nAdded Shelly Plus H&T\nAdded Shelly Pro 3\nFixed channel name and long push duration handling for Shelly i3\nFixed (automatic) firmware update process for generation 2 devices\nGet correct IP address in Docker environment\nAdded temperature offset configuration for Shelly UNI\nUpdated online indicator handling\nFixed temperature of Shelly Door / Window 2\nAdded icons for some states\nTranslated (some) object names",
+        "de": "Shelly Motion 2 hinzugefügt\nHinzugefügt Shelly Plus H&T\nHinzugefügt Shelly Pro 3\nFester Kanalname und lange Schubdauer Handling für Shelly i3\nFeste (automatische) Firmware-Update-Prozess für Generation 2 Geräte\nErhalten Sie richtige IP-Adresse in Docker Umgebung\nTemperaturoffset-Konfiguration für Shelly UNI hinzugefügt\nAktualisierte Online-Indikatorenhandling\nFeste Temperatur von Shelly Door / Fenster 2\nIcons für einige Staaten hinzugefügt\nÜbersetzte (einige) Objektnamen",
+        "ru": "Добавлено Shelly Motion 2\nДобавлено Shelly Plus H&T\nДобавлено Shelly Pro 3\nФиксированное название канала и длительный ход движения для Shelly i3\nИсправлен (автоматический) процесс обновления прошивки для генерации 2 устройств\nПолучите правильный IP-адрес в среде Docker\nДобавлена настройка компенсации температуры для Shelly UNI\nОбновленная обработка индикаторов онлайн\nФиксированная температура Shelly Door / Window 2\nДобавлены иконки для некоторых государств\nПеревод (некоторые) названия объектов",
+        "pt": "Adicionado Shelly Motion 2\nAdicionado Shelly Plus H&T\nAdicionado Shelly Pro 3\nNome do canal fixo e longo prazo de manipulação para Shelly i3\nProcesso de atualização de firmware fixo (automático) para dispositivos de geração 2\nObter o endereço IP correto no ambiente Docker\nConfiguração de deslocamento de temperatura adicionada para Shelly UNI\nManipulação de indicadores on-line atualizado\nTemperatura fixa da porta de Shelly / janela 2\nÍcones adicionados para alguns estados\nTraduzido (alguns) nomes de objetos",
+        "nl": "Voeg Shelly Motion 2 toe\nAdded Shelly Plus HT\nVertaling:\nVertaling:\nVertaling:\nZorg voor correct IP-adres van Docker\nVoegde de temperatuur configuatie toe voor Shelly Unil\nUpdate online indicator\nQuality over Quantity (QoQ) Releases Vertaling:\nIcoon toegevoegd voor sommige staten\nVertaald door:",
+        "fr": "Ajouté Shelly Motion 2\nAjouté Shelly Plus HΔT\nAjouté Shelly Pro 3\nNom de canal fixe et longue durée de manipulation pour Shelly i3\nProcessus de mise à jour de firmware fixe (automatique) pour les appareils de génération 2\nObtenez l'adresse IP correcte dans l'environnement Docker\nConfiguration de compensation de température ajoutée pour Shelly UNI\nMise à jour de la manipulation des indicateurs en ligne\nTempérature fixe de la porte Shelly / fenêtre 2\nAjout d'icônes pour certains états\nTranslated (some) object names",
+        "it": "Aggiunto Shelly Motion 2\nAggiunto Shelly Plus H&T\nAggiunto Shelly Pro 3\nNome del canale fisso e lunga durata di gestione per Shelly i3\nProcesso di aggiornamento firmware fisso (automatico) per dispositivi di generazione 2\nRicevi l'indirizzo IP corretto nell'ambiente Docker\nConfigurazione offset a temperatura aggiuntiva per Shelly UNI\nGestione degli indicatori online aggiornata\nTemperatura fissa di Shelly Door / Finestra 2\nAggiunto icone per alcuni stati\nTradotto (alcuni) nomi oggetti",
+        "es": "Moción de Shelly 2\nAñadido Shelly Plus H\nAñadido Shelly Pro 3\nNombre de canal fijo y manejo de duración de empuje largo para Shelly i3\nProceso de actualización de firmware fijo (automático) para dispositivos de generación 2\nObtener dirección IP correcta en entorno Docker\nConfiguración de compensación de temperatura adicional para Shelly UNI\nGestión actualizada de indicadores en línea\nTemperatura fija de Puerta de Shelly / Ventana 2\nIconos añadidos para algunos estados\nNombres de objeto traducidos (algunos)",
+        "pl": "Oficjalna strona Shelly Motion 2\nOficjalna strona Shelly Plus H&T\nOficjalna strona Shelly Pro 3\nFixed channel name and long push handling\nFixed (automatyczny) proces aktualizacji oprogramowania dla generacji 2\nPoprawny adres IP w środowisku Dockera\nPoniższa konfiguracja o temperaturze offsetowej Shelly UNI\nUproszczony wskaźnik online\nFixed temperature of Shelly Door / Window 2 (ang.)\nIkony do niektórych stanów\nPrzetłumaczone (niepełne) nazwy obiektów",
+        "zh-cn": "增 编\n增 编\n增 编\n固定的渠道名称和长期推销时间\n制造2种装置的固定软件更新过程\nGet正确地处理Docker环境中的IP地址\n增加的温度抵消了整个工发组织希塞组合\n最新在线指标处理\n全套温度/温得2\n增加一些州的理由\n联系(有些)物体名称",
+        "uk": "Додано Shelly Motion 2\nДодано Shelly Plus H&T\nДодано Shelly Pro 3\nВиправлено обробку назви каналу та тривалості натискання для Shelly i3\nВиправлений (автоматичний) процес оновлення мікропрограми для пристроїв покоління 2\nОтримайте правильну IP-адресу в середовищі Docker\nДодано конфігурацію зміщення температури для Shelly UNI\nОновлена ​​обробка онлайн-індикаторів\nФіксована температура Shelly Door/Window 2\nДодано значки для деяких штатів\nПерекладені (деякі) назви об'єктів"
+      },
+      "6.1.0": {
+        "en": "**Breaking:** Added device modes (just display relevant states for current mode)\n**Breaking:** Moved \"mode\" setting of some devices to \"Sys.deviceMode\"\nAdded ext temperature offset configuration\nAdded mqtt status states and checks for generation 2 devices\nSend unchanged state to device, ack state if value is unchanged\nFixed total power of RGBW2 when in color mode",
+        "de": "Breaking: Gerätemodi hinzugefügt (nur relevante Zustände für den aktuellen Modus anzeigen)\nBruch: Verschiebemoduseinstellung einiger Geräte nach Sys.deviceMode\nZusätzliche Ext-Temperatur-Offset-Konfiguration\nMqtt Statuszustände hinzugefügt und Kontrollen für Generation 2 Geräte\nSenden Sie unverändert Zustand an Gerät, ack Zustand, wenn Wert unverändert\nFeste Gesamtleistung von RGBW2 im Farbmodus",
+        "ru": "Перерыв: Добавлены режимы устройства (просто отображать соответствующие состояния для текущего режима)\nПерерыв: Перемещение режима настройки некоторых устройств для Sys.deviceMode\nДобавлена ext температура офсетная конфигурация\nДобавлены состояния mqtt и проверки для устройств поколения 2\nОтправьте неизмененное состояние на устройство, укажите состояние, если значение не изменится\nФиксированная общая мощность RGBW2 когда в цветовом режиме",
+        "pt": "Quebra: modos de dispositivo adicionados (apenas exibir estados relevantes para o modo atual)\nQuebrando: Configuração de modo movido de alguns dispositivos para Sys.deviceMode\nConfiguração de deslocamento de temperatura ext adicionada\nEstados de status mqtt adicionados e verificações para a geração 2 dispositivos\nEnviar estado inalterado para dispositivo, ack estado se o valor é inalterado\nPotência total fixa de RGBW2 quando no modo de cor",
+        "nl": "Toegevoegde apparaten\nBreaking: Verplaatste modus die wat apparatuur naar Sys.deviceMode\nVertaling:\nVermeld Mqt status staat en controle voor generatie 2 apparaten\nStuur onveranderde staat naar apparatuur als de waarde onveranderd is\nVertaling:",
+        "fr": "Disjonction: Ajout de modes de périphérique (juste afficher les états pertinents pour le mode courant)\nBreaking: Réglage de mode déplacé de certains appareils vers Sys.deviceMode\nAjout de la configuration de décalage de température\nAjout des états de statut mqtt et des contrôles pour les appareils de génération 2\nEnvoyer l'état inchangé à l'appareil, état ack si la valeur est inchangée\nPuissance totale fixe de RGBW2 en mode couleur",
+        "it": "Interruzione: Aggiunte modalità dispositivo (solo visualizzare stati rilevanti per la modalità corrente)\nBreaking: Impostazione modalità spostata di alcuni dispositivi a Sys.deviceMode\nConfigurazione offset della temperatura ext\nAggiunti stati di stato di mqtt e controlli per la generazione 2 dispositivi\nInvia stato invariato al dispositivo, ack stato se il valore è invariato\nPotenza totale fissa di RGBW2 quando in modalità colore",
+        "es": "Breaking: Añadidos modos de dispositivo (sólo mostrar estados relevantes para el modo actual)\nRomper: Modo de movimiento de algunos dispositivos a Sys.deviceMode\nConfiguración offset de temperatura\nEstado de estado de mqtt y cheques de generación 2 dispositivos\nEnviar estado sin cambios en el dispositivo, estado de la cubierta si el valor no se cambia\nPotencia total fija de RGBW2 cuando en modo de color",
+        "pl": "Przekrój: tryby urządzenie do urządzeniech (w skrócie odpowiednie stany dla trybu bieżącego)\nBreaking: Przestrzeń niektórych urządzeń do Sys.deviceMode\nZapewnienie temperatury offset\nAdded mqtt oznacza stany i sprawozdanie dla dwóch urządzeń generacji\nStan niezmieniony do urządzenia, czy wartość jest niezmieniona\nCałkowita moc RGBW2 w trybie kolorowym",
+        "zh-cn": "处理:增编装置模式(以目前方式显示相关国家)\n处理: 某些装置的放置方式给Sys.device Mode\n增加的外热温度抵消组合\n添加的米克特地位州和制造2种装置的检查\n如果价值不变,那么装置状况没有改变。\n在以色色彩的方式确定RGBW2的全部权力",
+        "uk": "**Порушення:** Додано режими пристрою (просто відображати релевантні стани для поточного режиму)\n**Порушення:** налаштування \"режиму\" деяких пристроїв перенесено на \"Sys.deviceMode\"\nДодана конфігурація зсуву зовнішньої температури\nДодано стани та перевірки стану mqtt для пристроїв покоління 2\nНадіслати незмінний стан на пристрій, підтвердити стан, якщо значення не змінилося\nВиправлена ​​сумарна потужність RGBW2 у кольоровому режимі"
+      }
     },
-    "protectedNative": [
-        "mqttusername",
-        "mqttpassword",
-        "httpusername",
-        "httppassword"
-    ],
-    "encryptedNative": [
-        "mqttpassword",
-        "httppassword"
-    ],
-    "native": {
-        "protocol": "mqtt",
-        "httpusername": "admin",
-        "httppassword": "",
-        "polltime": 15,
-        "autoupdate": false,
-        "updateUnchangedObjects": false,
-        "logDebugMessages": false,
-        "saveHttpResponses": false,
-        "bind": "0.0.0.0",
-        "port": 1882,
-        "mqttusername": "mqttuser",
-        "mqttpassword": "mqttuser",
-        "qos": 0,
-        "coapbind": "0.0.0.0",
-        "blacklist": [
-            {
-                "id": "SHBDUO-1#123456789#2"
-            }
-        ]
+    "title": "Shelly",
+    "titleLang": {
+      "en": "Shelly",
+      "de": "Shelly",
+      "ru": "Shelly",
+      "pt": "Shelly",
+      "nl": "Shelly",
+      "fr": "Shelly",
+      "it": "Shelly",
+      "es": "Shelly",
+      "pl": "Shelly",
+      "zh-cn": "Shelly",
+      "uk": "Шеллі"
     },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "",
-            "type": "meta",
-            "common": {
-                "name": {
-                    "en": "Meta storage for user files",
-                    "de": "Meta-Speicher für Benutzerdateien",
-                    "ru": "Meta Storage для файлов пользователей",
-                    "pt": "Meta de armazenamento para arquivos de usuário",
-                    "nl": "Meta opslag voor gebruikersbestanden",
-                    "fr": "Stockage Meta pour les fichiers utilisateur",
-                    "it": "Meta storage per i file utente",
-                    "es": "Meta almacenamiento para archivos de usuario",
-                    "pl": "Meta storage for user files",
-                    "zh-cn": "用户档案的储存"
-                },
-                "type": "meta.user"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "name": {
-                    "en": "Devices connected",
-                    "de": "Geräte verbunden",
-                    "ru": "Приборы подключены",
-                    "pt": "Dispositivos conectados",
-                    "nl": "Vertaling:",
-                    "fr": "Appareils connectés",
-                    "it": "Dispositivi connessi",
-                    "es": "Dispositivos conectados",
-                    "pl": "Device połączone",
-                    "zh-cn": "联系人"
-                },
-                "type": "boolean",
-                "role": "indicator.connected",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.update",
-            "type": "state",
-            "common": {
-                "name": {
-                    "en": "Update firmware version on all devices",
-                    "de": "Firmware-Version auf allen Geräten aktualisieren",
-                    "ru": "Обновление версии прошивки на всех устройствах",
-                    "pt": "Atualizar a versão de firmware em todos os dispositivos",
-                    "nl": "Update firmaware versie op alle apparaten",
-                    "fr": "Mettre à jour la version du firmware sur tous les appareils",
-                    "it": "Aggiorna la versione firmware su tutti i dispositivi",
-                    "es": "Actualizar la versión de firmware en todos los dispositivos",
-                    "pl": "Oficjalna wersja oprogramowania",
-                    "zh-cn": "所有装置的更新软件版本"
-                },
-                "type": "boolean",
-                "role": "button",
-                "read": false,
-                "write": true
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.downloadScripts",
-            "type": "state",
-            "common": {
-                "name": {
-                    "en": "Download scripts from all devices",
-                    "de": "Skripte von allen Geräten herunterladen",
-                    "ru": "Скачать скрипты со всех устройств",
-                    "pt": "Baixar scripts de todos os dispositivos",
-                    "nl": "Download scripts van alle apparaten",
-                    "fr": "Télécharger les scripts de tous les appareils",
-                    "it": "Scarica gli script da tutti i dispositivi",
-                    "es": "Descargar scripts de todos los dispositivos",
-                    "pl": "Skrypty z wszystkich urządzeń",
-                    "zh-cn": "所有装置的配件"
-                },
-                "type": "boolean",
-                "role": "button",
-                "read": false,
-                "write": true
-            },
-            "native": {}
-        }
+    "desc": {
+      "en": "Integrate Shelly devices via CoAP or MQTT",
+      "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
+      "ru": "Интеграция Shelly устройств через CoAP или MQTT",
+      "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
+      "nl": "Integrate Shelly apparatuur via CoAP of MQT",
+      "fr": "Dispositifs Shelly intégrés via CoAP ou MQTT",
+      "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
+      "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
+      "pl": "Integracja Shelly poprzez CoAP lub MQTT",
+      "zh-cn": "通过联合方案或技合中心将全套装置纳入",
+      "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT"
+    },
+    "license": "MIT",
+    "authors": [
+      "Thorsten Stueben <thorsten@stueben.de>",
+      "Apollon77 <iobroker@fischer-ka.de>",
+      "Matthias Kleine <info@haus-automatisierung.com>"
+    ],
+    "docs": {
+      "en": [
+        "docs/en/README.md",
+        "docs/en/protocol-coap.md",
+        "docs/en/protocol-mqtt.md",
+        "docs/en/restricted-login.md",
+        "docs/en/state-changes.md",
+        "docs/en/faq.md",
+        "docs/en/debug.md"
+      ],
+      "de": [
+        "docs/de/README.md",
+        "docs/de/protocol-coap.md",
+        "docs/de/protocol-mqtt.md",
+        "docs/de/restricted-login.md",
+        "docs/de/state-changes.md",
+        "docs/de/faq.md",
+        "docs/de/debug.md"
+      ]
+    },
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "shelly.png",
+    "enabled": false,
+    "compact": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
+    "keywords": [
+      "Shelly",
+      "IoT",
+      "CoAP",
+      "CoIoT",
+      "MQTT"
+    ],
+    "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
+    "loglevel": "info",
+    "type": "iot-systems",
+    "restartAdapters": [],
+    "connectionType": "local",
+    "dataSource": "push",
+    "tier": 2,
+    "plugins": {
+      "sentry": {
+        "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
+        "pathWhitelist": [
+          "@apollon",
+          "shelly-iot"
+        ]
+      }
+    },
+    "adminUI": {
+      "config": "json"
+    },
+    "globalDependencies": [
+      {
+        "admin": ">=6.0.0"
+      }
+    ],
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.22"
+      }
     ]
+  },
+  "protectedNative": [
+    "mqttusername",
+    "mqttpassword",
+    "httpusername",
+    "httppassword"
+  ],
+  "encryptedNative": [
+    "mqttpassword",
+    "httppassword"
+  ],
+  "native": {
+    "protocol": "mqtt",
+    "httpusername": "admin",
+    "httppassword": "",
+    "polltime": 15,
+    "autoupdate": false,
+    "updateUnchangedObjects": false,
+    "logDebugMessages": false,
+    "saveHttpResponses": false,
+    "bind": "0.0.0.0",
+    "port": 1882,
+    "mqttusername": "mqttuser",
+    "mqttpassword": "mqttuser",
+    "qos": 0,
+    "coapbind": "0.0.0.0",
+    "blacklist": [
+      {
+        "id": "SHBDUO-1#123456789#2"
+      }
+    ]
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "",
+      "type": "meta",
+      "common": {
+        "name": {
+          "en": "Meta storage for user files",
+          "de": "Meta-Speicher für Benutzerdateien",
+          "ru": "Meta Storage для файлов пользователей",
+          "pt": "Meta de armazenamento para arquivos de usuário",
+          "nl": "Meta opslag voor gebruikersbestanden",
+          "fr": "Stockage Meta pour les fichiers utilisateur",
+          "it": "Meta storage per i file utente",
+          "es": "Meta almacenamiento para archivos de usuario",
+          "pl": "Meta storage for user files",
+          "zh-cn": "用户档案的储存"
+        },
+        "type": "meta.user"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Devices connected",
+          "de": "Geräte verbunden",
+          "ru": "Приборы подключены",
+          "pt": "Dispositivos conectados",
+          "nl": "Vertaling:",
+          "fr": "Appareils connectés",
+          "it": "Dispositivi connessi",
+          "es": "Dispositivos conectados",
+          "pl": "Device połączone",
+          "zh-cn": "联系人"
+        },
+        "type": "boolean",
+        "role": "indicator.connected",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.update",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Update firmware version on all devices",
+          "de": "Firmware-Version auf allen Geräten aktualisieren",
+          "ru": "Обновление версии прошивки на всех устройствах",
+          "pt": "Atualizar a versão de firmware em todos os dispositivos",
+          "nl": "Update firmaware versie op alle apparaten",
+          "fr": "Mettre à jour la version du firmware sur tous les appareils",
+          "it": "Aggiorna la versione firmware su tutti i dispositivi",
+          "es": "Actualizar la versión de firmware en todos los dispositivos",
+          "pl": "Oficjalna wersja oprogramowania",
+          "zh-cn": "所有装置的更新软件版本"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.downloadScripts",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Download scripts from all devices",
+          "de": "Skripte von allen Geräten herunterladen",
+          "ru": "Скачать скрипты со всех устройств",
+          "pt": "Baixar scripts de todos os dispositivos",
+          "nl": "Download scripts van alle apparaten",
+          "fr": "Télécharger les scripts de tous les appareils",
+          "it": "Scarica gli script da tutti i dispositivi",
+          "es": "Descargar scripts de todos los dispositivos",
+          "pl": "Skrypty z wszystkich urządzeń",
+          "zh-cn": "所有装置的配件"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    }
+  ]
 }

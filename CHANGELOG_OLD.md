@@ -1,4 +1,17 @@
 # Older changes
+## 6.2.0 (2022-09-15)
+* (klein0r) Added Shelly Motion 2
+* (klein0r) Added Shelly Plus H&T
+* (klein0r) Added Shelly Pro 3
+* (klein0r) Fixed channel name and long push duration handling for Shelly i3
+* (klein0r) Fixed (automatic) firmware update process for generation 2 devices
+* (klein0r) Get correct IP address in Docker environment
+* (klein0r) Added temperature offset configuration for Shelly UNI
+* (klein0r) Updated online indicator handling
+* (klein0r) Fixed temperature of Shelly Door / Window 2
+* (klein0r) Added icons for some states
+* (klein0r) Translated (some) object names
+
 ## 6.1.0 (2022-09-02)
 * (klein0r) **Breaking:** Added device modes (just display relevant states for current mode)
 * (klein0r) **Breaking:** Moved "mode" setting of some devices to "Sys.deviceMode"

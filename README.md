@@ -115,7 +115,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.3.0 (2022-12-22)
 
 * (klein0r) Added more TRV features
 * (jlegen) Improved Shelly TRV integration
@@ -141,19 +141,6 @@ execute
 * (klein0r) Added duration for generation 2 devices in cover mode
 * (klein0r) Added temperature data of Shelly Motion 2
 * (klein0r) Added knowledge base urls for all devices
-
-### 6.2.0 (2022-09-15)
-* (klein0r) Added Shelly Motion 2
-* (klein0r) Added Shelly Plus H&T
-* (klein0r) Added Shelly Pro 3
-* (klein0r) Fixed channel name and long push duration handling for Shelly i3
-* (klein0r) Fixed (automatic) firmware update process for generation 2 devices
-* (klein0r) Get correct IP address in Docker environment
-* (klein0r) Added temperature offset configuration for Shelly UNI
-* (klein0r) Updated online indicator handling
-* (klein0r) Fixed temperature of Shelly Door / Window 2
-* (klein0r) Added icons for some states
-* (klein0r) Translated (some) object names
 
 ## License
 
