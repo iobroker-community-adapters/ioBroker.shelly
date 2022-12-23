@@ -118,6 +118,7 @@ execute
 ### **WORK IN PROGRESS**
 
 * (klein0r) Updated MQTT topic prefix handling
+* (klein0r) Added temperature for generation 2 devices in cover mode
 
 ### 6.3.0 (2022-12-22)
 
