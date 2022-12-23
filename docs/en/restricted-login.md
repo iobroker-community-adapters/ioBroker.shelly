@@ -10,7 +10,12 @@ To protect your Shelly devices with a restricted login, choose a username and a 
 
 Activate the login restriction on all your Shelly devices.
 
-**Generation 2 devices don't provide a username option. If you use Gen 1 and Gen 2 devices, use the same password on all devices.**
+**Important:**
+
+- Generation 2 devices don't provide a username option - the username can be chosen freely but is just used for Generation 1 devices
+- Configure the same password on all devices
+    - Generation 1: Configure the defined username and the password of the Shelly instance
+    - Generation 2: Configure just the passwort of the Shelly instance
 
 ### Warnings
 
@@ -21,6 +26,24 @@ To avoid those warnings, you can
 - remove the password from the ioBroker configuration (= no password required) or
 - enable the restricted login on all Shelly devices with the configured password
 
+### Generation 2 devices (Plus and Pro)
+
+1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
+2. Go to ```Settings -> Authentication```
+3. Enable the authentication feature and enter the previously configured password
+4. Save the configuration
+
+![shelly gen2](./img/shelly_restrict_login-gen2.png)
+
+Older firmware versions (`< 0.12`) have a slightly different user interface:
+
+1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
+2. Go to ```Device -> Authentication```
+3. Enable the authentication feature and enter the previously configured password
+4. Save the configuration
+
+![shelly gen2 old](./img/shelly_restrict_login-gen2-old.png)
+
 ### Generation 1 devices
 
 1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
@@ -29,13 +52,4 @@ To avoid those warnings, you can
 4. Save the configuration - the Shelly will reboot automatically
 5. Ensure to configure the same username and password on all your Shelly devices
 
-![shelly gen 1](./img/shelly_restrict_login-gen1.png)
-
-### Generation 2 devices (Plus and Pro)
-
-1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
-2. Go to ```Device -> Authentication```
-3. Enable the authentication feature and enter the previously configured password
-4. Save the configuration
-
-![shelly gen 2](./img/shelly_restrict_login-gen2.png)
+![shelly gen1](./img/shelly_restrict_login-gen1.png)
