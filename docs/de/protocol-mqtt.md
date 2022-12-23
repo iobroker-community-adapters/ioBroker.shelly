@@ -21,6 +21,8 @@
 3. Öffne das Tab **MQTT Einstellungen**
 4. Wähle einen Benutzernamen und ein sicheres Passwort (Du musst diese Informationen auf allen Shelly-Geräten hinterlegen)
 
+> Der Shelly-Adapter startet einen eigenen MQTT-Broker (intern). Der konfigurierte Benutzername und das Passwort muss auf allen Shelly-Geräten hinterlegt werden, welche sich mit diesem Broker verbinden sollen.
+
 ![iobroker_mqtt](./img/iobroker_mqtt.png)
 
 Aktiviere MQTT auf deinen Shelly-Geräten.
