@@ -124,6 +124,7 @@ execute
 * (klein0r) Updated MQTT topic prefix handling
 * (klein0r) Added temperature for generation 2 devices in cover mode
 * (klein0r) Added boost start/stop for Shelly TRV
+* (klein0r) Added external power for Shelly H&T
 
 ### 6.3.0 (2022-12-22)
 
