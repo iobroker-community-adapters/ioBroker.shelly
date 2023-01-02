@@ -49,6 +49,9 @@ class Shelly extends utils.Adapter {
 
             await this.setOnlineFalse();
 
+            // Start online check
+            this.onlineCheck();
+
             // Start MQTT server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
@@ -68,9 +71,6 @@ class Shelly extends utils.Adapter {
                     this.log.info(`Starting in CoAP mode. Listening on ${this.config.coapbind}:5683`);
                     this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
                     this.serverCoap.listen();
-
-                    // Start online check
-                    this.onlineCheck();
                 }
             });
 
@@ -79,7 +79,7 @@ class Shelly extends utils.Adapter {
 
                 this.setTimeout(() => {
                     this.autoFirmwareUpdate();
-                }, 10 * 1000); // Wait 10 Seconds for devices to connect
+                }, 10 * 1000); // Wait 10 seconds for devices to connect
             }
 
         } catch (err) {
@@ -203,7 +203,7 @@ class Shelly extends utils.Adapter {
         this.onlineCheckTimeout = this.setTimeout(() => {
             this.onlineCheckTimeout = null;
             this.onlineCheck();
-        }, 60 * 1000); // Restart online check in 60 Seconds
+        }, 60 * 1000); // Restart online check in 60 seconds
     }
 
     async deviceStatusUpdate(deviceId, status) {
