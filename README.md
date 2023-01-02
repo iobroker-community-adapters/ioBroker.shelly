@@ -157,7 +157,7 @@ execute
 
 The MIT License (MIT)
 
-Copyright (c) 2018-2022 Thorsten Stueben <thorsten@stueben.de>,
+Copyright (c) 2018-2023 Thorsten Stueben <thorsten@stueben.de>,
                         Apollon77 <iobroker@fischer-ka.de> and
                         Matthias Kleine <info@haus-automatisierung.com>
 
