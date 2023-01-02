@@ -165,7 +165,9 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "MQTT Username"
+                    "label": "MQTT Username",
+                    "help": "Must be configured on all Shelly devices",
+                    "helpLink": "/#tab-adapters/readme/shelly"
                 },
                 "mqttpassword": {
                     "type": "password",
@@ -174,7 +176,8 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "MQTT Password"
+                    "label": "MQTT Password",
+                    "help": "Must be configured on all Shelly devices"
                 },
                 "qos": {
                     "newLine": true,

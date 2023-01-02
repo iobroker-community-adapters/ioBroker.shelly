@@ -22,5 +22,6 @@
     "Will be used to authenticate against all Shelly devices": "Використовуватиметься для автентифікації на всіх пристроях Shelly",
     "You have to configure the same password on all devices": "Ви повинні налаштувати однаковий пароль на всіх пристроях",
     "Save HTTP responses (for debugging)": "Зберегти відповіді HTTP (для налагодження)",
-    "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)": "CoAP підтримується пристроями Gen1, MQTT підтримується всіма пристроями (Gen1 і Gen2)"
+    "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)": "CoAP підтримується пристроями Gen1, MQTT підтримується всіма пристроями (Gen1 і Gen2)",
+    "Must be configured on all Shelly devices": "Необхідно налаштувати на всіх пристроях Shelly"
 }
