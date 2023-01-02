@@ -119,7 +119,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.3.1 (2023-01-02)
 
 * (klein0r) Updated MQTT topic prefix handling
 * (klein0r) Added temperature for generation 2 devices in cover mode
@@ -146,12 +146,6 @@ execute
 ### 6.2.2 (2022-10-13)
 
 * (klein0r) Fixed state updates for CoAP integration
-
-### 6.2.1 (2022-10-11)
-* (klein0r) Warn user if a device is not protected via restricted login
-* (klein0r) Added duration for generation 2 devices in cover mode
-* (klein0r) Added temperature data of Shelly Motion 2
-* (klein0r) Added knowledge base urls for all devices
 
 ## License
 

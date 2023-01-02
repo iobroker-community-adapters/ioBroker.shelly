@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.3.0",
+    "version": "6.3.1",
     "news": {
+      "6.3.1": {
+        "en": "Updated MQTT topic prefix handling\nAdded temperature for generation 2 devices in cover mode\nAdded boost start/stop for Shelly TRV\nAdded external power for Shelly H&T",
+        "de": "Aktualisiertes MQTT-Themen-Präfixhandling\nTemperatur für Generation 2 Geräte im Cover-Modus hinzugefügt\nZusätzlich Boost Start/Stopp für Shelly TRV\nZusätzliche externe Leistung für Shelly H&T",
+        "ru": "Обновлено MQTT тема префикса обработки\nДобавлена температура для генерации 2 устройств в режиме обложки\nДобавлена поддержка start/stop для Шелли TRV\nДобавлена внешняя мощность для Shelly H&T",
+        "pt": "Manipulação de prefixo de tópico MQTT atualizado\nTemperatura adicional para a geração 2 dispositivos no modo de cobertura\nAdicionado boost start/stop para Shelly TRV\nAdicionado poder externo para Shelly H&T",
+        "nl": "Quality over Quantity Releases Vertaling:\nVoeg de temperatuur toe voor generatie 2 apparaten in dekmantel\nVoedde een boost start/stop voor Shelly TriV\nVoeg externe kracht toe voor Shelly HT",
+        "fr": "Mise à jour MQTT sujet préfixe manipulation\nTempérature ajoutée pour les appareils de génération 2 en mode couverture\nAjout de boost start/stop pour Shelly TRV\nPuissance externe supplémentaire pour Shelly HΖT",
+        "it": "Gestione prefisso dell'argomento MQTT aggiornata\nTemperatura aggiuntiva per dispositivi di generazione 2 in modalità di copertura\nAggiunto l'avvio / arresto di spinta per Shelly TRV\nAggiunto potere esterno per Shelly H&T",
+        "es": "Tratamiento de prefijo de MQTT actualizado\nTemperatura agregada para la generación 2 dispositivos en modo de cubierta\nAgregado el inicio / parada del impulso Shelly TRV\nAñadido poder externo para Shelly H",
+        "pl": "Updatek MQTT\nWstępna temperatura dla pokoleń dwóch urządzeń w trybie przechowywania\nDodany start/stop dla startu. Shell TRV\nDodać zewnętrzne moce Shelly H&T",
+        "uk": "Оновлено MQTT тему префіксування\nДодано температуру для генерації 2 пристроїв в режимі кришки\nДоданий приріст старт/стоп для Shelly TRV\nДодано зовнішню потужність для Shelly H&T",
+        "zh-cn": "B. 更新的技术转让问题\n增加2种装置的温度,以涵盖方式\n增加开始/支持 她完全TRV\n增加希全 H&T的外部权力"
+      },
       "6.3.0": {
         "en": "Added more TRV features\nImproved Shelly TRV integration\nUpdated knowledge base urls\nAdded Ukrainian language",
         "de": "Weitere TRV-Funktionen\nVerbesserte Shelly TRV Integration\nAktualisierte Wissensbasis urls\nUkrainische Sprache",
@@ -80,19 +93,6 @@
         "pl": "Oficjalna strona Shelly Motion 2\nOficjalna strona Shelly Plus H&T\nOficjalna strona Shelly Pro 3\nFixed channel name and long push handling\nFixed (automatyczny) proces aktualizacji oprogramowania dla generacji 2\nPoprawny adres IP w środowisku Dockera\nPoniższa konfiguracja o temperaturze offsetowej Shelly UNI\nUproszczony wskaźnik online\nFixed temperature of Shelly Door / Window 2 (ang.)\nIkony do niektórych stanów\nPrzetłumaczone (niepełne) nazwy obiektów",
         "zh-cn": "增 编\n增 编\n增 编\n固定的渠道名称和长期推销时间\n制造2种装置的固定软件更新过程\nGet正确地处理Docker环境中的IP地址\n增加的温度抵消了整个工发组织希塞组合\n最新在线指标处理\n全套温度/温得2\n增加一些州的理由\n联系(有些)物体名称",
         "uk": "Додано Shelly Motion 2\nДодано Shelly Plus H&T\nДодано Shelly Pro 3\nВиправлено обробку назви каналу та тривалості натискання для Shelly i3\nВиправлений (автоматичний) процес оновлення мікропрограми для пристроїв покоління 2\nОтримайте правильну IP-адресу в середовищі Docker\nДодано конфігурацію зміщення температури для Shelly UNI\nОновлена ​​обробка онлайн-індикаторів\nФіксована температура Shelly Door/Window 2\nДодано значки для деяких штатів\nПерекладені (деякі) назви об'єктів"
-      },
-      "6.1.0": {
-        "en": "**Breaking:** Added device modes (just display relevant states for current mode)\n**Breaking:** Moved \"mode\" setting of some devices to \"Sys.deviceMode\"\nAdded ext temperature offset configuration\nAdded mqtt status states and checks for generation 2 devices\nSend unchanged state to device, ack state if value is unchanged\nFixed total power of RGBW2 when in color mode",
-        "de": "Breaking: Gerätemodi hinzugefügt (nur relevante Zustände für den aktuellen Modus anzeigen)\nBruch: Verschiebemoduseinstellung einiger Geräte nach Sys.deviceMode\nZusätzliche Ext-Temperatur-Offset-Konfiguration\nMqtt Statuszustände hinzugefügt und Kontrollen für Generation 2 Geräte\nSenden Sie unverändert Zustand an Gerät, ack Zustand, wenn Wert unverändert\nFeste Gesamtleistung von RGBW2 im Farbmodus",
-        "ru": "Перерыв: Добавлены режимы устройства (просто отображать соответствующие состояния для текущего режима)\nПерерыв: Перемещение режима настройки некоторых устройств для Sys.deviceMode\nДобавлена ext температура офсетная конфигурация\nДобавлены состояния mqtt и проверки для устройств поколения 2\nОтправьте неизмененное состояние на устройство, укажите состояние, если значение не изменится\nФиксированная общая мощность RGBW2 когда в цветовом режиме",
-        "pt": "Quebra: modos de dispositivo adicionados (apenas exibir estados relevantes para o modo atual)\nQuebrando: Configuração de modo movido de alguns dispositivos para Sys.deviceMode\nConfiguração de deslocamento de temperatura ext adicionada\nEstados de status mqtt adicionados e verificações para a geração 2 dispositivos\nEnviar estado inalterado para dispositivo, ack estado se o valor é inalterado\nPotência total fixa de RGBW2 quando no modo de cor",
-        "nl": "Toegevoegde apparaten\nBreaking: Verplaatste modus die wat apparatuur naar Sys.deviceMode\nVertaling:\nVermeld Mqt status staat en controle voor generatie 2 apparaten\nStuur onveranderde staat naar apparatuur als de waarde onveranderd is\nVertaling:",
-        "fr": "Disjonction: Ajout de modes de périphérique (juste afficher les états pertinents pour le mode courant)\nBreaking: Réglage de mode déplacé de certains appareils vers Sys.deviceMode\nAjout de la configuration de décalage de température\nAjout des états de statut mqtt et des contrôles pour les appareils de génération 2\nEnvoyer l'état inchangé à l'appareil, état ack si la valeur est inchangée\nPuissance totale fixe de RGBW2 en mode couleur",
-        "it": "Interruzione: Aggiunte modalità dispositivo (solo visualizzare stati rilevanti per la modalità corrente)\nBreaking: Impostazione modalità spostata di alcuni dispositivi a Sys.deviceMode\nConfigurazione offset della temperatura ext\nAggiunti stati di stato di mqtt e controlli per la generazione 2 dispositivi\nInvia stato invariato al dispositivo, ack stato se il valore è invariato\nPotenza totale fissa di RGBW2 quando in modalità colore",
-        "es": "Breaking: Añadidos modos de dispositivo (sólo mostrar estados relevantes para el modo actual)\nRomper: Modo de movimiento de algunos dispositivos a Sys.deviceMode\nConfiguración offset de temperatura\nEstado de estado de mqtt y cheques de generación 2 dispositivos\nEnviar estado sin cambios en el dispositivo, estado de la cubierta si el valor no se cambia\nPotencia total fija de RGBW2 cuando en modo de color",
-        "pl": "Przekrój: tryby urządzenie do urządzeniech (w skrócie odpowiednie stany dla trybu bieżącego)\nBreaking: Przestrzeń niektórych urządzeń do Sys.deviceMode\nZapewnienie temperatury offset\nAdded mqtt oznacza stany i sprawozdanie dla dwóch urządzeń generacji\nStan niezmieniony do urządzenia, czy wartość jest niezmieniona\nCałkowita moc RGBW2 w trybie kolorowym",
-        "zh-cn": "处理:增编装置模式(以目前方式显示相关国家)\n处理: 某些装置的放置方式给Sys.device Mode\n增加的外热温度抵消组合\n添加的米克特地位州和制造2种装置的检查\n如果价值不变,那么装置状况没有改变。\n在以色色彩的方式确定RGBW2的全部权力",
-        "uk": "**Порушення:** Додано режими пристрою (просто відображати релевантні стани для поточного режиму)\n**Порушення:** налаштування \"режиму\" деяких пристроїв перенесено на \"Sys.deviceMode\"\nДодана конфігурація зсуву зовнішньої температури\nДодано стани та перевірки стану mqtt для пристроїв покоління 2\nНадіслати незмінний стан на пристрій, підтвердити стан, якщо значення не змінилося\nВиправлена ​​сумарна потужність RGBW2 у кольоровому режимі"
       }
     },
     "title": "Shelly",
