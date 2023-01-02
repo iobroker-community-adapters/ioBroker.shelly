@@ -94,8 +94,12 @@ NOT Supported:
 
 NOT Supported:
 
+- Shelly Plus Smoke
+- Shelly Plus Plug S
+- Shelly Plus AddOn
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
+- Shelly Pro 3 EM
 
 ## Sentry
 
