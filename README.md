@@ -77,25 +77,25 @@ NOT Supported:
 
 ## Supported devices (Gen 2)
 
-| Shelly Device                    | CoAP | MQTT      | Tested firmware version         |
-| -------------------------------- | ---- | --------- | ------------------------------- |
-| Shelly Plus 1 (shellyplus1)      | ❌   | >= v5.0.0 | 20221206-141227/0.12.0-gafc2404 |
-| Shelly Plus 1 PM (shellyplus1pm) | ❌   | >= v5.0.0 | 20221206-141253/0.12.0-gafc2404 |
-| Shelly Plus 2 PM (shellyplus2pm) | ❌   | >= v5.2.0 | 20221206-141957/0.12.0-gafc2404 |
-| Shelly Plus i4 (shellyplusi4)    | ❌   | >= v5.3.0 | 20221206-142532/0.12.0-gafc2404 |
-| Shelly Plus i4 DC (shellyplusi4) | ❌   | >= v5.3.0 | 20221206-142532/0.12.0-gafc2404 |
-| Shelly Pro 1 (shellypro1)        | ❌   | >= v5.2.0 | 20221206-143405/0.12.0-gafc2404 |
-| Shelly Pro 1 PM (shellypro1pm)   | ❌   | >= v5.2.0 | 20221206-143638/0.12.0-gafc2404 |
-| Shelly Pro 2 (shellypro2)        | ❌   | >= v5.2.0 | 20221206-143405/0.12.0-gafc2404 |
-| Shelly Pro 2 PM (shellypro2pm)   | ❌   | >= v5.2.0 | 20221206-143638/0.12.0-gafc2404 |
-| Shelly Pro 3 (shellypro3)        | ❌   | >= v6.2.0 | 20221206-143535/0.12.0-gafc2404 |
-| Shelly Pro 4 PM (shellypro4pm)   | ❌   | >= v5.0.0 | 20221206-143814/0.12.0-gafc2404 |
-| Shelly Plus H&T (shellyplusht)   | ❌   | >= v6.2.0 | 20221206-142534/0.12.0-gafc2404 |
+| Shelly Device                        | CoAP | MQTT      | Tested firmware version         |
+| ------------------------------------ | ---- | --------- | ------------------------------- |
+| Shelly Plus 1 (shellyplus1)          | ❌   | >= v5.0.0 | 20221206-141227/0.12.0-gafc2404 |
+| Shelly Plus 1 PM (shellyplus1pm)     | ❌   | >= v5.0.0 | 20221206-141253/0.12.0-gafc2404 |
+| Shelly Plus 2 PM (shellyplus2pm)     | ❌   | >= v5.2.0 | 20221206-141957/0.12.0-gafc2404 |
+| Shelly Plus i4 (shellyplusi4)        | ❌   | >= v5.3.0 | 20221206-142532/0.12.0-gafc2404 |
+| Shelly Plus i4 DC (shellyplusi4)     | ❌   | >= v5.3.0 | 20221206-142532/0.12.0-gafc2404 |
+| Shelly Pro 1 (shellypro1)            | ❌   | >= v5.2.0 | 20221206-143405/0.12.0-gafc2404 |
+| Shelly Pro 1 PM (shellypro1pm)       | ❌   | >= v5.2.0 | 20221206-143638/0.12.0-gafc2404 |
+| Shelly Pro 2 (shellypro2)            | ❌   | >= v5.2.0 | 20221206-143405/0.12.0-gafc2404 |
+| Shelly Pro 2 PM (shellypro2pm)       | ❌   | >= v5.2.0 | 20221206-143638/0.12.0-gafc2404 |
+| Shelly Pro 3 (shellypro3)            | ❌   | >= v6.2.0 | 20221206-143535/0.12.0-gafc2404 |
+| Shelly Pro 4 PM (shellypro4pm)       | ❌   | >= v5.0.0 | 20221206-143814/0.12.0-gafc2404 |
+| Shelly Plus H&T (shellyplusht)       | ❌   | >= v6.2.0 | 20221206-142534/0.12.0-gafc2404 |
+| Shelly Plus Plug S (shellyplusplugs) | ❌   | >= v6.4.0 | n/a                             |
 
 NOT Supported:
 
 - Shelly Plus Smoke
-- Shelly Plus Plug S
 - Shelly Plus AddOn
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
@@ -119,6 +119,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Added Shelly Plus Plug S
+
 ### 6.3.1 (2023-01-02)
 
 * (klein0r) Updated MQTT topic prefix handling
