@@ -78,8 +78,8 @@
         "it": "Avvertente se un dispositivo non è protetto tramite login limitato\nDurata aggiuntiva per dispositivi di generazione 2 in modalità di copertura\nDati di temperatura aggiunti di Shelly Motion 2\nUlteriori informazioni base urls per tutti i dispositivi",
         "es": "Avisar al usuario si un dispositivo no está protegido a través de acceso restringido\nDuración agregada para la generación 2 dispositivos en modo de cubierta\nDatos de temperatura añadidos de movimiento de Shelly 2\nUrales de base de conocimiento añadido para todos los dispositivos",
         "pl": "Użytkownik Warna, jeśli urządzenie nie jest chronione poprzez ograniczone loginy\nDodany czas na pokolenie dwóch urządzeń w trybie przechowywania\nDane dotyczące temperatury Shelly Motion 2\nZapytane podstawy wiedzy dla wszystkich urządzeń",
-        "zh-cn": "如果一个装置不受限制的伐木加以保护,则警告用户\n增加生产2种装置的期间\n全氟化气体的增温数据 2\n增加所有装置的知识库",
-        "uk": "Попередити користувача, якщо пристрій не захищено через обмежений вхід\nДодано тривалість для пристроїв покоління 2 у режимі покриття\nДодано дані про температуру Shelly Motion 2\nДодано URL-адреси бази знань для всіх пристроїв"
+        "uk": "Попередити користувача, якщо пристрій не захищено через обмежений вхід\nДодано тривалість для пристроїв покоління 2 у режимі покриття\nДодано дані про температуру Shelly Motion 2\nДодано URL-адреси бази знань для всіх пристроїв",
+        "zh-cn": "如果一个装置不受限制的伐木加以保护,则警告用户\n增加生产2种装置的期间\n全氟化气体的增温数据 2\n增加所有装置的知识库"
       },
       "6.2.0": {
         "en": "Added Shelly Motion 2\nAdded Shelly Plus H&T\nAdded Shelly Pro 3\nFixed channel name and long push duration handling for Shelly i3\nFixed (automatic) firmware update process for generation 2 devices\nGet correct IP address in Docker environment\nAdded temperature offset configuration for Shelly UNI\nUpdated online indicator handling\nFixed temperature of Shelly Door / Window 2\nAdded icons for some states\nTranslated (some) object names",
@@ -91,8 +91,8 @@
         "it": "Aggiunto Shelly Motion 2\nAggiunto Shelly Plus H&T\nAggiunto Shelly Pro 3\nNome del canale fisso e lunga durata di gestione per Shelly i3\nProcesso di aggiornamento firmware fisso (automatico) per dispositivi di generazione 2\nRicevi l'indirizzo IP corretto nell'ambiente Docker\nConfigurazione offset a temperatura aggiuntiva per Shelly UNI\nGestione degli indicatori online aggiornata\nTemperatura fissa di Shelly Door / Finestra 2\nAggiunto icone per alcuni stati\nTradotto (alcuni) nomi oggetti",
         "es": "Moción de Shelly 2\nAñadido Shelly Plus H\nAñadido Shelly Pro 3\nNombre de canal fijo y manejo de duración de empuje largo para Shelly i3\nProceso de actualización de firmware fijo (automático) para dispositivos de generación 2\nObtener dirección IP correcta en entorno Docker\nConfiguración de compensación de temperatura adicional para Shelly UNI\nGestión actualizada de indicadores en línea\nTemperatura fija de Puerta de Shelly / Ventana 2\nIconos añadidos para algunos estados\nNombres de objeto traducidos (algunos)",
         "pl": "Oficjalna strona Shelly Motion 2\nOficjalna strona Shelly Plus H&T\nOficjalna strona Shelly Pro 3\nFixed channel name and long push handling\nFixed (automatyczny) proces aktualizacji oprogramowania dla generacji 2\nPoprawny adres IP w środowisku Dockera\nPoniższa konfiguracja o temperaturze offsetowej Shelly UNI\nUproszczony wskaźnik online\nFixed temperature of Shelly Door / Window 2 (ang.)\nIkony do niektórych stanów\nPrzetłumaczone (niepełne) nazwy obiektów",
-        "zh-cn": "增 编\n增 编\n增 编\n固定的渠道名称和长期推销时间\n制造2种装置的固定软件更新过程\nGet正确地处理Docker环境中的IP地址\n增加的温度抵消了整个工发组织希塞组合\n最新在线指标处理\n全套温度/温得2\n增加一些州的理由\n联系(有些)物体名称",
-        "uk": "Додано Shelly Motion 2\nДодано Shelly Plus H&T\nДодано Shelly Pro 3\nВиправлено обробку назви каналу та тривалості натискання для Shelly i3\nВиправлений (автоматичний) процес оновлення мікропрограми для пристроїв покоління 2\nОтримайте правильну IP-адресу в середовищі Docker\nДодано конфігурацію зміщення температури для Shelly UNI\nОновлена ​​обробка онлайн-індикаторів\nФіксована температура Shelly Door/Window 2\nДодано значки для деяких штатів\nПерекладені (деякі) назви об'єктів"
+        "uk": "Додано Shelly Motion 2\nДодано Shelly Plus H&T\nДодано Shelly Pro 3\nВиправлено обробку назви каналу та тривалості натискання для Shelly i3\nВиправлений (автоматичний) процес оновлення мікропрограми для пристроїв покоління 2\nОтримайте правильну IP-адресу в середовищі Docker\nДодано конфігурацію зміщення температури для Shelly UNI\nОновлена ​​обробка онлайн-індикаторів\nФіксована температура Shelly Door/Window 2\nДодано значки для деяких штатів\nПерекладені (деякі) назви об'єктів",
+        "zh-cn": "增 编\n增 编\n增 编\n固定的渠道名称和长期推销时间\n制造2种装置的固定软件更新过程\nGet正确地处理Docker环境中的IP地址\n增加的温度抵消了整个工发组织希塞组合\n最新在线指标处理\n全套温度/温得2\n增加一些州的理由\n联系(有些)物体名称"
       }
     },
     "title": "Shelly",
@@ -106,8 +106,8 @@
       "it": "Shelly",
       "es": "Shelly",
       "pl": "Shelly",
-      "zh-cn": "Shelly",
-      "uk": "Шеллі"
+      "uk": "Shelly",
+      "zh-cn": "Shelly"
     },
     "desc": {
       "en": "Integrate Shelly devices via CoAP or MQTT",
@@ -119,8 +119,8 @@
       "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
       "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
       "pl": "Integracja Shelly poprzez CoAP lub MQTT",
-      "zh-cn": "通过联合方案或技合中心将全套装置纳入",
-      "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT"
+      "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT",
+      "zh-cn": "通过联合方案或技合中心将全套装置纳入"
     },
     "license": "MIT",
     "authors": [
@@ -238,6 +238,7 @@
           "it": "Meta storage per i file utente",
           "es": "Meta almacenamiento para archivos de usuario",
           "pl": "Meta storage for user files",
+          "uk": "Зберігання мета для файлів користувачів",
           "zh-cn": "用户档案的储存"
         },
         "type": "meta.user"
@@ -266,6 +267,7 @@
           "it": "Dispositivi connessi",
           "es": "Dispositivos conectados",
           "pl": "Device połączone",
+          "uk": "Пристрої підключені",
           "zh-cn": "联系人"
         },
         "type": "boolean",
@@ -290,6 +292,7 @@
           "it": "Aggiorna la versione firmware su tutti i dispositivi",
           "es": "Actualizar la versión de firmware en todos los dispositivos",
           "pl": "Oficjalna wersja oprogramowania",
+          "uk": "Оновлення версії прошивки на всіх пристроях",
           "zh-cn": "所有装置的更新软件版本"
         },
         "type": "boolean",
@@ -313,6 +316,7 @@
           "it": "Scarica gli script da tutti i dispositivi",
           "es": "Descargar scripts de todos los dispositivos",
           "pl": "Skrypty z wszystkich urządzeń",
+          "uk": "Завантажити скрипти з усіх пристроїв",
           "zh-cn": "所有装置的配件"
         },
         "type": "boolean",
