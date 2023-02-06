@@ -90,6 +90,7 @@ NOT Supported:
 | Shelly Pro 2 PM (shellypro2pm)       | ❌   | >= v5.2.0 | 20221206-143638/0.12.0-gafc2404 |
 | Shelly Pro 3 (shellypro3)            | ❌   | >= v6.2.0 | 20221206-143535/0.12.0-gafc2404 |
 | Shelly Pro 4 PM (shellypro4pm)       | ❌   | >= v5.0.0 | 20221206-143814/0.12.0-gafc2404 |
+| Shelly Pro 3 EM (shellypro3em)       | ❌   | >= v6.4.0 | n/a                             |
 | Shelly Plus H&T (shellyplusht)       | ❌   | >= v6.2.0 | 20221206-142534/0.12.0-gafc2404 |
 | Shelly Plus Plug S (shellyplusplugs) | ❌   | >= v6.4.0 | n/a                             |
 
@@ -99,7 +100,6 @@ NOT Supported:
 - Shelly Plus AddOn
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
-- Shelly Pro 3 EM
 
 ## Sentry
 
@@ -122,6 +122,7 @@ execute
 ### **WORK IN PROGRESS**
 
 * (klein0r) Added Shelly Plus Plug S
+* (klein0r) Added Shelly Pro 3 EM
 
 ### 6.3.1 (2023-01-02)
 
