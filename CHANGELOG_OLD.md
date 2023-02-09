@@ -1,4 +1,8 @@
 # Older changes
+## 6.2.2 (2022-10-13)
+
+* (klein0r) Fixed state updates for CoAP integration
+
 ## 6.2.1 (2022-10-11)
 * (klein0r) Warn user if a device is not protected via restricted login
 * (klein0r) Added duration for generation 2 devices in cover mode

@@ -119,7 +119,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.4.0 (2023-02-09)
 
 * (klein0r) Added Shelly Plus Plug S
 * (klein0r) Added Shelly Pro 3 EM
@@ -149,10 +149,6 @@ execute
 
 * (klein0r) Use unique ID for each command - generation 2 devices
 * (klein0r) Fix: Ack state if value is unchanged
-
-### 6.2.2 (2022-10-13)
-
-* (klein0r) Fixed state updates for CoAP integration
 
 ## License
 

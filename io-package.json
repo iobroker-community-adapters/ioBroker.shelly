@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.3.1",
+    "version": "6.4.0",
     "news": {
+      "6.4.0": {
+        "en": "Added Shelly Plus Plug S\nAdded Shelly Pro 3 EM\nReduced checks for firmware updates\nShelly TV profile is now changeable",
+        "de": "Hinzugefügt Shelly Plus Plug S\nHinzugefügt Shelly Pro 3 EM\nReduzierte Kontrollen für Firmware-Updates\nShelly TV-Profil ist jetzt änderbar",
+        "ru": "Добавлено Shelly Plus Plug S\nДобавлено Shelly Pro 3 EM\nУменьшенные проверки обновлений прошивки\nShelly TV профиль теперь изменен",
+        "pt": "Adicionado Shelly Plus Plug S\nAdicionado Shelly Pro 3 EM\nVerificações reduzidas para atualizações de firmware\nPerfil de TV Shelly agora é mutável",
+        "nl": "_\n_\nVerminderde cheques voor firmaware updates\nShelly TV profiel is nu veranderd",
+        "fr": "Ajouté Shelly Plus Plug S\nAjouté Shelly Pro 3 EM\nVérifications réduites pour les mises à jour du firmware\nLe profil Shelly TV est maintenant changeable",
+        "it": "Aggiunto Shelly Plus Plug S\nAggiunto Shelly Pro 3 EM\nRiduzione dei controlli per gli aggiornamenti del firmware\nIl profilo di Shelly TV è ora modificabile",
+        "es": "Añadido Shelly Plus Plug S\nAñadido Shelly Pro 3 EM\nControles reducidos para actualizaciones de firmware\nEl perfil de Shelly TV ahora es cambiante",
+        "pl": "Oficjalna strona Shelly Plus Plug S\nAdded Shelly Pro 3 (ang.)\nReduced checks for firmware updates (ang.)\nProfil Shelly TV jest obecnie zmienny",
+        "uk": "Додано Shelly Plus Plug S\nДодано Shelly Pro 3 EM\nЗменшені перевірки оновлень прошивки\nПрофіль Shelly TV тепер мінливий",
+        "zh-cn": "增 编\n增 编\n公司更新检查\n她完全的电视形象现在可以改变。"
+      },
       "6.3.1": {
         "en": "Updated MQTT topic prefix handling\nAdded temperature for generation 2 devices in cover mode\nAdded boost start/stop for Shelly TRV\nAdded external power for Shelly H&T",
         "de": "Aktualisiertes MQTT-Themen-Präfixhandling\nTemperatur für Generation 2 Geräte im Cover-Modus hinzugefügt\nZusätzlich Boost Start/Stopp für Shelly TRV\nZusätzliche externe Leistung für Shelly H&T",
@@ -80,19 +93,6 @@
         "pl": "Użytkownik Warna, jeśli urządzenie nie jest chronione poprzez ograniczone loginy\nDodany czas na pokolenie dwóch urządzeń w trybie przechowywania\nDane dotyczące temperatury Shelly Motion 2\nZapytane podstawy wiedzy dla wszystkich urządzeń",
         "uk": "Попередити користувача, якщо пристрій не захищено через обмежений вхід\nДодано тривалість для пристроїв покоління 2 у режимі покриття\nДодано дані про температуру Shelly Motion 2\nДодано URL-адреси бази знань для всіх пристроїв",
         "zh-cn": "如果一个装置不受限制的伐木加以保护,则警告用户\n增加生产2种装置的期间\n全氟化气体的增温数据 2\n增加所有装置的知识库"
-      },
-      "6.2.0": {
-        "en": "Added Shelly Motion 2\nAdded Shelly Plus H&T\nAdded Shelly Pro 3\nFixed channel name and long push duration handling for Shelly i3\nFixed (automatic) firmware update process for generation 2 devices\nGet correct IP address in Docker environment\nAdded temperature offset configuration for Shelly UNI\nUpdated online indicator handling\nFixed temperature of Shelly Door / Window 2\nAdded icons for some states\nTranslated (some) object names",
-        "de": "Shelly Motion 2 hinzugefügt\nHinzugefügt Shelly Plus H&T\nHinzugefügt Shelly Pro 3\nFester Kanalname und lange Schubdauer Handling für Shelly i3\nFeste (automatische) Firmware-Update-Prozess für Generation 2 Geräte\nErhalten Sie richtige IP-Adresse in Docker Umgebung\nTemperaturoffset-Konfiguration für Shelly UNI hinzugefügt\nAktualisierte Online-Indikatorenhandling\nFeste Temperatur von Shelly Door / Fenster 2\nIcons für einige Staaten hinzugefügt\nÜbersetzte (einige) Objektnamen",
-        "ru": "Добавлено Shelly Motion 2\nДобавлено Shelly Plus H&T\nДобавлено Shelly Pro 3\nФиксированное название канала и длительный ход движения для Shelly i3\nИсправлен (автоматический) процесс обновления прошивки для генерации 2 устройств\nПолучите правильный IP-адрес в среде Docker\nДобавлена настройка компенсации температуры для Shelly UNI\nОбновленная обработка индикаторов онлайн\nФиксированная температура Shelly Door / Window 2\nДобавлены иконки для некоторых государств\nПеревод (некоторые) названия объектов",
-        "pt": "Adicionado Shelly Motion 2\nAdicionado Shelly Plus H&T\nAdicionado Shelly Pro 3\nNome do canal fixo e longo prazo de manipulação para Shelly i3\nProcesso de atualização de firmware fixo (automático) para dispositivos de geração 2\nObter o endereço IP correto no ambiente Docker\nConfiguração de deslocamento de temperatura adicionada para Shelly UNI\nManipulação de indicadores on-line atualizado\nTemperatura fixa da porta de Shelly / janela 2\nÍcones adicionados para alguns estados\nTraduzido (alguns) nomes de objetos",
-        "nl": "Voeg Shelly Motion 2 toe\nAdded Shelly Plus HT\nVertaling:\nVertaling:\nVertaling:\nZorg voor correct IP-adres van Docker\nVoegde de temperatuur configuatie toe voor Shelly Unil\nUpdate online indicator\nQuality over Quantity (QoQ) Releases Vertaling:\nIcoon toegevoegd voor sommige staten\nVertaald door:",
-        "fr": "Ajouté Shelly Motion 2\nAjouté Shelly Plus HΔT\nAjouté Shelly Pro 3\nNom de canal fixe et longue durée de manipulation pour Shelly i3\nProcessus de mise à jour de firmware fixe (automatique) pour les appareils de génération 2\nObtenez l'adresse IP correcte dans l'environnement Docker\nConfiguration de compensation de température ajoutée pour Shelly UNI\nMise à jour de la manipulation des indicateurs en ligne\nTempérature fixe de la porte Shelly / fenêtre 2\nAjout d'icônes pour certains états\nTranslated (some) object names",
-        "it": "Aggiunto Shelly Motion 2\nAggiunto Shelly Plus H&T\nAggiunto Shelly Pro 3\nNome del canale fisso e lunga durata di gestione per Shelly i3\nProcesso di aggiornamento firmware fisso (automatico) per dispositivi di generazione 2\nRicevi l'indirizzo IP corretto nell'ambiente Docker\nConfigurazione offset a temperatura aggiuntiva per Shelly UNI\nGestione degli indicatori online aggiornata\nTemperatura fissa di Shelly Door / Finestra 2\nAggiunto icone per alcuni stati\nTradotto (alcuni) nomi oggetti",
-        "es": "Moción de Shelly 2\nAñadido Shelly Plus H\nAñadido Shelly Pro 3\nNombre de canal fijo y manejo de duración de empuje largo para Shelly i3\nProceso de actualización de firmware fijo (automático) para dispositivos de generación 2\nObtener dirección IP correcta en entorno Docker\nConfiguración de compensación de temperatura adicional para Shelly UNI\nGestión actualizada de indicadores en línea\nTemperatura fija de Puerta de Shelly / Ventana 2\nIconos añadidos para algunos estados\nNombres de objeto traducidos (algunos)",
-        "pl": "Oficjalna strona Shelly Motion 2\nOficjalna strona Shelly Plus H&T\nOficjalna strona Shelly Pro 3\nFixed channel name and long push handling\nFixed (automatyczny) proces aktualizacji oprogramowania dla generacji 2\nPoprawny adres IP w środowisku Dockera\nPoniższa konfiguracja o temperaturze offsetowej Shelly UNI\nUproszczony wskaźnik online\nFixed temperature of Shelly Door / Window 2 (ang.)\nIkony do niektórych stanów\nPrzetłumaczone (niepełne) nazwy obiektów",
-        "uk": "Додано Shelly Motion 2\nДодано Shelly Plus H&T\nДодано Shelly Pro 3\nВиправлено обробку назви каналу та тривалості натискання для Shelly i3\nВиправлений (автоматичний) процес оновлення мікропрограми для пристроїв покоління 2\nОтримайте правильну IP-адресу в середовищі Docker\nДодано конфігурацію зміщення температури для Shelly UNI\nОновлена ​​обробка онлайн-індикаторів\nФіксована температура Shelly Door/Window 2\nДодано значки для деяких штатів\nПерекладені (деякі) назви об'єктів",
-        "zh-cn": "增 编\n增 编\n增 编\n固定的渠道名称和长期推销时间\n制造2种装置的固定软件更新过程\nGet正确地处理Docker环境中的IP地址\n增加的温度抵消了整个工发组织希塞组合\n最新在线指标处理\n全套温度/温得2\n增加一些州的理由\n联系(有些)物体名称"
       }
     },
     "title": "Shelly",
