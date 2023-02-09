@@ -79,10 +79,10 @@ NOT Supported:
 
 | Shelly Device                        | CoAP | MQTT      | Tested firmware version         |
 | ------------------------------------ | ---- | --------- | ------------------------------- |
-| Shelly Plus 1 (shellyplus1)          | ❌   | >= v5.0.0 | 20221206-141227/0.12.0-gafc2404 |
-| Shelly Plus 1 PM (shellyplus1pm)     | ❌   | >= v5.0.0 | 20221206-141253/0.12.0-gafc2404 |
-| Shelly Plus 2 PM (shellyplus2pm)     | ❌   | >= v5.2.0 | 20221206-141957/0.12.0-gafc2404 |
-| Shelly Plus i4 (shellyplusi4)        | ❌   | >= v5.3.0 | 20221206-142532/0.12.0-gafc2404 |
+| Shelly Plus 1 (shellyplus1)          | ❌   | >= v5.0.0 | 20230209-131418/0.13.0-g68ba560 |
+| Shelly Plus 1 PM (shellyplus1pm)     | ❌   | >= v5.0.0 | 20230209-131443/0.13.0-g68ba560 |
+| Shelly Plus 2 PM (shellyplus2pm)     | ❌   | >= v5.2.0 | 20230209-131443/0.13.0-g68ba560 |
+| Shelly Plus i4 (shellyplusi4)        | ❌   | >= v5.3.0 | 20230209-132028/0.13.0-g68ba560 |
 | Shelly Plus i4 DC (shellyplusi4)     | ❌   | >= v5.3.0 | 20221206-142532/0.12.0-gafc2404 |
 | Shelly Pro 1 (shellypro1)            | ❌   | >= v5.2.0 | 20221206-143405/0.12.0-gafc2404 |
 | Shelly Pro 1 PM (shellypro1pm)       | ❌   | >= v5.2.0 | 20221206-143638/0.12.0-gafc2404 |
@@ -124,6 +124,7 @@ execute
 * (klein0r) Added Shelly Plus Plug S
 * (klein0r) Added Shelly Pro 3 EM
 * (klein0r) Reduced checks for firmware updates
+* (klein0r) Shelly TV profile is now changeable
 
 ### 6.3.1 (2023-01-02)
 
