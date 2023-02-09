@@ -123,6 +123,7 @@ execute
 
 * (klein0r) Added Shelly Plus Plug S
 * (klein0r) Added Shelly Pro 3 EM
+* (klein0r) Reduced checks for firmware updates
 
 ### 6.3.1 (2023-01-02)
 
