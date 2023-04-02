@@ -119,6 +119,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (viper4gh) Added Shelly Pro 3 EM energy data
+
 ### 6.4.0 (2023-02-09)
 
 * (klein0r) Added Shelly Plus Plug S
