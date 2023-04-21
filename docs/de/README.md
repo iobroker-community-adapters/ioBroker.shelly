@@ -28,10 +28,10 @@ Für mehr Informationen, siehe *supported devices*.
 
 ## Allgemein
 
-Der Adapter kann über CoAP oder MQTT mit den Geräten kommunizieren.
+Der Adapter kann über MQTT (empfohlen) oder CoAP/CoIoT mit den Geräten kommunizieren.
 
-- Der Standard-Modus ist MQTT (siehe [Dokumentation](protocol-mqtt.md) für mehr Informationen)
-- CoAP ist ausschließlich mit Generation 1 Geräten kompatibel!
+- Der Standard-Modus des Adapters ist MQTT (siehe [Dokumentation](protocol-mqtt.md) für mehr Informationen)
+- CoAP ist ausschließlich mit Gen1 Geräten kompatibel!
 - **Falls Gen2-Geräte integriert werden sollen, muss MQTT konfiguriert werden!**
 
 Fragen? Schaue zuerst in die [FAQ](faq.md)!

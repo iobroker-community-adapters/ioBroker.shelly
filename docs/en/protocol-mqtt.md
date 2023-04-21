@@ -8,11 +8,13 @@
 
 ### Important notes
 
-- It is not possible to connect the Shelly adapter to an existing MQTT broker in your network
-- The Shelly adapter starts an own MQTT broker which is running on the (non default) port ``1882`` to avoid conflicts with other MQTT brokers on the same system (the default port for MQTT is 1883)
+- It is not possible to connect the Shelly adapter to an existing MQTT broker
+- The Shelly adapter starts an own MQTT broker which is running on the (non default) port ``1882`` to avoid conflicts with other MQTT brokers on the same system (the default port for MQTT is ``1883``)
 - It is not possible to connect a MQTT client (e.g. MQTT-Explorer) to the internal MQTT broker
-- You can change the port of the MQTT broker in the instance settings
+- You can change the port of the interal MQTT broker in the instance settings
 - **You don't need any knowledge about MQTT to use it** - everything is handled internally
+
+Questions? Check the [FAQ](faq.md) section first!
 
 ### Configuration
 
@@ -21,7 +23,7 @@
 3. Open the **MQTT Settings** tab
 4. Choose a username and a secure password (you have to configure these information on all Shelly devices)
 
-> The Shelly adapter will start an own MQTT broker internally. The configured username and password must be used on all Shelly devices which should be connected to this broker.
+> The Shelly adapter will start an own MQTT broker internally. The configured username and password must be used on all Shelly devices which should connect to this broker.
 
 ![iobroker_mqtt](./img/iobroker_mqtt.png)
 

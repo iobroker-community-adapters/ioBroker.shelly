@@ -28,10 +28,10 @@ Check the list of *supported devices* for more details.
 
 ## General
 
-You can use the adapter in CoAP or MQTT mode.
+The adapter can be used in MQTT (recommended) or CoAP/CoIoT mode.
 
-- The default mode is MQTT (see [documentation](protocol-mqtt.md) for details)
-- CoAP is just compatible with devices of generation 1
+- The default mode of the adapter is MQTT (see [documentation](protocol-mqtt.md) for details)
+- CoAP/CoIoT is just compatible with Gen1 devices!
 - **If you want to use Gen2 devices, you must use MQTT!**
 
 Questions? Check the [FAQ](faq.md) section first!

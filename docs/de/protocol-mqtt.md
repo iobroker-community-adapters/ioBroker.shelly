@@ -8,11 +8,13 @@
 
 ### Wichtige Hinweise
 
-- Es ist nicht möglich, den Shelly-Adapter mit einem existierenden MQTT-Broker in deinem Netzwerk zu verbinden
-- Der Shelly-Adapter startet einen eigenen MQTT-Broker, welcher auf dem Port ``1882`` gestartet wird, um einen Konflikt mit anderen MQTT-Brokern auf dem gleichen System zu vermeiden (Standard-Port für MQTT ist 1883)
+- Es ist nicht möglich, den Shelly-Adapter mit einem bereits existierenden MQTT-Broker zu verbinden
+- Der Shelly-Adapter startet einen eigenen MQTT-Broker, welcher auf dem Port ``1882`` gestartet wird, um einen Konflikt mit anderen MQTT-Brokern auf dem gleichen System zu vermeiden (Standard-Port für MQTT ist ``1883``)
 - Es ist nicht möglich, einen MQTT-Client (wie z.B. MQTT-Explorer) gegen den internen MQTT-Broker zu verbinden
-- Der Standard-Port des MQTT-Brokers kann in der Konfiguration des Adapters angepasst werden
+- Der Standard-Port des internen MQTT-Brokers kann in der Konfiguration des Adapters angepasst werden
 - **Es ist kein Wissen über das MQTT-Protokoll erforderlich** - sämtliche Kommunikation wird intern behandelt
+
+Fragen? Schaue zuerst in die [FAQ](faq.md)!
 
 ### Konfiguration
 
