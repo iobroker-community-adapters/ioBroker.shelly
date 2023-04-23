@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.4.0",
+    "version": "6.4.1",
     "news": {
+      "6.4.1": {
+        "en": "Added Shelly Pro 3 EM energy data\nFixed IP handling in Docker containers",
+        "de": "Hinzugefügt Shelly Pro 3 EM Energiedaten\nFeste IP-Behandlung in Docker-Containern",
+        "ru": "Добавлено Shelly Pro 3 EM данные по энергии\nИсправлена обработка IP в Docker контейнерах",
+        "pt": "Adicionado Shelly Pro 3 EM dados de energia\nManuseio IP fixo em contentores Docker",
+        "nl": "Vertaling:\nIP behandelt Docker containers",
+        "fr": "Ajout de données énergétiques Shelly Pro 3 EM\nManipulation IP fixe dans les conteneurs Docker",
+        "it": "Shelly Pro 3 EM dati energetici\nGestione IP fissa in contenitori Docker",
+        "es": "Añadido Shelly Pro 3 datos de energía EM\nManejo de IP fijo en contenedores Docker",
+        "pl": "Strona domowa Shelly Pro 3\nObsługa IP w kontenerach Dockera",
+        "uk": "Додано Shelly Pro 3 EM енергетичні дані\nФіксована обробка IP в контейнерах Docker",
+        "zh-cn": "添加了全套的能源数据\n多克集装箱的混合IP处理"
+      },
       "6.4.0": {
         "en": "Added Shelly Plus Plug S\nAdded Shelly Pro 3 EM\nReduced checks for firmware updates\nShelly TV profile is now changeable",
         "de": "Hinzugefügt Shelly Plus Plug S\nHinzugefügt Shelly Pro 3 EM\nReduzierte Kontrollen für Firmware-Updates\nShelly TV-Profil ist jetzt änderbar",
@@ -80,19 +93,6 @@
         "pl": "Fixed state updates for CoAP (ang.)",
         "uk": "Виправлені оновлення стану для інтеграції CoAP",
         "zh-cn": "九. 共同方案一体化国家最新资料"
-      },
-      "6.2.1": {
-        "en": "Warn user if a device is not protected via restricted login\nAdded duration for generation 2 devices in cover mode\nAdded temperature data of Shelly Motion 2\nAdded knowledge base urls for all devices",
-        "de": "Warnbenutzer, wenn ein Gerät nicht über einen eingeschränkten Login geschützt ist\nZusätzliche Dauer für 2 Geräte im Cover-Modus\nTemperaturdaten von Shelly Motion 2 hinzugefügt\nHinzugefügt Wissensbasis URLs für alle Geräte",
-        "ru": "Теплый пользователь, если устройство не защищено с помощью ограниченного входа\nДобавлена продолжительность для поколения 2 устройства в режиме обложки\nДобавлены температурные данные Shelly Motion 2\nДобавлена база знаний URL для всех устройств",
-        "pt": "Usuário alerta se um dispositivo não estiver protegido via login restrito\nDuração adicional para a geração 2 dispositivos no modo de cobertura\nDados de temperatura adicionados de Shelly Motion 2\nAdicionados urls base de conhecimento para todos os dispositivos",
-        "nl": "Als een apparaat niet beschermd wordt via beperkt login\nVertaling:\nVoeg de temperatuurgegevens toe van Shelly Motion 2\nVoeg kennis toe voor alle apparaten",
-        "fr": "Internaute averti si un appareil n'est pas protégé via un login restreint\nDurée ajoutée pour les appareils de génération 2 en mode couverture\nDonnées de température ajoutées de Shelly Motion 2\nAjout des urls de base de connaissances pour tous les appareils",
-        "it": "Avvertente se un dispositivo non è protetto tramite login limitato\nDurata aggiuntiva per dispositivi di generazione 2 in modalità di copertura\nDati di temperatura aggiunti di Shelly Motion 2\nUlteriori informazioni base urls per tutti i dispositivi",
-        "es": "Avisar al usuario si un dispositivo no está protegido a través de acceso restringido\nDuración agregada para la generación 2 dispositivos en modo de cubierta\nDatos de temperatura añadidos de movimiento de Shelly 2\nUrales de base de conocimiento añadido para todos los dispositivos",
-        "pl": "Użytkownik Warna, jeśli urządzenie nie jest chronione poprzez ograniczone loginy\nDodany czas na pokolenie dwóch urządzeń w trybie przechowywania\nDane dotyczące temperatury Shelly Motion 2\nZapytane podstawy wiedzy dla wszystkich urządzeń",
-        "uk": "Попередити користувача, якщо пристрій не захищено через обмежений вхід\nДодано тривалість для пристроїв покоління 2 у режимі покриття\nДодано дані про температуру Shelly Motion 2\nДодано URL-адреси бази знань для всіх пристроїв",
-        "zh-cn": "如果一个装置不受限制的伐木加以保护,则警告用户\n增加生产2种装置的期间\n全氟化气体的增温数据 2\n增加所有装置的知识库"
       }
     },
     "title": "Shelly",

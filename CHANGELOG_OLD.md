@@ -1,4 +1,9 @@
 # Older changes
+## 6.2.3 (2022-10-20)
+
+* (klein0r) Use unique ID for each command - generation 2 devices
+* (klein0r) Fix: Ack state if value is unchanged
+
 ## 6.2.2 (2022-10-13)
 
 * (klein0r) Fixed state updates for CoAP integration
