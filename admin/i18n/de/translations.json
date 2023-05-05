@@ -19,9 +19,12 @@
     "Shelly protocol": "Shelly-Protokoll",
     "Update objects even if there is no value change": "Objekte aktualisieren, auch wenn keine Wertänderung vorliegt",
     "Log Debug Messages": "Debug-Meldungen protokollieren",
-    "Will be used to authenticate against all Shelly devices": "Wird zur Authentifizierung bei allen Shelly-Geräten verwendet",
     "You have to configure the same password on all devices": "Sie müssen auf allen Geräten dasselbe Passwort konfigurieren",
     "Save HTTP responses (for debugging)": "HTTP-Antworten speichern (zum Debuggen)",
     "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)": "CoAP wird von Gen1-Geräten unterstützt, MQTT wird von allen Geräten (Gen1 und Gen2) unterstützt",
-    "Must be configured on all Shelly devices": "Muss auf allen Shelly-Geräten konfiguriert werden"
+    "Must be configured on all Shelly devices": "Muss auf allen Shelly-Geräten konfiguriert werden",
+    "Will be used to authenticate against generation 1 devices": "Wird zur Authentifizierung bei Geräten der Generation 1 verwendet",
+    "User credentials for restricted login": "Benutzeranmeldeinformationen für die eingeschränkte Anmeldung",
+    "Custom options": "Benutzerdefinierte Optionen",
+    "Debugging (expert options)": "Debugging (Expertenoptionen)"
 }

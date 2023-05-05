@@ -72,6 +72,15 @@
                     "label": "Shelly protocol",
                     "help": "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)"
                 },
+                "_headerAuthentication": {
+                    "newLine": true,
+                    "type": "header",
+                    "size": 3,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "text": "User credentials for restricted login"
+                },
                 "httpusername": {
                     "newLine": true,
                     "type": "text",
@@ -79,8 +88,7 @@
                     "md": 6,
                     "lg": 6,
                     "label": "HTTP Username",
-                    "help": "Will be used to authenticate against all Shelly devices",
-                    "helpLink": "/#tab-adapters/readme/shelly"
+                    "help": "Will be used to authenticate against generation 1 devices"
                 },
                 "httppassword": {
                     "type": "password",
@@ -91,6 +99,15 @@
                     "lg": 6,
                     "label": "HTTP Password",
                     "help": "You have to configure the same password on all devices"
+                },
+                "_headerCustomOptions": {
+                    "newLine": true,
+                    "type": "header",
+                    "size": 3,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "text": "Custom options"
                 },
                 "polltime": {
                     "newLine": true,
@@ -117,6 +134,15 @@
                     "md": 6,
                     "lg": 6,
                     "label": "Update objects even if there is no value change"
+                },
+                "_headerDebugging": {
+                    "newLine": true,
+                    "type": "header",
+                    "size": 3,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "text": "Debugging (expert options)"
                 },
                 "logDebugMessages": {
                     "newLine": true,
