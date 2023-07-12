@@ -12,7 +12,7 @@
                     "href": "https://github.com/iobroker-community-adapters/ioBroker.shelly/tree/master/docs/en",
                     "label": {
                         "en": "Please read the documentation carefully before using this adapter",
-                        "de": "Bitte lies die Dokumentation sorgfältig vor der Verwendung dieses Adapters",
+                        "de": "Bitte lies vor der Verwendung dieses Adapters die Dokumentation",
                         "ru": "Пожалуйста, внимательно прочитайте документацию перед использованием этого адаптера",
                         "pt": "Por favor, leia a documentação cuidadosamente antes de usar este adaptador",
                         "nl": "Lees de documentatie zorgvuldig voor je deze adapter gebruikt",
@@ -24,7 +24,9 @@
                         "zh-cn": "请仔细阅读文件,然后利用这一适应者。"
                     },
                     "button": true,
-                    "icon": "info",
+                    "variant": "contained",
+                    
+                    "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNOTYgMEM0MyAwIDAgNDMgMCA5NlY0MTZjMCA1MyA0MyA5NiA5NiA5NkgzODRoMzJjMTcuNyAwIDMyLTE0LjMgMzItMzJzLTE0LjMtMzItMzItMzJWMzg0YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjMyYzAtMTcuNy0xNC4zLTMyLTMyLTMySDM4NCA5NnptMCAzODRIMzUydjY0SDk2Yy0xNy43IDAtMzItMTQuMy0zMi0zMnMxNC4zLTMyIDMyLTMyem0zMi0yNDBjMC04LjggNy4yLTE2IDE2LTE2SDMzNmM4LjggMCAxNiA3LjIgMTYgMTZzLTcuMiAxNi0xNiAxNkgxNDRjLTguOCAwLTE2LTcuMi0xNi0xNnptMTYgNDhIMzM2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2SDE0NGMtOC44IDAtMTYtNy4yLTE2LTE2czcuMi0xNiAxNi0xNnoiLz48L3N2Zz4=",
                     "sm": 12,
                     "md": 12,
                     "lg": 12
