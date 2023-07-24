@@ -29,7 +29,6 @@ class Shelly extends utils.Adapter {
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
-        this.on('message', this.onMessage.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
@@ -112,13 +111,6 @@ class Shelly extends utils.Adapter {
                 }
             }
         }
-    }
-
-    /**
-     * @param {ioBroker.Message} obj
-     */
-    onMessage(obj) {
-        this.sendTo(obj.from, obj.command, 'Execute command ' + obj.command, obj.callback);
     }
 
     /**
