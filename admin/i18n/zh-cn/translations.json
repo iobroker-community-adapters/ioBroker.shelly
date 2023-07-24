@@ -26,5 +26,6 @@
     "Will be used to authenticate against generation 1 devices": "将用于对第 1 代设备进行身份验证",
     "User credentials for restricted login": "受限登录的用户凭据",
     "Custom options": "自定义选项",
-    "Debugging (expert options)": "调试（专家选项）"
+    "Debugging (expert options)": "调试（专家选项）",
+    "MQTT Server options": "MQTT 服务器选项"
 }

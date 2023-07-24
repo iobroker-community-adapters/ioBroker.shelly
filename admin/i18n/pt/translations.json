@@ -26,5 +26,6 @@
     "Will be used to authenticate against generation 1 devices": "Será usado para autenticação em dispositivos da geração 1",
     "User credentials for restricted login": "Credenciais de usuário para login restrito",
     "Custom options": "Opções personalizadas",
-    "Debugging (expert options)": "Depuração (opções avançadas)"
+    "Debugging (expert options)": "Depuração (opções avançadas)",
+    "MQTT Server options": "Opções do servidor MQTT"
 }

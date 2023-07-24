@@ -26,5 +26,6 @@
     "Will be used to authenticate against generation 1 devices": "Використовуватиметься для автентифікації пристроїв першого покоління",
     "User credentials for restricted login": "Облікові дані користувача для обмеженого входу",
     "Custom options": "Спеціальні параметри",
-    "Debugging (expert options)": "Налагодження (експертні параметри)"
+    "Debugging (expert options)": "Налагодження (експертні параметри)",
+    "MQTT Server options": "Параметри сервера MQTT"
 }

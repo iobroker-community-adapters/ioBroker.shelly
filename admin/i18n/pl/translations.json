@@ -26,5 +26,6 @@
     "Will be used to authenticate against generation 1 devices": "Będzie używany do uwierzytelniania na urządzeniach 1. generacji",
     "User credentials for restricted login": "Poświadczenia użytkownika do ograniczonego logowania",
     "Custom options": "Opcje niestandardowe",
-    "Debugging (expert options)": "Debugowanie (opcje eksperckie)"
+    "Debugging (expert options)": "Debugowanie (opcje eksperckie)",
+    "MQTT Server options": "Opcje serwera MQTT"
 }

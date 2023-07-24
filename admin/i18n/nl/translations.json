@@ -26,5 +26,6 @@
     "Will be used to authenticate against generation 1 devices": "Zal worden gebruikt om te verifiëren tegen apparaten van de eerste generatie",
     "User credentials for restricted login": "Gebruikersreferenties voor beperkte aanmelding",
     "Custom options": "Aangepaste opties",
-    "Debugging (expert options)": "Foutopsporing (expertopties)"
+    "Debugging (expert options)": "Foutopsporing (expertopties)",
+    "MQTT Server options": "MQTT Server-opties"
 }
