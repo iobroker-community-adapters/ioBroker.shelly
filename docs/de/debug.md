@@ -2,6 +2,8 @@
 
 # ioBroker.shelly
 
+This is the German documentation - [🇺🇸 English version](../en/debug.md)
+
 ## Debug
 
 *Debugging ist nur für Generation 2 Geräte verfügbar*

@@ -2,6 +2,8 @@
 
 # ioBroker.shelly
 
+This is the German documentation - [🇺🇸 English version](../en/protocol-mqtt.md)
+
 ## MQTT
 
 ![iobroker_general_mqtt](./img/iobroker_general_mqtt.png)
