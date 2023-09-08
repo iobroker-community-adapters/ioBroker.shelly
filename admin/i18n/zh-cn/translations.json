@@ -19,9 +19,13 @@
     "Shelly protocol": "雪莉协议",
     "Update objects even if there is no value change": "即使值没有变化也要更新对象",
     "Log Debug Messages": "记录调试消息",
-    "Will be used to authenticate against all Shelly devices": "将用于对所有 Shelly 设备进行身份验证",
     "You have to configure the same password on all devices": "您必须在所有设备上配置相同的密码",
     "Save HTTP responses (for debugging)": "保存 HTTP 响应（用于调试）",
     "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)": "Gen1 设备支持 CoAP，所有设备（Gen1 和 Gen2）都支持 MQTT",
-    "Must be configured on all Shelly devices": "必须在所有 Shelly 设备上配置"
+    "Must be configured on all Shelly devices": "必须在所有 Shelly 设备上配置",
+    "Will be used to authenticate against generation 1 devices": "将用于对第 1 代设备进行身份验证",
+    "User credentials for restricted login": "受限登录的用户凭据",
+    "Custom options": "自定义选项",
+    "Debugging (expert options)": "调试（专家选项）",
+    "MQTT Server options": "MQTT 服务器选项"
 }

@@ -2,6 +2,8 @@
 
 # ioBroker.shelly
 
+This is the German documentation - [🇺🇸 English version](../en/faq.md)
+
 ## Kann man CoAP und MQTT gleichzeitig nutzen?
 
 Nein, aber Du kannst eine zweite Instanz des Shelly-Adapters erstellen, welche dann für MQTT konfiguriert wird (und die andere für CoAP).
@@ -16,10 +18,10 @@ Du kannst die Konfiguration in der Shelly-Instanz jederzeit ändern. Alle Objekt
 
 ## Ist es möglich, den Shelly-Adapter mit einem bestehenden MQTT-Broker zu verbinden?
 
-Es ist nicht möglich, den Shelly-Adapter mit einem existierenden MQTT-Broker in deinem Netzwerk zu verbinden. Der Shelly-Adapter startet einen eigenen MQTT-Broker, welcher auf dem Port ``1882`` gestartet wird, um einen Konflikt mit anderen MQTT-Brokern auf dem gleichen System zu vermeiden.
+Es ist nicht möglich, den Shelly-Adapter mit einem existierenden MQTT-Broker in deinem Netzwerk zu verbinden. Der Shelly-Adapter startet einen eigenen MQTT-Broker intern, welcher auf dem Port ``1882`` gestartet wird, um einen Konflikt mit anderen MQTT-Brokern auf dem gleichen System zu vermeiden.
 
 ## Kann ich weiterhin die Cloud-Verbindung nutzen, wenn ich mit dem Shelly-Adapter arbeite?
 
-Falls Du Geräte der **Generation 1** verwendest, kann man MQTT und die Shelly-Cloud nicht gleichzeitig verwenden. In diesem Fall musst CoAP für die Integration genutzt werden, wenn die Cloud-Verbindung gleichzeitig bestehen soll.
+Falls Du Geräte der **Generation 1 (Gen1)** verwendest, kann man MQTT und die Shelly-Cloud nicht gleichzeitig verwenden. In diesem Fall muss CoAP/CoIoT für die ioBroker-Integration genutzt werden, falls die Cloud-Verbindung gleichzeitig bestehen soll.
 
-Geräte der **Generation 2** können per MQTT verbunden werden und gleichzeitig die Cloud-Verbindung aufrecht erhalten.
+Geräte der **Generation 2 (Gen2)** können per MQTT verbunden werden und gleichzeitig die Cloud-Verbindung aufrecht erhalten.

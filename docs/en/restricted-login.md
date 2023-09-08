@@ -2,6 +2,8 @@
 
 # ioBroker.shelly
 
+This is the English documentation - [🇩🇪 German version](../de/restricted-login.md)
+
 ## Restricted login
 
 To protect your Shelly devices with a restricted login, choose a username and a password in the ioBroker configuration on the *general settings* tab.

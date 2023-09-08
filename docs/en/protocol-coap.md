@@ -2,6 +2,8 @@
 
 # ioBroker.shelly
 
+This is the English documentation - [🇩🇪 German version](../de/protocol-coap.md)
+
 ## CoAP
 
 ![iobroker_general_coap](./img/iobroker_general_coap.png)

@@ -35,7 +35,7 @@ body:
   - type: input
     attributes:
       label: Shelly device
-      description: Please provide the exact device which has a problem
+      description: Which device has a problem? Provide the name and current firmware version.
     validations:
       required: false
   - type: input

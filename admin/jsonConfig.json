@@ -12,7 +12,7 @@
                     "href": "https://github.com/iobroker-community-adapters/ioBroker.shelly/tree/master/docs/en",
                     "label": {
                         "en": "Please read the documentation carefully before using this adapter",
-                        "de": "Bitte lies die Dokumentation sorgfältig vor der Verwendung dieses Adapters",
+                        "de": "Bitte lies vor der Verwendung dieses Adapters die Dokumentation",
                         "ru": "Пожалуйста, внимательно прочитайте документацию перед использованием этого адаптера",
                         "pt": "Por favor, leia a documentação cuidadosamente antes de usar este adaptador",
                         "nl": "Lees de documentatie zorgvuldig voor je deze adapter gebruikt",
@@ -24,7 +24,8 @@
                         "zh-cn": "请仔细阅读文件,然后利用这一适应者。"
                     },
                     "button": true,
-                    "icon": "info",
+                    "variant": "contained",
+                    "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNOTYgMEM0MyAwIDAgNDMgMCA5NlY0MTZjMCA1MyA0MyA5NiA5NiA5NkgzODRoMzJjMTcuNyAwIDMyLTE0LjMgMzItMzJzLTE0LjMtMzItMzItMzJWMzg0YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjMyYzAtMTcuNy0xNC4zLTMyLTMyLTMySDM4NCA5NnptMCAzODRIMzUydjY0SDk2Yy0xNy43IDAtMzItMTQuMy0zMi0zMnMxNC4zLTMyIDMyLTMyem0zMi0yNDBjMC04LjggNy4yLTE2IDE2LTE2SDMzNmM4LjggMCAxNiA3LjIgMTYgMTZzLTcuMiAxNi0xNiAxNkgxNDRjLTguOCAwLTE2LTcuMi0xNi0xNnptMTYgNDhIMzM2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2SDE0NGMtOC44IDAtMTYtNy4yLTE2LTE2czcuMi0xNiAxNi0xNnoiLz48L3N2Zz4=",
                     "sm": 12,
                     "md": 12,
                     "lg": 12
@@ -67,30 +68,70 @@
                         }
                     ],
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 8,
+                    "lg": 8,
                     "label": "Shelly protocol",
                     "help": "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)"
+                },
+                "_headerAuthentication": {
+                    "newLine": true,
+                    "type": "header",
+                    "size": 2,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "text": "User credentials for restricted login"
                 },
                 "httpusername": {
                     "newLine": true,
                     "type": "text",
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "HTTP Username",
-                    "help": "Will be used to authenticate against all Shelly devices",
-                    "helpLink": "/#tab-adapters/readme/shelly"
+                    "help": "Will be used to authenticate against generation 1 devices"
                 },
                 "httppassword": {
                     "type": "password",
                     "repeat": false,
                     "visible": true,
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "HTTP Password",
                     "help": "You have to configure the same password on all devices"
+                },
+                "_documentationLinkRestrictedLogin": {
+                    "type": "staticLink",
+                    "href": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/restricted-login.md",
+                    "label": {
+                        "en": "How to protect your devices",
+                        "de": "Wie Sie Ihre Geräte absichern",
+                        "ru": "Как защитить ваши устройства",
+                        "pt": "Como proteger seus dispositivos",
+                        "nl": "Hoe je je apparatuur te beschermen",
+                        "fr": "Comment protéger vos appareils",
+                        "it": "Come proteggere i dispositivi",
+                        "es": "Cómo proteger sus dispositivos",
+                        "pl": "Jak chronić swoje urządzenia",
+                        "uk": "Як захистити ваші пристрої",
+                        "zh-cn": "如何保护你的装置"
+                    },
+                    "button": true,
+                    "variant": "contained",
+                    "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNOTYgMEM0MyAwIDAgNDMgMCA5NlY0MTZjMCA1MyA0MyA5NiA5NiA5NkgzODRoMzJjMTcuNyAwIDMyLTE0LjMgMzItMzJzLTE0LjMtMzItMzItMzJWMzg0YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjMyYzAtMTcuNy0xNC4zLTMyLTMyLTMySDM4NCA5NnptMCAzODRIMzUydjY0SDk2Yy0xNy43IDAtMzItMTQuMy0zMi0zMnMxNC4zLTMyIDMyLTMyem0zMi0yNDBjMC04LjggNy4yLTE2IDE2LTE2SDMzNmM4LjggMCAxNiA3LjIgMTYgMTZzLTcuMiAxNi0xNiAxNkgxNDRjLTguOCAwLTE2LTcuMi0xNi0xNnptMTYgNDhIMzM2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2SDE0NGMtOC44IDAtMTYtNy4yLTE2LTE2czcuMi0xNiAxNi0xNnoiLz48L3N2Zz4=",
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4
+                },
+                "_headerCustomOptions": {
+                    "newLine": true,
+                    "type": "header",
+                    "size": 2,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "text": "Custom options"
                 },
                 "polltime": {
                     "newLine": true,
@@ -98,40 +139,48 @@
                     "min": 5,
                     "max": 86400,
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "Poll time in seconds"
                 },
                 "autoupdate": {
                     "newLine": true,
                     "type": "checkbox",
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "Auto update of new firmware"
                 },
                 "updateUnchangedObjects": {
-                    "newLine": true,
                     "type": "checkbox",
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "Update objects even if there is no value change"
+                },
+                "_headerDebugging": {
+                    "newLine": true,
+                    "type": "header",
+                    "size": 3,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "text": "Debugging (expert options)"
                 },
                 "logDebugMessages": {
                     "newLine": true,
                     "type": "checkbox",
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "Log Debug Messages"
                 },
                 "saveHttpResponses": {
                     "newLine": true,
                     "type": "checkbox",
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "Save HTTP responses (for debugging)"
                 }
             }
@@ -146,8 +195,8 @@
                     "type": "ip",
                     "listenOnAllPorts": true,
                     "sm": 12,
-                    "md": 8,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "MQTT Listen IP"
                 },
                 "port": {
@@ -156,28 +205,68 @@
                     "max": 65535,
                     "sm": 12,
                     "md": 4,
-                    "lg": 1,
+                    "lg": 2,
                     "label": "Port"
+                },
+                "_headerAuthenticationMqtt": {
+                    "newLine": true,
+                    "type": "header",
+                    "size": 2,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "text": "MQTT Server options"
                 },
                 "mqttusername": {
                     "newLine": true,
                     "type": "text",
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "MQTT Username",
-                    "help": "Must be configured on all Shelly devices",
-                    "helpLink": "/#tab-adapters/readme/shelly"
+                    "help": "Must be configured on all Shelly devices"
                 },
                 "mqttpassword": {
                     "type": "password",
                     "repeat": false,
                     "visible": true,
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "MQTT Password",
                     "help": "Must be configured on all Shelly devices"
+                },
+                "_documentationLinkRestrictedLogin": {
+                    "type": "staticLink",
+                    "href": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/protocol-mqtt.md",
+                    "label": {
+                        "en": "How to configure MQTT",
+                        "de": "So konfigurieren Sie MQTT",
+                        "ru": "Как настроить MQTT",
+                        "pt": "Como configurar o MQTT",
+                        "nl": "Hoe je MQTT te overtuigen",
+                        "fr": "Comment configurer MQTT",
+                        "it": "Come configurare MQTT",
+                        "es": "Cómo configurar MQTT",
+                        "pl": "Jak skonfigurować MQTT",
+                        "uk": "Як налаштувати MQTT",
+                        "zh-cn": "如何配置MQTT"
+                    },
+                    "button": true,
+                    "variant": "contained",
+                    "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNOTYgMEM0MyAwIDAgNDMgMCA5NlY0MTZjMCA1MyA0MyA5NiA5NiA5NkgzODRoMzJjMTcuNyAwIDMyLTE0LjMgMzItMzJzLTE0LjMtMzItMzItMzJWMzg0YzE3LjcgMCAzMi0xNC4zIDMyLTMyVjMyYzAtMTcuNy0xNC4zLTMyLTMyLTMySDM4NCA5NnptMCAzODRIMzUydjY0SDk2Yy0xNy43IDAtMzItMTQuMy0zMi0zMnMxNC4zLTMyIDMyLTMyem0zMi0yNDBjMC04LjggNy4yLTE2IDE2LTE2SDMzNmM4LjggMCAxNiA3LjIgMTYgMTZzLTcuMiAxNi0xNiAxNkgxNDRjLTguOCAwLTE2LTcuMi0xNi0xNnptMTYgNDhIMzM2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2SDE0NGMtOC44IDAtMTYtNy4yLTE2LTE2czcuMi0xNiAxNi0xNnoiLz48L3N2Zz4=",
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4
+                },
+                "_headerExpertMqtt": {
+                    "newLine": true,
+                    "type": "header",
+                    "size": 3,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "text": "Expert options"
                 },
                 "qos": {
                     "newLine": true,
@@ -233,8 +322,8 @@
                         }
                     ],
                     "sm": 12,
-                    "md": 6,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "Default QoS"
                 }
             }
@@ -249,8 +338,8 @@
                     "type": "ip",
                     "listenOnAllPorts": true,
                     "sm": 12,
-                    "md": 8,
-                    "lg": 6,
+                    "md": 4,
+                    "lg": 4,
                     "label": "COAP listen IP"
                 },
                 "blacklist": {

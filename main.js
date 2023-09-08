@@ -2,14 +2,13 @@
 
 const utils = require('@iobroker/adapter-core');
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
-const protocolMqtt = require(__dirname + '/lib/protocol/mqtt');
-const protocolCoap = require(__dirname + '/lib/protocol/coap');
+const protocolMqtt = require('./lib/protocol/mqtt');
+const protocolCoap = require('./lib/protocol/coap');
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
 const EventEmitter = require('events').EventEmitter;
 
 class Shelly extends utils.Adapter {
-
     constructor(options) {
         super({
             ...options,
@@ -29,7 +28,6 @@ class Shelly extends utils.Adapter {
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
-        this.on('message', this.onMessage.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
@@ -50,15 +48,19 @@ class Shelly extends utils.Adapter {
             await this.setOnlineFalse();
 
             // Start online check
-            this.onlineCheck();
+            await this.onlineCheck();
 
             // Start MQTT server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
                     this.log.info(`Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port} (QoS ${this.config.qos})`);
 
-                    if (!this.config.mqttusername || this.config.mqttusername.length === 0) { this.log.error('MQTT Username is missing!'); }
-                    if (!this.config.mqttpassword || this.config.mqttpassword.length === 0) { this.log.error('MQTT Password is missing!'); }
+                    if (!this.config.mqttusername || this.config.mqttusername.length === 0) {
+                        this.log.error('MQTT Username is missing!');
+                    }
+                    if (!this.config.mqttpassword || this.config.mqttpassword.length === 0) {
+                        this.log.error('MQTT Password is missing!');
+                    }
 
                     this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
                     this.serverMqtt.listen();
@@ -77,11 +79,9 @@ class Shelly extends utils.Adapter {
             if (this.config.autoupdate) {
                 this.log.info(`[firmwareUpdate] Auto-Update enabled - devices will be updated automatically`);
 
-                this.setTimeout(() => {
-                    this.autoFirmwareUpdate();
-                }, 10 * 1000); // Wait 10 seconds for devices to connect
+                // Wait 10 seconds for devices to connect
+                this.setTimeout(() => this.autoFirmwareUpdate(), 10 * 1000);
             }
-
         } catch (err) {
             this.log.error(`[onReady] Startup error: ${err}`);
         }
@@ -94,7 +94,7 @@ class Shelly extends utils.Adapter {
     onStateChange(id, state) {
         // Warning, state can be null if it was deleted
         if (state && !state.ack) {
-            const stateId = id.replace(this.namespace + '.', '');
+            const stateId = id.replace(`${this.namespace}.`, '');
 
             if (stateId === 'info.update') {
                 this.log.debug(`[onStateChange] "info.update" state changed - starting update on every device`);
@@ -112,13 +112,6 @@ class Shelly extends utils.Adapter {
                 }
             }
         }
-    }
-
-    /**
-     * @param {ioBroker.Message} obj
-     */
-    onMessage(obj) {
-        this.sendTo(obj.from, obj.command, 'Execute command ' + obj.command, obj.callback);
     }
 
     /**
@@ -191,9 +184,8 @@ class Shelly extends utils.Adapter {
                 if (valHostname) {
                     this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
-                    tcpPing.probe(valHostname, valPort, async (error, isAlive) => {
-                        this.deviceStatusUpdate(deviceId, isAlive);
-                    });
+                    tcpPing.probe(valHostname, valPort, (error, isAlive) =>
+                        this.deviceStatusUpdate(deviceId, isAlive));
                 }
             }
         } catch (e) {
@@ -300,7 +292,7 @@ class Shelly extends utils.Adapter {
     }
 
     removeNamespace(id) {
-        const re = new RegExp(this.namespace + '*\\.', 'g');
+        const re = new RegExp(`${this.namespace}*\\.`, 'g');
         return id.replace(re, '');
     }
 
@@ -327,9 +319,13 @@ class Shelly extends utils.Adapter {
             native.keys = null;
         }
 
+        if (this.config) {
+            this.config.polltime = parseInt(this.config?.polltime, 10);
+        }
+
         if (Object.keys(native).length) {
             this.log.info('Migrate some data from old Shelly Adapter version. Restarting Shelly Adapter now!');
-            await this.extendForeignObjectAsync('system.adapter.' + this.namespace, { native: native });
+            await this.extendForeignObjectAsync(`system.adapter.${this.namespace}`, { native });
 
             return true;
         }
