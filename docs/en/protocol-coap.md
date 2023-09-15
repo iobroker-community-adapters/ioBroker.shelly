@@ -14,6 +14,8 @@ Enter the IP address of your ioBroker server as CoIoT server - followed  by port
 
 ![shelly_coap](./img/shelly_coap.png)
 
+**You have to reboot the Shelly device afterwards!**
+
 CoAP will add all devices in your network. If you want to exclude some Shelly devices, you can put them on a blacklist. Just enter the serial numbers to the blacklist table:
 
 ![iobroker_coap](./img/iobroker_coap.png)
