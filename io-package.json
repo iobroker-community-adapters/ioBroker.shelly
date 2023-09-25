@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.4.2",
+    "version": "6.4.3",
     "news": {
-      "6.4.2": {
+      "6.4.3": {
         "en": "Added Shelly Pro Dual Cover/Shutter PM\nAdded Shelly Pro 3 EM 400A\nAdded support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdded support of Shelly Plus AddOn for Gen2 Devices.\nAdded support of Plus PM Mini",
         "de": "Hinzugefügt Shelly Pro Dual Cover/Shutter PM\nHinzugefügt Shelly Pro 3 EM 400A\nUnterstützung von Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nUnterstützung von Shelly Plus AddOn für Gen2 Geräte hinzugefügt.\nUnterstützung von Plus PM Mini",
         "ru": "Добавлено Shelly Pro Dual Cover/Shutter PM\nДобавлено Shelly Pro 3 EM 400A\nДобавлена поддержка Shelly Plus 1 Mini + Shelly Plus 1 PM Мини\nДобавлена поддержка Shelly Plus AddOn для Gen2 Devices.\nДобавлена поддержка Plus PM Mini",
