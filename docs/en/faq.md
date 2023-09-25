@@ -14,7 +14,7 @@ No, just configure your Shelly devices as documented [here](protocol-mqtt.md) an
 
 ## Can I switch between CoAP and MQTT? What will happen?
 
-You can re-configure your instance at any time. You will not loose any objects or states and everything will stay the same. Just the communication method changes changes in the background.
+You can re-configure your instance at any time. You will not lose any objects or states and everything will stay the same. Just the communication method changes in the background.
 
 ## Is it possible to connect the Shelly adapter to an existing MQTT broker?
 

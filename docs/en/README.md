@@ -14,20 +14,17 @@ This is the English documentation - [🇩🇪 German version](../de/README.md)
 - [FAQ](faq.md)
 
 ## Requirements
-
-1. nodejs 14.5 (or later)
+1. Node.js 16 (or later)
 2. js-controller 3.3.22 (or later)
 4. Admin Adapter 6.0.0 (or later)
 
 ## Device generations
-
 Check the list of *supported devices* for more details.
 
 - **Gen1**: ESP8266 devices, [CoAP](protocol-coap.md) or [MQTT](protocol-mqtt.md)
 - **Gen2**: ESP32 devices, [MQTT](protocol-mqtt.md)
 
 ## General
-
 The adapter can be used in MQTT (recommended) or CoAP/CoIoT mode.
 
 - The default mode of the adapter is MQTT (see [documentation](protocol-mqtt.md) for details)

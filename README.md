@@ -22,7 +22,7 @@
 
 The adapter communicates with Shelly devices by REST API and the CoAP or MQTT protocol.
 
-Uses the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here : [Shelly](https://shelly.cloud/)
+It uses the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here: [Shelly](https://shelly.cloud/)
 
 ## Documentation
 
