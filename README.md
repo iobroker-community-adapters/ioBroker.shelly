@@ -71,24 +71,26 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 
 ## Supported devices (Gen 2)
 
-| Shelly Device                              | CoAP | MQTT      | Tested firmware version         |
-| ------------------------------------------ | ---- | --------- | ------------------------------- |
-| Shelly Plus 1 (shellyplus1)                | ❌   | >= v5.0.0 | 20230308-091529/0.14.1-g22a4cb7 |
-| Shelly Plus 1 PM (shellyplus1pm)           | ❌   | >= v5.0.0 | 20230308-091612/0.14.1-g22a4cb7 |
-| Shelly Plus 2 PM (shellyplus2pm)           | ❌   | >= v5.2.0 | 20230308-091102/0.14.1-g22a4cb7 |
-| Shelly Plus i4 (shellyplusi4)              | ❌   | >= v5.3.0 | 20230308-091236/0.14.1-g22a4cb7 |
-| Shelly Plus i4 DC (shellyplusi4)           | ❌   | >= v5.3.0 | 20221206-142532/0.12.0-gafc2404 |
-| Shelly Pro 1 (shellypro1)                  | ❌   | >= v5.2.0 | 20230308-091929/0.14.1-g22a4cb7 |
-| Shelly Pro 1 PM (shellypro1pm)             | ❌   | >= v5.2.0 | 20230308-091936/0.14.1-g22a4cb7 |
-| Shelly Pro 2 (shellypro2)                  | ❌   | >= v5.2.0 | 20230308-092019/0.14.1-g22a4cb7 |
-| Shelly Pro 2 PM (shellypro2pm)             | ❌   | >= v5.2.0 | 20230308-091222/0.14.1-g22a4cb7 |
-| Shelly Pro 3 (shellypro3)                  | ❌   | >= v6.2.0 | 20230308-092019/0.14.1-g22a4cb7 |
-| Shelly Pro 4 PM (shellypro4pm)             | ❌   | >= v5.0.0 | 20230308-091950/0.14.1-g22a4cb7 |
-| Shelly Pro 3 EM (120A) (shellypro3em)      | ❌   | >= v6.4.0 | n/a                             |
-| Shelly Pro 3 EM (400A) (shellypro3em400)   | ❌   | >= v6.5.0 | n/a                             |
-| Shelly Pro Dual Cover PM (shellypro2cover) | ❌   | >= v6.5.0 | n/a                             |
-| Shelly Plus H&T (shellyplusht)             | ❌   | >= v6.2.0 | 20230308-091102/0.14.1-g22a4cb7 |
-| Shelly Plus Plug S (shellyplusplugs)       | ❌   | >= v6.4.0 | n/a                             |
+| Shelly Device                             | CoAP | MQTT      | Tested firmware version         |
+|-------------------------------------------| ---- | --------- | ------------------------------- |
+| Shelly Plus 1 (shellyplus1)               | ❌   | >= v5.0.0 | 20230308-091529/0.14.1-g22a4cb7 |
+| Shelly Plus 1 PM (shellyplus1pm)          | ❌   | >= v5.0.0 | 20230308-091612/0.14.1-g22a4cb7 |
+| Shelly Plus 2 PM (shellyplus2pm)          | ❌   | >= v5.2.0 | 20230308-091102/0.14.1-g22a4cb7 |
+| Shelly Plus i4 (shellyplusi4)             | ❌   | >= v5.3.0 | 20230308-091236/0.14.1-g22a4cb7 |
+| Shelly Plus i4 DC (shellyplusi4)          | ❌   | >= v5.3.0 | 20221206-142532/0.12.0-gafc2404 |
+| Shelly Pro 1 (shellypro1)                 | ❌   | >= v5.2.0 | 20230308-091929/0.14.1-g22a4cb7 |
+| Shelly Pro 1 PM (shellypro1pm)            | ❌   | >= v5.2.0 | 20230308-091936/0.14.1-g22a4cb7 |
+| Shelly Pro 2 (shellypro2)                 | ❌   | >= v5.2.0 | 20230308-092019/0.14.1-g22a4cb7 |
+| Shelly Pro 2 PM (shellypro2pm)            | ❌   | >= v5.2.0 | 20230308-091222/0.14.1-g22a4cb7 |
+| Shelly Pro 3 (shellypro3)                 | ❌   | >= v6.2.0 | 20230308-092019/0.14.1-g22a4cb7 |
+| Shelly Pro 4 PM (shellypro4pm)            | ❌   | >= v5.0.0 | 20230308-091950/0.14.1-g22a4cb7 |
+| Shelly Pro 3 EM (shellypro3em)            | ❌   | >= v6.4.0 | n/a                             |
+| Shelly Plus H&T (shellyplusht)            | ❌   | >= v6.2.0 | 20230308-091102/0.14.1-g22a4cb7 |
+| Shelly Plus Plug S (shellyplusplugs)      | ❌   | >= v6.4.0 | n/a                             |
+| Shelly Plus PM Mini (shellypmmini)        | ❌   | >= ?      | n/a                             |
+| Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= ?      | n/a                             |
+| Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= ?      | n/a                             |
+
 
 ## NOT Supported devices
 
@@ -96,13 +98,9 @@ Uses the default Shelly firmware (no flashing of firmware needed!). You will fin
 - Shelly BLU Gateway
 - Shelly BLU devices (Button 1, Door/Window, Motion, ...)
 - Shelly Plus Smoke
-- Shelly Plus AddOn
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
 - Shelly Pro EM 2x50A
-- Shelly Plus 1 Mini
-- Shelly Plus PM Mini
-- Shelly Plus 1 PM Mini
 - USB powered UVC LED strip
 
 ## Sentry
@@ -124,9 +122,11 @@ execute
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-
 * (klein0r) Added Shelly Pro Dual Cover/Shutter PM
 * (klein0r) Added Shelly Pro 3 EM 400A
+* (JuniperChris929) Added support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini
+* (BooosesThaSnipper) Added support of Shelly Plus AddOn for Gen2 Devices.
+* (D1gitaldad) Added support of Plus PM Mini
 
 ### 6.4.1 (2023-04-23)
 
