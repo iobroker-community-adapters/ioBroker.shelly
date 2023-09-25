@@ -87,10 +87,9 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Pro 3 EM (shellypro3em)            | ❌   | >= v6.4.0 | n/a                             |
 | Shelly Plus H&T (shellyplusht)            | ❌   | >= v6.2.0 | 20230308-091102/0.14.1-g22a4cb7 |
 | Shelly Plus Plug S (shellyplusplugs)      | ❌   | >= v6.4.0 | n/a                             |
-| Shelly Plus PM Mini (shellypluspmmini)    | ❌   | >= ?      | n/a                             |
-| Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= ?      | n/a                             |
-| Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= ?      | n/a                             |
-
+| Shelly Plus PM Mini (shellypluspmmini)    | ❌   | >= v6.4.2 | n/a                             |
+| Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= v6.4.2 | n/a                             |
+| Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.2 | n/a                             |
 
 ## NOT Supported devices
 
