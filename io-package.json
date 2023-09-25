@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.4.2",
+    "version": "6.4.3",
     "news": {
+      "6.4.3": {
+        "en": "Added Shelly Pro Dual Cover/Shutter PM\nAdded Shelly Pro 3 EM 400A\nAdded support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdded support of Shelly Plus AddOn for Gen2 Devices.\nAdded support of Plus PM Mini",
+        "de": "Hinzugefügt Shelly Pro Dual Cover/Shutter PM\nHinzugefügt Shelly Pro 3 EM 400A\nUnterstützung von Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nUnterstützung von Shelly Plus AddOn für Gen2 Geräte hinzugefügt.\nUnterstützung von Plus PM Mini",
+        "ru": "Добавлено Shelly Pro Dual Cover/Shutter PM\nДобавлено Shelly Pro 3 EM 400A\nДобавлена поддержка Shelly Plus 1 Mini + Shelly Plus 1 PM Мини\nДобавлена поддержка Shelly Plus AddOn для Gen2 Devices.\nДобавлена поддержка Plus PM Mini",
+        "pt": "Adicionado Shelly Pro Dual Cover/Shutter PM\nAdicionado Shelly Pro 3 EM 400A\nAdicionado suporte de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdicionado suporte de Shelly Plus AddOn para dispositivos Gen2.\nAdicionado suporte de Plus PM Mini",
+        "nl": "Vertaling:\nVertaling:\n_ Shelly Plus 1 PM Mini\nGesteund ondersteuning van Shelly Plus AddOn voor Gen2 Devices.\n_",
+        "fr": "Ajouté Shelly Pro Dual Cover/Shutter PM\nAjouté Shelly Pro 3 EM 400A\nAjout du support de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAjout du support de Shelly Plus AddOn pour les appareils Gen2.\nAjout du support de Plus PM Mini",
+        "it": "Aggiunto Shelly Pro Dual Cover/Shutter PM\nAggiunto Shelly Pro 3 EM 400A\nAggiunto il supporto di Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAggiunto il supporto di Shelly Plus AddOn per dispositivi Gen2.\nAggiunto il supporto di Plus PM Mini",
+        "es": "Añadido Shelly Pro Dual Cover/Shutter PM\nAñadido Shelly Pro 3 EM 400A\nSoporte añadido de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAñadido soporte de Shelly Plus AddOn para Dispositivos Gen2.\nAgregado soporte de Plus PM Mini",
+        "pl": "Added Shelly Pro Dual Cover/Shutter (ang.)\nOficjalna strona Shelly Pro 3\nOficjalna strona Shelly Plus 1 Mini + Shelly Plus 1 PM Mini (ang.)\nWsparcie Shelly Plus AdddOn dla Gen2 Devices.\nWsparcie Plus Mini",
+        "uk": "Додано Shelly Pro Dual Cover/Shutter PM\nДодано Shelly Pro 3 EM 400A\nДодано підтримку Shelly Plus 1 Mini + Shelly Plus 1 PM Міні\nДодано підтримку Shelly Plus AddOn для пристроїв Gen2.\nДодано підтримку Plus PM Mini",
+        "zh-cn": "增 编\n增 编\n增加圣佩卢斯1个小型+的支持 她完全 Plus 1 PM Mini\n· 进一步支持关于 Gen2 Devic的Shi PlusAdd。.\nB. 添加的预防小儿麻痹症支助"
+      },
       "6.4.1": {
         "en": "Added Shelly Pro 3 EM energy data\nFixed IP handling in Docker containers",
         "de": "Hinzugefügt Shelly Pro 3 EM Energiedaten\nFeste IP-Behandlung in Docker-Containern",

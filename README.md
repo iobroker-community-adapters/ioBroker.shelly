@@ -121,7 +121,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.4.3 (2023-09-25)
 * (klein0r) Added Shelly Pro Dual Cover/Shutter PM
 * (klein0r) Added Shelly Pro 3 EM 400A
 * (JuniperChris929) Added support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini
