@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "6.4.3",
+  "version": "6.4.4",
   "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
   "author": {
     "name": "Thorsten Stueben",
@@ -14,6 +14,10 @@
     {
       "name": "Matthias Kleine",
       "email": "info@haus-automatisierung.com"
+    },
+    {
+      "name": "Christian Scholz",
+      "email": "chs@ip4.de"
     }
   ],
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.shelly",
