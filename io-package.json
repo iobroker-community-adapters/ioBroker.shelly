@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.4.3",
+    "version": "6.4.4",
     "news": {
       "6.4.1": {
         "en": "Added Shelly Pro 3 EM energy data\nFixed IP handling in Docker containers",
