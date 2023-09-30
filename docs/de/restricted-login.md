@@ -1,11 +1,9 @@
 ![Logo](../../admin/shelly.png)
 
 # ioBroker.shelly
-
 This is the German documentation - [🇺🇸 English version](../en/restricted-login.md)
 
 ## Geschützter Login
-
 Um die Shelly-Geräte vor unbefugtem Zugriff zu schützen, setze in der ioBroker Konfiguration einen beliebigen Benutzernamen und Passwort im Tab *Allgemeine Einstellungen*.
 
 ![iobroker_general_restrict_login](./img/iobroker_general_restrict_login.png)
@@ -20,7 +18,6 @@ Aktiviere danach den geschützten Zugriff auf allen Shelly-Geräten.
     - Generation 2: Konfiguriere nur das Passwort aus den Instanz-Einstellungen
 
 ### Warnungen
-
 Ist ein Geräte-Passwort im ioBroker konfiguriert, wird der Adapter Warnungen ins Log schreiben, falls einige Shelly-Geräte ungeschützt sind!
 
 Um keine Warnungen mehr zu erhalten, kann entweder
@@ -29,9 +26,8 @@ Um keine Warnungen mehr zu erhalten, kann entweder
 - auf allen Shelly-Geräten der geschützte Zugriff aktiviert werden
 
 ### Generation 2 Geräte (Plus und Pro)
-
 1. Öffne die Shelly-Webkonfiguration in einem Browser (nicht in der Shelly App!)
-2. Gehe zu ```Settings -> Authentication```
+2. Gehe zu `Settings -> Authentication`
 3. Aktiviere das Passwort-Feature und gib das gerade konfigurierte Passwort ein
 4. Speichere die Konfiguration
 
@@ -40,16 +36,15 @@ Um keine Warnungen mehr zu erhalten, kann entweder
 Ältere Firmware-Versionen (`< 0.12`) haben eine andere Benutzeroberfläche:
 
 1. Öffne die Shelly-Webkonfiguration in einem Browser (nicht in der Shelly App!)
-2. Gehe zu ```Device -> Authentication```
+2. Gehe zu `Device -> Authentication`
 3. Aktiviere das Passwort-Feature und gib das gerade konfigurierte Passwort ein
 4. Speichere die Konfiguration
 
 ![shelly gen2 old](./img/shelly_restrict_login-gen2-old.png)
 
 ### Generation 1 Geräte
-
 1. Öffne die Shelly-Webkonfiguration in einem Browser (nicht in der Shelly App!)
-2. Gehe zu ```Internet & Security settings -> Restricted Login```
+2. Gehe zu `Internet & Security settings -> Restricted Login`
 3. Setze den Haken für den gesicherten Zugriff und gib die gerade konfigurierten Zugangsdaten ein
 4. Speichere die Konfiguration - der Shelly startet automatisch neu
 5. Stelle sicher, dass auf allen Shelly-Geräten die identischen Zugangsdaten konfiguriert werden

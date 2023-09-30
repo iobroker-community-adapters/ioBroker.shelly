@@ -1,329 +1,329 @@
 {
-    "common": {
-        "name": "shelly",
-        "version": "6.4.1",
-        "news": {
-            "6.4.1": {
-                "en": "Added Shelly Pro 3 EM energy data\nFixed IP handling in Docker containers",
-                "de": "Hinzugefügt Shelly Pro 3 EM Energiedaten\nFeste IP-Behandlung in Docker-Containern",
-                "ru": "Добавлено Shelly Pro 3 EM данные по энергии\nИсправлена обработка IP в Docker контейнерах",
-                "pt": "Adicionado Shelly Pro 3 EM dados de energia\nManuseio IP fixo em contentores Docker",
-                "nl": "Vertaling:\nIP behandelt Docker containers",
-                "fr": "Ajout de données énergétiques Shelly Pro 3 EM\nManipulation IP fixe dans les conteneurs Docker",
-                "it": "Shelly Pro 3 EM dati energetici\nGestione IP fissa in contenitori Docker",
-                "es": "Añadido Shelly Pro 3 datos de energía EM\nManejo de IP fijo en contenedores Docker",
-                "pl": "Strona domowa Shelly Pro 3\nObsługa IP w kontenerach Dockera",
-                "uk": "Додано Shelly Pro 3 EM енергетичні дані\nФіксована обробка IP в контейнерах Docker",
-                "zh-cn": "添加了全套的能源数据\n多克集装箱的混合IP处理"
-            },
-            "6.4.0": {
-                "en": "Added Shelly Plus Plug S\nAdded Shelly Pro 3 EM\nReduced checks for firmware updates\nShelly TV profile is now changeable",
-                "de": "Hinzugefügt Shelly Plus Plug S\nHinzugefügt Shelly Pro 3 EM\nReduzierte Kontrollen für Firmware-Updates\nShelly TV-Profil ist jetzt änderbar",
-                "ru": "Добавлено Shelly Plus Plug S\nДобавлено Shelly Pro 3 EM\nУменьшенные проверки обновлений прошивки\nShelly TV профиль теперь изменен",
-                "pt": "Adicionado Shelly Plus Plug S\nAdicionado Shelly Pro 3 EM\nVerificações reduzidas para atualizações de firmware\nPerfil de TV Shelly agora é mutável",
-                "nl": "_\n_\nVerminderde cheques voor firmaware updates\nShelly TV profiel is nu veranderd",
-                "fr": "Ajouté Shelly Plus Plug S\nAjouté Shelly Pro 3 EM\nVérifications réduites pour les mises à jour du firmware\nLe profil Shelly TV est maintenant changeable",
-                "it": "Aggiunto Shelly Plus Plug S\nAggiunto Shelly Pro 3 EM\nRiduzione dei controlli per gli aggiornamenti del firmware\nIl profilo di Shelly TV è ora modificabile",
-                "es": "Añadido Shelly Plus Plug S\nAñadido Shelly Pro 3 EM\nControles reducidos para actualizaciones de firmware\nEl perfil de Shelly TV ahora es cambiante",
-                "pl": "Oficjalna strona Shelly Plus Plug S\nAdded Shelly Pro 3 (ang.)\nReduced checks for firmware updates (ang.)\nProfil Shelly TV jest obecnie zmienny",
-                "uk": "Додано Shelly Plus Plug S\nДодано Shelly Pro 3 EM\nЗменшені перевірки оновлень прошивки\nПрофіль Shelly TV тепер мінливий",
-                "zh-cn": "增 编\n增 编\n公司更新检查\n她完全的电视形象现在可以改变。"
-            },
-            "6.3.1": {
-                "en": "Updated MQTT topic prefix handling\nAdded temperature for generation 2 devices in cover mode\nAdded boost start/stop for Shelly TRV\nAdded external power for Shelly H&T",
-                "de": "Aktualisiertes MQTT-Themen-Präfixhandling\nTemperatur für Generation 2 Geräte im Cover-Modus hinzugefügt\nZusätzlich Boost Start/Stopp für Shelly TRV\nZusätzliche externe Leistung für Shelly H&T",
-                "ru": "Обновлено MQTT тема префикса обработки\nДобавлена температура для генерации 2 устройств в режиме обложки\nДобавлена поддержка start/stop для Шелли TRV\nДобавлена внешняя мощность для Shelly H&T",
-                "pt": "Manipulação de prefixo de tópico MQTT atualizado\nTemperatura adicional para a geração 2 dispositivos no modo de cobertura\nAdicionado boost start/stop para Shelly TRV\nAdicionado poder externo para Shelly H&T",
-                "nl": "Quality over Quantity Releases Vertaling:\nVoeg de temperatuur toe voor generatie 2 apparaten in dekmantel\nVoedde een boost start/stop voor Shelly TriV\nVoeg externe kracht toe voor Shelly HT",
-                "fr": "Mise à jour MQTT sujet préfixe manipulation\nTempérature ajoutée pour les appareils de génération 2 en mode couverture\nAjout de boost start/stop pour Shelly TRV\nPuissance externe supplémentaire pour Shelly HΖT",
-                "it": "Gestione prefisso dell'argomento MQTT aggiornata\nTemperatura aggiuntiva per dispositivi di generazione 2 in modalità di copertura\nAggiunto l'avvio / arresto di spinta per Shelly TRV\nAggiunto potere esterno per Shelly H&T",
-                "es": "Tratamiento de prefijo de MQTT actualizado\nTemperatura agregada para la generación 2 dispositivos en modo de cubierta\nAgregado el inicio / parada del impulso Shelly TRV\nAñadido poder externo para Shelly H",
-                "pl": "Updatek MQTT\nWstępna temperatura dla pokoleń dwóch urządzeń w trybie przechowywania\nDodany start/stop dla startu. Shell TRV\nDodać zewnętrzne moce Shelly H&T",
-                "uk": "Оновлено MQTT тему префіксування\nДодано температуру для генерації 2 пристроїв в режимі кришки\nДоданий приріст старт/стоп для Shelly TRV\nДодано зовнішню потужність для Shelly H&T",
-                "zh-cn": "B. 更新的技术转让问题\n增加2种装置的温度,以涵盖方式\n增加开始/支持 她完全TRV\n增加希全 H&T的外部权力"
-            },
-            "6.3.0": {
-                "en": "Added more TRV features\nImproved Shelly TRV integration\nUpdated knowledge base urls\nAdded Ukrainian language",
-                "de": "Weitere TRV-Funktionen\nVerbesserte Shelly TRV Integration\nAktualisierte Wissensbasis urls\nUkrainische Sprache",
-                "ru": "Добавлено больше возможностей TRV\nУлучшена интеграция Shelly TRV\nОбновленная база знаний urls\nДобавлен украинский язык",
-                "pt": "Adicionado mais TRV recursos\nMelhor integração do Shelly TRV\nURLs de base de conhecimento atualizadas\nAdicionado idioma ucraniano",
-                "nl": "Voegde meer TRV kenmerken toe\nImproviseren Shelly TR integratie\nVerouderde kennis basis uilen\nVoeg Oekraïense taal toe",
-                "fr": "Ajout d'autres fonctionnalités TRV\nAmélioration de l ' intégration de Shelly TRV\nBase de connaissances actualisées urls\nAjout de la langue ukrainienne",
-                "it": "Aggiunto più funzioni TRV\nIntegrazione migliorata di Shelly TRV\nRiferimenti di base di conoscenze aggiornate\nAggiunto lingua ucraina",
-                "es": "Más características de TRV\nMejor integración Shelly TRV\nUrls de base de conocimientos actualizados\nIdioma ucraniano añadido",
-                "pl": "Added TRV\nPoprawa integracji z Shelly TRV\nPodstawa wiedzy\nJęzyk ukraiński",
-                "uk": "Додаткові функції TRV\nПокращена інтеграція Shelly TRV\nОновлені знання бази виворіт\nУкраїнська мова",
-                "zh-cn": "增加的TRV特征\nB. 改善整个TRV一体化\n最新知识库\n增加乌克兰语"
-            },
-            "6.2.4": {
-                "en": "IP address of CoAP devices is unknown in some cases\nOptimized destroy process",
-                "de": "IP-Adresse von CoAP-Geräten ist in einigen Fällen unbekannt\nOptimierter Zerstörungsprozess",
-                "ru": "IP-адрес устройств CoAP неизведан в некоторых случаях\nОптимизированный процесс уничтожения",
-                "pt": "O endereço IP de dispositivos CoAP é desconhecido em alguns casos\nProcesso de destruição otimizado",
-                "nl": "IP adres van CoAP apparatuur is onbekend in sommige gevallen\nVernietigingsproces",
-                "fr": "L'adresse IP des appareils CoAP est inconnue dans certains cas\nProcessus de destruction optimisé",
-                "it": "L'indirizzo IP dei dispositivi CoAP è sconosciuto in alcuni casi\nProcesso di distruzione ottimizzato",
-                "es": "IP address of CoAP devices is unknown in some cases\nProceso de destrucción optimizado",
-                "pl": "Adres IP CoAP nie jest znany w niektórych przypadkach\nOptymizacja niszczeń",
-                "uk": "IP-адреса пристроїв CoAP невідомо в деяких випадках\nОптимальний процес знищення",
-                "zh-cn": "在某些情况下,IP处理联合设施设备的情况不明。\n销毁进程"
-            },
-            "6.2.3": {
-                "en": "Use unique ID for each command - generation 2 devices\nFix: Ack state if value is unchanged",
-                "de": "Verwenden Sie einzigartige ID für jeden Befehl - Generation 2 Geräte\nFix: Ack-Zustand, wenn der Wert unverändert ist",
-                "ru": "Используйте уникальный ID для каждой команды - генерация 2 устройств\nИсправление: Ack состояние, если значение не изменяется",
-                "pt": "Use ID único para cada comando - geração 2 dispositivos\nFix: Ack state se o valor for inalterado",
-                "nl": "Gebruik unieke ID voor elk commando, generatie 2 apparaten\nAck staat als waarde onveranderd is",
-                "fr": "Utiliser l'ID unique pour chaque commande - les appareils de génération 2\nFixe: Ack état si la valeur est inchangée",
-                "it": "Utilizzare ID unico per ogni comando - generazione 2 dispositivi\nFisso: Ack stato se il valore è invariato",
-                "es": "Use ID única para cada comando - generación 2 dispositivos\nFijación: estado de ack si el valor no se cambia",
-                "pl": "Wykorzystywanie unikalnego identyfikatora dla każdego komendy – genera 2 urządzeń\nFix: Czy wartość jest niezmieniona",
-                "uk": "Використовуйте унікальний ідентифікатор для кожної команди - генерації 2 пристроїв\nВиправлення: Стан ck, якщо значення не змінюється",
-                "zh-cn": "B. 每名指挥者使用独一无二的装置\nFix:如果价值不变,则一克国"
-            },
-            "6.2.2": {
-                "en": "Fixed state updates for CoAP integration",
-                "de": "Feste Zustandsaktualisierungen für die CoAP-Integration",
-                "ru": "Исправлены государственные обновления для интеграции CoAP",
-                "pt": "Atualizações de estado fixo para integração CoAP",
-                "nl": "Vertaling:",
-                "fr": "Mises à jour fixes de l'état pour l'intégration CoAP",
-                "it": "Aggiornamenti fissi dello stato per l'integrazione CoAP",
-                "es": "Actualizaciones de estado fijas para la integración de CoAP",
-                "pl": "Fixed state updates for CoAP (ang.)",
-                "uk": "Виправлені оновлення стану для інтеграції CoAP",
-                "zh-cn": "九. 共同方案一体化国家最新资料"
-            }
-        },
-        "titleLang": {
-            "en": "Shelly",
-            "de": "Shelly",
-            "ru": "Shelly",
-            "pt": "Shelly",
-            "nl": "Shelly",
-            "fr": "Shelly",
-            "it": "Shelly",
-            "es": "Shelly",
-            "pl": "Shelly",
-            "uk": "Shelly",
-            "zh-cn": "Shelly"
-        },
-        "desc": {
-            "en": "Integrate Shelly devices via CoAP or MQTT",
-            "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
-            "ru": "Интеграция Shelly устройств через CoAP или MQTT",
-            "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
-            "nl": "Integrate Shelly apparatuur via CoAP of MQT",
-            "fr": "Dispositifs Shelly intégrés via CoAP ou MQTT",
-            "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
-            "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
-            "pl": "Integracja Shelly poprzez CoAP lub MQTT",
-            "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT",
-            "zh-cn": "通过联合方案或技合中心将全套装置纳入"
-        },
-        "license": "MIT",
-        "authors": [
-            "Thorsten Stueben <thorsten@stueben.de>",
-            "Apollon77 <iobroker@fischer-ka.de>",
-            "Matthias Kleine <info@haus-automatisierung.com>"
-        ],
-        "docs": {
-            "en": [
-                "docs/en/README.md",
-                "docs/en/protocol-coap.md",
-                "docs/en/protocol-mqtt.md",
-                "docs/en/restricted-login.md",
-                "docs/en/state-changes.md",
-                "docs/en/faq.md",
-                "docs/en/debug.md"
-            ],
-            "de": [
-                "docs/de/README.md",
-                "docs/de/protocol-coap.md",
-                "docs/de/protocol-mqtt.md",
-                "docs/de/restricted-login.md",
-                "docs/de/state-changes.md",
-                "docs/de/faq.md",
-                "docs/de/debug.md"
-            ]
-        },
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "icon": "shelly.png",
-        "enabled": false,
-        "compact": true,
-        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
-        "keywords": [
-            "Shelly",
-            "IoT",
-            "CoAP",
-            "CoIoT",
-            "MQTT"
-        ],
-        "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
-        "loglevel": "info",
-        "type": "iot-systems",
-        "restartAdapters": [],
-        "connectionType": "local",
-        "dataSource": "push",
-        "tier": 2,
-        "plugins": {
-            "sentry": {
-                "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
-                "pathWhitelist": [
-                    "@apollon",
-                    "shelly-iot"
-                ]
-            }
-        },
-        "adminUI": {
-            "config": "json"
-        },
-        "globalDependencies": [
-            {
-                "admin": ">=6.0.0"
-            }
-        ],
-        "dependencies": [
-            {
-                "js-controller": ">=3.3.22"
-            }
-        ]
+  "common": {
+    "name": "shelly",
+    "version": "6.4.5",
+    "news": {
+      "6.4.5": {
+        "en": "Added Shelly Pro Dual Cover/Shutter PM\nAdded Shelly Pro 3 EM 400A\nAdded support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdded support of Shelly Plus AddOn for Gen2 Devices.\nAdded support of Plus PM Mini",
+        "de": "Hinzugefügt Shelly Pro Dual Cover/Shutter PM\nHinzugefügt Shelly Pro 3 EM 400A\nUnterstützung von Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nUnterstützung von Shelly Plus AddOn für Gen2 Geräte hinzugefügt.\nUnterstützung von Plus PM Mini",
+        "ru": "Добавлено Shelly Pro Dual Cover/Shutter PM\nДобавлено Shelly Pro 3 EM 400A\nДобавлена поддержка Shelly Plus 1 Mini + Shelly Plus 1 PM Мини\nДобавлена поддержка Shelly Plus AddOn для Gen2 Devices.\nДобавлена поддержка Plus PM Mini",
+        "pt": "Adicionado Shelly Pro Dual Cover/Shutter PM\nAdicionado Shelly Pro 3 EM 400A\nAdicionado suporte de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdicionado suporte de Shelly Plus AddOn para dispositivos Gen2.\nAdicionado suporte de Plus PM Mini",
+        "nl": "Vertaling:\nVertaling:\n_ Shelly Plus 1 PM Mini\nGesteund ondersteuning van Shelly Plus AddOn voor Gen2 Devices.\n_",
+        "fr": "Ajouté Shelly Pro Dual Cover/Shutter PM\nAjouté Shelly Pro 3 EM 400A\nAjout du support de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAjout du support de Shelly Plus AddOn pour les appareils Gen2.\nAjout du support de Plus PM Mini",
+        "it": "Aggiunto Shelly Pro Dual Cover/Shutter PM\nAggiunto Shelly Pro 3 EM 400A\nAggiunto il supporto di Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAggiunto il supporto di Shelly Plus AddOn per dispositivi Gen2.\nAggiunto il supporto di Plus PM Mini",
+        "es": "Añadido Shelly Pro Dual Cover/Shutter PM\nAñadido Shelly Pro 3 EM 400A\nSoporte añadido de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAñadido soporte de Shelly Plus AddOn para Dispositivos Gen2.\nAgregado soporte de Plus PM Mini",
+        "pl": "Added Shelly Pro Dual Cover/Shutter (ang.)\nOficjalna strona Shelly Pro 3\nOficjalna strona Shelly Plus 1 Mini + Shelly Plus 1 PM Mini (ang.)\nWsparcie Shelly Plus AdddOn dla Gen2 Devices.\nWsparcie Plus Mini",
+        "uk": "Додано Shelly Pro Dual Cover/Shutter PM\nДодано Shelly Pro 3 EM 400A\nДодано підтримку Shelly Plus 1 Mini + Shelly Plus 1 PM Міні\nДодано підтримку Shelly Plus AddOn для пристроїв Gen2.\nДодано підтримку Plus PM Mini",
+        "zh-cn": "增 编\n增 编\n增加圣佩卢斯1个小型+的支持 她完全 Plus 1 PM Mini\n· 进一步支持关于 Gen2 Devic的Shi PlusAdd。.\nB. 添加的预防小儿麻痹症支助"
+      },
+      "6.4.1": {
+        "en": "Added Shelly Pro 3 EM energy data\nFixed IP handling in Docker containers",
+        "de": "Hinzugefügt Shelly Pro 3 EM Energiedaten\nFeste IP-Behandlung in Docker-Containern",
+        "ru": "Добавлено Shelly Pro 3 EM данные по энергии\nИсправлена обработка IP в Docker контейнерах",
+        "pt": "Adicionado Shelly Pro 3 EM dados de energia\nManuseio IP fixo em contentores Docker",
+        "nl": "Vertaling:\nIP behandelt Docker containers",
+        "fr": "Ajout de données énergétiques Shelly Pro 3 EM\nManipulation IP fixe dans les conteneurs Docker",
+        "it": "Shelly Pro 3 EM dati energetici\nGestione IP fissa in contenitori Docker",
+        "es": "Añadido Shelly Pro 3 datos de energía EM\nManejo de IP fijo en contenedores Docker",
+        "pl": "Strona domowa Shelly Pro 3\nObsługa IP w kontenerach Dockera",
+        "uk": "Додано Shelly Pro 3 EM енергетичні дані\nФіксована обробка IP в контейнерах Docker",
+        "zh-cn": "添加了全套的能源数据\n多克集装箱的混合IP处理"
+      },
+      "6.4.0": {
+        "en": "Added Shelly Plus Plug S\nAdded Shelly Pro 3 EM\nReduced checks for firmware updates\nShelly TV profile is now changeable",
+        "de": "Hinzugefügt Shelly Plus Plug S\nHinzugefügt Shelly Pro 3 EM\nReduzierte Kontrollen für Firmware-Updates\nShelly TV-Profil ist jetzt änderbar",
+        "ru": "Добавлено Shelly Plus Plug S\nДобавлено Shelly Pro 3 EM\nУменьшенные проверки обновлений прошивки\nShelly TV профиль теперь изменен",
+        "pt": "Adicionado Shelly Plus Plug S\nAdicionado Shelly Pro 3 EM\nVerificações reduzidas para atualizações de firmware\nPerfil de TV Shelly agora é mutável",
+        "nl": "_\n_\nVerminderde cheques voor firmaware updates\nShelly TV profiel is nu veranderd",
+        "fr": "Ajouté Shelly Plus Plug S\nAjouté Shelly Pro 3 EM\nVérifications réduites pour les mises à jour du firmware\nLe profil Shelly TV est maintenant changeable",
+        "it": "Aggiunto Shelly Plus Plug S\nAggiunto Shelly Pro 3 EM\nRiduzione dei controlli per gli aggiornamenti del firmware\nIl profilo di Shelly TV è ora modificabile",
+        "es": "Añadido Shelly Plus Plug S\nAñadido Shelly Pro 3 EM\nControles reducidos para actualizaciones de firmware\nEl perfil de Shelly TV ahora es cambiante",
+        "pl": "Oficjalna strona Shelly Plus Plug S\nAdded Shelly Pro 3 (ang.)\nReduced checks for firmware updates (ang.)\nProfil Shelly TV jest obecnie zmienny",
+        "uk": "Додано Shelly Plus Plug S\nДодано Shelly Pro 3 EM\nЗменшені перевірки оновлень прошивки\nПрофіль Shelly TV тепер мінливий",
+        "zh-cn": "增 编\n增 编\n公司更新检查\n她完全的电视形象现在可以改变。"
+      },
+      "6.3.1": {
+        "en": "Updated MQTT topic prefix handling\nAdded temperature for generation 2 devices in cover mode\nAdded boost start/stop for Shelly TRV\nAdded external power for Shelly H&T",
+        "de": "Aktualisiertes MQTT-Themen-Präfixhandling\nTemperatur für Generation 2 Geräte im Cover-Modus hinzugefügt\nZusätzlich Boost Start/Stopp für Shelly TRV\nZusätzliche externe Leistung für Shelly H&T",
+        "ru": "Обновлено MQTT тема префикса обработки\nДобавлена температура для генерации 2 устройств в режиме обложки\nДобавлена поддержка start/stop для Шелли TRV\nДобавлена внешняя мощность для Shelly H&T",
+        "pt": "Manipulação de prefixo de tópico MQTT atualizado\nTemperatura adicional para a geração 2 dispositivos no modo de cobertura\nAdicionado boost start/stop para Shelly TRV\nAdicionado poder externo para Shelly H&T",
+        "nl": "Quality over Quantity Releases Vertaling:\nVoeg de temperatuur toe voor generatie 2 apparaten in dekmantel\nVoedde een boost start/stop voor Shelly TriV\nVoeg externe kracht toe voor Shelly HT",
+        "fr": "Mise à jour MQTT sujet préfixe manipulation\nTempérature ajoutée pour les appareils de génération 2 en mode couverture\nAjout de boost start/stop pour Shelly TRV\nPuissance externe supplémentaire pour Shelly HΖT",
+        "it": "Gestione prefisso dell'argomento MQTT aggiornata\nTemperatura aggiuntiva per dispositivi di generazione 2 in modalità di copertura\nAggiunto l'avvio / arresto di spinta per Shelly TRV\nAggiunto potere esterno per Shelly H&T",
+        "es": "Tratamiento de prefijo de MQTT actualizado\nTemperatura agregada para la generación 2 dispositivos en modo de cubierta\nAgregado el inicio / parada del impulso Shelly TRV\nAñadido poder externo para Shelly H",
+        "pl": "Updatek MQTT\nWstępna temperatura dla pokoleń dwóch urządzeń w trybie przechowywania\nDodany start/stop dla startu. Shell TRV\nDodać zewnętrzne moce Shelly H&T",
+        "uk": "Оновлено MQTT тему префіксування\nДодано температуру для генерації 2 пристроїв в режимі кришки\nДоданий приріст старт/стоп для Shelly TRV\nДодано зовнішню потужність для Shelly H&T",
+        "zh-cn": "B. 更新的技术转让问题\n增加2种装置的温度,以涵盖方式\n增加开始/支持 她完全TRV\n增加希全 H&T的外部权力"
+      },
+      "6.3.0": {
+        "en": "Added more TRV features\nImproved Shelly TRV integration\nUpdated knowledge base urls\nAdded Ukrainian language",
+        "de": "Weitere TRV-Funktionen\nVerbesserte Shelly TRV Integration\nAktualisierte Wissensbasis urls\nUkrainische Sprache",
+        "ru": "Добавлено больше возможностей TRV\nУлучшена интеграция Shelly TRV\nОбновленная база знаний urls\nДобавлен украинский язык",
+        "pt": "Adicionado mais TRV recursos\nMelhor integração do Shelly TRV\nURLs de base de conhecimento atualizadas\nAdicionado idioma ucraniano",
+        "nl": "Voegde meer TRV kenmerken toe\nImproviseren Shelly TR integratie\nVerouderde kennis basis uilen\nVoeg Oekraïense taal toe",
+        "fr": "Ajout d'autres fonctionnalités TRV\nAmélioration de l ' intégration de Shelly TRV\nBase de connaissances actualisées urls\nAjout de la langue ukrainienne",
+        "it": "Aggiunto più funzioni TRV\nIntegrazione migliorata di Shelly TRV\nRiferimenti di base di conoscenze aggiornate\nAggiunto lingua ucraina",
+        "es": "Más características de TRV\nMejor integración Shelly TRV\nUrls de base de conocimientos actualizados\nIdioma ucraniano añadido",
+        "pl": "Added TRV\nPoprawa integracji z Shelly TRV\nPodstawa wiedzy\nJęzyk ukraiński",
+        "uk": "Додаткові функції TRV\nПокращена інтеграція Shelly TRV\nОновлені знання бази виворіт\nУкраїнська мова",
+        "zh-cn": "增加的TRV特征\nB. 改善整个TRV一体化\n最新知识库\n增加乌克兰语"
+      },
+      "6.2.4": {
+        "en": "IP address of CoAP devices is unknown in some cases\nOptimized destroy process",
+        "de": "IP-Adresse von CoAP-Geräten ist in einigen Fällen unbekannt\nOptimierter Zerstörungsprozess",
+        "ru": "IP-адрес устройств CoAP неизведан в некоторых случаях\nОптимизированный процесс уничтожения",
+        "pt": "O endereço IP de dispositivos CoAP é desconhecido em alguns casos\nProcesso de destruição otimizado",
+        "nl": "IP adres van CoAP apparatuur is onbekend in sommige gevallen\nVernietigingsproces",
+        "fr": "L'adresse IP des appareils CoAP est inconnue dans certains cas\nProcessus de destruction optimisé",
+        "it": "L'indirizzo IP dei dispositivi CoAP è sconosciuto in alcuni casi\nProcesso di distruzione ottimizzato",
+        "es": "IP address of CoAP devices is unknown in some cases\nProceso de destrucción optimizado",
+        "pl": "Adres IP CoAP nie jest znany w niektórych przypadkach\nOptymizacja niszczeń",
+        "uk": "IP-адреса пристроїв CoAP невідомо в деяких випадках\nОптимальний процес знищення",
+        "zh-cn": "在某些情况下,IP处理联合设施设备的情况不明。\n销毁进程"
+      },
+      "6.2.3": {
+        "en": "Use unique ID for each command - generation 2 devices\nFix: Ack state if value is unchanged",
+        "de": "Verwenden Sie einzigartige ID für jeden Befehl - Generation 2 Geräte\nFix: Ack-Zustand, wenn der Wert unverändert ist",
+        "ru": "Используйте уникальный ID для каждой команды - генерация 2 устройств\nИсправление: Ack состояние, если значение не изменяется",
+        "pt": "Use ID único para cada comando - geração 2 dispositivos\nFix: Ack state se o valor for inalterado",
+        "nl": "Gebruik unieke ID voor elk commando, generatie 2 apparaten\nAck staat als waarde onveranderd is",
+        "fr": "Utiliser l'ID unique pour chaque commande - les appareils de génération 2\nFixe: Ack état si la valeur est inchangée",
+        "it": "Utilizzare ID unico per ogni comando - generazione 2 dispositivi\nFisso: Ack stato se il valore è invariato",
+        "es": "Use ID única para cada comando - generación 2 dispositivos\nFijación: estado de ack si el valor no se cambia",
+        "pl": "Wykorzystywanie unikalnego identyfikatora dla każdego komendy – genera 2 urządzeń\nFix: Czy wartość jest niezmieniona",
+        "uk": "Використовуйте унікальний ідентифікатор для кожної команди - генерації 2 пристроїв\nВиправлення: Стан ck, якщо значення не змінюється",
+        "zh-cn": "B. 每名指挥者使用独一无二的装置\nFix:如果价值不变,则一克国"
+      }
     },
-    "protectedNative": [
-        "mqttusername",
-        "mqttpassword",
-        "httpusername",
-        "httppassword"
-    ],
-    "encryptedNative": [
-        "mqttpassword",
-        "httppassword"
-    ],
-    "native": {
-        "protocol": "mqtt",
-        "httpusername": "admin",
-        "httppassword": "",
-        "polltime": 15,
-        "autoupdate": false,
-        "updateUnchangedObjects": false,
-        "logDebugMessages": false,
-        "saveHttpResponses": false,
-        "bind": "0.0.0.0",
-        "port": 1882,
-        "mqttusername": "mqttuser",
-        "mqttpassword": "mqttuser",
-        "qos": 0,
-        "coapbind": "0.0.0.0",
-        "blacklist": [
-            {
-                "id": "SHBDUO-1#123456789#2"
-            }
-        ]
+    "titleLang": {
+      "en": "Shelly",
+      "de": "Shelly",
+      "ru": "Shelly",
+      "pt": "Shelly",
+      "nl": "Shelly",
+      "fr": "Shelly",
+      "it": "Shelly",
+      "es": "Shelly",
+      "pl": "Shelly",
+      "uk": "Shelly",
+      "zh-cn": "Shelly"
     },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "",
-            "type": "meta",
-            "common": {
-                "name": {
-                    "en": "Meta storage for user files",
-                    "de": "Meta-Speicher für Benutzerdateien",
-                    "ru": "Meta Storage для файлов пользователей",
-                    "pt": "Meta de armazenamento para arquivos de usuário",
-                    "nl": "Meta opslag voor gebruikersbestanden",
-                    "fr": "Stockage Meta pour les fichiers utilisateur",
-                    "it": "Meta storage per i file utente",
-                    "es": "Meta almacenamiento para archivos de usuario",
-                    "pl": "Meta storage for user files",
-                    "uk": "Зберігання мета для файлів користувачів",
-                    "zh-cn": "用户档案的储存"
-                },
-                "type": "meta.user"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "name": {
-                    "en": "Devices connected",
-                    "de": "Geräte verbunden",
-                    "ru": "Приборы подключены",
-                    "pt": "Dispositivos conectados",
-                    "nl": "Vertaling:",
-                    "fr": "Appareils connectés",
-                    "it": "Dispositivi connessi",
-                    "es": "Dispositivos conectados",
-                    "pl": "Device połączone",
-                    "uk": "Пристрої підключені",
-                    "zh-cn": "联系人"
-                },
-                "type": "boolean",
-                "role": "indicator.connected",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.update",
-            "type": "state",
-            "common": {
-                "name": {
-                    "en": "Update firmware version on all devices",
-                    "de": "Firmware-Version auf allen Geräten aktualisieren",
-                    "ru": "Обновление версии прошивки на всех устройствах",
-                    "pt": "Atualizar a versão de firmware em todos os dispositivos",
-                    "nl": "Update firmaware versie op alle apparaten",
-                    "fr": "Mettre à jour la version du firmware sur tous les appareils",
-                    "it": "Aggiorna la versione firmware su tutti i dispositivi",
-                    "es": "Actualizar la versión de firmware en todos los dispositivos",
-                    "pl": "Oficjalna wersja oprogramowania",
-                    "uk": "Оновлення версії прошивки на всіх пристроях",
-                    "zh-cn": "所有装置的更新软件版本"
-                },
-                "type": "boolean",
-                "role": "button",
-                "read": false,
-                "write": true
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.downloadScripts",
-            "type": "state",
-            "common": {
-                "name": {
-                    "en": "Download scripts from all devices",
-                    "de": "Skripte von allen Geräten herunterladen",
-                    "ru": "Скачать скрипты со всех устройств",
-                    "pt": "Baixar scripts de todos os dispositivos",
-                    "nl": "Download scripts van alle apparaten",
-                    "fr": "Télécharger les scripts de tous les appareils",
-                    "it": "Scarica gli script da tutti i dispositivi",
-                    "es": "Descargar scripts de todos los dispositivos",
-                    "pl": "Skrypty z wszystkich urządzeń",
-                    "uk": "Завантажити скрипти з усіх пристроїв",
-                    "zh-cn": "所有装置的配件"
-                },
-                "type": "boolean",
-                "role": "button",
-                "read": false,
-                "write": true
-            },
-            "native": {}
-        }
+    "desc": {
+      "en": "Integrate Shelly devices via CoAP or MQTT",
+      "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
+      "ru": "Интеграция Shelly устройств через CoAP или MQTT",
+      "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
+      "nl": "Integrate Shelly apparatuur via CoAP of MQT",
+      "fr": "Dispositifs Shelly intégrés via CoAP ou MQTT",
+      "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
+      "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
+      "pl": "Integracja Shelly poprzez CoAP lub MQTT",
+      "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT",
+      "zh-cn": "通过联合方案或技合中心将全套装置纳入"
+    },
+    "license": "MIT",
+    "authors": [
+      "Thorsten Stueben <thorsten@stueben.de>",
+      "Apollon77 <iobroker@fischer-ka.de>",
+      "Matthias Kleine <info@haus-automatisierung.com>"
+    ],
+    "docs": {
+      "en": [
+        "docs/en/README.md",
+        "docs/en/protocol-coap.md",
+        "docs/en/protocol-mqtt.md",
+        "docs/en/restricted-login.md",
+        "docs/en/state-changes.md",
+        "docs/en/faq.md",
+        "docs/en/debug.md"
+      ],
+      "de": [
+        "docs/de/README.md",
+        "docs/de/protocol-coap.md",
+        "docs/de/protocol-mqtt.md",
+        "docs/de/restricted-login.md",
+        "docs/de/state-changes.md",
+        "docs/de/faq.md",
+        "docs/de/debug.md"
+      ]
+    },
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "shelly.png",
+    "enabled": false,
+    "compact": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
+    "keywords": [
+      "Shelly",
+      "IoT",
+      "CoAP",
+      "CoIoT",
+      "MQTT"
+    ],
+    "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
+    "loglevel": "info",
+    "type": "iot-systems",
+    "restartAdapters": [],
+    "connectionType": "local",
+    "dataSource": "push",
+    "tier": 2,
+    "plugins": {
+      "sentry": {
+        "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
+        "pathWhitelist": [
+          "@apollon",
+          "shelly-iot"
+        ]
+      }
+    },
+    "adminUI": {
+      "config": "json"
+    },
+    "globalDependencies": [
+      {
+        "admin": ">=6.0.0"
+      }
+    ],
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.22"
+      }
     ]
+  },
+  "protectedNative": [
+    "mqttusername",
+    "mqttpassword",
+    "httpusername",
+    "httppassword"
+  ],
+  "encryptedNative": [
+    "mqttpassword",
+    "httppassword"
+  ],
+  "native": {
+    "protocol": "mqtt",
+    "httpusername": "admin",
+    "httppassword": "",
+    "polltime": 15,
+    "autoupdate": false,
+    "updateUnchangedObjects": false,
+    "logDebugMessages": false,
+    "saveHttpResponses": false,
+    "bind": "0.0.0.0",
+    "port": 1882,
+    "mqttusername": "mqttuser",
+    "mqttpassword": "mqttuser",
+    "qos": 0,
+    "coapbind": "0.0.0.0",
+    "blacklist": [
+      {
+        "id": "SHBDUO-1#123456789#2"
+      }
+    ]
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "",
+      "type": "meta",
+      "common": {
+        "name": {
+          "en": "Meta storage for user files",
+          "de": "Meta-Speicher für Benutzerdateien",
+          "ru": "Meta Storage для файлов пользователей",
+          "pt": "Meta de armazenamento para arquivos de usuário",
+          "nl": "Meta opslag voor gebruikersbestanden",
+          "fr": "Stockage Meta pour les fichiers utilisateur",
+          "it": "Meta storage per i file utente",
+          "es": "Meta almacenamiento para archivos de usuario",
+          "pl": "Meta storage for user files",
+          "uk": "Зберігання мета для файлів користувачів",
+          "zh-cn": "用户档案的储存"
+        },
+        "type": "meta.user"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Devices connected",
+          "de": "Geräte verbunden",
+          "ru": "Приборы подключены",
+          "pt": "Dispositivos conectados",
+          "nl": "Vertaling:",
+          "fr": "Appareils connectés",
+          "it": "Dispositivi connessi",
+          "es": "Dispositivos conectados",
+          "pl": "Device połączone",
+          "uk": "Пристрої підключені",
+          "zh-cn": "联系人"
+        },
+        "type": "boolean",
+        "role": "indicator.connected",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.update",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Update firmware version on all devices",
+          "de": "Firmware-Version auf allen Geräten aktualisieren",
+          "ru": "Обновление версии прошивки на всех устройствах",
+          "pt": "Atualizar a versão de firmware em todos os dispositivos",
+          "nl": "Update firmaware versie op alle apparaten",
+          "fr": "Mettre à jour la version du firmware sur tous les appareils",
+          "it": "Aggiorna la versione firmware su tutti i dispositivi",
+          "es": "Actualizar la versión de firmware en todos los dispositivos",
+          "pl": "Oficjalna wersja oprogramowania",
+          "uk": "Оновлення версії прошивки на всіх пристроях",
+          "zh-cn": "所有装置的更新软件版本"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.downloadScripts",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Download scripts from all devices",
+          "de": "Skripte von allen Geräten herunterladen",
+          "ru": "Скачать скрипты со всех устройств",
+          "pt": "Baixar scripts de todos os dispositivos",
+          "nl": "Download scripts van alle apparaten",
+          "fr": "Télécharger les scripts de tous les appareils",
+          "it": "Scarica gli script da tutti i dispositivi",
+          "es": "Descargar scripts de todos los dispositivos",
+          "pl": "Skrypty z wszystkich urządzeń",
+          "uk": "Завантажити скрипти з усіх пристроїв",
+          "zh-cn": "所有装置的配件"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    }
+  ]
 }
