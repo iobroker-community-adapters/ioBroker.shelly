@@ -120,7 +120,13 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+* (theimo1221) More Shelly TRV Datapoints
+
 ### 6.4.5 (2023-09-26)
+
 * (klein0r) Added Shelly Pro Dual Cover/Shutter PM
 * (klein0r) Added Shelly Pro 3 EM 400A
 * (JuniperChris929) Added support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini
