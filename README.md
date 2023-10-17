@@ -87,6 +87,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Pro 3 EM (shellypro3em)            | ❌   | >= v6.4.0 | n/a                             |
 | Shelly Plus H&T (shellyplusht)            | ❌   | >= v6.2.0 | 20230308-091102/0.14.1-g22a4cb7 |
 | Shelly Plus Smoke (shellyplussmoke)       | ❌   | >= v6.5.0 | 20230912-082250/1.0.3-g6176478  |
+| Shelly Bluetooth Gateway (shellyblugw)    | ❌   | >= v6.5.0 | 20230912-081940/1.0.3-g6176478  |
 | Shelly Plus Plug S (shellyplusplugs)      | ❌   | >= v6.4.0 | n/a                             |
 | Shelly Plus PM Mini (shellypmmini)        | ❌   | >= v6.4.2 | n/a                             |
 | Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= v6.4.2 | n/a                             |
@@ -95,7 +96,6 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 ## NOT Supported devices
 
 - Shelly Wall Display
-- Shelly BLU Gateway
 - Shelly BLU devices (Button 1, Door/Window, Motion, ...)
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
@@ -124,6 +124,7 @@ execute
 ### **WORK IN PROGRESS**
 
 * (klein0r) Added Shelly Plus Smoke
+* (klein0r) Added Shelly Bluetooth Low Energy Gateway
 * (theimo1221) More Shelly TRV Datapoints
 
 ### 6.4.5 (2023-09-26)
