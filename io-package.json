@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.4.5",
+    "version": "6.5.0",
     "news": {
+      "6.5.0": {
+        "en": "Added Shelly Plus Smoke\nAdded Shelly Bluetooth Low Energy Gateway\nMore Shelly TRV Datapoints",
+        "de": "Hinzugefügt Shelly Plus Rauch\nHinzugefügt Shelly Bluetooth Low Energy Gateway\nMehr Shelly TRV Datapoints",
+        "ru": "Добавлено Shelly Plus Smoke\nДобавлено Shelly Bluetooth Low Energy Gateway\nБольше Shelly TRV Datapoints",
+        "pt": "Adicionado Shelly Plus Smoke\nAdicionado Shelly Bluetooth Low Energy Gateway\nMais Datapoints da Shelly TRV",
+        "nl": "Voegde Shelly Plus Smoke toe\nVoeg Shelly Bluetooth Low Energy Gateway toe\nMeer Shelly TriV Datapoints",
+        "fr": "Ajouté Shelly Plus Smoke\nAjout de Shelly Bluetooth Low Energy Gateway\nPlus de points de données Shelly TRV",
+        "it": "Aggiunto Shelly Plus Smoke\nAggiunto Shelly Bluetooth Low Energy Gateway\nPiù Shelly TRV Datapoints",
+        "es": "Añadido Shelly más humo\nAñadido Shelly Bluetooth Low Energy Gateway\nMás puntos de datos Shelly TRV",
+        "pl": "Strona oficjalna Smoke Shelly Plus\nOficjalna strona Shelly Bluetooth Low Energy Gateway\nMore Shelly TRV Datapoints (ang.)",
+        "uk": "Доданий Shelly Plus дим\nДодана Shelly Bluetooth Low Energy Gateway\nБільше точок даних Shelly TRV",
+        "zh-cn": "增 编\n增加谢全·蓝图低能源\n更广的TRV数据点"
+      },
       "6.4.5": {
         "en": "Added Shelly Pro Dual Cover/Shutter PM\nAdded Shelly Pro 3 EM 400A\nAdded support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdded support of Shelly Plus AddOn for Gen2 Devices.\nAdded support of Plus PM Mini",
         "de": "Hinzugefügt Shelly Pro Dual Cover/Shutter PM\nHinzugefügt Shelly Pro 3 EM 400A\nUnterstützung von Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nUnterstützung von Shelly Plus AddOn für Gen2 Geräte hinzugefügt.\nUnterstützung von Plus PM Mini",
@@ -80,19 +93,6 @@
         "pl": "Adres IP CoAP nie jest znany w niektórych przypadkach\nOptymizacja niszczeń",
         "uk": "IP-адреса пристроїв CoAP невідомо в деяких випадках\nОптимальний процес знищення",
         "zh-cn": "在某些情况下,IP处理联合设施设备的情况不明。\n销毁进程"
-      },
-      "6.2.3": {
-        "en": "Use unique ID for each command - generation 2 devices\nFix: Ack state if value is unchanged",
-        "de": "Verwenden Sie einzigartige ID für jeden Befehl - Generation 2 Geräte\nFix: Ack-Zustand, wenn der Wert unverändert ist",
-        "ru": "Используйте уникальный ID для каждой команды - генерация 2 устройств\nИсправление: Ack состояние, если значение не изменяется",
-        "pt": "Use ID único para cada comando - geração 2 dispositivos\nFix: Ack state se o valor for inalterado",
-        "nl": "Gebruik unieke ID voor elk commando, generatie 2 apparaten\nAck staat als waarde onveranderd is",
-        "fr": "Utiliser l'ID unique pour chaque commande - les appareils de génération 2\nFixe: Ack état si la valeur est inchangée",
-        "it": "Utilizzare ID unico per ogni comando - generazione 2 dispositivi\nFisso: Ack stato se il valore è invariato",
-        "es": "Use ID única para cada comando - generación 2 dispositivos\nFijación: estado de ack si el valor no se cambia",
-        "pl": "Wykorzystywanie unikalnego identyfikatora dla każdego komendy – genera 2 urządzeń\nFix: Czy wartość jest niezmieniona",
-        "uk": "Використовуйте унікальний ідентифікатор для кожної команди - генерації 2 пристроїв\nВиправлення: Стан ck, якщо значення не змінюється",
-        "zh-cn": "B. 每名指挥者使用独一无二的装置\nFix:如果价值不变,则一克国"
       }
     },
     "titleLang": {

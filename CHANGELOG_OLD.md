@@ -1,4 +1,11 @@
 # Older changes
+## 6.3.0 (2022-12-22)
+
+* (klein0r) Added more TRV features
+* (jlegen) Improved Shelly TRV integration
+* (klein0r) Updated knowledge base urls
+* (klein0r) Added Ukrainian language
+
 ## 6.2.4 (2022-10-23)
 
 * (klein0r) IP address of CoAP devices is unknown in some cases

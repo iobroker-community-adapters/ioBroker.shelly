@@ -120,8 +120,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 6.5.0 (2023-10-17)
 
 * (klein0r) Added Shelly Plus Smoke
 * (klein0r) Added Shelly Bluetooth Low Energy Gateway
@@ -153,13 +152,6 @@ execute
 * (klein0r) Added temperature for generation 2 devices in cover mode
 * (klein0r) Added boost start/stop for Shelly TRV
 * (klein0r) Added external power for Shelly H&T
-
-### 6.3.0 (2022-12-22)
-
-* (klein0r) Added more TRV features
-* (jlegen) Improved Shelly TRV integration
-* (klein0r) Updated knowledge base urls
-* (klein0r) Added Ukrainian language
 
 ## License
 
