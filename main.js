@@ -291,6 +291,47 @@ class Shelly extends utils.Adapter {
         }
     }
 
+    async processBleMessage(val) {
+        if (val && val.payload) {
+            const typesList = {
+                battery: 'number',
+                button: 'number',
+                motion: 'number',
+                illuminance: 'number',
+                window: 'number',
+                rotation: 'number',
+                rssi: 'number',
+                address: 'string',
+            };
+
+            await this.extendObjectAsync(`ble.${val.srcBle.mac}`, {
+                type: 'device',
+                common: {
+                    name: val.srcBle.mac,
+                },
+                native: {},
+            }, { preserve: { common: ['name'] } });
+
+            for (const [key, value] of Object.entries(val.payload)) {
+                if (Object.keys(typesList).includes(key)) {
+                    await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.${key}`, {
+                        type: 'state',
+                        common: {
+                            name: key,
+                            type: typesList[key],
+                            role: 'value',
+                            read: true,
+                            write: false,
+                        },
+                        native: {},
+                    });
+
+                    await this.setStateAsync(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true });
+                }
+            }
+        }
+    }
+
     removeNamespace(id) {
         const re = new RegExp(`${this.namespace}*\\.`, 'g');
         return id.replace(re, '');

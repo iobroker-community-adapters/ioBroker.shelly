@@ -324,6 +324,27 @@
         "write": true
       },
       "native": {}
+    },
+    {
+      "_id": "ble",
+      "type": "folder",
+      "common": {
+        "name": {
+          "en": "Bluetooth devices",
+          "de": "Bluetooth-Geräte",
+          "ru": "Bluetooth устройства",
+          "pt": "Dispositivos Bluetooth",
+          "nl": "Bluetooth apparatuur",
+          "fr": "Appareils Bluetooth",
+          "it": "Dispositivi Bluetooth",
+          "es": "Dispositivos Bluetooth",
+          "pl": "Bluetooth device",
+          "uk": "Пристрої Bluetooth",
+          "zh-cn": "蓝图装置"
+        },
+        "desc": "Help: https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md"
+      },
+      "native": {}
     }
   ]
 }

@@ -120,6 +120,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Added BLE devices as states to `shelly.0.ble.*` (Shelly Scripting required)
+
 ### 6.5.0 (2023-10-17)
 
 * (klein0r) Added Shelly Plus Smoke
