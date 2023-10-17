@@ -120,7 +120,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.6.0 (2023-10-17)
 
 * (klein0r) Added BLE devices as states to `shelly.0.ble.*` (Shelly Scripting required)
 
@@ -149,13 +149,6 @@ execute
 * (klein0r) Added Shelly Pro 3 EM
 * (klein0r) Reduced checks for firmware updates
 * (klein0r) Shelly TV profile is now changeable
-
-### 6.3.1 (2023-01-02)
-
-* (klein0r) Updated MQTT topic prefix handling
-* (klein0r) Added temperature for generation 2 devices in cover mode
-* (klein0r) Added boost start/stop for Shelly TRV
-* (klein0r) Added external power for Shelly H&T
 
 ## License
 

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.5.0",
+    "version": "6.6.0",
     "news": {
+      "6.6.0": {
+        "en": "Added BLE devices as states to `shelly.0.ble.*` (Shelly Scripting required)",
+        "de": "Hinzugefügt BLE-Geräte als Zustände zu shelly.0.ble* (Shelly Scripting erforderlich)",
+        "ru": "Добавлены BLE устройства, как государства для shelly.0.ble* (Необходимо скриптирование)",
+        "pt": "Adicionado dispositivos BLE como estados para shelly.0.ble* (Shelly Scripting necessário)",
+        "nl": "Vervoegde BLE apparaten als staat tot Shelly.0",
+        "fr": "Ajout d'appareils BLE comme états à shelly.0.ble* (Shelly Scripting required)",
+        "it": "Aggiunto dispositivi BLE come stati a shelly.0.ble* (Shelly Scripting richiesto)",
+        "es": "Agregados dispositivos BLE como estados a shelly.0.ble* (Se requiere scripting total)",
+        "pl": "Adddowane urządzenia BLE jako stany do ostrzału.0.ble* (ang.)",
+        "uk": "Додано BLE-пристрої як стани для оболонки.0.ble* (Використання потрібного скрипту)",
+        "zh-cn": "增加乙型装置作为炮击国。"
+      },
       "6.5.0": {
         "en": "Added Shelly Plus Smoke\nAdded Shelly Bluetooth Low Energy Gateway\nMore Shelly TRV Datapoints",
         "de": "Hinzugefügt Shelly Plus Rauch\nHinzugefügt Shelly Bluetooth Low Energy Gateway\nMehr Shelly TRV Datapoints",
@@ -80,19 +93,6 @@
         "pl": "Added TRV\nPoprawa integracji z Shelly TRV\nPodstawa wiedzy\nJęzyk ukraiński",
         "uk": "Додаткові функції TRV\nПокращена інтеграція Shelly TRV\nОновлені знання бази виворіт\nУкраїнська мова",
         "zh-cn": "增加的TRV特征\nB. 改善整个TRV一体化\n最新知识库\n增加乌克兰语"
-      },
-      "6.2.4": {
-        "en": "IP address of CoAP devices is unknown in some cases\nOptimized destroy process",
-        "de": "IP-Adresse von CoAP-Geräten ist in einigen Fällen unbekannt\nOptimierter Zerstörungsprozess",
-        "ru": "IP-адрес устройств CoAP неизведан в некоторых случаях\nОптимизированный процесс уничтожения",
-        "pt": "O endereço IP de dispositivos CoAP é desconhecido em alguns casos\nProcesso de destruição otimizado",
-        "nl": "IP adres van CoAP apparatuur is onbekend in sommige gevallen\nVernietigingsproces",
-        "fr": "L'adresse IP des appareils CoAP est inconnue dans certains cas\nProcessus de destruction optimisé",
-        "it": "L'indirizzo IP dei dispositivi CoAP è sconosciuto in alcuni casi\nProcesso di distruzione ottimizzato",
-        "es": "IP address of CoAP devices is unknown in some cases\nProceso de destrucción optimizado",
-        "pl": "Adres IP CoAP nie jest znany w niektórych przypadkach\nOptymizacja niszczeń",
-        "uk": "IP-адреса пристроїв CoAP невідомо в деяких випадках\nОптимальний процес знищення",
-        "zh-cn": "在某些情况下,IP处理联合设施设备的情况不明。\n销毁进程"
       }
     },
     "titleLang": {
