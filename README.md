@@ -93,10 +93,19 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= v6.4.2 | n/a                             |
 | Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.2 | n/a                             |
 
+## Supported devices (Bluetooth/BLU)
+
+**Experimental** - see [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) for details (Shelly Scripting required)
+
+Adapter version >= v6.6.0 required!
+
+- BLU Button 1,
+- BLU Door/Window
+- BLU Motion
+
 ## NOT Supported devices
 
 - Shelly Wall Display
-- Shelly BLU devices (Button 1, Door/Window, Motion, ...)
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
 - Shelly Pro EM 2x50A
