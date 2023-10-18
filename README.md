@@ -89,9 +89,9 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus Smoke (shellyplussmoke)       | ❌   | >= v6.5.0 | 20230912-082250/1.0.3-g6176478  |
 | Shelly Bluetooth Gateway (shellyblugw)    | ❌   | >= v6.5.0 | 20230912-081940/1.0.3-g6176478  |
 | Shelly Plus Plug S (shellyplusplugs)      | ❌   | >= v6.4.0 | n/a                             |
-| Shelly Plus PM Mini (shellypmmini)        | ❌   | >= v6.4.2 | n/a                             |
-| Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= v6.4.2 | n/a                             |
-| Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.2 | n/a                             |
+| Shelly Plus PM Mini (shellypmmini)        | ❌   | >= v6.4.5 | n/a                             |
+| Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= v6.4.5 | n/a                             |
+| Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.5 | n/a                             |
 
 ## Supported devices (Bluetooth/BLU)
 
