@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.6.0",
+    "version": "6.6.1",
     "news": {
+      "6.6.1": {
+        "en": "Fixed stop reason for Shelly 2.5 / Shelly 2\nAdded humidity of Shelly Plus Addon\nNot all devices have external power",
+        "de": "Fixed Stop Grund für Shelly 2.5 / Shelly 2\nHinzugefügt Luftfeuchtigkeit von Shelly Plus Addon\nNicht alle Geräte haben externe Leistung",
+        "ru": "Исправлена причина остановки Shelly 2.5 / Шелли 2\nДобавлена влажность Shelly Plus Addon\nНе все устройства имеют внешнюю мощность",
+        "pt": "Razão de parada fixa para Shelly 2.5 / Shelly 2\nAdicionado umidade de Shelly Plus Addon\nNem todos os dispositivos têm energia externa",
+        "nl": "Vertaling: 2,5/ Shelly 2\nVervoegde vochtigheid van Shelly Plus Addon\nNiet alle apparaten hebben externe macht",
+        "fr": "Cause d'arrêt fixe pour Shelly 2.5 / Shelly 2\nAjout d'humidité de Shelly Plus Addon\nTous les appareils n'ont pas de puissance externe",
+        "it": "Ragione di arresto fisso per Shelly 2.5 / Shelly 2\nAggiunto l'umidità di Shelly Plus Addon\nNon tutti i dispositivi hanno potenza esterna",
+        "es": "Razón de parada fija para Shelly 2.5 / Shelly 2\nHumedad agregada de Shelly Plus Addon\nNo todos los dispositivos tienen energía externa",
+        "pl": "Fixed stop reason for Shelly (ang.). 2.5/ Shelly 2 (ang.)\nWilgotność Shelly Plus Addon\nNie wszystkie urządzenia nie posiadają mocy zewnętrznej",
+        "uk": "Виправлена причина зупинки для Shelly 2.5 / Шелли 2\nДодана вологість Shelly Plus Addon\nНе всі пристрої мають зовнішню потужність",
+        "zh-cn": "D. 固定的中止理由 2.5/ Shelly 2\nD. 增加全套包装的湿度\n并非所有装置都拥有外部权力"
+      },
       "6.6.0": {
         "en": "Added BLE devices as states to `shelly.0.ble.*` (Shelly Scripting required)",
         "de": "Hinzugefügt BLE-Geräte als Zustände zu shelly.0.ble* (Shelly Scripting erforderlich)",
@@ -80,19 +93,6 @@
         "pl": "Updatek MQTT\nWstępna temperatura dla pokoleń dwóch urządzeń w trybie przechowywania\nDodany start/stop dla startu. Shell TRV\nDodać zewnętrzne moce Shelly H&T",
         "uk": "Оновлено MQTT тему префіксування\nДодано температуру для генерації 2 пристроїв в режимі кришки\nДоданий приріст старт/стоп для Shelly TRV\nДодано зовнішню потужність для Shelly H&T",
         "zh-cn": "B. 更新的技术转让问题\n增加2种装置的温度,以涵盖方式\n增加开始/支持 她完全TRV\n增加希全 H&T的外部权力"
-      },
-      "6.3.0": {
-        "en": "Added more TRV features\nImproved Shelly TRV integration\nUpdated knowledge base urls\nAdded Ukrainian language",
-        "de": "Weitere TRV-Funktionen\nVerbesserte Shelly TRV Integration\nAktualisierte Wissensbasis urls\nUkrainische Sprache",
-        "ru": "Добавлено больше возможностей TRV\nУлучшена интеграция Shelly TRV\nОбновленная база знаний urls\nДобавлен украинский язык",
-        "pt": "Adicionado mais TRV recursos\nMelhor integração do Shelly TRV\nURLs de base de conhecimento atualizadas\nAdicionado idioma ucraniano",
-        "nl": "Voegde meer TRV kenmerken toe\nImproviseren Shelly TR integratie\nVerouderde kennis basis uilen\nVoeg Oekraïense taal toe",
-        "fr": "Ajout d'autres fonctionnalités TRV\nAmélioration de l ' intégration de Shelly TRV\nBase de connaissances actualisées urls\nAjout de la langue ukrainienne",
-        "it": "Aggiunto più funzioni TRV\nIntegrazione migliorata di Shelly TRV\nRiferimenti di base di conoscenze aggiornate\nAggiunto lingua ucraina",
-        "es": "Más características de TRV\nMejor integración Shelly TRV\nUrls de base de conocimientos actualizados\nIdioma ucraniano añadido",
-        "pl": "Added TRV\nPoprawa integracji z Shelly TRV\nPodstawa wiedzy\nJęzyk ukraiński",
-        "uk": "Додаткові функції TRV\nПокращена інтеграція Shelly TRV\nОновлені знання бази виворіт\nУкраїнська мова",
-        "zh-cn": "增加的TRV特征\nB. 改善整个TRV一体化\n最新知识库\n增加乌克兰语"
       }
     },
     "titleLang": {

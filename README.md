@@ -129,7 +129,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.6.1 (2023-10-20)
 
 * (klein0r) Fixed stop reason for Shelly 2.5 / Shelly 2
 * (klein0r) Added humidity of Shelly Plus Addon
@@ -157,13 +157,6 @@ execute
 
 * (viper4gh) Added Shelly Pro 3 EM energy data
 * (klein0r) Fixed IP handling in Docker containers
-
-### 6.4.0 (2023-02-09)
-
-* (klein0r) Added Shelly Plus Plug S
-* (klein0r) Added Shelly Pro 3 EM
-* (klein0r) Reduced checks for firmware updates
-* (klein0r) Shelly TV profile is now changeable
 
 ## License
 
