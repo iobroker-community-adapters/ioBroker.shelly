@@ -295,14 +295,15 @@ class Shelly extends utils.Adapter {
         // TODO: Just set values once when called by multiple devices
         if (val && val.payload) {
             const typesList = {
-                battery: 'number',
-                button: 'number',
-                motion: 'number',
-                illuminance: 'number',
-                window: 'number',
-                rotation: 'number',
-                rssi: 'number',
-                address: 'string',
+                rssi: { type: 'number', unit: 'dBm' },
+                battery: { type: 'number', unit: '%' },
+                temperature: { type: 'number', unit: '°C' },
+                humidity: { type: 'number', unit: '%' },
+                illuminance: { type: 'number' },
+                motion: { type: 'number' },
+                window: { type: 'number' },
+                button: { type: 'number' },
+                rotation: { type: 'number' },
             };
 
             await this.extendObjectAsync(`ble.${val.srcBle.mac}`, {
@@ -316,19 +317,20 @@ class Shelly extends utils.Adapter {
 
             for (const [key, value] of Object.entries(val.payload)) {
                 if (Object.keys(typesList).includes(key)) {
-                    await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.${key}`, {
+                    await this.extendObjectAsync(`ble.${val.srcBle.mac}.${key}`, {
                         type: 'state',
                         common: {
                             name: key,
-                            type: typesList[key],
+                            type: typesList[key].type,
                             role: 'value',
                             read: true,
                             write: false,
+                            unit: typesList[key]?.unit,
                         },
                         native: {},
                     });
 
-                    await this.setStateAsync(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true });
+                    await this.setStateAsync(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true, c: val.src });
                 }
             }
         }
