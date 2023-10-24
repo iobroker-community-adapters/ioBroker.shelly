@@ -6,6 +6,8 @@ This is the German documentation - [🇺🇸 English version](../en/protocol-coa
 
 ## CoAP
 
+**CoAP / CoIoT wird nur von Gen1 Geräten unterstützt - Plus- und Pro-Geräte (Gen2) unterstützen dieses Protokoll nicht!**
+
 ![iobroker_general_coap](./img/iobroker_general_coap.png)
 
 **Falls eine Firmware-Version größer als 1.9.4 verwendet wird, musst ein CoIoT-Server auf den Shelly-Geräten konfiguriert werden (unicast).**
