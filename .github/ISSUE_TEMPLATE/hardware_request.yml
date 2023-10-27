@@ -4,8 +4,6 @@ description: "Request a new device which is not supported by this adapter"
 assignees:
   - klein0r
 body:
-  - type: markdown
-    attributes:
   - type: checkboxes
     attributes:
       label: I'm sure that

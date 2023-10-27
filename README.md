@@ -30,7 +30,9 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 [🇩🇪 Dokumentation](./docs/de/README.md)
 
-## Supported devices (Gen 1)
+## Supported devices
+
+### Generation 1 (Gen 1)
 
 | Shelly Device                        | CoAP      | MQTT      | Tested firmware version                  |
 | ------------------------------------ | --------- | --------- | ---------------------------------------- |
@@ -69,7 +71,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly TRV (SHTRV-01)                | >= v6.0.0 | >= v6.0.0 | 20220811-152343/v2.1.8@5afc928c          |
 | Shelly Motion 2 (SHMOS-02)           | => v6.2.0 | >= v6.2.0 | 20220811-152232/v2.1.8@5afc928c          |
 
-## Supported devices (Gen 2)
+### Generation 2 (Gen 2)
 
 | Shelly Device                             | CoAP | MQTT      | Tested firmware version         |
 |-------------------------------------------| ---- | --------- | ------------------------------- |
@@ -93,7 +95,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= v6.4.5 | n/a                             |
 | Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.5 | n/a                             |
 
-## Supported devices (Bluetooth/BLU)
+### Bluetooth Low Energy (BLU)
 
 **Experimental** - see [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) for details (Shelly Scripting required)
 
