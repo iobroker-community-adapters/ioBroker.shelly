@@ -61,9 +61,9 @@ body:
       required: true
   - type: markdown
     attributes:
-      label: Log file(s)
-      description: iobroker.current.log (in debug mode!)
       value: |
+        ### iobroker.current.log (in debug mode!)
+
         ```
         <your log>
         ```
