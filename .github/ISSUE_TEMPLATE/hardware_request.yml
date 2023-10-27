@@ -1,0 +1,29 @@
+name: Hardware request
+title: "[Hardware Request]: "
+description: "Request a new device which is not supported by this adapter"
+assignees:
+  - klein0r
+body:
+  - type: markdown
+    attributes:
+  - type: checkboxes
+    attributes:
+      label: I'm sure that
+      options:
+        - label: This device is still unsupported in the **current beta version** of this adapter
+          required: true
+        - label: There is no other (open) request for the same device type (used the search)
+          required: true
+  - type: input
+    attributes:
+      label: Shelly device
+      description: Which device should be added?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Further information
+      description: >-
+        Share websites, documentation or other useful information to integrate this device
+    validations:
+      required: true

@@ -47,7 +47,7 @@ body:
         - CoAP / CoIoT
       default: 0
     validations:
-      required: false
+      required: true
   - type: textarea
     attributes:
       label: The problem
@@ -59,14 +59,11 @@ body:
         details as possible.
     validations:
       required: true
-  - type: markdown
+  - type: textarea
     attributes:
-      value: |
-        ### iobroker.current.log (in debug mode!)
-
-        ```
-        <your log>
-        ```
+      label: iobroker.current.log (in debug mode!)
+      description: >-
+        Share the log file of this adapter in debug mode
   - type: input
     attributes:
       label: Version of nodejs
