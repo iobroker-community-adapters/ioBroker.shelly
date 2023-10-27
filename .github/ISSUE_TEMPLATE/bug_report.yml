@@ -1,6 +1,8 @@
 name: Bug report
-title: "Bug report"
-description: "Create a report to help improve this ioBroker adapter"
+title: "[Bug]: "
+description: "Create a bug report to help improve this ioBroker adapter"
+assignees:
+  - klein0r
 body:
   - type: markdown
     attributes:
@@ -17,9 +19,6 @@ body:
         Do also not seek support here ("I need help with ...", "I have a
         question ...", "Can someone walk me through ..."), that belongs into the
         [ioBroker forum at forum.iobroker.net](https://forum.iobroker.net/).
-
-        And finally, make sure any bug you want to report is still present with the **current**
-        adapter (beta) version.
 
         Thank you for your collaboration!
   - type: checkboxes
@@ -38,10 +37,15 @@ body:
       description: Which device has a problem? Provide the name and current firmware version.
     validations:
       required: false
-  - type: input
+  - type: dropdown
+    id: protocol
     attributes:
-      label: Protocol (CoAP / MQTT)
+      label: Protocol
       description: Which protocol was configured when this issue occurs
+      options:
+        - MQTT
+        - CoAP / CoIoT
+      default: 0
     validations:
       required: false
   - type: textarea
@@ -57,8 +61,12 @@ body:
       required: true
   - type: markdown
     attributes:
+      label: Log file(s)
+      description: iobroker.current.log (in debug mode!)
       value: |
-        ## Environment
+        ```
+        <your log>
+        ```
   - type: input
     attributes:
       label: Version of nodejs
@@ -73,28 +81,7 @@ body:
       required: true
   - type: input
     attributes:
-      label: Version of Adapter
+      label: Version of adapter
       description: Can be found in the adapters tab of ioBroker admin
     validations:
       required: true
-  - type: input
-    attributes:
-      label: Operating system running ioBroker
-      description: >-
-        Linux, Windows, MacOS, something else? With version please?
-    validations:
-      required: true
-  - type: markdown
-    attributes:
-      value: |
-        ## Logs and other files needed for analysis
-  - type: checkboxes
-    attributes:
-      label: Checklist of files to include below
-      options:
-        - label: iobroker.current.log (Please share the logs in debug mode)
-          required: true
-        - label: Contents of the JavaScript browser console (always include in cases of issues with the user interface)
-  - type: textarea
-    attributes:
-      label: Additional information & file uploads

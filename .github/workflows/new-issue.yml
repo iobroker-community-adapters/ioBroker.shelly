@@ -1,4 +1,4 @@
-# v0.2
+# v0.3
 name: New issue
 
 on:
@@ -30,7 +30,7 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           body: |
             Thanks for reporting a new issue @${{ github.actor }}!
-            1. Please make sure your topic is not covered in the [documentation](https://github.com/${{ github.event.repository.full_name }}/blob/master/docs/en/README.md)
+            1. Please make sure your topic is not covered in the [documentation](https://github.com/${{ github.event.repository.full_name }}/blob/v${{ steps.get_npm_version.outputs.LATEST_VERSION }}/docs/en/README.md)
             2. Ensure that you use the latest **beta version** (not the current stable version): **${{ steps.get_npm_version.outputs.LATEST_VERSION }}**
             3. Please attach all necessary log files (in debug mode!), screenshots and other information to reproduce this issue
             4. [Search for the issue topic](https://github.com/${{ github.event.repository.full_name }}/issues?q=is%3Aissue) in other/closed issues to avoid duplicates!
