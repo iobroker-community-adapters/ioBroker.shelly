@@ -293,7 +293,11 @@ class Shelly extends utils.Adapter {
 
     async processBleMessage(val) {
         // TODO: Just set values once when called by multiple devices
-        if (val && val.payload) {
+        if (val && val.scriptVersion && val.src && val.payload) {
+            if (val.scriptVersion !== '0.1') {
+                this.log.warn(`[BLE] ${val.srcBle.mac} (via ${val.src}): BLE-Script version is invalid, check documentation for latest version`);
+            }
+
             const typesList = {
                 rssi: { type: 'number', unit: 'dBm' },
                 battery: { type: 'number', unit: '%' },
