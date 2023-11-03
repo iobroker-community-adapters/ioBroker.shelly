@@ -8,6 +8,12 @@ You have to create a new script (see below) on a Plus or Pro device (Gen 2) to g
 
 Devices status of all known BLE-Devices will be collected in `shelly.0.ble.<macAddress>`. *Feel free to change the name of the device object to identify the device.*
 
+Requirements:
+
+- A custom script (see below) on the Shelly Gen2 Device (copy/paste)
+- Shelly BLU device (encryption must be disabled!)
+- Adapter-Version > 6.6.0
+
 ## Example Payloads
 
 **Shelly BLU Button 1**
