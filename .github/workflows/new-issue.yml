@@ -18,7 +18,7 @@ jobs:
           node-version: 18
       - name: Get package name
         id: get_package_name
-        uses: ASzc/change-string-case-action@v5
+        uses: ASzc/change-string-case-action@v6
         with:
           string: ${{ github.event.repository.name }}
       - name: Get NPM version
