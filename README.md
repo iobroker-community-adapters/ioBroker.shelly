@@ -94,6 +94,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus PM Mini (shellypmmini)        | ❌   | >= v6.4.5 | n/a                             |
 | Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= v6.4.5 | n/a                             |
 | Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.5 | n/a                             |
+| Shelly Wall Display (shellywalldisplay)   | ❌   | >= v6.7.0 | n/a                             |
 
 ### Bluetooth Low Energy (BLU)
 
@@ -107,7 +108,6 @@ Adapter version >= v6.6.0 required!
 
 ## NOT Supported devices
 
-- Shelly Wall Display
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
 - Shelly Pro EM 2x50A
@@ -134,6 +134,7 @@ execute
 ### **WORK IN PROGRESS**
 
 * (klein0r) Updated handling of ble payloads
+* (D1gitaldad) Added Shelly Wall Display
 
 ### 6.6.1 (2023-10-20)
 
