@@ -1,4 +1,9 @@
 # Older changes
+## 6.4.1 (2023-04-23)
+
+* (viper4gh) Added Shelly Pro 3 EM energy data
+* (klein0r) Fixed IP handling in Docker containers
+
 ## 6.4.0 (2023-02-09)
 
 * (klein0r) Added Shelly Plus Plug S

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.6.1",
+    "version": "6.7.0",
     "news": {
+      "6.7.0": {
+        "en": "Updated handling of ble payloads\nAdded Shelly Wall Display",
+        "de": "Aktualisiertes Handling von ble Payloads\nHinzugefügt Shelly Wandanzeige",
+        "ru": "Обновленная обработка ble payloads\nДобавлено Shelly Wall Display",
+        "pt": "Manipulação atualizada de cargas de ble\nDisplay de parede de prateleira adicionado",
+        "nl": "Verouderd met het bedragen van bleke ladingen\nVertaling:",
+        "fr": "Mise à jour de la manipulation des charges utiles\nAjouté Shelly Wall Display",
+        "it": "Gestione aggiornata dei carichi di carico\nDisplay a parete Shelly",
+        "es": "Gestión actualizada de las cargas de ble\nPantalla de pared adicional",
+        "pl": "Ulepszona obsługa ciężarówek\nOficjalna strona Shelly Wall Display",
+        "uk": "Оновлена обробка блочних перевантажень\nДодано Shelly Wall Display",
+        "zh-cn": "A. 最新处理问题载荷\nD. 增加谢全·隔离墙的区别"
+      },
       "6.6.1": {
         "en": "Fixed stop reason for Shelly 2.5 / Shelly 2\nAdded humidity of Shelly Plus Addon\nNot all devices have external power",
         "de": "Fixed Stop Grund für Shelly 2.5 / Shelly 2\nHinzugefügt Luftfeuchtigkeit von Shelly Plus Addon\nNicht alle Geräte haben externe Leistung",
@@ -80,19 +93,6 @@
         "pl": "Oficjalna strona Shelly Plus Plug S\nAdded Shelly Pro 3 (ang.)\nReduced checks for firmware updates (ang.)\nProfil Shelly TV jest obecnie zmienny",
         "uk": "Додано Shelly Plus Plug S\nДодано Shelly Pro 3 EM\nЗменшені перевірки оновлень прошивки\nПрофіль Shelly TV тепер мінливий",
         "zh-cn": "增 编\n增 编\n公司更新检查\n她完全的电视形象现在可以改变。"
-      },
-      "6.3.1": {
-        "en": "Updated MQTT topic prefix handling\nAdded temperature for generation 2 devices in cover mode\nAdded boost start/stop for Shelly TRV\nAdded external power for Shelly H&T",
-        "de": "Aktualisiertes MQTT-Themen-Präfixhandling\nTemperatur für Generation 2 Geräte im Cover-Modus hinzugefügt\nZusätzlich Boost Start/Stopp für Shelly TRV\nZusätzliche externe Leistung für Shelly H&T",
-        "ru": "Обновлено MQTT тема префикса обработки\nДобавлена температура для генерации 2 устройств в режиме обложки\nДобавлена поддержка start/stop для Шелли TRV\nДобавлена внешняя мощность для Shelly H&T",
-        "pt": "Manipulação de prefixo de tópico MQTT atualizado\nTemperatura adicional para a geração 2 dispositivos no modo de cobertura\nAdicionado boost start/stop para Shelly TRV\nAdicionado poder externo para Shelly H&T",
-        "nl": "Quality over Quantity Releases Vertaling:\nVoeg de temperatuur toe voor generatie 2 apparaten in dekmantel\nVoedde een boost start/stop voor Shelly TriV\nVoeg externe kracht toe voor Shelly HT",
-        "fr": "Mise à jour MQTT sujet préfixe manipulation\nTempérature ajoutée pour les appareils de génération 2 en mode couverture\nAjout de boost start/stop pour Shelly TRV\nPuissance externe supplémentaire pour Shelly HΖT",
-        "it": "Gestione prefisso dell'argomento MQTT aggiornata\nTemperatura aggiuntiva per dispositivi di generazione 2 in modalità di copertura\nAggiunto l'avvio / arresto di spinta per Shelly TRV\nAggiunto potere esterno per Shelly H&T",
-        "es": "Tratamiento de prefijo de MQTT actualizado\nTemperatura agregada para la generación 2 dispositivos en modo de cubierta\nAgregado el inicio / parada del impulso Shelly TRV\nAñadido poder externo para Shelly H",
-        "pl": "Updatek MQTT\nWstępna temperatura dla pokoleń dwóch urządzeń w trybie przechowywania\nDodany start/stop dla startu. Shell TRV\nDodać zewnętrzne moce Shelly H&T",
-        "uk": "Оновлено MQTT тему префіксування\nДодано температуру для генерації 2 пристроїв в режимі кришки\nДоданий приріст старт/стоп для Shelly TRV\nДодано зовнішню потужність для Shelly H&T",
-        "zh-cn": "B. 更新的技术转让问题\n增加2种装置的温度,以涵盖方式\n增加开始/支持 她完全TRV\n增加希全 H&T的外部权力"
       }
     },
     "titleLang": {
