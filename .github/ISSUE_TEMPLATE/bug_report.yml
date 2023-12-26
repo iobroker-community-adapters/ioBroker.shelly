@@ -1,9 +1,11 @@
+#v 0.1
 name: Bug report
 title: "[Bug]: "
 description: "Create a bug report to help improve this ioBroker adapter"
 assignees:
   - klein0r
 body:
+  # general information
   - type: markdown
     attributes:
       value: >
@@ -12,9 +14,9 @@ body:
         If this is the first time you are doing this, please take a few moments to read
         through the [README](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md).
 
-        You are about to report a bug in **Shelly Adapter**. Do not proceed if your issues
-        occurs with ioBroker, any third party adapters, unofficial or outdated
-        adapter versions.
+        You are about to report a bug in **Shelly Adapter**. Do not proceed if your issue
+        occurs with ioBroker core, any other adapters, unofficial or outdated
+        adapter or NodeJS versions.
 
         Do also not seek support here ("I need help with ...", "I have a
         question ...", "Can someone walk me through ..."), that belongs into the
@@ -27,14 +29,21 @@ body:
       options:
         - label: This issue is still present in the **current beta version** of this adapter
           required: true
-        - label: There is no other (open) issue with the same topic (used the search)
+        - label: There is no other (open) issue with the same topic (use the search!)
           required: true
-        - label: This issue is not described in the adapter documentation / FAQ
+        - label: This issue is not described in the adapter documentation / FAQ (read the docs!)
           required: true
+  # adapter specific input fields
   - type: input
     attributes:
       label: Shelly device
-      description: Which device has a problem? Provide the name and current firmware version.
+      description: Which device has a problem?
+    validations:
+      required: false
+  - type: input
+    attributes:
+      label: Shelly firmware version
+      description: Which version is installed on the device?
     validations:
       required: false
   - type: dropdown
@@ -48,6 +57,7 @@ body:
       default: 0
     validations:
       required: true
+  # general questions
   - type: textarea
     attributes:
       label: The problem
