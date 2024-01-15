@@ -132,6 +132,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Updated Shelly i3 number limits
+
 ### 6.7.0 (2023-12-22)
 
 * (klein0r) Updated handling of ble payloads
