@@ -257,25 +257,6 @@
                     "label": "MQTT Password",
                     "help": "Must be configured on all Shelly devices"
                 },
-                "_mqttAuthGen2": {
-                    "hidden": "!data.mqttpassword",
-                    "newLine": true,
-                    "type": "staticImage",
-                    "tooltip": "Gen2",
-                    "sm": 12,
-                    "md": 6,
-                    "lg": 6,
-                    "src": "img/mqttGen2.png"
-                },
-                "_mqttAuthGen1": {
-                    "hidden": "!data.mqttpassword",
-                    "type": "staticImage",
-                    "tooltip": "Gen1",
-                    "sm": 12,
-                    "md": 6,
-                    "lg": 6,
-                    "src": "img/mqttGen1.png"
-                },
                 "_documentationLinkRestrictedLogin": {
                     "type": "staticLink",
                     "href": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/protocol-mqtt.md",
@@ -298,6 +279,25 @@
                     "sm": 12,
                     "md": 4,
                     "lg": 4
+                },
+                "_mqttAuthGen2": {
+                    "hidden": "!data.mqttpassword",
+                    "newLine": true,
+                    "type": "staticImage",
+                    "tooltip": "Gen2",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "src": "img/mqttGen2.png"
+                },
+                "_mqttAuthGen1": {
+                    "hidden": "!data.mqttpassword",
+                    "type": "staticImage",
+                    "tooltip": "Gen1",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "src": "img/mqttGen1.png"
                 },
                 "_headerExpertMqtt": {
                     "newLine": true,
