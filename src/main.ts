@@ -1,18 +1,22 @@
-'use strict';
+import { objectHelper } from '@apollon/iobroker-tools';
+import * as utils from '@iobroker/adapter-core';
 
-const utils = require('@iobroker/adapter-core');
-const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
-const protocolMqtt = require('./lib/protocol/mqtt');
-const protocolCoap = require('./lib/protocol/coap');
-const adapterName = require('./package.json').name.split('.').pop();
-const tcpPing = require('tcp-ping');
-const EventEmitter = require('events').EventEmitter;
+import { EventEmitter } from 'events';
+import * as tcpPing from 'tcp-ping';
 
 class Shelly extends utils.Adapter {
-    constructor(options) {
+    private isUnloaded: boolean;
+    private serverMqtt: null;
+    private serverCoap: null;
+    private firmwareUpdateTimeout: ioBroker.Timeout | null;
+    private onlineCheckTimeout: ioBroker.Timeout | null;
+    private onlineDevices: { [key: string]: boolean };
+    private eventEmitter: EventEmitter;
+
+    public constructor(options: Partial<utils.AdapterOptions> = {}) {
         super({
             ...options,
-            name: adapterName,
+            name: 'shelly',
         });
 
         this.isUnloaded = false;
@@ -31,7 +35,7 @@ class Shelly extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
     }
 
-    async onReady() {
+    private async onReady(): Promise<void> {
         try {
             // Upgrade older config
             if (await this.migrateConfig()) {
@@ -43,7 +47,7 @@ class Shelly extends utils.Adapter {
             this.subscribeStates('*');
             objectHelper.init(this);
 
-            const protocol = this.config.protocol || 'coap';
+            const protocol = this.config.protocol || 'mqtt';
 
             await this.setOnlineFalse();
 
@@ -87,11 +91,7 @@ class Shelly extends utils.Adapter {
         }
     }
 
-    /**
-     * @param {string} id
-     * @param {ioBroker.State | null | undefined} state
-     */
-    onStateChange(id, state) {
+    private onStateChange(id: string, state: ioBroker.State | null | undefined): void {
         // Warning, state can be null if it was deleted
         if (state && !state.ack) {
             const stateId = id.replace(`${this.namespace}.`, '');
@@ -114,10 +114,7 @@ class Shelly extends utils.Adapter {
         }
     }
 
-    /**
-     * @param {() => void} callback
-     */
-    onUnload(callback) {
+    private onUnload(callback: () => void): void {
         this.isUnloaded = true;
 
         if (this.onlineCheckTimeout) {
@@ -163,7 +160,7 @@ class Shelly extends utils.Adapter {
     /**
      * Online-Check via TCP ping (when using CoAP)
      */
-    async onlineCheck() {
+    async onlineCheck(): Promise<void> {
         const valPort = 80;
 
         if (this.onlineCheckTimeout) {
@@ -184,8 +181,7 @@ class Shelly extends utils.Adapter {
                 if (valHostname) {
                     this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
-                    tcpPing.probe(valHostname, valPort, (error, isAlive) =>
-                        this.deviceStatusUpdate(deviceId, isAlive));
+                    tcpPing.probe(valHostname, valPort, (_error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
                 }
             }
         } catch (e) {
@@ -198,7 +194,7 @@ class Shelly extends utils.Adapter {
         }, 60 * 1000); // Restart online check in 60 seconds
     }
 
-    async deviceStatusUpdate(deviceId, status) {
+    async deviceStatusUpdate(deviceId: string, status: boolean): Promise<void> {
         if (this.isUnloaded) return;
         if (!deviceId) return;
 
@@ -246,16 +242,16 @@ class Shelly extends utils.Adapter {
         }
     }
 
-    isOnline(deviceId) {
+    isOnline(deviceId: string): boolean {
         return Object.prototype.hasOwnProperty.call(this.onlineDevices, deviceId);
     }
 
-    async getAllDeviceIds() {
+    async getAllDeviceIds(): Promise<string[]> {
         const devices = await this.getDevicesAsync();
-        return devices.map(device => this.removeNamespace(device._id));
+        return devices.map((device) => this.removeNamespace(device._id));
     }
 
-    async setOnlineFalse() {
+    async setOnlineFalse(): Promise<void> {
         const deviceIds = await this.getAllDeviceIds();
         for (const d in deviceIds) {
             const deviceId = deviceIds[d];
@@ -277,17 +273,20 @@ class Shelly extends utils.Adapter {
         await this.setStateAsync('info.connection', { val: false, ack: true });
     }
 
-    autoFirmwareUpdate() {
+    autoFirmwareUpdate(): void {
         if (this.isUnloaded) return;
         if (this.config.autoupdate) {
             this.log.debug(`[firmwareUpdate] Starting update on every device`);
 
             this.eventEmitter.emit('onFirmwareUpdate');
 
-            this.firmwareUpdateTimeout = this.setTimeout(() => {
-                this.firmwareUpdateTimeout = null;
-                this.autoFirmwareUpdate();
-            }, 15 * 60 * 1000); // Restart firmware update in 60 Seconds
+            this.firmwareUpdateTimeout = this.setTimeout(
+                () => {
+                    this.firmwareUpdateTimeout = null;
+                    this.autoFirmwareUpdate();
+                },
+                15 * 60 * 1000,
+            ); // Restart firmware update in 60 Seconds
         }
     }
 
@@ -383,14 +382,10 @@ class Shelly extends utils.Adapter {
     }
 }
 
-// @ts-ignore parent is a valid property on module
-if (module.parent) {
+if (require.main !== module) {
     // Export the constructor in compact mode
-    /**
-     * @param {Partial<ioBroker.AdapterOptions>} [options={}]
-     */
-    module.exports = (options) => new Shelly(options);
+    module.exports = (options: Partial<utils.AdapterOptions> | undefined) => new Shelly(options);
 } else {
     // otherwise start the instance directly
-    new Shelly();
+    (() => new Shelly())();
 }
