@@ -135,6 +135,7 @@ execute
 ### **WORK IN PROGRESS**
 
 * (klein0r) Updated Shelly i3 number limits
+* (klein0r) Added screenshots to instance configuration
 
 ### 6.7.0 (2023-12-22)
 

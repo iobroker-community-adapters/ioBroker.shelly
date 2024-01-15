@@ -125,6 +125,25 @@
                     "md": 4,
                     "lg": 4
                 },
+                "_restrictedLoginGen2": {
+                    "hidden": "!data.httppassword",
+                    "newLine": true,
+                    "type": "staticImage",
+                    "tooltip": "Gen2",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "src": "img/restrictedLoginGen2.png"
+                },
+                "_restrictedLoginGen1": {
+                    "hidden": "!data.httppassword",
+                    "type": "staticImage",
+                    "tooltip": "Gen1",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "src": "img/restrictedLoginGen1.png"
+                },
                 "_headerCustomOptions": {
                     "newLine": true,
                     "type": "header",
@@ -237,6 +256,25 @@
                     "lg": 4,
                     "label": "MQTT Password",
                     "help": "Must be configured on all Shelly devices"
+                },
+                "_mqttAuthGen2": {
+                    "hidden": "!data.mqttpassword",
+                    "newLine": true,
+                    "type": "staticImage",
+                    "tooltip": "Gen2",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "src": "img/mqttGen2.png"
+                },
+                "_mqttAuthGen1": {
+                    "hidden": "!data.mqttpassword",
+                    "type": "staticImage",
+                    "tooltip": "Gen1",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "src": "img/mqttGen1.png"
                 },
                 "_documentationLinkRestrictedLogin": {
                     "type": "staticLink",
