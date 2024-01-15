@@ -62,7 +62,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Sense (SHSEN-1)               | >= v3.3.0 | >= v3.3.0 | n/a                                      |
 | Shelly Bulb (SHBLB)                  | >= v3.3.0 | >= v3.3.0 | n/a                                      |
 | Shelly Bulb Duo (SHBDUO-1)           | >= v3.3.0 | >= v3.3.0 | 20221027-090712/v1.12.1-ga9117d3         |
-| Shelly Color Bulb (SHCB-1)           | >= v4.0.5 | >= v4.0.5 | 20230503-095009/v1.13.0-g9aed950         |
+| Shelly Color Bulb (SHCB-1)           | >= v4.0.5 | >= v4.0.5 | 20230913-111548/v1.14.0-gcb84623         |
 | Shelly Vintage (SHVIN-1)             | >= v3.3.0 | >= v3.3.0 | n/a                                      |
 | Shelly Uni (SHUNI-1)                 | >= v4.0.4 | >= v4.0.4 | 20230913-114521/v1.14.0-gcb84623         |
 | Shelly Button (SHBTN-1)              | >= v3.3.3 | >= v3.3.3 | 20230913-113105/v1.14.0-gcb84623         |
