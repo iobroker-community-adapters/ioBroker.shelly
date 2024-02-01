@@ -25,7 +25,7 @@ jobs:
         id: get_npm_version
         run: echo "LATEST_VERSION=$(npm view ${{ steps.get_package_name.outputs.lowercase }}@latest version)" >> "$GITHUB_OUTPUT"
       - name: Create comment
-        uses: peter-evans/create-or-update-comment@v3
+        uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
