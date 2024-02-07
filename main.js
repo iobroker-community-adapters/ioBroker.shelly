@@ -304,9 +304,9 @@ class Shelly extends utils.Adapter {
                 temperature: { type: 'number', unit: '°C' },
                 humidity: { type: 'number', unit: '%' },
                 illuminance: { type: 'number' },
-                motion: { type: 'number' },
-                window: { type: 'number' },
-                button: { type: 'number' },
+                motion: { type: 'number', states: { 0: 'Clear', 1: 'Detected' } },
+                window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
+                button: { type: 'number', states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long' } },
                 rotation: { type: 'number' },
             };
 
@@ -330,6 +330,7 @@ class Shelly extends utils.Adapter {
                             read: true,
                             write: false,
                             unit: typesList[key]?.unit,
+                            states: typesList[key]?.states,
                         },
                         native: {},
                     });

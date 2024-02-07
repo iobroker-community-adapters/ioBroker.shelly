@@ -81,9 +81,9 @@ let BTH = {};
 let SHELLY_ID = undefined;
 
 BTH[0x00] = { n: 'pid', t: uint8 };
-BTH[0x01] = { n: 'battery', t: uint8, u: '%' };
-BTH[0x02] = { n: 'temperature', t: int16, f: 0.01, u: 'tC' };
-BTH[0x03] = { n: 'humidity', t: uint16, f: 0.01, u: '%' };
+BTH[0x01] = { n: 'battery', t: uint8 };
+BTH[0x02] = { n: 'temperature', t: int16, f: 0.01 };
+BTH[0x03] = { n: 'humidity', t: uint16, f: 0.01 };
 BTH[0x05] = { n: 'illuminance', t: uint24, f: 0.01 };
 BTH[0x1a] = { n: 'door', t: uint8 };
 BTH[0x20] = { n: 'moisture', t: uint8 };
@@ -96,7 +96,6 @@ function getByteSize(type) {
     if (type === uint8 || type === int8) return 1;
     if (type === uint16 || type === int16) return 2;
     if (type === uint24 || type === int24) return 3;
-    // impossible as advertisements are much smaller
     return 255;
 }
 
@@ -181,7 +180,6 @@ function bleScanCallback(event, result) {
         typeof result.service_data === 'undefined' ||
         typeof result.service_data[BTHOME_SVC_ID_STR] === 'undefined'
     ) {
-        // console.log('Error: Missing service_data member');
         return;
     }
 
@@ -192,8 +190,8 @@ function bleScanCallback(event, result) {
     // exit if unpacked data is null or the device is encrypted
     if (
         unpackedData === null ||
-        typeof unpackedData === "undefined" ||
-        unpackedData["encryption"]
+        typeof unpackedData === 'undefined' ||
+        unpackedData['encryption']
     ) {
         console.log('Error: Encrypted devices are not supported');
         return;
@@ -209,7 +207,7 @@ function bleScanCallback(event, result) {
     unpackedData.rssi = result.rssi;
     unpackedData.address = result.addr;
 
-    // create MQTT-Payload
+    // create MQTT payload
     let message = {
         scriptVersion: SCRIPT_VERSION,
         src: SHELLY_ID,
@@ -220,7 +218,7 @@ function bleScanCallback(event, result) {
         payload: unpackedData
     };
 
-    console.log('Received ' + JSON.stringify(unpackedData));
+    // console.log('Received ' + JSON.stringify(unpackedData));
 
     if (MQTT.isConnected()) {
         MQTT.publish(SHELLY_ID + '/events/ble', JSON.stringify(message));
