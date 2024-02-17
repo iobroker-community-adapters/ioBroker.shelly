@@ -1,4 +1,12 @@
 # Older changes
+## 6.4.5 (2023-09-26)
+
+* (klein0r) Added Shelly Pro Dual Cover/Shutter PM
+* (klein0r) Added Shelly Pro 3 EM 400A
+* (JuniperChris929) Added support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini
+* (BooosesThaSnipper) Added support of Shelly Plus AddOn for Gen2 Devices.
+* (D1gitaldad) Added support of Plus PM Mini
+
 ## 6.4.1 (2023-04-23)
 
 * (viper4gh) Added Shelly Pro 3 EM energy data

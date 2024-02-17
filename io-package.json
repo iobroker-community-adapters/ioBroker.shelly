@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.7.0",
+    "version": "6.8.0",
     "news": {
+      "6.8.0": {
+        "en": "Updated BLE script to 0.2 (new shelly motion firmware)\nUpdated Shelly i3 number limits\nAdded screenshots to instance configuration",
+        "de": "Aktualisierte BLE-Skript auf 0,2 (neue Shelly Motion Firmware)\nAktualisierte Shelly i3 Nummernlimits\nScreenshots zu Instanz-Konfiguration hinzugefügt",
+        "ru": "Обновленный сценарий BLE до 0.2 (новая подшивка для подстрелки)\nОбновленные лимиты номеров Shelly i3\nДобавлены скриншоты к конфигурации экземпляра",
+        "pt": "Script BLE atualizado para 0.2 (novo firmware de movimento shelly)\nLimites de números Shelly i3 atualizados\nAdicionado screenshots para configuração de instância",
+        "nl": "Bijgewerkt BLE script naar 0.2 (nieuwe shelly motion firmware)\nBijgewerkt Shelly i3 aantal limieten\nSchermafbeeldingen toegevoegd aan instantieconfiguratie",
+        "fr": "Mise à jour du script BLE à 0.2 (nouveau firmware shelly motion)\nMise à jour des limites de nombre Shelly i3\nAjout de captures d'écran à la configuration de l'instance",
+        "it": "Aggiornato lo script BLE a 0.2 (nuovo firmware di movimento shelly)\nLimiti numerici aggiornati Shelly i3\nAggiunti screenshot per la configurazione di istanza",
+        "es": "Actualizado BLE script a 0,2 (nuevo firmware de movimiento)\nActualización de los límites de número Shelly i3\nAñadido capturas de pantalla para la configuración de instancia",
+        "pl": "Aktualizacja skryptu BLE do 0.2 (nowy firmware ruchu Shelly)\nAktualizacja limitów liczby Shelly i3\nDodano zrzuty ekranu do konfiguracji instancji",
+        "uk": "Оновлений скрипт BLE до 0.2 (нова прошивка руху)\nОновлені ліміти чисел Shelly i3\nДодано скріншоти до конфігурації екземпляра",
+        "zh-cn": "将 BLE 脚本更新为 0.2( 新舍利运动固件)\n更新 Shelly i3 数字限制\n添加到实例配置的截图"
+      },
       "6.7.0": {
         "en": "Updated handling of ble payloads\nAdded Shelly Wall Display",
         "de": "Aktualisiertes Handling von ble Payloads\nHinzugefügt Shelly Wandanzeige",
@@ -80,19 +93,6 @@
         "pl": "Strona domowa Shelly Pro 3\nObsługa IP w kontenerach Dockera",
         "uk": "Додано Shelly Pro 3 EM енергетичні дані\nФіксована обробка IP в контейнерах Docker",
         "zh-cn": "添加了全套的能源数据\n多克集装箱的混合IP处理"
-      },
-      "6.4.0": {
-        "en": "Added Shelly Plus Plug S\nAdded Shelly Pro 3 EM\nReduced checks for firmware updates\nShelly TV profile is now changeable",
-        "de": "Hinzugefügt Shelly Plus Plug S\nHinzugefügt Shelly Pro 3 EM\nReduzierte Kontrollen für Firmware-Updates\nShelly TV-Profil ist jetzt änderbar",
-        "ru": "Добавлено Shelly Plus Plug S\nДобавлено Shelly Pro 3 EM\nУменьшенные проверки обновлений прошивки\nShelly TV профиль теперь изменен",
-        "pt": "Adicionado Shelly Plus Plug S\nAdicionado Shelly Pro 3 EM\nVerificações reduzidas para atualizações de firmware\nPerfil de TV Shelly agora é mutável",
-        "nl": "_\n_\nVerminderde cheques voor firmaware updates\nShelly TV profiel is nu veranderd",
-        "fr": "Ajouté Shelly Plus Plug S\nAjouté Shelly Pro 3 EM\nVérifications réduites pour les mises à jour du firmware\nLe profil Shelly TV est maintenant changeable",
-        "it": "Aggiunto Shelly Plus Plug S\nAggiunto Shelly Pro 3 EM\nRiduzione dei controlli per gli aggiornamenti del firmware\nIl profilo di Shelly TV è ora modificabile",
-        "es": "Añadido Shelly Plus Plug S\nAñadido Shelly Pro 3 EM\nControles reducidos para actualizaciones de firmware\nEl perfil de Shelly TV ahora es cambiante",
-        "pl": "Oficjalna strona Shelly Plus Plug S\nAdded Shelly Pro 3 (ang.)\nReduced checks for firmware updates (ang.)\nProfil Shelly TV jest obecnie zmienny",
-        "uk": "Додано Shelly Plus Plug S\nДодано Shelly Pro 3 EM\nЗменшені перевірки оновлень прошивки\nПрофіль Shelly TV тепер мінливий",
-        "zh-cn": "增 编\n增 编\n公司更新检查\n她完全的电视形象现在可以改变。"
       }
     },
     "titleLang": {
