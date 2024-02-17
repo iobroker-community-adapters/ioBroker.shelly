@@ -16,7 +16,7 @@ Requirements:
 
 ## Example Payloads
 
-**Shelly BLU Button 1**
+**Shelly BLU Button**
 
 - Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/button
 - Tested with firmware: 20240212-205000/v1.0.11@672f7da3

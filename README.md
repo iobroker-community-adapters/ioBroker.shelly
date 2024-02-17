@@ -100,11 +100,11 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 **Experimental** - see [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) for details (Shelly Scripting required)
 
-Adapter version >= v6.6.0 required!
+Adapter version >= v6.8.0 required!
 
-- BLU Button 1,
-- BLU Door/Window
-- BLU Motion
+- Shelly BLU Button
+- Shelly BLU Door Window
+- Shelly BLU Motion
 
 ## NOT Supported devices
 
