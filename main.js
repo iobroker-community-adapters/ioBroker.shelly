@@ -294,8 +294,8 @@ class Shelly extends utils.Adapter {
     async processBleMessage(val) {
         // TODO: Just set values once when called by multiple devices
         if (val && val.scriptVersion && val.src && val.payload) {
-            if (val.scriptVersion !== '0.1') {
-                this.log.warn(`[BLE] ${val.srcBle.mac} (via ${val.src}): BLE-Script version is invalid, check documentation for latest version`);
+            if (val.scriptVersion !== '0.2') {
+                this.log.warn(`[BLE] ${val.srcBle.mac} (via ${val.src}): BLE-Script version ${val.scriptVersion} is not supported, check documentation for latest version`);
             }
 
             const typesList = {

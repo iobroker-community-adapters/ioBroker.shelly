@@ -134,6 +134,7 @@ execute
 -->
 ### **WORK IN PROGRESS**
 
+* (klein0r) Updated BLE script to 0.2 (new shelly motion firmware)
 * (klein0r) Updated Shelly i3 number limits
 * (klein0r) Added screenshots to instance configuration
 

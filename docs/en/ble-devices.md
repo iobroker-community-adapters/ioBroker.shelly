@@ -12,11 +12,14 @@ Requirements:
 
 - A custom script (see below) on the Shelly Gen2 Device (copy/paste)
 - Shelly BLU device (encryption must be disabled!)
-- Adapter-Version > 6.6.0
+- Adapter-Version > 6.8.0
 
 ## Example Payloads
 
 **Shelly BLU Button 1**
+
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/button
+- Tested with firmware: 20240212-205000/v1.0.11@672f7da3
 
 ```json
 {
@@ -31,6 +34,9 @@ Requirements:
 ```
 
 **Shelly BLU Door/Window**
+
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/dw
+- Tested with firmware: 20240212-205005/v1.0.11@672f7da3
 
 ```json
 {
@@ -48,15 +54,19 @@ Requirements:
 
 **Shelly BLU Motion**
 
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/motion
+- Tested with firmware: 20240212-205015/v1.0.11@672f7da3
+
 ```json
 {
   "encryption": false,
   "BTHome_version": 2,
   "pid": 182,
   "battery": 100,
-  "illuminance": 232,
-  "motion": 1,
-  "rssi": -66,
+  "temperature": 25.9,
+  "illuminance": 427,
+  "motion": 1, // 1 = motion, 0 = motion ended
+  "rssi": -51,
   "address": "bc:02:6e:c3:93:c3"
 }
 ```
@@ -66,8 +76,8 @@ Requirements:
 Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2) and start it:
 
 ```javascript
-// v0.1
-let SCRIPT_VERSION = '0.1';
+// v0.2
+let SCRIPT_VERSION = '0.2';
 let BTHOME_SVC_ID_STR = 'fcd2';
 
 let uint8 = 0;
@@ -80,22 +90,26 @@ let int24 = 5;
 let BTH = {};
 let SHELLY_ID = undefined;
 
-BTH[0x00] = { n: 'pid', t: uint8 };
-BTH[0x01] = { n: 'battery', t: uint8 };
-BTH[0x02] = { n: 'temperature', t: int16, f: 0.01 };
-BTH[0x03] = { n: 'humidity', t: uint16, f: 0.01 };
-BTH[0x05] = { n: 'illuminance', t: uint24, f: 0.01 };
-BTH[0x1a] = { n: 'door', t: uint8 };
-BTH[0x20] = { n: 'moisture', t: uint8 };
-BTH[0x21] = { n: 'motion', t: uint8 };
-BTH[0x2d] = { n: 'window', t: uint8 };
-BTH[0x3a] = { n: 'button', t: uint8 };
-BTH[0x3f] = { n: 'rotation', t: int16, f: 0.1 };
+const BTH = {
+    0x00: { n: 'pid', t: uint8 },
+    0x01: { n: 'battery', t: uint8, u: '%' },
+    0x02: { n: 'temperature', t: int16, f: 0.01, u: 'tC' },
+    0x45: { n: 'temperature', t: int16, f: 0.1, u: 'tC' },
+    0x03: { n: 'humidity', t: uint16, f: 0.01, u: '%' },
+    0x05: { n: 'illuminance', t: uint24, f: 0.01 },
+    0x1a: { n: 'door', t: uint8 },
+    0x20: { n: 'moisture', t: uint8 },
+    0x21: { n: 'motion', t: uint8 },
+    0x2d: { n: 'window', t: uint8 },
+    0x3a: { n: 'button', t: uint8 },
+    0x3f: { n: 'rotation', t: int16, f: 0.1 }
+};
 
 function getByteSize(type) {
     if (type === uint8 || type === int8) return 1;
     if (type === uint16 || type === int16) return 2;
     if (type === uint24 || type === int24) return 3;
+    // impossible as advertisements are much smaller
     return 255;
 }
 
@@ -152,7 +166,7 @@ let BTHomeDecoder = {
         while (buffer.length > 0) {
             _bth = BTH[buffer.at(0)];
             if (typeof _bth === 'undefined') {
-                console.log('Error: unknown type');
+                console.log('Error: unknown type ' + buffer.at(0));
                 break;
             }
             buffer = buffer.slice(1);
@@ -163,7 +177,7 @@ let BTHomeDecoder = {
             buffer = buffer.slice(getByteSize(_bth.t));
         }
         return result;
-    },
+    }
 };
 
 let lastPacketId = 0x100;
@@ -180,6 +194,7 @@ function bleScanCallback(event, result) {
         typeof result.service_data === 'undefined' ||
         typeof result.service_data[BTHOME_SVC_ID_STR] === 'undefined'
     ) {
+        // console.log('Error: Missing service_data member');
         return;
     }
 
@@ -190,8 +205,8 @@ function bleScanCallback(event, result) {
     // exit if unpacked data is null or the device is encrypted
     if (
         unpackedData === null ||
-        typeof unpackedData === 'undefined' ||
-        unpackedData['encryption']
+        typeof unpackedData === "undefined" ||
+        unpackedData["encryption"]
     ) {
         console.log('Error: Encrypted devices are not supported');
         return;
@@ -207,7 +222,7 @@ function bleScanCallback(event, result) {
     unpackedData.rssi = result.rssi;
     unpackedData.address = result.addr;
 
-    // create MQTT payload
+    // create MQTT-Payload
     let message = {
         scriptVersion: SCRIPT_VERSION,
         src: SHELLY_ID,
@@ -218,7 +233,7 @@ function bleScanCallback(event, result) {
         payload: unpackedData
     };
 
-    // console.log('Received ' + JSON.stringify(unpackedData));
+    console.log('Received ' + JSON.stringify(unpackedData));
 
     if (MQTT.isConnected()) {
         MQTT.publish(SHELLY_ID + '/events/ble', JSON.stringify(message));
