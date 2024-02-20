@@ -121,7 +121,6 @@
       "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT",
       "zh-cn": "通过联合方案或技合中心将全套装置纳入"
     },
-    "license": "MIT",
     "authors": [
       "Thorsten Stueben <thorsten@stueben.de>",
       "Apollon77 <iobroker@fischer-ka.de>",
@@ -147,12 +146,6 @@
         "docs/de/debug.md"
       ]
     },
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "icon": "shelly.png",
-    "enabled": false,
-    "compact": true,
-    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
     "keywords": [
       "Shelly",
       "IoT",
@@ -160,13 +153,24 @@
       "CoIoT",
       "MQTT"
     ],
+    "tier": 2,
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
+    "automaticUpgrade": "patch",
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "shelly.png",
+    "enabled": false,
+    "compact": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
     "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
     "loglevel": "info",
     "type": "iot-systems",
     "restartAdapters": [],
     "connectionType": "local",
     "dataSource": "push",
-    "tier": 2,
     "plugins": {
       "sentry": {
         "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
