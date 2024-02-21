@@ -4,9 +4,9 @@
 
 This is the German documentation - [🇺🇸 English version](../en/protocol-coap.md)
 
-## CoAP
+## CoAP (CoIoT)
 
-**CoAP / CoIoT wird nur von Gen1 Geräten unterstützt - Plus- und Pro-Geräte (Gen2) unterstützen dieses Protokoll nicht!**
+**CoAP/CoIoT wird nur von Gen1 Geräten unterstützt - Plus- und Pro-Geräte (Gen2) unterstützen dieses Protokoll nicht!**
 
 ![iobroker_general_coap](./img/iobroker_general_coap.png)
 
@@ -18,7 +18,7 @@ Trage als CoIoT-Server die IP-Adresse von deinem ioBroker Server ein - gefolgt v
 
 **Das Shelly-Gerät muss nach dieser Änderung neugestartet werden!**
 
-CoAP fügt alle Geräte in deinem Netzwerk hinzu. Falls Du einzelne Geräte ausschließen möchtest, kannst Du diese in der Blacklist konfigurieren. Füge dafür die Seriennummern in die Tabelle ein:
+CoAP/CoIoT fügt alle Geräte in deinem Netzwerk hinzu. Falls Du einzelne Geräte ausschließen möchtest, kannst Du diese in der Blacklist konfigurieren. Füge dafür die Seriennummern in die Tabelle ein:
 
 ![iobroker_coap](./img/iobroker_coap.png)
 
@@ -26,7 +26,7 @@ CoAP fügt alle Geräte in deinem Netzwerk hinzu. Falls Du einzelne Geräte auss
 
 Falls Du einen Shelly mit einer Firmware kleiner oder gleich 1.9.4 verwendest, ist keine weitere Konfiguration notwendig. Deine Geräte werden automatisch vom Adapter gefunden.
 
-**Wichtig: Da CoAP Multicast UDP Pakete verwendet, müssen die Shelly-Geräte im gleichen Subnetz wie der ioBroker-Server sein.**
+**Wichtig: Da CoAP/CoIoT Multicast UDP Pakete verwendet, müssen die Shelly-Geräte im gleichen Subnetz wie der ioBroker-Server sein.**
 
 ### Wichtige Hinweise
 
@@ -36,9 +36,9 @@ Falls Du ioBroker in einem Docker-Container laufen hast, muss der Container im N
 
 #### Shelly Firmware 1.8.0 (oder neuer)
 
-- Falls Du das CoAP-Protokoll nutzt, muss ab dieser Version der Adapter in Version 4.0.0 (oder neuer) genutzt werden.
+- Falls Du das CoAP-/CoIoT-Protokoll nutzt, muss ab dieser Version der Adapter in Version 4.0.0 (oder neuer) genutzt werden.
 - Für Geräte mit älterer Firmware (außer Shelly 4 Pro) muss der Adapter in Version 3.3.6 (oder älter) genutzt werden. Die Adapter-Version 4.0.0 (oder neuer) ist nicht mit älteren Firmware-Versionen kompatibel!
 
 #### Shelly Firmware 1.9.4 (oder neuer)
 
-- Ab dieser Version muss ein CoIoT-Server auf jedem Shelly hinterlegt werden, falls das CoAP-Protokoll genutzt wird (unicast).
+- Ab dieser Version muss ein CoAP-/CoIoT-Server auf jedem Shelly hinterlegt werden, falls das CoAP-/CoIoT-Protokoll genutzt wird (unicast).

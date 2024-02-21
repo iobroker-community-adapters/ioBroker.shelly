@@ -7,7 +7,7 @@ This is the English documentation - [🇩🇪 German version](../de/README.md)
 ## Table of contents
 
 - [MQTT protocol](protocol-mqtt.md)
-- [CoAP protocol](protocol-coap.md)
+- [CoAP/CoIoT protocol](protocol-coap.md)
 - [Restricted login](restricted-login.md)
 - [State changes](state-changes.md)
 - [Debug](debug.md)
@@ -21,7 +21,7 @@ This is the English documentation - [🇩🇪 German version](../de/README.md)
 ## Device generations
 Check the list of *supported devices* for more details.
 
-- **Gen1**: ESP8266 devices, [CoAP](protocol-coap.md) or [MQTT](protocol-mqtt.md)
+- **Gen1**: ESP8266 devices, [CoAP/CoIoT](protocol-coap.md) or [MQTT](protocol-mqtt.md)
 - **Gen2**: ESP32 devices, [MQTT](protocol-mqtt.md)
 
 ## General

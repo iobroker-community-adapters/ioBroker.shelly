@@ -7,7 +7,7 @@ This is the German documentation - [🇺🇸 English version](../en/README.md)
 ## Inhaltsverzeichnis
 
 - [MQTT Protokoll](protocol-mqtt.md)
-- [CoAP Protokoll](protocol-coap.md)
+- [CoAP/CoIoT Protokoll](protocol-coap.md)
 - [Geschützter Login](restricted-login.md)
 - [Zustandsänderungen](state-changes.md)
 - [Debug](debug.md)
@@ -22,7 +22,7 @@ This is the German documentation - [🇺🇸 English version](../en/README.md)
 
 Für mehr Informationen, siehe *supported devices*.
 
-- **Gen1**: ESP8266 Geräte, [CoAP](protocol-coap.md) oder [MQTT](protocol-mqtt.md)
+- **Gen1**: ESP8266 Geräte, [CoAP/CoIoT](protocol-coap.md) oder [MQTT](protocol-mqtt.md)
 - **Gen2**: ESP32 Geräte, [MQTT](protocol-mqtt.md)
 
 ## Allgemein
@@ -30,7 +30,7 @@ Für mehr Informationen, siehe *supported devices*.
 Der Adapter kann über MQTT (empfohlen) oder CoAP/CoIoT mit den Geräten kommunizieren.
 
 - Der Standard-Modus des Adapters ist MQTT (siehe [Dokumentation](protocol-mqtt.md) für mehr Informationen)
-- CoAP ist ausschließlich mit Gen1 Geräten kompatibel!
+- CoAP/CoIoT ist ausschließlich mit Gen1 Geräten kompatibel!
 - **Falls Gen2-Geräte integriert werden sollen, muss MQTT konfiguriert werden!**
 
 Fragen? Schaue zuerst in die [FAQ](faq.md)!
