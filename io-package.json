@@ -158,7 +158,6 @@
       "license": "MIT",
       "type": "free"
     },
-    "automaticUpgrade": "patch",
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "shelly.png",
