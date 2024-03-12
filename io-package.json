@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.8.0",
+    "version": "6.9.0",
     "news": {
+      "6.9.0": {
+        "en": "Added Shelly Plus 0-10V\nAdmin notification for available firmware updates",
+        "de": "Hinzugefügt Shelly Plus 0-10V\nAdmin-Benachrichtigung für verfügbare Firmware-Updates",
+        "ru": "Добавлено Shelly Plus 0-10V\nУведомление об имеющихся обновлениях прошивки",
+        "pt": "Adicionado Shelly Plus 0-10V\nNotificação de administrador para atualizações de firmware disponíveis",
+        "nl": "Toegevoegd Shelly Plus 0-10V\nAdmin notificatie voor beschikbare firmware updates",
+        "fr": "Ajouté Shelly Plus 0-10V\nNotification Admin pour les mises à jour firmware disponibles",
+        "it": "Aggiunto Shelly Plus 0-10V\nNotifica di amministratore per gli aggiornamenti firmware disponibili",
+        "es": "Añadido Shelly Plus 0-10V\nAviso de Admin para actualizaciones de firmware disponibles",
+        "pl": "Dodano Shelly Plus 0- 10V\nPowiadomienie administratora o dostępnych aktualizacjach oprogramowania firmowego",
+        "uk": "Додано Shelly Plus 0-10V\nПовідомлення про наявність оновлень прошивки",
+        "zh-cn": "添加雪莉加0-10V\n可用固件更新的管理通知"
+      },
       "6.8.0": {
         "en": "Updated BLE script to 0.2 (new shelly motion firmware)\nUpdated Shelly i3 number limits\nAdded screenshots to instance configuration",
         "de": "Aktualisierte BLE-Skript auf 0,2 (neue Shelly Motion Firmware)\nAktualisierte Shelly i3 Nummernlimits\nScreenshots zu Instanz-Konfiguration hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "Added Shelly Pro Dual Cover/Shutter (ang.)\nOficjalna strona Shelly Pro 3\nOficjalna strona Shelly Plus 1 Mini + Shelly Plus 1 PM Mini (ang.)\nWsparcie Shelly Plus AdddOn dla Gen2 Devices.\nWsparcie Plus Mini",
         "uk": "Додано Shelly Pro Dual Cover/Shutter PM\nДодано Shelly Pro 3 EM 400A\nДодано підтримку Shelly Plus 1 Mini + Shelly Plus 1 PM Міні\nДодано підтримку Shelly Plus AddOn для пристроїв Gen2.\nДодано підтримку Plus PM Mini",
         "zh-cn": "增 编\n增 编\n增加圣佩卢斯1个小型+的支持 她完全 Plus 1 PM Mini\n· 进一步支持关于 Gen2 Devic的Shi PlusAdd。.\nB. 添加的预防小儿麻痹症支助"
-      },
-      "6.4.1": {
-        "en": "Added Shelly Pro 3 EM energy data\nFixed IP handling in Docker containers",
-        "de": "Hinzugefügt Shelly Pro 3 EM Energiedaten\nFeste IP-Behandlung in Docker-Containern",
-        "ru": "Добавлено Shelly Pro 3 EM данные по энергии\nИсправлена обработка IP в Docker контейнерах",
-        "pt": "Adicionado Shelly Pro 3 EM dados de energia\nManuseio IP fixo em contentores Docker",
-        "nl": "Vertaling:\nIP behandelt Docker containers",
-        "fr": "Ajout de données énergétiques Shelly Pro 3 EM\nManipulation IP fixe dans les conteneurs Docker",
-        "it": "Shelly Pro 3 EM dati energetici\nGestione IP fissa in contenitori Docker",
-        "es": "Añadido Shelly Pro 3 datos de energía EM\nManejo de IP fijo en contenedores Docker",
-        "pl": "Strona domowa Shelly Pro 3\nObsługa IP w kontenerach Dockera",
-        "uk": "Додано Shelly Pro 3 EM енергетичні дані\nФіксована обробка IP в контейнерах Docker",
-        "zh-cn": "添加了全套的能源数据\n多克集装箱的混合IP处理"
       }
     },
     "titleLang": {

@@ -133,7 +133,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 6.9.0 (2024-03-12)
 
 * (klein0r) Added Shelly Plus 0-10V
 * (klein0r) Admin notification for available firmware updates
@@ -158,12 +158,6 @@ execute
 ### 6.6.0 (2023-10-17)
 
 * (klein0r) Added BLE devices as states to `shelly.0.ble.*` (Shelly Scripting required)
-
-### 6.5.0 (2023-10-17)
-
-* (klein0r) Added Shelly Plus Smoke
-* (klein0r) Added Shelly Bluetooth Low Energy Gateway
-* (theimo1221) More Shelly TRV Datapoints
 
 ## License
 

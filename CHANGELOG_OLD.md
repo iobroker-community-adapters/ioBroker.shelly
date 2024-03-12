@@ -1,4 +1,10 @@
 # Older changes
+## 6.5.0 (2023-10-17)
+
+* (klein0r) Added Shelly Plus Smoke
+* (klein0r) Added Shelly Bluetooth Low Energy Gateway
+* (theimo1221) More Shelly TRV Datapoints
+
 ## 6.4.5 (2023-09-26)
 
 * (klein0r) Added Shelly Pro Dual Cover/Shutter PM
