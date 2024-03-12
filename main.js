@@ -1,10 +1,12 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
+// @ts-ignore
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
 const adapterName = require('./package.json').name.split('.').pop();
+// @ts-ignore
 const tcpPing = require('tcp-ping');
 const EventEmitter = require('events').EventEmitter;
 
@@ -81,6 +83,9 @@ class Shelly extends utils.Adapter {
 
                 // Wait 10 seconds for devices to connect
                 this.setTimeout(() => this.autoFirmwareUpdate(), 10 * 1000);
+            } else {
+                // Wait 10 seconds for devices to connect
+                this.setTimeout(() => this.firmwareNotify(), 10 * 1000);
             }
         } catch (err) {
             this.log.error(`[onReady] Startup error: ${err}`);
@@ -173,17 +178,14 @@ class Shelly extends utils.Adapter {
 
         try {
             const deviceIds = await this.getAllDeviceIds();
-            for (const d in deviceIds) {
-                const deviceId = deviceIds[d];
-
-                const idHostname = `${deviceId}.hostname`;
-
-                const stateHostaname = await this.getStateAsync(idHostname);
+            for (const deviceId of deviceIds) {
+                const stateHostaname = await this.getStateAsync(`${deviceId}.hostname`);
                 const valHostname = stateHostaname ? stateHostaname.val : undefined;
 
                 if (valHostname) {
                     this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
+                    // @ts-ignore
                     tcpPing.probe(valHostname, valPort, (error, isAlive) =>
                         this.deviceStatusUpdate(deviceId, isAlive));
                 }
@@ -287,7 +289,42 @@ class Shelly extends utils.Adapter {
             this.firmwareUpdateTimeout = this.setTimeout(() => {
                 this.firmwareUpdateTimeout = null;
                 this.autoFirmwareUpdate();
-            }, 15 * 60 * 1000); // Restart firmware update in 60 Seconds
+            }, 15 * 60 * 1000); // Restart firmware update in 15 minutes
+        }
+    }
+
+    async firmwareNotify() {
+        if (this.isUnloaded) return;
+        if (!this.config.autoupdate) {
+            this.log.debug(`[firmwareNotify] Starting firmware check on every device`);
+
+            const availableUpdates = [];
+
+            try {
+                const deviceIds = await this.getAllDeviceIds();
+                for (const deviceId of deviceIds) {
+                    const stateFirmware = await this.getStateAsync(`${deviceId}.firmware`);
+                    const hasNewFirmware = stateFirmware && stateFirmware.ack ? stateFirmware.val : false;
+
+                    if (hasNewFirmware) {
+                        const deviceObj = await this.getObjectAsync(deviceId);
+
+                        availableUpdates.push(`${deviceObj?.common.name} (${deviceId})`);
+                    }
+                }
+            } catch (e) {
+                this.log.error(e.toString());
+            }
+
+            if (availableUpdates.length > 0) {
+                // @ts-ignore
+                this.registerNotification('shelly', 'deviceUpdates', availableUpdates.join('\n'));
+            }
+
+            this.firmwareUpdateTimeout = this.setTimeout(() => {
+                this.firmwareUpdateTimeout = null;
+                this.firmwareNotify();
+            }, 15 * 60 * 1000); // Restart firmware check in 15 minutes
         }
     }
 
@@ -348,28 +385,39 @@ class Shelly extends utils.Adapter {
 
     async migrateConfig() {
         const native = {};
+        // @ts-ignore
         if (this.config?.http_username) {
+            // @ts-ignore
             native.httpusername = this.config.http_username;
             native.http_username = '';
         }
+        // @ts-ignore
         if (this.config?.http_password) {
+            // @ts-ignore
             native.httppassword = this.config.http_password;
             native.http_password = '';
         }
+        // @ts-ignore
         if (this.config?.user) {
+            // @ts-ignore
             native.mqttusername = this.config.user;
             native.user = '';
         }
+        // @ts-ignore
         if (this.config?.password) {
+            // @ts-ignore
             native.mqttpassword = this.config.password;
             native.password = '';
         }
+        // @ts-ignore
         if (this.config?.keys) {
+            // @ts-ignore
             native.blacklist = this.config.keys.map(b => { return { id: b.blacklist }; });
             native.keys = null;
         }
 
         if (this.config) {
+            // @ts-ignore
             this.config.polltime = parseInt(this.config?.polltime, 10);
         }
 

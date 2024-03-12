@@ -136,6 +136,7 @@ execute
 ### **WORK IN PROGRESS**
 
 * (klein0r) Added Shelly Plus 0-10V
+* (klein0r) Admin notification for available firmware updates
 
 ### 6.8.0 (2024-02-17)
 
