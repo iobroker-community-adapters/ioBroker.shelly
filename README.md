@@ -80,6 +80,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus 2 PM (shellyplus2pm)          | ❌   | >= v5.2.0 | 20231219-133951/1.1.0-g34b5d4f  |
 | Shelly Plus i4 (shellyplusi4)             | ❌   | >= v5.3.0 | 20231219-133933/1.1.0-g34b5d4f  |
 | Shelly Plus i4 DC (shellyplusi4)          | ❌   | >= v5.3.0 | 20231219-133933/1.1.0-g34b5d4f  |
+| Shelly Plus 0-10V (shellyplus010v)        | ❌   | >= v6.9.0 | n/a                             |
 | Shelly Pro 1 (shellypro1)                 | ❌   | >= v5.2.0 | 20231219-133937/1.1.0-g34b5d4f  |
 | Shelly Pro 1 PM (shellypro1pm)            | ❌   | >= v5.2.0 | 20231219-133937/1.1.0-g34b5d4f  |
 | Shelly Pro 2 (shellypro2)                 | ❌   | >= v5.2.0 | 20231219-133952/1.1.0-g34b5d4f  |
@@ -132,6 +133,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (klein0r) Added Shelly Plus 0-10V
+
 ### 6.8.0 (2024-02-17)
 
 * (klein0r) Updated BLE script to 0.2 (new shelly motion firmware)
