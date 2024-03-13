@@ -12,64 +12,15 @@ Requirements:
 
 - A custom script (see below) on the Shelly Gen2 Device (copy/paste)
 - Shelly BLU device (encryption must be disabled!)
-- Adapter-Version > 6.8.0
+- The correct script version for the used adapter version
 
-## Example Payloads
-
-**Shelly BLU Button**
-
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/button
-- Tested with firmware: 20240212-205000/v1.0.11@672f7da3
-
-```json
-{
-  "encryption": false,
-  "BTHome_version": 2,
-  "pid": 6,
-  "battery": 70,
-  "button": 1, // 1 = single press, 2 = double press, 3 = triple press, 4 = long press
-  "rssi": -76,
-  "address": "5c:c7:c1:f2:e4:7c"
-}
-```
-
-**Shelly BLU Door/Window**
-
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/dw
-- Tested with firmware: 20240212-205005/v1.0.11@672f7da3
-
-```json
-{
-  "encryption": false,
-  "BTHome_version": 2,
-  "pid": 12,
-  "battery": 100,
-  "illuminance": 13,
-  "window": 0, // 1 = open, 0 = closed
-  "rotation": 0,
-  "rssi": -55,
-  "address": "60:ef:ab:42:ed:25"
-}
-```
-
-**Shelly BLU Motion**
-
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/motion
-- Tested with firmware: 20240212-205015/v1.0.11@672f7da3
-
-```json
-{
-  "encryption": false,
-  "BTHome_version": 2,
-  "pid": 182,
-  "battery": 100,
-  "temperature": 25.9,
-  "illuminance": 427,
-  "motion": 1, // 1 = motion, 0 = motion ended
-  "rssi": -51,
-  "address": "bc:02:6e:c3:93:c3"
-}
-```
+| Adapter version | Script version |
+|-----------------|----------------|
+| 6.6.0           | v0.1           |
+| 6.6.1           | v0.1           |
+| 6.7.0           | v0.1           |
+| 6.8.0           | v0.2           |
+| 6.9.0           | v0.2           |
 
 ## JavaScript (Shelly Scripting)
 
@@ -274,4 +225,61 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
 
     init();
 });
+```
+
+## Example Payloads
+
+**Shelly BLU Button**
+
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/button
+- Tested with firmware: 20240212-205000/v1.0.11@672f7da3
+
+```json
+{
+  "encryption": false,
+  "BTHome_version": 2,
+  "pid": 6,
+  "battery": 70,
+  "button": 1, // 1 = single press, 2 = double press, 3 = triple press, 4 = long press
+  "rssi": -76,
+  "address": "5c:c7:c1:f2:e4:7c"
+}
+```
+
+**Shelly BLU Door/Window**
+
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/dw
+- Tested with firmware: 20240212-205005/v1.0.11@672f7da3
+
+```json
+{
+  "encryption": false,
+  "BTHome_version": 2,
+  "pid": 12,
+  "battery": 100,
+  "illuminance": 13,
+  "window": 0, // 1 = open, 0 = closed
+  "rotation": 0,
+  "rssi": -55,
+  "address": "60:ef:ab:42:ed:25"
+}
+```
+
+**Shelly BLU Motion**
+
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/motion
+- Tested with firmware: 20240212-205015/v1.0.11@672f7da3
+
+```json
+{
+  "encryption": false,
+  "BTHome_version": 2,
+  "pid": 182,
+  "battery": 100,
+  "temperature": 25.9,
+  "illuminance": 427,
+  "motion": 1, // 1 = motion, 0 = motion ended
+  "rssi": -51,
+  "address": "bc:02:6e:c3:93:c3"
+}
 ```

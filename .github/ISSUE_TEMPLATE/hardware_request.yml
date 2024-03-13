@@ -1,8 +1,7 @@
 name: Hardware request
 title: "[Hardware Request]: "
+labels: ["hardware request"]
 description: "Request a new device which is not supported by this adapter"
-assignees:
-  - klein0r
 body:
   - type: checkboxes
     attributes:
