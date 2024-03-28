@@ -37,7 +37,7 @@
     "url": "git+https://github.com/iobroker-community-adapters/ioBroker.shelly.git"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "dependencies": {
     "@apollon/iobroker-tools": "^0.2.1",

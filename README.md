@@ -133,6 +133,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+NodeJS >= 18.x and js-controller >= 5 is required
+
 ### 6.9.0 (2024-03-12)
 
 * (klein0r) Added Shelly Plus 0-10V
