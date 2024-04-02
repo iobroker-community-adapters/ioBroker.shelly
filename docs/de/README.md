@@ -22,8 +22,8 @@ This is the German documentation - [🇺🇸 English version](../en/README.md)
 
 Für mehr Informationen, siehe *supported devices*.
 
-- **Gen1**: ESP8266 Geräte, [CoAP/CoIoT](protocol-coap.md) oder [MQTT](protocol-mqtt.md)
-- **Gen2**: ESP32 Geräte, [MQTT](protocol-mqtt.md)
+- **Gen 1**: ESP8266 Geräte, [CoAP/CoIoT](protocol-coap.md) oder [MQTT](protocol-mqtt.md)
+- **Gen 2+**: ESP32 Geräte, [MQTT](protocol-mqtt.md)
 
 ## Allgemein
 

@@ -21,8 +21,8 @@ This is the English documentation - [🇩🇪 German version](../de/README.md)
 ## Device generations
 Check the list of *supported devices* for more details.
 
-- **Gen1**: ESP8266 devices, [CoAP/CoIoT](protocol-coap.md) or [MQTT](protocol-mqtt.md)
-- **Gen2**: ESP32 devices, [MQTT](protocol-mqtt.md)
+- **Gen 1**: ESP8266 devices, [CoAP/CoIoT](protocol-coap.md) or [MQTT](protocol-mqtt.md)
+- **Gen 2+**: ESP32 devices, [MQTT](protocol-mqtt.md)
 
 ## General
 The adapter can be used in MQTT (recommended) or CoAP/CoIoT mode.

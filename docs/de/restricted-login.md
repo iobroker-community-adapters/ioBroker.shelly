@@ -12,10 +12,10 @@ Aktiviere danach den geschützten Zugriff auf allen Shelly-Geräten.
 
 **Wichtig:**
 
-- Geräte der Generation 2 bieten keine Option für einen Benutzernamen - der Benutzername kann frei gewählt werden, aber ist nur für Geräte der Generation 1 relevant
+- Geräte der Generation 2+ bieten keine Option für einen Benutzernamen - der Benutzername kann frei gewählt werden, aber ist nur für Geräte der Generation 1 relevant
 - Konfiguriere auf allen Geräten das gleiche Passwort, welches in der Shelly-Instanz festgelegt wurde
     - Generation 1: Konfiguriere Benutzername UND Passwort aus der Instanz
-    - Generation 2: Konfiguriere nur das Passwort aus den Instanz-Einstellungen
+    - Generation 2+: Konfiguriere nur das Passwort aus den Instanz-Einstellungen
 
 ### Warnungen
 Ist ein Geräte-Passwort im ioBroker konfiguriert, wird der Adapter Warnungen ins Log schreiben, falls einige Shelly-Geräte ungeschützt sind!
@@ -25,7 +25,7 @@ Um keine Warnungen mehr zu erhalten, kann entweder
 - das Passwort in der Konfiguration des Adapters entfernt werden (= kein Passwort nötig) oder
 - auf allen Shelly-Geräten der geschützte Zugriff aktiviert werden
 
-### Generation 2 Geräte (Plus und Pro)
+### Generation 2+ Geräte (Plus und Pro)
 1. Öffne die Shelly-Webkonfiguration in einem Browser (nicht in der Shelly App!)
 2. Gehe zu `Settings -> Authentication`
 3. Aktiviere das Passwort-Feature und gib das gerade konfigurierte Passwort ein

@@ -14,10 +14,10 @@ Activate the login restriction on all your Shelly devices.
 
 **Important:**
 
-- Generation 2 devices don't provide a username option. The username can be chosen freely but is just used for Generation 1 devices
+- Generation 2+ devices don't provide a username option. The username can be chosen freely but is just used for Generation 1 devices
 - Configure the same password on all devices
     - Generation 1: Configure the defined username and the password of the Shelly instance
-    - Generation 2: Configure just the passwort of the Shelly instance
+    - Generation 2+: Configure just the passwort of the Shelly instance
 
 ### Warnings
 
@@ -28,7 +28,7 @@ To avoid those warnings, you can
 - remove the password from the ioBroker configuration (= no password required) or
 - enable the restricted login on all Shelly devices with the configured password
 
-### Generation 2 devices (Plus and Pro)
+### Generation 2+ devices (Plus and Pro)
 
 1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
 2. Go to `Settings -> Authentication`

@@ -34,4 +34,4 @@ Es ist nicht möglich, den Shelly-Adapter mit einem existierenden MQTT-Broker in
 
 Falls Du Geräte der **Generation 1 (Gen1)** verwendest, kann man MQTT und die Shelly-Cloud nicht gleichzeitig verwenden. In diesem Fall muss CoAP/CoIoT für die ioBroker-Integration genutzt werden, falls die Cloud-Verbindung gleichzeitig bestehen soll.
 
-Geräte der **Generation 2 (Gen2)** können per MQTT verbunden werden und gleichzeitig die Cloud-Verbindung aufrecht erhalten.
+Geräte der **Generation 2+ (Gen2+)** können per MQTT verbunden werden und gleichzeitig die Cloud-Verbindung aufrecht erhalten.
