@@ -6,11 +6,11 @@ This is the English documentation - [🇩🇪 German version](../de/debug.md)
 
 ## Debug
 
-*Debugging is just available for Gen 2 devices*
+*Debugging is just available for Gen 2+ devices*
 
 ### Requirements
 
-- Gen 2 device
+- Gen 2+ device
 - Shelly adapter instance in mqtt mode (version >= 6.0.0)
 
 ### Enable debugging

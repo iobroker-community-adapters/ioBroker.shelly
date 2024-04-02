@@ -4,7 +4,7 @@
 
 **This feature is experimental!**
 
-You have to create a new script (see below) on a Plus or Pro device (Gen 2) to get Events in this state as JSON: `shelly.0.<device>.BLE.Event`.
+You have to create a new script (see below) on a Plus or Pro device (Gen 2+) to get Events in this state as JSON: `shelly.0.<device>.BLE.Event`.
 
 Devices status of all known BLE-Devices will be collected in `shelly.0.ble.<macAddress>`. *Feel free to change the name of the device object to identify the device.*
 
@@ -24,7 +24,7 @@ Requirements:
 
 ## JavaScript (Shelly Scripting)
 
-Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2) and start it:
+Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2+) and start it:
 
 ```javascript
 // v0.2
