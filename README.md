@@ -97,6 +97,12 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.5 | n/a                             |
 | Shelly Wall Display (shellywalldisplay)   | ❌   | >= v6.7.0 | n/a                             |
 
+### Generation 3 (Gen 3)
+
+| Shelly Device                             | CoAP | MQTT      | Tested firmware version         |
+|-------------------------------------------| ---- | --------- | ------------------------------- |
+| Shelly 1 PM Mini (shelly1pmminig3)        | ❌   | >= v7.0.0 | n/a                             |
+
 ### Bluetooth Low Energy (BLU)
 
 **Experimental** - see [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) for details (Shelly Scripting required)
@@ -112,7 +118,6 @@ Adapter version >= v6.8.0 required!
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
 - Shelly Pro EM 2x50A
-- Shelly Gen 3
 - USB powered UVC LED strip
 
 ## Sentry
@@ -136,6 +141,8 @@ execute
 ### **WORK IN PROGRESS**
 
 NodeJS >= 18.x and js-controller >= 5 is required
+
+* (svenbluege) Added Shelly 1 PM Mini (Gen3)
 
 ### 6.9.0 (2024-03-12)
 
