@@ -1,4 +1,4 @@
-# v0.3
+# v0.5
 name: New issue
 
 on:
@@ -13,9 +13,10 @@ jobs:
       issues: write
     steps:
       - name: Setup node
+        id: setup_node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Get package name
         id: get_package_name
         uses: ASzc/change-string-case-action@v6
@@ -25,14 +26,29 @@ jobs:
         id: get_npm_version
         run: echo "LATEST_VERSION=$(npm view ${{ steps.get_package_name.outputs.lowercase }}@latest version)" >> "$GITHUB_OUTPUT"
       - name: Create comment
+        id: create_comment_ok
+        if: ${{ contains(github.event.issue.body, steps.get_npm_version.outputs.LATEST_VERSION) }}
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
             Thanks for reporting a new issue @${{ github.actor }}!
             1. Please make sure your topic is not covered in the [documentation](https://github.com/${{ github.event.repository.full_name }}/blob/v${{ steps.get_npm_version.outputs.LATEST_VERSION }}/docs/en/README.md)
-            2. Ensure that you use the latest **beta version** (not the current stable version): **${{ steps.get_npm_version.outputs.LATEST_VERSION }}**
-            3. Please attach all necessary log files (in debug mode!), screenshots and other information to reproduce this issue
-            4. [Search for the issue topic](https://github.com/${{ github.event.repository.full_name }}/issues?q=is%3Aissue) in other/closed issues to avoid duplicates!
+            2. Please attach all necessary log files (in debug mode!), screenshots and other information to reproduce this issue
+            3. [Search for the issue topic](https://github.com/${{ github.event.repository.full_name }}/issues?q=is%3Aissue) in other/closed issues to avoid duplicates!
+            ----
+            *Otherwise this issue will be closed.*
+      - name: Create comment (beta version)
+        id: create_comment_version
+        if: ${{ !contains(github.event.issue.body, steps.get_npm_version.outputs.LATEST_VERSION) }}
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Thanks for reporting a new issue @${{ github.actor }}!
+            1. Please make sure your topic is not covered in the [documentation](https://github.com/${{ github.event.repository.full_name }}/blob/v${{ steps.get_npm_version.outputs.LATEST_VERSION }}/docs/en/README.md)
+            2. Please attach all necessary log files (in debug mode!), screenshots and other information to reproduce this issue
+            3. [Search for the issue topic](https://github.com/${{ github.event.repository.full_name }}/issues?q=is%3Aissue) in other/closed issues to avoid duplicates!
+            4. Ensure that you use the latest available **beta version** of this adapter (not the current stable version): **${{ steps.get_npm_version.outputs.LATEST_VERSION }}**
             ----
             *Otherwise this issue will be closed.*
