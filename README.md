@@ -101,6 +101,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 | Shelly Device                             | CoAP | MQTT      | Tested firmware version         |
 |-------------------------------------------| ---- | --------- | ------------------------------- |
+| Shelly 1 Mini (shelly1minig3)             | ❌   | >= v7.0.0 | n/a                             |
 | Shelly 1 PM Mini (shelly1pmminig3)        | ❌   | >= v7.0.0 | n/a                             |
 
 ### Bluetooth Low Energy (BLU)
@@ -142,6 +143,7 @@ execute
 
 NodeJS >= 18.x and js-controller >= 5 is required
 
+* (klein0r) Added Shelly 1 Mini (Gen3)
 * (svenbluege) Added Shelly 1 PM Mini (Gen3)
 
 ### 6.9.0 (2024-03-12)
