@@ -95,7 +95,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus PM Mini (shellypmmini)        | ❌   | >= v6.4.5 | n/a                             |
 | Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= v6.4.5 | n/a                             |
 | Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.5 | n/a                             |
-| Shelly Wall Display (shellywalldisplay)   | ❌   | >= v6.7.0 | n/a                             |
+| Shelly Wall Display (shellywalldisplay)   | ❌   | >= v7.0.0 | 20240402-142908/1.2.11-e287c5c3 |
 
 ### Generation 3 (Gen 3)
 
@@ -147,6 +147,7 @@ NodeJS >= 18.x and js-controller >= 5 is required
 * (klein0r) Added Shelly 1 Mini (Gen3)
 * (svenbluege) Added Shelly 1 PM Mini (Gen3)
 * (klein0r) Added Shelly PM Mini (Gen3)
+* (klein0r) Fixed Shelly Wall Display integration
 
 ### 6.9.0 (2024-03-12)
 
