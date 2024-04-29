@@ -414,7 +414,21 @@ class Shelly extends utils.Adapter {
             // Check if same message has been received by other Shellys
             if (pidOld !== pidNew) {
                 await this.setStateAsync(`ble.${val.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
-                await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, { val: JSON.stringify({ [val.src]: val.payload.rssi }), ack: true });
+                await this.setStateAsync(
+                    `ble.${val.srcBle.mac}.receivedBy`, {
+                        val: JSON.stringify(
+                            {
+                                [val.src]: {
+                                    rssi: val.payload.rssi,
+                                    ts: Date.now(),
+                                },
+                            },
+                            null,
+                            2,
+                        ),
+                        ack: true,
+                    },
+                );
 
                 for (const [key, value] of Object.entries(val.payload)) {
                     if (Object.keys(typesList).includes(key)) {
@@ -440,9 +454,12 @@ class Shelly extends utils.Adapter {
                     const receivedByState = await this.getStateAsync(`ble.${val.srcBle.mac}.receivedBy`);
                     if (receivedByState) {
                         const deviceList = JSON.parse(receivedByState.val);
-                        deviceList[val.src] = val.payload.rssi;
+                        deviceList[val.src] = {
+                            rssi: val.payload.rssi,
+                            ts: Date.now(),
+                        };
 
-                        await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, { val: JSON.stringify(deviceList), ack: true });
+                        await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, { val: JSON.stringify(deviceList, null, 2), ack: true });
                     }
                 } catch (err) {
                     this.log.error(`[processBleMessage] Unable to extend device list (receivedBy) of ${val.srcBle.mac}: ${err}`);

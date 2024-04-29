@@ -8,6 +8,21 @@ You have to create a new script (see below) on a Plus or Pro device (Gen 2+) to 
 
 Devices status of all known BLE-Devices will be collected in `shelly.0.ble.<macAddress>`. *Feel free to change the name of the device object to identify the device.*
 
+Since adapter version 7.1.0 you will get a list of all devices (JSON object) which received the Bluetooth message in `shelly.0.ble.<macAddress>.receivedBy`. Example format:
+
+```json
+{
+  "shelly1pmminig3-3030f9e512ac": {
+    "rssi": -49,
+    "ts": 1714383830316
+  },
+  "shellypmminig3-84fce63c5d7c": {
+    "rssi": -39,
+    "ts": 1714383830416
+  }
+}
+```
+
 Requirements:
 
 - A custom script (see below) on the Shelly Gen2 Device (copy/paste)

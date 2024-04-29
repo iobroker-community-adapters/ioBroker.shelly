@@ -147,6 +147,7 @@ execute
 ### **WORK IN PROGRESS**
 
 * (klein0r) Added Shelly Plus Uni
+* (klein0r) Improved structure of ble events (receivedBy) - see documentation for details
 
 ### 7.0.0 (2024-04-29)
 
