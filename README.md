@@ -146,6 +146,7 @@ execute
 -->
 ### **WORK IN PROGRESS**
 
+* (klein0r) Breaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)
 * (klein0r) Added Shelly Plus Uni
 * (klein0r) Improved structure of ble events (receivedBy) - see documentation for details
 
