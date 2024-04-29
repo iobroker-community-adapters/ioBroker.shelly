@@ -152,6 +152,7 @@ NodeJS >= 18.x and js-controller >= 5 is required
 * (klein0r) Added Shelly Pro Dimmer 1 PM
 * (klein0r) Fixed Shelly Wall Display integration
 * (klein0r) Added device list of ble events (receivedBy) - removed rssi state
+* (klein0r) Added Switch Addon for Shelly Pro 3 EM
 
 ### 6.9.0 (2024-03-12)
 
