@@ -143,7 +143,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 7.0.0 (2024-04-29)
 
 NodeJS >= 18.x and js-controller >= 5 is required
 
@@ -176,10 +176,6 @@ NodeJS >= 18.x and js-controller >= 5 is required
 * (klein0r) Fixed stop reason for Shelly 2.5 / Shelly 2
 * (klein0r) Added humidity of Shelly Plus Addon
 * (klein0r) Not all devices have external power
-
-### 6.6.0 (2023-10-17)
-
-* (klein0r) Added BLE devices as states to `shelly.0.ble.*` (Shelly Scripting required)
 
 ## License
 

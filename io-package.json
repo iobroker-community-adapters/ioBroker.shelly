@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.9.0",
+    "version": "7.0.0",
     "news": {
+      "7.0.0": {
+        "en": "NodeJS >= 18.x and js-controller >= 5 is required\n\n* Added Shelly 1 Mini (Gen3)\n* Added Shelly 1 PM Mini (Gen3)\n* Added Shelly PM Mini (Gen3)\n* Added Shelly Pro Dimmer 1 PM and Pro Dimmer 2 PM\n* Fixed Shelly Wall Display integration\n* Added device list of ble events (receivedBy) - removed rssi state\n* Added Switch Addon for Shelly Pro 3 EM",
+        "de": "NodeJS >= 18.x und js-Controller >= 5 ist erforderlich\n\n* Hinzugefügt Shelly 1 Mini (Gen3)\n* Hinzugefügt Shelly 1 PM Mini (Gen3)\n* Hinzugefügt Shelly PM Mini (Gen3)\n* Hinzugefügt Shelly Pro Dimmer 1 PM und Pro Dimmer 2 PM\n* Feste Shelly Wandanzeige Integration\n* Hinzugefügt Geräteliste von ble events (receivedBy) - entfernt rssi Zustand\n* Hinzugefügt Schalter Addon für Shelly Pro 3 EM",
+        "ru": "NodeJS >= 18.x и js-контроллер >= 5 требуется\n\n* Добавлено Shelly 1 Mini (Gen3)\n* Добавлено Shelly 1 PM Mini (Gen3)\n* Добавлено Shelly PM Mini (Gen3)\n* Добавлено Shelly Pro Dimmer 1 PM и Pro Dimmer 2 PM\n* Интеграция Fixed Shelly Wall Display\n* Добавлен список устройств отблескных событий (receivedBy) - удаленное состояние rssi\n* Добавлен коммутатор для Shelly Pro 3 EM",
+        "pt": "NodeJS >= 18.x e js-controller >= 5 é necessário\n\n* Adicionado Shelly 1 Mini (Gen3)\n* Adicionado Shelly 1 PM Mini (Gen3)\n* Adicionado Shelly PM Mini (Gen3)\n* Adicionado Shelly Pro Dimmer 1 PM e Pro Dimmer 2 PM\n* Integração de exibição de parede de prateleira fixa\n* Adicionado lista de dispositivos de eventos ble (receivedBy) - removido rssi estado\n* Adicionado interruptor Addon para Shelly Pro 3 EM",
+        "nl": "Voor de toepassing van de onderverdelingen 870190 tot en met 870290 wordt onder post 8702 verstaan: 5 is vereist\n\n* Toegevoegd Shelly 1 Mini (Gen3)\n* Toegevoegd Shelly 1 PM Mini (Gen3)\n* Toegevoegd Shelly PM Mini (Gen3)\n* Toegevoegd Shelly Pro Dimmer 1 PM en Pro Dimmer 2 PM\n* Vaste Shelly Wall Display integratie\n* Toegevoegd apparaat lijst van ble gebeurtenissen (ontvangenBy) - verwijderd rssi toestand\n* Toegevoegde Switch Addon voor Shelly Pro 3 EM",
+        "fr": "NodeJS >= 18.x et js-controller >= 5 est nécessaire\n\n* Ajouté Shelly 1 Mini (Gen3)\n* Ajouté Shelly 1 PM Mini (Gen3)\n* Ajouté Shelly PM Mini (Gen3)\n* Ajouté Shelly Pro Dimmer 1 PM et Pro Dimmer 2 PM\n* Intégration fixe de l'affichage mural Shelly\n* Ajout d'une liste d'événements ble (reçu par) - état rssi supprimé\n* Ajout du commutateur pour Shelly Pro 3 EM",
+        "it": "NodeJS >= 18.x e js-controller 5 è richiesto\n\n* Aggiunto Shelly 1 Mini (Gen3)\n* Aggiunto Shelly 1 PM Mini (Gen3)\n* Aggiunto Shelly PM Mini (Gen3)\n* Aggiunto Shelly Pro Dimmer 1 PM e Pro Dimmer 2 PM\n* Integrazione fissa del display a parete Shelly\n* Aggiunta l'elenco dei dispositivi di eventi ble (receivedBy) - rimosso rssi stato\n* Aggiunto Switch Addon per Shelly Pro 3 EM",
+        "es": "NodeJS >= 18.x y js-controller Se requiere 5\n\n* Añadido Shelly 1 Mini (Gen3)\n* Añadido Shelly 1 PM Mini (Gen3)\n* Añadido Shelly PM Mini (Gen3)\n* Añadido Shelly Pro Dimmer 1 PM y Pro Dimmer 2 PM\n* Integración de pantalla de pared fija\n* Lista de dispositivos agregada de eventos de la sangre (recibidoBy) - estado rssi eliminado\n* Complemento de interruptor para Shelly Pro 3 EM",
+        "pl": "NodeJS > = 18.x i kontroler js- > = 5 jest wymagane\n\n* Dodano Shelly 1 Mini (Gen3)\n* Dodano Shelly 1 PM Mini (Gen3)\n* Dodano Shelly PM Mini (Gen3)\n* Dodano Shelly Pro Dimmer 1 PM i Pro Dimmer 2 PM\n* Naprawiono integrację Shelly Wall Display\n* Dodano listę urządzeń zdarzeń ble (receivedby) - usunięty stan rssi\n* Dodano przełącznik Addon dla Shelly Pro 3 EM",
+        "uk": "NodeJS >= 18.x та js-controller >= 5 обов'язково\n\n* Додано Shelly 1 Міні (Gen3)\n* Додано Shelly 1 PM Mini (Gen3)\n* Додано Shelly PM Mini (Gen3)\n* Додано Shelly Pro Dimmer 1 PM і Pro Dimmer 2 PM\n* Фіксована Shelly Wall Display інтеграції\n* Додано список пристроїв ble подій (receivedBy) - вилучений стан rssi\n* Додано перемикач Addon для Shelly Pro 3 EM",
+        "zh-cn": "节点JS18x和js控制器QQ 需要5个\n\n* 添加Shelly 1 mini(Gen3)\n* 添加Shelly 1 PMini(Gen3)\n* 添加Shelly PM Mini(Gen3)\n* 增加了雪莉Pro Dimmer 1 PM和Pro Dimmer 2 PM\n* 固定舍利墙显示集成\n* 添加ble事件设备列表(收到By) - 删除 rssi 状态\n* Shelly Pro 3 EM 添加开关加件"
+      },
       "6.9.0": {
         "en": "Added Shelly Plus 0-10V\nAdmin notification for available firmware updates",
         "de": "Hinzugefügt Shelly Plus 0-10V\nAdmin-Benachrichtigung für verfügbare Firmware-Updates",
@@ -80,19 +93,6 @@
         "pl": "Strona oficjalna Smoke Shelly Plus\nOficjalna strona Shelly Bluetooth Low Energy Gateway\nMore Shelly TRV Datapoints (ang.)",
         "uk": "Доданий Shelly Plus дим\nДодана Shelly Bluetooth Low Energy Gateway\nБільше точок даних Shelly TRV",
         "zh-cn": "增 编\n增加谢全·蓝图低能源\n更广的TRV数据点"
-      },
-      "6.4.5": {
-        "en": "Added Shelly Pro Dual Cover/Shutter PM\nAdded Shelly Pro 3 EM 400A\nAdded support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdded support of Shelly Plus AddOn for Gen2 Devices.\nAdded support of Plus PM Mini",
-        "de": "Hinzugefügt Shelly Pro Dual Cover/Shutter PM\nHinzugefügt Shelly Pro 3 EM 400A\nUnterstützung von Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nUnterstützung von Shelly Plus AddOn für Gen2 Geräte hinzugefügt.\nUnterstützung von Plus PM Mini",
-        "ru": "Добавлено Shelly Pro Dual Cover/Shutter PM\nДобавлено Shelly Pro 3 EM 400A\nДобавлена поддержка Shelly Plus 1 Mini + Shelly Plus 1 PM Мини\nДобавлена поддержка Shelly Plus AddOn для Gen2 Devices.\nДобавлена поддержка Plus PM Mini",
-        "pt": "Adicionado Shelly Pro Dual Cover/Shutter PM\nAdicionado Shelly Pro 3 EM 400A\nAdicionado suporte de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdicionado suporte de Shelly Plus AddOn para dispositivos Gen2.\nAdicionado suporte de Plus PM Mini",
-        "nl": "Vertaling:\nVertaling:\n_ Shelly Plus 1 PM Mini\nGesteund ondersteuning van Shelly Plus AddOn voor Gen2 Devices.\n_",
-        "fr": "Ajouté Shelly Pro Dual Cover/Shutter PM\nAjouté Shelly Pro 3 EM 400A\nAjout du support de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAjout du support de Shelly Plus AddOn pour les appareils Gen2.\nAjout du support de Plus PM Mini",
-        "it": "Aggiunto Shelly Pro Dual Cover/Shutter PM\nAggiunto Shelly Pro 3 EM 400A\nAggiunto il supporto di Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAggiunto il supporto di Shelly Plus AddOn per dispositivi Gen2.\nAggiunto il supporto di Plus PM Mini",
-        "es": "Añadido Shelly Pro Dual Cover/Shutter PM\nAñadido Shelly Pro 3 EM 400A\nSoporte añadido de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAñadido soporte de Shelly Plus AddOn para Dispositivos Gen2.\nAgregado soporte de Plus PM Mini",
-        "pl": "Added Shelly Pro Dual Cover/Shutter (ang.)\nOficjalna strona Shelly Pro 3\nOficjalna strona Shelly Plus 1 Mini + Shelly Plus 1 PM Mini (ang.)\nWsparcie Shelly Plus AdddOn dla Gen2 Devices.\nWsparcie Plus Mini",
-        "uk": "Додано Shelly Pro Dual Cover/Shutter PM\nДодано Shelly Pro 3 EM 400A\nДодано підтримку Shelly Plus 1 Mini + Shelly Plus 1 PM Міні\nДодано підтримку Shelly Plus AddOn для пристроїв Gen2.\nДодано підтримку Plus PM Mini",
-        "zh-cn": "增 编\n增 编\n增加圣佩卢斯1个小型+的支持 她完全 Plus 1 PM Mini\n· 进一步支持关于 Gen2 Devic的Shi PlusAdd。.\nB. 添加的预防小儿麻痹症支助"
       }
     },
     "titleLang": {
