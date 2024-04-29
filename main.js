@@ -329,21 +329,21 @@ class Shelly extends utils.Adapter {
     }
 
     async processBleMessage(val) {
-        // TODO: Just set values once when called by multiple devices
         if (val && val.scriptVersion && val.src && val.payload) {
+            this.log.debug(`[processBleMessage] Received payload ${JSON.stringify(val.payload)} from ${val.src}`);
+
             if (val.scriptVersion !== '0.2') {
                 this.log.warn(`[BLE] ${val.srcBle.mac} (via ${val.src}): BLE-Script version ${val.scriptVersion} is not supported, check documentation for latest version`);
             }
 
             const typesList = {
-                rssi: { type: 'number', unit: 'dBm' },
                 battery: { type: 'number', unit: '%' },
                 temperature: { type: 'number', unit: '°C' },
                 humidity: { type: 'number', unit: '%' },
                 illuminance: { type: 'number' },
                 motion: { type: 'number', states: { 0: 'Clear', 1: 'Detected' } },
                 window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
-                button: { type: 'number', states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long' } },
+                button: { type: 'number', states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 254: 'Long' } },
                 rotation: { type: 'number' },
             };
 
@@ -356,23 +356,96 @@ class Shelly extends utils.Adapter {
                 native: {},
             }, { preserve: { common: ['name'] } });
 
-            for (const [key, value] of Object.entries(val.payload)) {
-                if (Object.keys(typesList).includes(key)) {
-                    await this.extendObjectAsync(`ble.${val.srcBle.mac}.${key}`, {
-                        type: 'state',
-                        common: {
-                            name: key,
-                            type: typesList[key].type,
-                            role: 'value',
-                            read: true,
-                            write: false,
-                            unit: typesList[key]?.unit,
-                            states: typesList[key]?.states,
-                        },
-                        native: {},
-                    });
+            await this.delObjectAsync(`ble.${val.srcBle.mac}.rssi`); // moved to receivedBy
 
-                    await this.setStateAsync(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true, c: val.src });
+            await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.pid`, {
+                type: 'state',
+                common: {
+                    name: {
+                        en: 'Received by devices',
+                        de: 'Von Geräten empfangen',
+                        ru: 'Получено устройствами',
+                        pt: 'Recebido por dispositivos',
+                        nl: 'Ontvangen door apparaten',
+                        fr: 'Reçu par les appareils',
+                        it: 'Ricevuto da dispositivi',
+                        es: 'Recibido por dispositivos',
+                        pl: 'Otrzymane przez urządzenia',
+                        uk: 'Пристрої',
+                        'zh-cn': '设备接收',
+                    },
+                    type: 'number',
+                    role: 'value',
+                    read: true,
+                    write: false,
+                },
+                native: {},
+            });
+
+            await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.receivedBy`, {
+                type: 'state',
+                common: {
+                    name: {
+                        en: 'Received by devices',
+                        de: 'Empfangen von Geräten',
+                        ru: 'Получено устройствами',
+                        pt: 'Recebido por dispositivos',
+                        nl: 'Ontvangen door apparaten',
+                        fr: 'Reçu par les appareils',
+                        it: 'Ricevuto da dispositivi',
+                        es: 'Recibido por dispositivos',
+                        pl: 'Otrzymane przez urządzenia',
+                        uk: 'Пристрої',
+                        'zh-cn': '设备接收',
+                    },
+                    type: 'string',
+                    role: 'json',
+                    read: true,
+                    write: false,
+                    def: '{}',
+                },
+                native: {},
+            });
+
+            const pidState = await this.getStateAsync(`ble.${val.srcBle.mac}.pid`);
+            const pidOld = pidState && pidState.val ? pidState.val : -1;
+            const pidNew = val.payload.pid;
+
+            // Check if same message has been received by other Shellys
+            if (pidOld !== pidNew) {
+                await this.setStateAsync(`ble.${val.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
+                await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, { val: JSON.stringify({ [val.src]: val.payload.rssi }), ack: true });
+
+                for (const [key, value] of Object.entries(val.payload)) {
+                    if (Object.keys(typesList).includes(key)) {
+                        await this.extendObjectAsync(`ble.${val.srcBle.mac}.${key}`, {
+                            type: 'state',
+                            common: {
+                                name: key,
+                                type: typesList[key].type,
+                                role: 'value',
+                                read: true,
+                                write: false,
+                                unit: typesList[key]?.unit,
+                                states: typesList[key]?.states,
+                            },
+                            native: {},
+                        });
+
+                        await this.setStateAsync(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true, c: val.src });
+                    }
+                }
+            } else {
+                try {
+                    const receivedByState = await this.getStateAsync(`ble.${val.srcBle.mac}.receivedBy`);
+                    if (receivedByState) {
+                        const deviceList = JSON.parse(receivedByState.val);
+                        deviceList[val.src] = val.payload.rssi;
+
+                        await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, { val: JSON.stringify(deviceList), ack: true });
+                    }
+                } catch (err) {
+                    this.log.error(`[processBleMessage] Unable to extend device list (receivedBy) of ${val.srcBle.mac}: ${err}`);
                 }
             }
         }
