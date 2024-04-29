@@ -89,6 +89,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Pro 4 PM (shellypro4pm)            | ❌   | >= v5.0.0 | 20231219-133936/1.1.0-g34b5d4f  |
 | Shelly Pro 3 EM (shellypro3em)            | ❌   | >= v6.4.0 | n/a                             |
 | Shelly Pro Dimmer 1 PM (shellyprodm1pm)   | ❌   | >= v7.0.0 | 20240425-141834/1.3.0-ga3fdd3d  |
+| Shelly Pro Dimmer 2 PM (shellyprodm2pm)   | ❌   | >= v7.0.0 | n/a                             |
 | Shelly Plus H&T (shellyplusht)            | ❌   | >= v6.2.0 | 20240105-142929/1.1.1-g68a461a  |
 | Shelly Plus Smoke (shellyplussmoke)       | ❌   | >= v6.5.0 | 20230912-082250/1.0.3-g6176478  |
 | Shelly Bluetooth Gateway (shellyblugw)    | ❌   | >= v6.5.0 | 20230912-081940/1.0.3-g6176478  |
@@ -149,7 +150,7 @@ NodeJS >= 18.x and js-controller >= 5 is required
 * (klein0r) Added Shelly 1 Mini (Gen3)
 * (svenbluege) Added Shelly 1 PM Mini (Gen3)
 * (klein0r) Added Shelly PM Mini (Gen3)
-* (klein0r) Added Shelly Pro Dimmer 1 PM
+* (klein0r) Added Shelly Pro Dimmer 1 PM and Pro Dimmer 2 PM
 * (klein0r) Fixed Shelly Wall Display integration
 * (klein0r) Added device list of ble events (receivedBy) - removed rssi state
 * (klein0r) Added Switch Addon for Shelly Pro 3 EM
