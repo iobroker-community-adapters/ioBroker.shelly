@@ -75,12 +75,12 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 | Shelly Device                             | CoAP | MQTT      | Tested firmware version         |
 |-------------------------------------------| ---- | --------- | ------------------------------- |
-| Shelly Plus 1 (shellyplus1)               | ❌   | >= v5.0.0 | 20231219-133950/1.1.0-g34b5d4f  |
-| Shelly Plus 1 PM (shellyplus1pm)          | ❌   | >= v5.0.0 | 20231219-133934/1.1.0-g34b5d4f  |
-| Shelly Plus 2 PM (shellyplus2pm)          | ❌   | >= v5.2.0 | 20231219-133951/1.1.0-g34b5d4f  |
-| Shelly Plus i4 (shellyplusi4)             | ❌   | >= v5.3.0 | 20231219-133933/1.1.0-g34b5d4f  |
-| Shelly Plus i4 DC (shellyplusi4)          | ❌   | >= v5.3.0 | 20231219-133933/1.1.0-g34b5d4f  |
-| Shelly Plus 0-10V (shellyplus010v)        | ❌   | >= v6.9.0 | n/a                             |
+| Shelly Plus 1 (shellyplus1)               | ❌   | >= v5.0.0 | 20240425-141423/1.3.0-ga3fdd3d  |
+| Shelly Plus 1 PM (shellyplus1pm)          | ❌   | >= v5.0.0 | 20240425-141434/1.3.0-ga3fdd3d  |
+| Shelly Plus 2 PM (shellyplus2pm)          | ❌   | >= v5.2.0 | 20240425-141443/1.3.0-ga3fdd3d  |
+| Shelly Plus i4 (shellyplusi4)             | ❌   | >= v5.3.0 | 20240425-141449/1.3.0-ga3fdd3d  |
+| Shelly Plus i4 DC (shellyplusi4)          | ❌   | >= v5.3.0 | 20240425-141449/1.3.0-ga3fdd3d  |
+| Shelly Plus 0-10V (shellyplus010v)        | ❌   | >= v6.9.0 | 20240425-141429/1.3.0-ga3fdd3d  |
 | Shelly Pro 1 (shellypro1)                 | ❌   | >= v5.2.0 | 20231219-133937/1.1.0-g34b5d4f  |
 | Shelly Pro 1 PM (shellypro1pm)            | ❌   | >= v5.2.0 | 20231219-133937/1.1.0-g34b5d4f  |
 | Shelly Pro 2 (shellypro2)                 | ❌   | >= v5.2.0 | 20231219-133952/1.1.0-g34b5d4f  |
