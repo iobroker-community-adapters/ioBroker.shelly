@@ -30,6 +30,7 @@ class Shelly extends utils.Adapter {
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
+        this.on('fileChange', this.onFileChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
@@ -41,6 +42,7 @@ class Shelly extends utils.Adapter {
             }
 
             await this.mkdirAsync(this.namespace, 'scripts');
+            this.subscribeForeignFiles(this.namespace, '*');
 
             this.subscribeStates('*');
             objectHelper.init(this);
@@ -117,6 +119,10 @@ class Shelly extends utils.Adapter {
                 }
             }
         }
+    }
+
+    onFileChange(id, fileName, size) {
+        this.log.error(`[onFileChange]: id: ${id}, fileName: ${fileName}, size: ${size}`);
     }
 
     /**

@@ -104,9 +104,10 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 | Shelly Device                             | CoAP | MQTT      | Tested firmware version         |
 |-------------------------------------------| ---- | --------- | ------------------------------- |
-| Shelly 1 Mini (shelly1minig3)             | ❌   | >= v7.0.0 | 20240425-141412/1.3.0-ga3fdd3d  |
-| Shelly 1 PM Mini (shelly1pmminig3)        | ❌   | >= v7.0.0 | 20240425-141355/1.3.0-ga3fdd3d  |
-| Shelly PM Mini (shellypmminig3)           | ❌   | >= v7.0.0 | 20240425-141418/1.3.0-ga3fdd3d  |
+| Shelly 1 Mini Gen3 (shelly1minig3)        | ❌   | >= v7.0.0 | 20240425-141412/1.3.0-ga3fdd3d  |
+| Shelly 1 PM Mini Gen3 (shelly1pmminig3)   | ❌   | >= v7.0.0 | 20240425-141355/1.3.0-ga3fdd3d  |
+| Shelly PM Mini Gen3 (shellypmminig3)      | ❌   | >= v7.0.0 | 20240425-141418/1.3.0-ga3fdd3d  |
+| Shelly H&T Gen3 (shellyhtg3)              | ❌   | >= v7.1.0 | 20240425-141355/1.3.0-ga3fdd3d  |
 
 ### Bluetooth Low Energy (BLU)
 
@@ -148,6 +149,7 @@ execute
 
 * (klein0r) Breaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)
 * (klein0r) Added Shelly Plus Uni
+* (klein0r) Added Shelly H&T (Gen3)
 * (klein0r) Improved structure of ble events (receivedBy) - see documentation for details
 
 ### 7.0.0 (2024-04-29)
