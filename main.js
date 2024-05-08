@@ -122,7 +122,7 @@ class Shelly extends utils.Adapter {
     }
 
     onFileChange(id, fileName, size) {
-        this.log.error(`[onFileChange]: id: ${id}, fileName: ${fileName}, size: ${size}`);
+        this.log.debug(`[onFileChange]: id: ${id}, fileName: ${fileName}, size: ${size}`);
     }
 
     /**
