@@ -152,9 +152,6 @@ execute
 -->
 ### **WORK IN PROGRESS**
 
-* (imperial929) Added Shelly Plus RGBW PM
-* (imperial929) Added Shelly i4 Gen3
-* (imperial929) Added Shelly Dimmer Gen3
 * (imperial929) Added Shelly 1 PM Gen3
 * (imperial929) Added Shelly 1 Gen3
 * (klein0r) Breaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)
