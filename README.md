@@ -108,6 +108,8 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly 1 PM Mini Gen3 (shelly1pmminig3)   | ❌   | >= v7.0.0 | 20240425-141355/1.3.0-ga3fdd3d  |
 | Shelly PM Mini Gen3 (shellypmminig3)      | ❌   | >= v7.0.0 | 20240425-141418/1.3.0-ga3fdd3d  |
 | Shelly H&T Gen3 (shellyhtg3)              | ❌   | >= v7.1.0 | 20240425-141355/1.3.0-ga3fdd3d  |
+| Shelly 1 PM Gen3 (shelly1pmg3)            | ❌   | >= v7.1.0 | 20240425-141355/1.3.0-ga3fdd3d  |
+| Shelly 1 Gen3 (shelly1g3)                 | ❌   | >= v7.1.0 | 20240425-141355/1.3.0-ga3fdd3d  |
 
 ### Bluetooth Low Energy (BLU)
 
@@ -126,6 +128,9 @@ Adapter version >= v6.8.0 required!
 - Shelly Plus Plug US
 - Shelly Pro EM 2x50A
 - USB powered UVC LED strip
+- Shelly Plus RGBW PM (shellyplusrgbwpm)
+- Shelly i4 Gen3 (shellyi4g3)
+- Shelly Dimmer Gen3 (shelly0110dimg3)
 
 ## Sentry
 
@@ -147,6 +152,11 @@ execute
 -->
 ### **WORK IN PROGRESS**
 
+* (imperial929) Added Shelly Plus RGBW PM
+* (imperial929) Added Shelly i4 Gen3
+* (imperial929) Added Shelly Dimmer Gen3
+* (imperial929) Added Shelly 1 PM Gen3
+* (imperial929) Added Shelly 1 Gen3
 * (klein0r) Breaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)
 * (klein0r) Added Shelly Plus Uni
 * (klein0r) Added Shelly H&T (Gen3)
