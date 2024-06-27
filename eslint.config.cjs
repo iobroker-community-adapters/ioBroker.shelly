@@ -12,7 +12,7 @@ const compat = new FlatCompat({
 });
 
 module.exports = [{
-    ignores: ['.dev-server/**', 'admin/words.js'],
+    ignores: ['.dev-server/**'],
 }, ...compat.extends('eslint:recommended'), {
     languageOptions: {
         globals: {
