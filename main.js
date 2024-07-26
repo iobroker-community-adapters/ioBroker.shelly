@@ -150,7 +150,7 @@ class Shelly extends utils.Adapter {
                 try {
                     this.log.debug(`[onUnload] Stopping CoAP server`);
                     this.serverCoap.destroy();
-                } catch (err) {
+                } catch {
                     // ignore
                 }
             }
@@ -159,13 +159,13 @@ class Shelly extends utils.Adapter {
                 try {
                     this.log.debug(`[onUnload] Stopping MQTT server`);
                     this.serverMqtt.destroy();
-                } catch (err) {
+                } catch {
                     // ignore
                 }
             }
 
             callback();
-        } catch (e) {
+        } catch {
             // this.log.error('Error');
             callback();
         }
