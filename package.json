@@ -46,7 +46,7 @@
     "mqtt-connection": "^4.1.0",
     "shelly-iot": "^1.1.2",
     "tcp-ping": "^0.1.1",
-    "xml2js": "0.6.2",
+    "xml2js": "^0.6.2",
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
