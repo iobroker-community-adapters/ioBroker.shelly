@@ -29,15 +29,15 @@ Requirements:
 - Shelly BLU device (encryption must be disabled!)
 - The correct script version for the used adapter version
 
-| Adapter version | Script version |
-|-----------------|----------------|
-| 6.6.0           | v0.1           |
-| 6.6.1           | v0.1           |
-| 6.7.0           | v0.1           |
-| 6.8.0           | v0.2           |
-| 6.9.0           | v0.2           |
-| 7.0.0           | v0.2           |
-| 7.1.0           | v0.3           |
+| Adapter version                                                                                            | Script version |
+|------------------------------------------------------------------------------------------------------------|----------------|
+| [6.6.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.6.0/docs/en/ble-devices.md) | v0.1           |
+| [6.6.1](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.6.1/docs/en/ble-devices.md) | v0.1           |
+| [6.7.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.7.0/docs/en/ble-devices.md) | v0.1           |
+| [6.8.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.8.0/docs/en/ble-devices.md) | v0.2           |
+| [6.9.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.9.0/docs/en/ble-devices.md) | v0.2           |
+| [7.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v7.0.0/docs/en/ble-devices.md) | v0.2           |
+| [7.1.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v7.1.0/docs/en/ble-devices.md) | v0.3           |
 
 ## JavaScript (Shelly Scripting)
 
