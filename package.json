@@ -38,8 +38,8 @@
   "dependencies": {
     "@iobroker/adapter-core": "^3.1.6",
     "@network-utils/tcp-ping": "^1.2.3",
-    "axios": "^1.7.3",
-    "mqtt-connection": "^4.1.0"
+    "aedes": "^0.51.2",
+    "axios": "^1.7.3"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^3.8.0",

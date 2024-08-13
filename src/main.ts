@@ -1,11 +1,13 @@
 import * as utils from '@iobroker/adapter-core';
 
 import { probe } from '@network-utils/tcp-ping';
-import { EventEmitter } from 'events';
+import { EventEmitter } from 'node:events';
+
+import { MQTTServer } from './lib/protocol/mqtt';
 
 class Shelly extends utils.Adapter {
     private isUnloaded: boolean;
-    private serverMqtt: null;
+    private serverMqtt: null | MQTTServer;
     private firmwareUpdateTimeout: ioBroker.Timeout | undefined;
     private onlineCheckTimeout: ioBroker.Timeout | undefined;
     private onlineDevices: { [key: string]: boolean };
@@ -56,8 +58,8 @@ class Shelly extends utils.Adapter {
                         this.log.error('MQTT Password is missing!');
                     }
 
-                    //this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
-                    //this.serverMqtt.listen();
+                    this.serverMqtt = new MQTTServer(this, this.eventEmitter);
+                    this.serverMqtt.listen();
                 }
             });
 
@@ -236,10 +238,10 @@ class Shelly extends utils.Adapter {
             const onlineState = await this.getStateAsync(idOnline);
 
             if (onlineState) {
-                await this.setStateAsync(idOnline, { val: false, ack: true });
+                await this.setState(idOnline, { val: false, ack: true });
             }
 
-            await this.extendObjectAsync(deviceId, {
+            await this.extendObject(deviceId, {
                 common: {
                     color: undefined, // Remove color from previous versions
                 },
@@ -247,7 +249,7 @@ class Shelly extends utils.Adapter {
         }
 
         this.onlineDevices = {};
-        await this.setStateAsync('info.connection', { val: false, ack: true });
+        await this.setState('info.connection', { val: false, ack: true });
     }
 
     autoFirmwareUpdate(): void {
