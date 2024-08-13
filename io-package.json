@@ -1,8 +1,47 @@
 {
   "common": {
     "name": "shelly",
-    "version": "6.7.0",
+    "version": "7.0.0",
     "news": {
+      "7.0.0": {
+        "en": "NodeJS >= 18.x and js-controller >= 5 is required\n\n* Added Shelly 1 Mini (Gen3)\n* Added Shelly 1 PM Mini (Gen3)\n* Added Shelly PM Mini (Gen3)\n* Added Shelly Pro Dimmer 1 PM and Pro Dimmer 2 PM\n* Fixed Shelly Wall Display integration\n* Added device list of ble events (receivedBy) - removed rssi state\n* Added Switch Addon for Shelly Pro 3 EM",
+        "de": "NodeJS >= 18.x und js-Controller >= 5 ist erforderlich\n\n* Hinzugefügt Shelly 1 Mini (Gen3)\n* Hinzugefügt Shelly 1 PM Mini (Gen3)\n* Hinzugefügt Shelly PM Mini (Gen3)\n* Hinzugefügt Shelly Pro Dimmer 1 PM und Pro Dimmer 2 PM\n* Feste Shelly Wandanzeige Integration\n* Hinzugefügt Geräteliste von ble events (receivedBy) - entfernt rssi Zustand\n* Hinzugefügt Schalter Addon für Shelly Pro 3 EM",
+        "ru": "NodeJS >= 18.x и js-контроллер >= 5 требуется\n\n* Добавлено Shelly 1 Mini (Gen3)\n* Добавлено Shelly 1 PM Mini (Gen3)\n* Добавлено Shelly PM Mini (Gen3)\n* Добавлено Shelly Pro Dimmer 1 PM и Pro Dimmer 2 PM\n* Интеграция Fixed Shelly Wall Display\n* Добавлен список устройств отблескных событий (receivedBy) - удаленное состояние rssi\n* Добавлен коммутатор для Shelly Pro 3 EM",
+        "pt": "NodeJS >= 18.x e js-controller >= 5 é necessário\n\n* Adicionado Shelly 1 Mini (Gen3)\n* Adicionado Shelly 1 PM Mini (Gen3)\n* Adicionado Shelly PM Mini (Gen3)\n* Adicionado Shelly Pro Dimmer 1 PM e Pro Dimmer 2 PM\n* Integração de exibição de parede de prateleira fixa\n* Adicionado lista de dispositivos de eventos ble (receivedBy) - removido rssi estado\n* Adicionado interruptor Addon para Shelly Pro 3 EM",
+        "nl": "Voor de toepassing van de onderverdelingen 870190 tot en met 870290 wordt onder post 8702 verstaan: 5 is vereist\n\n* Toegevoegd Shelly 1 Mini (Gen3)\n* Toegevoegd Shelly 1 PM Mini (Gen3)\n* Toegevoegd Shelly PM Mini (Gen3)\n* Toegevoegd Shelly Pro Dimmer 1 PM en Pro Dimmer 2 PM\n* Vaste Shelly Wall Display integratie\n* Toegevoegd apparaat lijst van ble gebeurtenissen (ontvangenBy) - verwijderd rssi toestand\n* Toegevoegde Switch Addon voor Shelly Pro 3 EM",
+        "fr": "NodeJS >= 18.x et js-controller >= 5 est nécessaire\n\n* Ajouté Shelly 1 Mini (Gen3)\n* Ajouté Shelly 1 PM Mini (Gen3)\n* Ajouté Shelly PM Mini (Gen3)\n* Ajouté Shelly Pro Dimmer 1 PM et Pro Dimmer 2 PM\n* Intégration fixe de l'affichage mural Shelly\n* Ajout d'une liste d'événements ble (reçu par) - état rssi supprimé\n* Ajout du commutateur pour Shelly Pro 3 EM",
+        "it": "NodeJS >= 18.x e js-controller 5 è richiesto\n\n* Aggiunto Shelly 1 Mini (Gen3)\n* Aggiunto Shelly 1 PM Mini (Gen3)\n* Aggiunto Shelly PM Mini (Gen3)\n* Aggiunto Shelly Pro Dimmer 1 PM e Pro Dimmer 2 PM\n* Integrazione fissa del display a parete Shelly\n* Aggiunta l'elenco dei dispositivi di eventi ble (receivedBy) - rimosso rssi stato\n* Aggiunto Switch Addon per Shelly Pro 3 EM",
+        "es": "NodeJS >= 18.x y js-controller Se requiere 5\n\n* Añadido Shelly 1 Mini (Gen3)\n* Añadido Shelly 1 PM Mini (Gen3)\n* Añadido Shelly PM Mini (Gen3)\n* Añadido Shelly Pro Dimmer 1 PM y Pro Dimmer 2 PM\n* Integración de pantalla de pared fija\n* Lista de dispositivos agregada de eventos de la sangre (recibidoBy) - estado rssi eliminado\n* Complemento de interruptor para Shelly Pro 3 EM",
+        "pl": "NodeJS > = 18.x i kontroler js- > = 5 jest wymagane\n\n* Dodano Shelly 1 Mini (Gen3)\n* Dodano Shelly 1 PM Mini (Gen3)\n* Dodano Shelly PM Mini (Gen3)\n* Dodano Shelly Pro Dimmer 1 PM i Pro Dimmer 2 PM\n* Naprawiono integrację Shelly Wall Display\n* Dodano listę urządzeń zdarzeń ble (receivedby) - usunięty stan rssi\n* Dodano przełącznik Addon dla Shelly Pro 3 EM",
+        "uk": "NodeJS >= 18.x та js-controller >= 5 обов'язково\n\n* Додано Shelly 1 Міні (Gen3)\n* Додано Shelly 1 PM Mini (Gen3)\n* Додано Shelly PM Mini (Gen3)\n* Додано Shelly Pro Dimmer 1 PM і Pro Dimmer 2 PM\n* Фіксована Shelly Wall Display інтеграції\n* Додано список пристроїв ble подій (receivedBy) - вилучений стан rssi\n* Додано перемикач Addon для Shelly Pro 3 EM",
+        "zh-cn": "节点JS18x和js控制器QQ 需要5个\n\n* 添加Shelly 1 mini(Gen3)\n* 添加Shelly 1 PMini(Gen3)\n* 添加Shelly PM Mini(Gen3)\n* 增加了雪莉Pro Dimmer 1 PM和Pro Dimmer 2 PM\n* 固定舍利墙显示集成\n* 添加ble事件设备列表(收到By) - 删除 rssi 状态\n* Shelly Pro 3 EM 添加开关加件"
+      },
+      "6.9.0": {
+        "en": "Added Shelly Plus 0-10V\nAdmin notification for available firmware updates",
+        "de": "Hinzugefügt Shelly Plus 0-10V\nAdmin-Benachrichtigung für verfügbare Firmware-Updates",
+        "ru": "Добавлено Shelly Plus 0-10V\nУведомление об имеющихся обновлениях прошивки",
+        "pt": "Adicionado Shelly Plus 0-10V\nNotificação de administrador para atualizações de firmware disponíveis",
+        "nl": "Toegevoegd Shelly Plus 0-10V\nAdmin notificatie voor beschikbare firmware updates",
+        "fr": "Ajouté Shelly Plus 0-10V\nNotification Admin pour les mises à jour firmware disponibles",
+        "it": "Aggiunto Shelly Plus 0-10V\nNotifica di amministratore per gli aggiornamenti firmware disponibili",
+        "es": "Añadido Shelly Plus 0-10V\nAviso de Admin para actualizaciones de firmware disponibles",
+        "pl": "Dodano Shelly Plus 0- 10V\nPowiadomienie administratora o dostępnych aktualizacjach oprogramowania firmowego",
+        "uk": "Додано Shelly Plus 0-10V\nПовідомлення про наявність оновлень прошивки",
+        "zh-cn": "添加雪莉加0-10V\n可用固件更新的管理通知"
+      },
+      "6.8.0": {
+        "en": "Updated BLE script to 0.2 (new shelly motion firmware)\nUpdated Shelly i3 number limits\nAdded screenshots to instance configuration",
+        "de": "Aktualisierte BLE-Skript auf 0,2 (neue Shelly Motion Firmware)\nAktualisierte Shelly i3 Nummernlimits\nScreenshots zu Instanz-Konfiguration hinzugefügt",
+        "ru": "Обновленный сценарий BLE до 0.2 (новая подшивка для подстрелки)\nОбновленные лимиты номеров Shelly i3\nДобавлены скриншоты к конфигурации экземпляра",
+        "pt": "Script BLE atualizado para 0.2 (novo firmware de movimento shelly)\nLimites de números Shelly i3 atualizados\nAdicionado screenshots para configuração de instância",
+        "nl": "Bijgewerkt BLE script naar 0.2 (nieuwe shelly motion firmware)\nBijgewerkt Shelly i3 aantal limieten\nSchermafbeeldingen toegevoegd aan instantieconfiguratie",
+        "fr": "Mise à jour du script BLE à 0.2 (nouveau firmware shelly motion)\nMise à jour des limites de nombre Shelly i3\nAjout de captures d'écran à la configuration de l'instance",
+        "it": "Aggiornato lo script BLE a 0.2 (nuovo firmware di movimento shelly)\nLimiti numerici aggiornati Shelly i3\nAggiunti screenshot per la configurazione di istanza",
+        "es": "Actualizado BLE script a 0,2 (nuevo firmware de movimiento)\nActualización de los límites de número Shelly i3\nAñadido capturas de pantalla para la configuración de instancia",
+        "pl": "Aktualizacja skryptu BLE do 0.2 (nowy firmware ruchu Shelly)\nAktualizacja limitów liczby Shelly i3\nDodano zrzuty ekranu do konfiguracji instancji",
+        "uk": "Оновлений скрипт BLE до 0.2 (нова прошивка руху)\nОновлені ліміти чисел Shelly i3\nДодано скріншоти до конфігурації екземпляра",
+        "zh-cn": "将 BLE 脚本更新为 0.2( 新舍利运动固件)\n更新 Shelly i3 数字限制\n添加到实例配置的截图"
+      },
       "6.7.0": {
         "en": "Updated handling of ble payloads\nAdded Shelly Wall Display",
         "de": "Aktualisiertes Handling von ble Payloads\nHinzugefügt Shelly Wandanzeige",
@@ -54,45 +93,6 @@
         "pl": "Strona oficjalna Smoke Shelly Plus\nOficjalna strona Shelly Bluetooth Low Energy Gateway\nMore Shelly TRV Datapoints (ang.)",
         "uk": "Доданий Shelly Plus дим\nДодана Shelly Bluetooth Low Energy Gateway\nБільше точок даних Shelly TRV",
         "zh-cn": "增 编\n增加谢全·蓝图低能源\n更广的TRV数据点"
-      },
-      "6.4.5": {
-        "en": "Added Shelly Pro Dual Cover/Shutter PM\nAdded Shelly Pro 3 EM 400A\nAdded support of Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdded support of Shelly Plus AddOn for Gen2 Devices.\nAdded support of Plus PM Mini",
-        "de": "Hinzugefügt Shelly Pro Dual Cover/Shutter PM\nHinzugefügt Shelly Pro 3 EM 400A\nUnterstützung von Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nUnterstützung von Shelly Plus AddOn für Gen2 Geräte hinzugefügt.\nUnterstützung von Plus PM Mini",
-        "ru": "Добавлено Shelly Pro Dual Cover/Shutter PM\nДобавлено Shelly Pro 3 EM 400A\nДобавлена поддержка Shelly Plus 1 Mini + Shelly Plus 1 PM Мини\nДобавлена поддержка Shelly Plus AddOn для Gen2 Devices.\nДобавлена поддержка Plus PM Mini",
-        "pt": "Adicionado Shelly Pro Dual Cover/Shutter PM\nAdicionado Shelly Pro 3 EM 400A\nAdicionado suporte de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAdicionado suporte de Shelly Plus AddOn para dispositivos Gen2.\nAdicionado suporte de Plus PM Mini",
-        "nl": "Vertaling:\nVertaling:\n_ Shelly Plus 1 PM Mini\nGesteund ondersteuning van Shelly Plus AddOn voor Gen2 Devices.\n_",
-        "fr": "Ajouté Shelly Pro Dual Cover/Shutter PM\nAjouté Shelly Pro 3 EM 400A\nAjout du support de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAjout du support de Shelly Plus AddOn pour les appareils Gen2.\nAjout du support de Plus PM Mini",
-        "it": "Aggiunto Shelly Pro Dual Cover/Shutter PM\nAggiunto Shelly Pro 3 EM 400A\nAggiunto il supporto di Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAggiunto il supporto di Shelly Plus AddOn per dispositivi Gen2.\nAggiunto il supporto di Plus PM Mini",
-        "es": "Añadido Shelly Pro Dual Cover/Shutter PM\nAñadido Shelly Pro 3 EM 400A\nSoporte añadido de Shelly Plus 1 Mini + Shelly Plus 1 PM Mini\nAñadido soporte de Shelly Plus AddOn para Dispositivos Gen2.\nAgregado soporte de Plus PM Mini",
-        "pl": "Added Shelly Pro Dual Cover/Shutter (ang.)\nOficjalna strona Shelly Pro 3\nOficjalna strona Shelly Plus 1 Mini + Shelly Plus 1 PM Mini (ang.)\nWsparcie Shelly Plus AdddOn dla Gen2 Devices.\nWsparcie Plus Mini",
-        "uk": "Додано Shelly Pro Dual Cover/Shutter PM\nДодано Shelly Pro 3 EM 400A\nДодано підтримку Shelly Plus 1 Mini + Shelly Plus 1 PM Міні\nДодано підтримку Shelly Plus AddOn для пристроїв Gen2.\nДодано підтримку Plus PM Mini",
-        "zh-cn": "增 编\n增 编\n增加圣佩卢斯1个小型+的支持 她完全 Plus 1 PM Mini\n· 进一步支持关于 Gen2 Devic的Shi PlusAdd。.\nB. 添加的预防小儿麻痹症支助"
-      },
-      "6.4.1": {
-        "en": "Added Shelly Pro 3 EM energy data\nFixed IP handling in Docker containers",
-        "de": "Hinzugefügt Shelly Pro 3 EM Energiedaten\nFeste IP-Behandlung in Docker-Containern",
-        "ru": "Добавлено Shelly Pro 3 EM данные по энергии\nИсправлена обработка IP в Docker контейнерах",
-        "pt": "Adicionado Shelly Pro 3 EM dados de energia\nManuseio IP fixo em contentores Docker",
-        "nl": "Vertaling:\nIP behandelt Docker containers",
-        "fr": "Ajout de données énergétiques Shelly Pro 3 EM\nManipulation IP fixe dans les conteneurs Docker",
-        "it": "Shelly Pro 3 EM dati energetici\nGestione IP fissa in contenitori Docker",
-        "es": "Añadido Shelly Pro 3 datos de energía EM\nManejo de IP fijo en contenedores Docker",
-        "pl": "Strona domowa Shelly Pro 3\nObsługa IP w kontenerach Dockera",
-        "uk": "Додано Shelly Pro 3 EM енергетичні дані\nФіксована обробка IP в контейнерах Docker",
-        "zh-cn": "添加了全套的能源数据\n多克集装箱的混合IP处理"
-      },
-      "6.4.0": {
-        "en": "Added Shelly Plus Plug S\nAdded Shelly Pro 3 EM\nReduced checks for firmware updates\nShelly TV profile is now changeable",
-        "de": "Hinzugefügt Shelly Plus Plug S\nHinzugefügt Shelly Pro 3 EM\nReduzierte Kontrollen für Firmware-Updates\nShelly TV-Profil ist jetzt änderbar",
-        "ru": "Добавлено Shelly Plus Plug S\nДобавлено Shelly Pro 3 EM\nУменьшенные проверки обновлений прошивки\nShelly TV профиль теперь изменен",
-        "pt": "Adicionado Shelly Plus Plug S\nAdicionado Shelly Pro 3 EM\nVerificações reduzidas para atualizações de firmware\nPerfil de TV Shelly agora é mutável",
-        "nl": "_\n_\nVerminderde cheques voor firmaware updates\nShelly TV profiel is nu veranderd",
-        "fr": "Ajouté Shelly Plus Plug S\nAjouté Shelly Pro 3 EM\nVérifications réduites pour les mises à jour du firmware\nLe profil Shelly TV est maintenant changeable",
-        "it": "Aggiunto Shelly Plus Plug S\nAggiunto Shelly Pro 3 EM\nRiduzione dei controlli per gli aggiornamenti del firmware\nIl profilo di Shelly TV è ora modificabile",
-        "es": "Añadido Shelly Plus Plug S\nAñadido Shelly Pro 3 EM\nControles reducidos para actualizaciones de firmware\nEl perfil de Shelly TV ahora es cambiante",
-        "pl": "Oficjalna strona Shelly Plus Plug S\nAdded Shelly Pro 3 (ang.)\nReduced checks for firmware updates (ang.)\nProfil Shelly TV jest obecnie zmienny",
-        "uk": "Додано Shelly Plus Plug S\nДодано Shelly Pro 3 EM\nЗменшені перевірки оновлень прошивки\nПрофіль Shelly TV тепер мінливий",
-        "zh-cn": "增 编\n增 编\n公司更新检查\n她完全的电视形象现在可以改变。"
       }
     },
     "titleLang": {
@@ -121,11 +121,9 @@
       "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT",
       "zh-cn": "通过联合方案或技合中心将全套装置纳入"
     },
-    "license": "MIT",
     "authors": [
-      "Thorsten Stueben <thorsten@stueben.de>",
-      "Apollon77 <iobroker@fischer-ka.de>",
-      "Matthias Kleine <info@haus-automatisierung.com>"
+      "Matthias Kleine <info@haus-automatisierung.com>",
+      "Apollon77 <iobroker@fischer-ka.de>"
     ],
     "docs": {
       "en": [
@@ -147,12 +145,6 @@
         "docs/de/debug.md"
       ]
     },
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "icon": "shelly.png",
-    "enabled": false,
-    "compact": true,
-    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
     "keywords": [
       "Shelly",
       "IoT",
@@ -160,13 +152,23 @@
       "CoIoT",
       "MQTT"
     ],
+    "tier": 2,
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "shelly.png",
+    "enabled": false,
+    "compact": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
     "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
     "loglevel": "info",
     "type": "iot-systems",
     "restartAdapters": [],
     "connectionType": "local",
     "dataSource": "push",
-    "tier": 2,
     "plugins": {
       "sentry": {
         "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
@@ -186,10 +188,75 @@
     ],
     "dependencies": [
       {
-        "js-controller": ">=3.3.22"
+        "js-controller": ">=5.0.19"
       }
     ]
   },
+  "notifications": [
+    {
+      "scope": "shelly",
+      "name": {
+        "en": "Shelly",
+        "de": "Shelly",
+        "ru": "Shelly",
+        "pt": "Shelly",
+        "nl": "Shelly",
+        "fr": "Shelly",
+        "it": "Shelly",
+        "es": "Shelly",
+        "pl": "Shelly",
+        "uk": "Shelly",
+        "zh-cn": "Shelly"
+      },
+      "description": {
+        "en": "These notifications represent news of connected devices.",
+        "de": "Diese Benachrichtigungen stellen Neuigkeiten über angeschlossene Geräte dar.",
+        "ru": "Эти уведомления представляют собой новости о подключенных устройствах.",
+        "pt": "Essas notificações representam notícias de dispositivos conectados.",
+        "nl": "Deze meldingen vertegenwoordigen nieuws van aangesloten apparaten.",
+        "fr": "Ces notifications représentent des nouvelles d'appareils connectés.",
+        "it": "Queste notifiche rappresentano notizie di dispositivi collegati.",
+        "es": "Estas notificaciones representan noticias de dispositivos conectados.",
+        "pl": "Powiadomienia te stanowią wiadomości o podłączonych urządzeniach.",
+        "uk": "Ці повідомлення представляють новини підключених пристроїв.",
+        "zh-cn": "这些通知代表了连接设备的消息."
+      },
+      "categories": [
+        {
+          "category": "deviceUpdates",
+          "name": {
+            "en": "Firmware update available",
+            "de": "Firmware-Update verfügbar",
+            "ru": "Доступное обновление прошивки",
+            "pt": "Atualização de firmware disponível",
+            "nl": "Firmware-update beschikbaar",
+            "fr": "Mise à jour du firmware disponible",
+            "it": "Aggiornamento firmware disponibile",
+            "es": "Actualización de firmware disponible",
+            "pl": "Dostępna aktualizacja oprogramowania firmowego",
+            "uk": "Оновлення прошивки",
+            "zh-cn": "可更新的固件"
+          },
+          "severity": "notify",
+          "description": {
+            "en": "New firmware update is available for your devices.",
+            "de": "Neues Firmware-Update ist für deine Geräte verfügbar.",
+            "ru": "Новое обновление прошивки доступно для ваших устройств.",
+            "pt": "Nova atualização de firmware está disponível para seus dispositivos.",
+            "nl": "Nieuwe firmware update is beschikbaar voor uw apparaten.",
+            "fr": "Une nouvelle mise à jour firmware est disponible pour vos appareils.",
+            "it": "Nuovo aggiornamento firmware è disponibile per i tuoi dispositivi.",
+            "es": "Nueva actualización de firmware está disponible para sus dispositivos.",
+            "pl": "Dla Państwa urządzeń dostępna jest nowa aktualizacja oprogramowania firmowego.",
+            "uk": "Нові оновлення прошивки доступні для ваших пристроїв.",
+            "zh-cn": "您的设备有新的固件更新 ."
+          },
+          "regex": [],
+          "limit": 1
+        }
+      ]
+    }
+  ],
   "protectedNative": [
     "mqttusername",
     "mqttpassword",

@@ -2,7 +2,7 @@
 {
     // To update the compilation target, install a different version of @tsconfig/node... and reference it here
     // https://github.com/tsconfig/bases#node-16-tsconfigjson
-    "extends": "@tsconfig/node16/tsconfig.json",
+    "extends": "@tsconfig/node18/tsconfig.json",
     "compilerOptions": {
         // do not compile anything, this file is just to configure type checking
         // the compilation is configured in tsconfig.build.json
@@ -20,16 +20,16 @@
         "resolveJsonModule": true,
 
         // If you want to disable the stricter type checks (not recommended), uncomment the following line
-        // "strict": false,
+        "strict": true,
         // And enable some of those features for more fine-grained control
         // "strictNullChecks": true,
         // "strictPropertyInitialization": true,
         // "strictBindCallApply": true,
-        // "noImplicitAny": true,
+        "noImplicitAny": true,
         // "noUnusedLocals": true,
         // "noUnusedParameters": true,
         // Uncomment this if you want the old behavior of catch variables being `any`
-        // "useUnknownInCatchVariables": false,
+        "useUnknownInCatchVariables": false,
 
         "sourceMap": true,
         "inlineSourceMap": false

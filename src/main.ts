@@ -1,8 +1,7 @@
-import { objectHelper } from '@apollon/iobroker-tools';
 import * as utils from '@iobroker/adapter-core';
 
+import { probe } from '@network-utils/tcp-ping';
 import { EventEmitter } from 'events';
-import * as tcpPing from 'tcp-ping';
 
 class Shelly extends utils.Adapter {
     private isUnloaded: boolean;
@@ -45,7 +44,7 @@ class Shelly extends utils.Adapter {
             await this.mkdirAsync(this.namespace, 'scripts');
 
             this.subscribeStates('*');
-            objectHelper.init(this);
+            // objectHelper.init(this);
 
             const protocol = this.config.protocol || 'mqtt';
 
@@ -181,7 +180,12 @@ class Shelly extends utils.Adapter {
                 if (valHostname) {
                     this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
-                    tcpPing.probe(valHostname, valPort, (_error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
+                    try {
+                        const isAlive = await probe(valPort, valHostname);
+                        this.deviceStatusUpdate(deviceId, isAlive);
+                    } catch (err) {
+                        this.log.warn(`[onlineCheck] Failed for ${deviceId} on ${valHostname}:${valPort}: ${err}`);
+                    }
                 }
             }
         } catch (e) {
@@ -213,7 +217,7 @@ class Shelly extends utils.Adapter {
 
         if (onlineState) {
             // Compare to previous value
-            const prevValue = onlineState.val ? (onlineState.val === 'true' || onlineState.val === true) : false;
+            const prevValue = onlineState.val ? onlineState.val === 'true' || onlineState.val === true : false;
 
             if (prevValue != status) {
                 await this.setStateAsync(idOnline, { val: status, ack: true });
@@ -309,14 +313,18 @@ class Shelly extends utils.Adapter {
                 rotation: { type: 'number' },
             };
 
-            await this.extendObjectAsync(`ble.${val.srcBle.mac}`, {
-                type: 'device',
-                common: {
-                    name: val.srcBle.mac,
-                    icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTk2LjQ4IDI2MC4wMjNsOTIuNjI2LTEwMy4zMzNMMTQzLjEyNSAwdjIwNi4zM2wtODYuMTExLTg2LjExMS0zMS40MDYgMzEuNDA1IDEwOC4wNjEgMTA4LjM5OUwyNS42MDggMzY4LjQyMmwzMS40MDYgMzEuNDA1IDg2LjExMS04Ni4xMTFMMTQ1Ljg0IDUxMmwxNDguNTUyLTE0OC42NDQtOTcuOTEyLTEwMy4zMzN6bTQwLjg2LTEwMi45OTZsLTQ5Ljk3NyA0OS45NzgtLjMzOC0xMDAuMjk1IDUwLjMxNSA1MC4zMTd6TTE4Ny4zNjMgMzEzLjA0bDQ5Ljk3NyA0OS45NzgtNTAuMzE1IDUwLjMxNi4zMzgtMTAwLjI5NHoiLz48L3N2Zz4=',
+            await this.extendObjectAsync(
+                `ble.${val.srcBle.mac}`,
+                {
+                    type: 'device',
+                    common: {
+                        name: val.srcBle.mac,
+                        icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTk2LjQ4IDI2MC4wMjNsOTIuNjI2LTEwMy4zMzNMMTQzLjEyNSAwdjIwNi4zM2wtODYuMTExLTg2LjExMS0zMS40MDYgMzEuNDA1IDEwOC4wNjEgMTA4LjM5OUwyNS42MDggMzY4LjQyMmwzMS40MDYgMzEuNDA1IDg2LjExMS04Ni4xMTFMMTQ1Ljg0IDUxMmwxNDguNTUyLTE0OC42NDQtOTcuOTEyLTEwMy4zMzN6bTQwLjg2LTEwMi45OTZsLTQ5Ljk3NyA0OS45NzgtLjMzOC0xMDAuMjk1IDUwLjMxNSA1MC4zMTd6TTE4Ny4zNjMgMzEzLjA0bDQ5Ljk3NyA0OS45NzgtNTAuMzE1IDUwLjMxNi4zMzgtMTAwLjI5NHoiLz48L3N2Zz4=',
+                    },
+                    native: {},
                 },
-                native: {},
-            }, { preserve: { common: ['name'] } });
+                { preserve: { common: ['name'] } },
+            );
 
             for (const [key, value] of Object.entries(val.payload)) {
                 if (Object.keys(typesList).includes(key)) {
@@ -363,7 +371,9 @@ class Shelly extends utils.Adapter {
             native.password = '';
         }
         if (this.config?.keys) {
-            native.blacklist = this.config.keys.map(b => { return { id: b.blacklist }; });
+            native.blacklist = this.config.keys.map((b) => {
+                return { id: b.blacklist };
+            });
             native.keys = null;
         }
 
