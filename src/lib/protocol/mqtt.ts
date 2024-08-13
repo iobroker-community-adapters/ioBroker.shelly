@@ -8,24 +8,37 @@ import { BaseClient, BaseServer } from './base';
 
 //const INIT_SRC = 'iobroker-init';
 
+type RpcResponse = {
+    result: object;
+    error: object;
+};
+
 export class MQTTClient extends BaseClient {
     private client: AedesClient;
     private mqttTopicPrefix: string | undefined;
+    private onboardingCompleted: boolean;
 
     private rpcSrc: string;
-    private rpcOpenMessages: { [key: number]: (payload: object) => void };
+    private rpcOpenMessages: { [key: number]: (response: RpcResponse) => void };
 
     constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter, client: AedesClient) {
         super('mqtt', adapter, eventEmitter);
 
         this.client = client;
+        this.onboardingCompleted = false;
+
         this.rpcSrc = `iobroker.${adapter.namespace}`;
         this.rpcOpenMessages = [];
     }
 
     public onboarding(): void {
-        this.publishRpcMsg({ method: 'Shelly.GetComponents' }).then((payload) => {
-            this.adapter.log.warn(`Shelly Components ${JSON.stringify(payload)}`);
+
+        // TODO: Create all objects
+
+        this.publishRpcMsg({ method: 'Shelly.GetComponents' }).then((result) => {
+            this.adapter.log.warn(`Shelly Components: ${JSON.stringify(result)}`);
+
+            this.onboardingCompleted = true;
         });
         /*
         this.publishRpcMsg({ method: 'Sys.SetConfig', params: { config: { device: { name: 'test2' } } } }).then((payload) => {
@@ -35,7 +48,7 @@ export class MQTTClient extends BaseClient {
     }
 
     public onMessagePublish(topic: string, payload: string): void {
-        if (topic.endsWith('/online') && !this.mqttTopicPrefix) {
+        if (topic.endsWith('/online') && !this.mqttTopicPrefix && !this.onboardingCompleted) {
             this.mqttTopicPrefix = topic.substring(0, topic.lastIndexOf('/online'));
             this.adapter.log.info(`Saved topic prefix for ${this.client.id}: ${this.mqttTopicPrefix}`);
 
@@ -46,7 +59,7 @@ export class MQTTClient extends BaseClient {
                 const payloadObj = JSON.parse(payload);
                 if (payloadObj.dst === this.rpcSrc) {
                     if (payloadObj.id && Object.prototype.hasOwnProperty.call(this.rpcOpenMessages, payloadObj.id)) {
-                        this.rpcOpenMessages[payloadObj.id](payloadObj); // Resolve promise
+                        this.rpcOpenMessages[payloadObj.id]({ result: payloadObj.result, error: payloadObj.error }); // Resolve promise
                         delete this.rpcOpenMessages[payloadObj.id];
                     }
                 }
@@ -81,7 +94,13 @@ export class MQTTClient extends BaseClient {
             this.publishMsg(topic, payloadObj.id, JSON.stringify(payloadObj))
                 .then(() => {
                     this.adapter.clearTimeout(timeout);
-                    this.rpcOpenMessages[msgId] = resolve;
+                    this.rpcOpenMessages[msgId] = (response: RpcResponse) => {
+                        if (response.error) {
+                            reject(response.error);
+                        } else {
+                            resolve(response.result);
+                        }
+                    };
                 })
                 .catch(reject);
         });
