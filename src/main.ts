@@ -6,9 +6,8 @@ import { EventEmitter } from 'events';
 class Shelly extends utils.Adapter {
     private isUnloaded: boolean;
     private serverMqtt: null;
-    private serverCoap: null;
-    private firmwareUpdateTimeout: ioBroker.Timeout | null;
-    private onlineCheckTimeout: ioBroker.Timeout | null;
+    private firmwareUpdateTimeout: ioBroker.Timeout | undefined;
+    private onlineCheckTimeout: ioBroker.Timeout | undefined;
     private onlineDevices: { [key: string]: boolean };
     private eventEmitter: EventEmitter;
 
@@ -21,9 +20,6 @@ class Shelly extends utils.Adapter {
         this.isUnloaded = false;
 
         this.serverMqtt = null;
-        this.serverCoap = null;
-        this.firmwareUpdateTimeout = null;
-        this.onlineCheckTimeout = null;
 
         this.onlineDevices = {};
 
@@ -36,11 +32,6 @@ class Shelly extends utils.Adapter {
 
     private async onReady(): Promise<void> {
         try {
-            // Upgrade older config
-            if (await this.migrateConfig()) {
-                return;
-            }
-
             await this.mkdirAsync(this.namespace, 'scripts');
 
             this.subscribeStates('*');
@@ -65,17 +56,8 @@ class Shelly extends utils.Adapter {
                         this.log.error('MQTT Password is missing!');
                     }
 
-                    this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
-                    this.serverMqtt.listen();
-                }
-            });
-
-            // Start CoAP server
-            setImmediate(() => {
-                if (protocol === 'both' || protocol === 'coap') {
-                    this.log.info(`Starting in CoAP mode. Listening on ${this.config.coapbind}:5683`);
-                    this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
-                    this.serverCoap.listen();
+                    //this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
+                    //this.serverMqtt.listen();
                 }
             });
 
@@ -106,9 +88,9 @@ class Shelly extends utils.Adapter {
             } else {
                 this.log.debug(`[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`);
 
-                if (objectHelper) {
-                    objectHelper.handleStateChange(id, state);
-                }
+                //if (objectHelper) {
+                //    objectHelper.handleStateChange(id, state);
+                //}
             }
         }
     }
@@ -131,26 +113,17 @@ class Shelly extends utils.Adapter {
         try {
             this.log.debug('[onUnload] Closing adapter');
 
-            if (this.serverCoap) {
-                try {
-                    this.log.debug(`[onUnload] Stopping CoAP server`);
-                    this.serverCoap.destroy();
-                } catch (err) {
-                    // ignore
-                }
-            }
-
             if (this.serverMqtt) {
                 try {
                     this.log.debug(`[onUnload] Stopping MQTT server`);
-                    this.serverMqtt.destroy();
-                } catch (err) {
+                    // this.serverMqtt.destroy();
+                } catch {
                     // ignore
                 }
             }
 
             callback();
-        } catch (e) {
+        } catch {
             // this.log.error('Error');
             callback();
         }
@@ -181,7 +154,7 @@ class Shelly extends utils.Adapter {
                     this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
                     try {
-                        const isAlive = await probe(valPort, valHostname);
+                        const isAlive = await probe(valPort, String(valHostname));
                         this.deviceStatusUpdate(deviceId, isAlive);
                     } catch (err) {
                         this.log.warn(`[onlineCheck] Failed for ${deviceId} on ${valHostname}:${valPort}: ${err}`);
@@ -268,7 +241,7 @@ class Shelly extends utils.Adapter {
 
             await this.extendObjectAsync(deviceId, {
                 common: {
-                    color: null, // Remove color from previous versions
+                    color: undefined, // Remove color from previous versions
                 },
             });
         }
@@ -294,101 +267,9 @@ class Shelly extends utils.Adapter {
         }
     }
 
-    async processBleMessage(val) {
-        // TODO: Just set values once when called by multiple devices
-        if (val && val.scriptVersion && val.src && val.payload) {
-            if (val.scriptVersion !== '0.1') {
-                this.log.warn(`[BLE] ${val.srcBle.mac} (via ${val.src}): BLE-Script version is invalid, check documentation for latest version`);
-            }
-
-            const typesList = {
-                rssi: { type: 'number', unit: 'dBm' },
-                battery: { type: 'number', unit: '%' },
-                temperature: { type: 'number', unit: '°C' },
-                humidity: { type: 'number', unit: '%' },
-                illuminance: { type: 'number' },
-                motion: { type: 'number' },
-                window: { type: 'number' },
-                button: { type: 'number' },
-                rotation: { type: 'number' },
-            };
-
-            await this.extendObjectAsync(
-                `ble.${val.srcBle.mac}`,
-                {
-                    type: 'device',
-                    common: {
-                        name: val.srcBle.mac,
-                        icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTk2LjQ4IDI2MC4wMjNsOTIuNjI2LTEwMy4zMzNMMTQzLjEyNSAwdjIwNi4zM2wtODYuMTExLTg2LjExMS0zMS40MDYgMzEuNDA1IDEwOC4wNjEgMTA4LjM5OUwyNS42MDggMzY4LjQyMmwzMS40MDYgMzEuNDA1IDg2LjExMS04Ni4xMTFMMTQ1Ljg0IDUxMmwxNDguNTUyLTE0OC42NDQtOTcuOTEyLTEwMy4zMzN6bTQwLjg2LTEwMi45OTZsLTQ5Ljk3NyA0OS45NzgtLjMzOC0xMDAuMjk1IDUwLjMxNSA1MC4zMTd6TTE4Ny4zNjMgMzEzLjA0bDQ5Ljk3NyA0OS45NzgtNTAuMzE1IDUwLjMxNi4zMzgtMTAwLjI5NHoiLz48L3N2Zz4=',
-                    },
-                    native: {},
-                },
-                { preserve: { common: ['name'] } },
-            );
-
-            for (const [key, value] of Object.entries(val.payload)) {
-                if (Object.keys(typesList).includes(key)) {
-                    await this.extendObjectAsync(`ble.${val.srcBle.mac}.${key}`, {
-                        type: 'state',
-                        common: {
-                            name: key,
-                            type: typesList[key].type,
-                            role: 'value',
-                            read: true,
-                            write: false,
-                            unit: typesList[key]?.unit,
-                        },
-                        native: {},
-                    });
-
-                    await this.setStateAsync(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true, c: val.src });
-                }
-            }
-        }
-    }
-
-    removeNamespace(id) {
+    removeNamespace(id: string): string {
         const re = new RegExp(`${this.namespace}*\\.`, 'g');
         return id.replace(re, '');
-    }
-
-    async migrateConfig() {
-        const native = {};
-        if (this.config?.http_username) {
-            native.httpusername = this.config.http_username;
-            native.http_username = '';
-        }
-        if (this.config?.http_password) {
-            native.httppassword = this.config.http_password;
-            native.http_password = '';
-        }
-        if (this.config?.user) {
-            native.mqttusername = this.config.user;
-            native.user = '';
-        }
-        if (this.config?.password) {
-            native.mqttpassword = this.config.password;
-            native.password = '';
-        }
-        if (this.config?.keys) {
-            native.blacklist = this.config.keys.map((b) => {
-                return { id: b.blacklist };
-            });
-            native.keys = null;
-        }
-
-        if (this.config) {
-            this.config.polltime = parseInt(this.config?.polltime, 10);
-        }
-
-        if (Object.keys(native).length) {
-            this.log.info('Migrate some data from old Shelly Adapter version. Restarting Shelly Adapter now!');
-            await this.extendForeignObjectAsync(`system.adapter.${this.namespace}`, { native });
-
-            return true;
-        }
-
-        return false;
     }
 }
 

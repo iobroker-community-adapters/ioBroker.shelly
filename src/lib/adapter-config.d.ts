@@ -4,8 +4,19 @@
 declare global {
     namespace ioBroker {
         interface AdapterConfig {
-            option1: boolean;
-            option2: string;
+            protocol: 'both' | 'mqtt' | 'coap';
+            httpusername: string;
+            httppassword: string;
+            polltime: number;
+            autoupdate: boolean;
+            updateUnchangedObjects: boolean;
+            logDebugMessages: boolean;
+            saveHttpResponses: boolean;
+            bind: string;
+            port: number;
+            mqttusername: string;
+            mqttpassword: string;
+            qos: number;
         }
     }
 }

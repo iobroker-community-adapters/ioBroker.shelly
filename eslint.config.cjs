@@ -17,7 +17,6 @@ module.exports = [{
         "**/build/",
         "**/.prettierrc.js",
         "**/.eslintrc.js",
-        "admin/blockly.js",
         "admin/words.js",
         "test/**",
         "eslint.config.cjs"

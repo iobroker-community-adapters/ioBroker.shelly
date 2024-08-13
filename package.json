@@ -39,10 +39,7 @@
     "@iobroker/adapter-core": "^3.1.6",
     "@network-utils/tcp-ping": "^1.2.3",
     "axios": "^1.7.3",
-    "mqtt-connection": "^4.1.0",
-    "shelly-iot": "^1.1.2",
-    "xml2js": "0.6.2",
-    "xmlbuilder": "^15.1.1"
+    "mqtt-connection": "^4.1.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^3.8.0",
