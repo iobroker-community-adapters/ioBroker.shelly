@@ -10,11 +10,76 @@ import { BaseClient, BaseServer } from './base';
 
 export class MQTTClient extends BaseClient {
     private client: AedesClient;
+    private rpcSrc: string;
+    private rpcOpenMessages: { [key: number]: (payload: object) => void };
 
     constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter, client: AedesClient) {
         super('mqtt', adapter, eventEmitter);
 
         this.client = client;
+        this.rpcSrc = `iobroker.${adapter.namespace}`;
+        this.rpcOpenMessages = [];
+    }
+
+    public onboarding(): void {
+        this.publishRpcMsg('shellyplusplugs-b0b21c18d700/rpc', { method: 'Sys.SetConfig', params: { config: { device: { name: 'test2' } } } });
+    }
+
+    public onMessagePublish(topic: string, payload: string): void {
+        try {
+            const payloadObj = JSON.parse(payload);
+            if (payloadObj.dst === this.rpcSrc) {
+                if (payloadObj.id && Object.prototype.hasOwnProperty.call(this.rpcOpenMessages, payloadObj.id)) {
+                    this.rpcOpenMessages[payloadObj.id](payloadObj); // Resolve promise
+                    delete this.rpcOpenMessages[payloadObj.id];
+                }
+            }
+        } catch (err) {
+            this.adapter.log.error(err);
+        }
+    }
+
+    private getNextMsgId(): number {
+        return this.msgId++ & 0xffff;
+    }
+
+    private async publishRpcMsg(topic: string, payload: object): Promise<void> {
+        return new Promise((resolve, reject) => {
+            const payloadObj = {
+                id: this.getNextMsgId(),
+                src: this.rpcSrc,
+                ...payload,
+            };
+
+            const timeout = this.adapter.setTimeout(() => reject('Timeout'), 2000);
+
+            this.publishMsg(topic, payloadObj.id, JSON.stringify(payloadObj))
+                .then((msgId) => {
+                    this.adapter.clearTimeout(timeout);
+                    this.rpcOpenMessages[msgId] = resolve;
+                })
+                .catch(reject);
+        });
+    }
+
+    private async publishMsg(topic: string, msgId: number, payload: string): Promise<number> {
+        return new Promise((resolve, reject) => {
+            const qos = this.adapter.config.qos ?? 0;
+
+            try {
+                this.adapter.log.warn(`[MQTT] Send state to ${this.client.id} with QoS ${qos}: ${topic} = ${payload} (${msgId})`);
+                this.client.publish({ cmd: 'publish', topic, payload, qos: 0, messageId: msgId, dup: false, retain: false }, (err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(msgId);
+                    }
+                });
+            } catch (err) {
+                this.adapter.log.error(`[MQTT] Unable to publish message to ${this.client.id} - received error "${err}": ${topic} = ${payload}`);
+                reject(err);
+            }
+        });
     }
 }
 
@@ -23,7 +88,7 @@ export class MQTTServer extends BaseServer {
     private server: net.Server | undefined;
     private clients: { [key: string]: MQTTClient };
 
-    constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter) {
+    public constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter) {
         super(adapter, eventEmitter);
 
         this.aedes = new Aedes({
@@ -47,7 +112,7 @@ export class MQTTServer extends BaseServer {
         this.clients = {};
     }
 
-    listen(): void {
+    public listen(): void {
         this.aedes!.on('clientReady', (client) => {
             if (client?.id) {
                 this.adapter.log.debug(`CLIENT_CONNECTED : MQTT Client "${client ? client.id : client}" connected to aedes broker`);
@@ -55,6 +120,9 @@ export class MQTTServer extends BaseServer {
                 try {
                     if (!Object.prototype.hasOwnProperty.call(this.clients, client.id)) {
                         this.clients[client.id] = new MQTTClient(this.adapter, this.eventEmitter, client);
+                        this.adapter.setTimeout(() => {
+                            this.clients[client.id].onboarding();
+                        }, 1000);
                     } else {
                         this.adapter.log.error(`[MQTT] Client with id "${client.id}" already connected/registered in broker`);
                     }
@@ -81,8 +149,8 @@ export class MQTTServer extends BaseServer {
 
         this.aedes!.on('publish', (packet, client) => {
             if (client?.id && Object.prototype.hasOwnProperty.call(this.clients, client.id)) {
-                this.adapter.log.debug(`[MQTT Server] Received message of client with id "${client.id}": ${JSON.stringify(packet)}`);
-                //this.clients[client.id].publish(packet);
+                this.adapter.log.debug(`[MQTT Server] Received message of client with id "${client.id}" ${packet.topic}: ${packet.payload.toString()}`);
+                this.clients[client.id].onMessagePublish(packet.topic, packet.payload.toString());
             }
         });
 
@@ -108,7 +176,7 @@ export class MQTTServer extends BaseServer {
         });
     }
 
-    destroy(): void {
+    public destroy(): void {
         super.destroy();
         this.adapter.log.debug(`[MQTT Server] Destroying`);
 
