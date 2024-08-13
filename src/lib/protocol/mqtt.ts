@@ -10,6 +10,8 @@ import { BaseClient, BaseServer } from './base';
 
 export class MQTTClient extends BaseClient {
     private client: AedesClient;
+    private mqttTopicPrefix: string | undefined;
+
     private rpcSrc: string;
     private rpcOpenMessages: { [key: number]: (payload: object) => void };
 
@@ -22,20 +24,35 @@ export class MQTTClient extends BaseClient {
     }
 
     public onboarding(): void {
-        this.publishRpcMsg('shellyplusplugs-b0b21c18d700/rpc', { method: 'Sys.SetConfig', params: { config: { device: { name: 'test2' } } } });
+        this.publishRpcMsg({ method: 'Shelly.GetComponents' }).then((payload) => {
+            this.adapter.log.warn(`Shelly Components ${JSON.stringify(payload)}`);
+        });
+        /*
+        this.publishRpcMsg({ method: 'Sys.SetConfig', params: { config: { device: { name: 'test2' } } } }).then((payload) => {
+            this.adapter.log.info(`Name changed to ${JSON.stringify(payload)}`);
+        });
+        */
     }
 
     public onMessagePublish(topic: string, payload: string): void {
-        try {
-            const payloadObj = JSON.parse(payload);
-            if (payloadObj.dst === this.rpcSrc) {
-                if (payloadObj.id && Object.prototype.hasOwnProperty.call(this.rpcOpenMessages, payloadObj.id)) {
-                    this.rpcOpenMessages[payloadObj.id](payloadObj); // Resolve promise
-                    delete this.rpcOpenMessages[payloadObj.id];
+        if (topic.endsWith('/online') && !this.mqttTopicPrefix) {
+            this.mqttTopicPrefix = topic.substring(0, topic.lastIndexOf('/online'));
+            this.adapter.log.info(`Saved topic prefix for ${this.client.id}: ${this.mqttTopicPrefix}`);
+
+            this.onboarding();
+        } else if (topic === `${this.rpcSrc}/rpc`) {
+            // Handle rpc answers
+            try {
+                const payloadObj = JSON.parse(payload);
+                if (payloadObj.dst === this.rpcSrc) {
+                    if (payloadObj.id && Object.prototype.hasOwnProperty.call(this.rpcOpenMessages, payloadObj.id)) {
+                        this.rpcOpenMessages[payloadObj.id](payloadObj); // Resolve promise
+                        delete this.rpcOpenMessages[payloadObj.id];
+                    }
                 }
+            } catch (err) {
+                this.adapter.log.error(err);
             }
-        } catch (err) {
-            this.adapter.log.error(err);
         }
     }
 
@@ -43,18 +60,26 @@ export class MQTTClient extends BaseClient {
         return this.msgId++ & 0xffff;
     }
 
-    private async publishRpcMsg(topic: string, payload: object): Promise<void> {
+    private async publishRpcMsg(payload: object): Promise<object> {
         return new Promise((resolve, reject) => {
+            const msgId = this.getNextMsgId();
+            const topic = `${this.mqttTopicPrefix}/rpc`;
+
             const payloadObj = {
-                id: this.getNextMsgId(),
+                id: msgId,
                 src: this.rpcSrc,
                 ...payload,
             };
 
-            const timeout = this.adapter.setTimeout(() => reject('Timeout'), 2000);
+            const timeout = this.adapter.setTimeout(() => {
+                this.adapter.log.warn(`[publishRpcMsg ${msgId}] Command timeout`);
+
+                delete this.rpcOpenMessages[msgId];
+                reject(`timeout for ${topic}`);
+            }, 2000);
 
             this.publishMsg(topic, payloadObj.id, JSON.stringify(payloadObj))
-                .then((msgId) => {
+                .then(() => {
                     this.adapter.clearTimeout(timeout);
                     this.rpcOpenMessages[msgId] = resolve;
                 })
@@ -67,7 +92,7 @@ export class MQTTClient extends BaseClient {
             const qos = this.adapter.config.qos ?? 0;
 
             try {
-                this.adapter.log.warn(`[MQTT] Send state to ${this.client.id} with QoS ${qos}: ${topic} = ${payload} (${msgId})`);
+                this.adapter.log.debug(`[MQTT] Send state to ${this.client.id} with QoS ${qos}: ${topic} = ${payload} (${msgId})`);
                 this.client.publish({ cmd: 'publish', topic, payload, qos: 0, messageId: msgId, dup: false, retain: false }, (err) => {
                     if (err) {
                         reject(err);
@@ -120,9 +145,6 @@ export class MQTTServer extends BaseServer {
                 try {
                     if (!Object.prototype.hasOwnProperty.call(this.clients, client.id)) {
                         this.clients[client.id] = new MQTTClient(this.adapter, this.eventEmitter, client);
-                        this.adapter.setTimeout(() => {
-                            this.clients[client.id].onboarding();
-                        }, 1000);
                     } else {
                         this.adapter.log.error(`[MQTT] Client with id "${client.id}" already connected/registered in broker`);
                     }
