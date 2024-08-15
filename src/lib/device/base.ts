@@ -13,5 +13,21 @@ export abstract class BaseDevice {
         // this.eventEmitter.on('onFirmwareUpdate', async () => await this.firmwareUpdate());
     }
 
+    public async init(deviceId: string, gen: number): Promise<void> {
+        await this.adapter.extendObject(deviceId, {
+            type: 'device',
+            common: {
+                name: `Device ${deviceId}`,
+                desc: `Gen ${gen}`,
+                statusStates: {
+                    onlineId: `${this.adapter.namespace}.${deviceId}.online`,
+                },
+            },
+            native: {},
+        });
+    }
+
     public abstract setName(name: string): void;
+
+    public abstract onMessagePublish(topic: string, payload: string): void;
 }

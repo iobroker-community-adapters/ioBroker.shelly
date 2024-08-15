@@ -1,6 +1,7 @@
 import * as utils from '@iobroker/adapter-core';
 import { Client as AedesClient } from 'aedes';
 import { EventEmitter } from 'node:events';
+import { BaseDevice } from '../device/base';
 import { NextgenDevice } from '../device/nextgen';
 import { BaseClient } from './base';
 
@@ -100,36 +101,41 @@ export class MQTTClient extends BaseClient {
     private client: AedesClient;
     private msgId: number;
     private mqttTopicPrefix: string | undefined;
-    private onboardingCompleted: boolean;
 
     private rpcSrc: string;
     private rpcOpenMessages: { [key: number]: (response: Rpc.Response) => void };
+
+    private device: BaseDevice | undefined;
 
     constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter, client: AedesClient) {
         super('mqtt', adapter, eventEmitter);
 
         this.client = client;
         this.msgId = 1;
-        this.onboardingCompleted = false;
 
         this.rpcSrc = `iobroker.${adapter.namespace}`;
         this.rpcOpenMessages = [];
     }
 
     public onboarding(): void {
-        this.publishRpcMsg({ method: 'Shelly.GetDeviceInfo' }).then((result) => {
-            this.adapter.log.warn(`Shelly device info: ${JSON.stringify(result)}`);
+        this.publishRpcMsg({ method: 'Shelly.GetDeviceInfo' })
+            .then((result) => {
+                this.adapter.log.warn(`Shelly device info: ${JSON.stringify(result)}`);
 
-            if (result.gen >= 2) {
-                new NextgenDevice(this.adapter, this.eventEmitter, this);
-            }
-
-            this.onboardingCompleted = true;
-        });
+                if (result.gen >= 2) {
+                    this.device = new NextgenDevice(this.adapter, this.eventEmitter, this);
+                    this.device.init(result.id, result.gen);
+                }
+            })
+            .catch((reason) => {
+                if (typeof reason === 'string' && reason.startsWith('[RPC_COMMAND_TIMEOUT')) {
+                    // Gen 1
+                }
+            });
     }
 
     public onMessagePublish(topic: string, payload: string): void {
-        if (topic.endsWith('/online') && !this.mqttTopicPrefix && !this.onboardingCompleted) {
+        if (topic.endsWith('/online') && !this.mqttTopicPrefix) {
             this.mqttTopicPrefix = topic.substring(0, topic.lastIndexOf('/online'));
             this.adapter.log.info(`Saved topic prefix for ${this.client.id}: ${this.mqttTopicPrefix}`);
 
@@ -147,6 +153,9 @@ export class MQTTClient extends BaseClient {
             } catch (err) {
                 this.adapter.log.error(err);
             }
+        } else if (this.device) {
+            // Forward to device
+            this.device.onMessagePublish(topic, payload);
         }
     }
 
@@ -172,16 +181,17 @@ export class MQTTClient extends BaseClient {
             };
 
             const timeout = this.adapter.setTimeout(() => {
-                this.adapter.log.warn(`[publishRpcMsg ${msgId}] Command timeout`);
+                this.adapter.log.warn(`[RPC_COMMAND_TIMEOUT ${msgId}] ${this.mqttTopicPrefix} on ${topic}`);
 
                 delete this.rpcOpenMessages[msgId];
-                reject(`timeout for ${topic}`);
+                reject(`[RPC_COMMAND_TIMEOUT ${msgId}] ${this.mqttTopicPrefix} on ${topic}`);
             }, 2000);
 
             this.publishMsg(topic, msgId, JSON.stringify(payload))
                 .then(() => {
-                    this.adapter.clearTimeout(timeout);
                     this.rpcOpenMessages[msgId] = (response: Rpc.Response) => {
+                        this.adapter.clearTimeout(timeout);
+
                         if (response.error) {
                             reject(response.error);
                         } else {

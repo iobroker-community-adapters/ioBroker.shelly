@@ -15,15 +15,15 @@ export class NextgenDevice extends BaseDevice {
         //this.eventEmitter.on('onScriptDownload', async () => await this.downloadAllScripts());
     }
 
-    public init(): void {
-        /*
-        this.mqttClient.publishRpcMsg({ method: 'Shelly.GetComponents' }).then((result) => {
-            this.adapter.log.warn(`Shelly components: ${JSON.stringify(result)}`);
-        });
-        */
+    public async init(deviceId: string, gen: number): Promise<void> {
+        await super.init(deviceId, gen);
     }
 
     public setName(name: string): void {
         this.mqttClient.publishRpcMsg({ method: 'Sys.SetConfig', params: { config: { device: { name } } } });
+    }
+
+    public onMessagePublish(topic: string, payload: string): void {
+        // yes
     }
 }
