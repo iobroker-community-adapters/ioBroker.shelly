@@ -6,28 +6,95 @@ import { BaseClient } from './base';
 
 //const INIT_SRC = 'iobroker-init';
 
-type RpcRequest = {
-    jsonrpc?: '2.0';
-    id?: number | string;
-    src?: string;
-    method: string;
-    params?: object;
-};
+export namespace Rpc {
+    export type Request = {
+        jsonrpc?: '2.0';
+        id?: number | string;
+        src?: string;
+        method: string;
+        params?: object;
+    };
 
-type RpcResponseResult = object;
+    export type ResponseResult = object;
 
-type RpcResponseError = {
-    code: number;
-    message: string;
-};
+    export type ResponseError = {
+        code: number;
+        message: string;
+    };
 
-type RpcResponse = {
-    id: number | string;
-    src: string;
-    dst: string;
-    result: RpcResponseResult;
-    error: RpcResponseError;
-};
+    export type Response = {
+        id: number | string;
+        src: string;
+        dst: string;
+        result: ResponseResult;
+        error: ResponseError;
+    };
+
+    export namespace Sys {
+        type Config = {
+            device: {
+                name: string;
+                eco_mode?: boolean;
+                mac?: string;
+                fw_id?: string;
+                profile?: string;
+                discoverable?: boolean;
+                addon_type?: string | null;
+                sys_btn_toggle?: boolean;
+            };
+        };
+
+        export type SetConfigRequest = Request & {
+            method: 'Sys.SetConfig';
+            params?: {
+                config?: Config;
+            };
+        };
+
+        export type SetConfigResult = ResponseResult & {
+            id: string;
+            mac: string;
+            model: string;
+            gen: number;
+            fw_id: string;
+            ver: string;
+            app: string;
+            profile: string;
+            auth_en: boolean;
+            auth_domain: string | null;
+            discoverable: boolean;
+            key: string;
+            batch: string;
+            fw_sbits: string;
+        };
+    }
+
+    export namespace Shelly {
+        export type DeviceInfoRequest = Request & {
+            method: 'Shelly.GetDeviceInfo';
+            params?: {
+                ident?: boolean;
+            };
+        };
+
+        export type DeviceInfoResult = ResponseResult & {
+            id: string;
+            mac: string;
+            model: string;
+            gen: number;
+            fw_id: string;
+            ver: string;
+            app: string;
+            profile: string;
+            auth_en: boolean;
+            auth_domain: string | null;
+            discoverable: boolean;
+            key: string;
+            batch: string;
+            fw_sbits: string;
+        };
+    }
+}
 
 export class MQTTClient extends BaseClient {
     private client: AedesClient;
@@ -36,7 +103,7 @@ export class MQTTClient extends BaseClient {
     private onboardingCompleted: boolean;
 
     private rpcSrc: string;
-    private rpcOpenMessages: { [key: number]: (response: RpcResponse) => void };
+    private rpcOpenMessages: { [key: number]: (response: Rpc.Response) => void };
 
     constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter, client: AedesClient) {
         super('mqtt', adapter, eventEmitter);
@@ -50,28 +117,15 @@ export class MQTTClient extends BaseClient {
     }
 
     public onboarding(): void {
-        // TODO: Create all objects
-
         this.publishRpcMsg({ method: 'Shelly.GetDeviceInfo' }).then((result) => {
             this.adapter.log.warn(`Shelly device info: ${JSON.stringify(result)}`);
 
-            //if (result.gen >= 2) {
-            new NextgenDevice(this.adapter, this.eventEmitter);
-            //}
+            if (result.gen >= 2) {
+                new NextgenDevice(this.adapter, this.eventEmitter, this);
+            }
 
             this.onboardingCompleted = true;
         });
-
-        this.publishRpcMsg({ method: 'Shelly.GetComponents' }).then((result) => {
-            this.adapter.log.warn(`Shelly components: ${JSON.stringify(result)}`);
-
-            this.onboardingCompleted = true;
-        });
-        /*
-        this.publishRpcMsg({ method: 'Sys.SetConfig', params: { config: { device: { name: 'test2' } } } }).then((payload) => {
-            this.adapter.log.info(`Name changed to ${JSON.stringify(payload)}`);
-        });
-        */
     }
 
     public onMessagePublish(topic: string, payload: string): void {
@@ -100,7 +154,9 @@ export class MQTTClient extends BaseClient {
         return this.msgId++ & 0xffff;
     }
 
-    private async publishRpcMsg(request: RpcRequest): Promise<RpcResponseResult> {
+    public async publishRpcMsg(request: Rpc.Sys.SetConfigRequest): Promise<Rpc.Sys.SetConfigResult>;
+    public async publishRpcMsg(request: Rpc.Shelly.DeviceInfoRequest): Promise<Rpc.Shelly.DeviceInfoResult>;
+    public async publishRpcMsg(request: Rpc.Request): Promise<Rpc.ResponseResult> {
         return new Promise((resolve, reject) => {
             if (!this.mqttTopicPrefix) {
                 reject(`MQTT topic prefix is not defined`);
@@ -125,7 +181,7 @@ export class MQTTClient extends BaseClient {
             this.publishMsg(topic, msgId, JSON.stringify(payload))
                 .then(() => {
                     this.adapter.clearTimeout(timeout);
-                    this.rpcOpenMessages[msgId] = (response: RpcResponse) => {
+                    this.rpcOpenMessages[msgId] = (response: Rpc.Response) => {
                         if (response.error) {
                             reject(response.error);
                         } else {

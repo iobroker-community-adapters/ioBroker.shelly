@@ -1,7 +1,7 @@
 import * as utils from '@iobroker/adapter-core';
 import { EventEmitter } from 'node:events';
 
-export class BaseDevice {
+export abstract class BaseDevice {
     protected adapter: utils.AdapterInstance;
     protected eventEmitter: EventEmitter;
 
@@ -12,4 +12,6 @@ export class BaseDevice {
         // Handle firmware updates
         // this.eventEmitter.on('onFirmwareUpdate', async () => await this.firmwareUpdate());
     }
+
+    public abstract setName(name: string): void;
 }
