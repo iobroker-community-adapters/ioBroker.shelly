@@ -12,11 +12,5 @@ export class BaseClient {
 
         this.adapter = adapter;
         this.eventEmitter = eventEmitter;
-
-        // Handle firmware updates
-        // this.eventEmitter.on('onFirmwareUpdate', async () => await this.firmwareUpdate());
-
-        // Handle script download
-        //this.eventEmitter.on('onScriptDownload', async () => await this.downloadAllScripts());
     }
 }

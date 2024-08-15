@@ -1,13 +1,32 @@
 import * as utils from '@iobroker/adapter-core';
 import { Client as AedesClient } from 'aedes';
 import { EventEmitter } from 'node:events';
+import { NextgenDevice } from '../device/nextgen';
 import { BaseClient } from './base';
 
 //const INIT_SRC = 'iobroker-init';
 
+type RpcRequest = {
+    jsonrpc?: '2.0';
+    id?: number | string;
+    src?: string;
+    method: string;
+    params?: object;
+};
+
+type RpcResponseResult = object;
+
+type RpcResponseError = {
+    code: number;
+    message: string;
+};
+
 type RpcResponse = {
-    result: object;
-    error: object;
+    id: number | string;
+    src: string;
+    dst: string;
+    result: RpcResponseResult;
+    error: RpcResponseError;
 };
 
 export class MQTTClient extends BaseClient {
@@ -36,6 +55,10 @@ export class MQTTClient extends BaseClient {
         this.publishRpcMsg({ method: 'Shelly.GetDeviceInfo' }).then((result) => {
             this.adapter.log.warn(`Shelly device info: ${JSON.stringify(result)}`);
 
+            //if (result.gen >= 2) {
+            new NextgenDevice(this.adapter, this.eventEmitter);
+            //}
+
             this.onboardingCompleted = true;
         });
 
@@ -63,7 +86,7 @@ export class MQTTClient extends BaseClient {
                 const payloadObj = JSON.parse(payload);
                 if (payloadObj.dst === this.rpcSrc) {
                     if (payloadObj.id && Object.prototype.hasOwnProperty.call(this.rpcOpenMessages, payloadObj.id)) {
-                        this.rpcOpenMessages[payloadObj.id]({ result: payloadObj.result, error: payloadObj.error }); // Resolve promise
+                        this.rpcOpenMessages[payloadObj.id](payloadObj); // Resolve promise
                         delete this.rpcOpenMessages[payloadObj.id];
                     }
                 }
@@ -77,15 +100,19 @@ export class MQTTClient extends BaseClient {
         return this.msgId++ & 0xffff;
     }
 
-    private async publishRpcMsg(payload: object): Promise<object> {
+    private async publishRpcMsg(request: RpcRequest): Promise<RpcResponseResult> {
         return new Promise((resolve, reject) => {
+            if (!this.mqttTopicPrefix) {
+                reject(`MQTT topic prefix is not defined`);
+            }
+
             const msgId = this.getNextMsgId();
             const topic = `${this.mqttTopicPrefix}/rpc`;
 
-            const payloadObj = {
+            const payload = {
                 id: msgId,
                 src: this.rpcSrc,
-                ...payload,
+                ...request,
             };
 
             const timeout = this.adapter.setTimeout(() => {
@@ -95,7 +122,7 @@ export class MQTTClient extends BaseClient {
                 reject(`timeout for ${topic}`);
             }, 2000);
 
-            this.publishMsg(topic, payloadObj.id, JSON.stringify(payloadObj))
+            this.publishMsg(topic, msgId, JSON.stringify(payload))
                 .then(() => {
                     this.adapter.clearTimeout(timeout);
                     this.rpcOpenMessages[msgId] = (response: RpcResponse) => {
