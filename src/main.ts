@@ -2,8 +2,7 @@ import * as utils from '@iobroker/adapter-core';
 
 import { probe } from '@network-utils/tcp-ping';
 import { EventEmitter } from 'node:events';
-
-import { MQTTServer } from './lib/protocol/mqtt';
+import { MQTTServer } from './lib/server/mqtt';
 
 class Shelly extends utils.Adapter {
     private isUnloaded: boolean;
