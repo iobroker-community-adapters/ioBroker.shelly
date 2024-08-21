@@ -1,13 +1,12 @@
 import * as utils from '@iobroker/adapter-core';
-import { EventEmitter } from 'node:events';
 import { MQTTClient } from '../client/mqtt';
 import { BaseDevice } from './base';
 
 export class NextgenDevice extends BaseDevice {
     private mqttClient: MQTTClient;
 
-    constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter, mqttClient: MQTTClient) {
-        super(adapter, eventEmitter);
+    constructor(adapter: utils.AdapterInstance, mqttClient: MQTTClient) {
+        super(adapter);
 
         this.mqttClient = mqttClient;
 

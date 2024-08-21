@@ -2,9 +2,9 @@
 
 import * as utils from '@iobroker/adapter-core';
 import Aedes from 'aedes';
-import { EventEmitter } from 'node:events';
 import * as net from 'node:net';
 import { MQTTClient } from '../client/mqtt';
+import { Manager } from '../manager';
 import { BaseServer } from './base';
 
 export class MQTTServer extends BaseServer {
@@ -12,8 +12,8 @@ export class MQTTServer extends BaseServer {
     private server: net.Server | undefined;
     private clients: { [key: string]: MQTTClient };
 
-    public constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter) {
-        super(adapter, eventEmitter);
+    public constructor(adapter: utils.AdapterInstance, manager: Manager) {
+        super(adapter, manager);
 
         this.aedes = new Aedes({
             id: `iobroker.${this.adapter.namespace}`,
@@ -39,19 +39,12 @@ export class MQTTServer extends BaseServer {
     public listen(): void {
         this.aedes!.on('clientReady', (client) => {
             if (client?.id) {
-                this.adapter.log.debug(`CLIENT_CONNECTED : MQTT Client "${client ? client.id : client}" connected to aedes broker`);
+                this.adapter.log.debug(`[MQTT] Client with id "${client.id}" connected to aedes broker`);
 
-                try {
-                    if (!Object.prototype.hasOwnProperty.call(this.clients, client.id)) {
-                        this.clients[client.id] = new MQTTClient(this.adapter, this.eventEmitter, client);
-                    } else {
-                        this.adapter.log.error(`[MQTT] Client with id "${client.id}" already connected/registered in broker`);
-                    }
-                } catch (err) {
-                    if (err.message == 'DEVICE_UNKNOWN') {
-                        this.adapter.log.error(`[MQTT] (Shelly?) device unknown, configuration for client with id "${client.id}" does not exist!`);
-                        this.adapter.log.error(`[MQTT] DO NOT CHANGE THE CLIENT-ID OF YOUR SHELLY DEVICES (see adapter documentation for details)`);
-                    }
+                if (!Object.prototype.hasOwnProperty.call(this.clients, client.id)) {
+                    this.clients[client.id] = new MQTTClient(this.adapter, this.manager, client);
+                } else {
+                    this.adapter.log.error(`[MQTT] Client with id "${client.id}" already connected/registered in broker`);
                 }
             }
         });

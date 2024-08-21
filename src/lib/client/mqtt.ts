@@ -1,11 +1,9 @@
 import * as utils from '@iobroker/adapter-core';
 import { Client as AedesClient } from 'aedes';
-import { EventEmitter } from 'node:events';
 import { BaseDevice } from '../device/base';
 import { NextgenDevice } from '../device/nextgen';
+import { Manager } from '../manager';
 import { BaseClient } from './base';
-
-//const INIT_SRC = 'iobroker-init';
 
 export namespace Rpc {
     export type Request = {
@@ -107,8 +105,8 @@ export class MQTTClient extends BaseClient {
 
     private device: BaseDevice | undefined;
 
-    constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter, client: AedesClient) {
-        super('mqtt', adapter, eventEmitter);
+    constructor(adapter: utils.AdapterInstance, manager: Manager, client: AedesClient) {
+        super(adapter, manager);
 
         this.client = client;
         this.msgId = 1;
@@ -122,9 +120,12 @@ export class MQTTClient extends BaseClient {
             .then((result) => {
                 this.adapter.log.warn(`Shelly device info: ${JSON.stringify(result)}`);
 
-                if (result.gen >= 2) {
-                    this.device = new NextgenDevice(this.adapter, this.eventEmitter, this);
-                    this.device.init(result.id, result.gen);
+                if (!this.device && result.gen >= 2) {
+                    this.device = new NextgenDevice(this.adapter, this);
+
+                    this.device.init(result.id, result.gen).then(() => {
+                        this.manager.addDevice(result.id, this.device!);
+                    });
                 }
             })
             .catch((reason) => {

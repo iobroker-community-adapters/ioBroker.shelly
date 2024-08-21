@@ -2,6 +2,7 @@ import * as utils from '@iobroker/adapter-core';
 
 import { probe } from '@network-utils/tcp-ping';
 import { EventEmitter } from 'node:events';
+import { Manager } from './lib/manager';
 import { MQTTServer } from './lib/server/mqtt';
 
 class Shelly extends utils.Adapter {
@@ -9,8 +10,8 @@ class Shelly extends utils.Adapter {
     private serverMqtt: null | MQTTServer;
     private firmwareUpdateTimeout: ioBroker.Timeout | undefined;
     private onlineCheckTimeout: ioBroker.Timeout | undefined;
-    private onlineDevices: { [key: string]: boolean };
-    private eventEmitter: EventEmitter;
+    private eventEmitter: EventEmitter | undefined;
+    private manager: Manager | undefined;
 
     public constructor(options: Partial<utils.AdapterOptions> = {}) {
         super({
@@ -22,16 +23,15 @@ class Shelly extends utils.Adapter {
 
         this.serverMqtt = null;
 
-        this.onlineDevices = {};
-
-        this.eventEmitter = new EventEmitter();
-
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
     private async onReady(): Promise<void> {
+        this.eventEmitter = new EventEmitter();
+        this.manager = new Manager(this, this.eventEmitter);
+
         try {
             await this.mkdirAsync(this.namespace, 'scripts');
 
@@ -57,7 +57,7 @@ class Shelly extends utils.Adapter {
                         this.log.error('MQTT Password is missing!');
                     }
 
-                    this.serverMqtt = new MQTTServer(this, this.eventEmitter);
+                    this.serverMqtt = new MQTTServer(this, this.manager!);
                     this.serverMqtt.listen();
                 }
             });
@@ -81,12 +81,12 @@ class Shelly extends utils.Adapter {
             if (stateId === 'info.update') {
                 this.log.debug(`[onStateChange] "info.update" state changed - starting update on every device`);
 
-                this.eventEmitter.emit('onFirmwareUpdate');
+                this.eventEmitter!.emit('onFirmwareUpdate');
             } else if (stateId === 'info.downloadScripts') {
                 this.log.debug(`[onStateChange] "info.downloadScripts" state changed - starting script download of every device`);
 
-                this.eventEmitter.emit('onScriptDownload');
-            } else {
+                this.eventEmitter!.emit('onScriptDownload');
+            } else if (!this.isUnloaded) {
                 this.log.debug(`[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`);
 
                 //if (objectHelper) {
@@ -155,8 +155,9 @@ class Shelly extends utils.Adapter {
                     this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
                     try {
+                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
                         const isAlive = await probe(valPort, String(valHostname));
-                        this.deviceStatusUpdate(deviceId, isAlive);
+                        //this.deviceStatusUpdate(deviceId, isAlive);
                     } catch (err) {
                         this.log.warn(`[onlineCheck] Failed for ${deviceId} on ${valHostname}:${valPort}: ${err}`);
                     }
@@ -172,6 +173,7 @@ class Shelly extends utils.Adapter {
         }, 60 * 1000); // Restart online check in 60 seconds
     }
 
+    /*
     async deviceStatusUpdate(deviceId: string, status: boolean): Promise<void> {
         if (this.isUnloaded) return;
         if (!deviceId) return;
@@ -219,10 +221,7 @@ class Shelly extends utils.Adapter {
             }
         }
     }
-
-    isOnline(deviceId: string): boolean {
-        return Object.prototype.hasOwnProperty.call(this.onlineDevices, deviceId);
-    }
+    */
 
     async getAllDeviceIds(): Promise<string[]> {
         const devices = await this.getDevicesAsync();
@@ -247,7 +246,6 @@ class Shelly extends utils.Adapter {
             });
         }
 
-        this.onlineDevices = {};
         await this.setState('info.connection', { val: false, ack: true });
     }
 
@@ -256,7 +254,7 @@ class Shelly extends utils.Adapter {
         if (this.config.autoupdate) {
             this.log.debug(`[firmwareUpdate] Starting update on every device`);
 
-            this.eventEmitter.emit('onFirmwareUpdate');
+            this.eventEmitter!.emit('onFirmwareUpdate');
 
             this.firmwareUpdateTimeout = this.setTimeout(
                 () => {

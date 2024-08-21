@@ -1,13 +1,13 @@
 import * as utils from '@iobroker/adapter-core';
-import { EventEmitter } from 'node:events';
+import { Manager } from '../manager';
 
 export class BaseServer {
     protected adapter: utils.AdapterInstance;
-    protected eventEmitter: EventEmitter;
+    protected manager: Manager;
 
-    constructor(adapter: utils.AdapterInstance, eventEmitter: EventEmitter) {
+    constructor(adapter: utils.AdapterInstance, manager: Manager) {
         this.adapter = adapter;
-        this.eventEmitter = eventEmitter;
+        this.manager = manager;
     }
 
     destroy(): void {
