@@ -150,7 +150,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 8.0.0 (2024-08-25)
 
 * (imperial929) Added Shelly 1 PM Gen3
 * (imperial929) Added Shelly 1 Gen3
@@ -187,12 +187,6 @@ NodeJS >= 18.x and js-controller >= 5 is required
 
 * (klein0r) Updated handling of ble payloads
 * (D1gitaldad) Added Shelly Wall Display
-
-### 6.6.1 (2023-10-20)
-
-* (klein0r) Fixed stop reason for Shelly 2.5 / Shelly 2
-* (klein0r) Added humidity of Shelly Plus Addon
-* (klein0r) Not all devices have external power
 
 ## License
 

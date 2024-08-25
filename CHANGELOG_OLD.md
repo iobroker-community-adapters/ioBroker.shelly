@@ -1,4 +1,10 @@
 # Older changes
+## 6.6.1 (2023-10-20)
+
+* (klein0r) Fixed stop reason for Shelly 2.5 / Shelly 2
+* (klein0r) Added humidity of Shelly Plus Addon
+* (klein0r) Not all devices have external power
+
 ## 6.6.0 (2023-10-17)
 
 * (klein0r) Added BLE devices as states to `shelly.0.ble.*` (Shelly Scripting required)
