@@ -26,7 +26,7 @@ CoAP/CoIoT will add all devices in your network. If you want to exclude some She
 
 If you use Shelly devices with firmware version 1.9.4 (or older), you don't have to configure anything. Your Shelly devices will be discovered by ioBroker automatically.
 
-**Important: Because CoAP/CoIoT uses multicast UDP packages, the Shelly devices has to be in the same subnet as your ioBroker server.**
+**Important: Because CoAP/CoIoT uses multicast UDP packages, the Shelly devices have to be in the same subnet as your ioBroker server.**
 
 ### Important notes
 

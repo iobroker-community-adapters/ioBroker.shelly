@@ -16,9 +16,9 @@ Trage als CoIoT-Server die IP-Adresse von deinem ioBroker Server ein - gefolgt v
 
 ![shelly_coap](./img/shelly_coap.png)
 
-**Das Shelly-Gerät muss nach dieser Änderung neugestartet werden!**
+**Das Shelly-Gerät muss nach dieser Änderung neu gestartet werden!**
 
-CoAP/CoIoT fügt alle Geräte in deinem Netzwerk hinzu. Falls Du einzelne Geräte ausschließen möchtest, kannst Du diese in der Blacklist konfigurieren. Füge dafür die Seriennummern in die Tabelle ein:
+CoAP/CoIoT fügt alle Geräte in deinem Netzwerk hinzu. Falls du einzelne Geräte ausschließen möchtest, kannst Du diese in der Blacklist konfigurieren. Füge dafür die Seriennummern in die Tabelle ein:
 
 ![iobroker_coap](./img/iobroker_coap.png)
 
