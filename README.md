@@ -88,7 +88,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Pro 3 (shellypro3)                 | ❌   | >= v6.2.0 |
 | Shelly Pro 4 PM (shellypro4pm)            | ❌   | >= v5.0.0 |
 | Shelly Pro 3 EM (shellypro3em)            | ❌   | >= v6.4.0 |
-| Shelly Pro Dimmer 1 PM (shellyprodm1pm)   | ❌   | >= v7.1.0 |
+| Shelly Pro Dimmer 1 PM (shellyprodm1pm)   | ❌   | >= v8.0.0 |
 | Shelly Pro Dimmer 2 PM (shellyprodm2pm)   | ❌   | >= v7.0.0 |
 | Shelly Pro EM 2x50A                       | ❌   | >= v7.0.0 |
 | Shelly Plus H&T (shellyplusht)            | ❌   | >= v6.2.0 |
@@ -98,7 +98,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus PM Mini (shellypmmini)        | ❌   | >= v6.4.5 |
 | Shelly Plus 1 Mini (shellyplus1mini)      | ❌   | >= v6.4.5 |
 | Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.5 |
-| Shelly Plus Uni (shellyplusuni)           | ❌   | >= v7.1.0 |
+| Shelly Plus Uni (shellyplusuni)           | ❌   | >= v8.0.0 |
 | Shelly Wall Display (shellywalldisplay)   | ❌   | >= v7.0.0 |
 
 ### Generation 3 (Gen 3)
@@ -108,9 +108,9 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly 1 Mini Gen3 (shelly1minig3)        | ❌   | >= v7.0.0 |
 | Shelly 1 PM Mini Gen3 (shelly1pmminig3)   | ❌   | >= v7.0.0 |
 | Shelly PM Mini Gen3 (shellypmminig3)      | ❌   | >= v7.0.0 |
-| Shelly H&T Gen3 (shellyhtg3)              | ❌   | >= v7.1.0 |
-| Shelly 1 PM Gen3 (shelly1pmg3)            | ❌   | >= v7.1.0 |
-| Shelly 1 Gen3 (shelly1g3)                 | ❌   | >= v7.1.0 |
+| Shelly H&T Gen3 (shellyhtg3)              | ❌   | >= v8.0.0 |
+| Shelly 1 PM Gen3 (shelly1pmg3)            | ❌   | >= v8.0.0 |
+| Shelly 1 Gen3 (shelly1g3)                 | ❌   | >= v8.0.0 |
 
 ### Bluetooth Low Energy (BLU)
 
