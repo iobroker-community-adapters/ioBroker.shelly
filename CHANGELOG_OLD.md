@@ -1,4 +1,9 @@
 # Older changes
+## 6.7.0 (2023-12-22)
+
+* (klein0r) Updated handling of ble payloads
+* (D1gitaldad) Added Shelly Wall Display
+
 ## 6.6.1 (2023-10-20)
 
 * (klein0r) Fixed stop reason for Shelly 2.5 / Shelly 2
