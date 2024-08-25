@@ -138,7 +138,7 @@ Adapter version >= v6.8.0 required!
 
 ## Troubleshooting after installation
 
-### TypeError: xmlserializer.Builder is not a constructor
+### TypeError: `xmlserializer.Builder is not a constructor`
 
 execute
 
@@ -158,6 +158,7 @@ execute
 * (klein0r) Added Shelly Plus Uni
 * (klein0r) Added Shelly H&T (Gen3)
 * (klein0r) Improved structure of ble events (receivedBy) - see documentation for details
+* (bluefox) Improved the color of icons in the admin interface
 
 ### 7.0.0 (2024-04-29)
 
