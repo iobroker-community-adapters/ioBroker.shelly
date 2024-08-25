@@ -74,7 +74,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 ### Generation 2 (Gen 2)
 
 | Shelly Device                             | CoAP | MQTT      |
-|-------------------------------------------| ---- | --------- |
+|-------------------------------------------| ---- |-----------|
 | Shelly Plus 1 (shellyplus1)               | ❌   | >= v5.0.0 |
 | Shelly Plus 1 PM (shellyplus1pm)          | ❌   | >= v5.0.0 |
 | Shelly Plus 2 PM (shellyplus2pm)          | ❌   | >= v5.2.0 |
@@ -88,8 +88,9 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Pro 3 (shellypro3)                 | ❌   | >= v6.2.0 |
 | Shelly Pro 4 PM (shellypro4pm)            | ❌   | >= v5.0.0 |
 | Shelly Pro 3 EM (shellypro3em)            | ❌   | >= v6.4.0 |
-| Shelly Pro Dimmer 1 PM (shellyprodm1pm)   | ❌   | >= v7.0.0 |
+| Shelly Pro Dimmer 1 PM (shellyprodm1pm)   | ❌   | >= v7.1.0 |
 | Shelly Pro Dimmer 2 PM (shellyprodm2pm)   | ❌   | >= v7.0.0 |
+| Shelly Pro EM 2x50A                       | ❌   | >= v7.0.0 |
 | Shelly Plus H&T (shellyplusht)            | ❌   | >= v6.2.0 |
 | Shelly Plus Smoke (shellyplussmoke)       | ❌   | >= v6.5.0 |
 | Shelly Bluetooth Gateway (shellyblugw)    | ❌   | >= v6.5.0 |
@@ -126,7 +127,6 @@ Adapter version >= v6.8.0 required!
 
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
-- Shelly Pro EM 2x50A
 - USB powered UVC LED strip
 - Shelly Plus RGBW PM (shellyplusrgbwpm)
 - Shelly i4 Gen3 (shellyi4g3)
@@ -150,6 +150,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (esusxunil) Added Shelly Pro EM 2x50A
+
 ### 8.0.0 (2024-08-25)
 
 * (imperial929) Added Shelly 1 PM Gen3
