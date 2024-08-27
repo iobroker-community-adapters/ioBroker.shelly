@@ -150,6 +150,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@klein0r) Fixed lint issues and Shelly Gen 3 import
+
 ### 8.1.0 (2024-08-25)
 
 * (esusxunil) Added Shelly Pro EM 2x50A
