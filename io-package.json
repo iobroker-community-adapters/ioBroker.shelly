@@ -3,19 +3,6 @@
     "name": "shelly",
     "version": "8.1.0",
     "news": {
-      "8.1.0": {
-        "en": "Added Shelly Pro EM 2x50A",
-        "de": "Hinzugefügt Shelly Pro EM 2x50A",
-        "ru": "Добавлено Shelly Pro EM 2x50A",
-        "pt": "Adicionado Shelly Pro EM 2x50A",
-        "nl": "Toegevoegd Shelly Pro EM 2x50A",
-        "fr": "Ajouté Shelly Pro EM 2x50A",
-        "it": "Aggiunto Shelly Pro EM 2x50A",
-        "es": "Añadido Shelly Pro EM 2x50A",
-        "pl": "Dodano Shelly Pro EM 2x50A",
-        "uk": "Додано Shelly Pro EM 2x50A",
-        "zh-cn": "添加 Shelly Pro EM 2x50A"
-      },
       "8.0.0": {
         "en": "Added Shelly 1 PM Gen3\nAdded Shelly 1 Gen3\nBreaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)\nAdded Shelly Plus Uni\nAdded Shelly H&T (Gen3)\nImproved structure of ble events (receivedBy) - see documentation for details\nImproved the color of icons in the admin interface",
         "de": "Hinzugefügt Shelly 1 PM Gen3\nHinzugefügt Shelly 1 Gen3\nBruchänderung: Umbenannte Eingangszustände (jetzt digital/analog) von Shelly Plus Addon (Ext)\nHinzugefügt Shelly Plus Uni\nHinzugefügt Shelly H&T (Gen3)\nVerbesserte Struktur von Bble Events (receivedBy) - siehe Dokumentation für Details\nVerbesserte die Farbe der Icons in der Admin-Schnittstelle",
