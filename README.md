@@ -150,7 +150,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 8.1.1 (2024-08-27)
 
 * (@klein0r) Fixed lint issues and Shelly Gen 3 import
 
@@ -184,12 +184,6 @@ NodeJS >= 18.x and js-controller >= 5 is required
 
 * (klein0r) Added Shelly Plus 0-10V
 * (klein0r) Admin notification for available firmware updates
-
-### 6.8.0 (2024-02-17)
-
-* (klein0r) Updated BLE script to 0.2 (new shelly motion firmware)
-* (klein0r) Updated Shelly i3 number limits
-* (klein0r) Added screenshots to instance configuration
 
 ## License
 

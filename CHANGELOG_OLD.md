@@ -1,4 +1,10 @@
 # Older changes
+## 6.8.0 (2024-02-17)
+
+* (klein0r) Updated BLE script to 0.2 (new shelly motion firmware)
+* (klein0r) Updated Shelly i3 number limits
+* (klein0r) Added screenshots to instance configuration
+
 ## 6.7.0 (2023-12-22)
 
 * (klein0r) Updated handling of ble payloads

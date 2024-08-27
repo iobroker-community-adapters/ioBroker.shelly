@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "8.1.0",
+    "version": "8.1.1",
     "news": {
+      "8.1.1": {
+        "en": "Fixed lint issues and Shelly Gen 3 import",
+        "de": "Feste Lint-Probleme und Shelly Gen 3 Import",
+        "ru": "Fixed lint issues and Shelly Gen 3 import",
+        "pt": "Problemas de lint fixos e importação Shelly Gen 3",
+        "nl": "Vaste plint problemen en Shelly Gen 3 import",
+        "fr": "Problèmes de peluches fixes et importation Shelly Gen 3",
+        "it": "Problematiche fisse e importazione Shelly Gen 3",
+        "es": "Problemas de forro fijo e importación Shelly Gen 3",
+        "pl": "Naprawiono problemy z kłami i import Shelly Gen 3",
+        "uk": "Фіксовані проблеми з відтінком і Shelly Gen 3 імпорт",
+        "zh-cn": "固定文件夹和 Shelly Gen 3 导入"
+      },
       "8.0.0": {
         "en": "Added Shelly 1 PM Gen3\nAdded Shelly 1 Gen3\nBreaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)\nAdded Shelly Plus Uni\nAdded Shelly H&T (Gen3)\nImproved structure of ble events (receivedBy) - see documentation for details\nImproved the color of icons in the admin interface",
         "de": "Hinzugefügt Shelly 1 PM Gen3\nHinzugefügt Shelly 1 Gen3\nBruchänderung: Umbenannte Eingangszustände (jetzt digital/analog) von Shelly Plus Addon (Ext)\nHinzugefügt Shelly Plus Uni\nHinzugefügt Shelly H&T (Gen3)\nVerbesserte Struktur von Bble Events (receivedBy) - siehe Dokumentation für Details\nVerbesserte die Farbe der Icons in der Admin-Schnittstelle",
