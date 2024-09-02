@@ -1,8 +1,34 @@
 {
   "common": {
     "name": "shelly",
-    "version": "7.0.0",
+    "version": "8.1.1",
     "news": {
+      "8.1.1": {
+        "en": "Fixed lint issues and Shelly Gen 3 import",
+        "de": "Feste Lint-Probleme und Shelly Gen 3 Import",
+        "ru": "Fixed lint issues and Shelly Gen 3 import",
+        "pt": "Problemas de lint fixos e importação Shelly Gen 3",
+        "nl": "Vaste plint problemen en Shelly Gen 3 import",
+        "fr": "Problèmes de peluches fixes et importation Shelly Gen 3",
+        "it": "Problematiche fisse e importazione Shelly Gen 3",
+        "es": "Problemas de forro fijo e importación Shelly Gen 3",
+        "pl": "Naprawiono problemy z kłami i import Shelly Gen 3",
+        "uk": "Фіксовані проблеми з відтінком і Shelly Gen 3 імпорт",
+        "zh-cn": "固定文件夹和 Shelly Gen 3 导入"
+      },
+      "8.0.0": {
+        "en": "Added Shelly 1 PM Gen3\nAdded Shelly 1 Gen3\nBreaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)\nAdded Shelly Plus Uni\nAdded Shelly H&T (Gen3)\nImproved structure of ble events (receivedBy) - see documentation for details\nImproved the color of icons in the admin interface",
+        "de": "Hinzugefügt Shelly 1 PM Gen3\nHinzugefügt Shelly 1 Gen3\nBruchänderung: Umbenannte Eingangszustände (jetzt digital/analog) von Shelly Plus Addon (Ext)\nHinzugefügt Shelly Plus Uni\nHinzugefügt Shelly H&T (Gen3)\nVerbesserte Struktur von Bble Events (receivedBy) - siehe Dokumentation für Details\nVerbesserte die Farbe der Icons in der Admin-Schnittstelle",
+        "ru": "Добавлено Shelly 1 PM Gen3\nДобавлено Shelly 1 Gen3\nПерерыв: Переименованные состояния ввода (ныне цифровой/аналог) Shelly Plus Addon (Ext)\nДобавлено Shelly Plus Uni\nДобавлено Shelly H&T (Gen3)\nУлучшенная структура мрачных событий (receivedBy) - см. документацию для деталей\nУлучшен цвет иконок в интерфейсе администратора",
+        "pt": "Adicionado Shelly 1 PM Gen3\nAdicionado Shelly 1 Gen3\nMudança de ruptura: Renamed estados de entrada (agora digital / analógico) de Shelly Plus Addon (Ext)\nAdicionado Shelly Plus Uni\nAdicionado Shelly H&T (Gen3)\nMelhor estrutura de eventos ble (recebidBy) - ver documentação para detalhes\nMelhorou a cor dos ícones na interface admin",
+        "nl": "Toegevoegd Shelly 1 PM Gen3\nToegevoegd Shelly 1 Gen3\nVerandering: Hernoemde invoertoestanden (nu digitaal/analogus) van Shelly Plus Addon (Ext)\nToegevoegd Shelly Plus Uni\nToegevoegd Shelly H&T (Gen3)\nVerbeterde structuur van de gebeurtenissen (ontvangenBy) - zie documentatie voor details\nVerbeterde kleur van pictogrammen in de admin interface",
+        "fr": "Ajouté Shelly 1 PM Gen3\nAjouté Shelly 1 Gen3\nBriser le changement : États d'entrée renommés (maintenant numériques/analogiques) de Shelly Plus Addon (Ext)\nAjouté Shelly Plus Uni\nAjout de Shelly H & T (Gen3)\nAmélioration de la structure des événements (reçus par) - voir la documentation pour plus de détails\nAmélioration de la couleur des icônes dans l'interface d'administration",
+        "it": "Aggiunto Shelly 1 PM Gen3\nAggiunto Shelly 1 Gen3\nCambiamento di rottura: Stati di input rinominati (ora digitale/analogico) di Shelly Plus Addon (Ext)\nAggiunto Shelly Plus Uni\nAggiunto Shelly H&T (Gen3)\nMiglioramento della struttura degli eventi di ble (receivedBy) - vedi documentazione per i dettagli\nMigliorato il colore delle icone nell'interfaccia di amministrazione",
+        "es": "Añadido Shelly 1 PM Gen3\nAñadido Shelly 1 Gen3\nCambio de ruptura: Estado de entrada (ahora digital/análogo) de Shelly Plus Addon (Ext)\nAñadido Shelly Plus Uni\nAñadido Shelly H adultoT (Gen3)\nMejora de la estructura de los eventos de ble (recibidoBy) - ver documentación para detalles\nMejora el color de los iconos en la interfaz de administración",
+        "pl": "Dodano Shelly 1 PM Gen3\nDodano Shelly 1 Gen3\nŁamanie zmian: Zmienione stany wejścia (obecnie cyfrowe / analogowe) Shelly Plus Addon (Ext)\nDodano Shelly Plus Uni\nDodano Shelly H & T (Gen3)\nUlepszona struktura zdarzeń ble (receivedBy) - szczegółowe informacje w dokumentacji\nUlepszenie koloru ikon w interfejsie administracyjnym",
+        "uk": "Додано Shelly 1 PM Gen3\nДодано Shelly 1 Gen3\nЗміна розривів: Перейменовані вхідні стани (нині цифрові / анлог) Shelly Plus Addon (Ext)\nДодано Shelly Plus Uni\nДодано Shelly H&T (Gen3)\nУдосконалено структуру ble подій (receivedBy) - див. документацію для деталей\nПокращено колір іконок в інтерфейсі адміністратора",
+        "zh-cn": "添加 Shelly 1 PM Gen3\n已添加 Shelly 1 Gen3\n中断更改 : 重命名 Shelly Plus Addon( Ext) 的输入状态( 现在的数字/ analog)\n添加 Shelly Plus 统一\n已添加 Shelly H&T (Gen3)\n改进了ble事件的结构(收到By)-详情见文件\n改进管理界面中图标的颜色"
+      },
       "7.0.0": {
         "en": "NodeJS >= 18.x and js-controller >= 5 is required\n\n* Added Shelly 1 Mini (Gen3)\n* Added Shelly 1 PM Mini (Gen3)\n* Added Shelly PM Mini (Gen3)\n* Added Shelly Pro Dimmer 1 PM and Pro Dimmer 2 PM\n* Fixed Shelly Wall Display integration\n* Added device list of ble events (receivedBy) - removed rssi state\n* Added Switch Addon for Shelly Pro 3 EM",
         "de": "NodeJS >= 18.x und js-Controller >= 5 ist erforderlich\n\n* Hinzugefügt Shelly 1 Mini (Gen3)\n* Hinzugefügt Shelly 1 PM Mini (Gen3)\n* Hinzugefügt Shelly PM Mini (Gen3)\n* Hinzugefügt Shelly Pro Dimmer 1 PM und Pro Dimmer 2 PM\n* Feste Shelly Wandanzeige Integration\n* Hinzugefügt Geräteliste von ble events (receivedBy) - entfernt rssi Zustand\n* Hinzugefügt Schalter Addon für Shelly Pro 3 EM",
@@ -67,32 +93,6 @@
         "pl": "Fixed stop reason for Shelly (ang.). 2.5/ Shelly 2 (ang.)\nWilgotność Shelly Plus Addon\nNie wszystkie urządzenia nie posiadają mocy zewnętrznej",
         "uk": "Виправлена причина зупинки для Shelly 2.5 / Шелли 2\nДодана вологість Shelly Plus Addon\nНе всі пристрої мають зовнішню потужність",
         "zh-cn": "D. 固定的中止理由 2.5/ Shelly 2\nD. 增加全套包装的湿度\n并非所有装置都拥有外部权力"
-      },
-      "6.6.0": {
-        "en": "Added BLE devices as states to `shelly.0.ble.*` (Shelly Scripting required)",
-        "de": "Hinzugefügt BLE-Geräte als Zustände zu shelly.0.ble* (Shelly Scripting erforderlich)",
-        "ru": "Добавлены BLE устройства, как государства для shelly.0.ble* (Необходимо скриптирование)",
-        "pt": "Adicionado dispositivos BLE como estados para shelly.0.ble* (Shelly Scripting necessário)",
-        "nl": "Vervoegde BLE apparaten als staat tot Shelly.0",
-        "fr": "Ajout d'appareils BLE comme états à shelly.0.ble* (Shelly Scripting required)",
-        "it": "Aggiunto dispositivi BLE come stati a shelly.0.ble* (Shelly Scripting richiesto)",
-        "es": "Agregados dispositivos BLE como estados a shelly.0.ble* (Se requiere scripting total)",
-        "pl": "Adddowane urządzenia BLE jako stany do ostrzału.0.ble* (ang.)",
-        "uk": "Додано BLE-пристрої як стани для оболонки.0.ble* (Використання потрібного скрипту)",
-        "zh-cn": "增加乙型装置作为炮击国。"
-      },
-      "6.5.0": {
-        "en": "Added Shelly Plus Smoke\nAdded Shelly Bluetooth Low Energy Gateway\nMore Shelly TRV Datapoints",
-        "de": "Hinzugefügt Shelly Plus Rauch\nHinzugefügt Shelly Bluetooth Low Energy Gateway\nMehr Shelly TRV Datapoints",
-        "ru": "Добавлено Shelly Plus Smoke\nДобавлено Shelly Bluetooth Low Energy Gateway\nБольше Shelly TRV Datapoints",
-        "pt": "Adicionado Shelly Plus Smoke\nAdicionado Shelly Bluetooth Low Energy Gateway\nMais Datapoints da Shelly TRV",
-        "nl": "Voegde Shelly Plus Smoke toe\nVoeg Shelly Bluetooth Low Energy Gateway toe\nMeer Shelly TriV Datapoints",
-        "fr": "Ajouté Shelly Plus Smoke\nAjout de Shelly Bluetooth Low Energy Gateway\nPlus de points de données Shelly TRV",
-        "it": "Aggiunto Shelly Plus Smoke\nAggiunto Shelly Bluetooth Low Energy Gateway\nPiù Shelly TRV Datapoints",
-        "es": "Añadido Shelly más humo\nAñadido Shelly Bluetooth Low Energy Gateway\nMás puntos de datos Shelly TRV",
-        "pl": "Strona oficjalna Smoke Shelly Plus\nOficjalna strona Shelly Bluetooth Low Energy Gateway\nMore Shelly TRV Datapoints (ang.)",
-        "uk": "Доданий Shelly Plus дим\nДодана Shelly Bluetooth Low Energy Gateway\nБільше точок даних Shelly TRV",
-        "zh-cn": "增 编\n增加谢全·蓝图低能源\n更广的TRV数据点"
       }
     },
     "titleLang": {
@@ -189,7 +189,7 @@
     ],
     "dependencies": [
       {
-        "js-controller": ">=5.0.0"
+        "js-controller": ">=5.0.19"
       }
     ]
   },

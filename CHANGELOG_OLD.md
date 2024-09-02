@@ -1,4 +1,21 @@
 # Older changes
+## 6.8.0 (2024-02-17)
+
+* (klein0r) Updated BLE script to 0.2 (new shelly motion firmware)
+* (klein0r) Updated Shelly i3 number limits
+* (klein0r) Added screenshots to instance configuration
+
+## 6.7.0 (2023-12-22)
+
+* (klein0r) Updated handling of ble payloads
+* (D1gitaldad) Added Shelly Wall Display
+
+## 6.6.1 (2023-10-20)
+
+* (klein0r) Fixed stop reason for Shelly 2.5 / Shelly 2
+* (klein0r) Added humidity of Shelly Plus Addon
+* (klein0r) Not all devices have external power
+
 ## 6.6.0 (2023-10-17)
 
 * (klein0r) Added BLE devices as states to `shelly.0.ble.*` (Shelly Scripting required)

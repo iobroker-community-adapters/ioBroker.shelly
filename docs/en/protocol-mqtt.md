@@ -11,7 +11,7 @@ This is the English documentation - [🇩🇪 German version](../de/protocol-mqt
 ### Important notes
 
 - It is not possible to connect the Shelly adapter to an existing MQTT broker
-- The Shelly adapter starts an own MQTT broker which is running on the (non default) port `1882` to avoid conflicts with other MQTT brokers on the same system (the default port for MQTT is `1883`)
+- The Shelly adapter starts an own MQTT broker which is running on the (non-default) port `1882` to avoid conflicts with other MQTT brokers on the same system (the default port for MQTT is `1883`)
 - It is not possible to connect a MQTT client (e.g., MQTT-Explorer) to the internal MQTT broker
 - You can change the port of the internal MQTT broker in the instance settings
 - **You don't need any knowledge about MQTT to use it** - everything is handled internally
@@ -52,7 +52,7 @@ Activate MQTT on all your Shelly devices.
 
 1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
 2. Go to `Internet & Security settings -> Advanced - Developer settings`
-3. Enable MQTT and enter the previously configured username, password and the ip address of the system where ioBroker is installed - followed by the configured port (e.g. `192.168.1.2:1882`)
+3. Enable MQTT and enter the previously configured username, password and the IP address of the system where ioBroker is installed, followed by the configured port (e.g. `192.168.1.2:1882`)
 4. Save the configuration. The Shelly will reboot automatically
 
 ![shelly gen1](./img/shelly_mqtt-gen1.png)
