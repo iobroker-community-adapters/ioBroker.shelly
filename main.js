@@ -343,6 +343,8 @@ class Shelly extends utils.Adapter {
             }
 
             const typesList = {
+                moisture: { type: 'number', unit: '%' },
+                soil: { type: 'number', unit: 'µS/cm' },
                 battery: { type: 'number', unit: '%' },
                 temperature: { type: 'number', unit: '°C' },
                 humidity: { type: 'number', unit: '%' },
