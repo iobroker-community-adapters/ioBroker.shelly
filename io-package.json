@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "shelly",
-    "version": "8.1.1",
+    "version": "8.1.2",
     "news": {
       "8.1.1": {
         "en": "Fixed lint issues and Shelly Gen 3 import",
