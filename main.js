@@ -437,17 +437,19 @@ class Shelly extends utils.Adapter {
                 );
 
                 for (const [key, value] of Object.entries(val.payload)) {
-                    if (Object.keys(typesList).includes(key)) {
+                    const typeListKey = key.includes('button_') ? 'button' : key;
+
+                    if (Object.keys(typesList).includes(typeListKey)) {
                         await this.extendObjectAsync(`ble.${val.srcBle.mac}.${key}`, {
                             type: 'state',
                             common: {
                                 name: key,
-                                type: typesList[key].type,
+                                type: typesList[typeListKey].type,
                                 role: 'value',
                                 read: true,
                                 write: false,
-                                unit: typesList[key]?.unit,
-                                states: typesList[key]?.states,
+                                unit: typesList[typeListKey]?.unit,
+                                states: typesList[typeListKey]?.states,
                             },
                             native: {},
                         });

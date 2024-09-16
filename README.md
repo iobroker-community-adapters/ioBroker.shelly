@@ -119,6 +119,8 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 Adapter version >= v6.8.0 required!
 
 - Shelly BLU Button and Button Tough 1
+- Shelly BLU Wall Switch 4
+- Shelly BLU RC Button 4
 - Shelly BLU Door Window
 - Shelly BLU Motion
 - Shelly BLU H&T
@@ -150,6 +152,11 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+* (Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4
+
 ### 8.1.1 (2024-08-27)
 
 * (@klein0r) Fixed lint issues and Shelly Gen 3 import
