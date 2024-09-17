@@ -90,7 +90,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Pro 3 EM (shellypro3em)            | ❌   | >= v6.4.0 |
 | Shelly Pro Dimmer 1 PM (shellyprodm1pm)   | ❌   | >= v8.0.0 |
 | Shelly Pro Dimmer 2 PM (shellyprodm2pm)   | ❌   | >= v7.0.0 |
-| Shelly Pro EM 2x50A                       | ❌   | >= v7.0.0 |
+| Shelly Pro EM 2x50A                       | ❌   | >= v8.1.0 |
 | Shelly Plus H&T (shellyplusht)            | ❌   | >= v6.2.0 |
 | Shelly Plus Smoke (shellyplussmoke)       | ❌   | >= v6.5.0 |
 | Shelly Bluetooth Gateway (shellyblugw)    | ❌   | >= v6.5.0 |
