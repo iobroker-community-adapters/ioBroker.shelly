@@ -100,6 +100,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.5 |
 | Shelly Plus Uni (shellyplusuni)           | ❌   | >= v8.0.0 |
 | Shelly Wall Display (shellywalldisplay)   | ❌   | >= v7.0.0 |
+| Shelly Plus RGBW PM (shellyplusrgbwpm)    | ❌   | >= v8.2.0 |
 
 ### Generation 3 (Gen 3)
 
@@ -130,7 +131,6 @@ Adapter version >= v6.8.0 required!
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
 - USB powered UVC LED strip
-- Shelly Plus RGBW PM (shellyplusrgbwpm)
 - Shelly i4 Gen3 (shellyi4g3)
 - Shelly Dimmer Gen3 (shelly0110dimg3)
 
@@ -155,7 +155,8 @@ execute
 
 ### **WORK IN PROGRESS**
 
-* (Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4
+* (@Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4
+* (@Paradoxa) Added Shelly Plus RGBW PM
 
 ### 8.1.1 (2024-08-27)
 
