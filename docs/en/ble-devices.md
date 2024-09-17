@@ -39,6 +39,7 @@ Requirements:
 | [7.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v7.0.0/docs/en/ble-devices.md) | v0.2           |
 | [8.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.0.0/docs/en/ble-devices.md) | v0.3           |
 | [8.1.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.1.0/docs/en/ble-devices.md) | v0.3           |
+| [8.2.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.1.0/docs/en/ble-devices.md) | v0.4           |
 
 ## JavaScript (Shelly Scripting)
 
