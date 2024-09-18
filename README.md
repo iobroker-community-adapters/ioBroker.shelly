@@ -157,6 +157,7 @@ execute
 
 * (@Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4
 * (@Paradoxa) Added Shelly Plus RGBW PM
+* (simatec) Responsive Design added
 
 ### 8.1.1 (2024-08-27)
 
