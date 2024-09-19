@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "8.1.1",
+    "version": "8.2.0",
     "news": {
+      "8.2.0": {
+        "en": "Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4\nAdded Shelly Plus RGBW PM\nResponsive Design added",
+        "de": "Hinzugefügt Shelly BLU Wandschalter 4 & Shelly BLU RC Button 4\nHinzugefügt Shelly Plus RGBW PM\nResponsive Design hinzugefügt",
+        "ru": "Добавлено Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4\nДобавлено Shelly Plus RGBW PM\nResponsive Design",
+        "pt": "Adicionado Shelly BLU Wall Switch 4 & Shelly BLU Botão RC 4\nAdicionado Shelly Plus RGBW PM\nDesign responsivo adicionado",
+        "nl": "Toegevoegd Shelly BLU Wall Switch 4 & Shelly BLU RC knop 4\nToegevoegd Shelly Plus RGBW PM\nResponsive Design toegevoegd",
+        "fr": "Ajout de Shelly BLU Wall Switch 4 et Shelly BLU RC Button 4\nAjouté Shelly Plus RGBW PM\nDesign sensible ajouté",
+        "it": "Aggiunto Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4\nAggiunto Shelly Plus RGBW PM\nResponsive Design aggiunto",
+        "es": "Añadido Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4\nAñadido Shelly Plus RGBW PM\nDiseño responsable añadido",
+        "pl": "Dodano Shelly BLU Wall Switch 4 & Shelly BLU RC Przycisk 4\nDodano Shelly Plus RGBW PM\nDodano projekt odpowiedzialny",
+        "uk": "Додано Shelly BLU Wall Switch 4 & Shelly BLU RC Кнопка 4\nДодано Shelly Plus RGBW PM\nДодано адаптивний дизайн",
+        "zh-cn": "添加 Shelly BLU 墙开关 4 & Shelly BLU RC 按钮 4\n添加雪莉加RGBW PM\n添加响应设计"
+      },
       "8.1.1": {
         "en": "Fixed lint issues and Shelly Gen 3 import",
         "de": "Feste Lint-Probleme und Shelly Gen 3 Import",
@@ -80,19 +93,6 @@
         "pl": "Ulepszona obsługa ciężarówek\nOficjalna strona Shelly Wall Display",
         "uk": "Оновлена обробка блочних перевантажень\nДодано Shelly Wall Display",
         "zh-cn": "A. 最新处理问题载荷\nD. 增加谢全·隔离墙的区别"
-      },
-      "6.6.1": {
-        "en": "Fixed stop reason for Shelly 2.5 / Shelly 2\nAdded humidity of Shelly Plus Addon\nNot all devices have external power",
-        "de": "Fixed Stop Grund für Shelly 2.5 / Shelly 2\nHinzugefügt Luftfeuchtigkeit von Shelly Plus Addon\nNicht alle Geräte haben externe Leistung",
-        "ru": "Исправлена причина остановки Shelly 2.5 / Шелли 2\nДобавлена влажность Shelly Plus Addon\nНе все устройства имеют внешнюю мощность",
-        "pt": "Razão de parada fixa para Shelly 2.5 / Shelly 2\nAdicionado umidade de Shelly Plus Addon\nNem todos os dispositivos têm energia externa",
-        "nl": "Vertaling: 2,5/ Shelly 2\nVervoegde vochtigheid van Shelly Plus Addon\nNiet alle apparaten hebben externe macht",
-        "fr": "Cause d'arrêt fixe pour Shelly 2.5 / Shelly 2\nAjout d'humidité de Shelly Plus Addon\nTous les appareils n'ont pas de puissance externe",
-        "it": "Ragione di arresto fisso per Shelly 2.5 / Shelly 2\nAggiunto l'umidità di Shelly Plus Addon\nNon tutti i dispositivi hanno potenza esterna",
-        "es": "Razón de parada fija para Shelly 2.5 / Shelly 2\nHumedad agregada de Shelly Plus Addon\nNo todos los dispositivos tienen energía externa",
-        "pl": "Fixed stop reason for Shelly (ang.). 2.5/ Shelly 2 (ang.)\nWilgotność Shelly Plus Addon\nNie wszystkie urządzenia nie posiadają mocy zewnętrznej",
-        "uk": "Виправлена причина зупинки для Shelly 2.5 / Шелли 2\nДодана вологість Shelly Plus Addon\nНе всі пристрої мають зовнішню потужність",
-        "zh-cn": "D. 固定的中止理由 2.5/ Shelly 2\nD. 增加全套包装的湿度\n并非所有装置都拥有外部权力"
       }
     },
     "titleLang": {

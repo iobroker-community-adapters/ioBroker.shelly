@@ -1,4 +1,9 @@
 # Older changes
+## 6.9.0 (2024-03-12)
+
+* (klein0r) Added Shelly Plus 0-10V
+* (klein0r) Admin notification for available firmware updates
+
 ## 6.8.0 (2024-02-17)
 
 * (klein0r) Updated BLE script to 0.2 (new shelly motion firmware)

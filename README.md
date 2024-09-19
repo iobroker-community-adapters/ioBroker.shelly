@@ -152,8 +152,7 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 8.2.0 (2024-09-19)
 
 * (@Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4
 * (@Paradoxa) Added Shelly Plus RGBW PM
@@ -188,11 +187,6 @@ NodeJS >= 18.x and js-controller >= 5 is required
 * (klein0r) Fixed Shelly Wall Display integration
 * (klein0r) Added device list of ble events (receivedBy) - removed rssi state
 * (klein0r) Added Switch Addon for Shelly Pro 3 EM
-
-### 6.9.0 (2024-03-12)
-
-* (klein0r) Added Shelly Plus 0-10V
-* (klein0r) Admin notification for available firmware updates
 
 ## License
 
