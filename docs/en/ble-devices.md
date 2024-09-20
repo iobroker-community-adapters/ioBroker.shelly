@@ -47,7 +47,7 @@ Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (
 
 ```javascript
 // v0.4
-const SCRIPT_VERSION = '0.3';
+const SCRIPT_VERSION = '0.4';
 const BTHOME_SVC_ID_STR = 'fcd2';
 
 const uint8 = 0;
