@@ -152,6 +152,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@Matze2010) Added datapoint for cover target position
+
 ### 8.2.0 (2024-09-19)
 
 * (@Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4
