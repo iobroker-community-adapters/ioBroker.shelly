@@ -155,6 +155,7 @@ execute
 ### **WORK IN PROGRESS**
 
 * (@Matze2010) Added datapoint for cover target position
+* (@klein0r) Fixed integration of Shelly 1 PM Gen 3
 
 ### 8.2.0 (2024-09-19)
 
