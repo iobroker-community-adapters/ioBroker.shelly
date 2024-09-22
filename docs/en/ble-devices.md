@@ -39,14 +39,15 @@ Requirements:
 | [7.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v7.0.0/docs/en/ble-devices.md) | v0.2           |
 | [8.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.0.0/docs/en/ble-devices.md) | v0.3           |
 | [8.1.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.1.0/docs/en/ble-devices.md) | v0.3           |
+| [8.2.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.1.0/docs/en/ble-devices.md) | v0.4           |
 
 ## JavaScript (Shelly Scripting)
 
 Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2+) and start it:
 
 ```javascript
-// v0.3
-const SCRIPT_VERSION = '0.3';
+// v0.4
+const SCRIPT_VERSION = '0.4';
 const BTHOME_SVC_ID_STR = 'fcd2';
 
 const uint8 = 0;
@@ -138,7 +139,7 @@ const BTH = {
     0x2c: { n: 'vibration', t: uint8 },
     0x2d: { n: 'window', t: uint8 },
     // Events
-    0x3a: { n: 'button', t: uint8 },
+    0x3a: { n: 'button', t: uint8, b: 1 },
     0x3c: { n: 'dimmer', t: uint8 }
 };
 
@@ -210,6 +211,8 @@ let BTHomeDecoder = {
 
         let _bth;
         let _value;
+        let _name;
+        let _btnNum = 1;
         while (buffer.length > 0) {
             _bth = BTH[buffer.at(0)];
             if (typeof _bth === 'undefined') {
@@ -220,7 +223,14 @@ let BTHomeDecoder = {
             _value = this.getBufValue(_bth.t, buffer);
             if (_value === null) break;
             if (typeof _bth.f !== 'undefined') _value = _value * _bth.f;
-            result[_bth.n] = _value;
+
+            _name = _bth.n;
+            if (typeof _bth.b !== "undefined") {
+                _name = _name + '_' + _btnNum.toString();
+                _btnNum++;
+            }
+
+            result[_name] = _value;
             buffer = buffer.slice(getByteSize(_bth.t));
         }
         return result;

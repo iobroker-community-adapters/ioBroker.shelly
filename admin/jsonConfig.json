@@ -1,6 +1,9 @@
 {
     "i18n": true,
     "type": "tabs",
+    "tabsStyle": {
+        "width": "calc(100% - 100px)"
+    },
     "iconPosition": "top",
     "items": {
         "_general": {
@@ -27,6 +30,7 @@
                     "button": true,
                     "variant": "contained",
                     "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj4NCiAgICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik05NiAwQzQzIDAgMCA0MyAwIDk2VjQxNmMwIDUzIDQzIDk2IDk2IDk2SDM4NGgzMmMxNy43IDAgMzItMTQuMyAzMi0zMnMtMTQuMy0zMi0zMi0zMlYzODRjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzJjMC0xNy43LTE0LjMtMzItMzItMzJIMzg0IDk2em0wIDM4NEgzNTJ2NjRIOTZjLTE3LjcgMC0zMi0xNC4zLTMyLTMyczE0LjMtMzIgMzItMzJ6bTMyLTI0MGMwLTguOCA3LjItMTYgMTYtMTZIMzM2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2SDE0NGMtOC44IDAtMTYtNy4yLTE2LTE2em0xNiA0OEgzMzZjOC44IDAgMTYgNy4yIDE2IDE2cy03LjIgMTYtMTYgMTZIMTQ0Yy04LjggMC0xNi03LjItMTYtMTZzNy4yLTE2IDE2LTE2eiIvPg0KPC9zdmc+DQo=",
+                    "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 12
@@ -68,6 +72,7 @@
                             "value": "coap"
                         }
                     ],
+                    "xs": 12,
                     "sm": 12,
                     "md": 8,
                     "lg": 8,
@@ -78,6 +83,7 @@
                     "newLine": true,
                     "type": "header",
                     "size": 2,
+                    "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 12,
@@ -86,6 +92,7 @@
                 "httpusername": {
                     "newLine": true,
                     "type": "text",
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -96,6 +103,7 @@
                     "type": "password",
                     "repeat": false,
                     "visible": true,
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -121,6 +129,7 @@
                     "button": true,
                     "variant": "contained",
                     "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj4NCiAgICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik05NiAwQzQzIDAgMCA0MyAwIDk2VjQxNmMwIDUzIDQzIDk2IDk2IDk2SDM4NGgzMmMxNy43IDAgMzItMTQuMyAzMi0zMnMtMTQuMy0zMi0zMi0zMlYzODRjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzJjMC0xNy43LTE0LjMtMzItMzItMzJIMzg0IDk2em0wIDM4NEgzNTJ2NjRIOTZjLTE3LjcgMC0zMi0xNC4zLTMyLTMyczE0LjMtMzIgMzItMzJ6bTMyLTI0MGMwLTguOCA3LjItMTYgMTYtMTZIMzM2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2SDE0NGMtOC44IDAtMTYtNy4yLTE2LTE2em0xNiA0OEgzMzZjOC44IDAgMTYgNy4yIDE2IDE2cy03LjIgMTYtMTYgMTZIMTQ0Yy04LjggMC0xNi03LjItMTYtMTZzNy4yLTE2IDE2LTE2eiIvPg0KPC9zdmc+DQo=",
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4
@@ -130,6 +139,7 @@
                     "newLine": true,
                     "type": "staticImage",
                     "tooltip": "Gen2",
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
@@ -139,6 +149,7 @@
                     "hidden": "!data.httppassword",
                     "type": "staticImage",
                     "tooltip": "Gen1",
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
@@ -148,6 +159,7 @@
                     "newLine": true,
                     "type": "header",
                     "size": 2,
+                    "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 12,
@@ -158,6 +170,7 @@
                     "type": "number",
                     "min": 5,
                     "max": 86400,
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -166,6 +179,7 @@
                 "autoupdate": {
                     "newLine": true,
                     "type": "checkbox",
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -173,6 +187,7 @@
                 },
                 "updateUnchangedObjects": {
                     "type": "checkbox",
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -182,6 +197,7 @@
                     "newLine": true,
                     "type": "header",
                     "size": 3,
+                    "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 12,
@@ -190,6 +206,7 @@
                 "logDebugMessages": {
                     "newLine": true,
                     "type": "checkbox",
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -198,6 +215,7 @@
                 "saveHttpResponses": {
                     "newLine": true,
                     "type": "checkbox",
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -215,6 +233,7 @@
                     "newLine": true,
                     "type": "ip",
                     "listenOnAllPorts": true,
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -224,6 +243,7 @@
                     "type": "number",
                     "min": 1,
                     "max": 65535,
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 2,
@@ -233,6 +253,7 @@
                     "newLine": true,
                     "type": "header",
                     "size": 2,
+                    "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 12,
@@ -241,6 +262,7 @@
                 "mqttusername": {
                     "newLine": true,
                     "type": "text",
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -251,6 +273,7 @@
                     "type": "password",
                     "repeat": false,
                     "visible": true,
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -276,6 +299,7 @@
                     "button": true,
                     "variant": "contained",
                     "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj4NCiAgICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik05NiAwQzQzIDAgMCA0MyAwIDk2VjQxNmMwIDUzIDQzIDk2IDk2IDk2SDM4NGgzMmMxNy43IDAgMzItMTQuMyAzMi0zMnMtMTQuMy0zMi0zMi0zMlYzODRjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzJjMC0xNy43LTE0LjMtMzItMzItMzJIMzg0IDk2em0wIDM4NEgzNTJ2NjRIOTZjLTE3LjcgMC0zMi0xNC4zLTMyLTMyczE0LjMtMzIgMzItMzJ6bTMyLTI0MGMwLTguOCA3LjItMTYgMTYtMTZIMzM2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2SDE0NGMtOC44IDAtMTYtNy4yLTE2LTE2em0xNiA0OEgzMzZjOC44IDAgMTYgNy4yIDE2IDE2cy03LjIgMTYtMTYgMTZIMTQ0Yy04LjggMC0xNi03LjItMTYtMTZzNy4yLTE2IDE2LTE2eiIvPg0KPC9zdmc+DQo=",
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4
@@ -285,6 +309,7 @@
                     "newLine": true,
                     "type": "staticImage",
                     "tooltip": "Gen2",
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
@@ -294,6 +319,7 @@
                     "hidden": "!data.mqttpassword",
                     "type": "staticImage",
                     "tooltip": "Gen1",
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
@@ -303,6 +329,7 @@
                     "newLine": true,
                     "type": "header",
                     "size": 3,
+                    "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 12,
@@ -361,6 +388,7 @@
                             "value": 2
                         }
                     ],
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -378,6 +406,7 @@
                     "newLine": true,
                     "type": "ip",
                     "listenOnAllPorts": true,
+                    "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
@@ -385,6 +414,7 @@
                 },
                 "blacklist": {
                     "type": "table",
+                    "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 12,

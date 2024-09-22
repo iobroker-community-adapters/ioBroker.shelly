@@ -90,7 +90,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Pro 3 EM (shellypro3em)            | ❌   | >= v6.4.0 |
 | Shelly Pro Dimmer 1 PM (shellyprodm1pm)   | ❌   | >= v8.0.0 |
 | Shelly Pro Dimmer 2 PM (shellyprodm2pm)   | ❌   | >= v7.0.0 |
-| Shelly Pro EM 2x50A                       | ❌   | >= v7.0.0 |
+| Shelly Pro EM 2x50A                       | ❌   | >= v8.1.0 |
 | Shelly Plus H&T (shellyplusht)            | ❌   | >= v6.2.0 |
 | Shelly Plus Smoke (shellyplussmoke)       | ❌   | >= v6.5.0 |
 | Shelly Bluetooth Gateway (shellyblugw)    | ❌   | >= v6.5.0 |
@@ -100,6 +100,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus 1 PM Mini (shellyplus1pmmini) | ❌   | >= v6.4.5 |
 | Shelly Plus Uni (shellyplusuni)           | ❌   | >= v8.0.0 |
 | Shelly Wall Display (shellywalldisplay)   | ❌   | >= v7.0.0 |
+| Shelly Plus RGBW PM (shellyplusrgbwpm)    | ❌   | >= v8.2.0 |
 
 ### Generation 3 (Gen 3)
 
@@ -119,6 +120,8 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 Adapter version >= v6.8.0 required!
 
 - Shelly BLU Button and Button Tough 1
+- Shelly BLU Wall Switch 4
+- Shelly BLU RC Button 4
 - Shelly BLU Door Window
 - Shelly BLU Motion
 - Shelly BLU H&T
@@ -128,7 +131,6 @@ Adapter version >= v6.8.0 required!
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
 - USB powered UVC LED strip
-- Shelly Plus RGBW PM (shellyplusrgbwpm)
 - Shelly i4 Gen3 (shellyi4g3)
 - Shelly Dimmer Gen3 (shelly0110dimg3)
 
@@ -150,6 +152,12 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### 8.2.0 (2024-09-19)
+
+* (@Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4
+* (@Paradoxa) Added Shelly Plus RGBW PM
+* (simatec) Responsive Design added
+
 ### 8.1.1 (2024-08-27)
 
 * (@klein0r) Fixed lint issues and Shelly Gen 3 import
@@ -179,11 +187,6 @@ NodeJS >= 18.x and js-controller >= 5 is required
 * (klein0r) Fixed Shelly Wall Display integration
 * (klein0r) Added device list of ble events (receivedBy) - removed rssi state
 * (klein0r) Added Switch Addon for Shelly Pro 3 EM
-
-### 6.9.0 (2024-03-12)
-
-* (klein0r) Added Shelly Plus 0-10V
-* (klein0r) Admin notification for available firmware updates
 
 ## License
 
