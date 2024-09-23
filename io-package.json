@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "8.2.0",
+    "version": "8.2.1",
     "news": {
+      "8.2.1": {
+        "en": "Added datapoint for cover target position\nFixed integration of Shelly 1 PM Gen 3",
+        "de": "Zusätzlicher Datenpunkt zur Deckung der Zielposition\nFeste Integration von Shelly 1 PM Gen 3",
+        "ru": "Добавленная точка данных для охвата целевого положения\nФиксированная интеграция Shelly 1 PM Gen 3",
+        "pt": "Datapoint adicionado para posição de alvo de cobertura\nIntegração fixa de Shelly 1 PM Gen 3",
+        "nl": "Toegevoegd datapoint voor dekking doel positie\nVaste integratie van Shelly 1 PM Gen 3",
+        "fr": "Point de données ajouté pour couvrir la position cible\nIntégration fixe de Shelly 1 PM Gen 3",
+        "it": "Datapoint aggiunto per la posizione di destinazione di copertura\nIntegrazione fissa di Shelly 1 PM Gen 3",
+        "es": "Punto de datos añadido para cubrir la posición de destino\nIntegración fija de Shelly 1 PM Gen 3",
+        "pl": "Dodano punkt danych dla pozycji docelowej pokrycia\nNaprawiono integrację Shelly 1 PM Gen 3",
+        "uk": "Додано точку даних для цільової позиції обкладинки\nФіксована інтеграція Shelly 1 PM Gen 3",
+        "zh-cn": "为覆盖目标位置添加数据点\n Shelly 1 PM Gen 3的固定整合"
+      },
       "8.2.0": {
         "en": "Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4\nAdded Shelly Plus RGBW PM\nResponsive Design added",
         "de": "Hinzugefügt Shelly BLU Wandschalter 4 & Shelly BLU RC Button 4\nHinzugefügt Shelly Plus RGBW PM\nResponsive Design hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "Aktualizacja skryptu BLE do 0.2 (nowy firmware ruchu Shelly)\nAktualizacja limitów liczby Shelly i3\nDodano zrzuty ekranu do konfiguracji instancji",
         "uk": "Оновлений скрипт BLE до 0.2 (нова прошивка руху)\nОновлені ліміти чисел Shelly i3\nДодано скріншоти до конфігурації екземпляра",
         "zh-cn": "将 BLE 脚本更新为 0.2( 新舍利运动固件)\n更新 Shelly i3 数字限制\n添加到实例配置的截图"
-      },
-      "6.7.0": {
-        "en": "Updated handling of ble payloads\nAdded Shelly Wall Display",
-        "de": "Aktualisiertes Handling von ble Payloads\nHinzugefügt Shelly Wandanzeige",
-        "ru": "Обновленная обработка ble payloads\nДобавлено Shelly Wall Display",
-        "pt": "Manipulação atualizada de cargas de ble\nDisplay de parede de prateleira adicionado",
-        "nl": "Verouderd met het bedragen van bleke ladingen\nVertaling:",
-        "fr": "Mise à jour de la manipulation des charges utiles\nAjouté Shelly Wall Display",
-        "it": "Gestione aggiornata dei carichi di carico\nDisplay a parete Shelly",
-        "es": "Gestión actualizada de las cargas de ble\nPantalla de pared adicional",
-        "pl": "Ulepszona obsługa ciężarówek\nOficjalna strona Shelly Wall Display",
-        "uk": "Оновлена обробка блочних перевантажень\nДодано Shelly Wall Display",
-        "zh-cn": "A. 最新处理问题载荷\nD. 增加谢全·隔离墙的区别"
       }
     },
     "titleLang": {
