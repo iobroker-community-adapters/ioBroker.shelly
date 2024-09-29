@@ -4,6 +4,10 @@
 
 This is the German documentation - [🇺🇸 English version](../en/faq.md)
 
+## Kann man die Konfiguration auch per Shelly App durchführen?
+
+Die gesamte Dokumentation basiert auf die Einstellungen der Weboberfläche der Geräte. Manche Optionen fehlen eventuell in der App. Daher ist der Weg nicht empfohlen!
+
 ## Kann man CoAP (CoIoT) und MQTT gleichzeitig nutzen?
 
 Nein, aber Du kannst eine zweite Instanz des Shelly-Adapters erstellen, welche dann für MQTT konfiguriert wird (und die andere für CoAP/CoIoT).
