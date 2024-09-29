@@ -37,15 +37,6 @@ To avoid those warnings, you can
 
 ![shelly gen2](./img/shelly_restrict_login-gen2.png)
 
-Older firmware versions (`< 0.12`) have a slightly different user interface:
-
-1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)
-2. Go to `Device -> Authentication`
-3. Enable the authentication feature and enter the previously configured password
-4. Save the configuration
-
-![shelly gen2 old](./img/shelly_restrict_login-gen2-old.png)
-
 ### Generation 1 devices
 
 1. Open the Shelly web configuration in your webbrowser (not in the Shelly App!)

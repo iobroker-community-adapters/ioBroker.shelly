@@ -33,15 +33,6 @@ Um keine Warnungen mehr zu erhalten, kann entweder
 
 ![shelly gen2](./img/shelly_restrict_login-gen2.png)
 
-Ältere Firmware-Versionen (`< 0.12`) haben eine andere Benutzeroberfläche:
-
-1. Öffne die Shelly-Webkonfiguration in einem Browser (nicht in der Shelly App!)
-2. Gehe zu `Device -> Authentication`
-3. Aktiviere das Passwort-Feature und gib das gerade konfigurierte Passwort ein
-4. Speichere die Konfiguration
-
-![shelly gen2 old](./img/shelly_restrict_login-gen2-old.png)
-
 ### Generation 1 Geräte
 1. Öffne die Shelly-Webkonfiguration in einem Browser (nicht in der Shelly App!)
 2. Gehe zu `Internet & Security settings -> Restricted Login`

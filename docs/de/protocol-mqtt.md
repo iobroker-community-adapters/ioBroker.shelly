@@ -44,10 +44,6 @@ Aktiviere MQTT auf deinen Shelly-Geräten.
 
 ![shelly gen2](./img/shelly_mqtt-gen2.png)
 
-*Ältere Firmware-Versionen der Generation 2 Geräte (Gen2) haben eine andere Weboberfläche - bitte Update auf die aktuelle stable Version durchführen!*
-
-![shelly gen2 old](./img/shelly_mqtt-gen2-old.png)
-
 ### Generation 1 Geräte
 
 1. Öffne die Shelly-Webkonfiguration in einem Browser (nicht in der Shelly App!)
