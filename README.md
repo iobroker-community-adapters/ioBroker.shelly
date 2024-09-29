@@ -117,14 +117,17 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 **Experimental** - see [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) for details (Shelly Scripting required)
 
-Adapter version >= v6.8.0 required!
+Adapter version >= v6.8.0 required for:
 
 - Shelly BLU Button and Button Tough 1
-- Shelly BLU Wall Switch 4
-- Shelly BLU RC Button 4
 - Shelly BLU Door Window
 - Shelly BLU Motion
 - Shelly BLU H&T
+
+Adapter version >= v8.2.0 required for:
+
+- Shelly BLU Wall Switch 4
+- Shelly BLU RC Button 4
 
 ## NOT Supported devices
 
@@ -133,6 +136,8 @@ Adapter version >= v6.8.0 required!
 - USB powered UVC LED strip
 - Shelly i4 Gen3 (shellyi4g3)
 - Shelly Dimmer Gen3 (shelly0110dimg3)
+- Shelly Plug S Gen3
+- Shelly DALI Dimmer Gen3
 
 ## Sentry
 
