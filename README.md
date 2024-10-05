@@ -112,6 +112,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly H&T Gen3 (shellyhtg3)              | ❌   | >= v8.0.0 |
 | Shelly 1 PM Gen3 (shelly1pmg3)            | ❌   | >= v8.0.0 |
 | Shelly 1 Gen3 (shelly1g3)                 | ❌   | >= v8.0.0 |
+| Shelly 2 PM Gen3 (shelly2pmg3)            | ❌   | >= v8.0.0 |
 
 ### Bluetooth Low Energy (BLU)
 
@@ -157,6 +158,11 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### 8.2.2 (2024-10-05)
+* (@rockflopp) Added Shelly 2 PM gen 3 Integration
+
+
 ### 8.2.1 (2024-09-23)
 
 * (@Matze2010) Added datapoint for cover target position
