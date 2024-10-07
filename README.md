@@ -112,7 +112,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly H&T Gen3 (shellyhtg3)              | ❌   | >= v8.0.0 |
 | Shelly 1 PM Gen3 (shelly1pmg3)            | ❌   | >= v8.0.0 |
 | Shelly 1 Gen3 (shelly1g3)                 | ❌   | >= v8.0.0 |
-| Shelly 2 PM Gen3 (shelly2pmg3)            | ❌   | >= v8.0.0 |
+| Shelly 2 PM Gen3 (shelly2pmg3)            | ❌   | >= v8.3.0 |
 
 ### Bluetooth Low Energy (BLU)
 
@@ -159,7 +159,7 @@ execute
   ### **WORK IN PROGRESS**
 -->
 
-### 8.2.2 (2024-10-05)
+### **WORK IN PROGRESS**
 * (@rockflopp) Added Shelly 2 PM gen 3 Integration
 
 
