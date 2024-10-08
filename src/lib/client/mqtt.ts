@@ -118,7 +118,7 @@ export class MQTTClient extends BaseClient {
     public onboarding(): void {
         this.publishRpcMsg({ method: 'Shelly.GetDeviceInfo' })
             .then((result) => {
-                this.adapter.log.warn(`Shelly device info: ${JSON.stringify(result)}`);
+                this.adapter.log.debug(`Shelly device info: ${JSON.stringify(result)}`);
 
                 if (!this.device && result.gen >= 2) {
                     this.device = new NextgenDevice(this.adapter, this);

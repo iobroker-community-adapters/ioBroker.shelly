@@ -63,7 +63,7 @@ export class MQTTServer extends BaseServer {
 
         this.aedes!.on('publish', (packet, client) => {
             if (client?.id && Object.prototype.hasOwnProperty.call(this.clients, client.id)) {
-                this.adapter.log.debug(`[MQTT Server] Received message of client with id "${client.id}" ${packet.topic}: ${packet.payload.toString()}`);
+                this.adapter.log.silly(`[MQTT Server] Received message of client with id "${client.id}" ${packet.topic}: ${packet.payload.toString()}`);
                 this.clients[client.id].onMessagePublish(packet.topic, packet.payload.toString());
             }
         });

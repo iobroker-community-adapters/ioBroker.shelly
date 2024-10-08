@@ -16,6 +16,9 @@ export class NextgenDevice extends BaseDevice {
 
     public async init(deviceId: string, gen: number): Promise<void> {
         await super.init(deviceId, gen);
+
+        const deviceInfoResult = await this.mqttClient.publishRpcMsg({ method: 'Shelly.GetDeviceInfo' });
+        this.setBaseDeviceState('version', deviceInfoResult.fw_id);
     }
 
     public setName(name: string): void {

@@ -2,6 +2,7 @@ import * as utils from '@iobroker/adapter-core';
 
 export abstract class BaseDevice {
     protected adapter: utils.AdapterInstance;
+    protected deviceId: string | undefined;
 
     constructor(adapter: utils.AdapterInstance) {
         this.adapter = adapter;
@@ -11,6 +12,8 @@ export abstract class BaseDevice {
     }
 
     public async init(deviceId: string, gen: number): Promise<void> {
+        this.deviceId = deviceId;
+
         await this.adapter.extendObject(deviceId, {
             type: 'device',
             common: {
@@ -49,6 +52,36 @@ export abstract class BaseDevice {
         });
         await this.adapter.setState(`${deviceId}.online`, { val: true, ack: true });
 
+        await this.adapter.extendObject(`${deviceId}.gen`, {
+            type: 'state',
+            common: {
+                name: {
+                    en: 'Device generation',
+                    de: 'Gerätegeneration',
+                    ru: 'Генерация устройства',
+                    pt: 'Geração de dispositivos',
+                    nl: 'Vernietigingsgeneratie',
+                    fr: "Production d'appareils",
+                    it: 'Generazione di dispositivi',
+                    es: 'Generación de dispositivos',
+                    pl: 'Pokolenie Device',
+                    uk: 'Виробництво',
+                    'zh-cn': '代 人',
+                },
+                type: 'number',
+                role: 'state',
+                read: true,
+                write: false,
+                states: {
+                    '1': 'Generation 1',
+                    '2': 'Generation 2',
+                    '3': 'Generation 3',
+                },
+            },
+            native: {},
+        });
+        await this.adapter.setState(`${deviceId}.gen`, { val: gen, ack: true });
+
         await this.adapter.extendObject(`${deviceId}.version`, {
             type: 'state',
             common: {
@@ -73,6 +106,10 @@ export abstract class BaseDevice {
             },
             native: {},
         });
+    }
+
+    protected async setBaseDeviceState(id: 'version' | 'gen', val: ioBroker.StateValue): ioBroker.SetStatePromise {
+        return this.adapter.setState(`${this.deviceId}.${id}`, { val, ack: true });
     }
 
     public abstract setName(name: string): void;
