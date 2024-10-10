@@ -1,4 +1,14 @@
 # Older changes
+## 8.0.0 (2024-08-25)
+
+* (imperial929) Added Shelly 1 PM Gen3
+* (imperial929) Added Shelly 1 Gen3
+* (klein0r) Breaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)
+* (klein0r) Added Shelly Plus Uni
+* (klein0r) Added Shelly H&T (Gen3)
+* (klein0r) Improved structure of ble events (receivedBy) - see documentation for details
+* (bluefox) Improved the color of icons in the admin interface
+
 ## 7.0.0 (2024-04-29)
 
 NodeJS >= 18.x and js-controller >= 5 is required

@@ -158,10 +158,8 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 8.3.0 (2024-10-10)
 * (@rockflopp) Added Shelly 2 PM gen 3 Integration
-
 
 ### 8.2.1 (2024-09-23)
 
@@ -181,16 +179,6 @@ execute
 ### 8.1.0 (2024-08-25)
 
 * (esusxunil) Added Shelly Pro EM 2x50A
-
-### 8.0.0 (2024-08-25)
-
-* (imperial929) Added Shelly 1 PM Gen3
-* (imperial929) Added Shelly 1 Gen3
-* (klein0r) Breaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)
-* (klein0r) Added Shelly Plus Uni
-* (klein0r) Added Shelly H&T (Gen3)
-* (klein0r) Improved structure of ble events (receivedBy) - see documentation for details
-* (bluefox) Improved the color of icons in the admin interface
 
 ## License
 
