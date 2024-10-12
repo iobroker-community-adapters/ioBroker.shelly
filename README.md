@@ -158,6 +158,10 @@ execute
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@klein0r) Added AddOn support for Gen3 devices
+
 ### 8.3.0 (2024-10-10)
 * (@rockflopp) Added Shelly 2 PM gen 3 Integration
 
