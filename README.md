@@ -150,7 +150,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 8.4.0 (2024-10-20)
 
 * (@klein0r) Added AddOn support for Gen3 devices
 * (@kalledausb) Added Shelly 0/1-10V PM Gen3 Integration
@@ -172,10 +172,6 @@ Adapter version >= v8.2.0 required for:
 ### 8.1.1 (2024-08-27)
 
 * (@klein0r) Fixed lint issues and Shelly Gen 3 import
-
-### 8.1.0 (2024-08-25)
-
-* (esusxunil) Added Shelly Pro EM 2x50A
 
 ## License
 

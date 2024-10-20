@@ -1,4 +1,8 @@
 # Older changes
+## 8.1.0 (2024-08-25)
+
+* (esusxunil) Added Shelly Pro EM 2x50A
+
 ## 8.0.0 (2024-08-25)
 
 * (imperial929) Added Shelly 1 PM Gen3

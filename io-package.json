@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "8.3.0",
+    "version": "8.4.0",
     "news": {
+      "8.4.0": {
+        "en": "Added AddOn support for Gen3 devices\nAdded Shelly 0/1-10V PM Gen3 Integration",
+        "de": "Hinzufügen Hinzugefügt Auf Unterstützung von Gen3 Geräten\nHinzugefügt Shelly 0/1-10V PM Gen3 Integration",
+        "ru": "Добавить На поддержку устройств Gen3\nДобавлено Shelly 0/1-10V PM Gen3 Интеграция",
+        "pt": "Adicionado Adicionar Em suporte para dispositivos Gen3\nAdicionado Shelly 0/1-10V PM Gen3 Integração",
+        "nl": "Toegevoegd Op ondersteuning voor Gen3-apparaten\nToegevoegd Shelly 0/1-10V PM Gen3 integratie",
+        "fr": "Ajouté Ajouter Sur support pour appareils Gen3\nAjout de l'intégration Shelly 0/1-10V PM Gen3",
+        "it": "Aggiunto aggiunto Su supporto per dispositivi Gen3\nAggiunto Shelly 0/1-10V PM Gen3 Integrazione",
+        "es": "Añadido En soporte para dispositivos Gen3\nAñadido Shelly 0/1-10V PM Gen3 Integration",
+        "pl": "Dodaj Dodaj Wsparcie dla urządzeń Gen3\nDodano Shelly 0 / 1-10V PM Gen3 Integracja",
+        "uk": "Додати На підтримку пристроїв Gen3\nДодано Shelly 0/1-10V PM Gen3 Інтеграція",
+        "zh-cn": "添加 关于 Gen3 设备的支持\n添加 Shelly 0/1-10V PM Gen3 集成"
+      },
       "8.3.0": {
         "en": "Added Shelly 2 PM gen 3 Integration",
         "de": "Hinzugefügt Shelly 2 PM gen 3 Integration",
@@ -80,19 +93,6 @@
         "pl": "NodeJS > = 18.x i kontroler js- > = 5 jest wymagane\n\n* Dodano Shelly 1 Mini (Gen3)\n* Dodano Shelly 1 PM Mini (Gen3)\n* Dodano Shelly PM Mini (Gen3)\n* Dodano Shelly Pro Dimmer 1 PM i Pro Dimmer 2 PM\n* Naprawiono integrację Shelly Wall Display\n* Dodano listę urządzeń zdarzeń ble (receivedby) - usunięty stan rssi\n* Dodano przełącznik Addon dla Shelly Pro 3 EM",
         "uk": "NodeJS >= 18.x та js-controller >= 5 обов'язково\n\n* Додано Shelly 1 Міні (Gen3)\n* Додано Shelly 1 PM Mini (Gen3)\n* Додано Shelly PM Mini (Gen3)\n* Додано Shelly Pro Dimmer 1 PM і Pro Dimmer 2 PM\n* Фіксована Shelly Wall Display інтеграції\n* Додано список пристроїв ble подій (receivedBy) - вилучений стан rssi\n* Додано перемикач Addon для Shelly Pro 3 EM",
         "zh-cn": "节点JS18x和js控制器QQ 需要5个\n\n* 添加Shelly 1 mini(Gen3)\n* 添加Shelly 1 PMini(Gen3)\n* 添加Shelly PM Mini(Gen3)\n* 增加了雪莉Pro Dimmer 1 PM和Pro Dimmer 2 PM\n* 固定舍利墙显示集成\n* 添加ble事件设备列表(收到By) - 删除 rssi 状态\n* Shelly Pro 3 EM 添加开关加件"
-      },
-      "6.9.0": {
-        "en": "Added Shelly Plus 0-10V\nAdmin notification for available firmware updates",
-        "de": "Hinzugefügt Shelly Plus 0-10V\nAdmin-Benachrichtigung für verfügbare Firmware-Updates",
-        "ru": "Добавлено Shelly Plus 0-10V\nУведомление об имеющихся обновлениях прошивки",
-        "pt": "Adicionado Shelly Plus 0-10V\nNotificação de administrador para atualizações de firmware disponíveis",
-        "nl": "Toegevoegd Shelly Plus 0-10V\nAdmin notificatie voor beschikbare firmware updates",
-        "fr": "Ajouté Shelly Plus 0-10V\nNotification Admin pour les mises à jour firmware disponibles",
-        "it": "Aggiunto Shelly Plus 0-10V\nNotifica di amministratore per gli aggiornamenti firmware disponibili",
-        "es": "Añadido Shelly Plus 0-10V\nAviso de Admin para actualizaciones de firmware disponibles",
-        "pl": "Dodano Shelly Plus 0- 10V\nPowiadomienie administratora o dostępnych aktualizacjach oprogramowania firmowego",
-        "uk": "Додано Shelly Plus 0-10V\nПовідомлення про наявність оновлень прошивки",
-        "zh-cn": "添加雪莉加0-10V\n可用固件更新的管理通知"
       }
     },
     "titleLang": {
