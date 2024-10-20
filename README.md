@@ -113,6 +113,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly 1 PM Gen3 (shelly1pmg3)            | ❌   | >= v8.0.0 |
 | Shelly 1 Gen3 (shelly1g3)                 | ❌   | >= v8.0.0 |
 | Shelly 2 PM Gen3 (shelly2pmg3)            | ❌   | >= v8.3.0 |
+| Shelly 0/1-10V PM Gen3 (shelly0110dimg3)  | ❌   | >= v8.4.0 |
 
 ### Bluetooth Low Energy (BLU)
 
@@ -136,7 +137,6 @@ Adapter version >= v8.2.0 required for:
 - Shelly Plus Plug US
 - USB powered UVC LED strip
 - Shelly i4 Gen3 (shellyi4g3)
-- Shelly Dimmer Gen3 (shelly0110dimg3)
 - Shelly Plug S Gen3
 - Shelly DALI Dimmer Gen3
 
@@ -153,6 +153,7 @@ Adapter version >= v8.2.0 required for:
 ### **WORK IN PROGRESS**
 
 * (@klein0r) Added AddOn support for Gen3 devices
+* (@kalledausb) Added Shelly 0/1-10V PM Gen3 Integration
 
 ### 8.3.0 (2024-10-10)
 * (@rockflopp) Added Shelly 2 PM gen 3 Integration
