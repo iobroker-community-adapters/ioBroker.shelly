@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@apollon/iobroker-tools": "^0.3.0",
-    "@iobroker/adapter-core": "^3.2.1",
+    "@iobroker/adapter-core": "^3.2.2",
     "axios": "^1.7.7",
     "mqtt-connection": "^4.1.0",
     "shelly-iot": "^1.1.2",
