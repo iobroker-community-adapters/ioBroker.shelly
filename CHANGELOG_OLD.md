@@ -1,4 +1,8 @@
 # Older changes
+## 8.1.1 (2024-08-27)
+
+* (@klein0r) Fixed lint issues and Shelly Gen 3 import
+
 ## 8.1.0 (2024-08-25)
 
 * (esusxunil) Added Shelly Pro EM 2x50A

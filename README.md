@@ -151,7 +151,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 8.5.0 (2024-11-24)
 
 * (@klein0r) Added Shelly Plug S Gen3
 * (@klein0r) Added Shelly BLU Gateway Gen3
@@ -175,10 +175,6 @@ Adapter version >= v8.2.0 required for:
 * (@Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4
 * (@Paradoxa) Added Shelly Plus RGBW PM
 * (simatec) Responsive Design added
-
-### 8.1.1 (2024-08-27)
-
-* (@klein0r) Fixed lint issues and Shelly Gen 3 import
 
 ## License
 
