@@ -151,6 +151,10 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@klein0r) Added LED control for Shelly Plus Plug S
+
 ### 8.5.0 (2024-11-24)
 
 * (@klein0r) Added Shelly Plug S Gen3
