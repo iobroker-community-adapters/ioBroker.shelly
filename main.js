@@ -338,8 +338,9 @@ class Shelly extends utils.Adapter {
         if (val && val.scriptVersion && val.src && val.payload) {
             this.log.debug(`[processBleMessage] Received payload ${JSON.stringify(val.payload)} from ${val.src}`);
 
-            if (val.scriptVersion !== '0.4') {
-                this.log.warn(`[BLE] ${val.srcBle.mac} (via ${val.src}): BLE-Script version ${val.scriptVersion} is not supported, check documentation for latest version`);
+            const expectedScriptVersion = '0.4';
+            if (val.scriptVersion !== expectedScriptVersion) {
+                this.log.warn(`[BLE] ${val.srcBle.mac} (via ${val.src}): Script version ${val.scriptVersion} is not supported (expected ${expectedScriptVersion}), see documentation for latest version`);
             }
 
             const typesList = {
