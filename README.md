@@ -153,6 +153,7 @@ Adapter version >= v8.2.0 required for:
 -->
 ### **WORK IN PROGRESS**
 
+* (@klein0r) Fixed digest auth for Shelly Wall Display
 * (@klein0r) Added LED control for Shelly Plus Plug S
 
 ### 8.5.0 (2024-11-24)
