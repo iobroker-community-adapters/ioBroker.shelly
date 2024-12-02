@@ -151,7 +151,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 8.5.1 (2024-12-02)
 
 * (@klein0r) Fixed digest auth for Shelly Wall Display
 * (@klein0r) Added LED control for Shelly Plus Plug S
@@ -174,12 +174,6 @@ Adapter version >= v8.2.0 required for:
 
 * (@Matze2010) Added datapoint for cover target position
 * (@klein0r) Fixed integration of Shelly 1 PM Gen 3
-
-### 8.2.0 (2024-09-19)
-
-* (@Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4
-* (@Paradoxa) Added Shelly Plus RGBW PM
-* (simatec) Responsive Design added
 
 ## License
 

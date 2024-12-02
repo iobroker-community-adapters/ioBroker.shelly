@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "8.5.0",
+    "version": "8.5.1",
     "news": {
+      "8.5.1": {
+        "en": "Fixed digest auth for Shelly Wall Display\nAdded LED control for Shelly Plus Plug S",
+        "de": "Feste Verdauung Auth für Shelly Wall Display\nLED-Steuerung für Shelly Plus Plug S",
+        "ru": "Исправленный дайджест для Shelly Wall Display\nДобавление светодиодного управления для Shelly Plus Plug S",
+        "pt": "Auth de digestão fixa para exibição de parede de Shelly\nAdicionado controle de LED para Shelly Plus Plug S",
+        "nl": "Vaste vertakking voor Shelly Wall Display\nToegevoegd LED-besturing voor Shelly Plus Plug S",
+        "fr": "Auth digest fixe pour écran mural Shelly\nAjout du contrôle LED pour Shelly Plus Plug S",
+        "it": "Digestore fisso per display a parete Shelly\nAggiunto controllo LED per Shelly Plus Plug S",
+        "es": "Auth digest fijado para Shelly Wall Display\nControl LED añadido para Shelly Plus Plug S",
+        "pl": "Naprawiono auth diety dla Shelly Wall Display\nDodano sterownik LED dla Shelly Plus Plug S",
+        "uk": "Фіксований дайджест для Shelly Wall Display\nДодано світлодіодний контроль для Shelly Plus Plug S",
+        "zh-cn": "用于 Shelly 墙壁显示的固定文摘认证\nShelly Plus 插件 S 添加的 LED 控制"
+      },
       "8.5.0": {
         "en": "Added Shelly Plug S Gen3\nAdded Shelly BLU Gateway Gen3\nAdded Shelly I4 / I4DC Gen3",
         "de": "Hinzugefügt Shelly Plug S Gen3\nHinzugefügt Shelly BLU Gateway Gen3\nHinzugefügt Shelly I4 / I4DC Gen3",
@@ -80,19 +93,6 @@
         "pl": "Naprawiono problemy z kłami i import Shelly Gen 3",
         "uk": "Фіксовані проблеми з відтінком і Shelly Gen 3 імпорт",
         "zh-cn": "固定文件夹和 Shelly Gen 3 导入"
-      },
-      "8.0.0": {
-        "en": "Added Shelly 1 PM Gen3\nAdded Shelly 1 Gen3\nBreaking change: Renamed input states (now digital/analog) of Shelly Plus Addon (Ext)\nAdded Shelly Plus Uni\nAdded Shelly H&T (Gen3)\nImproved structure of ble events (receivedBy) - see documentation for details\nImproved the color of icons in the admin interface",
-        "de": "Hinzugefügt Shelly 1 PM Gen3\nHinzugefügt Shelly 1 Gen3\nBruchänderung: Umbenannte Eingangszustände (jetzt digital/analog) von Shelly Plus Addon (Ext)\nHinzugefügt Shelly Plus Uni\nHinzugefügt Shelly H&T (Gen3)\nVerbesserte Struktur von Bble Events (receivedBy) - siehe Dokumentation für Details\nVerbesserte die Farbe der Icons in der Admin-Schnittstelle",
-        "ru": "Добавлено Shelly 1 PM Gen3\nДобавлено Shelly 1 Gen3\nПерерыв: Переименованные состояния ввода (ныне цифровой/аналог) Shelly Plus Addon (Ext)\nДобавлено Shelly Plus Uni\nДобавлено Shelly H&T (Gen3)\nУлучшенная структура мрачных событий (receivedBy) - см. документацию для деталей\nУлучшен цвет иконок в интерфейсе администратора",
-        "pt": "Adicionado Shelly 1 PM Gen3\nAdicionado Shelly 1 Gen3\nMudança de ruptura: Renamed estados de entrada (agora digital / analógico) de Shelly Plus Addon (Ext)\nAdicionado Shelly Plus Uni\nAdicionado Shelly H&T (Gen3)\nMelhor estrutura de eventos ble (recebidBy) - ver documentação para detalhes\nMelhorou a cor dos ícones na interface admin",
-        "nl": "Toegevoegd Shelly 1 PM Gen3\nToegevoegd Shelly 1 Gen3\nVerandering: Hernoemde invoertoestanden (nu digitaal/analogus) van Shelly Plus Addon (Ext)\nToegevoegd Shelly Plus Uni\nToegevoegd Shelly H&T (Gen3)\nVerbeterde structuur van de gebeurtenissen (ontvangenBy) - zie documentatie voor details\nVerbeterde kleur van pictogrammen in de admin interface",
-        "fr": "Ajouté Shelly 1 PM Gen3\nAjouté Shelly 1 Gen3\nBriser le changement : États d'entrée renommés (maintenant numériques/analogiques) de Shelly Plus Addon (Ext)\nAjouté Shelly Plus Uni\nAjout de Shelly H & T (Gen3)\nAmélioration de la structure des événements (reçus par) - voir la documentation pour plus de détails\nAmélioration de la couleur des icônes dans l'interface d'administration",
-        "it": "Aggiunto Shelly 1 PM Gen3\nAggiunto Shelly 1 Gen3\nCambiamento di rottura: Stati di input rinominati (ora digitale/analogico) di Shelly Plus Addon (Ext)\nAggiunto Shelly Plus Uni\nAggiunto Shelly H&T (Gen3)\nMiglioramento della struttura degli eventi di ble (receivedBy) - vedi documentazione per i dettagli\nMigliorato il colore delle icone nell'interfaccia di amministrazione",
-        "es": "Añadido Shelly 1 PM Gen3\nAñadido Shelly 1 Gen3\nCambio de ruptura: Estado de entrada (ahora digital/análogo) de Shelly Plus Addon (Ext)\nAñadido Shelly Plus Uni\nAñadido Shelly H adultoT (Gen3)\nMejora de la estructura de los eventos de ble (recibidoBy) - ver documentación para detalles\nMejora el color de los iconos en la interfaz de administración",
-        "pl": "Dodano Shelly 1 PM Gen3\nDodano Shelly 1 Gen3\nŁamanie zmian: Zmienione stany wejścia (obecnie cyfrowe / analogowe) Shelly Plus Addon (Ext)\nDodano Shelly Plus Uni\nDodano Shelly H & T (Gen3)\nUlepszona struktura zdarzeń ble (receivedBy) - szczegółowe informacje w dokumentacji\nUlepszenie koloru ikon w interfejsie administracyjnym",
-        "uk": "Додано Shelly 1 PM Gen3\nДодано Shelly 1 Gen3\nЗміна розривів: Перейменовані вхідні стани (нині цифрові / анлог) Shelly Plus Addon (Ext)\nДодано Shelly Plus Uni\nДодано Shelly H&T (Gen3)\nУдосконалено структуру ble подій (receivedBy) - див. документацію для деталей\nПокращено колір іконок в інтерфейсі адміністратора",
-        "zh-cn": "添加 Shelly 1 PM Gen3\n已添加 Shelly 1 Gen3\n中断更改 : 重命名 Shelly Plus Addon( Ext) 的输入状态( 现在的数字/ analog)\n添加 Shelly Plus 统一\n已添加 Shelly H&T (Gen3)\n改进了ble事件的结构(收到By)-详情见文件\n改进管理界面中图标的颜色"
       }
     },
     "titleLang": {
