@@ -1,12 +1,10 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-// @ts-ignore
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
 const adapterName = require('./package.json').name.split('.').pop();
-// @ts-ignore
 const tcpPing = require('tcp-ping');
 const EventEmitter = require('events').EventEmitter;
 
@@ -57,7 +55,9 @@ class Shelly extends utils.Adapter {
             // Start MQTT server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
-                    this.log.info(`Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port} (QoS ${this.config.qos})`);
+                    this.log.info(
+                        `Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port} (QoS ${this.config.qos})`,
+                    );
 
                     if (!this.config.mqttusername || this.config.mqttusername.length === 0) {
                         this.log.error('MQTT Username is missing!');
@@ -94,10 +94,6 @@ class Shelly extends utils.Adapter {
         }
     }
 
-    /**
-     * @param {string} id
-     * @param {ioBroker.State | null | undefined} state
-     */
     onStateChange(id, state) {
         // Warning, state can be null if it was deleted
         if (state && !state.ack) {
@@ -108,11 +104,15 @@ class Shelly extends utils.Adapter {
 
                 this.eventEmitter.emit('onFirmwareUpdate');
             } else if (stateId === 'info.downloadScripts') {
-                this.log.debug(`[onStateChange] "info.downloadScripts" state changed - starting script download of every device`);
+                this.log.debug(
+                    `[onStateChange] "info.downloadScripts" state changed - starting script download of every device`,
+                );
 
                 this.eventEmitter.emit('onScriptDownload');
             } else {
-                this.log.debug(`[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`);
+                this.log.debug(
+                    `[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`,
+                );
 
                 if (objectHelper) {
                     objectHelper.handleStateChange(id, state);
@@ -126,7 +126,7 @@ class Shelly extends utils.Adapter {
     }
 
     /**
-     * @param {() => void} callback
+     * @param callback
      */
     onUnload(callback) {
         this.isUnloaded = true;
@@ -191,9 +191,7 @@ class Shelly extends utils.Adapter {
                 if (valHostname) {
                     this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
-                    // @ts-ignore
-                    tcpPing.probe(valHostname, valPort, (error, isAlive) =>
-                        this.deviceStatusUpdate(deviceId, isAlive));
+                    tcpPing.probe(valHostname, valPort, (error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
                 }
             }
         } catch (e) {
@@ -207,15 +205,21 @@ class Shelly extends utils.Adapter {
     }
 
     async deviceStatusUpdate(deviceId, status) {
-        if (this.isUnloaded) return;
-        if (!deviceId) return;
+        if (this.isUnloaded) {
+            return;
+        }
+        if (!deviceId) {
+            return;
+        }
 
         this.log.debug(`[deviceStatusUpdate] ${deviceId}: ${status}`);
 
         // Check if device object exists
         const knownDeviceIds = await this.getAllDeviceIds();
         if (knownDeviceIds.indexOf(deviceId) === -1) {
-            this.log.silly(`[deviceStatusUpdate] ${deviceId} is not in list of known devices: ${JSON.stringify(knownDeviceIds)}`);
+            this.log.silly(
+                `[deviceStatusUpdate] ${deviceId} is not in list of known devices: ${JSON.stringify(knownDeviceIds)}`,
+            );
             return;
         }
 
@@ -225,7 +229,7 @@ class Shelly extends utils.Adapter {
 
         if (onlineState) {
             // Compare to previous value
-            const prevValue = onlineState.val ? (onlineState.val === 'true' || onlineState.val === true) : false;
+            const prevValue = onlineState.val ? onlineState.val === 'true' || onlineState.val === true : false;
 
             if (prevValue != status) {
                 await this.setStateAsync(idOnline, { val: status, ack: true });
@@ -286,21 +290,28 @@ class Shelly extends utils.Adapter {
     }
 
     autoFirmwareUpdate() {
-        if (this.isUnloaded) return;
+        if (this.isUnloaded) {
+            return;
+        }
         if (this.config.autoupdate) {
             this.log.debug(`[firmwareUpdate] Starting update on every device`);
 
             this.eventEmitter.emit('onFirmwareUpdate');
 
-            this.firmwareUpdateTimeout = this.setTimeout(() => {
-                this.firmwareUpdateTimeout = null;
-                this.autoFirmwareUpdate();
-            }, 15 * 60 * 1000); // Restart firmware update in 15 minutes
+            this.firmwareUpdateTimeout = this.setTimeout(
+                () => {
+                    this.firmwareUpdateTimeout = null;
+                    this.autoFirmwareUpdate();
+                },
+                15 * 60 * 1000,
+            ); // Restart firmware update in 15 minutes
         }
     }
 
     async firmwareNotify() {
-        if (this.isUnloaded) return;
+        if (this.isUnloaded) {
+            return;
+        }
         if (!this.config.autoupdate) {
             this.log.debug(`[firmwareNotify] Starting firmware check on every device`);
 
@@ -323,14 +334,16 @@ class Shelly extends utils.Adapter {
             }
 
             if (availableUpdates.length > 0) {
-                // @ts-ignore
                 this.registerNotification('shelly', 'deviceUpdates', availableUpdates.join('\n'));
             }
 
-            this.firmwareUpdateTimeout = this.setTimeout(() => {
-                this.firmwareUpdateTimeout = null;
-                this.firmwareNotify();
-            }, 15 * 60 * 1000); // Restart firmware check in 15 minutes
+            this.firmwareUpdateTimeout = this.setTimeout(
+                () => {
+                    this.firmwareUpdateTimeout = null;
+                    this.firmwareNotify();
+                },
+                15 * 60 * 1000,
+            ); // Restart firmware check in 15 minutes
         }
     }
 
@@ -340,7 +353,9 @@ class Shelly extends utils.Adapter {
 
             const expectedScriptVersion = '0.4';
             if (val.scriptVersion !== expectedScriptVersion) {
-                this.log.warn(`[BLE] ${val.srcBle.mac} (via ${val.src}): Script version ${val.scriptVersion} is not supported (expected ${expectedScriptVersion}), see documentation for latest version`);
+                this.log.warn(
+                    `[BLE] ${val.srcBle.mac} (via ${val.src}): Script version ${val.scriptVersion} is not supported (expected ${expectedScriptVersion}), see documentation for latest version`,
+                );
             }
 
             const typesList = {
@@ -356,14 +371,18 @@ class Shelly extends utils.Adapter {
                 rotation: { type: 'number' },
             };
 
-            await this.extendObjectAsync(`ble.${val.srcBle.mac}`, {
-                type: 'device',
-                common: {
-                    name: val.srcBle.mac,
-                    icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTk2LjQ4IDI2MC4wMjNsOTIuNjI2LTEwMy4zMzNMMTQzLjEyNSAwdjIwNi4zM2wtODYuMTExLTg2LjExMS0zMS40MDYgMzEuNDA1IDEwOC4wNjEgMTA4LjM5OUwyNS42MDggMzY4LjQyMmwzMS40MDYgMzEuNDA1IDg2LjExMS04Ni4xMTFMMTQ1Ljg0IDUxMmwxNDguNTUyLTE0OC42NDQtOTcuOTEyLTEwMy4zMzN6bTQwLjg2LTEwMi45OTZsLTQ5Ljk3NyA0OS45NzgtLjMzOC0xMDAuMjk1IDUwLjMxNSA1MC4zMTd6TTE4Ny4zNjMgMzEzLjA0bDQ5Ljk3NyA0OS45NzgtNTAuMzE1IDUwLjMxNi4zMzgtMTAwLjI5NHoiLz48L3N2Zz4=',
+            await this.extendObjectAsync(
+                `ble.${val.srcBle.mac}`,
+                {
+                    type: 'device',
+                    common: {
+                        name: val.srcBle.mac,
+                        icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTk2LjQ4IDI2MC4wMjNsOTIuNjI2LTEwMy4zMzNMMTQzLjEyNSAwdjIwNi4zM2wtODYuMTExLTg2LjExMS0zMS40MDYgMzEuNDA1IDEwOC4wNjEgMTA4LjM5OUwyNS42MDggMzY4LjQyMmwzMS40MDYgMzEuNDA1IDg2LjExMS04Ni4xMTFMMTQ1Ljg0IDUxMmwxNDguNTUyLTE0OC42NDQtOTcuOTEyLTEwMy4zMzN6bTQwLjg2LTEwMi45OTZsLTQ5Ljk3NyA0OS45NzgtLjMzOC0xMDAuMjk1IDUwLjMxNSA1MC4zMTd6TTE4Ny4zNjMgMzEzLjA0bDQ5Ljk3NyA0OS45NzgtNTAuMzE1IDUwLjMxNi4zMzgtMTAwLjI5NHoiLz48L3N2Zz4=',
+                    },
+                    native: {},
                 },
-                native: {},
-            }, { preserve: { common: ['name'] } });
+                { preserve: { common: ['name'] } },
+            );
 
             await this.delObjectAsync(`ble.${val.srcBle.mac}.rssi`); // moved to receivedBy
 
@@ -423,21 +442,19 @@ class Shelly extends utils.Adapter {
             // Check if same message has been received by other Shellys
             if (pidOld !== pidNew) {
                 await this.setStateAsync(`ble.${val.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
-                await this.setStateAsync(
-                    `ble.${val.srcBle.mac}.receivedBy`, {
-                        val: JSON.stringify(
-                            {
-                                [val.src]: {
-                                    rssi: val.payload.rssi,
-                                    ts: Date.now(),
-                                },
+                await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, {
+                    val: JSON.stringify(
+                        {
+                            [val.src]: {
+                                rssi: val.payload.rssi,
+                                ts: Date.now(),
                             },
-                            null,
-                            2,
-                        ),
-                        ack: true,
-                    },
-                );
+                        },
+                        null,
+                        2,
+                    ),
+                    ack: true,
+                });
 
                 for (const [key, value] of Object.entries(val.payload)) {
                     const typeListKey = key.includes('button_') ? 'button' : key;
@@ -470,10 +487,15 @@ class Shelly extends utils.Adapter {
                             ts: Date.now(),
                         };
 
-                        await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, { val: JSON.stringify(deviceList, null, 2), ack: true });
+                        await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, {
+                            val: JSON.stringify(deviceList, null, 2),
+                            ack: true,
+                        });
                     }
                 } catch (err) {
-                    this.log.error(`[processBleMessage] Unable to extend device list (receivedBy) of ${val.srcBle.mac}: ${err}`);
+                    this.log.error(
+                        `[processBleMessage] Unable to extend device list (receivedBy) of ${val.srcBle.mac}: ${err}`,
+                    );
                 }
             }
         }
@@ -486,39 +508,30 @@ class Shelly extends utils.Adapter {
 
     async migrateConfig() {
         const native = {};
-        // @ts-ignore
         if (this.config?.http_username) {
-            // @ts-ignore
             native.httpusername = this.config.http_username;
             native.http_username = '';
         }
-        // @ts-ignore
         if (this.config?.http_password) {
-            // @ts-ignore
             native.httppassword = this.config.http_password;
             native.http_password = '';
         }
-        // @ts-ignore
         if (this.config?.user) {
-            // @ts-ignore
             native.mqttusername = this.config.user;
             native.user = '';
         }
-        // @ts-ignore
         if (this.config?.password) {
-            // @ts-ignore
             native.mqttpassword = this.config.password;
             native.password = '';
         }
-        // @ts-ignore
         if (this.config?.keys) {
-            // @ts-ignore
-            native.blacklist = this.config.keys.map(b => { return { id: b.blacklist }; });
+            native.blacklist = this.config.keys.map(b => {
+                return { id: b.blacklist };
+            });
             native.keys = null;
         }
 
         if (this.config) {
-            // @ts-ignore
             this.config.polltime = parseInt(this.config?.polltime, 10);
         }
 
@@ -533,13 +546,12 @@ class Shelly extends utils.Adapter {
     }
 }
 
-// @ts-ignore parent is a valid property on module
 if (module.parent) {
     // Export the constructor in compact mode
     /**
-     * @param {Partial<ioBroker.AdapterOptions>} [options={}]
+     * @param [options]
      */
-    module.exports = (options) => new Shelly(options);
+    module.exports = options => new Shelly(options);
 } else {
     // otherwise start the instance directly
     new Shelly();

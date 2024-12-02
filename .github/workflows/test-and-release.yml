@@ -30,7 +30,6 @@ jobs:
         with:
           node-version: '20.x'
           lint: true
-          lint-command: 'npm run lint .'
 
   adapter-tests:
     if: contains(github.event.head_commit.message, '[skip ci]') == false
