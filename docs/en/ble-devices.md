@@ -31,7 +31,6 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 - Shelly BLU device (encryption must be disabled!)
 - The correct script version for the used adapter version
 
-
 | Adapter version                                                                                               | Script version |
 |---------------------------------------------------------------------------------------------------------------|----------------|
 | [>= 8.2.1](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.2.1/docs/en/ble-devices.md) | v0.4           |
