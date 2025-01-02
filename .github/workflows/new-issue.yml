@@ -8,7 +8,7 @@ on:
 jobs:
   issueCreated:
     runs-on: ubuntu-latest
-    if: ${{ !github.event.issue.pull_request && !startsWith(github.event.issue.title, 'Update stable version in repo') && github.actor != 'ioBroker-Bot' }}
+    if: ${{ !github.event.issue.pull_request && !startsWith(github.event.issue.title, 'Update stable version in repo') && !startsWith(github.event.issue.title, '[Hardware Request]') && github.actor != 'ioBroker-Bot' }}
     permissions:
       issues: write
     steps:
