@@ -166,6 +166,10 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+NodeJS >= 20.x and js-controller >= 6 is required
+
 ### 8.5.1 (2024-12-02)
 
 * (@klein0r) Fixed digest auth for Shelly Wall Display

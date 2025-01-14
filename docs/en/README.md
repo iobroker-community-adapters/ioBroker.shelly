@@ -15,9 +15,9 @@ This is the English documentation - [🇩🇪 German version](../de/README.md)
 
 ## Requirements
 
-1. Node.js 18 (or later)
-2. js-controller 5.0.19 (or later)
-3. Admin Adapter 6.0.0 (or later)
+1. Node.js 20 (or later)
+2. js-controller 6.0.0 (or later)
+3. Admin Adapter 6.6.0 (or later)
 
 ## Device generations
 
