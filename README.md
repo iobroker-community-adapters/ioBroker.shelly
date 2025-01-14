@@ -140,6 +140,21 @@ Adapter version >= v8.2.0 required for:
 - Shelly Plus Plug US
 - USB powered UVC LED strip
 - Shelly DALI Dimmer Gen3
+- Shelly Dimmer Gen3
+- Shelly Wall Display X2
+- Shelly 3EM-63 Gen3
+- Shelly Pro RGBWW PM
+- Shelly 1L Gen3
+- Shelly 2L Gen3
+- Shelly Outdoor Plug S Gen3
+- Shelly LoRa Add-On
+- Shelly Flood Gen4
+- Shelly 1 Gen4
+- Shelly 1PM Gen4
+- Shelly 2PM Gen4
+- Shelly 1 Mini Gen4
+- Shelly 1PM Mini Gen4
+- Shelly EM Mini Gen4
 
 ## Sentry
 
