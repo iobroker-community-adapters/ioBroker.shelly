@@ -170,6 +170,8 @@ Adapter version >= v8.2.0 required for:
 
 NodeJS >= 20.x and js-controller >= 6 is required
 
+* (@Zefau) add Source and MinBrightness to Shelly Dimmer
+
 ### 8.5.1 (2024-12-02)
 
 * (@klein0r) Fixed digest auth for Shelly Wall Display
