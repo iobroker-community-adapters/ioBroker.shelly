@@ -1,4 +1,9 @@
 # Older changes
+## 8.2.1 (2024-09-23)
+
+* (@Matze2010) Added datapoint for cover target position
+* (@klein0r) Fixed integration of Shelly 1 PM Gen 3
+
 ## 8.2.0 (2024-09-19)
 
 * (@Scrounger) Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4

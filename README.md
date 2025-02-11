@@ -166,7 +166,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.0.0 (2025-02-11)
 
 NodeJS >= 20.x and js-controller >= 6 is required
 
@@ -191,11 +191,6 @@ NodeJS >= 20.x and js-controller >= 6 is required
 
 ### 8.3.0 (2024-10-10)
 * (@rockflopp) Added Shelly 2 PM gen 3 Integration
-
-### 8.2.1 (2024-09-23)
-
-* (@Matze2010) Added datapoint for cover target position
-* (@klein0r) Fixed integration of Shelly 1 PM Gen 3
 
 ## License
 

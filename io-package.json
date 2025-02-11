@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "8.5.1",
+    "version": "9.0.0",
     "news": {
+      "9.0.0": {
+        "en": "NodeJS >= 20.x and js-controller >= 6 is required\n\n* add Source and MinBrightness to Shelly Dimmer\n* Improved log messages",
+        "de": "NodeJS >= 20.x und js-Controller >= 6 ist erforderlich\n\n* Fügen Sie Shelly Dimmer Source und MinBrightness hinzu\n* Verbesserte Log-Nachrichten",
+        "ru": "NodeJS >= 20.x и js-controller >= 6 требуется\n\n* Добавить Источник и MinBrightness в Shelly Dimmer\n* Улучшенные сообщения",
+        "pt": "NodeJS >= 20.x e js-controller >= 6 é necessário\n\n* adicionar Fonte e MinBrightness para Shelly Dimmer\n* Mensagens de log melhoradas",
+        "nl": "Van niet-gelegeerd staal 6 is vereist\n\n* Voeg Bron en MinBrightness toe aan Shelly Dimmer\n* Verbeterde logberichten",
+        "fr": "NodeJS >= 20.x et js-controller >= 6 est nécessaire\n\n* ajouter Source et MinBrightness à Shelly Dimmer\n* Messages de journal améliorés",
+        "it": "NodeJS >= 20.x e js-controller >= 6 è richiesto\n\n* aggiungere Sorgente e MinBrightness a Shelly Dimmer\n* Messaggi di registro migliorati",
+        "es": "NodeJS ю= 20.x y js-controller Se requiere 6\n\n* añadir Fuente y MinBrightness a Shelly Dimmer\n* Mensajes de registro mejorados",
+        "pl": "NodeJS > = 20 x i kontroler js- > = 6 jest wymagane\n\n* Dodaj źródło i jasność do Shelly Dimmer\n* Ulepszone wiadomości dziennika",
+        "uk": "NodeJS >= 20.x та js-controller >= 6 обов'язковий\n\n* додати джерело і MinBrightness для Shelly Dimmer\n* Покращені повідомлення журналу",
+        "zh-cn": "节点JS20x和js控制器QQ 需要6个\n\n* 在雪莉·迪默中添加源和敏亮度\n* 改进日志信息"
+      },
       "8.5.1": {
         "en": "Fixed digest auth for Shelly Wall Display\nAdded LED control for Shelly Plus Plug S",
         "de": "Feste Verdauung Auth für Shelly Wall Display\nLED-Steuerung für Shelly Plus Plug S",
@@ -80,19 +93,6 @@
         "pl": "Dodano Shelly BLU Wall Switch 4 & Shelly BLU RC Przycisk 4\nDodano Shelly Plus RGBW PM\nDodano projekt odpowiedzialny",
         "uk": "Додано Shelly BLU Wall Switch 4 & Shelly BLU RC Кнопка 4\nДодано Shelly Plus RGBW PM\nДодано адаптивний дизайн",
         "zh-cn": "添加 Shelly BLU 墙开关 4 & Shelly BLU RC 按钮 4\n添加雪莉加RGBW PM\n添加响应设计"
-      },
-      "8.1.1": {
-        "en": "Fixed lint issues and Shelly Gen 3 import",
-        "de": "Feste Lint-Probleme und Shelly Gen 3 Import",
-        "ru": "Fixed lint issues and Shelly Gen 3 import",
-        "pt": "Problemas de lint fixos e importação Shelly Gen 3",
-        "nl": "Vaste plint problemen en Shelly Gen 3 import",
-        "fr": "Problèmes de peluches fixes et importation Shelly Gen 3",
-        "it": "Problematiche fisse e importazione Shelly Gen 3",
-        "es": "Problemas de forro fijo e importación Shelly Gen 3",
-        "pl": "Naprawiono problemy z kłami i import Shelly Gen 3",
-        "uk": "Фіксовані проблеми з відтінком і Shelly Gen 3 імпорт",
-        "zh-cn": "固定文件夹和 Shelly Gen 3 导入"
       }
     },
     "titleLang": {
