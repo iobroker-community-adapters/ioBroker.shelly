@@ -171,6 +171,7 @@ Adapter version >= v8.2.0 required for:
 NodeJS >= 20.x and js-controller >= 6 is required
 
 * (@Zefau) add Source and MinBrightness to Shelly Dimmer
+* (@klein0r) Improved log messages
 
 ### 8.5.1 (2024-12-02)
 
