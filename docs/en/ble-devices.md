@@ -330,12 +330,12 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
 });
 ```
 
-## Example Payloads
+## Example Payloads (just for development)
 
 **Shelly BLU Button (and Tough 1)**
 
 - Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/button
-- Tested with firmware: 20240408-184555/v1.0.16@716b307b
+- Tested with firmware: `20241106-091020/v1.0.20-rc8@3771fa9d`
 
 ```json
 {
@@ -352,7 +352,7 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
 **Shelly BLU H&T**
 
 - Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/ht
-- Tested with firmware: 20240408-184609/v1.0.16@716b307b
+- Tested with firmware: `20240408-184609/v1.0.16@716b307b`
 
 ```json
 
@@ -361,7 +361,7 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
 **Shelly BLU Door/Window**
 
 - Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/dw
-- Tested with firmware: 20240408-184602/v1.0.16@716b307b
+- Tested with firmware: `20240408-184602/v1.0.16@716b307b`
 
 ```json
 {
@@ -380,7 +380,7 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
 **Shelly BLU Motion**
 
 - Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/motion
-- Tested with firmware: 20240408-184613/v1.0.16@716b307b
+- Tested with firmware: `20240408-184613/v1.0.16@716b307b`
 
 ```json
 {
