@@ -33,6 +33,7 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 
 | Adapter version                                                                                               | Script version |
 |---------------------------------------------------------------------------------------------------------------|----------------|
+| [>= 9.1.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v9.1.0/docs/en/ble-devices.md) | v0.5           |
 | [>= 8.2.1](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.2.1/docs/en/ble-devices.md) | v0.4           |
 | [>= 8.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.0.0/docs/en/ble-devices.md) | v0.3           |
 | [>= 6.8.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.8.0/docs/en/ble-devices.md) | v0.2           |
@@ -43,10 +44,11 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2+) and start it:
 
 ```javascript
-// v0.4
-const SCRIPT_VERSION = '0.4';
+// v0.5
+const SCRIPT_VERSION = '0.5';
 const BTHOME_SVC_ID_STR = 'fcd2';
 
+const rawtext = -1;
 const uint8 = 0;
 const int8 = 1;
 const uint16 = 2;
@@ -64,14 +66,19 @@ const BTH = {
     0xf0: { n: 'device_type', t: uint16 },
     0xf1: { n: 'firmware_version', t: uint32 },
     0xf2: { n: 'firmware_version', t: uint24 },
+    0x60: { n: 'channel', t: uint8 },
     // Sensor data
     0x51: { n: 'acceleration', t: uint16, f: 0.001, u: 'm/s²' },
     0x01: { n: 'battery', t: uint8, u: '%' },
     0x12: { n: 'co2', t: uint16, u: 'ppm' },
     0x09: { n: 'count', t: uint8 },
-    0x3d: { n: 'count', t: uint8 },
-    0x3e: { n: 'count', t: uint8 },
+    0x3d: { n: 'count', t: uint16 },
+    0x3e: { n: 'count', t: uint32 },
+    0x59: { n: 'count', t: int8 },
+    0x5a: { n: 'count', t: int16 },
+    0x5b: { n: 'count', t: int32 },
     0x43: { n: 'current', t: uint16, f: 0.001, u: 'A' },
+    0x5d: { n: 'current', t: int16, f: 0.001, u: 'A' },
     0x08: { n: 'dewpoint', t: int16, f: 0.01, u: '°C' },
     0x40: { n: 'distance_mm', t: uint16, u: 'mm' },
     0x41: { n: 'distance_m', t: uint16, f: 0.1, u: 'm' },
@@ -91,9 +98,12 @@ const BTH = {
     0x0d: { n: 'pm2_5', t: uint16, u: 'ug/m3' },
     0x0e: { n: 'pm10', t: uint16, u: 'ug/m3' },
     0x0b: { n: 'power', t: uint24, f: 0.01, u: 'W' },
+    0x5c: { n: 'power', t: int32, f: 0.01, u: 'W' },
     0x04: { n: 'pressure', t: uint24, f: 0.01, u: 'hPa' },
     0x3f: { n: 'rotation', t: int16, f: 0.1, u: '°' },
     0x44: { n: 'speed', t: uint16, f: 0.01, u: 'm/s' },
+    0x57: { n: 'temperature', t: int8, u: '°C' },
+    0x58: { n: 'temperature', t: int8, f: 0.35, u: '°C' },
     0x45: { n: 'temperature', t: int16, f: 0.1, u: '°C' },
     0x02: { n: 'temperature', t: int16, f: 0.01, u: '°C' },
     0x13: { n: 'tvoc', t: uint16, u: 'ug/m3' },
@@ -102,10 +112,12 @@ const BTH = {
     0x4e: { n: 'volume', t: uint32, f: 0.001, u: 'l' },
     0x47: { n: 'volume', t: uint16, f: 0.1, u: 'l' },
     0x48: { n: 'volume', t: uint16, u: 'ml' },
-    0x55: { n: 'volume', t: uint32, f: 0.001, u: 'l' },
-    0x49: { n: 'volume', t: uint16, f: 0.001, u: 'm3/h' },
+    0x55: { n: 'volume_storage', t: uint32, f: 0.001, u: 'l' },
+    0x49: { n: 'volume_flowrate', t: uint16, f: 0.001, u: 'm3/h' },
     0x46: { n: 'uv_index', t: uint8, f: 0.1 },
     0x4f: { n: 'water', t: uint32, f: 0.001, u: 'l' },
+    0x5e: { n: 'direction', t: uint16, f: 0.01, u: '°' },
+    0x5f: { n: 'precipitation', t: uint16, u: 'mm' },
     // Binary Sensor data
     0x15: { n: 'battery', t: uint8 },
     0x16: { n: 'battery_charging', t: uint8 },
@@ -137,7 +149,10 @@ const BTH = {
     0x2d: { n: 'window', t: uint8 },
     // Events
     0x3a: { n: 'button', t: uint8, b: 1 },
-    0x3c: { n: 'dimmer', t: uint8 }
+    0x3c: { n: 'dimmer', t: uint8 },
+    // Text / Raw
+    0x54: { n: 'raw', t: rawtext },
+    0x53: { n: 'text', t: rawtext }
 };
 
 function getByteSize(type) {
@@ -210,6 +225,7 @@ let BTHomeDecoder = {
         let _value;
         let _name;
         let _btnNum = 1;
+
         while (buffer.length > 0) {
             _bth = BTH[buffer.at(0)];
             if (typeof _bth === 'undefined') {
@@ -217,19 +233,29 @@ let BTHomeDecoder = {
                 break;
             }
             buffer = buffer.slice(1);
-            _value = this.getBufValue(_bth.t, buffer);
-            if (_value === null) break;
-            if (typeof _bth.f !== 'undefined') _value = _value * _bth.f;
 
             _name = _bth.n;
-            if (typeof _bth.b !== "undefined") {
-                _name = _name + '_' + _btnNum.toString();
-                _btnNum++;
+
+            if (_bth.t === rawtext) {
+                // text and raw values
+                // TODO: not implemented
+                _value = 'not_implemented';
+            } else {
+                _value = this.getBufValue(_bth.t, buffer);
+                if (_value === null) break;
+
+                if (typeof _bth.f !== 'undefined') _value = _value * _bth.f;
+
+                if (typeof _bth.b !== 'undefined') {
+                    _name = _name + '_' + _btnNum.toString();
+                    _btnNum++;
+                }
             }
 
             result[_name] = _value;
             buffer = buffer.slice(getByteSize(_bth.t));
         }
+
         return result;
     }
 };

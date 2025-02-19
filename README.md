@@ -166,6 +166,10 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@klein0r) Updated BLE script version to 0.5
+
 ### 9.0.0 (2025-02-11)
 
 NodeJS >= 20.x and js-controller >= 6 is required
