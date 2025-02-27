@@ -88,6 +88,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Pro 3 (shellypro3)                 | ❌   | >= v6.2.0 |
 | Shelly Pro 4 PM (shellypro4pm)            | ❌   | >= v5.0.0 |
 | Shelly Pro 3 EM (shellypro3em)            | ❌   | >= v6.4.0 |
+| Shelly Pro 3 EM 63 (shellypro3em63)       | ❌   | >= v9.1.0 |
 | Shelly Pro Dimmer 1 PM (shellyprodm1pm)   | ❌   | >= v8.0.0 |
 | Shelly Pro Dimmer 2 PM (shellyprodm2pm)   | ❌   | >= v7.0.0 |
 | Shelly Pro EM 2x50A                       | ❌   | >= v8.1.0 |
@@ -168,6 +169,7 @@ Adapter version >= v8.2.0 required for:
 -->
 ### **WORK IN PROGRESS**
 
+* (@Joylancer) Added Shelly Pro 3 EM 63
 * (@klein0r) Updated BLE script version to 0.5
 
 ### 9.0.0 (2025-02-11)
