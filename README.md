@@ -167,7 +167,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.1.0 (2025-02-27)
 
 * (@Joylancer) Added Shelly Pro 3 EM 63
 * (@klein0r) Updated BLE script version to 0.5
@@ -194,9 +194,6 @@ NodeJS >= 20.x and js-controller >= 6 is required
 
 * (@klein0r) Added AddOn support for Gen3 devices
 * (@kalledausb) Added Shelly 0/1-10V PM Gen3 Integration
-
-### 8.3.0 (2024-10-10)
-* (@rockflopp) Added Shelly 2 PM gen 3 Integration
 
 ## License
 

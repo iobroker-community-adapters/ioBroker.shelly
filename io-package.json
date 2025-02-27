@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.0.0",
+    "version": "9.1.0",
     "news": {
+      "9.1.0": {
+        "en": "Added Shelly Pro 3 EM 63\nUpdated BLE script version to 0.5",
+        "de": "Hinzugefügt Shelly Pro 3 EM 63\nAktualisierte BLE-Scriptversion auf 0,5",
+        "ru": "Shelly Pro 3 EM 63\nОбновленная версия сценария BLE до 0,5",
+        "pt": "Adicionado Shelly Pro 3 EM 63\nVersão de script BLE atualizada para 0.5",
+        "nl": "Toegevoegd Shelly Pro 3 EM 63\nBijgewerkt BLE script versie naar 0.5",
+        "fr": "Ajouté Shelly Pro 3 EM 63\nVersion de script BLE mise à jour à 0.5",
+        "it": "Aggiunto Shelly Pro 3 EM 63\nVersione di script BLE aggiornata a 0.5",
+        "es": "Añadido Shelly Pro 3 EM 63\nVersión de script BLE actualizada a 0,5",
+        "pl": "Dodano Shelly Pro 3 EM 63\nAktualizacja wersji skryptu BLE do 0.5",
+        "uk": "Додано Shelly Pro 3 EM 63\nОновлено версію сценарію BLE до 0.5",
+        "zh-cn": "添加的雪莉Pro 3 EM 63\n更新到 0.5 的 BLE 脚本版本"
+      },
       "9.0.0": {
         "en": "NodeJS >= 20.x and js-controller >= 6 is required\n\n* add Source and MinBrightness to Shelly Dimmer\n* Improved log messages",
         "de": "NodeJS >= 20.x und js-Controller >= 6 ist erforderlich\n\n* Fügen Sie Shelly Dimmer Source und MinBrightness hinzu\n* Verbesserte Log-Nachrichten",
@@ -80,19 +93,6 @@
         "pl": "Dodano punkt danych dla pozycji docelowej pokrycia\nNaprawiono integrację Shelly 1 PM Gen 3",
         "uk": "Додано точку даних для цільової позиції обкладинки\nФіксована інтеграція Shelly 1 PM Gen 3",
         "zh-cn": "为覆盖目标位置添加数据点\n Shelly 1 PM Gen 3的固定整合"
-      },
-      "8.2.0": {
-        "en": "Added Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4\nAdded Shelly Plus RGBW PM\nResponsive Design added",
-        "de": "Hinzugefügt Shelly BLU Wandschalter 4 & Shelly BLU RC Button 4\nHinzugefügt Shelly Plus RGBW PM\nResponsive Design hinzugefügt",
-        "ru": "Добавлено Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4\nДобавлено Shelly Plus RGBW PM\nResponsive Design",
-        "pt": "Adicionado Shelly BLU Wall Switch 4 & Shelly BLU Botão RC 4\nAdicionado Shelly Plus RGBW PM\nDesign responsivo adicionado",
-        "nl": "Toegevoegd Shelly BLU Wall Switch 4 & Shelly BLU RC knop 4\nToegevoegd Shelly Plus RGBW PM\nResponsive Design toegevoegd",
-        "fr": "Ajout de Shelly BLU Wall Switch 4 et Shelly BLU RC Button 4\nAjouté Shelly Plus RGBW PM\nDesign sensible ajouté",
-        "it": "Aggiunto Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4\nAggiunto Shelly Plus RGBW PM\nResponsive Design aggiunto",
-        "es": "Añadido Shelly BLU Wall Switch 4 & Shelly BLU RC Button 4\nAñadido Shelly Plus RGBW PM\nDiseño responsable añadido",
-        "pl": "Dodano Shelly BLU Wall Switch 4 & Shelly BLU RC Przycisk 4\nDodano Shelly Plus RGBW PM\nDodano projekt odpowiedzialny",
-        "uk": "Додано Shelly BLU Wall Switch 4 & Shelly BLU RC Кнопка 4\nДодано Shelly Plus RGBW PM\nДодано адаптивний дизайн",
-        "zh-cn": "添加 Shelly BLU 墙开关 4 & Shelly BLU RC 按钮 4\n添加雪莉加RGBW PM\n添加响应设计"
       }
     },
     "titleLang": {

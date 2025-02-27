@@ -1,4 +1,7 @@
 # Older changes
+## 8.3.0 (2024-10-10)
+* (@rockflopp) Added Shelly 2 PM gen 3 Integration
+
 ## 8.2.1 (2024-09-23)
 
 * (@Matze2010) Added datapoint for cover target position
