@@ -167,6 +167,11 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (mcm1957) translations for Gen2 devices have been added
+* (mcm1957) state roles for Gen2 devices have been adapted
+
 ### 9.1.0 (2025-02-27)
 
 * (@Joylancer) Added Shelly Pro 3 EM 63
