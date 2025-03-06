@@ -118,6 +118,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plug S Gen3 (shellyplugsg3)        | ❌   | >= v8.5.0 |
 | Shelly BLU Gateway Gen3 (shellyblugwg3)   | ❌   | >= v8.5.0 |
 | Shelly I4 / I4DC Gen3 (shellyi4g3)        | ❌   | >= v8.5.0 |
+| Shelly 3EM-63 Gen3 (shelly3em63g3)       | ❌   | >= v9.2.0 |
 
 ### Bluetooth Low Energy (BLU)
 
@@ -169,6 +170,7 @@ Adapter version >= v8.2.0 required for:
 -->
 ### **WORK IN PROGRESS**
 
+* (lennycb) added "shelly3em 63g3.js" (Gen3 Devices)
 * (@mcm1957) Translations for Gen2 devices have been added
 * (@mcm1957) State roles for Gen2 devices have been adapted
 * (@tclas) Added handling of Total Active Energy
