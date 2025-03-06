@@ -169,8 +169,9 @@ Adapter version >= v8.2.0 required for:
 -->
 ### **WORK IN PROGRESS**
 
-* (mcm1957) translations for Gen2 devices have been added
-* (mcm1957) state roles for Gen2 devices have been adapted
+* (@mcm1957) Translations for Gen2 devices have been added
+* (@mcm1957) State roles for Gen2 devices have been adapted
+* (@tclas) Added handling of Total Active Energy
 
 ### 9.1.0 (2025-02-27)
 
