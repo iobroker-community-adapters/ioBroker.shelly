@@ -119,6 +119,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly BLU Gateway Gen3 (shellyblugwg3)   | ❌   | >= v8.5.0 |
 | Shelly I4 / I4DC Gen3 (shellyi4g3)        | ❌   | >= v8.5.0 |
 | Shelly 3EM-63 Gen3 (shelly3em63g3)        | ❌   | >= v9.2.0 |
+| Shelly Dimmer Gen3 (shellydimmerg3)       | ❌   | > v9.2.0 |
 
 
 ### Bluetooth Low Energy (BLU)
@@ -143,7 +144,6 @@ Adapter version >= v8.2.0 required for:
 - Shelly Plus Plug US
 - USB powered UVC LED strip
 - Shelly DALI Dimmer Gen3
-- Shelly Dimmer Gen3
 - Shelly Wall Display X2
 - Shelly 3EM-63 Gen3
 - Shelly Pro RGBWW PM
@@ -171,6 +171,7 @@ Adapter version >= v8.2.0 required for:
 -->
 ### **WORK IN PROGRESS**
 
+* (fLaSk1n) Shelly Dimmer Gen3 added
 * (lennycb) Shelly 3EM63 Gen3 added
 * (@mcm1957) Translations for Gen2 devices have been added
 * (@mcm1957) State roles for Gen2 devices have been adapted
