@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.1.0",
+    "version": "9.2.0",
     "news": {
+      "9.2.0": {
+        "en": "Added Shelly Dimmer Gen3\nAdded Shelly 3EM63 Gen3\nTranslations for Gen2 devices have been added\nState roles for Gen2 devices have been adapted\nAdded handling of Total Active Energy",
+        "de": "Hinzugefügt Shelly Dimmer Gen3\nHinzugefügt Shelly 3EM63 Gen3\nÜbersetzungen für Gen2 Geräte wurden hinzugefügt\nStaatliche Rollen für Gen2 Geräte wurden angepasst\nZusätzlicher Umgang mit Total Active Energy",
+        "ru": "Обсуждение Shelly Dimmer Gen3\nШелли 3EM63 Gen3\nДобавлены переводы для устройств Gen2\nАдаптированы государственные роли для устройств Gen2\nОбработка полной активной энергии",
+        "pt": "Adicionado Shelly Dimmer Gen3\nAdicionado Shelly 3EM63 Gen3\nTraduções para dispositivos Gen2 foram adicionadas\nFunções estatais para dispositivos Gen2 foram adaptadas\nAdicionado manuseio de Total Active Energy",
+        "nl": "Toegevoegd Shelly Dimmer Gen3\nToegevoegd Shelly 3EM63 Gen3\nVertalingen voor Gen2-apparaten zijn toegevoegd\nDe rol van Gen2-apparaten is aangepast\nToegevoegde behandeling van totale actieve energie",
+        "fr": "Ajouté Shelly Dimmer Gen3\nAjouté Shelly 3EM63 Gen3\nDes traductions pour les appareils Gen2 ont été ajoutées\nLes rôles de l'État pour les appareils Gen2 ont été adaptés\nTraitement ajouté de Total Active Energy",
+        "it": "Aggiunto Shelly Dimmer Gen3\nAggiunto Shelly 3EM63 Gen3\nSono state aggiunte traduzioni per dispositivi Gen2\nI ruoli di stato per i dispositivi Gen2 sono stati adattati\nGestione aggiuntiva di Total Active Energy",
+        "es": "Añadido Shelly Dimmer Gen3\nAñadido Shelly 3EM63 Gen3\nSe han añadido traducciones para dispositivos Gen2\nLas funciones estatales de los dispositivos Gen2 han sido adaptadas\nManejo añadido de Energía Activa Total",
+        "pl": "Dodano Shelly Dimmer Gen3\nDodano Shelly 3EM63 Gen3\nTłumaczenie dla urządzeń Gen2 zostało dodane\nRole państwa dla urządzeń Gen2 zostały dostosowane\nDodano obsługę całkowitej energii czynnej",
+        "uk": "Доданий Shelly Dimmer Gen3\nДоданий Shelly 3EM63 Gen3\nДодано переклади для пристроїв Gen2\nПристосовано сучасні ролі для пристроїв Gen2\nДодана обробка Total Active Energy",
+        "zh-cn": "添加 Shelly Dimmer 源3\n添加 Shelly 3EM63 源3\nGen2 设备的翻译已添加\n改编了Gen2设备的国家作用\n增加的全活动能源处理"
+      },
       "9.1.0": {
         "en": "Added Shelly Pro 3 EM 63\nUpdated BLE script version to 0.5",
         "de": "Hinzugefügt Shelly Pro 3 EM 63\nAktualisierte BLE-Scriptversion auf 0,5",
@@ -80,19 +93,6 @@
         "pl": "Dodano Shelly 2 PM gen 3 Integracja",
         "uk": "Додано Shelly 2 PM gen 3 Інтеграція",
         "zh-cn": "添加 Shelly 2 PM gen 3 整合"
-      },
-      "8.2.1": {
-        "en": "Added datapoint for cover target position\nFixed integration of Shelly 1 PM Gen 3",
-        "de": "Zusätzlicher Datenpunkt zur Deckung der Zielposition\nFeste Integration von Shelly 1 PM Gen 3",
-        "ru": "Добавленная точка данных для охвата целевого положения\nФиксированная интеграция Shelly 1 PM Gen 3",
-        "pt": "Datapoint adicionado para posição de alvo de cobertura\nIntegração fixa de Shelly 1 PM Gen 3",
-        "nl": "Toegevoegd datapoint voor dekking doel positie\nVaste integratie van Shelly 1 PM Gen 3",
-        "fr": "Point de données ajouté pour couvrir la position cible\nIntégration fixe de Shelly 1 PM Gen 3",
-        "it": "Datapoint aggiunto per la posizione di destinazione di copertura\nIntegrazione fissa di Shelly 1 PM Gen 3",
-        "es": "Punto de datos añadido para cubrir la posición de destino\nIntegración fija de Shelly 1 PM Gen 3",
-        "pl": "Dodano punkt danych dla pozycji docelowej pokrycia\nNaprawiono integrację Shelly 1 PM Gen 3",
-        "uk": "Додано точку даних для цільової позиції обкладинки\nФіксована інтеграція Shelly 1 PM Gen 3",
-        "zh-cn": "为覆盖目标位置添加数据点\n Shelly 1 PM Gen 3的固定整合"
       }
     },
     "titleLang": {

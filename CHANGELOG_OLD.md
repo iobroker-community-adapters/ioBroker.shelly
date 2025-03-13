@@ -1,4 +1,9 @@
 # Older changes
+## 8.4.0 (2024-10-20)
+
+* (@klein0r) Added AddOn support for Gen3 devices
+* (@kalledausb) Added Shelly 0/1-10V PM Gen3 Integration
+
 ## 8.3.0 (2024-10-10)
 * (@rockflopp) Added Shelly 2 PM gen 3 Integration
 

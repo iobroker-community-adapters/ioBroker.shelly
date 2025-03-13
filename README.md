@@ -168,7 +168,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.2.0 (2025-03-13)
 
 * (@fLaSk1n) Added Shelly Dimmer Gen3
 * (@lennycb) Added Shelly 3EM63 Gen3
@@ -198,11 +198,6 @@ NodeJS >= 20.x and js-controller >= 6 is required
 * (@klein0r) Added Shelly Plug S Gen3
 * (@klein0r) Added Shelly BLU Gateway Gen3
 * (@klein0r) Added Shelly I4 / I4DC Gen3
-
-### 8.4.0 (2024-10-20)
-
-* (@klein0r) Added AddOn support for Gen3 devices
-* (@kalledausb) Added Shelly 0/1-10V PM Gen3 Integration
 
 ## License
 
