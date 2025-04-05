@@ -105,21 +105,22 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 ### Generation 3 (Gen 3)
 
-| Shelly Device                             | CoAP | MQTT      |
-|-------------------------------------------| ---- | --------- |
-| Shelly 1 Mini Gen3 (shelly1minig3)        | ❌   | >= v7.0.0 |
-| Shelly 1 PM Mini Gen3 (shelly1pmminig3)   | ❌   | >= v7.0.0 |
-| Shelly PM Mini Gen3 (shellypmminig3)      | ❌   | >= v7.0.0 |
-| Shelly H&T Gen3 (shellyhtg3)              | ❌   | >= v8.0.0 |
-| Shelly 1 PM Gen3 (shelly1pmg3)            | ❌   | >= v8.0.0 |
-| Shelly 1 Gen3 (shelly1g3)                 | ❌   | >= v8.0.0 |
-| Shelly 2 PM Gen3 (shelly2pmg3)            | ❌   | >= v8.3.0 |
-| Shelly 0/1-10V PM Gen3 (shelly0110dimg3)  | ❌   | >= v8.4.0 |
-| Shelly Plug S Gen3 (shellyplugsg3)        | ❌   | >= v8.5.0 |
-| Shelly BLU Gateway Gen3 (shellyblugwg3)   | ❌   | >= v8.5.0 |
-| Shelly I4 / I4DC Gen3 (shellyi4g3)        | ❌   | >= v8.5.0 |
-| Shelly 3EM-63 Gen3 (shelly3em63g3)        | ❌   | >= v9.2.0 |
-| Shelly Dimmer Gen3 (shellydimmerg3)       | ❌   | >= v9.2.0 |
+| Shelly Device                                 | CoAP | MQTT      |
+|-----------------------------------------------| ---- | --------- |
+| Shelly 1 Mini Gen3 (shelly1minig3)            | ❌   | >= v7.0.0 |
+| Shelly 1 PM Mini Gen3 (shelly1pmminig3)       | ❌   | >= v7.0.0 |
+| Shelly PM Mini Gen3 (shellypmminig3)          | ❌   | >= v7.0.0 |
+| Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0 |
+| Shelly 1 PM Gen3 (shelly1pmg3)                | ❌   | >= v8.0.0 |
+| Shelly 1 Gen3 (shelly1g3)                     | ❌   | >= v8.0.0 |
+| Shelly 2 PM Gen3 (shelly2pmg3)                | ❌   | >= v8.3.0 |
+| Shelly 0/1-10V PM Gen3 (shelly0110dimg3)      | ❌   | >= v8.4.0 |
+| Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0 |
+| Shelly BLU Gateway Gen3 (shellyblugwg3)       | ❌   | >= v8.5.0 |
+| Shelly I4 / I4DC Gen3 (shellyi4g3)            | ❌   | >= v8.5.0 |
+| Shelly 3EM-63 Gen3 (shelly3em63g3)            | ❌   | >= v9.2.0 |
+| Shelly Dimmer Gen3 (shellydimmerg3)           | ❌   | >= v9.2.0 |
+| Shelly Outdoor Plug S Gen3 (shellyoutdoorsg3) | ❌   | >= v9.3.0 |
 
 ### Bluetooth Low Energy (BLU)
 
@@ -148,7 +149,6 @@ Adapter version >= v8.2.0 required for:
 - Shelly Pro RGBWW PM
 - Shelly 1L Gen3
 - Shelly 2L Gen3
-- Shelly Outdoor Plug S Gen3
 - Shelly LoRa Add-On
 - Shelly Flood Gen4
 - Shelly 1 Gen4
@@ -170,6 +170,7 @@ Adapter version >= v8.2.0 required for:
 -->
 ### **WORK IN PROGRESS**
 
+* (@mcm1957) Added Shelly Outdoor Plug S Gen3
 * (@mcm1957) Missing energy values for pmminigen3 have been added
 
 ### 9.2.0 (2025-03-13)
