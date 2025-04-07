@@ -145,7 +145,6 @@ Adapter version >= v8.2.0 required for:
 - USB powered UVC LED strip
 - Shelly DALI Dimmer Gen3
 - Shelly Wall Display X2
-- Shelly 3EM-63 Gen3
 - Shelly Pro RGBWW PM
 - Shelly 1L Gen3
 - Shelly 2L Gen3
