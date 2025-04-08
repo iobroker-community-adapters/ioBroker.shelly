@@ -1,20 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.3.0-alpha.0",
+    "version": "9.3.0-alpha.1",
     "news": {
-      "9.3.0-alpha.0": {
-        "en": "Added Shelly Outdoor Plug S Gen3\nMissing energy values for Swicthes (i.e. Shelly Outdoor Plug S Gen3) have been added\nMissing energy values for pmminigen3 have been added",
-        "de": "Hinzugefügt Shelly Outdoor Plug S Gen3\nFehlende Energiewerte für Swicthes (d.h. Shelly Outdoor Plug S Gen3) wurden hinzugefügt\nFehlende Energiewerte für pmminigen3 wurden hinzugefügt",
-        "ru": "Обсуждение Shelly Outdoor Plug S Gen3\nДобавлены недостающие значения энергии для Swicthes (например, Shelly Outdoor Plug S Gen3)\nДобавлены недостающие значения энергии для pmminigen3",
-        "pt": "Adicionado Shelly Outdoor Plug S Gen3\nValores de energia ausentes para Swicthes (ou seja, Shelly Outdoor Plug S Gen3) foram adicionados\nValores de energia perdidos para pmminigen3 foram adicionados",
-        "nl": "Toegevoegd Shelly Outdoor Plug S Gen3\nOntbrekende energiewaarden voor Zwitsers (d.w.z. Shelly Outdoor Plug S Gen3) zijn toegevoegd\nOntbrekende energiewaarden voor pmminigen3 zijn toegevoegd",
-        "fr": "Ajout de Shelly Outdoor Plug S Gen3\nDes valeurs d'énergie manquantes pour Swicthes (c'est-à-dire Shelly Outdoor Plug S Gen3) ont été ajoutées\nDes valeurs énergétiques manquantes pour pmminingen3 ont été ajoutées",
-        "it": "Aggiunto Shelly Outdoor Plug S Gen3\nValori energetici mancanti per Swicthes (cioè Shelly Outdoor Plug S Gen3) sono stati aggiunti\nValori energetici mancanti per pmminigen3 sono stati aggiunti",
-        "es": "Añadido Shelly exterior Plug S Gen3\nSe han añadido valores de energía perdidos para Swicthes (es decir, Shelly Outdoor Plug S Gen3)\nSe han añadido valores energéticos perdidos para el PMminigen3",
-        "pl": "Dodano Shelly Outdoor Plug S Gen3\nDodano brakujące wartości energii dla Swicthes (tj. Shelly Outdoor Plug S Gen3)\nDodano brakujące wartości energii dla pmminigen3",
-        "uk": "Доданий Shelly Відкритий Plug S Gen3\nДодано значення енергії для Swicthes (i.e Shelly Outdoor Plug S Gen3)\nДодано значення енергії для PMminigen3",
-        "zh-cn": "添加 Shelly 室外插件 S Gen 3\n斯威奇斯缺失的能量值(即Shelly室外插件S Gen3)已被添加\n添加了 pmminigen3 的缺失能量值"
+      "9.3.0-alpha.1": {
+        "en": "Added Shelly Outdoor Plug S Gen3\nMissing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added\nMissing energy values for pmminigen3 have been added",
+        "de": "Hinzugefügt Shelly Outdoor Plug S Gen3\nFehlende Energiewerte für Schalter (d.h. Shelly Outdoor Plug S Gen3) wurden hinzugefügt\nFehlende Energiewerte für pmminigen3 wurden hinzugefügt",
+        "ru": "Обсуждение Shelly Outdoor Plug S Gen3\nОтсутствующие значения энергии для коммутаторов (например, Shelly Outdoor Plug S Gen3)\nДобавлены недостающие значения энергии для pmminigen3",
+        "pt": "Adicionado Shelly Outdoor Plug S Gen3\nValores de energia ausentes para Switches (ou seja, Shelly Outdoor Plug S Gen3) foram adicionados\nValores de energia perdidos para pmminigen3 foram adicionados",
+        "nl": "Toegevoegd Shelly Outdoor Plug S Gen3\nOntbrekende energiewaarden voor switches (d.w.z. Shelly Outdoor Plug S Gen3) zijn toegevoegd\nOntbrekende energiewaarden voor pmminigen3 zijn toegevoegd",
+        "fr": "Ajout de Shelly Outdoor Plug S Gen3\nDes valeurs d'énergie manquantes pour les commutateurs (c'est-à-dire Shelly Outdoor Plug S Gen3) ont été ajoutées\nDes valeurs énergétiques manquantes pour pmminingen3 ont été ajoutées",
+        "it": "Aggiunto Shelly Outdoor Plug S Gen3\nValori energetici mancanti per Switches (cioè Shelly Outdoor Plug S Gen3) sono stati aggiunti\nValori energetici mancanti per pmminigen3 sono stati aggiunti",
+        "es": "Añadido Shelly exterior Plug S Gen3\nSe han añadido valores de energía perdidos para Switches (es decir, Shelly Outdoor Plug S Gen3)\nSe han añadido valores energéticos perdidos para el PMminigen3",
+        "pl": "Dodano Shelly Outdoor Plug S Gen3\nDodano brakujące wartości energii dla przełączników (tj. Shelly Outdoor Plug S Gen3)\nDodano brakujące wartości energii dla pmminigen3",
+        "uk": "Доданий Shelly Відкритий Plug S Gen3\nДодані значення енергії для вимикачів (наприклад, Shelly Outdoor Plug S Gen3)\nДодано значення енергії для PMminigen3",
+        "zh-cn": "添加 Shelly 室外插件 S Gen 3\n切换器(即Shelly室外插件S Gen3)的能量值缺失\n添加了 pmminigen3 的缺失能量值"
       },
       "9.2.0": {
         "en": "Added Shelly Dimmer Gen3\nAdded Shelly 3EM63 Gen3\nTranslations for Gen2 devices have been added\nState roles for Gen2 devices have been adapted\nAdded handling of Total Active Energy",
@@ -80,19 +80,6 @@
         "pl": "Dodano Shelly Plug S Gen3\nDodano Shelly BLU Brama Gen3\nDodano Shelly I4 / I4DC Gen3",
         "uk": "Додано Shelly Plug S Gen3\nДодано Shelly BLU шлюз Gen3\nДодано Shelly I4 / I4DC Gen3",
         "zh-cn": "添加 Shelly 插件 S Gen3\n添加 Shelly BLU 数据 Gen3 网关\n已添加 Shelly I4 / I4DC Gen3"
-      },
-      "8.4.0": {
-        "en": "Added AddOn support for Gen3 devices\nAdded Shelly 0/1-10V PM Gen3 Integration",
-        "de": "Hinzufügen Hinzugefügt Auf Unterstützung von Gen3 Geräten\nHinzugefügt Shelly 0/1-10V PM Gen3 Integration",
-        "ru": "Добавить На поддержку устройств Gen3\nДобавлено Shelly 0/1-10V PM Gen3 Интеграция",
-        "pt": "Adicionado Adicionar Em suporte para dispositivos Gen3\nAdicionado Shelly 0/1-10V PM Gen3 Integração",
-        "nl": "Toegevoegd Op ondersteuning voor Gen3-apparaten\nToegevoegd Shelly 0/1-10V PM Gen3 integratie",
-        "fr": "Ajouté Ajouter Sur support pour appareils Gen3\nAjout de l'intégration Shelly 0/1-10V PM Gen3",
-        "it": "Aggiunto aggiunto Su supporto per dispositivi Gen3\nAggiunto Shelly 0/1-10V PM Gen3 Integrazione",
-        "es": "Añadido En soporte para dispositivos Gen3\nAñadido Shelly 0/1-10V PM Gen3 Integration",
-        "pl": "Dodaj Dodaj Wsparcie dla urządzeń Gen3\nDodano Shelly 0 / 1-10V PM Gen3 Integracja",
-        "uk": "Додати На підтримку пристроїв Gen3\nДодано Shelly 0/1-10V PM Gen3 Інтеграція",
-        "zh-cn": "添加 关于 Gen3 设备的支持\n添加 Shelly 0/1-10V PM Gen3 集成"
       }
     },
     "titleLang": {

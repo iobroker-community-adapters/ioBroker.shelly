@@ -168,7 +168,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.3.0-alpha.1 (2025-04-08)
 
 * (@mcm1957) Added Shelly Outdoor Plug S Gen3
 * (@mcm1957) Missing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added
