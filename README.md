@@ -168,10 +168,10 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 9.3.0-alpha.0 (2025-04-08)
+### **WORK IN PROGRESS**
 
 * (@mcm1957) Added Shelly Outdoor Plug S Gen3
-* (@mcm1957) Missing energy values for Swicthes (i.e. Shelly Outdoor Plug S Gen3) have been added
+* (@mcm1957) Missing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added
 * (@mcm1957) Missing energy values for pmminigen3 have been added
 
 ### 9.2.0 (2025-03-13)
