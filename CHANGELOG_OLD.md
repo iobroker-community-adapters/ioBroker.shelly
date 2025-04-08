@@ -1,4 +1,10 @@
 # Older changes
+## 8.5.0 (2024-11-24)
+
+* (@klein0r) Added Shelly Plug S Gen3
+* (@klein0r) Added Shelly BLU Gateway Gen3
+* (@klein0r) Added Shelly I4 / I4DC Gen3
+
 ## 8.4.0 (2024-10-20)
 
 * (@klein0r) Added AddOn support for Gen3 devices

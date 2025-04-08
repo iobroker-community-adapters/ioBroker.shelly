@@ -168,7 +168,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.3.0-alpha.0 (2025-04-08)
 
 * (@mcm1957) Added Shelly Outdoor Plug S Gen3
 * (@mcm1957) Missing energy values for Swicthes (i.e. Shelly Outdoor Plug S Gen3) have been added
@@ -198,12 +198,6 @@ NodeJS >= 20.x and js-controller >= 6 is required
 
 * (@klein0r) Fixed digest auth for Shelly Wall Display
 * (@klein0r) Added LED control for Shelly Plus Plug S
-
-### 8.5.0 (2024-11-24)
-
-* (@klein0r) Added Shelly Plug S Gen3
-* (@klein0r) Added Shelly BLU Gateway Gen3
-* (@klein0r) Added Shelly I4 / I4DC Gen3
 
 ## License
 
