@@ -1,20 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.3.0-alpha.1",
+    "version": "9.3.0",
     "news": {
-      "9.3.0-alpha.1": {
-        "en": "Added Shelly Outdoor Plug S Gen3\nMissing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added\nMissing energy values for pmminigen3 have been added",
-        "de": "Hinzugefügt Shelly Outdoor Plug S Gen3\nFehlende Energiewerte für Schalter (d.h. Shelly Outdoor Plug S Gen3) wurden hinzugefügt\nFehlende Energiewerte für pmminigen3 wurden hinzugefügt",
-        "ru": "Обсуждение Shelly Outdoor Plug S Gen3\nОтсутствующие значения энергии для коммутаторов (например, Shelly Outdoor Plug S Gen3)\nДобавлены недостающие значения энергии для pmminigen3",
-        "pt": "Adicionado Shelly Outdoor Plug S Gen3\nValores de energia ausentes para Switches (ou seja, Shelly Outdoor Plug S Gen3) foram adicionados\nValores de energia perdidos para pmminigen3 foram adicionados",
-        "nl": "Toegevoegd Shelly Outdoor Plug S Gen3\nOntbrekende energiewaarden voor switches (d.w.z. Shelly Outdoor Plug S Gen3) zijn toegevoegd\nOntbrekende energiewaarden voor pmminigen3 zijn toegevoegd",
-        "fr": "Ajout de Shelly Outdoor Plug S Gen3\nDes valeurs d'énergie manquantes pour les commutateurs (c'est-à-dire Shelly Outdoor Plug S Gen3) ont été ajoutées\nDes valeurs énergétiques manquantes pour pmminingen3 ont été ajoutées",
-        "it": "Aggiunto Shelly Outdoor Plug S Gen3\nValori energetici mancanti per Switches (cioè Shelly Outdoor Plug S Gen3) sono stati aggiunti\nValori energetici mancanti per pmminigen3 sono stati aggiunti",
-        "es": "Añadido Shelly exterior Plug S Gen3\nSe han añadido valores de energía perdidos para Switches (es decir, Shelly Outdoor Plug S Gen3)\nSe han añadido valores energéticos perdidos para el PMminigen3",
-        "pl": "Dodano Shelly Outdoor Plug S Gen3\nDodano brakujące wartości energii dla przełączników (tj. Shelly Outdoor Plug S Gen3)\nDodano brakujące wartości energii dla pmminigen3",
-        "uk": "Доданий Shelly Відкритий Plug S Gen3\nДодані значення енергії для вимикачів (наприклад, Shelly Outdoor Plug S Gen3)\nДодано значення енергії для PMminigen3",
-        "zh-cn": "添加 Shelly 室外插件 S Gen 3\n切换器(即Shelly室外插件S Gen3)的能量值缺失\n添加了 pmminigen3 的缺失能量值"
+      "9.3.0": {
+        "en": "Adapter requires admin 7.4.10 now. \nAdded Shelly Outdoor Plug S Gen3\nMissing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added\nMissing energy values for pmminigen3 have been added",
+        "de": "Adapter benötigt jetzt Admin 7.4.10.\nHinzugefügt Shelly Outdoor Plug S Gen3\nFehlende Energiewerte für Schalter (d.h. Shelly Outdoor Plug S Gen3) wurden hinzugefügt\nFehlende Energiewerte für pmminigen3 wurden hinzugefügt",
+        "ru": "Адаптер требует админ 7.4.10.\nОбсуждение Shelly Outdoor Plug S Gen3\nОтсутствующие значения энергии для коммутаторов (например, Shelly Outdoor Plug S Gen3)\nДобавлены недостающие значения энергии для pmminigen3",
+        "pt": "Adaptador requer admin 7.4.10 agora.\nAdicionado Shelly Outdoor Plug S Gen3\nValores de energia ausentes para Switches (ou seja, Shelly Outdoor Plug S Gen3) foram adicionados\nValores de energia perdidos para pmminigen3 foram adicionados",
+        "nl": "Adapter vereist admin 7.4.10 nu.\nToegevoegd Shelly Outdoor Plug S Gen3\nOntbrekende energiewaarden voor switches (d.w.z. Shelly Outdoor Plug S Gen3) zijn toegevoegd\nOntbrekende energiewaarden voor pmminigen3 zijn toegevoegd",
+        "fr": "Adaptateur nécessite admin 7.4.10 maintenant.\nAjout de Shelly Outdoor Plug S Gen3\nDes valeurs d'énergie manquantes pour les commutateurs (c'est-à-dire Shelly Outdoor Plug S Gen3) ont été ajoutées\nDes valeurs énergétiques manquantes pour pmminingen3 ont été ajoutées",
+        "it": "L'adattatore richiede ora admin 7.4.10.\nAggiunto Shelly Outdoor Plug S Gen3\nValori energetici mancanti per Switches (cioè Shelly Outdoor Plug S Gen3) sono stati aggiunti\nValori energetici mancanti per pmminigen3 sono stati aggiunti",
+        "es": "Adaptador requiere admin 7.4.10 ahora.\nAñadido Shelly exterior Plug S Gen3\nSe han añadido valores de energía perdidos para Switches (es decir, Shelly Outdoor Plug S Gen3)\nSe han añadido valores energéticos perdidos para el PMminigen3",
+        "pl": "Adapter wymaga admin 7.4.10 teraz.\nDodano Shelly Outdoor Plug S Gen3\nDodano brakujące wartości energii dla przełączników (tj. Shelly Outdoor Plug S Gen3)\nDodano brakujące wartości energii dla pmminigen3",
+        "uk": "Адаптер вимагає адміністратора 7.4.10 тепер.\nДоданий Shelly Відкритий Plug S Gen3\nДодані значення енергії для вимикачів (наприклад, Shelly Outdoor Plug S Gen3)\nДодано значення енергії для PMminigen3",
+        "zh-cn": "适配器现在需要管理员7.4.10.\n添加 Shelly 室外插件 S Gen 3\n切换器(即Shelly室外插件S Gen3)的能量值缺失\n添加了 pmminigen3 的缺失能量值"
       },
       "9.2.0": {
         "en": "Added Shelly Dimmer Gen3\nAdded Shelly 3EM63 Gen3\nTranslations for Gen2 devices have been added\nState roles for Gen2 devices have been adapted\nAdded handling of Total Active Energy",
