@@ -1,4 +1,9 @@
 # Older changes
+## 8.5.1 (2024-12-02)
+
+* (@klein0r) Fixed digest auth for Shelly Wall Display
+* (@klein0r) Added LED control for Shelly Plus Plug S
+
 ## 8.5.0 (2024-11-24)
 
 * (@klein0r) Added Shelly Plug S Gen3

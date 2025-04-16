@@ -173,7 +173,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.4.0 (2025-04-16)
 
 * (@klein0r) Added Gen4 devices (see documentation for details)
 
@@ -203,11 +203,6 @@ NodeJS >= 20.x and js-controller >= 6 is required
 
 * (@Zefau) add Source and MinBrightness to Shelly Dimmer
 * (@klein0r) Improved log messages
-
-### 8.5.1 (2024-12-02)
-
-* (@klein0r) Fixed digest auth for Shelly Wall Display
-* (@klein0r) Added LED control for Shelly Plus Plug S
 
 ## License
 

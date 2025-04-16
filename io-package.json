@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.3.0",
+    "version": "9.4.0",
     "news": {
+      "9.4.0": {
+        "en": "Added Gen4 devices (see documentation for details)",
+        "de": "Gen4 Geräte hinzugefügt (siehe Dokumentation für Details)",
+        "ru": "Добавлены устройства Gen4 (подробнее см. документацию)",
+        "pt": "Adicionados dispositivos Gen4 (veja documentação para detalhes)",
+        "nl": "Toegevoegd Gen4-apparaten (zie documentatie voor details)",
+        "fr": "Ajout de dispositifs Gen4 (voir la documentation pour plus de détails)",
+        "it": "Dispositivi Gen4 aggiunti (vedi documentazione per i dettagli)",
+        "es": "Dispositivos Gen4 añadidos (ver documentación para detalles)",
+        "pl": "Dodano urządzenia Gen4 (szczegóły w dokumentacji)",
+        "uk": "Додано пристрої Gen4 (див. документацію для деталей)",
+        "zh-cn": "添加的 Gen4 设备(详见文档)"
+      },
       "9.3.0": {
         "en": "Adapter requires admin 7.4.10 now. \nAdded Shelly Outdoor Plug S Gen3\nMissing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added\nMissing energy values for pmminigen3 have been added",
         "de": "Adapter benötigt jetzt Admin 7.4.10.\nHinzugefügt Shelly Outdoor Plug S Gen3\nFehlende Energiewerte für Schalter (d.h. Shelly Outdoor Plug S Gen3) wurden hinzugefügt\nFehlende Energiewerte für pmminigen3 wurden hinzugefügt",
