@@ -123,6 +123,15 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Dimmer Gen3 (shellydimmerg3)           | ❌   | >= v9.2.0 |
 | Shelly Outdoor Plug S Gen3 (shellyoutdoorsg3) | ❌   | >= v9.3.0 |
 
+### Generation 4 (Gen 4)
+
+| Shelly Device                                 | CoAP | MQTT      |
+|-----------------------------------------------| ---- | --------- |
+| Shelly 1 Gen4 (shelly1g4)                     | ❌   | >= v9.4.0 |
+| Shelly 1 PM Gen4 (shelly1pmg4)                | ❌   | >= v9.4.0 |
+| Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0 |
+| Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0 |
+
 ### Bluetooth Low Energy (BLU)
 
 **Experimental** - see [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) for details (Shelly Scripting required)
@@ -151,11 +160,7 @@ Adapter version >= v8.2.0 required for:
 - Shelly 2L Gen3
 - Shelly LoRa Add-On
 - Shelly Flood Gen4
-- Shelly 1 Gen4
-- Shelly 1PM Gen4
 - Shelly 2PM Gen4
-- Shelly 1 Mini Gen4
-- Shelly 1PM Mini Gen4
 - Shelly EM Mini Gen4
 
 ## Sentry
@@ -168,6 +173,10 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@klein0r) Added Gen4 devices (see documentation for details)
+
 ### 9.3.0 (2025-04-14)
 
 * (@klein0r) Adapter requires admin 7.4.10 now. 
