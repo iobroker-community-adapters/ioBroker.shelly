@@ -173,7 +173,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.4.1 (2025-04-17)
 
 * (@mcm1957) Minimum value for min_brightness fixed for dimmer1/2 [#1166]
 
@@ -200,13 +200,6 @@ Adapter version >= v8.2.0 required for:
 
 * (@Joylancer) Added Shelly Pro 3 EM 63
 * (@klein0r) Updated BLE script version to 0.5
-
-### 9.0.0 (2025-02-11)
-
-NodeJS >= 20.x and js-controller >= 6 is required
-
-* (@Zefau) add Source and MinBrightness to Shelly Dimmer
-* (@klein0r) Improved log messages
 
 ## License
 

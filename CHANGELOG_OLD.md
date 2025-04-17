@@ -1,4 +1,11 @@
 # Older changes
+## 9.0.0 (2025-02-11)
+
+NodeJS >= 20.x and js-controller >= 6 is required
+
+* (@Zefau) add Source and MinBrightness to Shelly Dimmer
+* (@klein0r) Improved log messages
+
 ## 8.5.1 (2024-12-02)
 
 * (@klein0r) Fixed digest auth for Shelly Wall Display

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.4.0",
+    "version": "9.4.1",
     "news": {
+      "9.4.1": {
+        "en": "Minimum value for min_brightness fixed for dimmer1/2 [#1166]",
+        "de": "Mindestwert für min_brightness korrigiert für dimmer1/2 [#1166]",
+        "ru": "Минимальное значение min_brightness зафиксировано для диммера1/2 [#1166]",
+        "pt": "Valor mínimo para min_brightness fixado para dimmer1/2 [#1166]",
+        "nl": "Minimumwaarde voor min_helderheid vastgesteld voor dimmer1/2 [#1166]",
+        "fr": "Valeur minimale de min_brightness fixée pour dimmer1/2 [#1166]",
+        "it": "Valore minimo per min_brightness fissato per dimmer1/2 [#1166]",
+        "es": "Valor mínimo para min_brightness fijado para dimmer1/2 [#1166]",
+        "pl": "Minimalna wartość dla min _ jasność ustalona dla ściemnia1 / 2 [# 1166]",
+        "uk": "Мінімальне значення для min_brightness фіксована для dimmer1/2 [#1166]",
+        "zh-cn": "定在 dimmer1/2 上的最小值 [# 1166]"
+      },
       "9.4.0": {
         "en": "Added Gen4 devices (see documentation for details)",
         "de": "Gen4 Geräte hinzugefügt (siehe Dokumentation für Details)",
@@ -80,19 +93,6 @@
         "pl": "Naprawiono auth diety dla Shelly Wall Display\nDodano sterownik LED dla Shelly Plus Plug S",
         "uk": "Фіксований дайджест для Shelly Wall Display\nДодано світлодіодний контроль для Shelly Plus Plug S",
         "zh-cn": "用于 Shelly 墙壁显示的固定文摘认证\nShelly Plus 插件 S 添加的 LED 控制"
-      },
-      "8.5.0": {
-        "en": "Added Shelly Plug S Gen3\nAdded Shelly BLU Gateway Gen3\nAdded Shelly I4 / I4DC Gen3",
-        "de": "Hinzugefügt Shelly Plug S Gen3\nHinzugefügt Shelly BLU Gateway Gen3\nHinzugefügt Shelly I4 / I4DC Gen3",
-        "ru": "Добавлено Shelly Plug S Gen3\nДобавлено Shelly BLU Gateway Gen3\nДобавлено Shelly I4 / I4DC Gen3",
-        "pt": "Adicionado Shelly Plug S Gen3\nAdicionado Shelly BLU Gateway Gen3\nAdicionado Shelly I4 / I4DC Gen3",
-        "nl": "Toegevoegd Shelly Plug S Gen3\nToegevoegd Shelly BLU Gateway Gen3\nToegevoegd Shelly I4 / I4DC Gen3",
-        "fr": "Ajouté Shelly Plug S Gen3\nAjout de Shelly BLU Géné3 de la passerelle\nAjouté Shelly I4 / I4DC Gen3",
-        "it": "Aggiunto Shelly Plug S Gen3\nAggiunto Shelly BLU Gateway Gen3\nAggiunto Shelly I4 / I4DC Gen3",
-        "es": "Añadido Shelly Plug S Gen3\nAñadido Shelly BLU Gateway Gen3\nAñadido Shelly I4 / I4DC Gen3",
-        "pl": "Dodano Shelly Plug S Gen3\nDodano Shelly BLU Brama Gen3\nDodano Shelly I4 / I4DC Gen3",
-        "uk": "Додано Shelly Plug S Gen3\nДодано Shelly BLU шлюз Gen3\nДодано Shelly I4 / I4DC Gen3",
-        "zh-cn": "添加 Shelly 插件 S Gen3\n添加 Shelly BLU 数据 Gen3 网关\n已添加 Shelly I4 / I4DC Gen3"
       }
     },
     "titleLang": {
