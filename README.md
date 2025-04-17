@@ -173,6 +173,10 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@mcm1957) Minimum value for min_brightness fixed for dimmer1/2 [#1166]
+
 ### 9.4.0 (2025-04-16)
 
 * (@klein0r) Added Gen4 devices (see documentation for details)
