@@ -190,7 +190,7 @@ Adapter version >= v8.2.0 required for:
 * (@mcm1957) Added energy states to Shelly Plus RBGW PM (shellyrgbwpm) [#1099].
 * (@mcm1957) Added energy states to Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].
 * (@mcm1957) Added energy states to Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].
-* (@mcm1957) Added energy states to Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].
+* (@mcm1957) Added energy states to Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].
 
 ### 9.4.1 (2025-04-17)
 
