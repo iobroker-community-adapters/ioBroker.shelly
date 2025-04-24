@@ -232,7 +232,7 @@ class Shelly extends utils.Adapter {
             const prevValue = onlineState.val ? onlineState.val === 'true' || onlineState.val === true : false;
 
             if (prevValue != status) {
-                await this.setStateAsync(idOnline, { val: status, ack: true });
+                await this.setState(idOnline, { val: status, ack: true });
             }
         }
 
@@ -251,9 +251,9 @@ class Shelly extends utils.Adapter {
         if (oldOnlineDeviceCount !== newOnlineDeviceCount) {
             this.log.debug(`[deviceStatusUpdate] Online devices: ${JSON.stringify(Object.keys(this.onlineDevices))}`);
             if (newOnlineDeviceCount > 0) {
-                await this.setStateAsync('info.connection', { val: true, ack: true });
+                await this.setState('info.connection', { val: true, ack: true });
             } else {
-                await this.setStateAsync('info.connection', { val: false, ack: true });
+                await this.setState('info.connection', { val: false, ack: true });
             }
         }
     }
@@ -275,10 +275,10 @@ class Shelly extends utils.Adapter {
             const onlineState = await this.getStateAsync(idOnline);
 
             if (onlineState) {
-                await this.setStateAsync(idOnline, { val: false, ack: true });
+                await this.setState(idOnline, { val: false, ack: true });
             }
 
-            await this.extendObjectAsync(deviceId, {
+            await this.extendObject(deviceId, {
                 common: {
                     color: null, // Remove color from previous versions
                 },
@@ -286,7 +286,7 @@ class Shelly extends utils.Adapter {
         }
 
         this.onlineDevices = {};
-        await this.setStateAsync('info.connection', { val: false, ack: true });
+        await this.setState('info.connection', { val: false, ack: true });
     }
 
     autoFirmwareUpdate() {
@@ -371,7 +371,7 @@ class Shelly extends utils.Adapter {
                 rotation: { type: 'number' },
             };
 
-            await this.extendObjectAsync(
+            await this.extendObject(
                 `ble.${val.srcBle.mac}`,
                 {
                     type: 'device',
@@ -441,8 +441,8 @@ class Shelly extends utils.Adapter {
 
             // Check if same message has been received by other Shellys
             if (pidOld !== pidNew) {
-                await this.setStateAsync(`ble.${val.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
-                await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, {
+                await this.setState(`ble.${val.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
+                await this.setState(`ble.${val.srcBle.mac}.receivedBy`, {
                     val: JSON.stringify(
                         {
                             [val.src]: {
@@ -460,7 +460,7 @@ class Shelly extends utils.Adapter {
                     const typeListKey = key.includes('button_') ? 'button' : key;
 
                     if (Object.keys(typesList).includes(typeListKey)) {
-                        await this.extendObjectAsync(`ble.${val.srcBle.mac}.${key}`, {
+                        await this.extendObject(`ble.${val.srcBle.mac}.${key}`, {
                             type: 'state',
                             common: {
                                 name: key,
@@ -474,7 +474,7 @@ class Shelly extends utils.Adapter {
                             native: {},
                         });
 
-                        await this.setStateAsync(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true, c: val.src });
+                        await this.setState(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true, c: val.src });
                     }
                 }
             } else {
@@ -487,7 +487,7 @@ class Shelly extends utils.Adapter {
                             ts: Date.now(),
                         };
 
-                        await this.setStateAsync(`ble.${val.srcBle.mac}.receivedBy`, {
+                        await this.setState(`ble.${val.srcBle.mac}.receivedBy`, {
                             val: JSON.stringify(deviceList, null, 2),
                             ack: true,
                         });
