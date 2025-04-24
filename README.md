@@ -123,6 +123,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Dimmer Gen3 (shellydimmerg3)           | ❌   | >= v9.2.0 |
 | Shelly Outdoor Plug S Gen3 (shellyoutdoorsg3) | ❌   | >= v9.3.0 |
 | Shelly AZ Plug (shellyazplug)                 | ❌   | >= v9.5.0 |
+| Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0 |
 
 ### Generation 4 (Gen 4)
 
@@ -175,7 +176,9 @@ Adapter version >= v8.2.0 required for:
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-* (@mcm1957) Added Shelly AZ Plug (shellyazplug)
+* (@mcm1957) Added Shelly AZ Plug (shellyazplug).
+* (@mcm1957) Added Shelly EM Gen 3 (shellyemg3).
+* (@mcm1957) Added 'total returned energy' to Gen2+ EM devices.
 
 ### 9.4.1 (2025-04-17)
 
