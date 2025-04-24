@@ -20,7 +20,7 @@ body:
   - type: input
     attributes:
       label: Original Client-ID
-      description: Original Client-ID sent by the device (format: `shellyxxxxxx-yyyyyy`). Please mask MAC-address (yyyyyy).
+      description: Original Client-ID sent by the device (format: shellyxxxxxx-yyyyyy). Please mask MAC-address (yyyyyy).
     validations:
       required: true
   - type: textarea
