@@ -20,14 +20,14 @@ body:
   - type: input
     attributes:
       label: Original Client-ID
-      description: Original Client-ID sent be device (shellyxxxxxx-yyyyyy). Please mask mac (yyyyyy).
+      description: Original Client-ID sent by the device (format: `shellyxxxxxx-yyyyyy`). Please mask MAC-address (yyyyyy).
     validations:
       required: true
   - type: textarea
     attributes:
       label: Output of http://<ip-address>/rpc/Shelly.GetStatus
       description: >-
-        Please use your browswer to retieve informatio n from the following web address: `http://<ip-address>/rpc/Shelly.GetStatus` and post the out put here. Replace '<ip-address>' withe the address of your shelly device.
+        Please use your browser to retrieve information from the following web address: `http://<ip-address>/rpc/Shelly.GetStatus` and post the out put here. Replace '<ip-address>' withe the address of your shelly device.
     validations:
       required: true
   - type: textarea
