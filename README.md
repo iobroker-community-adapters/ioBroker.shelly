@@ -134,6 +134,12 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0 |
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0 |
 
+### Powered By Shelly
+
+| Device                                        | CoAP | MQTT      |
+|-----------------------------------------------| ---- | --------- |
+| Ogemray 25A (ogemray25a)                      | ❌   | >= v9.5.0 |
+
 ### Bluetooth Low Energy (BLU)
 
 **Experimental** - see [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) for details (Shelly Scripting required)
@@ -180,6 +186,7 @@ Adapter version >= v8.2.0 required for:
 * (@mcm1957) Added Shelly EM Gen 3 (shellyemg3).
 * (@mcm1957) Added 'total returned energy' to Gen2+ EM devices.
 * (@mcm1957) Added 'Relay' to Shelly Pro EM 50 [#1038].
+* (@mcm1957) Added Ogemray 25A (ogemray25a).
 
 ### 9.4.1 (2025-04-17)
 
