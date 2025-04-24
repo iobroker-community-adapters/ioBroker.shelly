@@ -179,6 +179,7 @@ Adapter version >= v8.2.0 required for:
 * (@mcm1957) Added Shelly AZ Plug (shellyazplug).
 * (@mcm1957) Added Shelly EM Gen 3 (shellyemg3).
 * (@mcm1957) Added 'total returned energy' to Gen2+ EM devices.
+* (@mcm1957) Added 'Relay' to Shelly Pro EM 50 [#1038].
 
 ### 9.4.1 (2025-04-17)
 
