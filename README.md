@@ -122,6 +122,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly 3EM-63 Gen3 (shelly3em63g3)            | ❌   | >= v9.2.0 |
 | Shelly Dimmer Gen3 (shellydimmerg3)           | ❌   | >= v9.2.0 |
 | Shelly Outdoor Plug S Gen3 (shellyoutdoorsg3) | ❌   | >= v9.3.0 |
+| Shelly AZ Plug (shellyazplug)                 | ❌   | >= v9.5.0 |
 
 ### Generation 4 (Gen 4)
 
@@ -173,6 +174,9 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (@mcm1957) Added Shelly AZ Plug (shellyazplug)
+
 ### 9.4.1 (2025-04-17)
 
 * (@mcm1957) Minimum value for min_brightness fixed for dimmer1/2 [#1166]
