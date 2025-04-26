@@ -1,4 +1,9 @@
 # Older changes
+## 9.1.0 (2025-02-27)
+
+* (@Joylancer) Added Shelly Pro 3 EM 63
+* (@klein0r) Updated BLE script version to 0.5
+
 ## 9.0.0 (2025-02-11)
 
 NodeJS >= 20.x and js-controller >= 6 is required

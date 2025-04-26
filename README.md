@@ -181,7 +181,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.5.0-alpha.0 (2025-04-26)
 * (@mcm1957) Added Shelly AZ Plug (shellyazplug).
 * (@mcm1957) Added Shelly EM Gen 3 (shellyemg3).
 * (@mcm1957) Added 'total returned energy' to Gen2+ EM devices.
@@ -214,11 +214,6 @@ Adapter version >= v8.2.0 required for:
 * (@mcm1957) Translations for Gen2 devices have been added
 * (@mcm1957) State roles for Gen2 devices have been adapted
 * (@tclas) Added handling of Total Active Energy
-
-### 9.1.0 (2025-02-27)
-
-* (@Joylancer) Added Shelly Pro 3 EM 63
-* (@klein0r) Updated BLE script version to 0.5
 
 ## License
 
