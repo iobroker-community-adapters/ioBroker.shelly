@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.5.0-alpha.0",
+    "version": "9.5.0-alpha.1",
     "news": {
+      "9.5.0-alpha.1": {
+        "en": "Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nAdded Shelly Pro RGBWW PM (shellyprorgbwwpm) - Note: CCT component still missing.",
+        "de": "Hinzugefügt Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nHinzugefügt Shelly Pro RGBWW PM (shellyprorgbwpm) - Hinweis: CCT-Komponente fehlt noch.",
+        "ru": "Добавлен Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nДобавлен Shelly Pro RGBWW PM (shellyprorgbwwpm) - Примечание: компонент CCT все еще отсутствует.",
+        "pt": "Adicionado Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nAdicionado Shelly Pro RGBWW PM (shellyprorgbwpm) - Nota: componente CCT ainda faltando.",
+        "nl": "Toegevoegd Shelly Pro Dimmer 01/10V PM (shellypro0110pm).\nToegevoegd Shelly Pro RGBWW PM (shellyprorgbwwpm) - Opmerking: CCT-component ontbreekt nog.",
+        "fr": "Ajouté Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nAjouté Shelly Pro RGBWW PM (shellyprorgbwwpm) - Remarque : le composant CCT est toujours manquant.",
+        "it": "Aggiunto Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nAggiunto Shelly Pro RGBWW PM (shellyprorgbwpm) - Nota: componente CCT ancora mancante.",
+        "es": "Añadido Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nAñadido Shelly Pro RGBWW PM (shellyprorgbwpm) - Nota: componente CCT todavía falta.",
+        "pl": "Dodano Shelly Pro Dimmer 0 / 1-10V PM (shellypro0110pm).\nDodano Shelly Pro RGBWW PM (shellyprorgbwwpm) - Uwaga: nadal brakuje komponentu CCT.",
+        "uk": "Додано Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nДодано Shelly Pro RGBWW PM (shellyprorgbwwpm) - Примітка: компонент CCT все ще відсутні.",
+        "zh-cn": "增加了Shelly Pro Dimmer 0/1-10V PM(shellyprom110pm).\n添加 Shelly Pro RGBWW PM(shellyprorgbwwhpm) - 注:CCT组件仍然缺失."
+      },
       "9.5.0-alpha.0": {
         "en": "Added Shelly AZ Plug (shellyazplug).\nAdded Shelly EM Gen 3 (shellyemg3).\nAdded 'total returned energy' to Gen2+ EM devices.\nAdded 'Relay' to Shelly Pro EM 50 [#1038].\nAdded Ogemray 25A (ogemray25a).\nAdded energy states to Shelly Plus RBGW PM (shellyrgbwpm) [#1099].\nAdded energy states to Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].\nAdded energy states to Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].\nAdded energy states to Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].",
         "de": "Hinzugefügt Shelly AZ Plug (Shellyazplug).\nHinzugefügt Shelly EM Gen 3 (shellyemg3).\nZu Gen2+ EM-Geräten wurde \"gesamt zurückgegebene Energie\" hinzugefügt.\nHinzugefügt 'Relay' zu Shelly Pro EM 50 [#1038].\nHinzugefügt Ogemray 25A (ogemray25a).\nEnergy States zu Shelly Plus RBGW PM (shellyrgbwpm) hinzugefügt [#1099].\nHinzugefügt Energiezustände zu Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].\nZusätzliche Energiezustände zu Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].\nHinzugefügt Energiezustände zu Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].",
@@ -80,19 +93,6 @@
         "pl": "Dodano Shelly Pro 3 EM 63\nAktualizacja wersji skryptu BLE do 0.5",
         "uk": "Додано Shelly Pro 3 EM 63\nОновлено версію сценарію BLE до 0.5",
         "zh-cn": "添加的雪莉Pro 3 EM 63\n更新到 0.5 的 BLE 脚本版本"
-      },
-      "9.0.0": {
-        "en": "NodeJS >= 20.x and js-controller >= 6 is required\n\n* add Source and MinBrightness to Shelly Dimmer\n* Improved log messages",
-        "de": "NodeJS >= 20.x und js-Controller >= 6 ist erforderlich\n\n* Fügen Sie Shelly Dimmer Source und MinBrightness hinzu\n* Verbesserte Log-Nachrichten",
-        "ru": "NodeJS >= 20.x и js-controller >= 6 требуется\n\n* Добавить Источник и MinBrightness в Shelly Dimmer\n* Улучшенные сообщения",
-        "pt": "NodeJS >= 20.x e js-controller >= 6 é necessário\n\n* adicionar Fonte e MinBrightness para Shelly Dimmer\n* Mensagens de log melhoradas",
-        "nl": "Van niet-gelegeerd staal 6 is vereist\n\n* Voeg Bron en MinBrightness toe aan Shelly Dimmer\n* Verbeterde logberichten",
-        "fr": "NodeJS >= 20.x et js-controller >= 6 est nécessaire\n\n* ajouter Source et MinBrightness à Shelly Dimmer\n* Messages de journal améliorés",
-        "it": "NodeJS >= 20.x e js-controller >= 6 è richiesto\n\n* aggiungere Sorgente e MinBrightness a Shelly Dimmer\n* Messaggi di registro migliorati",
-        "es": "NodeJS ю= 20.x y js-controller Se requiere 6\n\n* añadir Fuente y MinBrightness a Shelly Dimmer\n* Mensajes de registro mejorados",
-        "pl": "NodeJS > = 20 x i kontroler js- > = 6 jest wymagane\n\n* Dodaj źródło i jasność do Shelly Dimmer\n* Ulepszone wiadomości dziennika",
-        "uk": "NodeJS >= 20.x та js-controller >= 6 обов'язковий\n\n* додати джерело і MinBrightness для Shelly Dimmer\n* Покращені повідомлення журналу",
-        "zh-cn": "节点JS20x和js控制器QQ 需要6个\n\n* 在雪莉·迪默中添加源和敏亮度\n* 改进日志信息"
       }
     },
     "titleLang": {

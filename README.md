@@ -185,7 +185,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.5.0-alpha.1 (2025-04-29)
 
 * (@mcm1957) Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).
 * (@mcm1957) Added Shelly Pro RGBWW PM (shellyprorgbwwpm) - Note: CCT component still missing.
@@ -216,14 +216,6 @@ Adapter version >= v8.2.0 required for:
 * (@mcm1957) Added Shelly Outdoor Plug S Gen3
 * (@mcm1957) Missing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added
 * (@mcm1957) Missing energy values for pmminigen3 have been added
-
-### 9.2.0 (2025-03-13)
-
-* (@fLaSk1n) Added Shelly Dimmer Gen3
-* (@lennycb) Added Shelly 3EM63 Gen3
-* (@mcm1957) Translations for Gen2 devices have been added
-* (@mcm1957) State roles for Gen2 devices have been adapted
-* (@tclas) Added handling of Total Active Energy
 
 ## License
 
