@@ -185,6 +185,10 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@mcm1957) Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).
+
 ### 9.5.0 (2025-05-03)
 
 * (@mcm1957) Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).
