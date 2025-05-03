@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.5.0",
+    "version": "9.5.1-alpha.0",
     "news": {
+      "9.5.1-alpha.0": {
+        "en": "Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).\nIssues reported by repositor checker have been fixed.",
+        "de": "Sensoren (Temperatur, Voltmeter, Feuchte, analoge Eingabe) zu Shelly Plus Uni (shellyplusuni) hinzugefügt.\nVom Repositor-Checker gemeldete Probleme wurden behoben.",
+        "ru": "Добавлены датчики (температура, вольтметр, влажность, аналоговый вход) в Shelly Plus Uni (shellyplusuni).\nПроблемы, о которых сообщила проверка репозитория, были исправлены.",
+        "pt": "Sensores adicionados (temperatura, voltímetro, umidade, entrada analógica) para Shelly Plus Uni (shellyplusuni).\nQuestões relatadas pelo verificador do repositório foram corrigidas.",
+        "nl": "Toegevoegd sensoren (Temperatuur, Voltmeter, Vochtigheid, analoge Input) aan Shelly Plus Uni (shellyplusuni).\nProblemen die gemeld zijn door de conciërge zijn opgelost.",
+        "fr": "Ajout de capteurs (température, voltmètre, humidité, entrée analogique) à Shelly Plus Uni (shellyplusuni).\nLes problèmes signalés par le vérificateur du dépôt ont été corrigés.",
+        "it": "Sensori aggiunti (Temperatura, Voltmetro, Umidità, ingresso analogico) a Shelly Plus Uni (shellyplusuni).\nI problemi segnalati dal deposito checker sono stati risolti.",
+        "es": "Sensores añadidos (Temperatura, Voltímetro, Humedad, entrada analógica) a Shelly Plus Uni (shellyplusuni).\nSe han fijado las cuestiones comunicadas por el repositorio.",
+        "pl": "Dodano czujniki (Temperatura, Voltmeter, Wilgotność, Analog Input) do Shelly Plus Uni (Shellyplusuni).\nKwestie zgłoszone przez kontrolera repozytorium zostały ustalone.",
+        "uk": "Додано датчики (Temperature, Voltmeter, Humidity, аналоговий Вхід) до Shelly Plus Uni (shellyplusuni).\nЗафіксовано питання, що повідомляються репозиторійним чекером.",
+        "zh-cn": "添加传感器(Temperature,Voltermeter,湿度,模拟输入)到Shelly Plus Uni(shellyplusuni).\n重新存储器检查仪报告的问题已经解决."
+      },
       "9.5.0": {
         "en": "Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nAdded Shelly Pro RGBWW PM (shellyprorgbwwpm) - Note: CCT component still missing.\nAdded Shelly AZ Plug (shellyazplug).\nAdded Shelly EM Gen 3 (shellyemg3).\nAdded 'total returned energy' to Gen2+ EM devices.\nAdded 'Relay' to Shelly Pro EM 50 [#1038].\nAdded Ogemray 25A (ogemray25a).\nAdded energy states to Shelly Plus RBGW PM (shellyrgbwpm) [#1099].\nAdded energy states to Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].\nAdded energy states to Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].\nAdded energy states to Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].",
         "de": "Hinzugefügt Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nHinzugefügt Shelly Pro RGBWW PM (shellyprorgbwpm) - Hinweis: CCT-Komponente fehlt noch.\nHinzugefügt Shelly AZ Stecker (Shellyazplug).\nHinzugefügt Shelly EM Gen 3 (shellyemg3).\nZu Gen2+ EM-Geräten wurde \"gesamt zurückgegebene Energie\" hinzugefügt.\nHinzugefügt 'Relay' zu Shelly Pro EM 50 [#1038].\nHinzugefügt Ogemray 25A (ogemray25a).\nZusätzlich zu Shelly Plus RBGW PM (shellyrgbwpm) [#1099].\nHinzugefügt Energiezustände zu Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].\nZusätzliche Energiezustände zu Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].\nHinzugefügt Energiezustände zu Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].",
@@ -80,19 +93,6 @@
         "pl": "Adapter wymaga admin 7.4.10 teraz.\nDodano Shelly Outdoor Plug S Gen3\nDodano brakujące wartości energii dla przełączników (tj. Shelly Outdoor Plug S Gen3)\nDodano brakujące wartości energii dla pmminigen3",
         "uk": "Адаптер вимагає адміністратора 7.4.10 тепер.\nДоданий Shelly Відкритий Plug S Gen3\nДодані значення енергії для вимикачів (наприклад, Shelly Outdoor Plug S Gen3)\nДодано значення енергії для PMminigen3",
         "zh-cn": "适配器现在需要管理员7.4.10.\n添加 Shelly 室外插件 S Gen 3\n切换器(即Shelly室外插件S Gen3)的能量值缺失\n添加了 pmminigen3 的缺失能量值"
-      },
-      "9.2.0": {
-        "en": "Added Shelly Dimmer Gen3\nAdded Shelly 3EM63 Gen3\nTranslations for Gen2 devices have been added\nState roles for Gen2 devices have been adapted\nAdded handling of Total Active Energy",
-        "de": "Hinzugefügt Shelly Dimmer Gen3\nHinzugefügt Shelly 3EM63 Gen3\nÜbersetzungen für Gen2 Geräte wurden hinzugefügt\nStaatliche Rollen für Gen2 Geräte wurden angepasst\nZusätzlicher Umgang mit Total Active Energy",
-        "ru": "Обсуждение Shelly Dimmer Gen3\nШелли 3EM63 Gen3\nДобавлены переводы для устройств Gen2\nАдаптированы государственные роли для устройств Gen2\nОбработка полной активной энергии",
-        "pt": "Adicionado Shelly Dimmer Gen3\nAdicionado Shelly 3EM63 Gen3\nTraduções para dispositivos Gen2 foram adicionadas\nFunções estatais para dispositivos Gen2 foram adaptadas\nAdicionado manuseio de Total Active Energy",
-        "nl": "Toegevoegd Shelly Dimmer Gen3\nToegevoegd Shelly 3EM63 Gen3\nVertalingen voor Gen2-apparaten zijn toegevoegd\nDe rol van Gen2-apparaten is aangepast\nToegevoegde behandeling van totale actieve energie",
-        "fr": "Ajouté Shelly Dimmer Gen3\nAjouté Shelly 3EM63 Gen3\nDes traductions pour les appareils Gen2 ont été ajoutées\nLes rôles de l'État pour les appareils Gen2 ont été adaptés\nTraitement ajouté de Total Active Energy",
-        "it": "Aggiunto Shelly Dimmer Gen3\nAggiunto Shelly 3EM63 Gen3\nSono state aggiunte traduzioni per dispositivi Gen2\nI ruoli di stato per i dispositivi Gen2 sono stati adattati\nGestione aggiuntiva di Total Active Energy",
-        "es": "Añadido Shelly Dimmer Gen3\nAñadido Shelly 3EM63 Gen3\nSe han añadido traducciones para dispositivos Gen2\nLas funciones estatales de los dispositivos Gen2 han sido adaptadas\nManejo añadido de Energía Activa Total",
-        "pl": "Dodano Shelly Dimmer Gen3\nDodano Shelly 3EM63 Gen3\nTłumaczenie dla urządzeń Gen2 zostało dodane\nRole państwa dla urządzeń Gen2 zostały dostosowane\nDodano obsługę całkowitej energii czynnej",
-        "uk": "Доданий Shelly Dimmer Gen3\nДоданий Shelly 3EM63 Gen3\nДодано переклади для пристроїв Gen2\nПристосовано сучасні ролі для пристроїв Gen2\nДодана обробка Total Active Energy",
-        "zh-cn": "添加 Shelly Dimmer 源3\n添加 Shelly 3EM63 源3\nGen2 设备的翻译已添加\n改编了Gen2设备的国家作用\n增加的全活动能源处理"
       }
     },
     "titleLang": {
