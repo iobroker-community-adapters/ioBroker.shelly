@@ -185,13 +185,10 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 9.5.0-alpha.1 (2025-04-29)
+### **WORK IN PROGRESS**
 
 * (@mcm1957) Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).
 * (@mcm1957) Added Shelly Pro RGBWW PM (shellyprorgbwwpm) - Note: CCT component still missing.
-
-### 9.5.0-alpha.0 (2025-04-26)
-
 * (@mcm1957) Added Shelly AZ Plug (shellyazplug).
 * (@mcm1957) Added Shelly EM Gen 3 (shellyemg3).
 * (@mcm1957) Added 'total returned energy' to Gen2+ EM devices.
