@@ -1,12 +1,4 @@
 # Older changes
-## 9.2.0 (2025-03-13)
-
-* (@fLaSk1n) Added Shelly Dimmer Gen3
-* (@lennycb) Added Shelly 3EM63 Gen3
-* (@mcm1957) Translations for Gen2 devices have been added
-* (@mcm1957) State roles for Gen2 devices have been adapted
-* (@tclas) Added handling of Total Active Energy
-
 ## 9.1.0 (2025-02-27)
 
 * (@Joylancer) Added Shelly Pro 3 EM 63
