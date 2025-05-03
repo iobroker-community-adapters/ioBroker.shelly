@@ -188,6 +188,7 @@ Adapter version >= v8.2.0 required for:
 ### **WORK IN PROGRESS**
 
 * (@mcm1957) Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).
+* (@mcm1957) Issues reported by repositor checker have been fixed.
 
 ### 9.5.0 (2025-05-03)
 
