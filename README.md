@@ -189,8 +189,8 @@ Adapter version >= v8.2.0 required for:
 
 * (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - added offset for temperatures.
-* (@mcm1957) Shelly Plus Uni (shellyplusuni) - Configuration of inputs reworked.
-
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - configuration of inputs reworked.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - support to reset counters added.
 
 ### 9.5.1-alpha.0 (2025-05-03)
 
