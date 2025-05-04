@@ -100,7 +100,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 | Shelly Plus PM Mini (shellypmmini)             | ❌   | >= v6.4.5 |
 | Shelly Plus 1 Mini (shellyplus1mini)           | ❌   | >= v6.4.5 |
 | Shelly Plus 1 PM Mini (shellyplus1pmmini)      | ❌   | >= v6.4.5 |
-| Shelly Plus Uni (shellyplusuni)                | ❌   | >= v8.0.0 |
+| Shelly Plus Uni (shellyplusuni)                | ❌   | >= v9.5.1 |
 | Shelly Wall Display (shellywalldisplay)        | ❌   | >= v7.0.0 |
 | Shelly Plus RGBW PM (shellyplusrgbwpm)         | ❌   | >= v8.2.0 |
 | Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm) | ❌   | >= v9.5.0 |
