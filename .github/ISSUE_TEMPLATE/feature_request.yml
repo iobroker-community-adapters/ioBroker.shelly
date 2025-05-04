@@ -1,0 +1,67 @@
+# v0.1
+name: Feature request
+title: "[Enhancement]: "
+labels: ["enhancement"]
+description: "CrSuggest an enhancement to help improve this ioBroker adapter"
+body:
+  # general information
+  - type: markdown
+    attributes:
+      value: >
+        **Thank you for wanting to suggest an enhancement for this adapter!**
+
+        If this is the first time you are doing this, please take a few moments to read
+        through the [README](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md).
+
+        If you want to request support for a new Device please use issue type **hardware_request**.
+
+        Do also not seek support here ("I need help with ...", "I have a
+        question ...", "Can someone walk me through ..."), that belongs into the
+        [ioBroker forum at forum.iobroker.net](https://forum.iobroker.net/).
+
+        Thank you for your collaboration!
+  - type: checkboxes
+    attributes:
+      label: I'm sure that
+      options:
+        - label: This issue is still present in the **current beta version** of this adapter
+          required: true
+        - label: There is no other (open) issue with the same topic (use the search!)
+          required: true
+        - label: This issue is not described in the adapter documentation / FAQ (read the docs!)
+          required: true
+  # adapter specific input fields
+  - type: input
+    attributes:
+      label: Shelly device
+      description: Which device would be improved?
+    validations:
+      required: false
+  - type: dropdown
+    id: protocol
+    attributes:
+      label: Protocol
+      description: Which protocol would be affected
+      options:
+        - MQTT
+        - CoAP / CoIoT
+      default: 0
+    validations:
+      required: true
+  # general questions
+  - type: textarea
+    attributes:
+      label: The suggestion
+      description: >-
+        Describe the enhancemnt you want to suggest.
+
+        Provide a clear and concise description of the improvement and include as many
+        details as possible.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Version of adapter
+      description: Can be found in the adapters tab of ioBroker admin
+    validations:
+      required: true
