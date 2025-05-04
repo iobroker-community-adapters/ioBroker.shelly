@@ -185,6 +185,11 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - Units for threshholds have been corrected.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.
+
 ### 9.5.1-alpha.1 (2025-05-04)
 
 * (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
