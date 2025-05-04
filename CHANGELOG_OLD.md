@@ -1,4 +1,8 @@
 # Older changes
+## 9.4.0 (2025-04-16)
+
+* (@klein0r) Added Gen4 devices (see documentation for details)
+
 ## 9.3.0 (2025-04-14)
 
 * (@klein0r) Adapter requires admin 7.4.10 now. 

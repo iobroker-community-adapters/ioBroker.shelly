@@ -185,7 +185,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.5.1-alpha.2 (2025-05-04)
 
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - Units for threshholds have been corrected.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.
@@ -220,10 +220,6 @@ Adapter version >= v8.2.0 required for:
 ### 9.4.1 (2025-04-17)
 
 * (@mcm1957) Minimum value for min_brightness fixed for dimmer1/2 [#1166]
-
-### 9.4.0 (2025-04-16)
-
-* (@klein0r) Added Gen4 devices (see documentation for details)
 
 ## License
 

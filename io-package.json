@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.5.1-alpha.1",
+    "version": "9.5.1-alpha.2",
     "news": {
+      "9.5.1-alpha.2": {
+        "en": "Shelly Plus Uni (shellyplusuni) - Units for threshholds have been corrected.\nShelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.\nResetPower has been added to Shelly switches supporting power measurement. [#1156]",
+        "de": "Shelly Plus Uni (shellyplusuni) - Einheiten für Dreshholds wurden korrigiert.\nShelly Plus Uni (shellyplusuni) - Threshhold für Voltmeter wurde korrigiert.\nResetPower wurde zu Shelly Switchen hinzugefügt, die die Leistungsmessung unterstützen. (#1156)",
+        "ru": "Shelly Plus Uni (shellyplusuni) - Единицы для моллюсков были исправлены.\nShelly Plus Uni (shellyplusuni) - Threshhold для вольтметра исправлен.\nResetPower был добавлен в коммутаторы Shelly, поддерживающие измерение мощности. [1156]",
+        "pt": "Shelly Plus Uni (shellyplusuni) - Unidades para threshholds foram corrigidas.\nShelly Plus Uni (shellyplusuni) - Threshhold for voltmeter foi corrigido.\nResetPower foi adicionado aos switches Shelly suportando a medição de energia. [#1156]",
+        "nl": "Shelly Plus Uni (shellyplusuni) - Eenheden voor dorsholds zijn gecorrigeerd.\nShelly Plus Uni (shellyplusuni) - Threshhold voor voltmeter is gecorrigeerd.\nResetPower is toegevoegd aan Shelly switches ondersteunend vermogen meting. [#1156]",
+        "fr": "Shelly Plus Uni (shellyplusuni) - Les unités de thresholds ont été corrigées.\nShelly Plus Uni (shellyplusuni) - Le seuil de voltmètre a été corrigé.\nResetPower a été ajouté aux commutateurs Shelly supportant la mesure de puissance. [#1156]",
+        "it": "Shelly Plus Uni (shellyplusuni) - Le unità per le torri sono state corrette.\nShelly Plus Uni (shellyplusuni) - Threshhold per voltmetro è stato corretto.\nResetPower è stato aggiunto agli interruttori Shelly che supportano la misurazione della potenza. [#1156]",
+        "es": "Shelly Plus Uni (shellyplusuni) - Unidades para trincheras han sido corregidas.\nShelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.\nResetPower se ha añadido a los interruptores Shelly que apoyan la medición de potencia. [#1156]",
+        "pl": "Shelly Plus Uni (shellyplusuni) - Jednostki dla motocykli zostały poprawione.\nShelly Plus Uni (shellyplusuni) - Threshold dla woltomierza został poprawiony.\nResetPower został dodany do przełączników Shelly wspierających pomiar mocy. [# 1156]",
+        "uk": "Shelly Plus Uni (shellyplusuni) - Виправляється блоки для щіток.\nShelly Plus Uni (shellyplusuni) - Виправлено загрозу для вольтметра.\nResetPower було додано в вимикачі Shelly, що підтримують вимірювання потужності. [#1156]",
+        "zh-cn": "Shelly Plus Uni(shellyplusuni) - 血压单位已经纠正.\nShelly Plus Uni (shellyplusuni) - 电压计的阈值已校正.\n在Shelly交换机中增加了支持功率测量的重置Power. [第1156号]"
+      },
       "9.5.1-alpha.1": {
         "en": "ATTENTION: Reworked configuration of inputs could effect some devices.\nShelly Plus Uni (shellyplusuni) - added offset for temperatures.\nShelly Plus Uni (shellyplusuni) - configuration of inputs reworked.\nShelly Plus Uni (shellyplusuni) - support to reset counters added.",
         "de": "ACHTUNG: Reworked-Konfiguration von Eingängen könnte einige Geräte bewirken.\nShelly Plus Uni (shellyplusuni) - hinzugefügt Offset für Temperaturen.\nShelly Plus Uni (shellyplusuni) - Konfiguration von Eingaben überarbeitet.\nShelly Plus Uni (shellyplusuni) - Unterstützung zum Zurücksetzen von Zählern hinzugefügt.",
@@ -80,19 +93,6 @@
         "pl": "Minimalna wartość dla min _ jasność ustalona dla ściemnia1 / 2 [# 1166]",
         "uk": "Мінімальне значення для min_brightness фіксована для dimmer1/2 [#1166]",
         "zh-cn": "定在 dimmer1/2 上的最小值 [# 1166]"
-      },
-      "9.4.0": {
-        "en": "Added Gen4 devices (see documentation for details)",
-        "de": "Gen4 Geräte hinzugefügt (siehe Dokumentation für Details)",
-        "ru": "Добавлены устройства Gen4 (подробнее см. документацию)",
-        "pt": "Adicionados dispositivos Gen4 (veja documentação para detalhes)",
-        "nl": "Toegevoegd Gen4-apparaten (zie documentatie voor details)",
-        "fr": "Ajout de dispositifs Gen4 (voir la documentation pour plus de détails)",
-        "it": "Dispositivi Gen4 aggiunti (vedi documentazione per i dettagli)",
-        "es": "Dispositivos Gen4 añadidos (ver documentación para detalles)",
-        "pl": "Dodano urządzenia Gen4 (szczegóły w dokumentacji)",
-        "uk": "Додано пристрої Gen4 (див. документацію для деталей)",
-        "zh-cn": "添加的 Gen4 设备(详见文档)"
       }
     },
     "titleLang": {
