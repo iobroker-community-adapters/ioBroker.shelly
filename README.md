@@ -185,7 +185,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.5.1-alpha.1 (2025-05-04)
 
 * (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - added offset for temperatures.
@@ -218,13 +218,6 @@ Adapter version >= v8.2.0 required for:
 ### 9.4.0 (2025-04-16)
 
 * (@klein0r) Added Gen4 devices (see documentation for details)
-
-### 9.3.0 (2025-04-14)
-
-* (@klein0r) Adapter requires admin 7.4.10 now. 
-* (@mcm1957) Added Shelly Outdoor Plug S Gen3
-* (@mcm1957) Missing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added
-* (@mcm1957) Missing energy values for pmminigen3 have been added
 
 ## License
 

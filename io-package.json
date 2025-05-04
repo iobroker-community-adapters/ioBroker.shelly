@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.5.1-alpha.0",
+    "version": "9.5.1-alpha.1",
     "news": {
+      "9.5.1-alpha.1": {
+        "en": "ATTENTION: Reworked configuration of inputs could effect some devices.\nShelly Plus Uni (shellyplusuni) - added offset for temperatures.\nShelly Plus Uni (shellyplusuni) - configuration of inputs reworked.\nShelly Plus Uni (shellyplusuni) - support to reset counters added.",
+        "de": "ACHTUNG: Reworked-Konfiguration von Eingängen könnte einige Geräte bewirken.\nShelly Plus Uni (shellyplusuni) - hinzugefügt Offset für Temperaturen.\nShelly Plus Uni (shellyplusuni) - Konfiguration von Eingaben überarbeitet.\nShelly Plus Uni (shellyplusuni) - Unterstützung zum Zurücksetzen von Zählern hinzugefügt.",
+        "ru": "ВНИМАНИЕ: Переработанная конфигурация входов может повлиять на некоторые устройства.\nShelly Plus Uni (shellyplusuni) - добавлено смещение для температур.\nShelly Plus Uni (shellyplusuni) - конфигурация входов переработана.\nShelly Plus Uni (shellyplusuni) - поддержка сброса счетчиков добавлена.",
+        "pt": "ATENÇÃO: A configuração retrabalhada de entradas pode afetar alguns dispositivos.\nShelly Plus Uni (shellyplusuni) - adicionado offset para temperaturas.\nShelly Plus Uni (shellyplusuni) - configuração de entradas retrabalhadas.\nShelly Plus Uni (shellyplusuni) - suporte para reiniciar contadores adicionados.",
+        "nl": "OPMERKING: Herwerkte configuratie van ingangen kan sommige apparaten beïnvloeden.\nShelly Plus Uni (shellyplusuni) - toegevoegd offset voor temperaturen.\nShelly Plus Uni (shellyplusuni) - configuratie van ingangen opnieuw bewerkt.\nShelly Plus Uni (shellyplusuni) - ondersteuning voor het resetten van tellers toegevoegd.",
+        "fr": "ATTENTION: La configuration retravaillée des entrées pourrait affecter certains appareils.\nShelly Plus Uni (shellyplusuni) - ajout de compensation pour les températures.\nShelly Plus Uni (shellyplusuni) - configuration des entrées retravaillées.\nShelly Plus Uni (shellyplusuni) - prise en charge pour réinitialiser les compteurs ajoutés.",
+        "it": "ATTENZIONE: La configurazione rielaborata degli input potrebbe effettuare alcuni dispositivi.\nShelly Plus Uni (shellyplusuni) - offset aggiunto per temperature.\nShelly Plus Uni (shellyplusuni) - configurazione di ingressi rielaborati.\nShelly Plus Uni (shellyplusuni) - supporto per reimpostare i contatori aggiunti.",
+        "es": "ATENCIÓN: La configuración reelaborada de entradas podría afectar algunos dispositivos.\nShelly Plus Uni (shellyplusuni) - añadido offset para temperaturas.\nShelly Plus Uni (shellyplusuni) - configuración de entradas reelaboradas.\nShelly Plus Uni (shellyplusuni) - soporte para reiniciar contadores añadidos.",
+        "pl": "UWAGA: Zmieniona konfiguracja wejść może mieć wpływ na niektóre urządzenia.\nShelly Plus Uni (shellyplusuni) - dodano offset dla temperatur.\nShelly Plus Uni (shellyplusuni) - konfiguracja wejść przerobionych.\nShelly Plus Uni (shellyplusuni) - wsparcie dla resetów dodanych liczników.",
+        "uk": "УВАГА: Перероблена конфігурація вводів може вплинути на деякі пристрої.\nShelly Plus Uni - додано зсув для температури.\nShelly Plus Uni (shellyplusuni) - налаштування вводів, перероблених.\nShelly Plus Uni (shellyplusuni) - підтримка скидання лічильників додано.",
+        "zh-cn": "注意:重修的投入配置可能会影响一些设备.\nShelly Plus Uni(Shellyplusuni) - 气温乘积.\nShelly Plus Uni(shellyplusuni) - 投入的配置重构.\nShelly Plus Uni(shellyplusuni) - 支持重置计数器添加."
+      },
       "9.5.1-alpha.0": {
         "en": "Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).\nIssues reported by repositor checker have been fixed.",
         "de": "Sensoren (Temperatur, Voltmeter, Feuchte, analoge Eingabe) zu Shelly Plus Uni (shellyplusuni) hinzugefügt.\nVom Repositor-Checker gemeldete Probleme wurden behoben.",
@@ -80,19 +93,6 @@
         "pl": "Dodano urządzenia Gen4 (szczegóły w dokumentacji)",
         "uk": "Додано пристрої Gen4 (див. документацію для деталей)",
         "zh-cn": "添加的 Gen4 设备(详见文档)"
-      },
-      "9.3.0": {
-        "en": "Adapter requires admin 7.4.10 now. \nAdded Shelly Outdoor Plug S Gen3\nMissing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added\nMissing energy values for pmminigen3 have been added",
-        "de": "Adapter benötigt jetzt Admin 7.4.10.\nHinzugefügt Shelly Outdoor Plug S Gen3\nFehlende Energiewerte für Schalter (d.h. Shelly Outdoor Plug S Gen3) wurden hinzugefügt\nFehlende Energiewerte für pmminigen3 wurden hinzugefügt",
-        "ru": "Адаптер требует админ 7.4.10.\nОбсуждение Shelly Outdoor Plug S Gen3\nОтсутствующие значения энергии для коммутаторов (например, Shelly Outdoor Plug S Gen3)\nДобавлены недостающие значения энергии для pmminigen3",
-        "pt": "Adaptador requer admin 7.4.10 agora.\nAdicionado Shelly Outdoor Plug S Gen3\nValores de energia ausentes para Switches (ou seja, Shelly Outdoor Plug S Gen3) foram adicionados\nValores de energia perdidos para pmminigen3 foram adicionados",
-        "nl": "Adapter vereist admin 7.4.10 nu.\nToegevoegd Shelly Outdoor Plug S Gen3\nOntbrekende energiewaarden voor switches (d.w.z. Shelly Outdoor Plug S Gen3) zijn toegevoegd\nOntbrekende energiewaarden voor pmminigen3 zijn toegevoegd",
-        "fr": "Adaptateur nécessite admin 7.4.10 maintenant.\nAjout de Shelly Outdoor Plug S Gen3\nDes valeurs d'énergie manquantes pour les commutateurs (c'est-à-dire Shelly Outdoor Plug S Gen3) ont été ajoutées\nDes valeurs énergétiques manquantes pour pmminingen3 ont été ajoutées",
-        "it": "L'adattatore richiede ora admin 7.4.10.\nAggiunto Shelly Outdoor Plug S Gen3\nValori energetici mancanti per Switches (cioè Shelly Outdoor Plug S Gen3) sono stati aggiunti\nValori energetici mancanti per pmminigen3 sono stati aggiunti",
-        "es": "Adaptador requiere admin 7.4.10 ahora.\nAñadido Shelly exterior Plug S Gen3\nSe han añadido valores de energía perdidos para Switches (es decir, Shelly Outdoor Plug S Gen3)\nSe han añadido valores energéticos perdidos para el PMminigen3",
-        "pl": "Adapter wymaga admin 7.4.10 teraz.\nDodano Shelly Outdoor Plug S Gen3\nDodano brakujące wartości energii dla przełączników (tj. Shelly Outdoor Plug S Gen3)\nDodano brakujące wartości energii dla pmminigen3",
-        "uk": "Адаптер вимагає адміністратора 7.4.10 тепер.\nДоданий Shelly Відкритий Plug S Gen3\nДодані значення енергії для вимикачів (наприклад, Shelly Outdoor Plug S Gen3)\nДодано значення енергії для PMminigen3",
-        "zh-cn": "适配器现在需要管理员7.4.10.\n添加 Shelly 室外插件 S Gen 3\n切换器(即Shelly室外插件S Gen3)的能量值缺失\n添加了 pmminigen3 的缺失能量值"
       }
     },
     "titleLang": {

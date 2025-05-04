@@ -1,4 +1,11 @@
 # Older changes
+## 9.3.0 (2025-04-14)
+
+* (@klein0r) Adapter requires admin 7.4.10 now. 
+* (@mcm1957) Added Shelly Outdoor Plug S Gen3
+* (@mcm1957) Missing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added
+* (@mcm1957) Missing energy values for pmminigen3 have been added
+
 ## 9.2.0 (2025-03-13)
 
 * (@fLaSk1n) Added Shelly Dimmer Gen3
