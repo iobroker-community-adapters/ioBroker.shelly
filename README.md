@@ -185,6 +185,13 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - added offset for temperatures.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - Configuration of inputs reworked.
+
+
 ### 9.5.1-alpha.0 (2025-05-03)
 
 * (@mcm1957) Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).
