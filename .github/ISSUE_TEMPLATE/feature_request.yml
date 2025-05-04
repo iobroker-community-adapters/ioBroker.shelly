@@ -2,7 +2,7 @@
 name: Feature request
 title: "[Enhancement]: "
 labels: ["enhancement"]
-description: "CrSuggest an enhancement to help improve this ioBroker adapter"
+description: "Suggest an enhancement to help improve this ioBroker adapter"
 body:
   # general information
   - type: markdown
