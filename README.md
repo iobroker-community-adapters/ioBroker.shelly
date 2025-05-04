@@ -189,6 +189,7 @@ Adapter version >= v8.2.0 required for:
 
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - Units for threshholds have been corrected.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.
+* (@mcm1957) ResetPower has been added to Shelly switches supporting power measurement. [#1156]
 
 ### 9.5.1-alpha.1 (2025-05-04)
 
