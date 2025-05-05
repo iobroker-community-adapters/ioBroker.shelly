@@ -187,6 +187,12 @@ Adapter version >= v8.2.0 required for:
 -->
 ### 9.5.1-alpha.2 (2025-05-04)
 
+* (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
+
+
+### **WORK IN PROGRESS**
+
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - Units for threshholds have been corrected.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.
 * (@mcm1957) ResetPower has been added to Shelly switches supporting power measurement. [#1156]
