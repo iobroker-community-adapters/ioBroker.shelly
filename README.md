@@ -188,6 +188,8 @@ Adapter version >= v8.2.0 required for:
 ### **WORK IN PROGRESS**
 
 * (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
+
 
 ### **WORK IN PROGRESS**
 
