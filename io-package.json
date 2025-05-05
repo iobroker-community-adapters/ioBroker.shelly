@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.5.1-alpha.2",
+    "version": "9.5.1-alpha.3",
     "news": {
+      "9.5.1-alpha.3": {
+        "en": "Shelly Plus Uni (shellyplusuni) - Units for threshholds have been corrected.\nShelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.\nResetPower has been added to Shelly switches supporting power measurement. [#1156]",
+        "de": "Shelly Plus Uni (shellyplusuni) - Einheiten für Dreshholds wurden korrigiert.\nShelly Plus Uni (shellyplusuni) - Threshhold für Voltmeter wurde korrigiert.\nResetPower wurde zu Shelly Switchen hinzugefügt, die die Leistungsmessung unterstützen. (#1156)",
+        "ru": "Shelly Plus Uni (shellyplusuni) - Единицы для моллюсков были исправлены.\nShelly Plus Uni (shellyplusuni) - Threshhold для вольтметра исправлен.\nResetPower был добавлен в коммутаторы Shelly, поддерживающие измерение мощности. [1156]",
+        "pt": "Shelly Plus Uni (shellyplusuni) - Unidades para threshholds foram corrigidas.\nShelly Plus Uni (shellyplusuni) - Threshhold for voltmeter foi corrigido.\nResetPower foi adicionado aos switches Shelly suportando a medição de energia. [#1156]",
+        "nl": "Shelly Plus Uni (shellyplusuni) - Eenheden voor dorsholds zijn gecorrigeerd.\nShelly Plus Uni (shellyplusuni) - Threshhold voor voltmeter is gecorrigeerd.\nResetPower is toegevoegd aan Shelly switches ondersteunend vermogen meting. [#1156]",
+        "fr": "Shelly Plus Uni (shellyplusuni) - Les unités de thresholds ont été corrigées.\nShelly Plus Uni (shellyplusuni) - Le seuil de voltmètre a été corrigé.\nResetPower a été ajouté aux commutateurs Shelly supportant la mesure de puissance. [#1156]",
+        "it": "Shelly Plus Uni (shellyplusuni) - Le unità per le torri sono state corrette.\nShelly Plus Uni (shellyplusuni) - Threshhold per voltmetro è stato corretto.\nResetPower è stato aggiunto agli interruttori Shelly che supportano la misurazione della potenza. [#1156]",
+        "es": "Shelly Plus Uni (shellyplusuni) - Unidades para trincheras han sido corregidas.\nShelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.\nResetPower se ha añadido a los interruptores Shelly que apoyan la medición de potencia. [#1156]",
+        "pl": "Shelly Plus Uni (shellyplusuni) - Jednostki dla motocykli zostały poprawione.\nShelly Plus Uni (shellyplusuni) - Threshold dla woltomierza został poprawiony.\nResetPower został dodany do przełączników Shelly wspierających pomiar mocy. [# 1156]",
+        "uk": "Shelly Plus Uni (shellyplusuni) - Виправляється блоки для щіток.\nShelly Plus Uni (shellyplusuni) - Виправлено загрозу для вольтметра.\nResetPower було додано в вимикачі Shelly, що підтримують вимірювання потужності. [#1156]",
+        "zh-cn": "Shelly Plus Uni(shellyplusuni) - 血压单位已经纠正.\nShelly Plus Uni (shellyplusuni) - 电压计的阈值已校正.\n在Shelly交换机中增加了支持功率测量的重置Power. [第1156号]"
+      },
       "9.5.1-alpha.2": {
         "en": "Shelly Plus Uni (shellyplusuni) - Units for threshholds have been corrected.\nShelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.\nResetPower has been added to Shelly switches supporting power measurement. [#1156]",
         "de": "Shelly Plus Uni (shellyplusuni) - Einheiten für Dreshholds wurden korrigiert.\nShelly Plus Uni (shellyplusuni) - Threshhold für Voltmeter wurde korrigiert.\nResetPower wurde zu Shelly Switchen hinzugefügt, die die Leistungsmessung unterstützen. (#1156)",
@@ -80,19 +93,6 @@
         "pl": "Dodano Shelly AZ Plug (szellyazplug).\nDodano Shelly EM Gen 3 (shellyemg3).\nDodano 'całkowitą energię zwróconą' do urządzeń Gen2 + EM.\nDodano 'Relay' do Shelly Pro EM 50 [# 1038].\nDodano Ogemray 25A (ogemray25a).\nDodano stany energii do Shelly Plus RBGW PM (shellyrgbwpm) [# 1099].\nDodano stany energii do Shelly Pro Dimmer 1 PM (shellyprodm1pm) [# 1129].\nDodano stany energii do Shelly Pro Dimmer 2 PM (shellyprodm2pm) [# 1067, # 1056, # 1037].\nDodano stany energii do Shelly Plus 0- 10V Dimmer Gen 3 (shelly0110dimg3) [# 1103].",
         "uk": "Додано Shelly AZ Штепсель (шкарпетка).\nДодано Shelly EM Gen 3 (клапаніmg3).\nДодано 'загальна подана енергія' для пристроїв Gen2+ EM.\nДодано 'Relay' в Shelly Pro EM 50 [#1038].\nДодано Ogemray 25A (ogemray25a).\nДодано енергетичні стани в Shelly Plus RBGW PM (shellyrgbwpm) [#1099].\nДодано енергетичні стани для Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].\nДодано енергетичні стани для Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].\nДодано енергетичні стани для Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].",
         "zh-cn": "已添加 Shelly AZ 插头(shellyazplug).\n添加 Shelly EM Gen 3 (shellyemg3).\n添加到 Gen2+ EM 设备中的“ 总还原能量 ” .\n将\"Relay\"添加到Shelly Pro EM 50 [#1038].\n添加了Ogemray 25A(ogemray25a).\n添加能量状态到Shelly Plus RBGW PM(shellyrgbwpm)[#1099].\n添加能量状态为Shelly Pro Dimmer 1 PM(shellyprodm1pm)[#1129].\n添加能量状态为Shelly Pro Dimmer 2 PM(shellyprodm2pm)[#1067,#1056,#1037].\n加入能量态为Shelly Plus 0-10V Dimmer Gen 3(shelly0110dimg3)[#1103]."
-      },
-      "9.4.1": {
-        "en": "Minimum value for min_brightness fixed for dimmer1/2 [#1166]",
-        "de": "Mindestwert für min_brightness korrigiert für dimmer1/2 [#1166]",
-        "ru": "Минимальное значение min_brightness зафиксировано для диммера1/2 [#1166]",
-        "pt": "Valor mínimo para min_brightness fixado para dimmer1/2 [#1166]",
-        "nl": "Minimumwaarde voor min_helderheid vastgesteld voor dimmer1/2 [#1166]",
-        "fr": "Valeur minimale de min_brightness fixée pour dimmer1/2 [#1166]",
-        "it": "Valore minimo per min_brightness fissato per dimmer1/2 [#1166]",
-        "es": "Valor mínimo para min_brightness fijado para dimmer1/2 [#1166]",
-        "pl": "Minimalna wartość dla min _ jasność ustalona dla ściemnia1 / 2 [# 1166]",
-        "uk": "Мінімальне значення для min_brightness фіксована для dimmer1/2 [#1166]",
-        "zh-cn": "定在 dimmer1/2 上的最小值 [# 1166]"
       }
     },
     "titleLang": {

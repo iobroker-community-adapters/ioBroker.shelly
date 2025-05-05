@@ -1,4 +1,8 @@
 # Older changes
+## 9.4.1 (2025-04-17)
+
+* (@mcm1957) Minimum value for min_brightness fixed for dimmer1/2 [#1166]
+
 ## 9.4.0 (2025-04-16)
 
 * (@klein0r) Added Gen4 devices (see documentation for details)
