@@ -185,7 +185,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 9.5.1-alpha.4 (2025-05-06)
+### **WORK IN PROGRESS**
 
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration default vlaue has been corrected.
 
