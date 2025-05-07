@@ -185,7 +185,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.5.1-alpha.6 (2025-05-07)
 
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - translations for range codes added.
 
@@ -210,11 +210,6 @@ Adapter version >= v8.2.0 required for:
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - added offset for temperatures.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - configuration of inputs reworked.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - support to reset counters added.
-
-### 9.5.1-alpha.0 (2025-05-03)
-
-* (@mcm1957) Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).
-* (@mcm1957) Issues reported by repositor checker have been fixed.
 
 ## License
 

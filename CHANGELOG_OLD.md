@@ -1,4 +1,9 @@
 # Older changes
+## 9.5.1-alpha.0 (2025-05-03)
+
+* (@mcm1957) Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).
+* (@mcm1957) Issues reported by repositor checker have been fixed.
+
 ## 9.5.0 (2025-05-03)
 
 * (@mcm1957) Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).
