@@ -185,7 +185,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.5.1-alpha.7 (2025-05-09)
 
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - remove analog defaults to indicate offline sensors more clearly.
 
@@ -207,13 +207,6 @@ Adapter version >= v8.2.0 required for:
 
 * (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
-
-### 9.5.1-alpha.1 (2025-05-04)
-
-* (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
-* (@mcm1957) Shelly Plus Uni (shellyplusuni) - added offset for temperatures.
-* (@mcm1957) Shelly Plus Uni (shellyplusuni) - configuration of inputs reworked.
-* (@mcm1957) Shelly Plus Uni (shellyplusuni) - support to reset counters added.
 
 ## License
 

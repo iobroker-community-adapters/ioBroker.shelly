@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.5.1-alpha.6",
+    "version": "9.5.1-alpha.7",
     "news": {
+      "9.5.1-alpha.7": {
+        "en": "Shelly Plus Uni (shellyplusuni) - remove analog defaults to indicate offline sensors more clearly.",
+        "de": "Shelly Plus Uni (shellyplusuni) - Entfernen Sie analoge Standardeinstellungen, um Offline-Sensoren deutlicher anzuzeigen.",
+        "ru": "Shelly Plus Uni (shellyplusuni) - удалите аналоговые по умолчанию, чтобы более четко указать автономные датчики.",
+        "pt": "Shelly Plus Uni (shellyplusuni) - remover padrões analógicos para indicar sensores off-line mais claramente.",
+        "nl": "Shelly Plus Uni (shellyplusuni) - verwijder analoge standaards om offline sensoren duidelijker aan te geven.",
+        "fr": "Shelly Plus Uni (shellyplusuni) - supprimer les valeurs par défaut analogiques pour indiquer plus clairement les capteurs hors ligne.",
+        "it": "Shelly Plus Uni (shellyplusuni) - rimuovere i default analogici per indicare i sensori offline più chiaramente.",
+        "es": "Shelly Plus Uni (shellyplusuni) - eliminar defectos analógicos para indicar los sensores fuera de línea con mayor claridad.",
+        "pl": "Shelly Plus Uni (shellyplusuni) - usuń domyślne wartości analogowe w celu wyraźniejszego wskazania czujników offline.",
+        "uk": "Shelly Plus Uni (shellyplusuni) - видаліть аналогові за замовчуванням, щоб вказати датчики в автономному режимі.",
+        "zh-cn": "Shelly Plus Uni(shellyplusuni) - 删除模拟默认,以更清楚地表示离线传感器."
+      },
       "9.5.1-alpha.6": {
         "en": "Shelly Plus Uni (shellyplusuni) - translations for range codes added.",
         "de": "Shelly Plus Uni (shellyplusuni) - Übersetzungen für Rangcodes hinzugefügt.",
@@ -80,19 +93,6 @@
         "pl": "UWAGA: Zmieniona konfiguracja wejść może mieć wpływ na niektóre urządzenia.\nShelly Plus Uni (shellyplusuni) - dodano offset dla temperatur.\nShelly Plus Uni (shellyplusuni) - konfiguracja wejść przerobionych.\nShelly Plus Uni (shellyplusuni) - wsparcie dla resetów dodanych liczników.",
         "uk": "УВАГА: Перероблена конфігурація вводів може вплинути на деякі пристрої.\nShelly Plus Uni - додано зсув для температури.\nShelly Plus Uni (shellyplusuni) - налаштування вводів, перероблених.\nShelly Plus Uni (shellyplusuni) - підтримка скидання лічильників додано.",
         "zh-cn": "注意:重修的投入配置可能会影响一些设备.\nShelly Plus Uni(Shellyplusuni) - 气温乘积.\nShelly Plus Uni(shellyplusuni) - 投入的配置重构.\nShelly Plus Uni(shellyplusuni) - 支持重置计数器添加."
-      },
-      "9.5.1-alpha.0": {
-        "en": "Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).\nIssues reported by repositor checker have been fixed.",
-        "de": "Sensoren (Temperatur, Voltmeter, Feuchte, analoge Eingabe) zu Shelly Plus Uni (shellyplusuni) hinzugefügt.\nVom Repositor-Checker gemeldete Probleme wurden behoben.",
-        "ru": "Добавлены датчики (температура, вольтметр, влажность, аналоговый вход) в Shelly Plus Uni (shellyplusuni).\nПроблемы, о которых сообщила проверка репозитория, были исправлены.",
-        "pt": "Sensores adicionados (temperatura, voltímetro, umidade, entrada analógica) para Shelly Plus Uni (shellyplusuni).\nQuestões relatadas pelo verificador do repositório foram corrigidas.",
-        "nl": "Toegevoegd sensoren (Temperatuur, Voltmeter, Vochtigheid, analoge Input) aan Shelly Plus Uni (shellyplusuni).\nProblemen die gemeld zijn door de conciërge zijn opgelost.",
-        "fr": "Ajout de capteurs (température, voltmètre, humidité, entrée analogique) à Shelly Plus Uni (shellyplusuni).\nLes problèmes signalés par le vérificateur du dépôt ont été corrigés.",
-        "it": "Sensori aggiunti (Temperatura, Voltmetro, Umidità, ingresso analogico) a Shelly Plus Uni (shellyplusuni).\nI problemi segnalati dal deposito checker sono stati risolti.",
-        "es": "Sensores añadidos (Temperatura, Voltímetro, Humedad, entrada analógica) a Shelly Plus Uni (shellyplusuni).\nSe han fijado las cuestiones comunicadas por el repositorio.",
-        "pl": "Dodano czujniki (Temperatura, Voltmeter, Wilgotność, Analog Input) do Shelly Plus Uni (Shellyplusuni).\nKwestie zgłoszone przez kontrolera repozytorium zostały ustalone.",
-        "uk": "Додано датчики (Temperature, Voltmeter, Humidity, аналоговий Вхід) до Shelly Plus Uni (shellyplusuni).\nЗафіксовано питання, що повідомляються репозиторійним чекером.",
-        "zh-cn": "添加传感器(Temperature,Voltermeter,湿度,模拟输入)到Shelly Plus Uni(shellyplusuni).\n重新存储器检查仪报告的问题已经解决."
       }
     },
     "titleLang": {

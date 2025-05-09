@@ -1,4 +1,11 @@
 # Older changes
+## 9.5.1-alpha.1 (2025-05-04)
+
+* (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - added offset for temperatures.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - configuration of inputs reworked.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - support to reset counters added.
+
 ## 9.5.1-alpha.0 (2025-05-03)
 
 * (@mcm1957) Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).
