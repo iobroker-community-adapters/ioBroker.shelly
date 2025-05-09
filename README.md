@@ -185,7 +185,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 9.5.1-alpha.8 (2025-05-09)
 
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - remove analog defaults to indicate offline sensors more clearly.
 

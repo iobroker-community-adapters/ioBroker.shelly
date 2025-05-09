@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.5.1-alpha.7",
+    "version": "9.5.1-alpha.8",
     "news": {
+      "9.5.1-alpha.8": {
+        "en": "Shelly Plus Uni (shellyplusuni) - remove analog defaults to indicate offline sensors more clearly.",
+        "de": "Shelly Plus Uni (shellyplusuni) - Entfernen Sie analoge Standardeinstellungen, um Offline-Sensoren deutlicher anzuzeigen.",
+        "ru": "Shelly Plus Uni (shellyplusuni) - удалите аналоговые по умолчанию, чтобы более четко указать автономные датчики.",
+        "pt": "Shelly Plus Uni (shellyplusuni) - remover padrões analógicos para indicar sensores off-line mais claramente.",
+        "nl": "Shelly Plus Uni (shellyplusuni) - verwijder analoge standaards om offline sensoren duidelijker aan te geven.",
+        "fr": "Shelly Plus Uni (shellyplusuni) - supprimer les valeurs par défaut analogiques pour indiquer plus clairement les capteurs hors ligne.",
+        "it": "Shelly Plus Uni (shellyplusuni) - rimuovere i default analogici per indicare i sensori offline più chiaramente.",
+        "es": "Shelly Plus Uni (shellyplusuni) - eliminar defectos analógicos para indicar los sensores fuera de línea con mayor claridad.",
+        "pl": "Shelly Plus Uni (shellyplusuni) - usuń domyślne wartości analogowe w celu wyraźniejszego wskazania czujników offline.",
+        "uk": "Shelly Plus Uni (shellyplusuni) - видаліть аналогові за замовчуванням, щоб вказати датчики в автономному режимі.",
+        "zh-cn": "Shelly Plus Uni(shellyplusuni) - 删除模拟默认,以更清楚地表示离线传感器."
+      },
       "9.5.0": {
         "en": "Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nAdded Shelly Pro RGBWW PM (shellyprorgbwwpm) - Note: CCT component still missing.\nAdded Shelly AZ Plug (shellyazplug).\nAdded Shelly EM Gen 3 (shellyemg3).\nAdded 'total returned energy' to Gen2+ EM devices.\nAdded 'Relay' to Shelly Pro EM 50 [#1038].\nAdded Ogemray 25A (ogemray25a).\nAdded energy states to Shelly Plus RBGW PM (shellyrgbwpm) [#1099].\nAdded energy states to Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].\nAdded energy states to Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].\nAdded energy states to Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].",
         "de": "Hinzugefügt Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nHinzugefügt Shelly Pro RGBWW PM (shellyprorgbwpm) - Hinweis: CCT-Komponente fehlt noch.\nHinzugefügt Shelly AZ Stecker (Shellyazplug).\nHinzugefügt Shelly EM Gen 3 (shellyemg3).\nZu Gen2+ EM-Geräten wurde \"gesamt zurückgegebene Energie\" hinzugefügt.\nHinzugefügt 'Relay' zu Shelly Pro EM 50 [#1038].\nHinzugefügt Ogemray 25A (ogemray25a).\nZusätzlich zu Shelly Plus RBGW PM (shellyrgbwpm) [#1099].\nHinzugefügt Energiezustände zu Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].\nZusätzliche Energiezustände zu Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].\nHinzugefügt Energiezustände zu Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].",
