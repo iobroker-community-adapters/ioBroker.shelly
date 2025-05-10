@@ -1,4 +1,28 @@
 # Older changes
+### 9.5.1-alpha.8 (2025-05-09)
+
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - remove analog defaults to indicate offline sensors more clearly.
+
+### 9.5.1-alpha.6 (2025-05-07)
+
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - translations for range codes added.
+
+### 9.5.1-alpha.5 (2025-05-06)
+
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration default vlaue has been corrected.
+
+### 9.5.1-alpha.3 (2025-05-05)
+
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - Units for threshholds have been corrected.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - Threshhold for voltmeter has been corrected.
+* (@mcm1957) ResetPower has been added to Shelly switches supporting power measurement. [#1156]
+
+### 9.5.1-alpha.2 (2025-05-04)
+
+* (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
+
+
 ## 9.5.1-alpha.1 (2025-05-04)
 
 * (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
