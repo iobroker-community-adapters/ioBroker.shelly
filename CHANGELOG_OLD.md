@@ -21,38 +21,6 @@
 
 * (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
-
-
-## 9.5.1-alpha.1 (2025-05-04)
-
-* (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
-* (@mcm1957) Shelly Plus Uni (shellyplusuni) - added offset for temperatures.
-* (@mcm1957) Shelly Plus Uni (shellyplusuni) - configuration of inputs reworked.
-* (@mcm1957) Shelly Plus Uni (shellyplusuni) - support to reset counters added.
-
-## 9.5.1-alpha.0 (2025-05-03)
-
-* (@mcm1957) Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).
-* (@mcm1957) Issues reported by repositor checker have been fixed.
-
-## 9.5.0 (2025-05-03)
-
-* (@mcm1957) Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).
-* (@mcm1957) Added Shelly Pro RGBWW PM (shellyprorgbwwpm) - Note: CCT component still missing.
-* (@mcm1957) Added Shelly AZ Plug (shellyazplug).
-* (@mcm1957) Added Shelly EM Gen 3 (shellyemg3).
-* (@mcm1957) Added 'total returned energy' to Gen2+ EM devices.
-* (@mcm1957) Added 'Relay' to Shelly Pro EM 50 [#1038].
-* (@mcm1957) Added Ogemray 25A (ogemray25a).
-* (@mcm1957) Added energy states to Shelly Plus RBGW PM (shellyrgbwpm) [#1099].
-* (@mcm1957) Added energy states to Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].
-* (@mcm1957) Added energy states to Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].
-* (@mcm1957) Added energy states to Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].
-
-## 9.4.1 (2025-04-17)
-
-* (@mcm1957) Minimum value for min_brightness fixed for dimmer1/2 [#1166]
-
 ## 9.4.0 (2025-04-16)
 
 * (@klein0r) Added Gen4 devices (see documentation for details)
