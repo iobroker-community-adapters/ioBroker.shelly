@@ -97,7 +97,7 @@ class Shelly extends utils.Adapter {
     onStateChange(id, state) {
         // Warning, state can be null if it was deleted
         if (state && !state.ack) {
-            const stateId = id.replace(`${this.namespace}.`, '');
+            const stateId = this.removeNamespace(id);
 
             if (stateId === 'info.update') {
                 this.log.debug(`[onStateChange] "info.update" state changed - starting update on every device`);
@@ -216,7 +216,7 @@ class Shelly extends utils.Adapter {
 
         // Check if device object exists
         const knownDeviceIds = await this.getAllDeviceIds();
-        if (knownDeviceIds.indexOf(deviceId) === -1) {
+        if (!knownDeviceIds.includes(deviceId)) {
             this.log.silly(
                 `[deviceStatusUpdate] ${deviceId} is not in list of known devices: ${JSON.stringify(knownDeviceIds)}`,
             );
