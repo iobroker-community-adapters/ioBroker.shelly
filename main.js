@@ -529,7 +529,6 @@ class Shelly extends utils.Adapter {
                 }
 
                 if (unpackedData !== null) {
-
                     const typesList = {
                         moisture: { type: 'number', unit: '%' },
                         soil: { type: 'number', unit: 'µS/cm' },
@@ -585,7 +584,11 @@ class Shelly extends utils.Adapter {
                                     native: {},
                                 });
 
-                                await this.setState(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true, c: val.src });
+                                await this.setState(`ble.${val.srcBle.mac}.${key}`, {
+                                    val: value,
+                                    ack: true,
+                                    c: val.src,
+                                });
                             }
                         }
                     } else {
