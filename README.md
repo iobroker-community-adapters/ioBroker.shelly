@@ -188,7 +188,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.0.0 (2025-05-30)
 
 * (@klein0r) Moved BTHome decoding to adapter (save memory on devices)
 * (@klein0r) Allow encrypted payloads of BTHome devices (set encryption key in state)
@@ -222,7 +222,11 @@ Adapter version >= v8.2.0 required for:
 
 * (@mcm1957) Minimum value for min_brightness fixed for dimmer1/2 [#1166]
 
-## 9.5.0 (2025-05-03)
+### 9.4.0 (2025-04-16)
+
+* (@klein0r) Added Gen4 devices (see documentation for details)
+
+### 9.5.0 (2025-05-03)
 
 * (@mcm1957) Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).
 * (@mcm1957) Added Shelly Pro RGBWW PM (shellyprorgbwwpm) - Note: CCT component still missing.

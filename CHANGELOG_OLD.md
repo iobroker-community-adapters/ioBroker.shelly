@@ -21,10 +21,6 @@
 
 * (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
-## 9.4.0 (2025-04-16)
-
-* (@klein0r) Added Gen4 devices (see documentation for details)
-
 ## 9.3.0 (2025-04-14)
 
 * (@klein0r) Adapter requires admin 7.4.10 now. 

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "9.5.1",
+    "version": "10.0.0",
     "news": {
+      "10.0.0": {
+        "en": "Moved BTHome decoding to adapter (save memory on devices)\nAllow encrypted payloads of BTHome devices (set encryption key in state)",
+        "de": "BTHome Dekodierung auf Adapter verschoben (Speicher auf Geräten speichern)\nErlauben Sie verschlüsselte Nutzlasten von BTHome-Geräten (Verschlüsselungsschlüssel im Zustand festlegen)",
+        "ru": "Перенесено декодирование BTHome на адаптер (сохранить память на устройствах)\nРазрешить зашифрованные полезные нагрузки устройств BTHome (установленный ключ шифрования в состоянии)",
+        "pt": "Movedo BTHome decodificação para adaptador (salvar memória em dispositivos)\nPermitir cargas criptografadas de dispositivos BTHome (ajustar chave de criptografia no estado)",
+        "nl": "BTHome-decodering naar adapter verplaatst (geheugen opslaan op apparaten)\nLaat gecodeerde payloads van BTHOME apparaten (versleutelingssleutel in staat)",
+        "fr": "Déplacer le décodage BTHome vers l'adaptateur (enregistrer la mémoire sur les appareils)\nAutoriser les charges utiles cryptées des périphériques BTHome (configurer la clé de chiffrement dans l'état)",
+        "it": "Spostato decodifica BTHome per adattatore (salvare la memoria sui dispositivi)\nConsentire payload crittografati di dispositivi BTHome (impostare la chiave di crittografia in stato)",
+        "es": "Descodificación de BTHome para adaptador (salvar la memoria en dispositivos)\nPermite cargas de pago encriptadas de dispositivos BTHome (clave de cifrado en estado)",
+        "pl": "Przesunął dekodowanie Bthome do adaptera (oszczędź pamięć na urządzeniach)\nZezwalaj na zaszyfrowane ładunki urządzeń Bthome (ustawiony klucz szyfrujący w stanie)",
+        "uk": "Перемічений BTHome декодування адаптера (Зберегти пам'ять на пристроях)\nДозволити зашифровані навантаження на BTHome пристрої (змінити ключ шифрування в державі)",
+        "zh-cn": "移动 BTHome 解码到适配器( 在设备上保存内存)\n允许 BTHome 设备的加密有效载荷( 设置加密密钥处于状态)"
+      },
       "9.5.1": {
         "en": "ATTENTION: Reworked configuration of inputs could effect some devices.\n\nResetPower has been added to Shelly switches supporting power measurement. [#1156]\nResetPower has been added to Gen2+ PM type devices.\nShelly Plus Uni (shellyplusuni) - configuration of inputs reworked.\nShelly Plus Uni (shellyplusuni) - support to reset counters added.\nAdded sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).\nIssues reported by repository checker have been fixed.\nDependencies have been updated",
         "de": "ACHTUNG: Reworked-Konfiguration von Eingängen könnte einige Geräte beeinflussen.\n\nResetPower wurde zu Shelly Switches hinzugefügt, die die Leistungsmessung unterstützen. (#1156)\nResetPower wurde zu Gen2+ PM-Geräten hinzugefügt.\nShelly Plus Uni (shellyplusuni) - Konfiguration von Eingängen überarbeitet.\nShelly Plus Uni (shellyplusuni) - Unterstützung zum Zurücksetzen von Zählern hinzugefügt.\nSensoren (Temperatur, Voltmeter, Feuchte, analoge Eingänge) zu Shelly Plus Uni (shellyplusuni) hinzugefügt.\nVom Repository-Checker gemeldete Probleme wurden behoben.\nAbhängigkeiten wurden aktualisiert",
