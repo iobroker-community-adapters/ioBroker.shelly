@@ -23,12 +23,12 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 }
 ```
 
-### Requirements:
+### Requirements
 
-- A custom script (see below) on the Shelly Gen2 Device (copy/paste)
+- A custom script on the Shelly Gen2+ Device (see below, just copy/paste)
 
   _Shelly PlugS Gen3 can't run the Script, because the scripting memory is limited due to the Matter protocol in the upcoming firmware version 1.5.0, it will be possible to disable Matter and restore script memory_
-- Shelly BLU device (encryption must be disabled!)
+- Shelly BLU device
 - The correct script version for the used adapter version
 
 | Adapter version                                                                                                 | Script version |
@@ -39,6 +39,17 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 | [>= 8.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.0.0/docs/en/ble-devices.md)   | v0.3           |
 | [>= 6.8.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.8.0/docs/en/ble-devices.md)   | v0.2           |
 | [>= 6.6.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.6.0/docs/en/ble-devices.md)   | v0.1           |
+
+## Encryption
+
+Encryption is supported since adapter version >10.0.0
+
+- Use the Shelly Debug App (e.g. on an Android smart phone) to encrypt the device
+- Copy the encryption key
+- Raise a new BLE event to generate the required states
+- Save the encryption key in `shelly.0.ble.<macAddress>.encryptionKey`
+
+After that, the next BLE event can be decrypted.
 
 ## JavaScript (Shelly Scripting)
 
