@@ -26,8 +26,6 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 ### Requirements
 
 - A custom script on the Shelly Gen2+ Device (see below, just copy/paste)
-
-  _Shelly PlugS Gen3 can't run the Script, because the scripting memory is limited due to the Matter protocol in the upcoming firmware version 1.5.0, it will be possible to disable Matter and restore script memory_
 - Shelly BLU device
 - The correct script version for the used adapter version
 
