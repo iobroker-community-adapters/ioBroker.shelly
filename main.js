@@ -1,5 +1,7 @@
 'use strict';
 
+const crypto = require('node:crypto');
+
 const utils = require('@iobroker/adapter-core');
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
 const protocolMqtt = require('./lib/protocol/mqtt');
@@ -433,6 +435,31 @@ class Shelly extends utils.Adapter {
                 native: {},
             });
 
+            await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.encrypted`, {
+                type: 'state',
+                common: {
+                    name: {
+                        en: 'Encrypted',
+                        de: 'Verschlüsselt',
+                        ru: 'Зашифрованный',
+                        pt: 'Criptografado',
+                        nl: 'Versleuteld',
+                        fr: 'Chiffres',
+                        it: 'Crittografia',
+                        es: 'Encriptado',
+                        pl: 'Zaszyfrowane',
+                        uk: 'Зашифрований',
+                        'zh-cn': '已加密',
+                    },
+                    type: 'boolean',
+                    role: 'value',
+                    read: true,
+                    write: false,
+                    def: false,
+                },
+                native: {},
+            });
+
             await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.encryptionKey`, {
                 type: 'state',
                 common: {
@@ -459,90 +486,128 @@ class Shelly extends utils.Adapter {
             });
 
             const rawData = this.convertFromHex(val.payload); // convert hex to bytes
-            const unpackedData = this.bleDecoder.unpack(rawData);
+            let unpackedData = this.bleDecoder.unpack(rawData);
 
             if (unpackedData !== null) {
                 this.log.debug(
                     `[processBleMessage] Received unpacked payload ${JSON.stringify(unpackedData)} from ${val.src}`,
                 );
 
-                const typesList = {
-                    moisture: { type: 'number', unit: '%' },
-                    soil: { type: 'number', unit: 'µS/cm' },
-                    battery: { type: 'number', unit: '%' },
-                    temperature: { type: 'number', unit: '°C' },
-                    humidity: { type: 'number', unit: '%' },
-                    illuminance: { type: 'number' },
-                    motion: { type: 'number', states: { 0: 'Clear', 1: 'Detected' } },
-                    window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
-                    button: {
-                        type: 'number',
-                        states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 254: 'Long' },
-                    },
-                    rotation: { type: 'number' },
-                };
+                await this.setState(`ble.${val.srcBle.mac}.encrypted`, { val: unpackedData.encryption, ack: true });
 
-                const pidState = await this.getStateAsync(`ble.${val.srcBle.mac}.pid`);
-                const pidOld = pidState && pidState.val ? pidState.val : -1;
-                const pidNew = unpackedData.pid;
+                if (unpackedData.encryption) {
+                    const encryptionKeyState = await this.getStateAsync(`ble.${val.srcBle.mac}.encryptionKey`);
+                    const encryptionKeyHex = encryptionKeyState
+                        ? String(encryptionKeyState.val)
+                        : '00000000-0000-0000-0000-000000000000';
 
-                // Check if same message has been received by other Shellys
-                if (pidOld !== pidNew) {
-                    await this.setState(`ble.${val.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
-                    await this.setState(`ble.${val.srcBle.mac}.receivedBy`, {
-                        val: JSON.stringify(
-                            {
-                                [val.src]: {
+                    const encryptionKey = Buffer.from(encryptionKeyHex.replaceAll('-', ''), 'hex');
+                    const macBuffer = Buffer.from(val.srcBle.mac.replaceAll(':', ''), 'hex');
+
+                    const dataPrefix = Buffer.concat([Buffer.from('d2fc', 'hex'), Buffer.from(rawData)]);
+
+                    const uuid = Buffer.from(dataPrefix.slice(0, 2));
+                    const deviceInfo = Buffer.from([dataPrefix[2]]);
+                    const ciphertext = Buffer.from(dataPrefix.slice(3, -8));
+                    const counter = Buffer.from(dataPrefix.slice(-8, -4));
+                    const mic = Buffer.from(dataPrefix.slice(-4));
+
+                    const nonce = Buffer.concat([macBuffer, uuid, deviceInfo, counter]);
+
+                    try {
+                        const decipher = crypto.createDecipheriv('aes-128-ccm', encryptionKey, nonce, {
+                            authTagLength: 4,
+                        });
+                        decipher.setAuthTag(mic);
+
+                        const decrypted = Buffer.concat([decipher.update(ciphertext), decipher.final()]);
+
+                        unpackedData = this.bleDecoder.unpack(decrypted, true);
+                    } catch (err) {
+                        this.log.error(`[processBleMessage] unable to process encrypted payload by ${val.src}: ${err}`);
+                    }
+                }
+
+                if (unpackedData !== null) {
+
+                    const typesList = {
+                        moisture: { type: 'number', unit: '%' },
+                        soil: { type: 'number', unit: 'µS/cm' },
+                        battery: { type: 'number', unit: '%' },
+                        temperature: { type: 'number', unit: '°C' },
+                        humidity: { type: 'number', unit: '%' },
+                        illuminance: { type: 'number' },
+                        motion: { type: 'number', states: { 0: 'Clear', 1: 'Detected' } },
+                        window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
+                        button: {
+                            type: 'number',
+                            states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 254: 'Long' },
+                        },
+                        rotation: { type: 'number' },
+                    };
+
+                    const pidState = await this.getStateAsync(`ble.${val.srcBle.mac}.pid`);
+                    const pidOld = pidState && pidState.val ? pidState.val : -1;
+                    const pidNew = unpackedData.pid;
+
+                    // Check if same message has been received by other Shellys
+                    if (pidOld !== pidNew) {
+                        await this.setState(`ble.${val.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
+                        await this.setState(`ble.${val.srcBle.mac}.receivedBy`, {
+                            val: JSON.stringify(
+                                {
+                                    [val.src]: {
+                                        rssi: unpackedData.rssi,
+                                        ts: Date.now(),
+                                    },
+                                },
+                                null,
+                                2,
+                            ),
+                            ack: true,
+                        });
+
+                        for (const [key, value] of Object.entries(unpackedData)) {
+                            const typeListKey = key.includes('button_') ? 'button' : key;
+
+                            if (Object.keys(typesList).includes(typeListKey)) {
+                                await this.extendObject(`ble.${val.srcBle.mac}.${key}`, {
+                                    type: 'state',
+                                    common: {
+                                        name: key,
+                                        type: typesList[typeListKey].type,
+                                        role: 'value',
+                                        read: true,
+                                        write: false,
+                                        unit: typesList[typeListKey]?.unit,
+                                        states: typesList[typeListKey]?.states,
+                                    },
+                                    native: {},
+                                });
+
+                                await this.setState(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true, c: val.src });
+                            }
+                        }
+                    } else {
+                        try {
+                            const receivedByState = await this.getStateAsync(`ble.${val.srcBle.mac}.receivedBy`);
+                            if (receivedByState) {
+                                const deviceList = JSON.parse(receivedByState.val);
+                                deviceList[val.src] = {
                                     rssi: unpackedData.rssi,
                                     ts: Date.now(),
-                                },
-                            },
-                            null,
-                            2,
-                        ),
-                        ack: true,
-                    });
+                                };
 
-                    for (const [key, value] of Object.entries(unpackedData)) {
-                        const typeListKey = key.includes('button_') ? 'button' : key;
-
-                        if (Object.keys(typesList).includes(typeListKey)) {
-                            await this.extendObject(`ble.${val.srcBle.mac}.${key}`, {
-                                type: 'state',
-                                common: {
-                                    name: key,
-                                    type: typesList[typeListKey].type,
-                                    role: 'value',
-                                    read: true,
-                                    write: false,
-                                    unit: typesList[typeListKey]?.unit,
-                                    states: typesList[typeListKey]?.states,
-                                },
-                                native: {},
-                            });
-
-                            await this.setState(`ble.${val.srcBle.mac}.${key}`, { val: value, ack: true, c: val.src });
+                                await this.setState(`ble.${val.srcBle.mac}.receivedBy`, {
+                                    val: JSON.stringify(deviceList, null, 2),
+                                    ack: true,
+                                });
+                            }
+                        } catch (err) {
+                            this.log.error(
+                                `[processBleMessage] Unable to extend device list (receivedBy) of ${val.srcBle.mac}: ${err}`,
+                            );
                         }
-                    }
-                } else {
-                    try {
-                        const receivedByState = await this.getStateAsync(`ble.${val.srcBle.mac}.receivedBy`);
-                        if (receivedByState) {
-                            const deviceList = JSON.parse(receivedByState.val);
-                            deviceList[val.src] = {
-                                rssi: unpackedData.rssi,
-                                ts: Date.now(),
-                            };
-
-                            await this.setState(`ble.${val.srcBle.mac}.receivedBy`, {
-                                val: JSON.stringify(deviceList, null, 2),
-                                ack: true,
-                            });
-                        }
-                    } catch (err) {
-                        this.log.error(
-                            `[processBleMessage] Unable to extend device list (receivedBy) of ${val.srcBle.mac}: ${err}`,
-                        );
                     }
                 }
             }

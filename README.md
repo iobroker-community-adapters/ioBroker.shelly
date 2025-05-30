@@ -191,6 +191,7 @@ Adapter version >= v8.2.0 required for:
 ### **WORK IN PROGRESS**
 
 * (@klein0r) Moved BTHome decoding to adapter (save memory on devices)
+* (@klein0r) Allow encrypted payloads of BTHome devices (set encryption key in state)
 
 ### 9.5.1 (2025-05-10)
 
