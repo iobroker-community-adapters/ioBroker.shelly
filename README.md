@@ -188,6 +188,10 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@klein0r) Moved BTHome decoding to adapter (save memory on devices)
+
 ### 9.5.1 (2025-05-10)
 
 * (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
