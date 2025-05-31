@@ -95,8 +95,6 @@ function bleScanCallback(event, result) {
         payload: convertToHex(result.service_data[BTHOME_SVC_ID_STR])
     };
 
-    // console.log('Received ' + JSON.stringify(unpackedData));
-
     if (MQTT.isConnected()) {
         MQTT.publish(SHELLY_ID + '/events/ble', JSON.stringify(message));
     }
