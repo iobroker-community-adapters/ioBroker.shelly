@@ -43,6 +43,8 @@ class Shelly extends utils.Adapter {
                 return;
             }
 
+            this.eventEmitter.setMaxListeners(Infinity);
+
             await this.mkdirAsync(this.namespace, 'scripts');
             this.subscribeForeignFiles(this.namespace, '*');
 
