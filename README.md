@@ -191,6 +191,7 @@ Adapter version >= v8.2.0 required for:
 ### **WORK IN PROGRESS**
 
 * (@klein0r) Allow infinite event listeners
+* (@klein0r) Added transformed voltage for voltmeter
 
 ### 10.0.0 (2025-05-30)
 
