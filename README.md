@@ -192,6 +192,7 @@ Adapter version >= v8.2.0 required for:
 
 * (@klein0r) Allow infinite event listeners
 * (@klein0r) Added transformed voltage for voltmeter
+* (@klein0r) Improved logging of mqtt authentication failures
 
 ### 10.0.0 (2025-05-30)
 
