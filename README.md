@@ -193,6 +193,7 @@ Adapter version >= v8.2.0 required for:
 * (@klein0r) Allow infinite event listeners
 * (@klein0r) Added transformed voltage for voltmeter
 * (@klein0r) Improved logging of mqtt authentication failures
+* (@klein0r) Acknowledge new encryption keys for bthome encryption
 
 ### 10.0.0 (2025-05-30)
 

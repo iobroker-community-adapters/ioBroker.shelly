@@ -115,6 +115,13 @@ class Shelly extends utils.Adapter {
                 );
 
                 this.eventEmitter.emit('onScriptDownload');
+            } else if (stateId.startsWith('ble.') && stateId.endsWith('.encryptionKey')) {
+                this.log.debug(`[onStateChange] "${stateId}" state changed - checking new encryption key`);
+
+                const encryptionKey = String(state.val).replaceAll('-', '').toUpperCase();
+                if (encryptionKey.length == 32) {
+                    this.setState(stateId, { val: encryptionKey, ack: true });
+                }
             } else {
                 this.log.debug(
                     `[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`,
