@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.0.0",
+    "version": "10.1.0",
     "news": {
+      "10.1.0": {
+        "en": "Allow infinite event listeners\nAdded transformed voltage for voltmeter\nImproved logging of mqtt authentication failures\nAcknowledge new encryption keys for bthome encryption",
+        "de": "Erlauben Sie unendliche Ereigniszuhörer\nTransformierte Spannung für Voltmeter hinzugefügt\nVerbesserte Protokollierung von mqtt Authentifizierungsfehlern\nNeue Verschlüsselungsschlüssel für bthome Verschlüsselung bekanntgeben",
+        "ru": "Позволить слушателям бесконечных событий\nДобавлено преобразованное напряжение для вольтметра\nУлучшенная регистрация ошибок аутентификации mqtt\nПризнать новые ключи шифрования для шифрования bthome",
+        "pt": "Permitir ouvintes de eventos infinitos\nAdicionada tensão transformada para voltímetro\nRegisto melhorado das falhas de autenticação mqtt\nReconheça novas chaves de criptografia para criptografia bthome",
+        "nl": "Oneindige eventluisteraars toestaan\nToegevoegd getransformeerde spanning voor voltmeter\nVerbeterde logging van mqtt-authenticatiefouten\nNieuwe encryptiesleutels voor bthome-encryptie erkennen",
+        "fr": "Permettre aux auditeurs d'événements infinis\nAjout de tension transformée pour voltmètre\nAmélioration de l'enregistrement des défaillances d'authentification mqtt\nReconnaissez les nouvelles clés de chiffrement pour le chiffrement bthome",
+        "it": "Consentire ascoltatori di eventi infinite\nAggiunto trasformato tensione per voltmetro\nRegistrazione migliorata dei guasti di autenticazione di mqtt\nRiconoscere nuove chiavi di crittografia per la crittografia bthome",
+        "es": "Permitir escuchar eventos infinitos\nVoltaje transformado para voltímetro\nMejor registro de fallas de autenticación mqtt\nReconoce nuevas claves de encriptación para encriptación de bthome",
+        "pl": "Pozwól nieskończonym słuchaczom zdarzeń\nDodano napięcie przekształcone dla woltomierza\nUlepszone logowanie błędów uwierzytelniania mqtt\nPotwierdź nowe klucze szyfrujące do szyfrowania bthome",
+        "uk": "Allow нескінченні прослуховування подій\nДодана трансформаторна напруга для вольтметра\nПокращується залога автентифікації mqtt\nAcknowledge нові ключі шифрування для шифрування bthome",
+        "zh-cn": "允许无限事件听众\n电压计增加的变形电压\n改进mqtt认证失败的记录\n确认 bthome 加密的新加密密钥"
+      },
       "10.0.0": {
         "en": "Moved BTHome decoding to adapter (save memory on devices)\nAllow encrypted payloads of BTHome devices (set encryption key in state)",
         "de": "BTHome Dekodierung auf Adapter verschoben (Speicher auf Geräten speichern)\nErlauben Sie verschlüsselte Nutzlasten von BTHome-Geräten (Verschlüsselungsschlüssel im Zustand festlegen)",
@@ -80,19 +93,6 @@
         "pl": "Adapter wymaga admin 7.4.10 teraz.\nDodano Shelly Outdoor Plug S Gen3\nDodano brakujące wartości energii dla przełączników (tj. Shelly Outdoor Plug S Gen3)\nDodano brakujące wartości energii dla pmminigen3",
         "uk": "Адаптер вимагає адміністратора 7.4.10 тепер.\nДоданий Shelly Відкритий Plug S Gen3\nДодані значення енергії для вимикачів (наприклад, Shelly Outdoor Plug S Gen3)\nДодано значення енергії для PMminigen3",
         "zh-cn": "适配器现在需要管理员7.4.10.\n添加 Shelly 室外插件 S Gen 3\n切换器(即Shelly室外插件S Gen3)的能量值缺失\n添加了 pmminigen3 的缺失能量值"
-      },
-      "9.2.0": {
-        "en": "Added Shelly Dimmer Gen3\nAdded Shelly 3EM63 Gen3\nTranslations for Gen2 devices have been added\nState roles for Gen2 devices have been adapted\nAdded handling of Total Active Energy",
-        "de": "Hinzugefügt Shelly Dimmer Gen3\nHinzugefügt Shelly 3EM63 Gen3\nÜbersetzungen für Gen2 Geräte wurden hinzugefügt\nStaatliche Rollen für Gen2 Geräte wurden angepasst\nZusätzlicher Umgang mit Total Active Energy",
-        "ru": "Обсуждение Shelly Dimmer Gen3\nШелли 3EM63 Gen3\nДобавлены переводы для устройств Gen2\nАдаптированы государственные роли для устройств Gen2\nОбработка полной активной энергии",
-        "pt": "Adicionado Shelly Dimmer Gen3\nAdicionado Shelly 3EM63 Gen3\nTraduções para dispositivos Gen2 foram adicionadas\nFunções estatais para dispositivos Gen2 foram adaptadas\nAdicionado manuseio de Total Active Energy",
-        "nl": "Toegevoegd Shelly Dimmer Gen3\nToegevoegd Shelly 3EM63 Gen3\nVertalingen voor Gen2-apparaten zijn toegevoegd\nDe rol van Gen2-apparaten is aangepast\nToegevoegde behandeling van totale actieve energie",
-        "fr": "Ajouté Shelly Dimmer Gen3\nAjouté Shelly 3EM63 Gen3\nDes traductions pour les appareils Gen2 ont été ajoutées\nLes rôles de l'État pour les appareils Gen2 ont été adaptés\nTraitement ajouté de Total Active Energy",
-        "it": "Aggiunto Shelly Dimmer Gen3\nAggiunto Shelly 3EM63 Gen3\nSono state aggiunte traduzioni per dispositivi Gen2\nI ruoli di stato per i dispositivi Gen2 sono stati adattati\nGestione aggiuntiva di Total Active Energy",
-        "es": "Añadido Shelly Dimmer Gen3\nAñadido Shelly 3EM63 Gen3\nSe han añadido traducciones para dispositivos Gen2\nLas funciones estatales de los dispositivos Gen2 han sido adaptadas\nManejo añadido de Energía Activa Total",
-        "pl": "Dodano Shelly Dimmer Gen3\nDodano Shelly 3EM63 Gen3\nTłumaczenie dla urządzeń Gen2 zostało dodane\nRole państwa dla urządzeń Gen2 zostały dostosowane\nDodano obsługę całkowitej energii czynnej",
-        "uk": "Доданий Shelly Dimmer Gen3\nДоданий Shelly 3EM63 Gen3\nДодано переклади для пристроїв Gen2\nПристосовано сучасні ролі для пристроїв Gen2\nДодана обробка Total Active Energy",
-        "zh-cn": "添加 Shelly Dimmer 源3\n添加 Shelly 3EM63 源3\nGen2 设备的翻译已添加\n改编了Gen2设备的国家作用\n增加的全活动能源处理"
       }
     },
     "titleLang": {
