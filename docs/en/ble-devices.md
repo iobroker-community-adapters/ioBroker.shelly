@@ -31,7 +31,7 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 
 | Adapter version                                                                                                 | Script version |
 |-----------------------------------------------------------------------------------------------------------------|----------------|
-| [>= 10.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.0.0/docs/en/ble-devices.md) | v1.0           |
+| [>= 10.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.1.0/docs/en/ble-devices.md) | v1.0           |
 | [>= 9.1.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v9.1.0/docs/en/ble-devices.md)   | v0.5           |
 | [>= 8.2.1](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.2.1/docs/en/ble-devices.md)   | v0.4           |
 | [>= 8.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.0.0/docs/en/ble-devices.md)   | v0.3           |
