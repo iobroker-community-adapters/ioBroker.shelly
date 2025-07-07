@@ -45,7 +45,7 @@ Encryption is supported since adapter version >10.0.0
 - Use the Shelly Debug App (e.g. on an Android smart phone) to encrypt the device
 - Copy the encryption key
 - Raise a new BLE event to generate the required states
-- Save the encryption key in `shelly.0.ble.<macAddress>.encryptionKey`
+- Save the encryption key in `shelly.0.ble.<macAddress>.encryptionKey` (with `ack: false`)
 
 After that, the next BLE event can be decrypted.
 
