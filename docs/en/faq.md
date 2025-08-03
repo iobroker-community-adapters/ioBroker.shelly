@@ -39,3 +39,8 @@ It is not possible to connect the Shelly adapter to an existing MQTT broker in y
 If you use **generation 1 (Gen1)** devices, it is not possible to use MQTT and the Shelly cloud at the same time. You have to use CoAP/CoIoT for ioBroker integration if you want to keep the cloud connection.
 
 **Generation 2+ (Gen2+)** devices are able to connect via MQTT and keep the cloud connection running.
+
+## Which Shelly-Devices can record negative Power / delivered Energy?
+
+Please see listing at Shelly Forum (GERMAN language only):  
+https://support.shelly.cloud/de/support/solutions/articles/103000316350-welche-shelly-ger%C3%A4te-k%C3%B6nnen-negative-leistung-f%C3%BCr-zur%C3%BCckgespeiste-energie-messen
