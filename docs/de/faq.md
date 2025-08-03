@@ -39,3 +39,8 @@ Es ist nicht möglich, den Shelly-Adapter mit einem existierenden MQTT-Broker in
 Falls Du Geräte der **Generation 1 (Gen1)** verwendest, kann man MQTT und die Shelly-Cloud nicht gleichzeitig verwenden. In diesem Fall muss CoAP/CoIoT für die ioBroker-Integration genutzt werden, falls die Cloud-Verbindung gleichzeitig bestehen soll.
 
 Geräte der **Generation 2+ (Gen2+)** können per MQTT verbunden werden und gleichzeitig die Cloud-Verbindung aufrecht erhalten.
+
+## Welche Shelly-Geräte können negative Leistung / zurückgespeiste Energie messen ?
+
+Siehe Auflistung im Shelly Forum:  
+https://support.shelly.cloud/de/support/solutions/articles/103000316350-welche-shelly-ger%C3%A4te-k%C3%B6nnen-negative-leistung-f%C3%BCr-zur%C3%BCckgespeiste-energie-messen
