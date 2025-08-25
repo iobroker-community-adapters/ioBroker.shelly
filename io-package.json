@@ -182,14 +182,14 @@
     "adminUI": {
       "config": "json"
     },
-    "globalDependencies": [
-      {
-        "admin": ">=7.4.10"
-      }
-    ],
     "dependencies": [
       {
-        "js-controller": ">=6.0.0"
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.6.17"
       }
     ]
   },
