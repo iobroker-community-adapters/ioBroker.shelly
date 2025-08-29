@@ -21,6 +21,10 @@
 
 * (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
+## 9.4.1 (2025-04-17)
+
+* (@mcm1957) Minimum value for min_brightness fixed for dimmer1/2 [#1166]
+
 ## 9.4.0 (2025-04-16)
 
 * (@klein0r) Added Gen4 devices (see documentation for details)

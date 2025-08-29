@@ -189,7 +189,7 @@ Adapter version >= v8.2.0 required for:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.2.0-alpha.0 (2025-08-29)
 
 * (@klein0r) Shelly Shutter Gen 3 (shellyshutter) has been added.
 * (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required now.
@@ -232,10 +232,6 @@ Adapter version >= v8.2.0 required for:
 * (@mcm1957) Added energy states to Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].
 * (@mcm1957) Added energy states to Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].
 * (@mcm1957) Added energy states to Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].
-
-### 9.4.1 (2025-04-17)
-
-* (@mcm1957) Minimum value for min_brightness fixed for dimmer1/2 [#1166]
 
 ## License
 

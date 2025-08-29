@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.1.0",
+    "version": "10.2.0-alpha.0",
     "news": {
+      "10.2.0-alpha.0": {
+        "en": "Shelly Shutter Gen 3 (shellyshutter) has been added.\nadmin 7.6.17 and js-controller 6.0.11 (or later) are required now.\nDependencies have been updated",
+        "de": "Shelly Shutter Gen 3 (Shellyshutter) wurde hinzugefügt.\nadmin 7.6.17 und js-controller 6.0.11 (oder später) sind jetzt erforderlich.\nAbhängigkeiten wurden aktualisiert",
+        "ru": "Shelly Shutter Gen 3 (Шеллишутер).\nадмин 7.6.17 и js-контроллер 6.0.11 (или более поздние) требуются сейчас.\nЗависимости были обновлены",
+        "pt": "Shelly Shutter Gen 3 (shellyshutter) foi adicionado.\nadmin 7.6.17 e js-controller 6.0.11 (ou posterior) são necessários agora.\nAs dependências foram atualizadas",
+        "nl": "Shelly Shutter Gen 3 (shellyshutter) is toegevoegd.\nadmin 7.6.17 en js-controller 6.0.11 (of later) zijn nu vereist.\nAfhankelijkheden zijn bijgewerkt",
+        "fr": "Shelly Shutter Gen 3 (shellyshutter) a été ajouté.\nadmin 7.6.17 et js-controller 6.0.11 (ou plus tard) sont nécessaires maintenant.\nLes dépendances ont été actualisées",
+        "it": "Shelly Shutter Gen 3 (shellyshutter) è stato aggiunto.\nadmin 7.6.17 e js-controller 6.0.11 (o più tardi) sono necessari ora.\nLe dipendenze sono state aggiornate",
+        "es": "Shelly Shutter Gen 3 (shellyshutter) ha sido añadido.\nadmin 7.6.17 y js-controller 6.0.11 (o posterior) son necesarios ahora.\nSe han actualizado las dependencias",
+        "pl": "Shelly Shutter Gen 3 (shellyshutter) została dodana.\nadministrator 7.6.17 i kontroler js- 6.0.11 (lub później) są wymagane teraz.\nZaktualizowano zależności",
+        "uk": "Додано Shelly Shutter Gen 3 (клапан).\nadmin 7.6.17 і js-controller 6.0.11 (або пізніше) обов'язкові.\nЗалежність було оновлено",
+        "zh-cn": "雪莉·关特·源3(英语:Shellyshutter Gen 3)被加入.\n现在需要admin 7.6.17和js控制器 6.0.11(或以后).\n依赖关系已更新"
+      },
       "10.1.0": {
         "en": "Allow infinite event listeners\nAdded transformed voltage for voltmeter\nImproved logging of mqtt authentication failures\nAcknowledge new encryption keys for bthome encryption",
         "de": "Erlauben Sie unendliche Ereigniszuhörer\nTransformierte Spannung für Voltmeter hinzugefügt\nVerbesserte Protokollierung von mqtt Authentifizierungsfehlern\nNeue Verschlüsselungsschlüssel für bthome Verschlüsselung bekanntgeben",
@@ -80,19 +93,6 @@
         "pl": "Dodano urządzenia Gen4 (szczegóły w dokumentacji)",
         "uk": "Додано пристрої Gen4 (див. документацію для деталей)",
         "zh-cn": "添加的 Gen4 设备(详见文档)"
-      },
-      "9.3.0": {
-        "en": "Adapter requires admin 7.4.10 now. \nAdded Shelly Outdoor Plug S Gen3\nMissing energy values for Switches (i.e. Shelly Outdoor Plug S Gen3) have been added\nMissing energy values for pmminigen3 have been added",
-        "de": "Adapter benötigt jetzt Admin 7.4.10.\nHinzugefügt Shelly Outdoor Plug S Gen3\nFehlende Energiewerte für Schalter (d.h. Shelly Outdoor Plug S Gen3) wurden hinzugefügt\nFehlende Energiewerte für pmminigen3 wurden hinzugefügt",
-        "ru": "Адаптер требует админ 7.4.10.\nОбсуждение Shelly Outdoor Plug S Gen3\nОтсутствующие значения энергии для коммутаторов (например, Shelly Outdoor Plug S Gen3)\nДобавлены недостающие значения энергии для pmminigen3",
-        "pt": "Adaptador requer admin 7.4.10 agora.\nAdicionado Shelly Outdoor Plug S Gen3\nValores de energia ausentes para Switches (ou seja, Shelly Outdoor Plug S Gen3) foram adicionados\nValores de energia perdidos para pmminigen3 foram adicionados",
-        "nl": "Adapter vereist admin 7.4.10 nu.\nToegevoegd Shelly Outdoor Plug S Gen3\nOntbrekende energiewaarden voor switches (d.w.z. Shelly Outdoor Plug S Gen3) zijn toegevoegd\nOntbrekende energiewaarden voor pmminigen3 zijn toegevoegd",
-        "fr": "Adaptateur nécessite admin 7.4.10 maintenant.\nAjout de Shelly Outdoor Plug S Gen3\nDes valeurs d'énergie manquantes pour les commutateurs (c'est-à-dire Shelly Outdoor Plug S Gen3) ont été ajoutées\nDes valeurs énergétiques manquantes pour pmminingen3 ont été ajoutées",
-        "it": "L'adattatore richiede ora admin 7.4.10.\nAggiunto Shelly Outdoor Plug S Gen3\nValori energetici mancanti per Switches (cioè Shelly Outdoor Plug S Gen3) sono stati aggiunti\nValori energetici mancanti per pmminigen3 sono stati aggiunti",
-        "es": "Adaptador requiere admin 7.4.10 ahora.\nAñadido Shelly exterior Plug S Gen3\nSe han añadido valores de energía perdidos para Switches (es decir, Shelly Outdoor Plug S Gen3)\nSe han añadido valores energéticos perdidos para el PMminigen3",
-        "pl": "Adapter wymaga admin 7.4.10 teraz.\nDodano Shelly Outdoor Plug S Gen3\nDodano brakujące wartości energii dla przełączników (tj. Shelly Outdoor Plug S Gen3)\nDodano brakujące wartości energii dla pmminigen3",
-        "uk": "Адаптер вимагає адміністратора 7.4.10 тепер.\nДоданий Shelly Відкритий Plug S Gen3\nДодані значення енергії для вимикачів (наприклад, Shelly Outdoor Plug S Gen3)\nДодано значення енергії для PMminigen3",
-        "zh-cn": "适配器现在需要管理员7.4.10.\n添加 Shelly 室外插件 S Gen 3\n切换器(即Shelly室外插件S Gen3)的能量值缺失\n添加了 pmminigen3 的缺失能量值"
       }
     },
     "titleLang": {
