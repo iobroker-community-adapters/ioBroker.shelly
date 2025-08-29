@@ -135,6 +135,7 @@ Note:
 | Shelly AZ Plug (shellyazplug)                 | ❌   | >= v9.5.0  |
 | Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
 | Shelly Shutter (shellyshutter)                | ❌   | >= v10.2.0 |
+| Shelly DALI Dimmer Gen3 (shellyddimmerg3)     | ❌   | >= v10.2.0 |
 
 ### Generation 4 (Gen 4)
 
@@ -173,7 +174,6 @@ Adapter version >= v8.2.0 required for:
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
 - USB powered UVC LED strip
-- Shelly DALI Dimmer Gen3
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
 - Shelly Flood Gen4
@@ -191,6 +191,7 @@ Adapter version >= v8.2.0 required for:
 --> 
 ### **WORK IN PROGRESS**
 
+* (@mcm1957) Shelly Dali Dimmer Gen 3 (shellyddimmerg3) has been added.
 * (@mcm1957) Shelly1L Gen 3 (shelly1lg3) has been added.
 * (@mcm1957) Shelly2L Gen 3 (shelly2lg3) has been added.
 * (@mcm1957) Shelly2PM Gen 4 (shelly2pmg4) has been added.
