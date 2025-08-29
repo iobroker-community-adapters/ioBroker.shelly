@@ -122,6 +122,7 @@ Note:
 | Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0  |
 | Shelly 1 PM Gen3 (shelly1pmg3)                | ❌   | >= v8.0.0  |
 | Shelly 1 Gen3 (shelly1g3)                     | ❌   | >= v8.0.0  |
+| Shelly 1L Gen3 (shelly1lg3)                   | ❌   | >= v10.2.0 |
 | Shelly 2 PM Gen3 (shelly2pmg3)                | ❌   | >= v8.3.0  |
 | Shelly 0/1-10V PM Gen3 (shelly0110dimg3)      | ❌   | >= v8.4.0  |
 | Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
@@ -142,7 +143,7 @@ Note:
 | Shelly 1 PM Gen4 (shelly1pmg4)                | ❌   | >= v9.4.0  |
 | Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0  |
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0  |
-| Shelly 2PM Gen4 (shelly2pmg4)                 | ❌   | >= v10.2.0 |
+| Shelly 2 PM Gen4 (shelly2pmg4)                | ❌   | >= v10.2.0 |
 
 ### Powered By Shelly
 
@@ -173,7 +174,6 @@ Adapter version >= v8.2.0 required for:
 - USB powered UVC LED strip
 - Shelly DALI Dimmer Gen3
 - Shelly Wall Display X2
-- Shelly 1L Gen3
 - Shelly 2L Gen3
 - Shelly LoRa Add-On
 - Shelly Flood Gen4
