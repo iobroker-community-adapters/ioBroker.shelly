@@ -191,6 +191,7 @@ Adapter version >= v8.2.0 required for:
 --> 
 ### **WORK IN PROGRESS**
 
+* (@mcm1957) Role definitions for anergy states has been corrected [#1195].
 * (@mcm1957) Shelly Dali Dimmer Gen 3 (shellyddimmerg3) has been added.
 * (@mcm1957) Shelly1L Gen 3 (shelly1lg3) has been added.
 * (@mcm1957) Shelly2L Gen 3 (shelly2lg3) has been added.
