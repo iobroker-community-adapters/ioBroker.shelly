@@ -191,8 +191,9 @@ Adapter version >= v8.2.0 required for:
 -->
 ### **WORK IN PROGRESS**
 
-* (@klein0r) Added Shelly Shutter (Gen3)
-* (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required
+* (@klein0r) Shelly Shutter Gen 3 (shellyshutter) has been added.
+* (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required now.
+* (@mcm1957) Dependencies have been updated
 
 ### 10.1.0 (2025-06-30)
 
