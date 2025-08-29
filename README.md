@@ -136,12 +136,13 @@ Note:
 
 ### Generation 4 (Gen 4)
 
-| Shelly Device                                 | CoAP | MQTT      |
-|-----------------------------------------------| ---- | --------- |
-| Shelly 1 Gen4 (shelly1g4)                     | ❌   | >= v9.4.0 |
-| Shelly 1 PM Gen4 (shelly1pmg4)                | ❌   | >= v9.4.0 |
-| Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0 |
-| Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0 |
+| Shelly Device                                 | CoAP | MQTT       |
+|-----------------------------------------------| ---- | ---------- |
+| Shelly 1 Gen4 (shelly1g4)                     | ❌   | >= v9.4.0  |
+| Shelly 1 PM Gen4 (shelly1pmg4)                | ❌   | >= v9.4.0  |
+| Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0  |
+| Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0  |
+| Shelly 2PM Gen4 (shelly2pmg4)                 | ❌   | >= v10.2.0 |
 
 ### Powered By Shelly
 
@@ -188,9 +189,10 @@ Adapter version >= v8.2.0 required for:
 <!--
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
--->
-### 10.2.0-alpha.0 (2025-08-29)
+--> 
+### **WORK IN PROGRESS**
 
+* (@mcm1957) Shelly2PM Gen 4 (shelly2pmg4) has been added.
 * (@klein0r) Shelly Shutter Gen 3 (shellyshutter) has been added.
 * (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required now.
 * (@mcm1957) Dependencies have been updated
