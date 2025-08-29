@@ -123,6 +123,7 @@ Note:
 | Shelly 1 PM Gen3 (shelly1pmg3)                | ❌   | >= v8.0.0  |
 | Shelly 1 Gen3 (shelly1g3)                     | ❌   | >= v8.0.0  |
 | Shelly 1L Gen3 (shelly1lg3)                   | ❌   | >= v10.2.0 |
+| Shelly 2L Gen3 (shelly2lg3)                   | ❌   | >= v10.2.0 |
 | Shelly 2 PM Gen3 (shelly2pmg3)                | ❌   | >= v8.3.0  |
 | Shelly 0/1-10V PM Gen3 (shelly0110dimg3)      | ❌   | >= v8.4.0  |
 | Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
@@ -174,7 +175,6 @@ Adapter version >= v8.2.0 required for:
 - USB powered UVC LED strip
 - Shelly DALI Dimmer Gen3
 - Shelly Wall Display X2
-- Shelly 2L Gen3
 - Shelly LoRa Add-On
 - Shelly Flood Gen4
 - Shelly EM Mini Gen4
@@ -191,6 +191,8 @@ Adapter version >= v8.2.0 required for:
 --> 
 ### **WORK IN PROGRESS**
 
+* (@mcm1957) Shelly1L Gen 3 (shelly1lg3) has been added.
+* (@mcm1957) Shelly2L Gen 3 (shelly2lg3) has been added.
 * (@mcm1957) Shelly2PM Gen 4 (shelly2pmg4) has been added.
 * (@klein0r) Shelly Shutter Gen 3 (shellyshutter) has been added.
 * (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required now.
