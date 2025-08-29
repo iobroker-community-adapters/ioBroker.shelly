@@ -177,7 +177,6 @@ Adapter version >= v8.2.0 required for:
 - Shelly 2L Gen3
 - Shelly LoRa Add-On
 - Shelly Flood Gen4
-- Shelly 2PM Gen4
 - Shelly EM Mini Gen4
 
 ## Sentry
