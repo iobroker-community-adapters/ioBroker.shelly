@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.2.0-alpha.2",
+    "version": "10.2.0",
     "news": {
       "10.2.0": {
         "en": "Role definitions for anergy states has been corrected [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) has been added.\nShelly1L Gen 3 (shelly1lg3) has been added.\nShelly2L Gen 3 (shelly2lg3) has been added.\nShelly2PM Gen 4 (shelly2pmg4) has been added.\nShelly Shutter Gen 3 (shellyshutter) has been added.\nadmin 7.6.17 and js-controller 6.0.11 (or later) are required now.\nDependencies have been updated",
