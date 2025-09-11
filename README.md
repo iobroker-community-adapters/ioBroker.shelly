@@ -157,17 +157,15 @@ Note:
 
 **Experimental** - see [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) for details (Shelly Scripting required)
 
-Adapter version >= v6.8.0 required for:
-
-- Shelly BLU Button and Button Tough 1
-- Shelly BLU Door Window
-- Shelly BLU Motion
-- Shelly BLU H&T
-
-Adapter version >= v8.2.0 required for:
-
-- Shelly BLU Wall Switch 4
-- Shelly BLU RC Button 4
+| Shelly Device                                 | Version     |
+|-----------------------------------------------| ----------- |
+| Shelly BLU Button and Button Tough 1          | >= v6.8.0   |
+| Shelly BLU Door Window                        | >= v6.8.0   |
+| Shelly BLU Motion                             | >= v6.8.0   |
+| Shelly BLU H&T                                | >= v6.8.0   |
+| Shelly BLU Wall Switch 4                      | >= v8.2.0   |
+| Shelly BLU RC Button 4                        | >= v8.2.0   |
+| Shelly BLU Distance                           | >= v10.2.0  |
 
 ## NOT Supported devices
 
