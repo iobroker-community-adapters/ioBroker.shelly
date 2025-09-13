@@ -42,7 +42,7 @@
   "dependencies": {
     "@apollon/iobroker-tools": "^0.3.0",
     "@iobroker/adapter-core": "^3.3.2",
-    "axios": "^1.11.0",
+    "axios": "^1.12.1",
     "mqtt-connection": "^4.1.0",
     "shelly-iot": "^1.1.2",
     "tcp-ping": "^0.1.1",
@@ -57,7 +57,7 @@
     "@iobroker/adapter-dev": "^1.4.0",
     "@iobroker/eslint-config": "^2.1.0",
     "@iobroker/testing": "^5.1.1",
-    "@types/node": "^24.3.0",
+    "@types/node": "^24.3.3",
     "typescript": "~5.9.2"
   },
   "main": "main.js",
