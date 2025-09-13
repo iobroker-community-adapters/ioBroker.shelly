@@ -40,6 +40,8 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 | [>= 6.8.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.8.0/docs/en/ble-devices.md)   | v0.2           |
 | [>= 6.6.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.6.0/docs/en/ble-devices.md)   | v0.1           |
 
+*Since script version v1.0 the processing of the ble message has been migrated to ioBroker. Older versions may not run on Gen3 devices, since they need more ressources to unpack the Bluetooth messages.*
+
 ## Encryption
 
 Encryption is supported since adapter version >10.0.0
@@ -152,7 +154,7 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
   "BTHome_version": 2,
   "pid": 6,
   "battery": 70,
-  "button": 1, // 1 = single press, 2 = double press, 3 = triple press, 4 = long press
+  "button": 1 // 1 = single press, 2 = double press, 3 = triple press, 4 = long press
 }
 ```
 
@@ -195,6 +197,6 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
   "battery": 100,
   "temperature": 25.9,
   "illuminance": 427,
-  "motion": 1, // 1 = motion, 0 = motion ended
+  "motion": 1 // 1 = motion, 0 = motion ended
 }
 ```
