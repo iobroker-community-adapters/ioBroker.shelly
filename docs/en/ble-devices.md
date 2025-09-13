@@ -31,7 +31,8 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 
 | Adapter version                                                                                                 | Script version |
 |-----------------------------------------------------------------------------------------------------------------|----------------|
-| [>= 10.2.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.1.0/docs/en/ble-devices.md) | v1.1           |
+| [>= 10.3.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.3.0/docs/en/ble-devices.md) | v1.2           |
+| [>= 10.2.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.2.0/docs/en/ble-devices.md) | v1.1           |
 | [>= 10.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.1.0/docs/en/ble-devices.md) | v1.0           |
 | [>= 9.1.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v9.1.0/docs/en/ble-devices.md)   | v0.5           |
 | [>= 8.2.1](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v8.2.1/docs/en/ble-devices.md)   | v0.4           |
@@ -55,8 +56,8 @@ After that, the next BLE event can be decrypted.
 Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2+) and start it:
 
 ```javascript
-// v1.1
-const SCRIPT_VERSION = '1.1';
+// v1.2
+const SCRIPT_VERSION = '1.2';
 const BTHOME_SVC_ID_STR = 'fcd2';
 
 let SHELLY_ID = undefined;
@@ -91,7 +92,8 @@ function bleScanCallback(event, result) {
         src: SHELLY_ID,
         srcBle: {
             type: result.local_name,
-            mac: result.addr
+            mac: result.addr,
+            rssi: result.rssi
         },
         payload: convertToHex(result.service_data[BTHOME_SVC_ID_STR])
     };
@@ -151,8 +153,6 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
   "pid": 6,
   "battery": 70,
   "button": 1, // 1 = single press, 2 = double press, 3 = triple press, 4 = long press
-  "rssi": -76,
-  "address": "5c:c7:c1:f2:e4:7c"
 }
 ```
 
@@ -178,9 +178,7 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
   "battery": 100,
   "illuminance": 13,
   "window": 0, // 1 = open, 0 = closed
-  "rotation": 0,
-  "rssi": -55,
-  "address": "60:ef:ab:42:ed:25"
+  "rotation": 0
 }
 ```
 
@@ -198,7 +196,5 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
   "temperature": 25.9,
   "illuminance": 427,
   "motion": 1, // 1 = motion, 0 = motion ended
-  "rssi": -51,
-  "address": "bc:02:6e:c3:93:c3"
 }
 ```

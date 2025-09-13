@@ -373,7 +373,7 @@ class Shelly extends utils.Adapter {
         if (val && val.scriptVersion && val.src && val.payload) {
             this.log.debug(`[processBleMessage] Received payload ${JSON.stringify(val.payload)} from ${val.src}`);
 
-            const expectedScriptVersion = '1.1';
+            const expectedScriptVersion = '1.2';
             if (val.scriptVersion !== expectedScriptVersion) {
                 this.log.warn(
                     `[BLE] ${val.srcBle.mac} (via ${val.src}): Script version ${val.scriptVersion} is not supported (expected ${expectedScriptVersion}), see documentation for latest version`,
@@ -565,7 +565,7 @@ class Shelly extends utils.Adapter {
                             val: JSON.stringify(
                                 {
                                     [val.src]: {
-                                        rssi: unpackedData.rssi,
+                                        rssi: val.srcBle.rssi,
                                         ts: Date.now(),
                                     },
                                 },
@@ -606,7 +606,7 @@ class Shelly extends utils.Adapter {
                             if (receivedByState) {
                                 const deviceList = JSON.parse(receivedByState.val);
                                 deviceList[val.src] = {
-                                    rssi: unpackedData.rssi,
+                                    rssi: val.srcBle.rssi,
                                     ts: Date.now(),
                                 };
 

@@ -187,6 +187,10 @@ Note:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@klein0r) Added rssi for ble to script
+
 ### 10.2.0 (2025-09-09)
 
 * (@mcm1957) Role definitions for anergy states has been corrected [#1195].
