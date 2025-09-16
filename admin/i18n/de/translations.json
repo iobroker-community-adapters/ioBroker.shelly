@@ -1,5 +1,5 @@
 {
-    "Allow to transfer errors if the adapter crash. Private data like usernames, passwords, tokens, ... will be NOT be transferd.": "Erlaube das Weiterleiten von Fehlern wenn der Adapter abstürzt. Private Daten wie z.B. Benutzername, Passwort, Token, ... werden NICHT übertragen.",
+    "Allow to transfer errors if the adapter crash. Private data like usernames, passwords, tokens, ... will be NOT be transferd.": "Erlaube das Weiterleiten von Fehlern, wenn der Adapter abstürzt. Private Daten wie z. B. Benutzername, Passwort, Token, … werden NICHT übertragen.",
     "Auto update of new firmware": "Automatisches Aktualisieren von neuer Firmware",
     "COAP listen IP": "COAP-Listen-IP",
     "CoAP and HTTP": "CoAP und HTTP",
