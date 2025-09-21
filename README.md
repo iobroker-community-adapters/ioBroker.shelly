@@ -192,7 +192,7 @@ Note:
 ### 10.3.0-alpha.0 (2025-09-21)
 
 * (@klein0r) Added rssi for ble to script
-* (@mcm1957) Shelly Flood Gen 4 (shellyfloodg4) has been added. [WIP]
+* (@mcm1957) Shelly Flood Gen 4 (shellyfloodg4) has been added.
 
 ### 10.2.0 (2025-09-09)
 
