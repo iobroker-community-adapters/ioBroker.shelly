@@ -1,0 +1,47 @@
+{
+    // Verwendet IntelliSense zum Ermitteln möglicher Attribute.
+    // Zeigen Sie auf vorhandene Attribute, um die zugehörigen Beschreibungen anzuzeigen.
+    // Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch normal",
+            "program": "${workspaceFolder}/main.js",
+            "args": ["--instance", "0", "--force", "--logs", "--debug"],
+            "request": "launch",
+            "stopOnEntry": true,
+            "console": "internalConsole",
+            "outputCapture": "std",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node",
+            "env": {"NODE_PATH":"${workspaceFolder}/.dev-server/default/node_modules"}
+        },
+    
+        {
+            "name": "Launch install",
+            "program": "${workspaceFolder}/build/main.js",
+            "args": ["--instance", "0", "--force", "--logs", "--debug", "--install"],
+            "request": "launch",
+            "stopOnEntry": true,
+            "console": "internalConsole",
+            "outputCapture": "std",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+    
+
+        {
+            "name": "Attach by Process ID",
+            "processId": "${command:PickProcess}",
+            "request": "attach",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        }
+    ]
+}
