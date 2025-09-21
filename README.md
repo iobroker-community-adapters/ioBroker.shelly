@@ -146,6 +146,9 @@ Note:
 | Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0  |
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0  |
 | Shelly 2 PM Gen4 (shelly2pmg4)                | ❌   | >= v10.2.0 |
+| Shelly Flood Gen4 (shellyfloodg4) [*]         | ❌   | >= v10.3.0 |
+
+[*] only partial support, full implementation work in progress
 
 ### Powered By Shelly
 
@@ -174,7 +177,6 @@ Note:
 - USB powered UVC LED strip
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
-- Shelly Flood Gen4
 - Shelly EM Mini Gen4
 
 ## Sentry
@@ -190,6 +192,7 @@ Note:
 ### **WORK IN PROGRESS**
 
 * (@klein0r) Added rssi for ble to script
+* (@mcm1957) Shelly Flood Gen 4 (shellyfloodg4) has been added. [WIP]
 
 ### 10.2.0 (2025-09-09)
 
