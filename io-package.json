@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.2.0",
+    "version": "10.3.0-alpha.0",
     "news": {
+      "10.3.0-alpha.0": {
+        "en": "Added rssi for ble to script\nShelly Flood Gen 4 (shellyfloodg4) has been added. [WIP]",
+        "de": "RSSI für BLE zu Skripten hinzugefügt.\nShelly Flood Gen 4 (shellyfloodg4) hinzugefügt. [WIP]",
+        "ru": "Добавлено значение RSSI для BLE в скрипт\nДобавлен Shelly Flood Gen 4 (shellyfloodg4). [В работе]",
+        "pt": "Adicionado rssi para ble no script\nShelly Flood Gen 4 (shellyfloodg4) foi adicionado. [Em progresso]",
+        "nl": "Rssi voor ble toegevoegd aan script\nShelly Flood Gen 4 (shellyfloodg4) is toegevoegd. [WIP]",
+        "fr": "Ajout de RSSI pour le BLE dans le script.\nShelly Flood Gen 4 (shellyfloodg4) a été ajouté. [Travail en cours]",
+        "it": "Aggiunto rssi per ble allo script\nShelly Flood Gen 4 (shellyfloodg4) è stato aggiunto. [In lavorazione]",
+        "es": "Agregado rssi para ble al script.\nSe ha agregado Shelly Flood Gen 4 (shellyfloodg4). [En progreso]",
+        "pl": "Dodano wskaźnik RSSI dla BLE do skryptu.\nDodano Shelly Flood Gen 4 (shellyfloodg4). [W trakcie realizacji]",
+        "uk": "Додано rssi для ble у скрипті\nДодано Shelly Flood Gen 4 (shellyfloodg4). [В роботі]",
+        "zh-cn": "为蓝牙低功耗模式（BLE）添加了信号强度指示（RSSI）至脚本。\nShelly Flood Gen 4（shellyfloodg4）已添加。【进行中】"
+      },
       "10.2.0": {
         "en": "Role definitions for anergy states has been corrected [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) has been added.\nShelly1L Gen 3 (shelly1lg3) has been added.\nShelly2L Gen 3 (shelly2lg3) has been added.\nShelly2PM Gen 4 (shelly2pmg4) has been added.\nShelly Shutter Gen 3 (shellyshutter) has been added.\nadmin 7.6.17 and js-controller 6.0.11 (or later) are required now.\nDependencies have been updated",
         "de": "Rollendefinitionen für Anergiezustände wurden korrigiert [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) wurde hinzugefügt.\nShelly1L Gen 3 (shelly1lg3) wurde hinzugefügt.\nShelly2L Gen 3 (shelly2lg3) wurde hinzugefügt.\nShelly2PM Gen 4 (shelly2pmg4) wurde hinzugefügt.\nShelly Shutter Gen 3 (Shellyshutter) wurde hinzugefügt.\nadmin 7.6.17 und js-controller 6.0.11 (oder später) sind jetzt erforderlich.\nAbhängigkeiten wurden aktualisiert",
