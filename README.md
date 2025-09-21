@@ -146,7 +146,7 @@ Note:
 | Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0  |
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0  |
 | Shelly 2 PM Gen4 (shelly2pmg4)                | ❌   | >= v10.2.0 |
-| Shelly Flood Gen4 (shellyfloodg4) [*]         | ❌   | >= v10.3.0 |
+| Shelly Flood Gen4 (shellyfloodg4)             | ❌   | >= v10.3.0 |
 
 [*] only partial support, full implementation work in progress
 
