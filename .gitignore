@@ -2,6 +2,7 @@
 .*/
 !.vscode/
 !.github/
+.commitinfo
 
 *.code-workspace
 node_modules
