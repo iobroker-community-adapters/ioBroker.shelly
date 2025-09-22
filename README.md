@@ -147,6 +147,7 @@ Note:
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0  |
 | Shelly 2 PM Gen4 (shelly2pmg4)                | ❌   | >= v10.2.0 |
 | Shelly Flood Gen4 (shellyfloodg4)             | ❌   | >= v10.3.0 |
+| Shelly Power Strip Gen4 (shellypstripg4) [*]  | ❌   | >= v10.3.0 |
 
 [*] only partial support, full implementation work in progress
 
@@ -193,6 +194,7 @@ Note:
 
 * (@klein0r) Rssi for ble has been added to script.
 * (@mcm1957) Shelly Flood Gen 4 (shellyfloodg4) has been added.
+* (@mcm1957) Shelly Power Strip Gen 4 (shellypstripg4) has been added with partial support.
 
 ### 10.2.0 (2025-09-09)
 
