@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.3.0-alpha.0",
+    "version": "10.3.0-alpha.1",
     "news": {
+      "10.3.0-alpha.1": {
+        "en": "Rssi for ble has been added to script.\nShelly Flood Gen 4 (shellyfloodg4) has been added.",
+        "de": "Rssi for ble wurde dem Skript hinzugefügt.\nShelly Flood Gen 4 (shellyfloodg4) wurde hinzugefügt.",
+        "ru": "Rssi для ble был добавлен в сценарий.\nДобавлен Shelly Flood Gen 4 (shellyfloodg4).",
+        "pt": "Rssi for ble foi adicionado ao script.\nShelly Flood Gen 4 (shellyfloodg4) foi adicionado.",
+        "nl": "Rssi for ble is toegevoegd aan het script.\nShelly Flood Gen 4 (shellyfloodg4) is toegevoegd.",
+        "fr": "Rssi for ble a été ajouté au script.\nOn a ajouté Shelly Flood Gen 4 (shellyfloodg4).",
+        "it": "Rssi for ble è stato aggiunto allo script.\nShelly Flood Gen 4 (shellyfloodg4) è stato aggiunto.",
+        "es": "Rssi for ble ha sido añadido al script.\nShelly Flood Gen 4 (shellyfloodg4) ha sido añadido.",
+        "pl": "Rssi for ble został dodany do skryptu.\nShelly Flood Gen 4 (shellyfloodg4) została dodana.",
+        "uk": "Додано Rssi для ble.\nДодано Shelly Fire Gen 4 (shellyfloodg4).",
+        "zh-cn": "脚本中添加了 Rssi for ble .\nShelly Flood Gen 4(英语:Shellyfloodg4)已经添加."
+      },
       "10.3.0-alpha.0": {
         "en": "Added rssi for ble to script\nShelly Flood Gen 4 (shellyfloodg4) has been added. [WIP]",
         "de": "RSSI für BLE zu Skripten hinzugefügt.\nShelly Flood Gen 4 (shellyfloodg4) hinzugefügt. [WIP]",
@@ -80,19 +93,6 @@
         "pl": "Dodano Shelly Pro Dimmer 0 / 1-10V PM (shellypro0110pm).\nDodano Shelly Pro RGBWW PM (shellyprorgbwwpm) - Uwaga: nadal brakuje komponentu CCT.\nDodano Shelly AZ Plug (szellyazplug).\nDodano Shelly EM Gen 3 (shellyemg3).\nDodano 'całkowitą energię zwróconą' do urządzeń Gen2 + EM.\nDodano 'Relay' do Shelly Pro EM 50 [# 1038].\nDodano Ogemray 25A (ogemray25a).\nDodano stany energii do Shelly Plus RBGW PM (shellyrgbwpm) [# 1099].\nDodano stany energii do Shelly Pro Dimmer 1 PM (shellyprodm1pm) [# 1129].\nDodano stany energii do Shelly Pro Dimmer 2 PM (shellyprodm2pm) [# 1067, # 1056, # 1037].\nDodano stany energii do Shelly Plus 0- 10V Dimmer Gen 3 (shelly0110dimg3) [# 1103].",
         "uk": "Додано Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).\nДодано Shelly Pro RGBWW PM (shellyprorgbwwpm) - Примітка: компонент CCT все ще відсутні.\nДодано Shelly AZ Штепсель (шкарпетка).\nДодано Shelly EM Gen 3 (клапаніmg3).\nДодано 'загальна подана енергія' для пристроїв Gen2+ EM.\nДодано 'Relay' в Shelly Pro EM 50 [#1038].\nДодано Ogemray 25A (ogemray25a).\nДодано енергетичні стани в Shelly Plus RBGW PM (shellyrgbwpm) [#1099].\nДодано енергетичні стани для Shelly Pro Dimmer 1 PM (shellyprodm1pm) [#1129].\nДодано енергетичні стани для Shelly Pro Dimmer 2 PM (shellyprodm2pm) [#1067, #1056, #1037].\nДодано енергетичні стани для Shelly Plus 0-10V Dimmer Gen 3 (shelly0110dimg3) [#1103].",
         "zh-cn": "增加了Shelly Pro Dimmer 0/1-10V PM(shellyprom110pm).\n添加 Shelly Pro RGBWW PM(shellyprorgbwwhpm) - 注:CCT组件仍然缺失.\n已添加 Shelly AZ 插头(shellyazplug).\n添加 Shelly EM Gen 3 (shellyemg3).\n添加到 Gen2+ EM 设备中的“ 总还原能量 ” .\n将\"Relay\"添加到Shelly Pro EM 50 [#1038].\n添加了Ogemray 25A(ogemray25a).\n添加能量状态到Shelly Plus RBGW PM(shellyrgbwpm)[#1099].\n添加能量状态为Shelly Pro Dimmer 1 PM(shellyprodm1pm)[#1129].\n添加能量状态为Shelly Pro Dimmer 2 PM(shellyprodm2pm)[#1067,#1056,#1037].\n加入能量态为Shelly Plus 0-10V Dimmer Gen 3(shelly0110dimg3)[#1103]."
-      },
-      "9.4.1": {
-        "en": "Minimum value for min_brightness fixed for dimmer1/2 [#1166]",
-        "de": "Mindestwert für min_brightness korrigiert für dimmer1/2 [#1166]",
-        "ru": "Минимальное значение min_brightness зафиксировано для диммера1/2 [#1166]",
-        "pt": "Valor mínimo para min_brightness fixado para dimmer1/2 [#1166]",
-        "nl": "Minimumwaarde voor min_helderheid vastgesteld voor dimmer1/2 [#1166]",
-        "fr": "Valeur minimale de min_brightness fixée pour dimmer1/2 [#1166]",
-        "it": "Valore minimo per min_brightness fissato per dimmer1/2 [#1166]",
-        "es": "Valor mínimo para min_brightness fijado para dimmer1/2 [#1166]",
-        "pl": "Minimalna wartość dla min _ jasność ustalona dla ściemnia1 / 2 [# 1166]",
-        "uk": "Мінімальне значення для min_brightness фіксована для dimmer1/2 [#1166]",
-        "zh-cn": "定在 dimmer1/2 上的最小值 [# 1166]"
       }
     },
     "titleLang": {
