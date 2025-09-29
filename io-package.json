@@ -3,45 +3,6 @@
     "name": "shelly",
     "version": "10.3.0-alpha.2",
     "news": {
-      "10.3.0-alpha.2": {
-        "en": "Rssi for ble has been added to script.\nShelly Flood Gen 4 (shellyfloodg4) has been added.\nShelly Power Strip Gen 4 (shellypstripg4) has been added with partial support.",
-        "de": "Rssi for ble wurde dem Skript hinzugefügt.\nShelly Flood Gen 4 (shellyfloodg4) wurde hinzugefügt.\nShelly Power Strip Gen 4 (shellypstripg4) wurde mit teilweiser Unterstützung hinzugefügt.",
-        "ru": "Rssi для ble был добавлен в сценарий.\nДобавлен Shelly Flood Gen 4 (shellyfloodg4).\nShelly Power Strip Gen 4 (shellypstripg4) был добавлен с частичной поддержкой.",
-        "pt": "Rssi for ble foi adicionado ao script.\nShelly Flood Gen 4 (shellyfloodg4) foi adicionado.\nShelly Power Strip Gen 4 (shellypstripg4) foi adicionado com suporte parcial.",
-        "nl": "Rssi for ble is toegevoegd aan het script.\nShelly Flood Gen 4 (shellyfloodg4) is toegevoegd.\nShelly Power Strip Gen 4 (shellypstripg4) is toegevoegd met gedeeltelijke ondersteuning.",
-        "fr": "Rssi for ble a été ajouté au script.\nOn a ajouté Shelly Flood Gen 4 (shellyfloodg4).\nShelly Power Strip Gen 4 (shellypstripg4) a été ajouté avec un support partiel.",
-        "it": "Rssi for ble è stato aggiunto allo script.\nShelly Flood Gen 4 (shellyfloodg4) è stato aggiunto.\nShelly Power Strip Gen 4 (shellypstripg4) è stato aggiunto con supporto parziale.",
-        "es": "Rssi for ble ha sido añadido al script.\nShelly Flood Gen 4 (shellyfloodg4) ha sido añadido.\nShelly Power Strip Gen 4 (shellypstripg4) se ha añadido con apoyo parcial.",
-        "pl": "Rssi for ble został dodany do skryptu.\nShelly Flood Gen 4 (shellyfloodg4) została dodana.\nShelly Power Strip Gen 4 (shellypstripg4) została dodana z częściowym wsparciem.",
-        "uk": "Додано Rssi для ble.\nДодано Shelly Fire Gen 4 (shellyfloodg4).\nShelly Power Strip Gen 4 (shellypstripg4) додано часткову підтримку.",
-        "zh-cn": "脚本中添加了 Rssi for ble .\nShelly Flood Gen 4(英语:Shellyfloodg4)已经添加.\nShelly Power Straff Gen 4 (shellypstripg4) 已添加部分支持."
-      },
-      "10.3.0-alpha.1": {
-        "en": "Rssi for ble has been added to script.\nShelly Flood Gen 4 (shellyfloodg4) has been added.",
-        "de": "Rssi for ble wurde dem Skript hinzugefügt.\nShelly Flood Gen 4 (shellyfloodg4) wurde hinzugefügt.",
-        "ru": "Rssi для ble был добавлен в сценарий.\nДобавлен Shelly Flood Gen 4 (shellyfloodg4).",
-        "pt": "Rssi for ble foi adicionado ao script.\nShelly Flood Gen 4 (shellyfloodg4) foi adicionado.",
-        "nl": "Rssi for ble is toegevoegd aan het script.\nShelly Flood Gen 4 (shellyfloodg4) is toegevoegd.",
-        "fr": "Rssi for ble a été ajouté au script.\nOn a ajouté Shelly Flood Gen 4 (shellyfloodg4).",
-        "it": "Rssi for ble è stato aggiunto allo script.\nShelly Flood Gen 4 (shellyfloodg4) è stato aggiunto.",
-        "es": "Rssi for ble ha sido añadido al script.\nShelly Flood Gen 4 (shellyfloodg4) ha sido añadido.",
-        "pl": "Rssi for ble został dodany do skryptu.\nShelly Flood Gen 4 (shellyfloodg4) została dodana.",
-        "uk": "Додано Rssi для ble.\nДодано Shelly Fire Gen 4 (shellyfloodg4).",
-        "zh-cn": "脚本中添加了 Rssi for ble .\nShelly Flood Gen 4(英语:Shellyfloodg4)已经添加."
-      },
-      "10.3.0-alpha.0": {
-        "en": "Added rssi for ble to script\nShelly Flood Gen 4 (shellyfloodg4) has been added. [WIP]",
-        "de": "RSSI für BLE zu Skripten hinzugefügt.\nShelly Flood Gen 4 (shellyfloodg4) hinzugefügt. [WIP]",
-        "ru": "Добавлено значение RSSI для BLE в скрипт\nДобавлен Shelly Flood Gen 4 (shellyfloodg4). [В работе]",
-        "pt": "Adicionado rssi para ble no script\nShelly Flood Gen 4 (shellyfloodg4) foi adicionado. [Em progresso]",
-        "nl": "Rssi voor ble toegevoegd aan script\nShelly Flood Gen 4 (shellyfloodg4) is toegevoegd. [WIP]",
-        "fr": "Ajout de RSSI pour le BLE dans le script.\nShelly Flood Gen 4 (shellyfloodg4) a été ajouté. [Travail en cours]",
-        "it": "Aggiunto rssi per ble allo script\nShelly Flood Gen 4 (shellyfloodg4) è stato aggiunto. [In lavorazione]",
-        "es": "Agregado rssi para ble al script.\nSe ha agregado Shelly Flood Gen 4 (shellyfloodg4). [En progreso]",
-        "pl": "Dodano wskaźnik RSSI dla BLE do skryptu.\nDodano Shelly Flood Gen 4 (shellyfloodg4). [W trakcie realizacji]",
-        "uk": "Додано rssi для ble у скрипті\nДодано Shelly Flood Gen 4 (shellyfloodg4). [В роботі]",
-        "zh-cn": "为蓝牙低功耗模式（BLE）添加了信号强度指示（RSSI）至脚本。\nShelly Flood Gen 4（shellyfloodg4）已添加。【进行中】"
-      },
       "10.2.0": {
         "en": "Role definitions for anergy states has been corrected [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) has been added.\nShelly1L Gen 3 (shelly1lg3) has been added.\nShelly2L Gen 3 (shelly2lg3) has been added.\nShelly2PM Gen 4 (shelly2pmg4) has been added.\nShelly Shutter Gen 3 (shellyshutter) has been added.\nadmin 7.6.17 and js-controller 6.0.11 (or later) are required now.\nDependencies have been updated",
         "de": "Rollendefinitionen für Anergiezustände wurden korrigiert [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) wurde hinzugefügt.\nShelly1L Gen 3 (shelly1lg3) wurde hinzugefügt.\nShelly2L Gen 3 (shelly2lg3) wurde hinzugefügt.\nShelly2PM Gen 4 (shelly2pmg4) wurde hinzugefügt.\nShelly Shutter Gen 3 (Shellyshutter) wurde hinzugefügt.\nadmin 7.6.17 und js-controller 6.0.11 (oder später) sind jetzt erforderlich.\nAbhängigkeiten wurden aktualisiert",
