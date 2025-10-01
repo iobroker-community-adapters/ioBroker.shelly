@@ -76,7 +76,7 @@ jobs:
           
       - name: Check for existing issues
         id: issue-check
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { data: issues } = await github.rest.issues.listForRepo({
@@ -101,7 +101,7 @@ jobs:
             
       - name: Create initial setup issue
         if: steps.version-check.outputs.setup_needed == 'true' && steps.issue-check.outputs.has_existing_issue == 'false'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const title = '🤖 Setup ioBroker GitHub Copilot Instructions';
@@ -140,7 +140,7 @@ jobs:
             
       - name: Create update issue  
         if: steps.version-check.outputs.update_needed == 'true' && steps.issue-check.outputs.has_existing_issue == 'false'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const title = '🤖 Update ioBroker Copilot Instructions Template';
