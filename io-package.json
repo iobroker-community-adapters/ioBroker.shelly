@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.3.0-alpha.3",
+    "version": "10.3.0",
     "news": {
-      "10.3.0-alpha.3": {
+      "10.3.0": {
         "en": "Rssi for ble has been added to script.\nShelly Flood Gen 4 (shellyfloodg4) has been added.\nShelly Power Strip Gen 4 (shellypstripg4) has been added with partial support.",
         "de": "Rssi for ble wurde dem Skript hinzugefügt.\nShelly Flood Gen 4 (shellyfloodg4) wurde hinzugefügt.\nShelly Power Strip Gen 4 (shellypstripg4) wurde mit teilweiser Unterstützung hinzugefügt.",
         "ru": "Rssi для ble был добавлен в сценарий.\nДобавлен Shelly Flood Gen 4 (shellyfloodg4).\nShelly Power Strip Gen 4 (shellypstripg4) был добавлен с частичной поддержкой.",
