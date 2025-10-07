@@ -36,7 +36,7 @@ jobs:
       - name: Create comment
         id: create_comment_ok
         if: ${{ contains(github.event.issue.body, steps.get_npm_version.outputs.LATEST_VERSION) }}
-        uses: peter-evans/create-or-update-comment@v4
+        uses: peter-evans/create-or-update-comment@v5
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
@@ -51,7 +51,7 @@ jobs:
       - name: Create comment (not beta version)
         id: create_comment_version
         if: ${{ !contains(github.event.issue.body, steps.get_npm_version.outputs.LATEST_VERSION) }}
-        uses: peter-evans/create-or-update-comment@v4
+        uses: peter-evans/create-or-update-comment@v5
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
