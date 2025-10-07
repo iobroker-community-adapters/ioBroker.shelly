@@ -21,6 +21,17 @@
 
 * (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
+## 9.5.1 (2025-05-10)
+
+* (@mcm1957) ATTENTION: Reworked configuration of inputs could effect some devices.
+* (@mcm1957) ResetPower has been added to Shelly switches supporting power measurement. [#1156]
+* (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - configuration of inputs reworked.
+* (@mcm1957) Shelly Plus Uni (shellyplusuni) - support to reset counters added.
+* (@mcm1957) Added sensors (Temperature, Voltmeter, Humidity, analog Input) to Shelly Plus Uni (shellyplusuni).
+* (@mcm1957) Issues reported by repositor checker have been fixed.
+* (@mcm1957) Dependencies have been updated
+
 ## 9.5.0 (2025-05-03)
 
 * (@mcm1957) Added Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm).

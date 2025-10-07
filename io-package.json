@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.3.0",
+    "version": "10.4.0-alpha.0",
     "news": {
+      "10.4.0-alpha.0": {
+        "en": "Shelly LinkedGo Smart Thermost (st1820) has been added as prototype for diagnostic purposes only.",
+        "de": "Shelly LinkedGo Smart Thermost (st1820) wurde als Prototyp nur für diagnostische Zwecke hinzugefügt.",
+        "ru": "Shelly LinkedGo Smart Thermost (st1820) был добавлен в качестве прототипа только для диагностических целей.",
+        "pt": "Shelly LinkedGo Smart Thermost (st1820) foi adicionado como protótipo apenas para fins de diagnóstico.",
+        "nl": "Shelly LinkedGo Smart Thermost (st1820) is toegevoegd als prototype alleen voor diagnostische doeleinden.",
+        "fr": "Shelly LinkedGo Smart Thermost (st1820) a été ajouté comme prototype à des fins de diagnostic seulement.",
+        "it": "Shelly LinkedGo Smart Thermost (st1820) è stato aggiunto come prototipo solo per scopi diagnostici.",
+        "es": "Shelly LinkedGo Smart Thermost (st1820) se ha añadido como prototipo únicamente para fines de diagnóstico.",
+        "pl": "Shelly LinkedGo Smart Thermost (st1820) została dodana jako prototyp wyłącznie do celów diagnostycznych.",
+        "uk": "Shelly LinkedGo Smart Thermost (st1820) додано в якості прототипу для діагностичних цілей.",
+        "zh-cn": "Shelly LinkedGo Smart Thormerd(st1820)被添加为原型,仅用于诊断目的."
+      },
       "10.3.0": {
         "en": "Rssi for ble has been added to script.\nShelly Flood Gen 4 (shellyfloodg4) has been added.\nShelly Power Strip Gen 4 (shellypstripg4) has been added with partial support.",
         "de": "Rssi for ble wurde dem Skript hinzugefügt.\nShelly Flood Gen 4 (shellyfloodg4) wurde hinzugefügt.\nShelly Power Strip Gen 4 (shellypstripg4) wurde mit teilweiser Unterstützung hinzugefügt.",
