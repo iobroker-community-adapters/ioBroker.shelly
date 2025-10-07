@@ -179,6 +179,7 @@ Note:
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
 - Shelly EM Mini Gen4
+- Shelly LinkedGo Smart Thermost (st1820)
 
 ## Sentry
 
@@ -190,6 +191,10 @@ Note:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@mcm1957) Shelly LinkedGo Smart Thermost (st1820) has been added as prototype for diagnostic purposes only.
+
 ### 10.3.0 (2025-10-06)
 
 * (@klein0r) Rssi for ble has been added to script.
