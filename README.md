@@ -191,8 +191,9 @@ Note:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 10.4.0-alpha.0 (2025-10-07)
+### 10.4.0-alpha.0 (2025-10-07)0
 
+* (@mcm1957) pos_control indicator has been added to devices supporting cover operation.
 * (@mcm1957) Shelly LinkedGo Smart Thermost (st1820) has been added as prototype for diagnostic purposes only.
 
 ### 10.3.0 (2025-10-06)
