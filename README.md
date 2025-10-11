@@ -179,7 +179,10 @@ Note:
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
 - Shelly EM Mini Gen4
-- Shelly LinkedGo Smart Thermost (st1820)
+- Shelly LinkedGo Smart Thermost (st1820) (*)
+- Shelly Frankever Smart Sprinkler Controller (irrigation) (*)
+
+(*) investigations in progress
 
 ## Sentry
 
@@ -195,6 +198,7 @@ Note:
 
 * (@mcm1957) Slat control added to Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 and Shelly 2PM Gen 4.
 * (@mcm1957) posControl indicator has been added to devices supporting cover operation.
+* (@mcm1957) Shelly Frankever Smart Sprinkler Controller (irrigation) has been added as prototype for diagnostic purposes only.
 * (@mcm1957) Shelly LinkedGo Smart Thermost (st1820) has been added as prototype for diagnostic purposes only.
 * (@mcm1957) Log adapter version if unknown device is detected.
 * (@mcm1957) Dependencies have been updated
