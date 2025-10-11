@@ -194,7 +194,7 @@ Note:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 10.4.0-alpha.1 (2025-10-09)
+### **WORK IN PROGRESS**
 
 * (@mcm1957) Slat control added to Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 and Shelly 2PM Gen 4.
 * (@mcm1957) posControl indicator has been added to devices supporting cover operation.
