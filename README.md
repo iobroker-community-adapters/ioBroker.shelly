@@ -80,14 +80,14 @@ Please connect you devices directly to your (W)LAN and use a classic WLAN Repeat
 |------------------------------------------------| ---- |-----------|
 | Shelly Plus 1 (shellyplus1)                    | ❌   | >= v5.0.0 |
 | Shelly Plus 1 PM (shellyplus1pm)               | ❌   | >= v5.0.0 |
-| Shelly Plus 2 PM (shellyplus2pm)               | ❌   | >= v5.2.0 |
+| Shelly Plus 2 PM (shellyplus2pm) (2)           | ❌   | >= v5.2.0 |
 | Shelly Plus i4 (shellyplusi4)                  | ❌   | >= v5.3.0 |
 | Shelly Plus i4 DC (shellyplusi4)               | ❌   | >= v5.3.0 |
 | Shelly Plus 0-10V (shellyplus010v)             | ❌   | >= v6.9.0 |
 | Shelly Pro 1 (shellypro1)                      | ❌   | >= v5.2.0 |
 | Shelly Pro 1 PM (shellypro1pm)                 | ❌   | >= v5.2.0 |
 | Shelly Pro 2 (shellypro2)                      | ❌   | >= v5.2.0 |
-| Shelly Pro 2 PM (shellypro2pm)                 | ❌   | >= v5.2.0 |
+| Shelly Pro 2 PM (shellypro2pm) (2)             | ❌   | >= v5.2.0 |
 | Shelly Pro 3 (shellypro3)                      | ❌   | >= v6.2.0 |
 | Shelly Pro 4 PM (shellypro4pm)                 | ❌   | >= v5.0.0 |
 | Shelly Pro 3 EM (shellypro3em)                 | ❌   | >= v6.4.0 |
@@ -96,6 +96,7 @@ Please connect you devices directly to your (W)LAN and use a classic WLAN Repeat
 | Shelly Pro Dimmer 1 PM (shellyprodm1pm)        | ❌   | >= v8.0.0 |
 | Shelly Pro Dimmer 2 PM (shellyprodm2pm)        | ❌   | >= v7.0.0 |
 | Shelly Pro EM 2x50A                            | ❌   | >= v8.1.0 |
+| Shelly Pro Dual Cover PM (shellypro2cover) (2) | ❌   | >= v6.5.0 | 
 | Shelly Plus H&T (shellyplusht)                 | ❌   | >= v6.2.0 |
 | Shelly Plus Smoke (shellyplussmoke)            | ❌   | >= v6.5.0 |
 | Shelly Bluetooth Gateway (shellyblugw)         | ❌   | >= v6.5.0 |
@@ -109,8 +110,9 @@ Please connect you devices directly to your (W)LAN and use a classic WLAN Repeat
 | Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm) | ❌   | >= v9.5.0 |
 | Shelly Pro RGBWW PM (shellyprorgbwwpm) (1)     | ❌   | >= v9.5.0 |
 
-Note:
+Notes:
 (1) CCT component not yet available
+(2) slat control requires >= v10.4.0
 
 ### Generation 3 (Gen 3)
 
@@ -124,7 +126,7 @@ Note:
 | Shelly 1 Gen3 (shelly1g3)                     | ❌   | >= v8.0.0  |
 | Shelly 1L Gen3 (shelly1lg3)                   | ❌   | >= v10.2.0 |
 | Shelly 2L Gen3 (shelly2lg3)                   | ❌   | >= v10.2.0 |
-| Shelly 2 PM Gen3 (shelly2pmg3)                | ❌   | >= v8.3.0  |
+| Shelly 2 PM Gen3 (shelly2pmg3) (1)            | ❌   | >= v8.3.0  |
 | Shelly 0/1-10V PM Gen3 (shelly0110dimg3)      | ❌   | >= v8.4.0  |
 | Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
 | Shelly BLU Gateway Gen3 (shellyblugwg3)       | ❌   | >= v8.5.0  |
@@ -134,22 +136,27 @@ Note:
 | Shelly Outdoor Plug S Gen3 (shellyoutdoorsg3) | ❌   | >= v9.3.0  |
 | Shelly AZ Plug (shellyazplug)                 | ❌   | >= v9.5.0  |
 | Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
-| Shelly Shutter (shellyshutter)                | ❌   | >= v10.2.0 |
+| Shelly Shutter (shellyshutter) (1)            | ❌   | >= v10.2.0 |
 | Shelly DALI Dimmer Gen3 (shellyddimmerg3)     | ❌   | >= v10.2.0 |
+
+Notes:
+(1) slat control requires >= v10.4.0
 
 ### Generation 4 (Gen 4)
 
 | Shelly Device                                 | CoAP | MQTT       |
 |-----------------------------------------------| ---- | ---------- |
 | Shelly 1 Gen4 (shelly1g4)                     | ❌   | >= v9.4.0  |
-| Shelly 1 PM Gen4 (shelly1pmg4)                | ❌   | >= v9.4.0  |
+| Shelly 1 PM Gen4 (shelly1pmg4) (1)            | ❌   | >= v9.4.0  |
 | Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0  |
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0  |
 | Shelly 2 PM Gen4 (shelly2pmg4)                | ❌   | >= v10.2.0 |
 | Shelly Flood Gen4 (shellyfloodg4)             | ❌   | >= v10.3.0 |
-| Shelly Power Strip Gen4 (shellypstripg4) [*]  | ❌   | >= v10.3.0 |
+| Shelly Power Strip Gen4 (shellypstripg4) (*)  | ❌   | >= v10.3.0 |
 
-[*] only partial support, full implementation work in progress
+Notes:
+(1) slat control requires >= v10.4.0
+(*) only partial support, full implementation work in progress
 
 ### Powered By Shelly
 
