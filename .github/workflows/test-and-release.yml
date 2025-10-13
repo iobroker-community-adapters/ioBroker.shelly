@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: ioBroker/testing-action-check@v1
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           lint: true
 
   adapter-tests:
@@ -52,6 +52,11 @@ jobs:
   deploy:
     needs: [check-and-lint, adapter-tests]
 
+    # Permissions are required to create Github releases and npm trusted publishing
+    permissions:
+      contents: write
+      id-token: write
+
     if: |
       contains(github.event.head_commit.message, '[skip ci]') == false &&
       github.event_name == 'push' &&
@@ -62,8 +67,8 @@ jobs:
     steps:
       - uses: ioBroker/testing-action-deploy@v1
         with:
-          node-version: '20.x'
-          npm-token: ${{ secrets.NPM_TOKEN }}
+          node-version: '22.x'
+          # npm-token: ${{ secrets.NPM_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
           sentry-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
