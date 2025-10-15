@@ -68,7 +68,7 @@ jobs:
       - uses: ioBroker/testing-action-deploy@v1
         with:
           node-version: '22.x'
-          # npm-token: ${{ secrets.NPM_TOKEN }}
+          # # npm-token: ${{ secrets.NPM_TOKEN }}  # Commented out for migration to Trusted Publishing
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
           sentry-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
