@@ -176,7 +176,7 @@ Notes:
 | Shelly BLU H&T                                | >= v6.8.0   |
 | Shelly BLU Wall Switch 4                      | >= v8.2.0   |
 | Shelly BLU RC Button 4                        | >= v8.2.0   |
-| Shelly BLU Distance                           | >= v10.2.0  |
+| Shelly BLU Distance                           | >= v10.4.1  |
 
 ## NOT Supported devices
 
@@ -204,6 +204,7 @@ Notes:
 ### **WORK IN PROGRESS**
 * (@mcm1957) Missing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].
 * (@mcm1957) Dependencies have been updated
+* (@klein0r) Added distance support to ble sensors
 
 ### 10.4.0 (2025-10-13)
 
