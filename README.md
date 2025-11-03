@@ -176,7 +176,7 @@ Notes:
 | Shelly BLU H&T                                | >= v6.8.0   |
 | Shelly BLU Wall Switch 4                      | >= v8.2.0   |
 | Shelly BLU RC Button 4                        | >= v8.2.0   |
-| Shelly BLU Distance                           | >= v10.2.0  |
+| Shelly BLU Distance                           | >= v10.4.1  |
 
 ## NOT Supported devices
 
@@ -201,6 +201,10 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (@klein0r) Added distance support to ble sensors
+
 ### 10.4.0 (2025-10-13)
 
 * (@mcm1957) Slat control added to Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 and Shelly 2PM Gen 4.

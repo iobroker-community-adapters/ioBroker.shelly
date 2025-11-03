@@ -538,9 +538,12 @@ class Shelly extends utils.Adapter {
                 }
 
                 if (unpackedData !== null) {
+                    this.log.debug(
+                        `[processBleMessage] Processing (decrypted) payload ${JSON.stringify(unpackedData)} from ${val.src}`,
+                    );
+
                     const typesList = {
                         moisture: { type: 'number', unit: '%' },
-                        soil: { type: 'number', unit: 'µS/cm' },
                         battery: { type: 'number', unit: '%' },
                         temperature: { type: 'number', unit: '°C' },
                         humidity: { type: 'number', unit: '%' },
@@ -552,6 +555,8 @@ class Shelly extends utils.Adapter {
                             states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 254: 'Long' },
                         },
                         rotation: { type: 'number' },
+                        distance_m: { type: 'number', unit: 'm' },
+                        distance_mm: { type: 'number', unit: 'mm' },
                     };
 
                     const pidState = await this.getStateAsync(`ble.${val.srcBle.mac}.pid`);
