@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.4.0",
+    "version": "10.4.1",
     "news": {
+      "10.4.1": {
+        "en": "Shelly pro 3em400 has been added as dedicated device to improve detection (shellypro3em400) [#1269].\nMissing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAdded distance support to ble sensors\nDependencies have been updated",
+        "de": "Shelly pro 3em400 wurde als dediziertes Gerät hinzugefügt, um die Erkennung zu verbessern  (shellypro3em400) [#1269].\nFehlende Energiezustände wurden beim Shelly Dimmer Gen 3 (shellydimmerg3)hinzugefügt [#1274] .\nZusätzliche Abstandsunterstützung für ble Sensoren wurde im plementiert.\nAbhängigkeiten wurden aktualisiert",
+        "ru": "Shelly Pro 3em400 был добавлен в качестве специального устройства для улучшения детектирования (shellypro3em400) [#1269].\nНедостающие энергетические состояния были добавлены к Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nДобавлена поддержка расстояния до датчиков ble\nЗависимости были обновлены",
+        "pt": "Shelly pro 3em400 foi adicionado como dispositivo dedicado para melhorar o detetio (shellypro3em400) [#1269].\nOs estados de energia em falta foram adicionados a Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAdicionado suporte de distância aos sensores ble\nAs dependências foram atualizadas",
+        "nl": "Shelly pro 3em400 is toegevoegd als toegewijd apparaat om detectio te verbeteren (shellypro3em400) [#1269].\nOntbrekende energietoestanden zijn toegevoegd aan Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nToegevoegde afstandsondersteuning aan ble sensors\nAfhankelijkheden zijn bijgewerkt",
+        "fr": "Shelly pro 3em400 a été ajouté en tant qu'appareil dédié pour améliorer le detectio (shellypro3em400) [#1269].\nDes états d'énergie manquants ont été ajoutés à Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAjout d'un support de distance aux capteurs ble\nLes dépendances ont été actualisées",
+        "it": "Shelly pro 3em400 è stato aggiunto come dispositivo dedicato per migliorare detectionio (shellypro3em400) [#1269].\nGli stati energetici mancanti sono stati aggiunti a Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nSupporto a distanza aggiunto ai sensori ble\nLe dipendenze sono state aggiornate",
+        "es": "Shelly pro 3em400 se ha añadido como dispositivo dedicado para mejorar detectio (shellypro3em400) [#1269].\nLos estados de energía perdidos se han añadido a Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAñadido soporte de distancia a sensores de la ble\nSe han actualizado las dependencias",
+        "pl": "Shelly pro 3em400 została dodana jako dedykowane urządzenie do poprawy detectio (shelpro3em400) [# 1269].\nZaginione stany energetyczne zostały dodane do Shelly Dimmer Gen 3 (shellydimmerg3) [# 1274].\nDodano wsparcie odległości do czujników ble\nZaktualizowano zależności",
+        "uk": "Shelly Pro 3em400 додано в якості виділеного пристрою для поліпшення детектива (shellypro3em400) [#1269].\nДо Shelly Dimmer Gen 3 (shellydimmerg3).\nДодана підтримка дистанційного керування датчиками\nЗалежність було оновлено",
+        "zh-cn": "Shelly pro 3em400作为专用设备被添加,以改善检测器(shellypro3em400)[#1269].\n缺失的能量状态已被加入雪莉·迪默Gen 3 (shellydimerg3)[#1274].\n添加到 ble 传感器的距离支持\n依赖关系已更新"
+      },
       "10.4.0": {
         "en": "Slat control added to Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 and Shelly 2PM Gen 4.\nLog adapter version if unknown device is detected.\nposControl indicator has been added to devices supporting cover operation.\nShelly Frankever Smart Sprinkler Controller (irrigation) has been added as prototype for diagnostic purposes only.\nShelly LinkedGo Smart Thermost (st1820) has been added as prototype for diagnostic purposes only.\nDependencies have been updated",
         "de": "Slat Control wurde zu Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 und Shelly 2PM Gen 4 hinzugefügt.\nDie Adapterversion wird nun gelogged, wenn ein unbekanntes Gerät erkannt wird.\nposControl-Indikator wurde zu Geräten hinzugefügt, die den DCovermodus unterstützen.\nFrankever Smart Sprinkler Controller (irrigation) wurde als Prototyp nur für diagnostische Zwecke hinzugefügt.\nShelly LinkedGo Smart Thermost (st1820) wurde als Prototyp nur für diagnostische Zwecke hinzugefügt.\nAbhängigkeiten wurden aktualisiert",

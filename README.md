@@ -201,7 +201,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.4.1 (2025-11-03)
 * (@mcm1957) Shelly pro 3em400 has been added as dedicated device to improve detectio (shellypro3em400) [#1269].
 * (@mcm1957) Missing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].
 * (@klein0r) Added distance support to ble sensors
@@ -239,12 +239,6 @@ Notes:
 * (@klein0r) Added transformed voltage for voltmeter
 * (@klein0r) Improved logging of mqtt authentication failures
 * (@klein0r) Acknowledge new encryption keys for bthome encryption
-
-### 10.0.0 (2025-05-30)
-
-* (@mcm1957) ATTENTION: Adapter requires BLE Script v1.0 now. See [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md).
-* (@klein0r) Moved BTHome decoding to adapter (save memory on devices)
-* (@klein0r) Allow encrypted payloads of BTHome devices (set encryption key in state)
 
 ## License
 
