@@ -22,6 +22,10 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
   }
 }
 ```
+### Video tutorials for shelly BLE on Youtube (german)
+
+- https://www.youtube.com/watch?v=qOjEFsCjhLg 
+- https://www.youtube.com/watch?v=FubPHOsktbU
 
 ### Requirements
 
