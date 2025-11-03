@@ -166,7 +166,7 @@ Notes:
 
 ### Bluetooth Low Energy (BLU)
 
-**Experimental** - see [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) for details (Shelly Scripting required)
+**Experimental** - see [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required)
 
 | Shelly Device                                 | Version     |
 |-----------------------------------------------| ----------- |
