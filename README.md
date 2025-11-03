@@ -202,9 +202,10 @@ Notes:
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+* (@mcm1957) Shelly pro 3em400 has been added as dedicated device to improve detectio (shellypro3em400) [#1269].
 * (@mcm1957) Missing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].
-* (@mcm1957) Dependencies have been updated
 * (@klein0r) Added distance support to ble sensors
+* (@mcm1957) Dependencies have been updated
 
 ### 10.4.0 (2025-10-13)
 
