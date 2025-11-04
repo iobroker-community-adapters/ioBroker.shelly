@@ -57,6 +57,11 @@ Verschlüsselung wird seit Adapterversion >10.0.0 unterstützt
 
 Danach kann das nächste BLE-Ereignis entschlüsselt werden.
 
+## Bluetooth aktivieren
+
+**WICHTIG**
+Bitte Bluetooth-Funktionalität am Shelly aktivieren, der als Gateway verwendet werden soll.
+
 ## JavaScript (Shelly Scripting)
 
 Dieses Skript im Shelly Scripting-Bereich eines Shelly Plus- oder Pro-Geräts (Gen 2+) hinzufügen und starten:
