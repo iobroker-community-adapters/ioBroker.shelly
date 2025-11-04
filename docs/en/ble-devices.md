@@ -57,6 +57,11 @@ Encryption is supported since adapter version >10.0.0
 
 After that, the next BLE event can be decrypted.
 
+## Enable Bluetooth
+
+**IMPORTANT**
+Do not forget to enable bluetooth functionalita at the Shelly to be used as gateway.
+
 ## JavaScript (Shelly Scripting)
 
 Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2+) and start it:
