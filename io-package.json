@@ -103,6 +103,7 @@
     "docs": {
       "en": [
         "docs/en/README.md",
+        "docs/en/ble-devices.md",
         "docs/en/protocol-coap.md",
         "docs/en/protocol-mqtt.md",
         "docs/en/restricted-login.md",
@@ -112,6 +113,7 @@
       ],
       "de": [
         "docs/de/README.md",
+        "docs/de/ble-devices.md",
         "docs/de/protocol-coap.md",
         "docs/de/protocol-mqtt.md",
         "docs/de/restricted-login.md",
