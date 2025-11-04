@@ -60,7 +60,7 @@ Danach kann das nächste BLE-Ereignis entschlüsselt werden.
 ## Bluetooth aktivieren
 
 **WICHTIG**
-Bitte Bluetooth-Funktionalität am Shelly aktivieren, der als Gateway verwendet werden soll.
+Bitte nicht vergessen die Bluetooth-Funktionalität am Shelly der als Gateway verwendet werden soll zu aktivieren.
 
 ## JavaScript (Shelly Scripting)
 
