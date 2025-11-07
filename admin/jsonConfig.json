@@ -420,7 +420,42 @@
                     "label": "Default QoS"
                 }
             }
+            "enableGen1MqttServer": {
+             "newLine": true,
+             "type": "checkbox",
+             "label": "Enable internal Gen1 MQTT Server",
+             "default": true
+            },
+            "gen1HttpPollIntervalMs": {
+              "newLine": true,
+             "type": "number",
+             "label": "Gen1 HTTP Poll Interval (ms)",
+             "default": 7000,
+             "min": 1000,
+              "step": 1000
+            }
         },
+        "_rpc": {
+  "type": "panel",
+  "label": "RPC (Gen2+) settings",
+  "items": {
+    "rpcPollIntervalMs": {
+      "type": "number",
+      "label": "RPC Poll Interval (ms)",
+      "default": 5000,
+      "min": 1000,
+      "step": 1000
+    },
+    "devices": {
+      "type": "table",
+      "label": "Configured Devices",
+      "items": {
+        "ip": { "type": "text", "label": "IP Address" },
+        "name": { "type": "text", "label": "Device Name" }
+      }
+    }
+  }
+},
         "_coap": {
             "hidden": "data.protocol !== 'coap'",
             "type": "panel",
