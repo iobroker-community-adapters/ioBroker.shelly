@@ -436,15 +436,15 @@
             }
         },
         "_rpc": {
-  "type": "panel",
-  "label": "RPC (Gen2+) settings",
-  "items": {
-    "rpcPollIntervalMs": {
-      "type": "number",
-      "label": "RPC Poll Interval (ms)",
-      "default": 5000,
-      "min": 1000,
-      "step": 1000
+          "type": "panel",
+         "label": "RPC (Gen2+) settings",
+          "items": {
+           "rpcPollIntervalMs": {
+             "type": "number",
+              "label": "RPC Poll Interval (ms)",
+             "default": 5000,
+             "min": 1000,
+             "step": 1000
     },
     "devices": {
       "type": "table",
@@ -455,7 +455,7 @@
       }
     }
   }
-},
+        },
         "_coap": {
             "hidden": "data.protocol !== 'coap'",
             "type": "panel",
