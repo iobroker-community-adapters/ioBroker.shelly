@@ -1,7 +1,7 @@
 {
   "name": "iobroker.shelly",
   "version": "10.4.1",
-  "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
+  "description": "Integrate your Shelly devices into ioBroker via MQTT, CoAP (Gen1) or RPC (Gen2+)",
   "author": {
     "name": "Thorsten Stueben",
     "email": "thorsten@stueben.de"
@@ -47,7 +47,9 @@
     "shelly-iot": "^1.1.2",
     "tcp-ping": "^0.1.1",
     "xml2js": "^0.6.2",
-    "xmlbuilder": "^15.1.1"
+    "xmlbuilder": "^15.1.1",
+    "aedes": "^0.46.5"
+
   },
   "devDependencies": {
     "@alcalzone/release-script": "^5.0.0",

@@ -3,6 +3,8 @@
 const crypto = require('node:crypto');
 
 const utils = require('@iobroker/adapter-core');
+const DeviceRegistry = require('./lib/deviceRegistry');
+const ShellyRpcClient = require('./lib/protocol/rpc');
 const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
@@ -30,6 +32,11 @@ class Shelly extends utils.Adapter {
         this.eventEmitter = new EventEmitter();
         this.bleDecoder = new BleDecoder();
 
+        // NEU: Hybrid-Logik
+        this.registry = new DeviceRegistry(this.log);
+        this.rpc = new ShellyRpcClient(this.log);
+        this.serverMqtt = null; // wird nur gesetzt, wenn Gen1-MQTT-Server aktiv ist
+
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('fileChange', this.onFileChange.bind(this));
@@ -37,26 +44,111 @@ class Shelly extends utils.Adapter {
     }
 
     async onReady() {
+    try {
+        // Upgrade older config
+        if (await this.migrateConfig()) {
+            return;
+        }
+
+        this.eventEmitter.setMaxListeners(Infinity);
+
+        await this.mkdirAsync(this.namespace, 'scripts');
+        await this.subscribeForeignFiles(this.namespace, '*');
+
+        this.subscribeStates('*');
+        objectHelper.init(this);
+
+        this.setOnline(false);
+
+        // Start online check
+        await this.onlineCheck();
+
+        // Hybrid-Start: Gen1 MQTT-Server nur wenn aktiviert
+        await this.initGen1MqttServerIfEnabled();
+
+        // Geräteerkennung und Anbindung
+        await this.discoverAndAttachDevices();
+
+        this.log.info('Shelly Adapter bereit.');
+    } catch (e) {
+        this.log.error(`Fehler in onReady: ${e.message}`);
+    }
+}
+
+async initGen1MqttServerIfEnabled() {
+    if (!this.config.enableGen1MqttServer) {
+        this.log.info('Gen1 MQTT-Server deaktiviert.');
+        return;
+    }
+
+    const aedes = require('aedes')();
+    const net = require('net');
+    const port = this.config.gen1MqttPort || 1883;
+
+    this.serverMqtt = net.createServer(aedes.handle);
+    this.serverMqtt.listen(port, () => {
+        this.log.info(`Gen1 MQTT-Server läuft auf Port ${port}`);
+    });
+
+    aedes.on('publish', (packet, client) => {
+        const topic = packet.topic || '';
+        const message = packet.payload?.toString('utf-8') || '';
+        this.log.debug(`MQTT publish: ${topic} -> ${message}`);
+        // TODO: Topic -> State Mapping
+    });
+}
+
+async discoverAndAttachDevices() {
+    const devices = await this.getConfiguredDevices();
+    for (const dev of devices) {
+        const meta = await this.registry.detect(dev.ip);
+        if (meta.gen === 'gen2') {
+            await this.attachGen2Device(dev.ip, meta);
+        } else if (meta.gen === 'gen1') {
+            await this.attachGen1Device(dev.ip, meta);
+        } else {
+            this.log.warn(`Gerät ${dev.ip} konnte nicht erkannt werden`);
+        }
+    }
+}
+
+async attachGen2Device(ip, meta) {
+    const poll = async () => {
         try {
-            // Upgrade older config
-            if (await this.migrateConfig()) {
-                return;
+            const status = await this.rpc.getSwitchStatus(ip, 0);
+            await this.setStateAsync(`${ip}.switch0.on`, { val: !!status.output, ack: true });
+            if (typeof status.apower === 'number') {
+                await this.setStateAsync(`${ip}.switch0.power`, { val: status.apower, ack: true });
             }
+        } catch (e) {
+            this.log.warn(`RPC zu ${ip} fehlgeschlagen: ${e.message}`);
+        }
+    };
+    poll();
+    setInterval(poll, this.config.rpcPollIntervalMs || 5000);
+}
 
-            this.eventEmitter.setMaxListeners(Infinity);
+async attachGen1Device(ip, meta) {
+    const poll = async () => {
+        try {
+            const status = await this.registry.detectGen1(ip);
+            const relay = Array.isArray(status?.relays) ? status.relays[0] : null;
+            await this.setStateAsync(`${ip}.relay0.on`, { val: !!relay?.ison, ack: true });
+            if (typeof status?.meters?.[0]?.power === 'number') {
+                await this.setStateAsync(`${ip}.relay0.power`, { val: status.meters[0].power, ack: true });
+            }
+        } catch (e) {
+            this.log.warn(`HTTP-Status zu ${ip} fehlgeschlagen: ${e.message}`);
+        }
+    };
+    poll();
+    setInterval(poll, this.config.gen1HttpPollIntervalMs || 7000);
+}
 
-            await this.mkdirAsync(this.namespace, 'scripts');
-            this.subscribeForeignFiles(this.namespace, '*');
-
-            this.subscribeStates('*');
-            objectHelper.init(this);
-
-            const protocol = this.config.protocol || 'coap';
-
-            await this.setOnlineFalse();
-
-            // Start online check
-            await this.onlineCheck();
+async getConfiguredDevices() {
+    const list = Array.isArray(this.config.devices) ? this.config.devices : [];
+    return list.map(d => ({ ip: d.ip, name: d.name }));
+}
 
             // Start MQTT server
             setImmediate(() => {
