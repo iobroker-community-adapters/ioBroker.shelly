@@ -404,66 +404,6 @@
         },
         "desc": "Help: https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md"
       },
-      {
-  "_id": "config.enableGen1MqttServer",
-  "type": "state",
-  "common": {       
-    "name": {
-      "en": "Enable Gen1 MQTT Server",
-      "de": "Gen1 MQTT-Server aktivieren"
-    "type": "boolean",
-    "role": "switch",
-    "def": true,
-    "read": true,
-    "write": true
-  },
-  "native": {}
-},
-{
-  "_id": "config.gen1MqttPort",
-  "type": "state",
-  "common": {
-    "name": {
-      "en": "Gen1 MQTT Port",
-      "de": "Gen1 MQTT-Port"
-    "type": "number",
-    "role": "value",
-    "def": 1883,
-    "read": true,
-    "write": true
-  },
-  "native": {}
-},
-{
-  "_id": "config.rpcPollIntervalMs",
-  "type": "state",
-  "common": {
-    "name": {
-      "en": "RPC Poll Interval (ms)",
-      "de": "RPC Abfrageintervall (ms)"
-    "type": "number",
-    "role": "value.interval",
-    "def": 5000,
-    "read": true,
-    "write": true
-  },
-  "native": {}
-},
-{
-  "_id": "config.gen1HttpPollIntervalMs",
-  "type": "state",
-  "common": {
-    "name": {
-      "en": "Gen1 HTTP Poll Interval (ms)",
-      "de": "Gen1 HTTP Abfrageintervall (ms)"
-    "type": "number",
-    "role": "value.interval",
-    "def": 7000,
-    "read": true,
-    "write": true
-  },
-  "native": {}
-}
       "native": {}
     }
   ]
