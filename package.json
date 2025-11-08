@@ -48,7 +48,7 @@
     "tcp-ping": "^0.1.1",
     "xml2js": "^0.6.2",
     "xmlbuilder": "^15.1.1",
-    "aedes": "^0.47.2"
+    "aedes": "^0.46.5"
 
   },
   "devDependencies": {
