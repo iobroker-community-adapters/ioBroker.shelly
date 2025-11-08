@@ -265,7 +265,7 @@
       "devices": [
   { "ip": "192.168.1.101", "name": "Shelly1PM" },
   { "ip": "192.168.1.102", "name": "Shelly Plus 2PM" }
-]
+],
   "objects": [],
   "instanceObjects": [
     {
@@ -464,8 +464,6 @@
           "write": true
         },
         "native": {}
-      },
-      "native": {}
     }
   ]
 }
