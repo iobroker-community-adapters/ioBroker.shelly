@@ -411,7 +411,6 @@
     "name": {
       "en": "Enable Gen1 MQTT Server",
       "de": "Gen1 MQTT-Server aktivieren"
-    },
     "type": "boolean",
     "role": "switch",
     "def": true,
@@ -427,7 +426,6 @@
     "name": {
       "en": "Gen1 MQTT Port",
       "de": "Gen1 MQTT-Port"
-    },
     "type": "number",
     "role": "value",
     "def": 1883,
@@ -443,7 +441,6 @@
     "name": {
       "en": "RPC Poll Interval (ms)",
       "de": "RPC Abfrageintervall (ms)"
-    },
     "type": "number",
     "role": "value.interval",
     "def": 5000,
@@ -459,7 +456,6 @@
     "name": {
       "en": "Gen1 HTTP Poll Interval (ms)",
       "de": "Gen1 HTTP Abfrageintervall (ms)"
-    },
     "type": "number",
     "role": "value.interval",
     "def": 7000,
