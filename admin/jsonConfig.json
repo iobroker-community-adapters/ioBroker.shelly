@@ -418,43 +418,80 @@
                     "lg": 4,
                     "xl": 4,
                     "label": "Default QoS"
+                },
+                "enableGen1MqttServer": {
+                    "newLine": true,
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Enable internal Gen1 MQTT Server",
+                    "default": true
+                },
+                "gen1HttpPollIntervalMs": {
+                    "newLine": true,
+                    "type": "number",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Gen1 HTTP Poll Interval (ms)",
+                    "default": 7000,
+                    "min": 1000,
+                    "step": 1000
                 }
-            },
-            "enableGen1MqttServer": {
-             "newLine": true,
-             "type": "checkbox",
-             "label": "Enable internal Gen1 MQTT Server",
-             "default": true
-            },
-            "gen1HttpPollIntervalMs": {
-              "newLine": true,
-             "type": "number",
-             "label": "Gen1 HTTP Poll Interval (ms)",
-             "default": 7000,
-             "min": 1000,
-              "step": 1000
             }
         },
         "_rpc": {
-          "type": "panel",
-         "label": "RPC (Gen2+) settings",
-          "items": {
-           "rpcPollIntervalMs": {
-             "type": "number",
-              "label": "RPC Poll Interval (ms)",
-             "default": 5000,
-             "min": 1000,
-             "step": 1000
-    },
-    "devices": {
-      "type": "table",
-      "label": "Configured Devices",
-      "items": {
-        "ip": { "type": "text", "label": "IP Address" },
-        "name": { "type": "text", "label": "Device Name" }
-      }
-    }
-  }
+            "type": "panel",
+            "label": "RPC (Gen2+) settings",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4NCiAgICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik00OTUuOSAxNjYuNmMzLjIgOC43IC41IDE4LjQtNi40IDI0LjZsLTQzLjMgMzkuNGMxLjEgOC4zIDEuNyAxNi44IDEuNyAyNS40cy0uNiAxNy4xLTEuNyAyNS40bDQzLjMgMzkuNGM2LjkgNi4yIDkuNiAxNS45IDYuNCAyNC42Yy00LjQgMTEuOS05LjcgMjMuMy0xNS44IDM0LjNsLTQuNyA4LjFjLTYuNiAxMS0xNCAyMS40LTIyLjEgMzEuMmMtNS45IDcuMi0xNS43IDkuNi0yNC41IDYuOGwtNTUuNy0xNy43Yy0xMy40IDEwLjMtMjguMiAxOC45LTQ0IDI1LjRsLTEyLjUgNTcuMWMtMiA5LjEtOSAxNi4zLTE4LjIgMTcuOGMtMTMuOCAyLjMtMjggMy41LTQyLjUgMy41cy0yOC43LTEuMi00Mi41LTMuNWMtOS4yLTEuNS0xNi4yLTguNy0xOC4yLTE3LjhsLTEyLjUtNTcuMWMtMTUuOC02LjUtMzAuNi0xNS4xLTQ0LTI1LjRMODMuMSA0MjUuOWMtOC44IDIuOC0xOC42IC4zLTI0LjUtNi44Yy04LjEtOS44LTE1LjUtMjAuMi0yMi4xLTMxLjJsLTQuNy04LjFjLTYuMS0xMS0xMS40LTIyLjQtMTUuOC0zNC4zYy0zLjItOC43LS41LTE4LjQgNi40LTI0LjZsNDMuMy0zOS40QzY0LjYgMjczLjEgNjQgMjY0LjYgNjQgMjU2cy42LTE3LjEgMS43LTI1LjRMMjIuNCAxOTEuMmMtNi45LTYuMi05LjYtMTUuOS02LjQtMjQuNmM0LjQtMTEuOSA5LjctMjMuMyAxNS44LTM0LjNsNC43LTguMWM2LjYtMTEgMTQtMjEuNCAyMi4xLTMxLjJjNS45LTcuMiAxNS43LTkuNiAyNC41LTYuOGw1NS43IDE3LjdjMTMuNC0xMC4zIDI4LjItMTguOSA0NC0yNS40bDEyLjUtNTcuMWMyLTkuMSA5LTE2LjMgMTguMi0xNy44QzIyNy4zIDEuMiAyNDEuNSAwIDI1NiAwczI4LjcgMS4yIDQyLjUgMy41YzkuMiAxLjUgMTYuMiA4LjcgMTguMiAxNy44bDEyLjUgNTcuMWMxNS44IDYuNSAzMC42IDE1LjEgNDQgMjUuNGw1NS43LTE3LjdjOC44LTIuOCAxOC42LS4zIDI0LjUgNi44YzguMSA5LjggMTUuNSAyMC4yIDIyLjEgMzEuMmw0LjcgOC4xYzYuMSAxMSAxMS40IDIyLjQgMTUuOCAzNC4zek0yNTYgMzM2YTgwIDgwIDAgMSAwIDAtMTYwIDgwIDgwIDAgMSAwIDAgMTYweiIvPg0KPC9zdmc+DQo=",
+            "items": {
+                "rpcPollIntervalMs": {
+                    "newLine": true,
+                    "type": "number",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "RPC Poll Interval (ms)",
+                    "default": 5000,
+                    "min": 1000,
+                    "step": 1000
+                },
+                "devices": {
+                    "newLine": true,
+                    "type": "table",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
+                    "label": "Configured Devices",
+                    "items": [
+                        {
+                            "type": "text",
+                            "attr": "ip",
+                            "width": "50%",
+                            "title": "IP Address",
+                            "filter": true,
+                            "sort": true
+                        },
+                        {
+                            "type": "text",
+                            "attr": "name",
+                            "width": "50%",
+                            "title": "Device Name",
+                            "filter": true,
+                            "sort": true
+                        }
+                    ]
+                }
+            }
         },
         "_coap": {
             "hidden": "data.protocol !== 'coap'",
