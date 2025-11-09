@@ -247,8 +247,8 @@
   "native": {
   "protocol": {
     "mqtt": {
-      "mqttUsername": "mqttjs",
-      "mqttPassword": "false",
+      "mqttusername": "mqttjs",
+      "mqttpassword": "false",
       "host": "0.0.0.0",
       "port": 1883,
       "coapbind": "0.0.0.0",
