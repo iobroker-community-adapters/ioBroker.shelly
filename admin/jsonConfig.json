@@ -442,6 +442,26 @@
                     "default": 7000,
                     "min": 1000,
                     "step": 1000
+                },
+                "gen1MqttPort": {
+                    "newLine": true,
+                    "type": "number",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": {
+                        "en": "Gen1 MQTT Port",
+                        "de": "Gen1 MQTT-Port"
+                    },
+                    "help": {
+                        "en": "Port for Gen1 devices to connect to (default: 1882)",
+                        "de": "Port für Gen1-Geräte zum Verbinden (Standard: 1882)"
+                    },
+                    "default": 1882,
+                    "min": 1024,
+                    "max": 65535
                 }
             }
         },
