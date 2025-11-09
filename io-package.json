@@ -245,29 +245,29 @@
     "httppassword"
   ],
   "native": {
-  "protocol": {
-    "mqtt": {
-      "mqttusername": "admin",
-      "mqttpassword": "",
-      "host": "0.0.0.0",
-      "port": 1883,
-      "coapbind": "0.0.0.0",
-      "autoUpdate": false,
-      "autoDelete": false,
-      "logDebugMessages": false,
-      "saveMqttResponses": false,
-      "blacklist": []
-    },
-    "rpc": {
-      "rpcPollIntervalMs": 5000,
-      "gen1HttpPollIntervalMs": 7000,
-      "enableGen1MqttServer": true,
-      "devices": [
-        { "ip": "192.168.1.10", "name": "Shelly1PM" },
-        { "ip": "192.168.1.11", "name": "Shelly Plus 2PM" }
-      ]
-    }
-  }
+  "mqttusername": "admin",
+  "mqttpassword": "",
+  "mqttport": 1883,
+  "mqttqos": 0,
+  "httpusername": "admin",
+  "httppassword": "",
+  "http-username": "",
+  "http-password": "",
+  "coapbind": "0.0.0.0",
+  "autoupdate": false,
+  "autodelete": false,
+  "polltime": 5000,
+  "timeout": 5000,
+  "blacklist": [],
+  "updateUnchangedObjects": false,
+  "enableGen1MqttServer": true,
+  "gen1MqttPort": 1883,
+  "rpcPollIntervalMs": 5000,
+  "gen1HttpPollIntervalMs": 7000,
+  "devices": [
+    { "ip": "192.168.1.10", "name": "Shelly1PM" },
+    { "ip": "192.168.1.11", "name": "Shelly Plus 2PM" }
+  ]
 },
   "objects": [],
   "instanceObjects": [
