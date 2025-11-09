@@ -247,7 +247,7 @@
   "native": {
   "mqttusername": "admin",
   "mqttpassword": "",
-  "mqttport": 1883,
+  "mqttport": 1883,        // ← Bleibt 1883 (für externe MQTT-Verbindungen)
   "mqttqos": 0,
   "httpusername": "admin",
   "httppassword": "",
@@ -261,7 +261,7 @@
   "blacklist": [],
   "updateUnchangedObjects": false,
   "enableGen1MqttServer": true,
-  "gen1MqttPort": 1883,
+  "gen1MqttPort": 1882,    // ← HIER: Ändern von 1883 zu 1882
   "rpcPollIntervalMs": 5000,
   "gen1HttpPollIntervalMs": 7000,
   "devices": [
