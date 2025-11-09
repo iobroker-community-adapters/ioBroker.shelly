@@ -419,7 +419,7 @@
                     "xl": 4,
                     "label": "Default QoS"
                 }
-            }
+            },
             "enableGen1MqttServer": {
              "newLine": true,
              "type": "checkbox",
