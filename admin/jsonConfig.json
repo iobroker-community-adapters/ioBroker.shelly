@@ -427,24 +427,13 @@
                     "md": 4,
                     "lg": 4,
                     "xl": 4,
-                    "label": "Enable internal Gen1 MQTT Server",
+                    "label": {
+                        "en": "Enable internal Gen1 MQTT Server",
+                        "de": "Internen Gen1 MQTT-Server aktivieren"
+                    },
                     "default": true
                 },
-                "gen1HttpPollIntervalMs": {
-                    "newLine": true,
-                    "type": "number",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 4,
-                    "lg": 4,
-                    "xl": 4,
-                    "label": "Gen1 HTTP Poll Interval (ms)",
-                    "default": 7000,
-                    "min": 1000,
-                    "step": 1000
-                },
                 "gen1MqttPort": {
-                    "newLine": true,
                     "type": "number",
                     "xs": 12,
                     "sm": 12,
@@ -456,18 +445,37 @@
                         "de": "Gen1 MQTT-Port"
                     },
                     "help": {
-                        "en": "Port for Gen1 devices to connect to (default: 1882)",
-                        "de": "Port für Gen1-Geräte zum Verbinden (Standard: 1882)"
+                        "en": "Port for Gen1 devices to connect to (configure Gen1 devices to this port)",
+                        "de": "Port für Gen1-Geräte zum Verbinden (Gen1-Geräte auf diesen Port einstellen)"
                     },
                     "default": 1882,
                     "min": 1024,
                     "max": 65535
+                },
+                "gen1HttpPollIntervalMs": {
+                    "newLine": true,
+                    "type": "number",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": {
+                        "en": "Gen1 HTTP Poll Interval (ms)",
+                        "de": "Gen1 HTTP Abfrageintervall (ms)"
+                    },
+                    "default": 7000,
+                    "min": 1000,
+                    "step": 1000
                 }
             }
         },
         "_rpc": {
             "type": "panel",
-            "label": "RPC (Gen2+) settings",
+            "label": {
+                "en": "RPC (Gen2+) settings",
+                "de": "RPC (Gen2+) Einstellungen"
+            },
             "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4NCiAgICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik00OTUuOSAxNjYuNmMzLjIgOC43IC41IDE4LjQtNi40IDI0LjZsLTQzLjMgMzkuNGMxLjEgOC4zIDEuNyAxNi44IDEuNyAyNS40cy0uNiAxNy4xLTEuNyAyNS40bDQzLjMgMzkuNGM2LjkgNi4yIDkuNiAxNS45IDYuNCAyNC42Yy00LjQgMTEuOS05LjcgMjMuMy0xNS44IDM0LjNsLTQuNyA4LjFjLTYuNiAxMS0xNCAyMS40LTIyLjEgMzEuMmMtNS45IDcuMi0xNS43IDkuNi0yNC41IDYuOGwtNTUuNy0xNy43Yy0xMy40IDEwLjMtMjguMiAxOC45LTQ0IDI1LjRsLTEyLjUgNTcuMWMtMiA5LjEtOSAxNi4zLTE4LjIgMTcuOGMtMTMuOCAyLjMtMjggMy41LTQyLjUgMy41cy0yOC43LTEuMi00Mi41LTMuNWMtOS4yLTEuNS0xNi4yLTguNy0xOC4yLTE3LjhsLTEyLjUtNTcuMWMtMTUuOC02LjUtMzAuNi0xNS4xLTQ0LTI1LjRMODMuMSA0MjUuOWMtOC44IDIuOC0xOC42IC4zLTI0LjUtNi44Yy04LjEtOS44LTE1LjUtMjAuMi0yMi4xLTMxLjJsLTQuNy04LjFjLTYuMS0xMS0xMS40LTIyLjQtMTUuOC0zNC4zYy0zLjItOC43LS41LTE4LjQgNi40LTI0LjZsNDMuMy0zOS40QzY0LjYgMjczLjEgNjQgMjY0LjYgNjQgMjU2cy42LTE3LjEgMS43LTI1LjRMMjIuNCAxOTEuMmMtNi45LTYuMi05LjYtMTUuOS02LjQtMjQuNmM0LjQtMTEuOSA5LjctMjMuMyAxNS44LTM0LjNsNC43LTguMWM2LjYtMTEgMTQtMjEuNCAyMi4xLTMxLjJjNS45LTcuMiAxNS43LTkuNiAyNC41LTYuOGw1NS43IDE3LjdjMTMuNC0xMC4zIDI4LjItMTguOSA0NC0yNS40bDEyLjUtNTcuMWMyLTkuMSA5LTE2LjMgMTguMi0xNy44QzIyNy4zIDEuMiAyNDEuNSAwIDI1NiAwczI4LjcgMS4yIDQyLjUgMy41YzkuMiAxLjUgMTYuMiA4LjcgMTguMiAxNy44bDEyLjUgNTcuMWMxNS44IDYuNSAzMC42IDE1LjEgNDQgMjUuNGw1NS43LTE3LjdjOC44LTIuOCAxOC42LS4zIDI0LjUgNi44YzguMSA5LjggMTUuNSAyMC4yIDIyLjEgMzEuMmw0LjcgOC4xYzYuMSAxMSAxMS40IDIyLjQgMTUuOCAzNC4zek0yNTYgMzM2YTgwIDgwIDAgMSAwIDAtMTYwIDgwIDgwIDAgMSAwIDAgMTYweiIvPg0KPC9zdmc+DQo=",
             "items": {
                 "rpcPollIntervalMs": {
@@ -478,7 +486,10 @@
                     "md": 4,
                     "lg": 4,
                     "xl": 4,
-                    "label": "RPC Poll Interval (ms)",
+                    "label": {
+                        "en": "RPC Poll Interval (ms)",
+                        "de": "RPC Abfrageintervall (ms)"
+                    },
                     "default": 5000,
                     "min": 1000,
                     "step": 1000
@@ -491,13 +502,19 @@
                     "md": 12,
                     "lg": 12,
                     "xl": 12,
-                    "label": "Configured Devices",
+                    "label": {
+                        "en": "Configured Devices",
+                        "de": "Konfigurierte Geräte"
+                    },
                     "items": [
                         {
                             "type": "text",
                             "attr": "ip",
                             "width": "50%",
-                            "title": "IP Address",
+                            "title": {
+                                "en": "IP Address",
+                                "de": "IP-Adresse"
+                            },
                             "filter": true,
                             "sort": true
                         },
@@ -505,7 +522,10 @@
                             "type": "text",
                             "attr": "name",
                             "width": "50%",
-                            "title": "Device Name",
+                            "title": {
+                                "en": "Device Name",
+                                "de": "Gerätename"
+                            },
                             "filter": true,
                             "sort": true
                         }
