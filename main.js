@@ -43,17 +43,35 @@ class Shelly extends utils.Adapter {
     }
 
     /**
-     * Get MQTT config (helper method)
+     * Get MQTT config (helper method) - FIXED
+     * Now reads directly from this.config instead of nested structure
      */
     getMqttConfig() {
-        return this.config.protocol?.mqtt || {};
+        // Return flat config object with MQTT-related settings
+        return {
+            host: this.config.bind || '0.0.0.0',
+            port: this.config.gen1MqttPort || 1882,
+            qos: this.config.mqttqos || 0,
+            username: this.config.mqttusername || '',
+            password: this.config.mqttpassword || '',
+            enableGen1MqttServer: this.config.enableGen1MqttServer !== false,
+            httpPollIntervalMs: this.config.gen1HttpPollIntervalMs || 7000,
+            autoUpdate: this.config.autoupdate || false,
+            coapbind: this.config.coapbind || '0.0.0.0',
+        };
     }
 
     /**
-     * Get RPC config (helper method)
+     * Get RPC config (helper method) - FIXED
+     * Now reads directly from this.config instead of nested structure
      */
     getRpcConfig() {
-        return this.config.protocol?.rpc || {};
+        // Return flat config object with RPC-related settings
+        return {
+            pollIntervalMs: this.config.rpcPollIntervalMs || 5000,
+            devices: Array.isArray(this.config.devices) ? this.config.devices : [],
+            enableGen1MqttServer: this.config.enableGen1MqttServer !== false,
+        };
     }
 
     async onReady() {
@@ -98,59 +116,64 @@ class Shelly extends utils.Adapter {
     }
 
     /**
-     * Start MQTT/CoAP servers for Gen1 devices
+     * Start MQTT/CoAP servers for Gen1 devices - FIXED
+     * FIX: Read config directly from this.config instead of this.config.protocol.mqtt/rpc
+     * The config structure is flat, not nested under protocol!
      */
     async initProtocolServersForGen1() {
-        const mqttConfig = this.getMqttConfig();
-        const rpcConfig = this.getRpcConfig();
+        try {
+            // Read config directly from this.config (not from protocol.mqtt/rpc!)
+            const enableGen1MqttServer = this.config.enableGen1MqttServer !== false;
+            const gen1MqttPort = this.config.gen1MqttPort || 1882;
+            const mqttHost = this.config.bind || '0.0.0.0';
+            const mqttQos = this.config.mqttqos || 0;
+            const mqttUsername = this.config.mqttusername || '';
+            const mqttPassword = this.config.mqttpassword || '';
+            const coapBind = this.config.coapbind || '0.0.0.0';
+            const protocol = this.config.protocol || 'mqtt';
 
-        // Bestimme Protokoll (standardmäßig 'both', wenn Gen1-MQTT-Server aktiviert)
-        const protocol = rpcConfig.enableGen1MqttServer ? 'both' : 'none';
-
-        if (protocol === 'none') {
-            this.log.info('Gen1 MQTT/CoAP servers disabled - only RPC mode active');
-            return;
-        }
-
-        // Start MQTT server for Gen1
-        if (protocol === 'both' || protocol === 'mqtt') {
-            const mqttHost = mqttConfig.host || '0.0.0.0';
-            const mqttPort = mqttConfig.port || 1883;
-            const mqttQos = mqttConfig.qos || 0;
-
-            this.log.info(
-                `Starting MQTT server for Gen1 devices on ${mqttHost}:${mqttPort} (QoS ${mqttQos})`,
-            );
-
-            if (!mqttConfig.mqttUsername || mqttConfig.mqttUsername.length === 0) {
-                this.log.error('MQTT Username is missing!');
-            }
-            if (!mqttConfig.mqttPassword || mqttConfig.mqttPassword.length === 0) {
-                this.log.error('MQTT Password is missing!');
+            if (!enableGen1MqttServer) {
+                this.log.info('Gen1 MQTT/CoAP servers disabled - only RPC mode active');
+                return;
             }
 
-            // Temporäre Config-Anpassung für protocolMqtt (erwartet flache Struktur)
-            this.config.bind = mqttHost;
-            this.config.port = mqttPort;
-            this.config.qos = mqttQos;
-            this.config.mqttusername = mqttConfig.mqttUsername;
-            this.config.mqttpassword = mqttConfig.mqttPassword;
+            // Start MQTT server for Gen1 devices
+            if (protocol === 'mqtt' || protocol === 'both') {
+                this.log.info(
+                    `Starting MQTT server for Gen1 devices on ${mqttHost}:${gen1MqttPort} (QoS ${mqttQos})`,
+                );
 
-            this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
-            this.serverMqtt.listen();
-        }
+                if (!mqttUsername || mqttUsername.length === 0) {
+                    this.log.warn('No MQTT username configured - authentication disabled!');
+                }
+                if (!mqttPassword || mqttPassword.length === 0) {
+                    this.log.warn('No MQTT password configured - authentication disabled!');
+                }
 
-        // Start CoAP server for Gen1
-        if (protocol === 'both' || protocol === 'coap') {
-            const coapBind = mqttConfig.coapbind || '0.0.0.0';
-            
-            this.log.info(`Starting CoAP server for Gen1 devices on ${coapBind}:5683`);
-            
-            // Temporäre Config-Anpassung für protocolCoap
-            this.config.coapbind = coapBind;
-            
-            this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
-            this.serverCoap.listen();
+                // Temporäre Config-Anpassung für protocolMqtt (erwartet flache Struktur)
+                this.config.bind = mqttHost;
+                this.config.port = gen1MqttPort;
+                this.config.qos = mqttQos;
+
+                this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
+                this.serverMqtt.listen();
+            }
+
+            // Start CoAP server for Gen1
+            if (protocol === 'coap' || protocol === 'both') {
+                this.log.info(`Starting CoAP server for Gen1 devices on ${coapBind}:5683`);
+
+                // Temporäre Config-Anpassung für protocolCoap
+                this.config.coapbind = coapBind;
+
+                this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
+                this.serverCoap.listen();
+            }
+
+            this.log.debug('Gen1 protocol servers initialized successfully');
+        } catch (e) {
+            this.log.error(`Error initializing protocol servers: ${e.message}`);
+            this.log.debug(e.stack);
         }
     }
 
@@ -374,7 +397,7 @@ class Shelly extends utils.Adapter {
      */
     startGen2Polling(deviceId, ip) {
         const rpcConfig = this.getRpcConfig();
-        const pollInterval = rpcConfig.rpcPollIntervalMs || 5000;
+        const pollInterval = rpcConfig.pollIntervalMs || 5000;
 
         const poll = async () => {
             if (this.isUnloaded) return;
