@@ -1,9 +1,10 @@
 'use strict';
 
 const crypto = require('node:crypto');
-
 const utils = require('@iobroker/adapter-core');
-const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
+const DeviceRegistry = require('./lib/deviceRegistry');
+const ShellyRpcClient = require('./lib/protocol/rpc');
+const objectHelper = require('@apollon/iobroker-tools').objectHelper;
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
 const BleDecoder = require('./lib/ble-decoder').BleDecoder;
@@ -26,14 +27,51 @@ class Shelly extends utils.Adapter {
         this.onlineCheckTimeout = null;
 
         this.onlineDevices = {};
+        this.gen2PollIntervals = {};
+        this.gen2Devices = new Set();
 
         this.eventEmitter = new EventEmitter();
         this.bleDecoder = new BleDecoder();
+
+        this.registry = new DeviceRegistry(this.log);
+        this.rpc = new ShellyRpcClient(this.log);
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         this.on('fileChange', this.onFileChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
+    }
+
+    /**
+     * Get MQTT config (helper method) - FIXED
+     * Now reads directly from this.config instead of nested structure
+     */
+    getMqttConfig() {
+        // Return flat config object with MQTT-related settings
+        return {
+            host: this.config.bind || '0.0.0.0',
+            port: this.config.gen1MqttPort || 1882,
+            qos: this.config.mqttqos || 0,
+            username: this.config.mqttusername || '',
+            password: this.config.mqttpassword || '',
+            enableGen1MqttServer: this.config.enableGen1MqttServer !== false,
+            httpPollIntervalMs: this.config.gen1HttpPollIntervalMs || 7000,
+            autoUpdate: this.config.autoupdate || false,
+            coapbind: this.config.coapbind || '0.0.0.0',
+        };
+    }
+
+    /**
+     * Get RPC config (helper method) - FIXED
+     * Now reads directly from this.config instead of nested structure
+     */
+    getRpcConfig() {
+        // Return flat config object with RPC-related settings
+        return {
+            pollIntervalMs: this.config.rpcPollIntervalMs || 5000,
+            devices: Array.isArray(this.config.devices) ? this.config.devices : [],
+            enableGen1MqttServer: this.config.enableGen1MqttServer !== false,
+        };
     }
 
     async onReady() {
@@ -46,74 +84,408 @@ class Shelly extends utils.Adapter {
             this.eventEmitter.setMaxListeners(Infinity);
 
             await this.mkdirAsync(this.namespace, 'scripts');
-            this.subscribeForeignFiles(this.namespace, '*');
+            await this.subscribeForeignFiles(this.namespace, '*');
 
             this.subscribeStates('*');
             objectHelper.init(this);
 
-            const protocol = this.config.protocol || 'coap';
-
-            await this.setOnlineFalse();
+            await this.setStateAsync('info.connection', { val: false, ack: true });
 
             // Start online check
             await this.onlineCheck();
 
-            // Start MQTT server
-            setImmediate(() => {
-                if (protocol === 'both' || protocol === 'mqtt') {
-                    this.log.info(
-                        `Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port} (QoS ${this.config.qos})`,
-                    );
+            // Start MQTT/CoAP Server für Gen1-Geräte
+            await this.initProtocolServersForGen1();
 
-                    if (!this.config.mqttusername || this.config.mqttusername.length === 0) {
-                        this.log.error('MQTT Username is missing!');
-                    }
-                    if (!this.config.mqttpassword || this.config.mqttpassword.length === 0) {
-                        this.log.error('MQTT Password is missing!');
-                    }
+            // Discover und attach devices (Gen2/Gen3 via RPC)
+            await this.discoverAndAttachDevices();
 
-                    this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
-                    this.serverMqtt.listen();
-                }
-            });
-
-            // Start CoAP server
-            setImmediate(() => {
-                if (protocol === 'both' || protocol === 'coap') {
-                    this.log.info(`Starting in CoAP mode. Listening on ${this.config.coapbind}:5683`);
-                    this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
-                    this.serverCoap.listen();
-                }
-            });
-
-            if (this.config.autoupdate) {
+            const mqttConfig = this.getMqttConfig();
+            if (mqttConfig.autoUpdate) {
                 this.log.info(`[firmwareUpdate] Auto-Update enabled - devices will be updated automatically`);
-
-                // Wait 10 seconds for devices to connect
                 this.setTimeout(() => this.autoFirmwareUpdate(), 10 * 1000);
             } else {
-                // Wait 10 seconds for devices to connect
                 this.setTimeout(() => this.firmwareNotify(), 10 * 1000);
             }
-        } catch (err) {
-            this.log.error(`[onReady] Startup error: ${err}`);
+
+            this.log.info('Shelly Adapter ready - Hybrid mode (Gen1: MQTT/CoAP, Gen2+: RPC)');
+        } catch (e) {
+            this.log.error(`[onReady] Startup error: ${e.message}`);
+            this.log.error(e.stack);
         }
     }
 
+    /**
+     * Start MQTT/CoAP servers for Gen1 devices - FIXED
+     * FIX: Read config directly from this.config instead of this.config.protocol.mqtt/rpc
+     * The config structure is flat, not nested under protocol!
+     */
+    async initProtocolServersForGen1() {
+        try {
+            // Read config directly from this.config (not from protocol.mqtt/rpc!)
+            const enableGen1MqttServer = this.config.enableGen1MqttServer !== false;
+            const gen1MqttPort = this.config.gen1MqttPort || 1882;
+            const mqttHost = this.config.bind || '0.0.0.0';
+            const mqttQos = this.config.mqttqos || 0;
+            const mqttUsername = this.config.mqttusername || '';
+            const mqttPassword = this.config.mqttpassword || '';
+            const coapBind = this.config.coapbind || '0.0.0.0';
+            const protocol = this.config.protocol || 'mqtt';
+
+            if (!enableGen1MqttServer) {
+                this.log.info('Gen1 MQTT/CoAP servers disabled - only RPC mode active');
+                return;
+            }
+
+            // Start MQTT server for Gen1 devices
+            if (protocol === 'mqtt' || protocol === 'both') {
+                this.log.info(
+                    `Starting MQTT server for Gen1 devices on ${mqttHost}:${gen1MqttPort} (QoS ${mqttQos})`,
+                );
+
+                if (!mqttUsername || mqttUsername.length === 0) {
+                    this.log.warn('No MQTT username configured - authentication disabled!');
+                }
+                if (!mqttPassword || mqttPassword.length === 0) {
+                    this.log.warn('No MQTT password configured - authentication disabled!');
+                }
+
+                // Temporäre Config-Anpassung für protocolMqtt (erwartet flache Struktur)
+                this.config.bind = mqttHost;
+                this.config.port = gen1MqttPort;
+                this.config.qos = mqttQos;
+
+                this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
+                this.serverMqtt.listen();
+            }
+
+            // Start CoAP server for Gen1
+            if (protocol === 'coap' || protocol === 'both') {
+                this.log.info(`Starting CoAP server for Gen1 devices on ${coapBind}:5683`);
+
+                // Temporäre Config-Anpassung für protocolCoap
+                this.config.coapbind = coapBind;
+
+                this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
+                this.serverCoap.listen();
+            }
+
+            this.log.debug('Gen1 protocol servers initialized successfully');
+        } catch (e) {
+            this.log.error(`Error initializing protocol servers: ${e.message}`);
+            this.log.debug(e.stack);
+        }
+    }
+
+    /**
+     * Discover devices and attach them based on generation
+     */
+    async discoverAndAttachDevices() {
+        const devices = await this.getConfiguredDevices();
+        
+        if (devices.length === 0) {
+            this.log.info('No devices configured for discovery');
+            return;
+        }
+
+        this.log.info(`Starting device discovery for ${devices.length} configured device(s)`);
+
+        for (const dev of devices) {
+            try {
+                this.log.debug(`Detecting device at ${dev.ip}...`);
+                const meta = await this.registry.detect(dev.ip);
+
+                if (meta.gen === 'gen2' || meta.gen === 'gen3') {
+                    await this.attachGen2Device(dev.ip, meta);
+                    this.log.info(`✓ ${dev.ip} (${meta.model || 'Unknown'}, ${meta.gen}) attached via RPC`);
+                } else if (meta.gen === 'gen1') {
+                    this.log.info(`✓ ${dev.ip} (${meta.model || 'Unknown'}, Gen1) will use MQTT/CoAP`);
+                    // Gen1 devices announce themselves via MQTT/CoAP - no direct attachment needed
+                } else {
+                    this.log.warn(`⚠ Device ${dev.ip} could not be identified (gen: ${meta.gen})`);
+                }
+            } catch (e) {
+                this.log.error(`✗ Failed to detect/attach device ${dev.ip}: ${e.message}`);
+            }
+        }
+    }
+
+    /**
+     * Attach Gen2/Gen3 device via RPC
+     */
+    async attachGen2Device(ip, meta) {
+        const deviceId = await this.getDeviceIdFromMeta(ip, meta);
+        
+        if (!deviceId) {
+            this.log.error(`Could not determine device ID for ${ip}`);
+            return;
+        }
+
+        this.gen2Devices.add(deviceId);
+
+        try {
+            // Create device objects
+            await this.createGen2DeviceObjects(deviceId, meta, ip);
+
+            // Get initial status via RPC
+            const status = await this.rpc.getStatus(ip);
+            await this.updateGen2DeviceStates(deviceId, status);
+
+            // Start polling
+            this.startGen2Polling(deviceId, ip);
+
+            this.log.debug(`Gen2 device ${deviceId} successfully attached`);
+        } catch (e) {
+            this.log.error(`Failed to attach Gen2 device ${ip}: ${e.message}`);
+        }
+    }
+
+    /**
+     * Create device objects for Gen2 device
+     */
+    async createGen2DeviceObjects(deviceId, meta, ip) {
+        // Create device
+        await this.extendObject(deviceId, {
+            type: 'device',
+            common: {
+                name: meta.model || deviceId,
+            },
+            native: {
+                gen: meta.gen,
+                model: meta.model,
+                ip: ip,
+            },
+        });
+
+        // Create standard states
+        await this.setObjectNotExistsAsync(`${deviceId}.hostname`, {
+            type: 'state',
+            common: {
+                name: 'Hostname / IP',
+                type: 'string',
+                role: 'info.ip',
+                read: true,
+                write: false,
+            },
+            native: {},
+        });
+
+        await this.setState(`${deviceId}.hostname`, { val: ip, ack: true });
+
+        await this.setObjectNotExistsAsync(`${deviceId}.online`, {
+            type: 'state',
+            common: {
+                name: 'Online',
+                type: 'boolean',
+                role: 'indicator.reachable',
+                read: true,
+                write: false,
+            },
+            native: {},
+        });
+
+        await this.setObjectNotExistsAsync(`${deviceId}.firmware`, {
+            type: 'state',
+            common: {
+                name: 'Has Firmware Update',
+                type: 'boolean',
+                role: 'indicator',
+                read: true,
+                write: false,
+            },
+            native: {},
+        });
+    }
+
+    /**
+     * Update Gen2 device states from RPC status
+     */
+    async updateGen2DeviceStates(deviceId, status) {
+        if (!status) return;
+
+        // Update switch states (if available)
+        if (status.switch) {
+            for (let i = 0; i < status.switch.length; i++) {
+                const sw = status.switch[i];
+                const channel = `${deviceId}.Switch:${i}`;
+
+                await this.setObjectNotExistsAsync(`${channel}.Output`, {
+                    type: 'state',
+                    common: {
+                        name: `Switch ${i} Output`,
+                        type: 'boolean',
+                        role: 'switch',
+                        read: true,
+                        write: true,
+                    },
+                    native: {},
+                });
+
+                await this.setState(`${channel}.Output`, { val: !!sw.output, ack: true });
+
+                if (typeof sw.apower === 'number') {
+                    await this.setObjectNotExistsAsync(`${channel}.Power`, {
+                        type: 'state',
+                        common: {
+                            name: `Switch ${i} Power`,
+                            type: 'number',
+                            role: 'value.power',
+                            read: true,
+                            write: false,
+                            unit: 'W',
+                        },
+                        native: {},
+                    });
+
+                    await this.setState(`${channel}.Power`, { val: sw.apower, ack: true });
+                }
+
+                if (typeof sw.aenergy?.total === 'number') {
+                    await this.setObjectNotExistsAsync(`${channel}.Energy`, {
+                        type: 'state',
+                        common: {
+                            name: `Switch ${i} Energy`,
+                            type: 'number',
+                            role: 'value.power.consumption',
+                            read: true,
+                            write: false,
+                            unit: 'Wh',
+                        },
+                        native: {},
+                    });
+
+                    await this.setState(`${channel}.Energy`, { val: sw.aenergy.total, ack: true });
+                }
+            }
+        }
+
+        // Update input states (if available)
+        if (status.input) {
+            for (let i = 0; i < status.input.length; i++) {
+                const input = status.input[i];
+                const channel = `${deviceId}.Input:${i}`;
+
+                await this.setObjectNotExistsAsync(`${channel}.State`, {
+                    type: 'state',
+                    common: {
+                        name: `Input ${i} State`,
+                        type: 'boolean',
+                        role: 'sensor.state',
+                        read: true,
+                        write: false,
+                    },
+                    native: {},
+                });
+
+                await this.setState(`${channel}.State`, { val: !!input.state, ack: true });
+            }
+        }
+
+        // Update system info
+        if (status.sys) {
+            if (status.sys.available_updates) {
+                await this.setState(`${deviceId}.firmware`, { 
+                    val: Object.keys(status.sys.available_updates).length > 0, 
+                    ack: true 
+                });
+            }
+        }
+    }
+
+    /**
+     * Start polling for Gen2 device
+     */
+    startGen2Polling(deviceId, ip) {
+        const rpcConfig = this.getRpcConfig();
+        const pollInterval = rpcConfig.pollIntervalMs || 5000;
+
+        const poll = async () => {
+            if (this.isUnloaded) return;
+
+            try {
+                const status = await this.rpc.getStatus(ip);
+                await this.updateGen2DeviceStates(deviceId, status);
+                await this.deviceStatusUpdate(deviceId, true);
+            } catch (e) {
+                this.log.debug(`RPC poll failed for ${deviceId}: ${e.message}`);
+                await this.deviceStatusUpdate(deviceId, false);
+            }
+        };
+
+        // Initial poll
+        poll();
+
+        // Start interval
+        this.gen2PollIntervals[deviceId] = setInterval(poll, pollInterval);
+        this.log.debug(`Started polling for ${deviceId} every ${pollInterval}ms`);
+    }
+
+    /**
+     * Get device ID from IP and metadata
+     */
+    async getDeviceIdFromMeta(ip, meta) {
+        try {
+            // Try to get device ID from RPC
+            const shelly = await this.rpc.getShelly(ip);
+            if (shelly && shelly.id) {
+                return shelly.id.toLowerCase().replace(/[^a-z0-9_-]/g, '_');
+            }
+        } catch (e) {
+            this.log.debug(`Could not get device ID from RPC for ${ip}: ${e.message}`);
+        }
+
+        // Fallback: use IP-based ID
+        return `shelly_${ip.replace(/\./g, '_')}`;
+    }
+
+    /**
+     * Get configured devices from adapter config
+     */
+    async getConfiguredDevices() {
+        const rpcConfig = this.getRpcConfig();
+        const list = Array.isArray(rpcConfig.devices) ? rpcConfig.devices : [];
+        
+        return list
+            .filter(d => d.ip && d.ip.length > 0)
+            .map(d => ({ 
+                ip: d.ip.trim(), 
+                name: d.name || d.ip 
+            }));
+    }
+
+    /**
+     * Check if device is Gen2
+     */
+    isGen2Device(stateId) {
+        const deviceId = stateId.split('.')[0];
+        return this.gen2Devices.has(deviceId);
+    }
+
+    /**
+     * Get device IP from device ID
+     */
+    async getDeviceIp(deviceId) {
+        const obj = await this.getObjectAsync(deviceId);
+        return obj?.native?.ip;
+    }
+
+    /**
+     * State change handler
+     */
     onStateChange(id, state) {
-        // Warning, state can be null if it was deleted
         if (state && !state.ack) {
             const stateId = this.removeNamespace(id);
 
-            if (stateId === 'info.update') {
+            // Check if it's a Gen2 device state
+            if (this.isGen2Device(stateId)) {
+                this.handleGen2StateChange(stateId, state);
+            } else if (stateId === 'info.update') {
                 this.log.debug(`[onStateChange] "info.update" state changed - starting update on every device`);
-
                 this.eventEmitter.emit('onFirmwareUpdate');
             } else if (stateId === 'info.downloadScripts') {
                 this.log.debug(
                     `[onStateChange] "info.downloadScripts" state changed - starting script download of every device`,
                 );
-
                 this.eventEmitter.emit('onScriptDownload');
             } else if (stateId.startsWith('ble.') && stateId.endsWith('.encryptionKey')) {
                 this.log.debug(`[onStateChange] "${stateId}" state changed - checking new encryption key`);
@@ -134,31 +506,88 @@ class Shelly extends utils.Adapter {
         }
     }
 
+    /**
+     * Handle Gen2 device state changes
+     */
+    async handleGen2StateChange(stateId, state) {
+        const parts = stateId.split('.');
+        const deviceId = parts[0];
+        const component = parts[1];
+        const property = parts[2];
+
+        const deviceIp = await this.getDeviceIp(deviceId);
+
+        if (!deviceIp) {
+            this.log.error(`Could not find IP for device ${deviceId}`);
+            return;
+        }
+
+        try {
+            // Handle Switch component
+            if (component && component.startsWith('Switch:')) {
+                const switchId = parseInt(component.split(':')[1]);
+
+                if (property === 'Output') {
+                    await this.rpc.switchSet(deviceIp, switchId, { on: !!state.val });
+                    this.log.debug(`Set ${deviceId} Switch:${switchId} to ${state.val}`);
+                    
+                    // Confirm state
+                    await this.setState(stateId, { val: state.val, ack: true });
+                }
+            }
+            // Add more component handlers here (Cover, Light, etc.)
+        } catch (e) {
+            this.log.error(`Failed to set state for ${stateId}: ${e.message}`);
+        }
+    }
+
     onFileChange(id, fileName, size) {
         this.log.debug(`[onFileChange]: id: ${id}, fileName: ${fileName}, size: ${size}`);
     }
 
     /**
-     * @param callback
+     * Unload handler
      */
     onUnload(callback) {
         this.isUnloaded = true;
 
+        // Stop online check
         if (this.onlineCheckTimeout) {
             this.clearTimeout(this.onlineCheckTimeout);
             this.onlineCheckTimeout = null;
         }
 
-        this.setOnlineFalse();
-
+        // Stop firmware update check
         if (this.firmwareUpdateTimeout) {
             this.clearTimeout(this.firmwareUpdateTimeout);
             this.firmwareUpdateTimeout = null;
         }
 
+        // Stop Gen2 polling
+        if (this.gen2PollIntervals) {
+            for (const [deviceId, interval] of Object.entries(this.gen2PollIntervals)) {
+                this.clearInterval(interval);
+                this.log.debug(`Stopped polling for ${deviceId}`);
+            }
+            this.gen2PollIntervals = {};
+        }
+
+        // Close RPC connections
+        if (this.rpc) {
+            try {
+                this.rpc.disconnectAll();
+            } catch (e) {
+                // ignore
+            }
+        }
+
+        // Set all devices offline
+        this.setOnlineFalse();
+
         try {
             this.log.debug('[onUnload] Closing adapter');
 
+            // Stop CoAP server
             if (this.serverCoap) {
                 try {
                     this.log.debug(`[onUnload] Stopping CoAP server`);
@@ -168,6 +597,7 @@ class Shelly extends utils.Adapter {
                 }
             }
 
+            // Stop MQTT server
             if (this.serverMqtt) {
                 try {
                     this.log.debug(`[onUnload] Stopping MQTT server`);
@@ -179,13 +609,12 @@ class Shelly extends utils.Adapter {
 
             callback();
         } catch {
-            // this.log.error('Error');
             callback();
         }
     }
 
     /**
-     * Online-Check via TCP ping (when using CoAP)
+     * Online-Check via TCP ping
      */
     async onlineCheck() {
         const valPort = 80;
@@ -198,8 +627,8 @@ class Shelly extends utils.Adapter {
         try {
             const deviceIds = await this.getAllDeviceIds();
             for (const deviceId of deviceIds) {
-                const stateHostaname = await this.getStateAsync(`${deviceId}.hostname`);
-                const valHostname = stateHostaname ? stateHostaname.val : undefined;
+                const stateHostname = await this.getStateAsync(`${deviceId}.hostname`);
+                const valHostname = stateHostname ? stateHostname.val : undefined;
 
                 if (valHostname) {
                     this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
@@ -214,20 +643,15 @@ class Shelly extends utils.Adapter {
         this.onlineCheckTimeout = this.setTimeout(() => {
             this.onlineCheckTimeout = null;
             this.onlineCheck();
-        }, 60 * 1000); // Restart online check in 60 seconds
+        }, 60 * 1000);
     }
 
     async deviceStatusUpdate(deviceId, status) {
-        if (this.isUnloaded) {
-            return;
-        }
-        if (!deviceId) {
-            return;
-        }
+        if (this.isUnloaded) return;
+        if (!deviceId) return;
 
         this.log.debug(`[deviceStatusUpdate] ${deviceId}: ${status}`);
 
-        // Check if device object exists
         const knownDeviceIds = await this.getAllDeviceIds();
         if (!knownDeviceIds.includes(deviceId)) {
             this.log.silly(
@@ -236,12 +660,10 @@ class Shelly extends utils.Adapter {
             return;
         }
 
-        // Update online status
         const idOnline = `${deviceId}.online`;
         const onlineState = await this.getStateAsync(idOnline);
 
         if (onlineState) {
-            // Compare to previous value
             const prevValue = onlineState.val ? onlineState.val === 'true' || onlineState.val === true : false;
 
             if (prevValue != status) {
@@ -249,7 +671,6 @@ class Shelly extends utils.Adapter {
             }
         }
 
-        // Update connection state
         const oldOnlineDeviceCount = Object.keys(this.onlineDevices).length;
 
         if (status) {
@@ -260,7 +681,6 @@ class Shelly extends utils.Adapter {
 
         const newOnlineDeviceCount = Object.keys(this.onlineDevices).length;
 
-        // Check online devices
         if (oldOnlineDeviceCount !== newOnlineDeviceCount) {
             this.log.debug(`[deviceStatusUpdate] Online devices: ${JSON.stringify(Object.keys(this.onlineDevices))}`);
             if (newOnlineDeviceCount > 0) {
@@ -293,7 +713,7 @@ class Shelly extends utils.Adapter {
 
             await this.extendObject(deviceId, {
                 common: {
-                    color: null, // Remove color from previous versions
+                    color: null,
                 },
             });
         }
@@ -303,12 +723,11 @@ class Shelly extends utils.Adapter {
     }
 
     autoFirmwareUpdate() {
-        if (this.isUnloaded) {
-            return;
-        }
-        if (this.config.autoupdate) {
+        if (this.isUnloaded) return;
+        
+        const mqttConfig = this.getMqttConfig();
+        if (mqttConfig.autoUpdate) {
             this.log.debug(`[firmwareUpdate] Starting update on every device`);
-
             this.eventEmitter.emit('onFirmwareUpdate');
 
             this.firmwareUpdateTimeout = this.setTimeout(
@@ -317,15 +736,15 @@ class Shelly extends utils.Adapter {
                     this.autoFirmwareUpdate();
                 },
                 15 * 60 * 1000,
-            ); // Restart firmware update in 15 minutes
+            );
         }
     }
 
     async firmwareNotify() {
-        if (this.isUnloaded) {
-            return;
-        }
-        if (!this.config.autoupdate) {
+        if (this.isUnloaded) return;
+        
+        const mqttConfig = this.getMqttConfig();
+        if (!mqttConfig.autoUpdate) {
             this.log.debug(`[firmwareNotify] Starting firmware check on every device`);
 
             const availableUpdates = [];
@@ -338,7 +757,6 @@ class Shelly extends utils.Adapter {
 
                     if (hasNewFirmware) {
                         const deviceObj = await this.getObjectAsync(deviceId);
-
                         availableUpdates.push(`${deviceObj?.common.name} (${deviceId})`);
                     }
                 }
@@ -356,7 +774,7 @@ class Shelly extends utils.Adapter {
                     this.firmwareNotify();
                 },
                 15 * 60 * 1000,
-            ); // Restart firmware check in 15 minutes
+            );
         }
     }
 
@@ -393,7 +811,7 @@ class Shelly extends utils.Adapter {
                 { preserve: { common: ['name'] } },
             );
 
-            await this.delObjectAsync(`ble.${val.srcBle.mac}.rssi`); // moved to receivedBy
+            await this.delObjectAsync(`ble.${val.srcBle.mac}.rssi`);
 
             await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.pid`, {
                 type: 'state',
@@ -494,7 +912,7 @@ class Shelly extends utils.Adapter {
                 native: {},
             });
 
-            const rawData = this.convertFromHex(val.payload); // convert hex to bytes
+            const rawData = this.convertFromHex(val.payload);
             let unpackedData = this.bleDecoder.unpack(rawData);
 
             if (unpackedData !== null) {
@@ -563,7 +981,6 @@ class Shelly extends utils.Adapter {
                     const pidOld = pidState && pidState.val ? pidState.val : -1;
                     const pidNew = unpackedData.pid;
 
-                    // Check if same message has been received by other Shellys
                     if (pidOld !== pidNew) {
                         await this.setState(`ble.${val.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
                         await this.setState(`ble.${val.srcBle.mac}.receivedBy`, {
@@ -638,37 +1055,39 @@ class Shelly extends utils.Adapter {
 
     async migrateConfig() {
         const native = {};
+        
+        // Alte flache Struktur migrieren falls vorhanden
         if (this.config?.http_username) {
-            native.httpusername = this.config.http_username;
+            if (!native.protocol) native.protocol = { mqtt: {} };
+            native.protocol.mqtt.httpusername = this.config.http_username;
             native.http_username = '';
         }
         if (this.config?.http_password) {
-            native.httppassword = this.config.http_password;
+            if (!native.protocol) native.protocol = { mqtt: {} };
+            native.protocol.mqtt.httppassword = this.config.http_password;
             native.http_password = '';
         }
         if (this.config?.user) {
-            native.mqttusername = this.config.user;
+            if (!native.protocol) native.protocol = { mqtt: {} };
+            native.protocol.mqtt.mqttUsername = this.config.user;
             native.user = '';
         }
         if (this.config?.password) {
-            native.mqttpassword = this.config.password;
+            if (!native.protocol) native.protocol = { mqtt: {} };
+            native.protocol.mqtt.mqttPassword = this.config.password;
             native.password = '';
         }
         if (this.config?.keys) {
-            native.blacklist = this.config.keys.map(b => {
+            if (!native.protocol) native.protocol = { mqtt: {} };
+            native.protocol.mqtt.blacklist = this.config.keys.map(b => {
                 return { id: b.blacklist };
             });
             native.keys = null;
         }
 
-        if (this.config) {
-            this.config.polltime = parseInt(this.config?.polltime, 10);
-        }
-
         if (Object.keys(native).length) {
             this.log.info('Migrate some data from old Shelly Adapter version. Restarting Shelly Adapter now!');
             await this.extendForeignObjectAsync(`system.adapter.${this.namespace}`, { native });
-
             return true;
         }
 
@@ -677,12 +1096,7 @@ class Shelly extends utils.Adapter {
 }
 
 if (module.parent) {
-    // Export the constructor in compact mode
-    /**
-     * @param [options]
-     */
     module.exports = options => new Shelly(options);
 } else {
-    // otherwise start the instance directly
     new Shelly();
 }
