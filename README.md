@@ -201,6 +201,10 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (@mcm1957) Changes to mqtt connect handling hav ebeen applied. This should fix err 'Unable to get MQTT.Prefix'[#931].
+* (@mcm1957) Dependencies have been updated
+
 ### 10.4.1 (2025-11-03)
 * (@mcm1957) Shelly pro 3em400 has been added as dedicated device to improve detectio (shellypro3em400) [#1269].
 * (@mcm1957) Missing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].
