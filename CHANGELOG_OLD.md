@@ -21,6 +21,13 @@
 
 * (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
+## 10.1.0 (2025-06-30)
+
+* (@klein0r) Allow infinite event listeners
+* (@klein0r) Added transformed voltage for voltmeter
+* (@klein0r) Improved logging of mqtt authentication failures
+* (@klein0r) Acknowledge new encryption keys for bthome encryption
+
 ## 10.0.0 (2025-05-30)
 
 * (@mcm1957) ATTENTION: Adapter requires BLE Script v1.0 now. See [documentation](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md).

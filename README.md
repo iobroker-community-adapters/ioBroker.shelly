@@ -201,7 +201,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.4.2-alpha.0 (2025-11-10)
 * (@mcm1957) Changes to mqtt connect handling hav ebeen applied. This should fix err 'Unable to get MQTT.Prefix'[#931].
 * (@mcm1957) Dependencies have been updated
 
@@ -236,13 +236,6 @@ Notes:
 * (@klein0r) Shelly Shutter Gen 3 (shellyshutter) has been added.
 * (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required now.
 * (@mcm1957) Dependencies have been updated
-
-### 10.1.0 (2025-06-30)
-
-* (@klein0r) Allow infinite event listeners
-* (@klein0r) Added transformed voltage for voltmeter
-* (@klein0r) Improved logging of mqtt authentication failures
-* (@klein0r) Acknowledge new encryption keys for bthome encryption
 
 ## License
 
