@@ -201,7 +201,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.4.2-alpha.1 (2025-11-12)
 * (@mcm1957) Changes to mqtt connect handling hav ebeen applied. This should fix err 'Unable to get MQTT.Prefix'[#931].
 * (@mcm1957) Dependencies have been updated
 
