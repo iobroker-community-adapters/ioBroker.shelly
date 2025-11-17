@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.4.1",
+    "version": "10.4.2-alpha.1",
     "news": {
+      "10.4.2-alpha.1": {
+        "en": "Changes to mqtt connect handling hav ebeen applied. This should fix err 'Unable to get MQTT.Prefix'[#931].\nDependencies have been updated",
+        "de": "Änderungen an mqt verbinden Handling hav ebeen angewendet. Dies sollte es reparieren \"Unable to get MQTT.Prefix\"[#931].\nAbhängigkeiten wurden aktualisiert",
+        "ru": "Применялись изменения в mqtt для управления подключением hav ebeen. Это должно исправить ошибку «Невозможно получить MQTT.Prefix» [#931].\nЗависимости были обновлены",
+        "pt": "Alterações no mqtt connect handling hav ebeen aplicado. Isso deve corrigir error 'Não é possível obter MQTT.Prefix'[#931].\nAs dependências foram atualizadas",
+        "nl": "Wijzigingen in mqtt connect handling have ebeen toegepast. Dit moet fout repareren 'Niet in staat om MQTT te krijgen.Prefix'[#931].\nAfhankelijkheden zijn bijgewerkt",
+        "fr": "Changements à mqtt connect manipulation hav ebeen appliqué. Cela devrait corriger err 'Impossible d'obtenir MQTT.Prefix'[#931].\nLes dépendances ont été actualisées",
+        "it": "Modifiche a mqtt collegare manipolazione hav ebeen applicato. Questo dovrebbe risolvere err 'Impossibile ottenere MQTT.Prefix'[#931].\nLe dipendenze sono state aggiornate",
+        "es": "Los cambios a mqtt conectan el manejo hav ebeen aplicado. Esto debe corregir el error 'Unable to get MQTT.Prefix'[#931].\nSe han actualizado las dependencias",
+        "pl": "Zmiany w obsłudze mqtt connect hav ebeen zastosowane. Powinno to naprawić err 'Nie można uzyskać MQTT.Prefix' [# 931].\nZaktualizowano zależności",
+        "uk": "Зміни до mqtt з'єднання обробки hav ebeen. Для отримання MQTT.Prefix [#931] слід зафіксувати ерр.\nЗалежність було оновлено",
+        "zh-cn": "更改 mqtt 连接处理 hav ebeen 应用 。 这将修正“ 无法获取 MQTT. prefix” [# 931] 的错误 .\n依赖关系已更新"
+      },
       "10.4.1": {
         "en": "Shelly pro 3em400 has been added as dedicated device to improve detection (shellypro3em400) [#1269].\nMissing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAdded distance support to ble sensors\nDependencies have been updated",
         "de": "Shelly pro 3em400 wurde als dediziertes Gerät hinzugefügt, um die Erkennung zu verbessern  (shellypro3em400) [#1269].\nFehlende Energiezustände wurden beim Shelly Dimmer Gen 3 (shellydimmerg3)hinzugefügt [#1274] .\nZusätzliche Abstandsunterstützung für ble Sensoren wurde im plementiert.\nAbhängigkeiten wurden aktualisiert",
