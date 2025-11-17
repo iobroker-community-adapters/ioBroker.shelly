@@ -543,20 +543,25 @@ class Shelly extends utils.Adapter {
                     );
 
                     const typesList = {
-                        moisture: { type: 'number', unit: '%' },
                         battery: { type: 'number', unit: '%' },
-                        temperature: { type: 'number', unit: '°C' },
-                        humidity: { type: 'number', unit: '%' },
-                        illuminance: { type: 'number' },
-                        motion: { type: 'number', states: { 0: 'Clear', 1: 'Detected' } },
-                        window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
                         button: {
                             type: 'number',
                             states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 254: 'Long' },
                         },
-                        rotation: { type: 'number' },
+                        direction: { type: 'number', unit: '°' },
                         distance_m: { type: 'number', unit: 'm' },
                         distance_mm: { type: 'number', unit: 'mm' },
+                        humidity: { type: 'number', unit: '%' },
+                        illuminance: { type: 'number' },
+                        moisture: { type: 'number', unit: '%' },
+                        motion: { type: 'number', states: { 0: 'Clear', 1: 'Detected' } },
+                        precipitation: { type: 'number', unit: 'mm' },
+                        pressure: { type: 'number', unit: 'hPa' },
+                        rotation: { type: 'number' },
+                        speed: { type: 'number', unit: 'm/s' },
+                        temperature: { type: 'number', unit: '°C' },
+                        uv_index: { type: 'number' },
+                        window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
                     };
 
                     const pidState = await this.getStateAsync(`ble.${val.srcBle.mac}.pid`);
