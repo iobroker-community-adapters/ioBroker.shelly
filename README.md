@@ -177,6 +177,7 @@ Notes:
 | Shelly BLU Wall Switch 4                      | >= v8.2.0   |
 | Shelly BLU RC Button 4                        | >= v8.2.0   |
 | Shelly BLU Distance                           | >= v10.4.1  |
+| Shelly BLU WS 90                              | >= v10.4.2  |
 
 ## NOT Supported devices
 
