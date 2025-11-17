@@ -548,6 +548,7 @@ class Shelly extends utils.Adapter {
                             type: 'number',
                             states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 254: 'Long' },
                         },
+                        dewpoint: { type: 'number', unit: '°C' },
                         direction: { type: 'number', unit: '°' },
                         distance_m: { type: 'number', unit: 'm' },
                         distance_mm: { type: 'number', unit: 'mm' },
