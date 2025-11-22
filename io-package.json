@@ -1,20 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.4.2-alpha.1",
+    "version": "10.4.2-alpha.2",
     "news": {
-      "10.4.2-alpha.1": {
-        "en": "Changes to mqtt connect handling hav ebeen applied. This should fix err 'Unable to get MQTT.Prefix'[#931].\nDependencies have been updated",
-        "de": "Änderungen an mqt verbinden Handling hav ebeen angewendet. Dies sollte es reparieren \"Unable to get MQTT.Prefix\"[#931].\nAbhängigkeiten wurden aktualisiert",
-        "ru": "Применялись изменения в mqtt для управления подключением hav ebeen. Это должно исправить ошибку «Невозможно получить MQTT.Prefix» [#931].\nЗависимости были обновлены",
-        "pt": "Alterações no mqtt connect handling hav ebeen aplicado. Isso deve corrigir error 'Não é possível obter MQTT.Prefix'[#931].\nAs dependências foram atualizadas",
-        "nl": "Wijzigingen in mqtt connect handling have ebeen toegepast. Dit moet fout repareren 'Niet in staat om MQTT te krijgen.Prefix'[#931].\nAfhankelijkheden zijn bijgewerkt",
-        "fr": "Changements à mqtt connect manipulation hav ebeen appliqué. Cela devrait corriger err 'Impossible d'obtenir MQTT.Prefix'[#931].\nLes dépendances ont été actualisées",
-        "it": "Modifiche a mqtt collegare manipolazione hav ebeen applicato. Questo dovrebbe risolvere err 'Impossibile ottenere MQTT.Prefix'[#931].\nLe dipendenze sono state aggiornate",
-        "es": "Los cambios a mqtt conectan el manejo hav ebeen aplicado. Esto debe corregir el error 'Unable to get MQTT.Prefix'[#931].\nSe han actualizado las dependencias",
-        "pl": "Zmiany w obsłudze mqtt connect hav ebeen zastosowane. Powinno to naprawić err 'Nie można uzyskać MQTT.Prefix' [# 931].\nZaktualizowano zależności",
-        "uk": "Зміни до mqtt з'єднання обробки hav ebeen. Для отримання MQTT.Prefix [#931] слід зафіксувати ерр.\nЗалежність було оновлено",
-        "zh-cn": "更改 mqtt 连接处理 hav ebeen 应用 。 这将修正“ 无法获取 MQTT. prefix” [# 931] 的错误 .\n依赖关系已更新"
+      "10.4.2-alpha.2": {
+        "en": "Added speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90\nChanges to mqtt connect handling have been applied. This should fix err 'Unable to get MQTT.Prefix'[#931].\nDependencies have been updated",
+        "de": "Hinzugefügt Geschwindigkeit, Taupunkt, uv_index, Druck, Richtung und Niederschlag für die Wetterstation WS 90\nÄnderungen an mqt Connect Handling wurden angewendet. Dies sollte es reparieren \"Unable to get MQTT.Prefix\"[#931].\nAbhängigkeiten wurden aktualisiert",
+        "ru": "Добавлена скорость, точка росы, uv_index, давление, направление и осадки для метеостанции WS 90\nБыли внесены изменения в обработку подключения mqtt. Это должно исправить ошибку «Невозможно получить MQTT.Prefix» [#931].\nЗависимости были обновлены",
+        "pt": "Velocidade adicionada, ponto de orvalho, uv_index, pressão, direção e precipitação para estação meteorológica WS 90\nForam aplicadas alterações na manipulação de ligação mqtt. Isso deve corrigir error 'Não é possível obter MQTT.Prefix'[#931].\nAs dependências foram atualizadas",
+        "nl": "Toegevoegde snelheid, dauwpunt, uv_index, druk, richting en neerslag voor weerstation WS 90\nWijzigingen in mqtt connect handling zijn toegepast. Dit moet fout repareren 'Niet in staat om MQTT te krijgen.Prefix'[#931].\nAfhankelijkheden zijn bijgewerkt",
+        "fr": "Ajout de vitesse, de point de rosée, uv_index, pression, direction et précipitations pour la station météorologique WS 90\nDes modifications ont été apportées à la manipulation de la connexion mqtt. Cela devrait corriger err 'Impossible d'obtenir MQTT.Prefix'[#931].\nLes dépendances ont été actualisées",
+        "it": "Aggiunto velocità, punto di rugiada, uv_index, pressione, direzione e precipitazioni per la stazione meteo WS 90\nSono state applicate modifiche alla gestione del collegamento di mqtt. Questo dovrebbe risolvere err 'Impossibile ottenere MQTT.Prefix'[#931].\nLe dipendenze sono state aggiornate",
+        "es": "Velocidad agregada, punto de rocío, uv_index, presión, dirección y precipitación para la estación del tiempo WS 90\nSe han aplicado cambios a la manipulación de conexiones mqtt. Esto debe corregir el error 'Unable to get MQTT.Prefix'[#931].\nSe han actualizado las dependencias",
+        "pl": "Dodano prędkość, punkt dewpoint, uv _ index, ciśnienie, kierunek i opady dla stacji pogodowej WS 90\nZastosowano zmiany obsługi połączenia mqtt. Powinno to naprawić err 'Nie można uzyskać MQTT.Prefix' [# 931].\nZaktualizowano zależności",
+        "uk": "Додана швидкість, точка відключення, uv_index, тиск, напрямок та опади на метеорологічну станцію WS 90\nНаведено зміни до обробки з'єднання mqtt. Для отримання MQTT.Prefix [#931] слід зафіксувати ерр.\nЗалежність було оновлено",
+        "zh-cn": "为气象站WS90添加速度、露点、uv_index、压力、方向和降水\n对 mqtt 连接处理的更改已被应用 。 这将修正“ 无法获取 MQTT. prefix” [# 931] 的错误 .\n依赖关系已更新"
       },
       "10.4.1": {
         "en": "Shelly pro 3em400 has been added as dedicated device to improve detection (shellypro3em400) [#1269].\nMissing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAdded distance support to ble sensors\nDependencies have been updated",
