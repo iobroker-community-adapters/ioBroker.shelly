@@ -204,7 +204,7 @@ Notes:
 -->
 ### **WORK IN PROGRESS**
 * (@klein0r) Added speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90
-* (@mcm1957) Changes to mqtt connect handling hav ebeen applied. This should fix err 'Unable to get MQTT.Prefix'[#931].
+* (@mcm1957) Changes to mqtt connect handling have been applied. This should fix err 'Unable to get MQTT.Prefix'[#931].
 * (@mcm1957) Dependencies have been updated
 
 ### 10.4.1 (2025-11-03)
