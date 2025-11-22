@@ -1,0 +1,13 @@
+name: Copilot request
+title: "[COPILOT]: "
+labels: ["copilot"]
+description: "Support a request to be handles by copilot - RESERVED TO DEVELOPERS"
+body:
+  - type: textarea
+    attributes:
+      label: request
+      description: >-
+        Add reqeust to be prcessed here. Please note that any issue not created by an actoive developer will be closed immidiatly. 
+    validations:
+      required: true
+ 
