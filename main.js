@@ -112,7 +112,6 @@ class Shelly extends utils.Adapter {
         // Default to 0 if qos is not set
         if (this.config.qos === undefined || this.config.qos === null) {
             this.config.qos = 0;
-            return;
         }
 
         const qos = parseInt(this.config.qos, 10);
@@ -123,16 +122,18 @@ class Shelly extends utils.Adapter {
                 `[MQTT] Invalid QoS value configured: ${this.config.qos}. QoS must be 0, 1, or 2. Setting QoS to 0.`,
             );
             this.config.qos = 0;
-        } else if (qos === 2) {
-            // Check if QoS 2 is configured
+            return;
+        }
+
+        // Log warning if QoS 2 is configured
+        if (qos === 2) {
             this.log.warn(
                 `[MQTT] QoS 2 is configured but not officially supported. Using QoS 2 anyway. Consider using QoS 0 or 1 instead.`,
             );
-            this.config.qos = qos;
-        } else {
-            // Normalize to integer for valid values (0 or 1)
-            this.config.qos = qos;
         }
+
+        // Normalize to integer type
+        this.config.qos = qos;
     }
 
     onStateChange(id, state) {
