@@ -109,13 +109,18 @@ class Shelly extends utils.Adapter {
      * Note: This modifies config.qos as a runtime override only; it does not persist to the configuration file.
      */
     validateQosConfig() {
+        // Default to 0 if qos is not set
+        if (this.config.qos === undefined || this.config.qos === null) {
+            this.config.qos = 0;
+            return;
+        }
+
         const qos = parseInt(this.config.qos, 10);
 
         // Check for invalid values (< 0 or > 2)
         if (isNaN(qos) || qos < 0 || qos > 2) {
-            const configuredValue = this.config.qos !== undefined ? this.config.qos : 'undefined';
             this.log.error(
-                `[MQTT] Invalid QoS value configured: ${configuredValue}. QoS must be 0, 1, or 2. Setting QoS to 0.`,
+                `[MQTT] Invalid QoS value configured: ${this.config.qos}. QoS must be 0, 1, or 2. Setting QoS to 0.`,
             );
             this.config.qos = 0;
         } else if (qos === 2) {
