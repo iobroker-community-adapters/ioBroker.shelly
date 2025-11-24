@@ -394,22 +394,6 @@
                                 "zh-cn": "1 - 至少一次"
                             },
                             "value": 1
-                        },
-                        {
-                            "label": {
-                                "en": "2 - Exactly once",
-                                "de": "2 - Genau einmal",
-                                "ru": "2 - Ровно один раз",
-                                "pt": "2 - Exatamente uma vez",
-                                "nl": "2 - Precies één keer",
-                                "fr": "2 - Exactement une fois",
-                                "it": "2 - Esattamente una volta",
-                                "es": "2 - Exactamente una vez",
-                                "pl": "2 - Dokładnie raz",
-                                "uk": "2 - Точно один",
-                                "zh-cn": "2 - 恰好一次"
-                            },
-                            "value": 2
                         }
                     ],
                     "xs": 12,

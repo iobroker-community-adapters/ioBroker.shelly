@@ -52,7 +52,7 @@ class Shelly extends utils.Adapter {
             objectHelper.init(this);
 
             const protocol = this.config.protocol || 'coap';
-
+            
             await this.setOnlineFalse();
 
             // Start online check
@@ -61,6 +61,8 @@ class Shelly extends utils.Adapter {
             // Start MQTT server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
+                    this.validateQosConfig();
+
                     this.log.info(
                         `Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port} (QoS ${this.config.qos})`,
                     );
@@ -98,6 +100,39 @@ class Shelly extends utils.Adapter {
         } catch (err) {
             this.log.error(`[onReady] Startup error: ${err}`);
         }
+    }
+
+    /**
+     * Validates and normalizes the QoS configuration value.
+     * This is the central place where config.qos is retrieved and validated.
+     * Note: This modifies config.qos as a runtime override only; it does not persist to the configuration file.
+     */
+    validateQosConfig() {
+        // Default to 0 if qos is not set
+        if (this.config.qos === undefined || this.config.qos === null) {
+            this.config.qos = 0;
+        }
+
+        const qos = parseInt(this.config.qos, 10);
+
+        // Check for invalid values (< 0 or > 2)
+        if (isNaN(qos) || qos < 0 || qos > 2) {
+            this.log.error(
+                `[MQTT] Invalid QoS value configured: ${this.config.qos}. QoS must be 0, 1, or 2. Setting QoS to 0.`,
+            );
+            this.config.qos = 0;
+            return;
+        }
+
+        // Log warning if QoS 2 is configured
+        if (qos === 2) {
+            this.log.warn(
+                `[MQTT] QoS 2 is configured but not officially supported. Using QoS 2 anyway. Consider using QoS 0 or 1 instead.`,
+            );
+        }
+
+        // Normalize to integer type
+        this.config.qos = qos;
     }
 
     onStateChange(id, state) {
