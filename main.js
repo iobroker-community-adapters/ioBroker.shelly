@@ -53,6 +53,9 @@ class Shelly extends utils.Adapter {
 
             const protocol = this.config.protocol || 'coap';
 
+            // Validate and normalize QoS configuration
+            this.validateQosConfig();
+
             await this.setOnlineFalse();
 
             // Start online check
@@ -97,6 +100,27 @@ class Shelly extends utils.Adapter {
             }
         } catch (err) {
             this.log.error(`[onReady] Startup error: ${err}`);
+        }
+    }
+
+    /**
+     * Validates and normalizes the QoS configuration value.
+     * This is the central place where config.qos is retrieved and validated.
+     */
+    validateQosConfig() {
+        const qos = parseInt(this.config.qos);
+
+        // Check for invalid values (< 0 or > 2)
+        if (isNaN(qos) || qos < 0 || qos > 2) {
+            this.log.error(
+                `[MQTT] Invalid QoS value configured: ${this.config.qos}. QoS must be between 0 and 2. Setting QoS to 0.`,
+            );
+            this.config.qos = 0;
+        } else if (qos === 2) {
+            // Check if QoS 2 is configured
+            this.log.warn(
+                `[MQTT] QoS 2 is configured but not officially supported. Using QoS 2 anyway. Consider using QoS 0 or 1 instead.`,
+            );
         }
     }
 
