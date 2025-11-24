@@ -52,7 +52,7 @@ class Shelly extends utils.Adapter {
             objectHelper.init(this);
 
             const protocol = this.config.protocol || 'coap';
-            
+
             await this.setOnlineFalse();
 
             // Start online check
