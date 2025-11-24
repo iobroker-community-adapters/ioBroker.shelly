@@ -113,8 +113,9 @@ class Shelly extends utils.Adapter {
 
         // Check for invalid values (< 0 or > 2)
         if (isNaN(qos) || qos < 0 || qos > 2) {
+            const configuredValue = this.config.qos !== undefined ? this.config.qos : 'undefined';
             this.log.error(
-                `[MQTT] Invalid QoS value configured: ${this.config.qos}. QoS must be between 0 and 2. Setting QoS to 0.`,
+                `[MQTT] Invalid QoS value configured: ${configuredValue}. QoS must be 0, 1, or 2. Setting QoS to 0.`,
             );
             this.config.qos = 0;
         } else if (qos === 2) {
