@@ -128,6 +128,10 @@ class Shelly extends utils.Adapter {
             this.log.warn(
                 `[MQTT] QoS 2 is configured but not officially supported. Using QoS 2 anyway. Consider using QoS 0 or 1 instead.`,
             );
+            this.config.qos = qos;
+        } else {
+            // Normalize to integer for valid values (0 or 1)
+            this.config.qos = qos;
         }
     }
 
