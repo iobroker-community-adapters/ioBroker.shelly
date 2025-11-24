@@ -106,9 +106,10 @@ class Shelly extends utils.Adapter {
     /**
      * Validates and normalizes the QoS configuration value.
      * This is the central place where config.qos is retrieved and validated.
+     * Note: This modifies config.qos as a runtime override only; it does not persist to the configuration file.
      */
     validateQosConfig() {
-        const qos = parseInt(this.config.qos);
+        const qos = parseInt(this.config.qos, 10);
 
         // Check for invalid values (< 0 or > 2)
         if (isNaN(qos) || qos < 0 || qos > 2) {
