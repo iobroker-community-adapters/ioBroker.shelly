@@ -52,10 +52,7 @@ class Shelly extends utils.Adapter {
             objectHelper.init(this);
 
             const protocol = this.config.protocol || 'coap';
-
-            // Validate and normalize QoS configuration
-            this.validateQosConfig();
-
+            
             await this.setOnlineFalse();
 
             // Start online check
@@ -64,6 +61,8 @@ class Shelly extends utils.Adapter {
             // Start MQTT server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
+                    this.validateQosConfig();
+
                     this.log.info(
                         `Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port} (QoS ${this.config.qos})`,
                     );
