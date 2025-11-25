@@ -138,6 +138,7 @@ Notes:
 | Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
 | Shelly Shutter (shellyshutter) (1)            | ❌   | >= v10.2.0 |
 | Shelly DALI Dimmer Gen3 (shellyddimmerg3)     | ❌   | >= v10.2.0 |
+| Shelly Plug PM Gen3 (shellyplugpmg3)          | ❌   | >= v10.5.0 |
 
 Notes:
 (1) slat control requires >= v10.4.0
@@ -202,10 +203,11 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 10.4.2-alpha.3 (2025-11-24)
+### **WORK IN PROGRESS**
 * (@klein0r) Added speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90
 * (@mcm1957) Changes to mqtt connect handling have been applied. This should fix err 'Unable to get MQTT.Prefix'[#931].
 * (@mcm1957) Mqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.
+* (@mcm1957) Shelly Plug PM Gen 3 (shellyplugpmg3) has been added.
 * (@mcm1957) Dependencies have been updated
 
 ### 10.4.1 (2025-11-03)
