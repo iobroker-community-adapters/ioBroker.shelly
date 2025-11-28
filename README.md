@@ -203,8 +203,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 10.5.0-alpha.1 (2025-11-28)
 * (@mcm1957) Addon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly with theis device.
 * (@klein0r) Added speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90
 * (@mcm1957) Changes to mqtt connect handling have been applied. This should fix err 'Unable to get MQTT.Prefix'[#931].

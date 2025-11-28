@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.5.0-alpha.0",
+    "version": "10.5.0-alpha.1",
     "news": {
-      "10.5.0-alpha.0": {
+      "10.5.0-alpha.1": {
         "en": "Addon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly with theis device.\nAdded speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90\nChanges to mqtt connect handling have been applied. This should fix err 'Unable to get MQTT.Prefix'[#931].\nMqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) has been added.\nShelly Dimmer Gen 4 (shellydimmerg4) has been added.\nDependencies have been updated",
         "de": "Addon-Unterstützung wurde **entfernt* von Shelly Dimmer Gen 3 (shellydimmerg3), da es nicht von Shelly mit Theis-Gerät unterstützt wird.\nHinzugefügt Geschwindigkeit, Taupunkt, uv_index, Druck, Richtung und Niederschlag für die Wetterstation WS 90\nÄnderungen an mqt Connect Handling wurden angewendet. Dies sollte es reparieren \"Unable to get MQTT.Prefix\"[#931].\nMqtt qos mode 2 wurde von der Konfiguration entfernt, da Shelly den Qos-Modus nicht unterstützt 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) wurde hinzugefügt.\nShelly Dimmer Gen 4 (shellydimmerg4) wurde hinzugefügt.\nAbhängigkeiten wurden aktualisiert",
         "ru": "Поддержка аддона была удалена из Shelly Dimmer Gen 3 (shellydimmerg3), поскольку она не поддерживается shelly с устройством.\nДобавлена скорость, точка росы, uv_index, давление, направление и осадки для метеостанции WS 90\nБыли внесены изменения в обработку подключения mqtt. Это должно исправить ошибку «Невозможно получить MQTT.Prefix» [#931].\nРежим 2 Mqtt qos был удален из конфигурации, поскольку shelly не поддерживает режим qos 2.\nДобавлен Shelly Plug PM Gen 3 (shellyplugpmg3).\nДобавлен Shelly Dimmer Gen 4 (shellydimmerg4).\nЗависимости были обновлены",
