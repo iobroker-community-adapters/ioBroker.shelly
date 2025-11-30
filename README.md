@@ -203,7 +203,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.5.0-alpha.2 (2025-11-30)
 * (@mcm1957) Addon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly with theis device.
 * (@mcm1957) Missing fields at light component have been added. This will effect several devices but should add additional states below light(n) only.
 * (@klein0r) Added speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90
