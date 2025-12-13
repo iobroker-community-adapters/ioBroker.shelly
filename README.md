@@ -205,6 +205,10 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+* (@HGlab01) Several fixes for Shelly Ecowitt ES 90 have benn implemented. [#1293]
+
 ### 10.5.0 (2025-12-13)
 * (@mcm1957) Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].
 * (@mcm1957) Addon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly for this device.
