@@ -203,14 +203,14 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 10.5.0-alpha.2 (2025-11-30)
-* (@mcm1957) Addon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly with theis device.
+### **WORK IN PROGRESS**
+* (@mcm1957) Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].
+* (@mcm1957) Addon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly for this device.
 * (@mcm1957) Missing fields at light component have been added. This will effect several devices but should add additional states below light(n) only.
 * (@klein0r) Added speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90
-* (@mcm1957) Changes to mqtt connect handling have been applied. This should fix err 'Unable to get MQTT.Prefix'[#931].
 * (@mcm1957) Mqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.
 * (@mcm1957) Shelly Plug PM Gen 3 (shellyplugpmg3) has been added.
-* (@mcm1957) Shelly Dimmer Gen 4 (shellydimmerg4) has been added.
+* (@mcm1957) Shelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. 
 * (@mcm1957) Dependencies have been updated
 
 ### 10.4.1 (2025-11-03)
