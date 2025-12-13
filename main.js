@@ -587,19 +587,20 @@ class Shelly extends utils.Adapter {
                         direction: { type: 'number', unit: '°' },
                         distance_m: { type: 'number', unit: 'm' },
                         distance_mm: { type: 'number', unit: 'mm' },
+                        gust_speed: { type: 'number', unit: 'm/s' },
                         humidity: { type: 'number', unit: '%' },
                         illuminance: { type: 'number' },
-                        rain_status: { type: 'number', states: { 0: 'Not raining', 1: 'Raining' } },
+                        moisture: { type: 'number', unit: '%' },
                         motion: { type: 'number', states: { 0: 'Clear', 1: 'Detected' } },
                         precipitation: { type: 'number', unit: 'mm' },
                         pressure: { type: 'number', unit: 'hPa' },
+                        rain_status: { type: 'number', states: { 0: 'Not raining', 1: 'Raining' } },
                         rotation: { type: 'number' },
                         speed: { type: 'number', unit: 'm/s' },
                         temperature: { type: 'number', unit: '°C' },
                         uv_index: { type: 'number' },
-                        window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
-                        gust_speed: { type: 'number', unit: 'm/s' },
                         voltage: { type: 'number', unit: 'V' },
+                        window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
                     };
 
                     const pidState = await this.getStateAsync(`ble.${val.srcBle.mac}.pid`);
