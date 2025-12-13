@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.5.1-alpha.0",
+    "version": "10.5.1-alpha.1",
     "news": {
+      "10.5.1-alpha.1": {
+        "en": "Several fixes for Shelly Ecowitt ES 90 have benn implemented. [#1293]",
+        "de": "Mehrere Fixes für Shelly Ecowitt ES 90 wurden implementiert. (#1293)",
+        "ru": "Несколько исправлений для Shelly Ecowitt ES 90 были реализованы. [#1293]",
+        "pt": "Várias correções para Shelly Ecowitt ES 90 foram implementadas. [#1293]",
+        "nl": "Verschillende oplossingen voor Shelly Ecowitt ES 90 zijn geïmplementeerd. [#1293]",
+        "fr": "Plusieurs corrections pour Shelly Ecowitt ES 90 ont été mises en œuvre. [#1293]",
+        "it": "Diversi correzioni per Shelly Ecowitt ES 90 sono state implementate. [#1293]",
+        "es": "Se han implementado varias correcciones para Shelly Ecowitt ES 90. [#1293]",
+        "pl": "Kilka poprawek dla Shelly Ecowitt ES 90 mają benn wdrożone. [# 1293]",
+        "uk": "Кілька фіксаторів для Shelly Ecowitt ES 90 реалізовано бенн. [#1293]",
+        "zh-cn": "对Shelly Ecowitt ES 90的一些规定已经执行。 [#1293] (中文(简体) )"
+      },
       "10.5.1-alpha.0": {
         "en": "Several fixes for Shelly Ecowitt ES 90 have benn implemented. [#1293]",
         "de": "Mehrere Fixes für Shelly Ecowitt ES 90 wurden implementiert. (#1293)",
@@ -80,19 +93,6 @@
         "pl": "Definicje roli państw anergicznych zostały skorygowane [# 1195].\nDodano Shelly Dali Dimmer Gen 3 (shelddimmerg3).\nDodano Shelly1L Gen 3 (shelly1lg3).\nDodano Shelly2L Gen 3 (shelly2lg3).\nDodano Shelly2PM Gen 4 (shelly2pmg4).\nShelly Shutter Gen 3 (shellyshutter) została dodana.\nadministrator 7.6.17 i kontroler js- 6.0.11 (lub później) są wymagane teraz.\nZaktualizowano zależności",
         "uk": "Виправлено визначення ролі для аергійних станів [#1195].\nShelly Dali Dimmer Gen 3 (коліснийдмерг3) додано.\nShelly1L Gen 3 (шкарпетка1lg3) додано.\nShelly2L Gen 3 (колісний2lg3) додано.\nShelly2PM Gen 4 (shelly2pmg4) додано.\nДодано Shelly Shutter Gen 3 (клапан).\nadmin 7.6.17 і js-controller 6.0.11 (або пізніше) обов'язкові.\nЗалежність було оновлено",
         "zh-cn": "厌食状态的角色定义已经纠正[#1195].\n雪莉·达利·迪默Gen 3(英语:Shellyddimerg3)被加入.\n增加了Shelly1L Gen 3(shelly1lg3).\n已添加 Shelly2L Gen 3(shelly2lg3).\n已添加 Shelly2PM Gen 4(shelly2pmg4).\n雪莉·关特·源3(英语:Shellyshutter Gen 3)被加入.\n现在需要admin 7.6.17和js控制器 6.0.11(或以后).\n依赖关系已更新"
-      },
-      "10.1.0": {
-        "en": "Allow infinite event listeners\nAdded transformed voltage for voltmeter\nImproved logging of mqtt authentication failures\nAcknowledge new encryption keys for bthome encryption",
-        "de": "Erlauben Sie unendliche Ereigniszuhörer\nTransformierte Spannung für Voltmeter hinzugefügt\nVerbesserte Protokollierung von mqtt Authentifizierungsfehlern\nNeue Verschlüsselungsschlüssel für bthome Verschlüsselung bekanntgeben",
-        "ru": "Позволить слушателям бесконечных событий\nДобавлено преобразованное напряжение для вольтметра\nУлучшенная регистрация ошибок аутентификации mqtt\nПризнать новые ключи шифрования для шифрования bthome",
-        "pt": "Permitir ouvintes de eventos infinitos\nAdicionada tensão transformada para voltímetro\nRegisto melhorado das falhas de autenticação mqtt\nReconheça novas chaves de criptografia para criptografia bthome",
-        "nl": "Oneindige eventluisteraars toestaan\nToegevoegd getransformeerde spanning voor voltmeter\nVerbeterde logging van mqtt-authenticatiefouten\nNieuwe encryptiesleutels voor bthome-encryptie erkennen",
-        "fr": "Permettre aux auditeurs d'événements infinis\nAjout de tension transformée pour voltmètre\nAmélioration de l'enregistrement des défaillances d'authentification mqtt\nReconnaissez les nouvelles clés de chiffrement pour le chiffrement bthome",
-        "it": "Consentire ascoltatori di eventi infinite\nAggiunto trasformato tensione per voltmetro\nRegistrazione migliorata dei guasti di autenticazione di mqtt\nRiconoscere nuove chiavi di crittografia per la crittografia bthome",
-        "es": "Permitir escuchar eventos infinitos\nVoltaje transformado para voltímetro\nMejor registro de fallas de autenticación mqtt\nReconoce nuevas claves de encriptación para encriptación de bthome",
-        "pl": "Pozwól nieskończonym słuchaczom zdarzeń\nDodano napięcie przekształcone dla woltomierza\nUlepszone logowanie błędów uwierzytelniania mqtt\nPotwierdź nowe klucze szyfrujące do szyfrowania bthome",
-        "uk": "Allow нескінченні прослуховування подій\nДодана трансформаторна напруга для вольтметра\nПокращується залога автентифікації mqtt\nAcknowledge нові ключі шифрування для шифрування bthome",
-        "zh-cn": "允许无限事件听众\n电压计增加的变形电压\n改进mqtt认证失败的记录\n确认 bthome 加密的新加密密钥"
       }
     },
     "titleLang": {

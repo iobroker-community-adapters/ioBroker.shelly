@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "10.5.1-alpha.0",
+  "version": "10.5.1-alpha.1",
   "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
   "author": {
     "name": "Thorsten Stueben",
