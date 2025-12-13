@@ -206,7 +206,7 @@ Notes:
   ### **WORK IN PROGRESS**
 -->
 ### 10.5.1-alpha.1 (2025-12-13)
-* (@HGlab01) Several fixes for Shelly Ecowitt ES 90 have benn implemented. [#1293]
+* (@HGlab01) Several fixes for Shelly Ecowitt WS90 have been implemented. [#1293]
 
 ### 10.5.0 (2025-12-13)
 * (@mcm1957) Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].
