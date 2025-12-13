@@ -599,6 +599,7 @@ class Shelly extends utils.Adapter {
                         uv_index: { type: 'number' },
                         window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
                         gust_speed: { type: 'number', unit: 'm/s' },
+                        voltage: { type: 'number', unit: 'V' },
                     };
 
                     const pidState = await this.getStateAsync(`ble.${val.srcBle.mac}.pid`);
