@@ -205,7 +205,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 10.5.1-alpha.0 (2025-12-13)
+### **WORK IN PROGRESS**
 * (@HGlab01) Several fixes for Shelly Ecowitt ES 90 have benn implemented. [#1293]
 
 ### 10.5.0 (2025-12-13)
