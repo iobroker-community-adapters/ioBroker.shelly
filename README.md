@@ -78,37 +78,37 @@ Please connect you devices directly to your (W)LAN and use a classic WLAN Repeat
 
 | Shelly Device                                  | CoAP | MQTT       |
 |------------------------------------------------| ---- |------------|
+| Shelly Bluetooth Gateway (shellyblugw)         | ❌   | >= v6.5.0  |
+| Shelly Plus 0-10V (shellyplus010v)             | ❌   | >= v6.9.0  |
 | Shelly Plus 1 (shellyplus1)                    | ❌   | >= v5.0.0  |
+| Shelly Plus 1 Mini (shellyplus1mini)           | ❌   | >= v6.4.5  |
+| Shelly Plus 1 PM Mini (shellyplus1pmmini)      | ❌   | >= v6.4.5  |
 | Shelly Plus 1 PM (shellyplus1pm)               | ❌   | >= v5.0.0  |
 | Shelly Plus 2 PM (shellyplus2pm) (2)           | ❌   | >= v5.2.0  |
 | Shelly Plus i4 (shellyplusi4)                  | ❌   | >= v5.3.0  |
 | Shelly Plus i4 DC (shellyplusi4)               | ❌   | >= v5.3.0  |
-| Shelly Plus 0-10V (shellyplus010v)             | ❌   | >= v6.9.0  |
+| Shelly Plus H&T (shellyplusht)                 | ❌   | >= v6.2.0  |
+| Shelly Plus Plug S (shellyplusplugs)           | ❌   | >= v6.4.0  |
+| Shelly Plus PM Mini (shellypmmini)             | ❌   | >= v6.4.5  |
+| Shelly Plus RGBW PM (shellyplusrgbwpm)         | ❌   | >= v8.2.0  |
+| Shelly Plus Smoke (shellyplussmoke)            | ❌   | >= v6.5.0  |
+| Shelly Plus Uni (shellyplusuni)                | ❌   | >= v9.5.1  |
 | Shelly Pro 1 (shellypro1)                      | ❌   | >= v5.2.0  |
 | Shelly Pro 1 PM (shellypro1pm)                 | ❌   | >= v5.2.0  |
 | Shelly Pro 2 (shellypro2)                      | ❌   | >= v5.2.0  |
 | Shelly Pro 2 PM (shellypro2pm) (2)             | ❌   | >= v5.2.0  |
 | Shelly Pro 3 (shellypro3)                      | ❌   | >= v6.2.0  |
-| Shelly Pro 4 PM (shellypro4pm)                 | ❌   | >= v5.0.0  |
 | Shelly Pro 3 EM (shellypro3em)                 | ❌   | >= v6.4.0  |
 | Shelly Pro 3 EM (400A) (shellypro3em400)       | ❌   | >= v10.4.1 |
 | Shelly Pro 3 EM 63 (shellypro3em63)            | ❌   | >= v9.1.0  |
+| Shelly Pro 4 PM (shellypro4pm)                 | ❌   | >= v5.0.0  |
+| Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm) | ❌   | >= v9.5.0  |
 | Shelly Pro Dimmer 1 PM (shellyprodm1pm)        | ❌   | >= v8.0.0  |
 | Shelly Pro Dimmer 2 PM (shellyprodm2pm)        | ❌   | >= v7.0.0  |
-| Shelly Pro EM 2x50A                            | ❌   | >= v8.1.0  |
 | Shelly Pro Dual Cover PM (shellypro2cover) (2) | ❌   | >= v6.5.0  | 
-| Shelly Plus H&T (shellyplusht)                 | ❌   | >= v6.2.0  |
-| Shelly Plus Smoke (shellyplussmoke)            | ❌   | >= v6.5.0  |
-| Shelly Bluetooth Gateway (shellyblugw)         | ❌   | >= v6.5.0  |
-| Shelly Plus Plug S (shellyplusplugs)           | ❌   | >= v6.4.0  |
-| Shelly Plus PM Mini (shellypmmini)             | ❌   | >= v6.4.5  |
-| Shelly Plus 1 Mini (shellyplus1mini)           | ❌   | >= v6.4.5  |
-| Shelly Plus 1 PM Mini (shellyplus1pmmini)      | ❌   | >= v6.4.5  |
-| Shelly Plus Uni (shellyplusuni)                | ❌   | >= v9.5.1  |
-| Shelly Wall Display (shellywalldisplay)        | ❌   | >= v7.0.0  |
-| Shelly Plus RGBW PM (shellyplusrgbwpm)         | ❌   | >= v8.2.0  |
-| Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm) | ❌   | >= v9.5.0  |
+| Shelly Pro EM 2x50A                            | ❌   | >= v8.1.0  |
 | Shelly Pro RGBWW PM (shellyprorgbwwpm) (1)     | ❌   | >= v9.5.0  |
+| Shelly Wall Display (shellywalldisplay)        | ❌   | >= v7.0.0  |
 
 Notes:
 (1) CCT component not yet available
@@ -118,27 +118,27 @@ Notes:
 
 | Shelly Device                                 | CoAP | MQTT       |
 |-----------------------------------------------| ---- | ---------- |
+| Shelly 0/1-10V PM Gen3 (shelly0110dimg3)      | ❌   | >= v8.4.0  |
 | Shelly 1 Mini Gen3 (shelly1minig3)            | ❌   | >= v7.0.0  |
 | Shelly 1 PM Mini Gen3 (shelly1pmminig3)       | ❌   | >= v7.0.0  |
-| Shelly PM Mini Gen3 (shellypmminig3)          | ❌   | >= v7.0.0  |
-| Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0  |
 | Shelly 1 PM Gen3 (shelly1pmg3)                | ❌   | >= v8.0.0  |
 | Shelly 1 Gen3 (shelly1g3)                     | ❌   | >= v8.0.0  |
 | Shelly 1L Gen3 (shelly1lg3)                   | ❌   | >= v10.2.0 |
 | Shelly 2L Gen3 (shelly2lg3)                   | ❌   | >= v10.2.0 |
 | Shelly 2 PM Gen3 (shelly2pmg3) (1)            | ❌   | >= v8.3.0  |
-| Shelly 0/1-10V PM Gen3 (shelly0110dimg3)      | ❌   | >= v8.4.0  |
-| Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
-| Shelly BLU Gateway Gen3 (shellyblugwg3)       | ❌   | >= v8.5.0  |
-| Shelly I4 / I4DC Gen3 (shellyi4g3)            | ❌   | >= v8.5.0  |
 | Shelly 3EM-63 Gen3 (shelly3em63g3)            | ❌   | >= v9.2.0  |
-| Shelly Dimmer Gen3 (shellydimmerg3)           | ❌   | >= v9.2.0  |
-| Shelly Outdoor Plug S Gen3 (shellyoutdoorsg3) | ❌   | >= v9.3.0  |
 | Shelly AZ Plug (shellyazplug)                 | ❌   | >= v9.5.0  |
-| Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
-| Shelly Shutter (shellyshutter) (1)            | ❌   | >= v10.2.0 |
+| Shelly BLU Gateway Gen3 (shellyblugwg3)       | ❌   | >= v8.5.0  |
 | Shelly DALI Dimmer Gen3 (shellyddimmerg3)     | ❌   | >= v10.2.0 |
+| Shelly Dimmer Gen3 (shellydimmerg3)           | ❌   | >= v9.2.0  |
+| Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
+| Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0  |
+| Shelly I4 / I4DC Gen3 (shellyi4g3)            | ❌   | >= v8.5.0  |
 | Shelly Plug PM Gen3 (shellyplugpmg3)          | ❌   | >= v10.5.0 |
+| Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
+| Shelly PM Mini Gen3 (shellypmminig3)          | ❌   | >= v7.0.0  |
+| Shelly Outdoor Plug S Gen3 (shellyoutdoorsg3) | ❌   | >= v9.3.0  |
+| Shelly Shutter (shellyshutter) (1)            | ❌   | >= v10.2.0 |
 
 Notes:
 (1) slat control requires >= v10.4.0
@@ -148,10 +148,11 @@ Notes:
 | Shelly Device                                 | CoAP | MQTT       |
 |-----------------------------------------------| ---- | ---------- |
 | Shelly 1 Gen4 (shelly1g4)                     | ❌   | >= v9.4.0  |
-| Shelly 1 PM Gen4 (shelly1pmg4) (1)            | ❌   | >= v9.4.0  |
+| Shelly 1 PM Gen4 (shelly1pmg4)                | ❌   | >= v9.4.0  |
 | Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0  |
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0  |
-| Shelly 2 PM Gen4 (shelly2pmg4)                | ❌   | >= v10.2.0 |
+| Shelly 2 PM Gen4 (shelly2pmg4) (1)            | ❌   | >= v10.2.0 |
+| Shelly Dimmer Gen4 (shellydimmerg4) (*)       | ❌   | >= v10.5.0 |
 | Shelly Flood Gen4 (shellyfloodg4)             | ❌   | >= v10.3.0 |
 | Shelly Power Strip Gen4 (shellypstripg4) (*)  | ❌   | >= v10.3.0 |
 
@@ -178,7 +179,7 @@ Notes:
 | Shelly BLU Wall Switch 4                      | >= v8.2.0   |
 | Shelly BLU RC Button 4                        | >= v8.2.0   |
 | Shelly BLU Distance                           | >= v10.4.1  |
-| Shelly BLU WS 90                              | >= v10.4.2  |
+| Shelly BLU WS 90                              | >= v10.5.0  |
 
 ## NOT Supported devices
 
@@ -187,12 +188,13 @@ Notes:
 - USB powered UVC LED strip
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
-- Shelly EM Mini Gen4
+- Shelly EM Mini Gen4 (**)
 - Shelly LinkedGo Smart Thermost (st1820) (*)
 - Shelly Frankever Smart Sprinkler Controller (irrigation) (*)
+- Shelly Pill (**)
 
 (*) investigation still in progress
-
+(**) planned
 ## Sentry
 
 **This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
