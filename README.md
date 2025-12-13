@@ -205,8 +205,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 10.5.1-alpha.0 (2025-12-13)
 * (@HGlab01) Several fixes for Shelly Ecowitt ES 90 have benn implemented. [#1293]
 
 ### 10.5.0 (2025-12-13)
@@ -239,17 +238,6 @@ Notes:
 * (@klein0r) Rssi for ble has been added to script.
 * (@mcm1957) Shelly Flood Gen 4 (shellyfloodg4) has been added.
 * (@mcm1957) Shelly Power Strip Gen 4 (shellypstripg4) has been added with partial support.
-
-### 10.2.0 (2025-09-09)
-
-* (@mcm1957) Role definitions for anergy states has been corrected [#1195].
-* (@mcm1957) Shelly Dali Dimmer Gen 3 (shellyddimmerg3) has been added.
-* (@mcm1957) Shelly1L Gen 3 (shelly1lg3) has been added.
-* (@mcm1957) Shelly2L Gen 3 (shelly2lg3) has been added.
-* (@mcm1957) Shelly2PM Gen 4 (shelly2pmg4) has been added.
-* (@klein0r) Shelly Shutter Gen 3 (shellyshutter) has been added.
-* (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required now.
-* (@mcm1957) Dependencies have been updated
 
 ## License
 

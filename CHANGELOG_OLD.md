@@ -21,6 +21,17 @@
 
 * (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
+## 10.2.0 (2025-09-09)
+
+* (@mcm1957) Role definitions for anergy states has been corrected [#1195].
+* (@mcm1957) Shelly Dali Dimmer Gen 3 (shellyddimmerg3) has been added.
+* (@mcm1957) Shelly1L Gen 3 (shelly1lg3) has been added.
+* (@mcm1957) Shelly2L Gen 3 (shelly2lg3) has been added.
+* (@mcm1957) Shelly2PM Gen 4 (shelly2pmg4) has been added.
+* (@klein0r) Shelly Shutter Gen 3 (shellyshutter) has been added.
+* (@klein0r) admin 7.6.17 and js-controller 6.0.11 (or later) are required now.
+* (@mcm1957) Dependencies have been updated
+
 ## 10.1.0 (2025-06-30)
 
 * (@klein0r) Allow infinite event listeners

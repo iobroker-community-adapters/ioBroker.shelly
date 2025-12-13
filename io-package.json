@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.5.0",
+    "version": "10.5.1-alpha.0",
     "news": {
+      "10.5.1-alpha.0": {
+        "en": "Several fixes for Shelly Ecowitt ES 90 have benn implemented. [#1293]",
+        "de": "Mehrere Fixes für Shelly Ecowitt ES 90 wurden implementiert. (#1293)",
+        "ru": "Несколько исправлений для Shelly Ecowitt ES 90 были реализованы. [#1293]",
+        "pt": "Várias correções para Shelly Ecowitt ES 90 foram implementadas. [#1293]",
+        "nl": "Verschillende oplossingen voor Shelly Ecowitt ES 90 zijn geïmplementeerd. [#1293]",
+        "fr": "Plusieurs corrections pour Shelly Ecowitt ES 90 ont été mises en œuvre. [#1293]",
+        "it": "Diversi correzioni per Shelly Ecowitt ES 90 sono state implementate. [#1293]",
+        "es": "Se han implementado varias correcciones para Shelly Ecowitt ES 90. [#1293]",
+        "pl": "Kilka poprawek dla Shelly Ecowitt ES 90 mają benn wdrożone. [# 1293]",
+        "uk": "Кілька фіксаторів для Shelly Ecowitt ES 90 реалізовано бенн. [#1293]",
+        "zh-cn": "对Shelly Ecowitt ES 90的一些规定已经执行。 [#1293] (中文(简体) )"
+      },
       "10.5.0": {
         "en": "Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].\nAddon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly for this device.\nMissing fields at light component have been added. This will effect several devices but should add additional states below light(n) only.\nAdded speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90\nMqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) has been added.\nShelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. \nDependencies have been updated",
         "de": "Änderungen am mqtt Connect Handling wurden angewendet. Dies sollte den Fehler 'Unable to get MQTT.Prefix' beheben. [#931]\nAddon-Unterstützung wurde **entfernt* von Shelly Dimmer Gen 3 (shellydimmerg3), da es nicht von Shelly für dieses Gerät unterstützt wird.\nFehlende Felder an der Lichtkomponente wurden hinzugefügt. Dies wird mehrere Geräte betreffen, sollte aber nur zusätzliche Zustände unterhalb von light(n) hinzufügen.\nHinzugefügt Geschwindigkeit, Taupunkt, uv_index, Druck, Richtung und Niederschlag für die Wetterstation WS 90\nMqtt qos mode 2 wurde von der Konfiguration entfernt, da Shelly den Qos-Modus 2 nicht unterstützt.\nShelly Plug PM Gen 3 (shellyplugpmg3) wurde hinzugefügt.\nShelly Dimmer Gen 4 (shellydimmerg4) wurde hinzugefügt. Es gibt noch einige Einschränkungen.\nAbhängigkeiten wurden aktualisiert",
