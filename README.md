@@ -205,7 +205,9 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 10.5.1-alpha.1 (2025-12-13)
+### **WORK IN PROGRESS**
+* (@mcm1957) Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]
+* (@mcm1957) Changes to shellypro3em could affect shellyemg3 and shellyproem50.
 * (@HGlab01) Several fixes for Shelly Ecowitt WS90 have been implemented. [#1293]
 
 ### 10.5.0 (2025-12-13)
