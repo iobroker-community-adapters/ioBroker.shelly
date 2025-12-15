@@ -1,33 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.5.1-alpha.1",
+    "version": "10.5.1-alpha.2",
     "news": {
-      "10.5.1-alpha.1": {
-        "en": "Several fixes for Shelly Ecowitt ES 90 have benn implemented. [#1293]",
-        "de": "Mehrere Fixes für Shelly Ecowitt ES 90 wurden implementiert. (#1293)",
-        "ru": "Несколько исправлений для Shelly Ecowitt ES 90 были реализованы. [#1293]",
-        "pt": "Várias correções para Shelly Ecowitt ES 90 foram implementadas. [#1293]",
-        "nl": "Verschillende oplossingen voor Shelly Ecowitt ES 90 zijn geïmplementeerd. [#1293]",
-        "fr": "Plusieurs corrections pour Shelly Ecowitt ES 90 ont été mises en œuvre. [#1293]",
-        "it": "Diversi correzioni per Shelly Ecowitt ES 90 sono state implementate. [#1293]",
-        "es": "Se han implementado varias correcciones para Shelly Ecowitt ES 90. [#1293]",
-        "pl": "Kilka poprawek dla Shelly Ecowitt ES 90 mają benn wdrożone. [# 1293]",
-        "uk": "Кілька фіксаторів для Shelly Ecowitt ES 90 реалізовано бенн. [#1293]",
-        "zh-cn": "对Shelly Ecowitt ES 90的一些规定已经执行。 [#1293] (中文(简体) )"
-      },
-      "10.5.1-alpha.0": {
-        "en": "Several fixes for Shelly Ecowitt ES 90 have benn implemented. [#1293]",
-        "de": "Mehrere Fixes für Shelly Ecowitt ES 90 wurden implementiert. (#1293)",
-        "ru": "Несколько исправлений для Shelly Ecowitt ES 90 были реализованы. [#1293]",
-        "pt": "Várias correções para Shelly Ecowitt ES 90 foram implementadas. [#1293]",
-        "nl": "Verschillende oplossingen voor Shelly Ecowitt ES 90 zijn geïmplementeerd. [#1293]",
-        "fr": "Plusieurs corrections pour Shelly Ecowitt ES 90 ont été mises en œuvre. [#1293]",
-        "it": "Diversi correzioni per Shelly Ecowitt ES 90 sono state implementate. [#1293]",
-        "es": "Se han implementado varias correcciones para Shelly Ecowitt ES 90. [#1293]",
-        "pl": "Kilka poprawek dla Shelly Ecowitt ES 90 mają benn wdrożone. [# 1293]",
-        "uk": "Кілька фіксаторів для Shelly Ecowitt ES 90 реалізовано бенн. [#1293]",
-        "zh-cn": "对Shelly Ecowitt ES 90的一些规定已经执行。 [#1293] (中文(简体) )"
+      "10.5.1-alpha.2": {
+        "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
+        "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
+        "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
+        "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
+        "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
+        "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
+        "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
+        "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
+        "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
+        "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
+        "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
       },
       "10.5.0": {
         "en": "Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].\nAddon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly for this device.\nMissing fields at light component have been added. This will effect several devices but should add additional states below light(n) only.\nAdded speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90\nMqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) has been added.\nShelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. \nDependencies have been updated",
@@ -80,19 +67,6 @@
         "pl": "Rssi for ble został dodany do skryptu.\nShelly Flood Gen 4 (shellyfloodg4) została dodana.\nShelly Power Strip Gen 4 (shellypstripg4) została dodana z częściowym wsparciem.",
         "uk": "Додано Rssi для ble.\nДодано Shelly Fire Gen 4 (shellyfloodg4).\nShelly Power Strip Gen 4 (shellypstripg4) додано часткову підтримку.",
         "zh-cn": "脚本中添加了 Rssi for ble .\nShelly Flood Gen 4(英语:Shellyfloodg4)已经添加.\nShelly Power Straff Gen 4 (shellypstripg4) 已添加部分支持."
-      },
-      "10.2.0": {
-        "en": "Role definitions for anergy states has been corrected [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) has been added.\nShelly1L Gen 3 (shelly1lg3) has been added.\nShelly2L Gen 3 (shelly2lg3) has been added.\nShelly2PM Gen 4 (shelly2pmg4) has been added.\nShelly Shutter Gen 3 (shellyshutter) has been added.\nadmin 7.6.17 and js-controller 6.0.11 (or later) are required now.\nDependencies have been updated",
-        "de": "Rollendefinitionen für Anergiezustände wurden korrigiert [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) wurde hinzugefügt.\nShelly1L Gen 3 (shelly1lg3) wurde hinzugefügt.\nShelly2L Gen 3 (shelly2lg3) wurde hinzugefügt.\nShelly2PM Gen 4 (shelly2pmg4) wurde hinzugefügt.\nShelly Shutter Gen 3 (Shellyshutter) wurde hinzugefügt.\nadmin 7.6.17 und js-controller 6.0.11 (oder später) sind jetzt erforderlich.\nAbhängigkeiten wurden aktualisiert",
-        "ru": "Определения ролей для состояний анергии были исправлены [#1195].\nДобавлен Shelly Dali Dimmer Gen 3 (shellyddimmerg3).\nДобавлен Shelly1L Gen 3 (shelly1lg3).\nДобавлен Shelly2L Gen 3 (shelly2lg3).\nДобавлен Shelly2PM Gen 4 (shelly2pmg4).\nShelly Shutter Gen 3 (Шеллишутер).\nадмин 7.6.17 и js-контроллер 6.0.11 (или более поздние) требуются сейчас.\nЗависимости были обновлены",
-        "pt": "Definições de papéis para estados de anergia foram corrigidas [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) foi adicionado.\nShelly1L Gen 3 (shelly1lg3) foi adicionado.\nShelly2L Gen 3 (shelly2lg3) foi adicionado.\nShelly2PM Gen 4 (shelly2pmg4) foi adicionado.\nShelly Shutter Gen 3 (shellyshutter) foi adicionado.\nadmin 7.6.17 e js-controller 6.0.11 (ou posterior) são necessários agora.\nAs dependências foram atualizadas",
-        "nl": "Roldefinities voor anergy states zijn gecorrigeerd [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) is toegevoegd.\nShelly1L Gen 3 (shelly1lg3) is toegevoegd.\nShelly2L Gen 3 (shelly2lg3) is toegevoegd.\nShelly2PM Gen 4 (shelly2pmg4) is toegevoegd.\nShelly Shutter Gen 3 (shellyshutter) is toegevoegd.\nadmin 7.6.17 en js-controller 6.0.11 (of later) zijn nu vereist.\nAfhankelijkheden zijn bijgewerkt",
-        "fr": "Les définitions des rôles des états anergiques ont été corrigées [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) a été ajouté.\nShelly1L Gen 3 (shelly1lg3) a été ajouté.\nShelly2L Gen 3 (shelly2lg3) a été ajouté.\nShelly2PM Gen 4 (shelly2pmg4) a été ajouté.\nShelly Shutter Gen 3 (shellyshutter) a été ajouté.\nadmin 7.6.17 et js-controller 6.0.11 (ou plus tard) sont nécessaires maintenant.\nLes dépendances ont été actualisées",
-        "it": "Le definizioni dei ruoli per gli stati anergici sono state corrette [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) è stato aggiunto.\nShelly1L Gen 3 (shelly1lg3) è stato aggiunto.\nShelly2L Gen 3 (shelly2lg3) è stato aggiunto.\nShelly2PM Gen 4 (shelly2pmg4) è stato aggiunto.\nShelly Shutter Gen 3 (shellyshutter) è stato aggiunto.\nadmin 7.6.17 e js-controller 6.0.11 (o più tardi) sono necessari ora.\nLe dipendenze sono state aggiornate",
-        "es": "Se han corregido las definiciones de papel para los estados de anergia [#1195].\nShelly Dali Dimmer Gen 3 (shellyddimmerg3) se ha añadido.\nShelly1L Gen 3 (shelly1lg3) se ha añadido.\nShelly2L Gen 3 (shelly2lg3) se ha añadido.\nShelly2PM Gen 4 (shelly2pmg4) se ha añadido.\nShelly Shutter Gen 3 (shellyshutter) ha sido añadido.\nadmin 7.6.17 y js-controller 6.0.11 (o posterior) son necesarios ahora.\nSe han actualizado las dependencias",
-        "pl": "Definicje roli państw anergicznych zostały skorygowane [# 1195].\nDodano Shelly Dali Dimmer Gen 3 (shelddimmerg3).\nDodano Shelly1L Gen 3 (shelly1lg3).\nDodano Shelly2L Gen 3 (shelly2lg3).\nDodano Shelly2PM Gen 4 (shelly2pmg4).\nShelly Shutter Gen 3 (shellyshutter) została dodana.\nadministrator 7.6.17 i kontroler js- 6.0.11 (lub później) są wymagane teraz.\nZaktualizowano zależności",
-        "uk": "Виправлено визначення ролі для аергійних станів [#1195].\nShelly Dali Dimmer Gen 3 (коліснийдмерг3) додано.\nShelly1L Gen 3 (шкарпетка1lg3) додано.\nShelly2L Gen 3 (колісний2lg3) додано.\nShelly2PM Gen 4 (shelly2pmg4) додано.\nДодано Shelly Shutter Gen 3 (клапан).\nadmin 7.6.17 і js-controller 6.0.11 (або пізніше) обов'язкові.\nЗалежність було оновлено",
-        "zh-cn": "厌食状态的角色定义已经纠正[#1195].\n雪莉·达利·迪默Gen 3(英语:Shellyddimerg3)被加入.\n增加了Shelly1L Gen 3(shelly1lg3).\n已添加 Shelly2L Gen 3(shelly2lg3).\n已添加 Shelly2PM Gen 4(shelly2pmg4).\n雪莉·关特·源3(英语:Shellyshutter Gen 3)被加入.\n现在需要admin 7.6.17和js控制器 6.0.11(或以后).\n依赖关系已更新"
       }
     },
     "titleLang": {
