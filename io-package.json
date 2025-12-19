@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.5.1-alpha.3",
+    "version": "10.5.1-alpha.4",
     "news": {
-      "10.5.1-alpha.3": {
+      "10.5.1-alpha.4": {
         "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
         "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
         "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
