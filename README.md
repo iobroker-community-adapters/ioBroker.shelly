@@ -205,7 +205,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.5.2 (2025-12-28)
 * (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
 
 ### 10.5.1 (2025-12-27)
@@ -238,12 +238,6 @@ Notes:
 * (@mcm1957) Shelly Frankever Smart Sprinkler Controller (irrigation) has been added as prototype for diagnostic purposes only.
 * (@mcm1957) Shelly LinkedGo Smart Thermost (st1820) has been added as prototype for diagnostic purposes only.
 * (@mcm1957) Dependencies have been updated
-
-### 10.3.0 (2025-10-06)
-
-* (@klein0r) Rssi for ble has been added to script.
-* (@mcm1957) Shelly Flood Gen 4 (shellyfloodg4) has been added.
-* (@mcm1957) Shelly Power Strip Gen 4 (shellypstripg4) has been added with partial support.
 
 ## License
 

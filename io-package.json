@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.5.1",
+    "version": "10.5.2",
     "news": {
+      "10.5.2": {
+        "en": "Monophase profile support has been fixed for shellypro3em and shellypro3em400.",
+        "de": "Einphasiger Profilträger wurde für shellypro3em und shellypro3em400 fixiert.",
+        "ru": "Монофазная поддержка профиля была зафиксирована для shellypro3em и shellypro3em400.",
+        "pt": "O suporte do perfil monofásico foi fixado para shellypro3em e shellypro3em400.",
+        "nl": "Monophase profiel ondersteuning is vastgesteld voor shellypro3em en shellypro3em400.",
+        "fr": "Le support de profil monophase a été fixé pour shellypro3em et shellypro3em400.",
+        "it": "Il supporto del profilo monofase è stato fissato per shellypro3em e shellypro3em400.",
+        "es": "El soporte de perfil monofásico se ha fijado para shellypro3em y shellypro3em400.",
+        "pl": "Wsparcie profilu monofazy zostało ustalone dla shellypro3em i shellypro3em400.",
+        "uk": "Монофазний профільний супровід був закріплений для оболонкиpro3em і оболонкиpro3em400.",
+        "zh-cn": "Monophase profile 支持已固定为 Shellypro3em 和 shellypro3em 400 ."
+      },
       "10.5.1": {
         "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
         "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nResetCounters Funktionalität wurde den Komponenten EMData und EM1Data hinzugefügt. Dieser Effekt shellypro3em* aber auch andere Shellyem* Geräte gen2 und später.\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",

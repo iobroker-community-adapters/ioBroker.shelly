@@ -21,6 +21,12 @@
 
 * (@mcm1957) ResetPower has been added to Gen2+ PM type devices.
 * (@mcm1957) Shelly Plus Uni (shellyplusuni) - RangeMap / calibration functionality has been fixed.
+## 10.3.0 (2025-10-06)
+
+* (@klein0r) Rssi for ble has been added to script.
+* (@mcm1957) Shelly Flood Gen 4 (shellyfloodg4) has been added.
+* (@mcm1957) Shelly Power Strip Gen 4 (shellypstripg4) has been added with partial support.
+
 ## 10.2.0 (2025-09-09)
 
 * (@mcm1957) Role definitions for anergy states has been corrected [#1195].
