@@ -98,9 +98,9 @@ Please connect you devices directly to your (W)LAN and use a classic WLAN Repeat
 | Shelly Pro 2 (shellypro2)                      | ❌   | >= v5.2.0  |
 | Shelly Pro 2 PM (shellypro2pm) (2)             | ❌   | >= v5.2.0  |
 | Shelly Pro 3 (shellypro3)                      | ❌   | >= v6.2.0  |
-| Shelly Pro 3 EM (shellypro3em)                 | ❌   | >= v6.4.0  |
-| Shelly Pro 3 EM (400A) (shellypro3em400)       | ❌   | >= v10.4.1 |
-| Shelly Pro 3 EM 63 (shellypro3em63)            | ❌   | >= v9.1.0  |
+| Shelly Pro 3 EM (shellypro3em) (3)             | ❌   | >= v6.4.0  |
+| Shelly Pro 3 EM (400A) (shellypro3em400) (3)   | ❌   | >= v10.4.1 |
+| Shelly Pro 3 EM 63 (shellypro3em63) (3)        | ❌   | >= v9.1.0  |
 | Shelly Pro 4 PM (shellypro4pm)                 | ❌   | >= v5.0.0  |
 | Shelly Pro Dimmer 0/1-10V PM (shellypro0110pm) | ❌   | >= v9.5.0  |
 | Shelly Pro Dimmer 1 PM (shellyprodm1pm)        | ❌   | >= v8.0.0  |
@@ -113,6 +113,7 @@ Please connect you devices directly to your (W)LAN and use a classic WLAN Repeat
 Notes:
 (1) CCT component not yet available
 (2) slat control requires >= v10.4.0
+(3) monophase support requires >= 10.5.2
 
 ### Generation 3 (Gen 3)
 
