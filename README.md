@@ -109,11 +109,13 @@ Please connect you devices directly to your (W)LAN and use a classic WLAN Repeat
 | Shelly Pro EM 2x50A                            | ❌   | >= v8.1.0  |
 | Shelly Pro RGBWW PM (shellyprorgbwwpm) (1)     | ❌   | >= v9.5.0  |
 | Shelly Wall Display (shellywalldisplay)        | ❌   | >= v7.0.0  |
+| Shelly Wall Display XL (shellywalldisplay) (4) | ❌   | >= v7.0.0  |
 
 Notes:
 (1) CCT component not yet available
 (2) slat control requires >= v10.4.0
 (3) monophase support requires >= 10.5.2
+(4) uses same cleinetId as shellywalldisplay 
 
 ### Generation 3 (Gen 3)
 
