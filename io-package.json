@@ -124,7 +124,8 @@
     "authors": [
       "Thorsten Stueben <thorsten@stueben.de>",
       "Apollon77 <iobroker@fischer-ka.de>",
-      "Matthias Kleine <info@haus-automatisierung.com>"
+      "Matthias Kleine <info@haus-automatisierung.com>",
+      "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
     ],
     "docs": {
       "en": [
