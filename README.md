@@ -171,7 +171,7 @@ Notes:
 
 ### Bluetooth Low Energy (BLU)
 
-**Experimental** - see [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required)
+**Experimental** - see [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required). Please note that currently no transmission of any data from teh adapter to the BLU devices is possible.
 
 | Shelly Device                                 | Version     |
 |-----------------------------------------------| ----------- |
@@ -196,8 +196,12 @@ Notes:
 - Shelly Frankever Smart Sprinkler Controller (irrigation) (*)
 - Shelly Pill (**)
 
+- Shelly BLU TRV
+- all BLU devices which need to receive data from the adapter.
+  
 (*) investigation still in progress
 (**) planned
+
 ## Sentry
 
 **This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
