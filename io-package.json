@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.5.2",
+    "version": "10.6.0-alpha.0",
     "news": {
+      "10.6.0-alpha.0": {
+        "en": "ALPHA implementation for The-Pill-By-Shelly (shellypill).\nShelly EM mini Gen 4 (shellyemminimg4) has been added.",
+        "de": "ALPHA Implementierung für The-Pill-By-Shelly (shellypill).\nShelly EM mini Gen 4 (shellyemminimg4) wurde hinzugefügt.",
+        "ru": "Реализация ALPHA для The-Pill-By-Shelly (шеллипилла).\nДобавлен Shelly EM mini Gen 4 (shellyemminimg4).",
+        "pt": "Implementação do ALPHA para o The-Pill-By-Shelly (shellypill).\nFoi adicionado Shelly EM mini Gen 4 (shellyemminimg4).",
+        "nl": "ALPHA implementatie voor The-Pill-By-Shelly (shellypill).\nShelly EM mini Gen 4 (shellyemminimg4) is toegevoegd.",
+        "fr": "Mise en œuvre de l'ALPHA pour The-Pill-By-Shelly (shellypill).\nShelly EM mini Gen 4 (shellyemminimg4) a été ajouté.",
+        "it": "Implementazione ALPHA per The-Pill-By-Shelly (shellypill).\nShelly EM mini Gen 4 (shellyemminimg4) è stato aggiunto.",
+        "es": "Implementación ALPHA para The-Pill-By-Shelly (shellypill).\nShelly EM mini Gen 4 (shellyemminimg4) se ha añadido.",
+        "pl": "ALPHA implementation for The- Pill- By- Shelly (shellypill).\nShelly EM mini Gen 4 (shellyemminimg4) została dodana.",
+        "uk": "Впровадження ALPHA для S-Pill-By-Shelly.\nДодано Shelly EM mini Gen 4 (shellyemminimg4).",
+        "zh-cn": "ALPHA为The-Pill-By-Shelly(英语:Shellypill)实施.\n加入了Shelly EM 迷你Gen 4(shellyemminimg4)."
+      },
       "10.5.2": {
         "en": "Monophase profile support has been fixed for shellypro3em and shellypro3em400.",
         "de": "Einphasiger Profilträger wurde für shellypro3em und shellypro3em400 fixiert.",
@@ -80,19 +93,6 @@
         "pl": "Kontrola Slat dodana do Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 i Shelly 2PM Gen 4.\nZaloguj wersję adaptera w przypadku wykrycia nieznanego urządzenia.\nposControl wskaźnik został dodany do urządzeń wspierających działanie osłony.\nShelly Frankever Smart zraszacz Kontroler (nawadnianie) został dodany jako prototyp wyłącznie do celów diagnostycznych.\nShelly LinkedGo Smart Thermost (st1820) została dodana jako prototyp wyłącznie do celów diagnostycznych.\nZaktualizowano zależności",
         "uk": "Slat control додано в Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 і Shelly 2PM Gen 4.\nВерсія адаптера входу при виявленні невідомого пристрою.\nіндикатор posControl додано до пристроїв, що підтримують роботу кришки.\nShelly Франкі Смарт Спринклер Контролер (регіляція) додано в якості прототипу для діагностичних цілей.\nShelly LinkedGo Smart Thermost (st1820) додано в якості прототипу для діагностичних цілей.\nЗалежність було оновлено",
         "zh-cn": "添加到 Shelly 的 Slat 控制 ProDualCoverPM,Shelly Pro2PM,Shelly Shutter,Shelly Plus 2PM,Shelly 2PM Gen 3和Shelly 2PM Gen 4 (英语).\n如果检测到未知设备, 日志适配器版本 .\n在支持覆盖操作的设备中添加了 pos 控制指标.\n雪莉弗兰克佛 智能喷洒器 增加了主计长(灌溉)作为原型,仅用于诊断目的.\nShelly LinkedGo Smart Thormerd(st1820)被添加为原型,仅用于诊断目的.\n依赖关系已更新"
-      },
-      "10.3.0": {
-        "en": "Rssi for ble has been added to script.\nShelly Flood Gen 4 (shellyfloodg4) has been added.\nShelly Power Strip Gen 4 (shellypstripg4) has been added with partial support.",
-        "de": "Rssi for ble wurde dem Skript hinzugefügt.\nShelly Flood Gen 4 (shellyfloodg4) wurde hinzugefügt.\nShelly Power Strip Gen 4 (shellypstripg4) wurde mit teilweiser Unterstützung hinzugefügt.",
-        "ru": "Rssi для ble был добавлен в сценарий.\nДобавлен Shelly Flood Gen 4 (shellyfloodg4).\nShelly Power Strip Gen 4 (shellypstripg4) был добавлен с частичной поддержкой.",
-        "pt": "Rssi for ble foi adicionado ao script.\nShelly Flood Gen 4 (shellyfloodg4) foi adicionado.\nShelly Power Strip Gen 4 (shellypstripg4) foi adicionado com suporte parcial.",
-        "nl": "Rssi for ble is toegevoegd aan het script.\nShelly Flood Gen 4 (shellyfloodg4) is toegevoegd.\nShelly Power Strip Gen 4 (shellypstripg4) is toegevoegd met gedeeltelijke ondersteuning.",
-        "fr": "Rssi for ble a été ajouté au script.\nOn a ajouté Shelly Flood Gen 4 (shellyfloodg4).\nShelly Power Strip Gen 4 (shellypstripg4) a été ajouté avec un support partiel.",
-        "it": "Rssi for ble è stato aggiunto allo script.\nShelly Flood Gen 4 (shellyfloodg4) è stato aggiunto.\nShelly Power Strip Gen 4 (shellypstripg4) è stato aggiunto con supporto parziale.",
-        "es": "Rssi for ble ha sido añadido al script.\nShelly Flood Gen 4 (shellyfloodg4) ha sido añadido.\nShelly Power Strip Gen 4 (shellypstripg4) se ha añadido con apoyo parcial.",
-        "pl": "Rssi for ble został dodany do skryptu.\nShelly Flood Gen 4 (shellyfloodg4) została dodana.\nShelly Power Strip Gen 4 (shellypstripg4) została dodana z częściowym wsparciem.",
-        "uk": "Додано Rssi для ble.\nДодано Shelly Fire Gen 4 (shellyfloodg4).\nShelly Power Strip Gen 4 (shellypstripg4) додано часткову підтримку.",
-        "zh-cn": "脚本中添加了 Rssi for ble .\nShelly Flood Gen 4(英语:Shellyfloodg4)已经添加.\nShelly Power Straff Gen 4 (shellypstripg4) 已添加部分支持."
       }
     },
     "titleLang": {
