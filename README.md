@@ -158,6 +158,7 @@ Notes:
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0  |
 | Shelly 2 PM Gen4 (shelly2pmg4) (1)            | ❌   | >= v10.2.0 |
 | Shelly Dimmer Gen4 (shellydimmerg4) (*)       | ❌   | >= v10.5.0 |
+| Shelly EM mini Gen4 (shellypemminig4)         | ❌   | >= v10.6.0 |
 | Shelly Flood Gen4 (shellyfloodg4)             | ❌   | >= v10.3.0 |
 | Shelly Power Strip Gen4 (shellypstripg4) (*)  | ❌   | >= v10.3.0 |
 
@@ -193,7 +194,6 @@ Notes:
 - USB powered UVC LED strip
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
-- Shelly EM Mini Gen4 (**)
 - Shelly LinkedGo Smart Thermost (st1820) (*)
 - Shelly Frankever Smart Sprinkler Controller (irrigation) (*)
 
@@ -215,6 +215,7 @@ Notes:
 -->
 ### **WORK IN PROGRESS**
 * (@mcm1957) ALPHA implementation for The-Pill-By-Shelly (shellypill).
+* (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) has been added.
 
 ### 10.5.2 (2025-12-28)
 * (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
