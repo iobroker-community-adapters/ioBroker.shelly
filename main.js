@@ -635,7 +635,7 @@ class Shelly extends utils.Adapter {
                                 if (stateType === 'number') {
                                     stateValue = value;
                                 } else if (stateType === 'boolean') {
-                                    stateValue = (value) ? true : false;
+                                    stateValue = value ? true : false;
                                 }
                                 await this.extendObject(`ble.${val.srcBle.mac}.${key}`, {
                                     type: 'state',
@@ -659,9 +659,7 @@ class Shelly extends utils.Adapter {
                                     });
                                 }
                             } else {
-                                this.log.debug(
-                                    `[processBleMessage] skipping unknown attribute ${key} from ${val.src}`,
-                                );
+                                this.log.debug(`[processBleMessage] skipping unknown attribute ${key} from ${val.src}`);
                             }
                         }
                     } else {
