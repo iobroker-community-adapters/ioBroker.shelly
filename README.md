@@ -213,7 +213,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.6.0-alpha.1 (2026-01-20)
 * (@mcm1957) ALPHA implementation for The-Pill-By-Shelly (shellypill). [#1232]
 * (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) has been added. [#1327]
 * (@mcm1957) Shelly BLU H&T Display ZB support for light attribute has been added. [#1230]
