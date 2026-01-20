@@ -137,6 +137,7 @@ Notes:
 | Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
 | Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0  |
 | Shelly I4 / I4DC Gen3 (shellyi4g3)            | ❌   | >= v8.5.0  |
+| Shelly Pill (shellypill) (2)                  | ❌   | >= v10.6.0 |
 | Shelly Plug PM Gen3 (shellyplugpmg3)          | ❌   | >= v10.5.0 |
 | Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
 | Shelly PM Mini Gen3 (shellypmminig3)          | ❌   | >= v7.0.0  |
@@ -145,6 +146,7 @@ Notes:
 
 Notes:
 (1) slat control requires >= v10.4.0
+(2) ALPHA implementation for testing purposes only as shelly has not yet published any API documentation
 
 ### Generation 4 (Gen 4)
 
@@ -194,7 +196,6 @@ Notes:
 - Shelly EM Mini Gen4 (**)
 - Shelly LinkedGo Smart Thermost (st1820) (*)
 - Shelly Frankever Smart Sprinkler Controller (irrigation) (*)
-- Shelly Pill (**)
 
 - Shelly BLU TRV
 - all BLU devices which need to receive data from the adapter.
@@ -212,6 +213,9 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (@mcm1957) ALPHA implementation for The-Pill-By-Shelly (shellypill).
+
 ### 10.5.2 (2025-12-28)
 * (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
 
