@@ -579,6 +579,7 @@ class Shelly extends utils.Adapter {
 
                     const typesList = {
                         battery: { type: 'number', unit: '%' },
+                        battery_low: { type: 'boolean' },
                         button: {
                             type: 'number',
                             states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 254: 'Long' },
@@ -590,6 +591,7 @@ class Shelly extends utils.Adapter {
                         gust_speed: { type: 'number', unit: 'm/s' },
                         humidity: { type: 'number', unit: '%' },
                         illuminance: { type: 'number' },
+                        light: { type: 'number', states: { 0: 'Dark', 1: 'Twilight', 2: 'Light' } },
                         moisture: { type: 'number', unit: '%' },
                         motion: { type: 'number', states: { 0: 'Clear', 1: 'Detected' } },
                         precipitation: { type: 'number', unit: 'mm' },
@@ -628,11 +630,18 @@ class Shelly extends utils.Adapter {
                             const typeListKey = key.includes('button_') ? 'button' : key;
 
                             if (Object.keys(typesList).includes(typeListKey)) {
+                                const stateType = typesList[typeListKey].type;
+                                let stateValue = undefined;
+                                if (stateType === 'number') {
+                                    stateValue = value;
+                                } else if (stateType === 'boolean') {
+                                    stateValue = (value) ? true : false;
+                                }
                                 await this.extendObject(`ble.${val.srcBle.mac}.${key}`, {
                                     type: 'state',
                                     common: {
                                         name: key,
-                                        type: typesList[typeListKey].type,
+                                        type: stateType,
                                         role: 'value',
                                         read: true,
                                         write: false,
@@ -642,11 +651,17 @@ class Shelly extends utils.Adapter {
                                     native: {},
                                 });
 
-                                await this.setState(`ble.${val.srcBle.mac}.${key}`, {
-                                    val: value,
-                                    ack: true,
-                                    c: val.src,
-                                });
+                                if (stateValue != undefined) {
+                                    await this.setState(`ble.${val.srcBle.mac}.${key}`, {
+                                        val: stateValue,
+                                        ack: true,
+                                        c: val.src,
+                                    });
+                                }
+                            } else {
+                                this.log.debug(
+                                    `[processBleMessage] skipping unknown attribute ${key} from ${val.src}`,
+                                );
                             }
                         }
                     } else {
