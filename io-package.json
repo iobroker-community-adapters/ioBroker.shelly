@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.6.0-alpha.1",
+    "version": "10.6.0-alpha.2",
     "news": {
-      "10.6.0-alpha.1": {
+      "10.6.0-alpha.2": {
         "en": "ALPHA implementation for The-Pill-By-Shelly (shellypill). [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) has been added. [#1327]\nShelly BLU H&T Display ZB support for light attribute has been added. [#1230]",
         "de": "ALPHA Implementierung für The-Pill-By-Shelly (shellypill). (#1232)\nShelly EM mini Gen 4 (shellyemminimg4) wurde hinzugefügt. (#1327)\nShelly BLU H&T Display ZB Unterstützung für Licht Attribut hinzugefügt wurde. (#1230)",
         "ru": "Реализация ALPHA для The-Pill-By-Shelly (шеллипилла). [#1232]\nДобавлен Shelly EM mini Gen 4 (shellyemminimg4). [#1327]\nШелли Блю Добавлена поддержка H&T Display ZB для световых атрибутов. [#1230]",
