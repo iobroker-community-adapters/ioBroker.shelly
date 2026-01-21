@@ -579,7 +579,7 @@ class Shelly extends utils.Adapter {
 
                     const typesList = {
                         battery: { type: 'number', unit: '%' },
-                        battery_low: { type: 'boolean' },
+                        battery_low: { type: 'number' },
                         button: {
                             type: 'number',
                             states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 254: 'Long' },
@@ -637,6 +637,7 @@ class Shelly extends utils.Adapter {
                                 } else if (stateType === 'boolean') {
                                     stateValue = value ? true : false;
                                 }
+
                                 await this.extendObject(`ble.${val.srcBle.mac}.${key}`, {
                                     type: 'state',
                                     common: {
