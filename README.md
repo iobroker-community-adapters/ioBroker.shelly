@@ -115,7 +115,7 @@ Notes:
 (1) CCT component not yet available
 (2) slat control requires >= v10.4.0
 (3) monophase support requires >= 10.5.2
-(4) uses same cleinetId as shellywalldisplay 
+(4) uses same clienetId as shellywalldisplay 
 
 ### Generation 3 (Gen 3)
 
@@ -138,6 +138,7 @@ Notes:
 | Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0  |
 | Shelly I4 / I4DC Gen3 (shellyi4g3)            | ❌   | >= v8.5.0  |
 | Shelly Pill (shellypill) (2)                  | ❌   | >= v10.6.0 |
+| Shelly Plug M Gen3 (shellyplugmg3)            | ❌   | >= v10.6.0 |
 | Shelly Plug PM Gen3 (shellyplugpmg3)          | ❌   | >= v10.5.0 |
 | Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
 | Shelly PM Mini Gen3 (shellypmminig3)          | ❌   | >= v7.0.0  |
@@ -213,9 +214,10 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 10.6.0-alpha.3 (2026-01-22)
+### **WORK IN PROGRESS**
 * (@mcm1957) ALPHA implementation for The-Pill-By-Shelly (shellypill). [#1232]
 * (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) has been added. [#1327]
+* (@mcm1957) Shelly Plug M Gen 3 (shellyplugmg3) has been added. [#1332]
 * (@mcm1957) Shelly BLU H&T Display ZB support for light attribute has been added. [#1230]
 * (@mcm1957) Support for favirotes for Gen 2+ devices with cover support has been added. [#1001]
 
