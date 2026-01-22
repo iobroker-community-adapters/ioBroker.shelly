@@ -1,5 +1,4 @@
 # Older changes
-
 ## 10.4.0 (2025-10-13)
 
 * (@mcm1957) Slat control added to Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 and Shelly 2PM Gen 4.
