@@ -219,7 +219,7 @@ Notes:
 * (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) has been added. [#1327]
 * (@mcm1957) Shelly Plug M Gen 3 (shellyplugmg3) has been added. [#1332]
 * (@mcm1957) Shelly BLU H&T Display ZB support for light attribute has been added. [#1230]
-* (@mcm1957) Support for favirotes for Gen 2+ devices with cover support has been added. [#1001]
+* (@mcm1957) Support for favorites for Gen 2+ devices with cover support has been added. [#1001]
 
 ### 10.5.2 (2025-12-28)
 * (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
