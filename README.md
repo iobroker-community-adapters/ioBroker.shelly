@@ -216,7 +216,7 @@ Notes:
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-* (@GelrmanBluefox) Added FrankEver Smart Water Valve
+* (@GermanBluefox) Added FrankEver Smart Water Valve
 
 ### 10.6.0-alpha.5 (2026-01-24)
 * (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
