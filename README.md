@@ -169,24 +169,25 @@ Notes:
 
 ### Powered By Shelly
 
-| Device                                        | CoAP | MQTT      |
-|-----------------------------------------------| ---- | --------- |
-| Ogemray 25A (ogemray25a)                      | ❌   | >= v9.5.0 |
+| Device                      | CoAP | MQTT      |
+|-----------------------------|------|-----------|
+| Ogemray 25A (ogemray25a)    | ❌    | >= v9.5.0 |
+| FrankEver Smart Water Valve | ❌    | >= v1.5.1 |
 
 ### Bluetooth Low Energy (BLU)
 
 **Experimental** - see [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required). Please note that currently no transmission of any data from teh adapter to the BLU devices is possible.
 
-| Shelly Device                                 | Version     |
-|-----------------------------------------------| ----------- |
-| Shelly BLU Button and Button Tough 1          | >= v6.8.0   |
-| Shelly BLU Door Window                        | >= v6.8.0   |
-| Shelly BLU Motion                             | >= v6.8.0   |
-| Shelly BLU H&T                                | >= v6.8.0   |
-| Shelly BLU Wall Switch 4                      | >= v8.2.0   |
-| Shelly BLU RC Button 4                        | >= v8.2.0   |
-| Shelly BLU Distance                           | >= v10.4.1  |
-| Shelly BLU WS 90                              | >= v10.5.0  |
+| Shelly Device                         | Version     |
+|---------------------------------------|-------------|
+| Shelly BLU Button and Button Tough 1  | >= v6.8.0   |
+| Shelly BLU Door Window                | >= v6.8.0   |
+| Shelly BLU Motion                     | >= v6.8.0   |
+| Shelly BLU H&T                        | >= v6.8.0   |
+| Shelly BLU Wall Switch 4              | >= v8.2.0   |
+| Shelly BLU RC Button 4                | >= v8.2.0   |
+| Shelly BLU Distance                   | >= v10.4.1  |
+| Shelly BLU WS 90                      | >= v10.5.0  |
 
 ## NOT Supported devices
 
@@ -214,6 +215,9 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (@GelrmanBluefox) Added FrankEver Smart Water Valve
+
 ### 10.6.0-alpha.5 (2026-01-24)
 * (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
 * (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]
