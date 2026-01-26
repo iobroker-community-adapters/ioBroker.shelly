@@ -214,11 +214,12 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 10.6.0-alpha.5 (2026-01-24)
+### 10.6.0-alpha.7 (2026-01-26)
 * (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
 * (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]
 * (@mcm1957) Shelly BLU H&T Display ZB support for light attribute has been added. [#1230]
 * (@mcm1957) Support for favorites for Gen 2+ devices with cover support has been added. [#1001]
+* (@mcm1957) Power metering support has been added to RGB and RGBW components. [#1339]
 
 ### 10.5.2 (2025-12-28)
 * (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
