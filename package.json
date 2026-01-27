@@ -1,79 +1,80 @@
 {
-  "name": "iobroker.shelly",
-  "version": "10.6.0-alpha.10",
-  "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
-  "author": "Thorsten Stueben <thorsten@stueben.de>",
-  "contributors": [
-    "Apollon77 <iobroker@fischer-ka.de>",
-    "Matthias Kleine <info@haus-automatisierung.com>",
-    "Christian Scholz <chs@ip4.de>",
-    "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
-  ],
-  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.shelly",
-  "license": "MIT",
-  "keywords": [
-    "ioBroker",
-    "Smart Home",
-    "home automation",
-    "Shelly",
-    "IoT",
-    "CoAP",
-    "CoIoT",
-    "MQTT"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iobroker-community-adapters/ioBroker.shelly.git"
-  },
-  "engines": {
-    "node": ">=20"
-  },
-  "dependencies": {
-    "@apollon/iobroker-tools": "^0.3.0",
-    "@iobroker/adapter-core": "^3.3.2",
-    "axios": "^1.13.2",
-    "mqtt-connection": "^4.1.0",
-    "shelly-iot": "^1.1.2",
-    "tcp-ping": "^0.1.1",
-    "xml2js": "^0.6.2",
-    "xmlbuilder": "^15.1.1"
-  },
-  "devDependencies": {
-    "@alcalzone/release-script": "^5.0.0",
-    "@alcalzone/release-script-plugin-iobroker": "^4.0.0",
-    "@alcalzone/release-script-plugin-license": "^4.0.0",
-    "@alcalzone/release-script-plugin-manual-review": "^4.0.0",
-    "@iobroker/adapter-dev": "^1.5.0",
-    "@iobroker/eslint-config": "^2.2.0",
-    "@iobroker/testing": "^5.2.2",
-    "@types/bl": "^5.1.4",
-    "@types/node": "^24.10.9",
-    "typescript": "~5.9.3"
-  },
-  "main": "main.js",
-  "files": [
-    "admin{,/!(src)/**}/!(tsconfig|tsconfig.*).json",
-    "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
-    "lib/**/*.js",
-    "io-package.json",
-    "LICENSE",
-    "main.js"
-  ],
-  "scripts": {
-    "test": "npm run test:js && npm run test:package",
-    "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
-    "test:package": "mocha test/package --exit",
-    "test:integration": "mocha test/integration --exit",
-    "lint": "eslint -c eslint.config.mjs .",
-    "translate": "translate-adapter",
-    "release": "release-script",
-    "update-svg": "node lib/jsonConfigSvg",
-    "release-patch": "release-script patch --yes",
-    "release-minor": "release-script minor --yes",
-    "release-major": "release-script major --yes"
-  },
-  "bugs": {
-    "url": "https://github.com/iobroker-community-adapters/ioBroker.shelly/issues"
-  },
-  "readmeFilename": "README.md"
+    "name": "iobroker.shelly",
+    "version": "10.6.0-alpha.10",
+    "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
+    "author": "Thorsten Stueben <thorsten@stueben.de>",
+    "contributors": [
+        "Apollon77 <iobroker@fischer-ka.de>",
+        "Matthias Kleine <info@haus-automatisierung.com>",
+        "Christian Scholz <chs@ip4.de>",
+        "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
+    ],
+    "homepage": "https://github.com/iobroker-community-adapters/ioBroker.shelly",
+    "license": "MIT",
+    "keywords": [
+        "ioBroker",
+        "Smart Home",
+        "home automation",
+        "Shelly",
+        "IoT",
+        "CoAP",
+        "CoIoT",
+        "MQTT"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iobroker-community-adapters/ioBroker.shelly.git"
+    },
+    "engines": {
+        "node": ">=20"
+    },
+    "dependencies": {
+        "@apollon/iobroker-tools": "^0.3.0",
+        "@iobroker/adapter-core": "^3.3.2",
+        "@iobroker/dm-utils": "^1.0.16",
+        "axios": "^1.13.2",
+        "mqtt-connection": "^4.1.0",
+        "shelly-iot": "^1.1.2",
+        "tcp-ping": "^0.1.1",
+        "xml2js": "^0.6.2",
+        "xmlbuilder": "^15.1.1"
+    },
+    "devDependencies": {
+        "@alcalzone/release-script": "^5.0.0",
+        "@alcalzone/release-script-plugin-iobroker": "^4.0.0",
+        "@alcalzone/release-script-plugin-license": "^4.0.0",
+        "@alcalzone/release-script-plugin-manual-review": "^4.0.0",
+        "@iobroker/adapter-dev": "^1.5.0",
+        "@iobroker/eslint-config": "^2.2.0",
+        "@iobroker/testing": "^5.2.2",
+        "@types/bl": "^5.1.4",
+        "@types/node": "^24.10.9",
+        "typescript": "~5.9.3"
+    },
+    "main": "main.js",
+    "files": [
+        "admin{,/!(src)/**}/!(tsconfig|tsconfig.*).json",
+        "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
+        "lib/**/*.js",
+        "io-package.json",
+        "LICENSE",
+        "main.js"
+    ],
+    "scripts": {
+        "test": "npm run test:js && npm run test:package",
+        "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
+        "test:package": "mocha test/package --exit",
+        "test:integration": "mocha test/integration --exit",
+        "lint": "eslint -c eslint.config.mjs .",
+        "translate": "translate-adapter",
+        "release": "release-script",
+        "update-svg": "node lib/jsonConfigSvg",
+        "release-patch": "release-script patch --yes",
+        "release-minor": "release-script minor --yes",
+        "release-major": "release-script major --yes"
+    },
+    "bugs": {
+        "url": "https://github.com/iobroker-community-adapters/ioBroker.shelly/issues"
+    },
+    "readmeFilename": "README.md"
 }

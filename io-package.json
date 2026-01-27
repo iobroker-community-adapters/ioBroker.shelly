@@ -1,187 +1,182 @@
 {
   "common": {
-    "name": "shelly",
-    "version": "10.6.0-alpha.10",
-    "news": {
-      "10.6.0-alpha.10": {
-        "en": "The-Pill-By-Shelly (shellypill) has been added. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]\nShelly BLU H&T Display ZB support for light attribute has been added. [#1230]\nSupport for favorites for Gen 2+ devices with cover support has been added. [#1001]\nPower metering support has been added to RGB and RGBW components. [#1339]\nFrankEver Smart Watervalve (watervalve) has been added. [#1341]\nLinkedGo ST1820 (st1820) has been added. [#1257]",
-        "de": "Die-Pill-By-Shelly (shellypill) wurde hinzugefügt. (#1232)\nShelly EM mini Gen 4 (shellyemminimg4) und Plug M Gen 3 (shellyplugmg3) wurden hinzugefügt. (#1327, #1332)\nShelly BLU H&T Display ZB Unterstützung für Licht Attribut hinzugefügt wurde. (#1230)\nUnterstützung für Favoriten für Gen 2+ Geräte mit Cover-Unterstützung wurde hinzugefügt. (#1001)\nDie Komponenten RGB und RGBW wurden mit Power-Dosierung unterstützt. (#1339)\nFrankEver Smart Watervalve (Wasserventil) wurde hinzugefügt. (#1341)\nLinkedGo ST1820 (st1820) wurde hinzugefügt. (#1257)",
-        "ru": "Добавлена Щеллипилль (The-Pill-By-Shelly). [#1232]\nДобавлены Shelly EM mini Gen 4 (shellyemminimg4) и Plug M Gen 3 (shellyplugmg3). [#1327, #1332]\nШелли Блю Добавлена поддержка H&T Display ZB для световых атрибутов. [#1230]\nДобавлена поддержка фаворитов для устройств Gen 2+ с поддержкой крышки. [#1001]\nПоддержка измерения мощности была добавлена к компонентам RGB и RGBW. [1339]\nДобавлен FrankEver Smart Watervalve (водяной клапан). [1341]\nДобавлен LinkedGo ST1820 (st1820). [#1257]",
-        "pt": "O-Pill-By-Shelly (shellypill) foi adicionado. [#1232]\nForam adicionados Shelly EM mini Gen 4 (shellyemminimg4) e Plug M Gen 3 (shellyplugmg3). [#1327,#1332]\nShelly BLU Foi adicionado o suporte ZB H&T Display para o atributo light. [#1230]\nSuporte para favoritos para dispositivos Gen 2+ com suporte de cobertura foi adicionado. [#1001]\nSuporte de medição de energia foi adicionado aos componentes RGB e RGBW. [#1339]\nFrankEver Smart Watervalve (válvula aquática) foi adicionado. [#1341]\nLinkedGo ST1820 (st1820) foi adicionado. [#1257]",
-        "nl": "De-Pill-By-Shelly (shellypill) is toegevoegd. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) en Plug M Gen 3 (shellyplugmg3) zijn toegevoegd. [#1327,#1332]\nShelly BLU H&T Display ZB-ondersteuning voor lichtattribuut is toegevoegd. [#1230]\nOndersteuning voor favorieten voor Gen 2+ apparaten met dekking is toegevoegd. [#1001]\nAan RGB- en RGBW-componenten is stroommeetondersteuning toegevoegd. [#1339]\nFrankEver Smart Watervalve (watervalve) is toegevoegd. [#1341]\nLinkedGo ST1820 (st1820) is toegevoegd. [#1257]",
-        "fr": "Le-Pill-By-Shelly (shellypill) a été ajouté. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) et Plug M Gen 3 (shellyplugmg3) ont été ajoutés. [#1327,#1332]\nBLU Shelly Le support H&T Display ZB pour l'attribut lumière a été ajouté. [#1230]\nLe support des favoris pour les appareils Gen 2+ avec support de couverture a été ajouté. [#1001]\nLe support de mesure de puissance a été ajouté aux composants RGB et RGBW. [#1339]\nFrankEver Smart Watervalve (watervalve) a été ajouté. [#1341]\nLinkedinGo ST1820 (st1820) a été ajouté. [#1257]",
-        "it": "Il-Pill-By-Shelly (shellypill) è stato aggiunto. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) e Plug M Gen 3 (shellyplugmg3) sono stati aggiunti. [#1327,#1332]\nShelly BLU È stato aggiunto il supporto H&T Display ZB per l'attributo leggero. [#1230]\nÈ stato aggiunto il supporto per i preferiti per i dispositivi Gen 2+ con supporto di copertura. [#1001]\nIl supporto di misura di potenza è stato aggiunto ai componenti RGB e RGBW. [#1339]\nFrankEver Smart Watervalve è stato aggiunto. [#1341]\nLinkedGo ST1820 (st1820) è stato aggiunto. [#1257]",
-        "es": "Se ha añadido el Pill-By-Shelly (shellypill). [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) y Plug M Gen 3 (shellyplugmg3) se han añadido. [#1327,#1332]\nShelly BLU Se ha añadido soporte ZB para atributo ligero. [#1230]\nSe ha añadido soporte para dispositivos Gen 2+ con soporte de cubierta. [#1001]\nSe ha añadido soporte de medición de potencia a los componentes RGB y RGBW. [#1339]\nSe ha añadido FrankEver Smart Watervalve (watervalve). [#1341]\nLinkedGo ST1820 (st1820) se ha añadido. [#1257]",
-        "pl": "Dodano Pill- By- Shelly (shellypill). [# 1232]\nShelly EM mini Gen 4 (shellyemminimg4) i Plug M Gen 3 (shellyplugmg3) zostały dodane. [# 1327, # 1332]\nShelly BLU Dodano obsługę H & T Display ZB dla atrybutu światła. [# 1230]\nDodano obsługę ulubionych urządzeń Gen 2 + z obsługą okładki. [# 1001]\nDo komponentów RGB i RGBW dodano obsługę pomiaru mocy. [# 1339]\nDodano FrankEver Smart Waterzator (zawór wodny). [# 1341]\nDodano LinkedGo ST1820 (st1820). [# 1257]",
-        "uk": "Додана послуга \"Pill-By-Shelly\" [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) і Plug M Gen 3 (клапан мг) були додані. [#1327,#1332]\nShelly BLU Додано підтримку H&T Display ZB для атрибутів світла. [#1230]\nДодано підтримку улюблених пристроїв Gen 2+ з підтримкою кришки. [#1001]\nПідтримка енергозберігаючих пристроїв додано до компонентів RGB та RGBW. [#1339]\nДодано FrankEver Smart Watervalve. [#1341]\nLinkedGo ST1820 (st1820) було додано. [#1257]",
-        "zh-cn": "已添加-Pill-By-Shelly(英语:Shellypill). [#1232] (中文(简体) )\n增加了Shelly EM 迷你Gen 4(shellyemminimg4)和Plug M Gen 3(shellyplugmg3). [#1327,#1332] (中文(简体) )\n雪莉·布鲁 H&T 显示 ZB 对光属性的支持已被添加. [#1230] (中文(简体) )\n添加了对 Gen 2+ 设备最爱的封面支持 。 [# 1001] (中文(简体) )\n在RGB和RGBW组件中增加了功率计量支持. [#1339] (中文(简体) )\nFrankEver Smart Watervalve(水阀)已经加入. [#1341] (中文(简体) )\n已添加链接Go ST1820(st1820). [#1257] (中文(简体) )"
+      "name": "shelly",
+      "version": "10.6.0-alpha.10",
+      "news": {
+          "10.6.0-alpha.10": {
+              "en": "The-Pill-By-Shelly (shellypill) has been added. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]\nShelly BLU H&T Display ZB support for light attribute has been added. [#1230]\nSupport for favorites for Gen 2+ devices with cover support has been added. [#1001]\nPower metering support has been added to RGB and RGBW components. [#1339]\nFrankEver Smart Watervalve (watervalve) has been added. [#1341]\nLinkedGo ST1820 (st1820) has been added. [#1257]",
+              "de": "Die-Pill-By-Shelly (shellypill) wurde hinzugefügt. (#1232)\nShelly EM mini Gen 4 (shellyemminimg4) und Plug M Gen 3 (shellyplugmg3) wurden hinzugefügt. (#1327, #1332)\nShelly BLU H&T Display ZB Unterstützung für Licht Attribut hinzugefügt wurde. (#1230)\nUnterstützung für Favoriten für Gen 2+ Geräte mit Cover-Unterstützung wurde hinzugefügt. (#1001)\nDie Komponenten RGB und RGBW wurden mit Power-Dosierung unterstützt. (#1339)\nFrankEver Smart Watervalve (Wasserventil) wurde hinzugefügt. (#1341)\nLinkedGo ST1820 (st1820) wurde hinzugefügt. (#1257)",
+              "ru": "Добавлена Щеллипилль (The-Pill-By-Shelly). [#1232]\nДобавлены Shelly EM mini Gen 4 (shellyemminimg4) и Plug M Gen 3 (shellyplugmg3). [#1327, #1332]\nШелли Блю Добавлена поддержка H&T Display ZB для световых атрибутов. [#1230]\nДобавлена поддержка фаворитов для устройств Gen 2+ с поддержкой крышки. [#1001]\nПоддержка измерения мощности была добавлена к компонентам RGB и RGBW. [1339]\nДобавлен FrankEver Smart Watervalve (водяной клапан). [1341]\nДобавлен LinkedGo ST1820 (st1820). [#1257]",
+              "pt": "O-Pill-By-Shelly (shellypill) foi adicionado. [#1232]\nForam adicionados Shelly EM mini Gen 4 (shellyemminimg4) e Plug M Gen 3 (shellyplugmg3). [#1327,#1332]\nShelly BLU Foi adicionado o suporte ZB H&T Display para o atributo light. [#1230]\nSuporte para favoritos para dispositivos Gen 2+ com suporte de cobertura foi adicionado. [#1001]\nSuporte de medição de energia foi adicionado aos componentes RGB e RGBW. [#1339]\nFrankEver Smart Watervalve (válvula aquática) foi adicionado. [#1341]\nLinkedGo ST1820 (st1820) foi adicionado. [#1257]",
+              "nl": "De-Pill-By-Shelly (shellypill) is toegevoegd. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) en Plug M Gen 3 (shellyplugmg3) zijn toegevoegd. [#1327,#1332]\nShelly BLU H&T Display ZB-ondersteuning voor lichtattribuut is toegevoegd. [#1230]\nOndersteuning voor favorieten voor Gen 2+ apparaten met dekking is toegevoegd. [#1001]\nAan RGB- en RGBW-componenten is stroommeetondersteuning toegevoegd. [#1339]\nFrankEver Smart Watervalve (watervalve) is toegevoegd. [#1341]\nLinkedGo ST1820 (st1820) is toegevoegd. [#1257]",
+              "fr": "Le-Pill-By-Shelly (shellypill) a été ajouté. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) et Plug M Gen 3 (shellyplugmg3) ont été ajoutés. [#1327,#1332]\nBLU Shelly Le support H&T Display ZB pour l'attribut lumière a été ajouté. [#1230]\nLe support des favoris pour les appareils Gen 2+ avec support de couverture a été ajouté. [#1001]\nLe support de mesure de puissance a été ajouté aux composants RGB et RGBW. [#1339]\nFrankEver Smart Watervalve (watervalve) a été ajouté. [#1341]\nLinkedinGo ST1820 (st1820) a été ajouté. [#1257]",
+              "it": "Il-Pill-By-Shelly (shellypill) è stato aggiunto. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) e Plug M Gen 3 (shellyplugmg3) sono stati aggiunti. [#1327,#1332]\nShelly BLU È stato aggiunto il supporto H&T Display ZB per l'attributo leggero. [#1230]\nÈ stato aggiunto il supporto per i preferiti per i dispositivi Gen 2+ con supporto di copertura. [#1001]\nIl supporto di misura di potenza è stato aggiunto ai componenti RGB e RGBW. [#1339]\nFrankEver Smart Watervalve è stato aggiunto. [#1341]\nLinkedGo ST1820 (st1820) è stato aggiunto. [#1257]",
+              "es": "Se ha añadido el Pill-By-Shelly (shellypill). [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) y Plug M Gen 3 (shellyplugmg3) se han añadido. [#1327,#1332]\nShelly BLU Se ha añadido soporte ZB para atributo ligero. [#1230]\nSe ha añadido soporte para dispositivos Gen 2+ con soporte de cubierta. [#1001]\nSe ha añadido soporte de medición de potencia a los componentes RGB y RGBW. [#1339]\nSe ha añadido FrankEver Smart Watervalve (watervalve). [#1341]\nLinkedGo ST1820 (st1820) se ha añadido. [#1257]",
+              "pl": "Dodano Pill- By- Shelly (shellypill). [# 1232]\nShelly EM mini Gen 4 (shellyemminimg4) i Plug M Gen 3 (shellyplugmg3) zostały dodane. [# 1327, # 1332]\nShelly BLU Dodano obsługę H & T Display ZB dla atrybutu światła. [# 1230]\nDodano obsługę ulubionych urządzeń Gen 2 + z obsługą okładki. [# 1001]\nDo komponentów RGB i RGBW dodano obsługę pomiaru mocy. [# 1339]\nDodano FrankEver Smart Waterzator (zawór wodny). [# 1341]\nDodano LinkedGo ST1820 (st1820). [# 1257]",
+              "uk": "Додана послуга \"Pill-By-Shelly\" [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) і Plug M Gen 3 (клапан мг) були додані. [#1327,#1332]\nShelly BLU Додано підтримку H&T Display ZB для атрибутів світла. [#1230]\nДодано підтримку улюблених пристроїв Gen 2+ з підтримкою кришки. [#1001]\nПідтримка енергозберігаючих пристроїв додано до компонентів RGB та RGBW. [#1339]\nДодано FrankEver Smart Watervalve. [#1341]\nLinkedGo ST1820 (st1820) було додано. [#1257]",
+              "zh-cn": "已添加-Pill-By-Shelly(英语:Shellypill). [#1232] (中文(简体) )\n增加了Shelly EM 迷你Gen 4(shellyemminimg4)和Plug M Gen 3(shellyplugmg3). [#1327,#1332] (中文(简体) )\n雪莉·布鲁 H&T 显示 ZB 对光属性的支持已被添加. [#1230] (中文(简体) )\n添加了对 Gen 2+ 设备最爱的封面支持 。 [# 1001] (中文(简体) )\n在RGB和RGBW组件中增加了功率计量支持. [#1339] (中文(简体) )\nFrankEver Smart Watervalve(水阀)已经加入. [#1341] (中文(简体) )\n已添加链接Go ST1820(st1820). [#1257] (中文(简体) )"
+          },
+          "10.5.2": {
+              "en": "Monophase profile support has been fixed for shellypro3em and shellypro3em400.",
+              "de": "Einphasiger Profilträger wurde für shellypro3em und shellypro3em400 fixiert.",
+              "ru": "Монофазная поддержка профиля была зафиксирована для shellypro3em и shellypro3em400.",
+              "pt": "O suporte do perfil monofásico foi fixado para shellypro3em e shellypro3em400.",
+              "nl": "Monophase profiel ondersteuning is vastgesteld voor shellypro3em en shellypro3em400.",
+              "fr": "Le support de profil monophase a été fixé pour shellypro3em et shellypro3em400.",
+              "it": "Il supporto del profilo monofase è stato fissato per shellypro3em e shellypro3em400.",
+              "es": "El soporte de perfil monofásico se ha fijado para shellypro3em y shellypro3em400.",
+              "pl": "Wsparcie profilu monofazy zostało ustalone dla shellypro3em i shellypro3em400.",
+              "uk": "Монофазний профільний супровід був закріплений для оболонкиpro3em і оболонкиpro3em400.",
+              "zh-cn": "Monophase profile 支持已固定为 Shellypro3em 和 shellypro3em 400 ."
+          },
+          "10.5.1": {
+              "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
+              "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nResetCounters Funktionalität wurde den Komponenten EMData und EM1Data hinzugefügt. Dieser Effekt shellypro3em* aber auch andere Shellyem* Geräte gen2 und später.\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
+              "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nФункциональность ResetCounters добавлена к компонентам EMData и EM1Data. Это эффект шеллипро3эм*, а также других шеллием* устройств ген2 и более поздних.\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
+              "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nA funcionalidade ResetCounters foi adicionada aos componentes EMData e EM1Data. Este efeito shellypro3em* mas também outros dispositivos shellyem* gen2 e posterior.\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
+              "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nResetCounters functionaliteit is toegevoegd aan componenten EMData en EM1Data. Dit effect shellypro3em* maar ook andere shellyem* apparaten gen2 en later.\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
+              "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLa fonctionnalité ResetCounters a été ajoutée aux composants EMData et EM1Data. Cet effet shellypro3em* mais aussi d'autres dispositifs shellyem* gen2 et plus tard.\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
+              "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLa funzionalità ResetCounters è stata aggiunta ai componenti EMData e EM1Data. Questo effetto shellypro3em* ma anche altri dispositivi shellyem* gen2 e successivi.\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
+              "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLa funcionalidad ResetCounters se ha añadido a los componentes EMData y EM1Data. Este efecto shellypro3em* pero también otros dispositivos shellyem* gen2 y posterior.\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
+              "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nDo komponentów EMData i EM1Data dodano funkcje ResetCounters. Ten efekt shelpro3em *ale także inne sheldem* urządzenia gen2 i później. \nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
+              "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nДодано функцію ResetCounters до компонентів EMData та EM1Data. Цей ефект Shellypro3em* але також інші оболонки * пристрої gen2 і пізніше.\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
+              "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n重新设置Counters功能已添加到组件EMData和EM1Data中. 这种效应Shellypro3em*,但也有其他Shellyem*设备gen2及以后.\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
+          },
+          "10.5.1-alpha.4": {
+              "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
+              "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
+              "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
+              "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
+              "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
+              "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
+              "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
+              "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
+              "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
+              "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
+              "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
+          },
+          "10.5.0": {
+              "en": "Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].\nAddon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly for this device.\nMissing fields at light component have been added. This will effect several devices but should add additional states below light(n) only.\nAdded speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90\nMqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) has been added.\nShelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. \nDependencies have been updated",
+              "de": "Änderungen am mqtt Connect Handling wurden angewendet. Dies sollte den Fehler 'Unable to get MQTT.Prefix' beheben. [#931]\nAddon-Unterstützung wurde **entfernt* von Shelly Dimmer Gen 3 (shellydimmerg3), da es nicht von Shelly für dieses Gerät unterstützt wird.\nFehlende Felder an der Lichtkomponente wurden hinzugefügt. Dies wird mehrere Geräte betreffen, sollte aber nur zusätzliche Zustände unterhalb von light(n) hinzufügen.\nHinzugefügt Geschwindigkeit, Taupunkt, uv_index, Druck, Richtung und Niederschlag für die Wetterstation WS 90\nMqtt qos mode 2 wurde von der Konfiguration entfernt, da Shelly den Qos-Modus 2 nicht unterstützt.\nShelly Plug PM Gen 3 (shellyplugpmg3) wurde hinzugefügt.\nShelly Dimmer Gen 4 (shellydimmerg4) wurde hinzugefügt. Es gibt noch einige Einschränkungen.\nAbhängigkeiten wurden aktualisiert",
+              "ru": "Были внесены изменения в обработку подключения mqtt. Это должно исправить ошибку «Невозможно получить MQTT.Prefix» [#931].\nПоддержка аддона была удалена из Shelly Dimmer Gen 3 (shellydimmerg3), поскольку она не поддерживается shelly для этого устройства.\nДобавлены недостающие поля на световой составляющей. Это повлияет на несколько устройств, но должно добавить дополнительные состояния под светом (n).\nДобавлена скорость, точка росы, uv_index, давление, направление и осадки для метеостанции WS 90\nРежим 2 Mqtt qos был удален из конфигурации, поскольку shelly не поддерживает режим qos 2.\nДобавлен Shelly Plug PM Gen 3 (shellyplugpmg3).\nДобавлен Shelly Dimmer Gen 4 (shellydimmerg4). Некоторые ограничения все еще существуют.\nЗависимости были обновлены",
+              "pt": "Foram aplicadas alterações na manipulação de ligação mqtt. Isso deve corrigir o erro 'Não é possível obter MQTT.Prefix'[#931].\nSuporte Addon foi ** removido** de Shelly Dimmer Gen 3 (shellydimmerg3), pois não é suportado por Shelly para este dispositivo.\nCampos em falta no componente de luz foram adicionados. Isto irá afetar vários dispositivos, mas deve adicionar estados adicionais abaixo de luz(n) apenas.\nVelocidade adicionada, ponto de orvalho, uv_index, pressão, direção e precipitação para estação meteorológica WS 90\nO modo qos 2 do Mqtt foi removido da configuração porque o Shelly não suporta o modo qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) foi adicionado.\nShelly Dimmer Gen 4 (shellydimmerg4) foi adicionado. Ainda existem algumas restrições.\nAs dependências foram atualizadas",
+              "nl": "Wijzigingen in mqtt connect handling zijn toegepast. Dit moet een fout herstellen 'Niet in staat om MQTT.Prefix'[#931] te krijgen.\nDe ondersteuning van Addon is verwijderd** van Shelly Dimmer Gen 3 (shellydimmerg3) omdat het niet ondersteund wordt door Shelly voor dit apparaat.\nOntbrekende velden bij lichte component zijn toegevoegd. Dit zal een effect hebben op verschillende apparaten, maar dient alleen extra toestanden onder licht(n) toe te voegen.\nToegevoegde snelheid, dauwpunt, uv_index, druk, richting en neerslag voor weerstation WS 90\nMqtt qos mode 2 is uit de configuratie verwijderd omdat shelly qos mode niet ondersteunt 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) is toegevoegd.\nShelly Dimmer Gen 4 (shellydimmerg4) is toegevoegd. Er bestaan nog steeds beperkingen.\nAfhankelijkheden zijn bijgewerkt",
+              "fr": "Des modifications ont été apportées à la manipulation de la connexion mqtt. Cela devrait corriger l'erreur 'Impossible d'obtenir MQTT.Prefix'[#931].\nLe support Addon a été **supprimé** de Shelly Dimmer Gen 3 (shellydimmerg3) car il n'est pas supporté par Shelly pour cet appareil.\nDes champs manquants ont été ajoutés au composant lumineux. Cela affectera plusieurs dispositifs, mais devrait ajouter des états supplémentaires sous light(n) seulement.\nAjout de vitesse, de point de rosée, uv_index, pression, direction et précipitations pour la station météorologique WS 90\nLe mode Mqtt qos 2 a été retiré de la configuration car Shelly ne supporte pas le mode qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) a été ajouté.\nShelly Dimmer Gen 4 (shellydimmerg4) a été ajouté. Certaines restrictions existent encore.\nLes dépendances ont été actualisées",
+              "it": "Sono state applicate modifiche alla gestione del collegamento di mqtt. Questo dovrebbe correggere l'errore 'Impossibile ottenere MQTT.Prefix'[#931].\nIl supporto Addon è stato rimosso** da Shelly Dimmer Gen 3 (shellydimmerg3) poiché non è supportato da Shelly per questo dispositivo.\nSono stati aggiunti campi mancanti a componenti leggeri. Questo effetto farà diversi dispositivi, ma dovrebbe aggiungere stati aggiuntivi sotto la luce (n) solo.\nAggiunto velocità, punto di rugiada, uv_index, pressione, direzione e precipitazioni per la stazione meteo WS 90\nMqtt qos mode 2 è stato rimosso dalla configurazione in quanto shelly non supporta la modalità qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) è stato aggiunto.\nShelly Dimmer Gen 4 (shellydimmerg4) è stato aggiunto. Esistono ancora alcune restrizioni.\nLe dipendenze sono state aggiornate",
+              "es": "Se han aplicado cambios a la manipulación de conexiones mqtt. Esto debe corregir el error 'Unable to get MQTT.Prefix'[#931].\nEl soporte Addon ha sido **removido** desde Shelly Dimmer Gen 3 (shellydimmerg3) ya que no es compatible con el dispositivo.\nSe han añadido campos perdidos en componente ligero. Esto afectará a varios dispositivos, pero debe añadir estados adicionales debajo de la luz (n) solamente.\nVelocidad agregada, punto de rocío, uv_index, presión, dirección y precipitación para la estación del tiempo WS 90\nMqtt qos modo 2 ha sido eliminado de la configuración ya que no soporta el modo qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) se ha añadido.\nShelly Dimmer Gen 4 (shellydimmerg4) ha sido añadido. Todavía existen algunas restricciones.\nSe han actualizado las dependencias",
+              "pl": "Zastosowano zmiany obsługi połączenia mqtt. Powinno to naprawić błąd 'Nie można uzyskać MQTT.Prefix' [# 931].\nWsparcie addonu zostało usunięte *** z Shelly Dimmer Gen 3 (sheldimmerg3), ponieważ nie jest obsługiwane przez shelly dla tego urządzenia. \nDodano brakujące pola w elemencie światła. Efektem tego będzie kilka urządzeń, ale powinno być dodanie tylko dodatkowych stanów poniżej światła (n).\nDodano prędkość, punkt dewpoint, uv _ index, ciśnienie, kierunek i opady dla stacji pogodowej WS 90\nMqtt qos mode 2 został usunięty z konfiguracji, ponieważ shelly nie obsługuje trybu qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) została dodana.\nDodano Shelly Dimmer Gen 4 (sheldimmerg4). Nadal istnieją pewne ograniczenia.\nZaktualizowano zależności",
+              "uk": "Наведено зміни до обробки з'єднання mqtt. Щоб отримати MQTT.Prefix[#931].\nАддонна підтримка була**** від Shelly Dimmer Gen 3 (shellydimmerg3), оскільки вона не підтримується оболонкою для цього пристрою.\nДодано поля пропуску на світловий компонент. Це буде ефект декількох пристроїв, але слід додати додаткові стани нижче світла (n) тільки.\nДодана швидкість, точка відключення, uv_index, тиск, напрямок та опади на метеорологічну станцію WS 90\nMqtt qos режим 2 видалено з конфігурації, як оболонка не підтримує режим qos 2,2 км.\nДодано Shelly Plug PM Gen 3 (клапанpmg3).\nДодано Shelly Dimmer Gen 4 (shellydimmerg4) Деякі обмеження досі існують.\nЗалежність було оновлено",
+              "zh-cn": "对 mqtt 连接处理的更改已被应用 。 这将修正错误“ 无法获取 MQTT. Prefix ” [# 931] .\nAddon支持已经** removed**从Shelly Dimmer Gen 3 (shellydimerg3)中移除,因为它没有Shelly支持这个设备.\n添加了光元件缺失的字段 。 这将影响若干设备,但只应在光线(n)下增加额外状态.\n为气象站WS90添加速度、露点、uv_index、压力、方向和降水\nMqtt qos 模式 2 从配置中删除, 因为 Shelly 不支持 qos 模式 2. 国家.\nShelly Plug Pen Gen 3(shellyplugpmg3)已经加入.\n已添加 Shelly Dimmer Gen 4 (Shellydimerg4) . 仍然存在一些限制.\n依赖关系已更新"
+          },
+          "10.4.1": {
+              "en": "Shelly pro 3em400 has been added as dedicated device to improve detection (shellypro3em400) [#1269].\nMissing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAdded distance support to ble sensors\nDependencies have been updated",
+              "de": "Shelly pro 3em400 wurde als dediziertes Gerät hinzugefügt, um die Erkennung zu verbessern  (shellypro3em400) [#1269].\nFehlende Energiezustände wurden beim Shelly Dimmer Gen 3 (shellydimmerg3)hinzugefügt [#1274] .\nZusätzliche Abstandsunterstützung für ble Sensoren wurde im plementiert.\nAbhängigkeiten wurden aktualisiert",
+              "ru": "Shelly Pro 3em400 был добавлен в качестве специального устройства для улучшения детектирования (shellypro3em400) [#1269].\nНедостающие энергетические состояния были добавлены к Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nДобавлена поддержка расстояния до датчиков ble\nЗависимости были обновлены",
+              "pt": "Shelly pro 3em400 foi adicionado como dispositivo dedicado para melhorar o detetio (shellypro3em400) [#1269].\nOs estados de energia em falta foram adicionados a Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAdicionado suporte de distância aos sensores ble\nAs dependências foram atualizadas",
+              "nl": "Shelly pro 3em400 is toegevoegd als toegewijd apparaat om detectio te verbeteren (shellypro3em400) [#1269].\nOntbrekende energietoestanden zijn toegevoegd aan Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nToegevoegde afstandsondersteuning aan ble sensors\nAfhankelijkheden zijn bijgewerkt",
+              "fr": "Shelly pro 3em400 a été ajouté en tant qu'appareil dédié pour améliorer le detectio (shellypro3em400) [#1269].\nDes états d'énergie manquants ont été ajoutés à Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAjout d'un support de distance aux capteurs ble\nLes dépendances ont été actualisées",
+              "it": "Shelly pro 3em400 è stato aggiunto come dispositivo dedicato per migliorare detectionio (shellypro3em400) [#1269].\nGli stati energetici mancanti sono stati aggiunti a Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nSupporto a distanza aggiunto ai sensori ble\nLe dipendenze sono state aggiornate",
+              "es": "Shelly pro 3em400 se ha añadido como dispositivo dedicado para mejorar detectio (shellypro3em400) [#1269].\nLos estados de energía perdidos se han añadido a Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAñadido soporte de distancia a sensores de la ble\nSe han actualizado las dependencias",
+              "pl": "Shelly pro 3em400 została dodana jako dedykowane urządzenie do poprawy detectio (shelpro3em400) [# 1269].\nZaginione stany energetyczne zostały dodane do Shelly Dimmer Gen 3 (shellydimmerg3) [# 1274].\nDodano wsparcie odległości do czujników ble\nZaktualizowano zależności",
+              "uk": "Shelly Pro 3em400 додано в якості виділеного пристрою для поліпшення детектива (shellypro3em400) [#1269].\nДо Shelly Dimmer Gen 3 (shellydimmerg3).\nДодана підтримка дистанційного керування датчиками\nЗалежність було оновлено",
+              "zh-cn": "Shelly pro 3em400作为专用设备被添加,以改善检测器(shellypro3em400)[#1269].\n缺失的能量状态已被加入雪莉·迪默Gen 3 (shellydimerg3)[#1274].\n添加到 ble 传感器的距离支持\n依赖关系已更新"
+          }
       },
-      "10.5.2": {
-        "en": "Monophase profile support has been fixed for shellypro3em and shellypro3em400.",
-        "de": "Einphasiger Profilträger wurde für shellypro3em und shellypro3em400 fixiert.",
-        "ru": "Монофазная поддержка профиля была зафиксирована для shellypro3em и shellypro3em400.",
-        "pt": "O suporte do perfil monofásico foi fixado para shellypro3em e shellypro3em400.",
-        "nl": "Monophase profiel ondersteuning is vastgesteld voor shellypro3em en shellypro3em400.",
-        "fr": "Le support de profil monophase a été fixé pour shellypro3em et shellypro3em400.",
-        "it": "Il supporto del profilo monofase è stato fissato per shellypro3em e shellypro3em400.",
-        "es": "El soporte de perfil monofásico se ha fijado para shellypro3em y shellypro3em400.",
-        "pl": "Wsparcie profilu monofazy zostało ustalone dla shellypro3em i shellypro3em400.",
-        "uk": "Монофазний профільний супровід був закріплений для оболонкиpro3em і оболонкиpro3em400.",
-        "zh-cn": "Monophase profile 支持已固定为 Shellypro3em 和 shellypro3em 400 ."
+      "titleLang": {
+          "en": "Shelly",
+          "de": "Shelly",
+          "ru": "Shelly",
+          "pt": "Shelly",
+          "nl": "Shelly",
+          "fr": "Shelly",
+          "it": "Shelly",
+          "es": "Shelly",
+          "pl": "Shelly",
+          "uk": "Shelly",
+          "zh-cn": "Shelly"
       },
-      "10.5.1": {
-        "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
-        "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nResetCounters Funktionalität wurde den Komponenten EMData und EM1Data hinzugefügt. Dieser Effekt shellypro3em* aber auch andere Shellyem* Geräte gen2 und später.\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
-        "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nФункциональность ResetCounters добавлена к компонентам EMData и EM1Data. Это эффект шеллипро3эм*, а также других шеллием* устройств ген2 и более поздних.\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
-        "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nA funcionalidade ResetCounters foi adicionada aos componentes EMData e EM1Data. Este efeito shellypro3em* mas também outros dispositivos shellyem* gen2 e posterior.\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
-        "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nResetCounters functionaliteit is toegevoegd aan componenten EMData en EM1Data. Dit effect shellypro3em* maar ook andere shellyem* apparaten gen2 en later.\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
-        "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLa fonctionnalité ResetCounters a été ajoutée aux composants EMData et EM1Data. Cet effet shellypro3em* mais aussi d'autres dispositifs shellyem* gen2 et plus tard.\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
-        "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLa funzionalità ResetCounters è stata aggiunta ai componenti EMData e EM1Data. Questo effetto shellypro3em* ma anche altri dispositivi shellyem* gen2 e successivi.\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
-        "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLa funcionalidad ResetCounters se ha añadido a los componentes EMData y EM1Data. Este efecto shellypro3em* pero también otros dispositivos shellyem* gen2 y posterior.\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
-        "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nDo komponentów EMData i EM1Data dodano funkcje ResetCounters. Ten efekt shelpro3em *ale także inne sheldem* urządzenia gen2 i później. \nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
-        "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nДодано функцію ResetCounters до компонентів EMData та EM1Data. Цей ефект Shellypro3em* але також інші оболонки * пристрої gen2 і пізніше.\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
-        "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n重新设置Counters功能已添加到组件EMData和EM1Data中. 这种效应Shellypro3em*,但也有其他Shellyem*设备gen2及以后.\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
+      "desc": {
+          "en": "Integrate Shelly devices via CoAP or MQTT",
+          "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
+          "ru": "Интеграция Shelly устройств через CoAP или MQTT",
+          "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
+          "nl": "Integrate Shelly apparatuur via CoAP of MQT",
+          "fr": "Dispositifs Shelly intégrés via CoAP ou MQTT",
+          "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
+          "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
+          "pl": "Integracja Shelly poprzez CoAP lub MQTT",
+          "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT",
+          "zh-cn": "通过联合方案或技合中心将全套装置纳入"
       },
-      "10.5.1-alpha.4": {
-        "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
-        "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
-        "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
-        "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
-        "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
-        "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
-        "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
-        "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
-        "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
-        "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
-        "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
-      },
-      "10.5.0": {
-        "en": "Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].\nAddon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly for this device.\nMissing fields at light component have been added. This will effect several devices but should add additional states below light(n) only.\nAdded speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90\nMqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) has been added.\nShelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. \nDependencies have been updated",
-        "de": "Änderungen am mqtt Connect Handling wurden angewendet. Dies sollte den Fehler 'Unable to get MQTT.Prefix' beheben. [#931]\nAddon-Unterstützung wurde **entfernt* von Shelly Dimmer Gen 3 (shellydimmerg3), da es nicht von Shelly für dieses Gerät unterstützt wird.\nFehlende Felder an der Lichtkomponente wurden hinzugefügt. Dies wird mehrere Geräte betreffen, sollte aber nur zusätzliche Zustände unterhalb von light(n) hinzufügen.\nHinzugefügt Geschwindigkeit, Taupunkt, uv_index, Druck, Richtung und Niederschlag für die Wetterstation WS 90\nMqtt qos mode 2 wurde von der Konfiguration entfernt, da Shelly den Qos-Modus 2 nicht unterstützt.\nShelly Plug PM Gen 3 (shellyplugpmg3) wurde hinzugefügt.\nShelly Dimmer Gen 4 (shellydimmerg4) wurde hinzugefügt. Es gibt noch einige Einschränkungen.\nAbhängigkeiten wurden aktualisiert",
-        "ru": "Были внесены изменения в обработку подключения mqtt. Это должно исправить ошибку «Невозможно получить MQTT.Prefix» [#931].\nПоддержка аддона была удалена из Shelly Dimmer Gen 3 (shellydimmerg3), поскольку она не поддерживается shelly для этого устройства.\nДобавлены недостающие поля на световой составляющей. Это повлияет на несколько устройств, но должно добавить дополнительные состояния под светом (n).\nДобавлена скорость, точка росы, uv_index, давление, направление и осадки для метеостанции WS 90\nРежим 2 Mqtt qos был удален из конфигурации, поскольку shelly не поддерживает режим qos 2.\nДобавлен Shelly Plug PM Gen 3 (shellyplugpmg3).\nДобавлен Shelly Dimmer Gen 4 (shellydimmerg4). Некоторые ограничения все еще существуют.\nЗависимости были обновлены",
-        "pt": "Foram aplicadas alterações na manipulação de ligação mqtt. Isso deve corrigir o erro 'Não é possível obter MQTT.Prefix'[#931].\nSuporte Addon foi ** removido** de Shelly Dimmer Gen 3 (shellydimmerg3), pois não é suportado por Shelly para este dispositivo.\nCampos em falta no componente de luz foram adicionados. Isto irá afetar vários dispositivos, mas deve adicionar estados adicionais abaixo de luz(n) apenas.\nVelocidade adicionada, ponto de orvalho, uv_index, pressão, direção e precipitação para estação meteorológica WS 90\nO modo qos 2 do Mqtt foi removido da configuração porque o Shelly não suporta o modo qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) foi adicionado.\nShelly Dimmer Gen 4 (shellydimmerg4) foi adicionado. Ainda existem algumas restrições.\nAs dependências foram atualizadas",
-        "nl": "Wijzigingen in mqtt connect handling zijn toegepast. Dit moet een fout herstellen 'Niet in staat om MQTT.Prefix'[#931] te krijgen.\nDe ondersteuning van Addon is verwijderd** van Shelly Dimmer Gen 3 (shellydimmerg3) omdat het niet ondersteund wordt door Shelly voor dit apparaat.\nOntbrekende velden bij lichte component zijn toegevoegd. Dit zal een effect hebben op verschillende apparaten, maar dient alleen extra toestanden onder licht(n) toe te voegen.\nToegevoegde snelheid, dauwpunt, uv_index, druk, richting en neerslag voor weerstation WS 90\nMqtt qos mode 2 is uit de configuratie verwijderd omdat shelly qos mode niet ondersteunt 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) is toegevoegd.\nShelly Dimmer Gen 4 (shellydimmerg4) is toegevoegd. Er bestaan nog steeds beperkingen.\nAfhankelijkheden zijn bijgewerkt",
-        "fr": "Des modifications ont été apportées à la manipulation de la connexion mqtt. Cela devrait corriger l'erreur 'Impossible d'obtenir MQTT.Prefix'[#931].\nLe support Addon a été **supprimé** de Shelly Dimmer Gen 3 (shellydimmerg3) car il n'est pas supporté par Shelly pour cet appareil.\nDes champs manquants ont été ajoutés au composant lumineux. Cela affectera plusieurs dispositifs, mais devrait ajouter des états supplémentaires sous light(n) seulement.\nAjout de vitesse, de point de rosée, uv_index, pression, direction et précipitations pour la station météorologique WS 90\nLe mode Mqtt qos 2 a été retiré de la configuration car Shelly ne supporte pas le mode qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) a été ajouté.\nShelly Dimmer Gen 4 (shellydimmerg4) a été ajouté. Certaines restrictions existent encore.\nLes dépendances ont été actualisées",
-        "it": "Sono state applicate modifiche alla gestione del collegamento di mqtt. Questo dovrebbe correggere l'errore 'Impossibile ottenere MQTT.Prefix'[#931].\nIl supporto Addon è stato rimosso** da Shelly Dimmer Gen 3 (shellydimmerg3) poiché non è supportato da Shelly per questo dispositivo.\nSono stati aggiunti campi mancanti a componenti leggeri. Questo effetto farà diversi dispositivi, ma dovrebbe aggiungere stati aggiuntivi sotto la luce (n) solo.\nAggiunto velocità, punto di rugiada, uv_index, pressione, direzione e precipitazioni per la stazione meteo WS 90\nMqtt qos mode 2 è stato rimosso dalla configurazione in quanto shelly non supporta la modalità qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) è stato aggiunto.\nShelly Dimmer Gen 4 (shellydimmerg4) è stato aggiunto. Esistono ancora alcune restrizioni.\nLe dipendenze sono state aggiornate",
-        "es": "Se han aplicado cambios a la manipulación de conexiones mqtt. Esto debe corregir el error 'Unable to get MQTT.Prefix'[#931].\nEl soporte Addon ha sido **removido** desde Shelly Dimmer Gen 3 (shellydimmerg3) ya que no es compatible con el dispositivo.\nSe han añadido campos perdidos en componente ligero. Esto afectará a varios dispositivos, pero debe añadir estados adicionales debajo de la luz (n) solamente.\nVelocidad agregada, punto de rocío, uv_index, presión, dirección y precipitación para la estación del tiempo WS 90\nMqtt qos modo 2 ha sido eliminado de la configuración ya que no soporta el modo qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) se ha añadido.\nShelly Dimmer Gen 4 (shellydimmerg4) ha sido añadido. Todavía existen algunas restricciones.\nSe han actualizado las dependencias",
-        "pl": "Zastosowano zmiany obsługi połączenia mqtt. Powinno to naprawić błąd 'Nie można uzyskać MQTT.Prefix' [# 931].\nWsparcie addonu zostało usunięte *** z Shelly Dimmer Gen 3 (sheldimmerg3), ponieważ nie jest obsługiwane przez shelly dla tego urządzenia. \nDodano brakujące pola w elemencie światła. Efektem tego będzie kilka urządzeń, ale powinno być dodanie tylko dodatkowych stanów poniżej światła (n).\nDodano prędkość, punkt dewpoint, uv _ index, ciśnienie, kierunek i opady dla stacji pogodowej WS 90\nMqtt qos mode 2 został usunięty z konfiguracji, ponieważ shelly nie obsługuje trybu qos 2.\nShelly Plug PM Gen 3 (shellyplugpmg3) została dodana.\nDodano Shelly Dimmer Gen 4 (sheldimmerg4). Nadal istnieją pewne ograniczenia.\nZaktualizowano zależności",
-        "uk": "Наведено зміни до обробки з'єднання mqtt. Щоб отримати MQTT.Prefix[#931].\nАддонна підтримка була**** від Shelly Dimmer Gen 3 (shellydimmerg3), оскільки вона не підтримується оболонкою для цього пристрою.\nДодано поля пропуску на світловий компонент. Це буде ефект декількох пристроїв, але слід додати додаткові стани нижче світла (n) тільки.\nДодана швидкість, точка відключення, uv_index, тиск, напрямок та опади на метеорологічну станцію WS 90\nMqtt qos режим 2 видалено з конфігурації, як оболонка не підтримує режим qos 2,2 км.\nДодано Shelly Plug PM Gen 3 (клапанpmg3).\nДодано Shelly Dimmer Gen 4 (shellydimmerg4) Деякі обмеження досі існують.\nЗалежність було оновлено",
-        "zh-cn": "对 mqtt 连接处理的更改已被应用 。 这将修正错误“ 无法获取 MQTT. Prefix ” [# 931] .\nAddon支持已经** removed**从Shelly Dimmer Gen 3 (shellydimerg3)中移除,因为它没有Shelly支持这个设备.\n添加了光元件缺失的字段 。 这将影响若干设备,但只应在光线(n)下增加额外状态.\n为气象站WS90添加速度、露点、uv_index、压力、方向和降水\nMqtt qos 模式 2 从配置中删除, 因为 Shelly 不支持 qos 模式 2. 国家.\nShelly Plug Pen Gen 3(shellyplugpmg3)已经加入.\n已添加 Shelly Dimmer Gen 4 (Shellydimerg4) . 仍然存在一些限制.\n依赖关系已更新"
-      },
-      "10.4.1": {
-        "en": "Shelly pro 3em400 has been added as dedicated device to improve detection (shellypro3em400) [#1269].\nMissing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAdded distance support to ble sensors\nDependencies have been updated",
-        "de": "Shelly pro 3em400 wurde als dediziertes Gerät hinzugefügt, um die Erkennung zu verbessern  (shellypro3em400) [#1269].\nFehlende Energiezustände wurden beim Shelly Dimmer Gen 3 (shellydimmerg3)hinzugefügt [#1274] .\nZusätzliche Abstandsunterstützung für ble Sensoren wurde im plementiert.\nAbhängigkeiten wurden aktualisiert",
-        "ru": "Shelly Pro 3em400 был добавлен в качестве специального устройства для улучшения детектирования (shellypro3em400) [#1269].\nНедостающие энергетические состояния были добавлены к Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nДобавлена поддержка расстояния до датчиков ble\nЗависимости были обновлены",
-        "pt": "Shelly pro 3em400 foi adicionado como dispositivo dedicado para melhorar o detetio (shellypro3em400) [#1269].\nOs estados de energia em falta foram adicionados a Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAdicionado suporte de distância aos sensores ble\nAs dependências foram atualizadas",
-        "nl": "Shelly pro 3em400 is toegevoegd als toegewijd apparaat om detectio te verbeteren (shellypro3em400) [#1269].\nOntbrekende energietoestanden zijn toegevoegd aan Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nToegevoegde afstandsondersteuning aan ble sensors\nAfhankelijkheden zijn bijgewerkt",
-        "fr": "Shelly pro 3em400 a été ajouté en tant qu'appareil dédié pour améliorer le detectio (shellypro3em400) [#1269].\nDes états d'énergie manquants ont été ajoutés à Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAjout d'un support de distance aux capteurs ble\nLes dépendances ont été actualisées",
-        "it": "Shelly pro 3em400 è stato aggiunto come dispositivo dedicato per migliorare detectionio (shellypro3em400) [#1269].\nGli stati energetici mancanti sono stati aggiunti a Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nSupporto a distanza aggiunto ai sensori ble\nLe dipendenze sono state aggiornate",
-        "es": "Shelly pro 3em400 se ha añadido como dispositivo dedicado para mejorar detectio (shellypro3em400) [#1269].\nLos estados de energía perdidos se han añadido a Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].\nAñadido soporte de distancia a sensores de la ble\nSe han actualizado las dependencias",
-        "pl": "Shelly pro 3em400 została dodana jako dedykowane urządzenie do poprawy detectio (shelpro3em400) [# 1269].\nZaginione stany energetyczne zostały dodane do Shelly Dimmer Gen 3 (shellydimmerg3) [# 1274].\nDodano wsparcie odległości do czujników ble\nZaktualizowano zależności",
-        "uk": "Shelly Pro 3em400 додано в якості виділеного пристрою для поліпшення детектива (shellypro3em400) [#1269].\nДо Shelly Dimmer Gen 3 (shellydimmerg3).\nДодана підтримка дистанційного керування датчиками\nЗалежність було оновлено",
-        "zh-cn": "Shelly pro 3em400作为专用设备被添加,以改善检测器(shellypro3em400)[#1269].\n缺失的能量状态已被加入雪莉·迪默Gen 3 (shellydimerg3)[#1274].\n添加到 ble 传感器的距离支持\n依赖关系已更新"
-      }
-    },
-    "titleLang": {
-      "en": "Shelly",
-      "de": "Shelly",
-      "ru": "Shelly",
-      "pt": "Shelly",
-      "nl": "Shelly",
-      "fr": "Shelly",
-      "it": "Shelly",
-      "es": "Shelly",
-      "pl": "Shelly",
-      "uk": "Shelly",
-      "zh-cn": "Shelly"
-    },
-    "desc": {
-      "en": "Integrate Shelly devices via CoAP or MQTT",
-      "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
-      "ru": "Интеграция Shelly устройств через CoAP или MQTT",
-      "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
-      "nl": "Integrate Shelly apparatuur via CoAP of MQT",
-      "fr": "Dispositifs Shelly intégrés via CoAP ou MQTT",
-      "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
-      "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
-      "pl": "Integracja Shelly poprzez CoAP lub MQTT",
-      "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT",
-      "zh-cn": "通过联合方案或技合中心将全套装置纳入"
-    },
-    "authors": [
-      "Thorsten Stueben <thorsten@stueben.de>",
-      "Apollon77 <iobroker@fischer-ka.de>",
-      "Matthias Kleine <info@haus-automatisierung.com>",
-      "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
-    ],
-    "docs": {
-      "en": [
-        "docs/en/README.md",
-        "docs/en/ble-devices.md",
-        "docs/en/protocol-coap.md",
-        "docs/en/protocol-mqtt.md",
-        "docs/en/restricted-login.md",
-        "docs/en/state-changes.md",
-        "docs/en/faq.md",
-        "docs/en/debug.md"
+      "authors": [
+          "Thorsten Stueben <thorsten@stueben.de>",
+          "Apollon77 <iobroker@fischer-ka.de>",
+          "Matthias Kleine <info@haus-automatisierung.com>",
+          "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
       ],
-      "de": [
-        "docs/de/README.md",
-        "docs/de/ble-devices.md",
-        "docs/de/protocol-coap.md",
-        "docs/de/protocol-mqtt.md",
-        "docs/de/restricted-login.md",
-        "docs/de/state-changes.md",
-        "docs/de/faq.md",
-        "docs/de/debug.md"
+      "docs": {
+          "en": [
+              "docs/en/README.md",
+              "docs/en/ble-devices.md",
+              "docs/en/protocol-coap.md",
+              "docs/en/protocol-mqtt.md",
+              "docs/en/restricted-login.md",
+              "docs/en/state-changes.md",
+              "docs/en/faq.md",
+              "docs/en/debug.md"
+          ],
+          "de": [
+              "docs/de/README.md",
+              "docs/de/ble-devices.md",
+              "docs/de/protocol-coap.md",
+              "docs/de/protocol-mqtt.md",
+              "docs/de/restricted-login.md",
+              "docs/de/state-changes.md",
+              "docs/de/faq.md",
+              "docs/de/debug.md"
+          ]
+      },
+      "keywords": ["Shelly", "IoT", "CoAP", "CoIoT", "MQTT"],
+      "tier": 2,
+      "licenseInformation": {
+          "license": "MIT",
+          "type": "free"
+      },
+      "supportedMessages": {
+          "deviceManager": true
+      },
+      "messagebox": true,
+      "platform": "Javascript/Node.js",
+      "mode": "daemon",
+      "icon": "shelly.png",
+      "enabled": false,
+      "compact": true,
+      "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
+      "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
+      "loglevel": "info",
+      "type": "iot-systems",
+      "restartAdapters": [],
+      "connectionType": "local",
+      "dataSource": "push",
+      "plugins": {
+          "sentry": {
+              "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
+              "pathWhitelist": ["@apollon", "shelly-iot"]
+          }
+      },
+      "adminUI": {
+          "config": "json"
+      },
+      "dependencies": [
+          {
+              "js-controller": ">=6.0.11"
+          }
+      ],
+      "globalDependencies": [
+          {
+              "admin": ">=7.6.17"
+          }
       ]
-    },
-    "keywords": [
-      "Shelly",
-      "IoT",
-      "CoAP",
-      "CoIoT",
-      "MQTT"
-    ],
-    "tier": 2,
-    "licenseInformation": {
-      "license": "MIT",
-      "type": "free"
-    },
-    "platform": "Javascript/Node.js",
-    "mode": "daemon",
-    "icon": "shelly.png",
-    "enabled": false,
-    "compact": true,
-    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
-    "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
-    "loglevel": "info",
-    "type": "iot-systems",
-    "restartAdapters": [],
-    "connectionType": "local",
-    "dataSource": "push",
-    "plugins": {
-      "sentry": {
-        "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
-        "pathWhitelist": [
-          "@apollon",
-          "shelly-iot"
-        ]
-      }
-    },
-    "adminUI": {
-      "config": "json"
-    },
-    "dependencies": [
-      {
-        "js-controller": ">=6.0.11"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=7.6.17"
-      }
-    ]
   },
   "notifications": [
     {

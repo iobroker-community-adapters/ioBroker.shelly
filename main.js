@@ -1,21 +1,22 @@
 'use strict';
 
 const crypto = require('node:crypto');
+const { EventEmitter } = require('node:events');
+const tcpPing = require('tcp-ping');
 
 const utils = require('@iobroker/adapter-core');
-const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
+const { objectHelper } = require('@apollon/iobroker-tools'); // Common adapter utils
+
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
 const BleDecoder = require('./lib/ble-decoder').BleDecoder;
-const adapterName = require('./package.json').name.split('.').pop();
-const tcpPing = require('tcp-ping');
-const EventEmitter = require('events').EventEmitter;
+const DeviceManagement = require('./lib/deviceManager');
 
 class Shelly extends utils.Adapter {
     constructor(options) {
         super({
             ...options,
-            name: adapterName,
+            name: 'shelly',
         });
 
         this.isUnloaded = false;
@@ -24,6 +25,7 @@ class Shelly extends utils.Adapter {
         this.serverCoap = null;
         this.firmwareUpdateTimeout = null;
         this.onlineCheckTimeout = null;
+        this.deviceManagement = null;
 
         this.onlineDevices = {};
 
@@ -32,12 +34,14 @@ class Shelly extends utils.Adapter {
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
-        this.on('fileChange', this.onFileChange.bind(this));
+        this.on('message', this.onMessage.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
     async onReady() {
         try {
+            this.deviceManagement = new DeviceManagement(this);
+
             // Upgrade older config
             if (await this.migrateConfig()) {
                 return;
@@ -99,6 +103,13 @@ class Shelly extends utils.Adapter {
             }
         } catch (err) {
             this.log.error(`[onReady] Startup error: ${err}`);
+        }
+    }
+
+    async onMessage(obj) {
+        if (obj.command?.startsWith('dm:')) {
+            // Handled by Device Manager class itself, so ignored here
+            return;
         }
     }
 
@@ -169,10 +180,6 @@ class Shelly extends utils.Adapter {
         }
     }
 
-    onFileChange(id, fileName, size) {
-        this.log.debug(`[onFileChange]: id: ${id}, fileName: ${fileName}, size: ${size}`);
-    }
-
     /**
      * @param callback
      */
@@ -233,13 +240,13 @@ class Shelly extends utils.Adapter {
         try {
             const deviceIds = await this.getAllDeviceIds();
             for (const deviceId of deviceIds) {
-                const stateHostaname = await this.getStateAsync(`${deviceId}.hostname`);
-                const valHostname = stateHostaname ? stateHostaname.val : undefined;
+                const stateHostName = await this.getStateAsync(`${deviceId}.hostname`);
+                const valHostName = stateHostName ? stateHostName.val : undefined;
 
-                if (valHostname) {
-                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
+                if (valHostName) {
+                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostName}:${valPort}`);
 
-                    tcpPing.probe(valHostname, valPort, (error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
+                    tcpPing.probe(valHostName, valPort, (error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
                 }
             }
         } catch (e) {
@@ -256,6 +263,7 @@ class Shelly extends utils.Adapter {
         if (this.isUnloaded) {
             return;
         }
+
         if (!deviceId) {
             return;
         }
@@ -279,7 +287,7 @@ class Shelly extends utils.Adapter {
             // Compare to previous value
             const prevValue = onlineState.val ? onlineState.val === 'true' || onlineState.val === true : false;
 
-            if (prevValue != status) {
+            if (prevValue !== status) {
                 await this.setState(idOnline, { val: status, ack: true });
             }
         }
