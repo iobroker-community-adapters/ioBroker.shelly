@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.6.0-alpha.10",
+    "version": "10.6.0-alpha.11",
     "news": {
-      "10.6.0-alpha.10": {
+      "10.6.0-alpha.11": {
         "en": "The-Pill-By-Shelly (shellypill) has been added. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]\nShelly BLU H&T Display ZB support for light attribute has been added. [#1230]\nSupport for favorites for Gen 2+ devices with cover support has been added. [#1001]\nPower metering support has been added to RGB and RGBW components. [#1339]\nFrankEver Smart Watervalve (watervalve) has been added. [#1341]\nLinkedGo ST1820 (st1820) has been added. [#1257]",
         "de": "Die-Pill-By-Shelly (shellypill) wurde hinzugefügt. (#1232)\nShelly EM mini Gen 4 (shellyemminimg4) und Plug M Gen 3 (shellyplugmg3) wurden hinzugefügt. (#1327, #1332)\nShelly BLU H&T Display ZB Unterstützung für Licht Attribut hinzugefügt wurde. (#1230)\nUnterstützung für Favoriten für Gen 2+ Geräte mit Cover-Unterstützung wurde hinzugefügt. (#1001)\nDie Komponenten RGB und RGBW wurden mit Power-Dosierung unterstützt. (#1339)\nFrankEver Smart Watervalve (Wasserventil) wurde hinzugefügt. (#1341)\nLinkedGo ST1820 (st1820) wurde hinzugefügt. (#1257)",
         "ru": "Добавлена Щеллипилль (The-Pill-By-Shelly). [#1232]\nДобавлены Shelly EM mini Gen 4 (shellyemminimg4) и Plug M Gen 3 (shellyplugmg3). [#1327, #1332]\nШелли Блю Добавлена поддержка H&T Display ZB для световых атрибутов. [#1230]\nДобавлена поддержка фаворитов для устройств Gen 2+ с поддержкой крышки. [#1001]\nПоддержка измерения мощности была добавлена к компонентам RGB и RGBW. [1339]\nДобавлен FrankEver Smart Watervalve (водяной клапан). [1341]\nДобавлен LinkedGo ST1820 (st1820). [#1257]",
