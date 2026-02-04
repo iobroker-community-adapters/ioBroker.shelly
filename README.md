@@ -32,9 +32,6 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 ## Supported devices
 
-Note that devices connected using **Shellies Range Extender** functionality are **not supported**.  
-Please connect you devices directly to your (W)LAN and use a classic WLAN Repeater if required.
-
 ### Generation 1 (Gen 1)
 
 | Shelly Device                        | CoAP      | MQTT      |
