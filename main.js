@@ -176,7 +176,7 @@ class Shelly extends utils.Adapter {
     /**
      * @param callback
      */
-    onUnload(callback) {
+    async onUnload(callback) {
         this.isUnloaded = true;
 
         if (this.onlineCheckTimeout) {
@@ -184,11 +184,15 @@ class Shelly extends utils.Adapter {
             this.onlineCheckTimeout = null;
         }
 
-        this.setOnlineFalse();
-
         if (this.firmwareUpdateTimeout) {
             this.clearTimeout(this.firmwareUpdateTimeout);
             this.firmwareUpdateTimeout = null;
+        }
+
+        try {
+            await this.setOnlineFalse();
+        } catch (e) {
+            this.log.debug(`[onUnload] Error in setOnlineFalse: ${e}`);
         }
 
         try {
