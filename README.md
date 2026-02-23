@@ -215,7 +215,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]
 - (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
 
@@ -246,12 +246,6 @@ Notes:
 * (@mcm1957) Mqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.
 * (@mcm1957) Shelly Plug PM Gen 3 (shellyplugpmg3) has been added.
 * (@mcm1957) Shelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. 
-* (@mcm1957) Dependencies have been updated
-
-### 10.4.1 (2025-11-03)
-* (@mcm1957) Shelly pro 3em400 has been added as dedicated device to improve detectio (shellypro3em400) [#1269].
-* (@mcm1957) Missing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].
-* (@klein0r) Added distance support to ble sensors
 * (@mcm1957) Dependencies have been updated
 
 ## License
