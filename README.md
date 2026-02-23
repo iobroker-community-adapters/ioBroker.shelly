@@ -137,7 +137,7 @@ Notes:
 | Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
 | Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0  |
 | Shelly I4 / I4DC Gen3 (shellyi4g3)            | ❌   | >= v8.5.0  |
-| Shelly Pill (shellypill) (2)                  | ❌   | >= v10.6.0 |
+| Shelly Pill (shellypill)                      | ❌   | >= v10.6.1 |
 | Shelly Plug M Gen3 (shellyplugmg3)            | ❌   | >= v10.6.0 |
 | Shelly Plug PM Gen3 (shellyplugpmg3)          | ❌   | >= v10.5.0 |
 | Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
@@ -147,7 +147,6 @@ Notes:
 
 Notes:
 (1) slat control requires >= v10.4.0
-(2) ALPHA implementation for testing purposes only as shelly has not yet published any API documentation
 
 ### Generation 4 (Gen 4)
 
