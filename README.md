@@ -215,6 +215,10 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+- (copilot) Adapter requires admin >= 7.7.22 now
+
 ### 10.6.0 (2026-02-08)
 * (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
 * (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]
