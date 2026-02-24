@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.6.0",
+    "version": "10.6.1",
     "news": {
+      "10.6.1": {
+        "en": "OnUnload handling has been improved. [#1279]\nshellypill: missing input 202 has been added, nonexisting analog input has been removed.",
+        "de": "OnUnload-Handling wurde verbessert. (#1279)\nshellypill: fehlender eingang 202 wurde hinzugefügt, nicht vorhandene analoge eingabe wurde entfernt.",
+        "ru": "Обработка OnUnload была улучшена. [#1279]\nshellypill: добавлен недостающий вход 202, удален несуществующий аналоговый вход.",
+        "pt": "O manuseio OnUnload foi melhorado. [#1279]\nshellypill: falta a entrada 202 foi adicionada, entrada analógica não existente foi removida.",
+        "nl": "OnUnload handling is verbeterd. [#1279]\nshellypill: ontbrekende input 202 is toegevoegd, niet bestaande analoge invoer is verwijderd.",
+        "fr": "La gestion du chargement a été améliorée. [#1279]\nshellypill: l'entrée manquante 202 a été ajoutée, l'entrée analogique non existante a été supprimée.",
+        "it": "La gestione di OnSload è stata migliorata. [#1279]\nshellypill: ingresso mancante 202 è stato aggiunto, ingresso analogico non esistente è stato rimosso.",
+        "es": "Se ha mejorado el manejo de onUnload. [#1279]\nshellypill: entrada faltante 202 se ha añadido, no se ha eliminado ninguna entrada analógica.",
+        "pl": "Ulepszono obchodzenie się z ładunkiem. [# 1279]\nshellypill: dodano brakujące wejście 202, usunięto nieistniejące wejście analogowe.",
+        "uk": "Удосконалено роботу над навантаженням. [#1279]\nоболонка: відсутній вхід 202 був доданий, неіснуючий аналоговий вхід був видалений.",
+        "zh-cn": "卸载处理已经改进 。 [#1279] (中文(简体) )\nshellypill:已添加缺失的输入 202,已删除不存在的模拟输入."
+      },
       "10.6.0": {
         "en": "The-Pill-By-Shelly (shellypill) has been added. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]\nShelly BLU H&T Display ZB support for light attribute has been added. [#1230]\nSupport for favorites for Gen 2+ devices with cover support has been added. [#1001]\nPower metering support has been added to RGB and RGBW components. [#1339]\nFrankEver Smart Watervalve (watervalve) has been added. [#1341]\nLinkedGo ST1820 (st1820) has been added. [#1257]\nDependencies have been updated",
         "de": "The-Pill-By-Shelly (shellypill) wurde hinzugefügt. (#1232)\nShelly EM mini Gen 4 (shellyemminimg4) und Plug M Gen 3 (shellyplugmg3) wurden hinzugefügt. (#1327, #1332)\nShelly BLU H&T Display ZB Unterstützung für Licht Attribut hinzugefügt wurde. (#1230)\nUnterstützung für Favoriten für Gen 2+ Geräte mit Cover-Unterstützung wurde hinzugefügt. (#1001)\nDie Komponenten RGB und RGBW wurden mit Power-Dosierung unterstützt. (#1339)\nFrankEver Smart Watervalve (Wasserventil) wurde hinzugefügt. (#1341)\nLinkedGo ST1820 (st1820) wurde hinzugefügt. (#1257)\nAbhängigkeiten wurden aktualisiert",

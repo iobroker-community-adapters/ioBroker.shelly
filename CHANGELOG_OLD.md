@@ -1,4 +1,10 @@
 # Older changes
+## 10.4.1 (2025-11-03)
+* (@mcm1957) Shelly pro 3em400 has been added as dedicated device to improve detectio (shellypro3em400) [#1269].
+* (@mcm1957) Missing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].
+* (@klein0r) Added distance support to ble sensors
+* (@mcm1957) Dependencies have been updated
+
 ## 10.4.0 (2025-10-13)
 
 * (@mcm1957) Slat control added to Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 and Shelly 2PM Gen 4.

@@ -137,7 +137,7 @@ Notes:
 | Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
 | Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0  |
 | Shelly I4 / I4DC Gen3 (shellyi4g3)            | ❌   | >= v8.5.0  |
-| Shelly Pill (shellypill) (2)                  | ❌   | >= v10.6.0 |
+| Shelly Pill (shellypill)                      | ❌   | >= v10.6.1 |
 | Shelly Plug M Gen3 (shellyplugmg3)            | ❌   | >= v10.6.0 |
 | Shelly Plug PM Gen3 (shellyplugpmg3)          | ❌   | >= v10.5.0 |
 | Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
@@ -147,7 +147,6 @@ Notes:
 
 Notes:
 (1) slat control requires >= v10.4.0
-(2) ALPHA implementation for testing purposes only as shelly has not yet published any API documentation
 
 ### Generation 4 (Gen 4)
 
@@ -219,6 +218,10 @@ Notes:
 ### **WORK IN PROGRESS**
 - (copilot) Adapter requires admin >= 7.7.22 now
 
+### 10.6.1 (2026-02-23)
+- (HGlab01) OnUnload handling has been improved. [#1279]
+- (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
+
 ### 10.6.0 (2026-02-08)
 * (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
 * (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]
@@ -246,12 +249,6 @@ Notes:
 * (@mcm1957) Mqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.
 * (@mcm1957) Shelly Plug PM Gen 3 (shellyplugpmg3) has been added.
 * (@mcm1957) Shelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. 
-* (@mcm1957) Dependencies have been updated
-
-### 10.4.1 (2025-11-03)
-* (@mcm1957) Shelly pro 3em400 has been added as dedicated device to improve detectio (shellypro3em400) [#1269].
-* (@mcm1957) Missing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].
-* (@klein0r) Added distance support to ble sensors
 * (@mcm1957) Dependencies have been updated
 
 ## License
