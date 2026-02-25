@@ -217,6 +217,8 @@ Notes:
 
 ### **WORK IN PROGRESS**
 - (copilot) Adapter requires admin >= 7.7.22 now
+- (mcm1957) PLUG_UI component has been added to AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).
+- (mcm1957) PLUG_UI component has been addepted for Plus Plug S (shellyplusplugs). No changes should be noticeable. 
 
 ### 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]
