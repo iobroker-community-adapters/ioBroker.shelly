@@ -214,12 +214,11 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 10.6.2-alpha.0 (2026-02-26)
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (mcm1957) PLUG_UI component has been added to AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).
 - (mcm1957) PLUG_UI component has been addepted for Plus Plug S (shellyplusplugs). No changes should be noticeable. 
-- (mcm1957) PLUPM_UI component has been addepted for Plug PM (shellyplugpmg3). 
+- (mcm1957) PLUPM_UI component has been addepted for Plug PM (shellyplugpmg3).
 
 ### 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]
@@ -243,16 +242,6 @@ Notes:
 * (@mcm1957) ResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.
 * (@mcm1957) Changes to shellypro3em could affect shellyemg3 and shellyproem50.
 * (@HGlab01) Several fixes for Shelly Ecowitt WS90 have been implemented. [#1293]
-
-### 10.5.0 (2025-12-13)
-* (@mcm1957) Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].
-* (@mcm1957) Addon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly for this device.
-* (@mcm1957) Missing fields at light component have been added. This will effect several devices but should add additional states below light(n) only.
-* (@klein0r) Added speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90
-* (@mcm1957) Mqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.
-* (@mcm1957) Shelly Plug PM Gen 3 (shellyplugpmg3) has been added.
-* (@mcm1957) Shelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. 
-* (@mcm1957) Dependencies have been updated
 
 ## License
 
