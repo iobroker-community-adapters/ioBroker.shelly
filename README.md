@@ -217,7 +217,7 @@ Notes:
 ### **WORK IN PROGRESS**
 - (mcm1957) DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.
 
-### 10.6.2-alpha.0 (2026-02-26)
+### 10.6.2-alpha.0 (2026-02-26) - REVOKED
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (mcm1957) PLUGS_UI component has been added to AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).
 - (mcm1957) PLUGS_UI component has been addepted for Plus Plug S (shellyplusplugs). No changes should be noticeable. 
