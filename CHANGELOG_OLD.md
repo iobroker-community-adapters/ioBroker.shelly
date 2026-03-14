@@ -1,4 +1,26 @@
 # Older changes
+## 10.5.1 (2025-12-27)
+* (@mcm1957) Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]
+* (@mcm1957) ResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.
+* (@mcm1957) Changes to shellypro3em could affect shellyemg3 and shellyproem50.
+* (@HGlab01) Several fixes for Shelly Ecowitt WS90 have been implemented. [#1293]
+
+## 10.5.0 (2025-12-13)
+* (@mcm1957) Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].
+* (@mcm1957) Addon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly for this device.
+* (@mcm1957) Missing fields at light component have been added. This will effect several devices but should add additional states below light(n) only.
+* (@klein0r) Added speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90
+* (@mcm1957) Mqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.
+* (@mcm1957) Shelly Plug PM Gen 3 (shellyplugpmg3) has been added.
+* (@mcm1957) Shelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. 
+* (@mcm1957) Dependencies have been updated
+
+## 10.4.1 (2025-11-03)
+* (@mcm1957) Shelly pro 3em400 has been added as dedicated device to improve detectio (shellypro3em400) [#1269].
+* (@mcm1957) Missing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].
+* (@klein0r) Added distance support to ble sensors
+* (@mcm1957) Dependencies have been updated
+
 ## 10.4.0 (2025-10-13)
 
 * (@mcm1957) Slat control added to Shelly ProDualCoverPM, Shelly Pro2PM, Shelly Shutter, Shelly Plus 2PM, Shelly 2PM Gen 3 and Shelly 2PM Gen 4.
