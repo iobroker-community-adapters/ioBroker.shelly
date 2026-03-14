@@ -26,6 +26,7 @@ class Shelly extends utils.Adapter {
         this.onlineCheckTimeout = null;
 
         this.onlineDevices = {};
+        this.apDeviceMap = {};
 
         this.eventEmitter = new EventEmitter();
         this.bleDecoder = new BleDecoder();
@@ -178,6 +179,7 @@ class Shelly extends utils.Adapter {
      */
     async onUnload(callback) {
         this.isUnloaded = true;
+        this.clearApEntries();
 
         if (this.onlineCheckTimeout) {
             this.clearTimeout(this.onlineCheckTimeout);
@@ -241,9 +243,20 @@ class Shelly extends utils.Adapter {
                 const valHostname = stateHostaname ? stateHostaname.val : undefined;
 
                 if (valHostname) {
-                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
+                    if (valHostname.toString().includes(':')) {
+                        const [extHostname, extPort] = valHostname.toString().split(':');
+                        this.log.debug(`[onlineCheck] Checking ${deviceId} on ${extHostname}:${extPort}`);
 
-                    tcpPing.probe(valHostname, valPort, (error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
+                        tcpPing.probe(extHostname, extPort, (error, isAlive) => {
+                            this.deviceStatusUpdate(deviceId, isAlive);
+                        });
+                    } else {
+                        this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
+
+                        tcpPing.probe(valHostname, valPort, (error, isAlive) => {
+                            this.deviceStatusUpdate(deviceId, isAlive);
+                        });
+                    }
                 }
             }
         } catch (e) {
@@ -691,6 +704,19 @@ class Shelly extends utils.Adapter {
                 }
             }
         }
+    }
+
+    updateApEntry(baseIP, entries) {
+        this.apDeviceMap[baseIP] = entries;
+    }
+
+    getApEntryIP(baseIP, deviceIP) {
+        const devicePort = this.apDeviceMap[baseIP]?.[deviceIP];
+        return devicePort ? `${baseIP}:${devicePort}` : undefined;
+    }
+
+    clearApEntries() {
+        this.apDeviceMap = {};
     }
 
     removeNamespace(id) {
