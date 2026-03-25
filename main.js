@@ -9,8 +9,8 @@ const { objectHelper } = require('@apollon/iobroker-tools'); // Common adapter u
 
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
-const BleDecoder = require('./lib/ble-decoder').BleDecoder;
-const DeviceManagement = require('./lib/deviceManager');
+const { BleDecoder } = require('./lib/ble-decoder');
+const DeviceManagement = require('./lib/deviceManager').default;
 
 class Shelly extends utils.Adapter {
     constructor(options) {
@@ -32,15 +32,17 @@ class Shelly extends utils.Adapter {
         this.eventEmitter = new EventEmitter();
         this.bleDecoder = new BleDecoder();
 
-        this.on('ready', this.onReady.bind(this));
-        this.on('stateChange', this.onStateChange.bind(this));
-        this.on('message', this.onMessage.bind(this));
-        this.on('unload', this.onUnload.bind(this));
+        this.on('ready', this.onReady);
+        this.on('stateChange', this.onStateChange);
+        this.on('objectChange', this.onObjectChange);
+        this.on('fileChange', this.onFileChange);
+        // this.on('message', this.onMessage);
+        this.on('unload', this.onUnload);
     }
 
-    async onReady() {
+    onReady = async () => {
         try {
-            this.deviceManagement = new DeviceManagement(this);
+            this.deviceManagement = new DeviceManagement(this, this.onlineDevices);
 
             // Upgrade older config
             if (await this.migrateConfig()) {
@@ -104,14 +106,15 @@ class Shelly extends utils.Adapter {
         } catch (err) {
             this.log.error(`[onReady] Startup error: ${err}`);
         }
-    }
+    };
 
-    async onMessage(obj) {
-        if (obj.command?.startsWith('dm:')) {
-            // Handled by Device Manager class itself, so ignored here
-            return;
-        }
-    }
+    // If onMassage will be used, do not forget to ignore device manager messages here
+    // onMessage = async obj => {
+    //     if (obj.command?.startsWith('dm:')) {
+    //         // Handled by Device Manager class itself, so ignored here
+    //         return;
+    //     }
+    // };
 
     /**
      * Validates and normalizes the QoS configuration value.
@@ -146,7 +149,13 @@ class Shelly extends utils.Adapter {
         this.config.qos = qos;
     }
 
-    onStateChange(id, state) {
+    onObjectChange = (id, obj) => {
+        this.deviceManagement?.onObjectChange(id, obj);
+    };
+
+    onStateChange = (id, state) => {
+        this.deviceManagement?.onStateChange(id, state);
+
         // Warning, state can be null if it was deleted
         if (state && !state.ack) {
             const stateId = this.removeNamespace(id);
@@ -173,18 +182,21 @@ class Shelly extends utils.Adapter {
                     `[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`,
                 );
 
-                if (objectHelper) {
-                    objectHelper.handleStateChange(id, state);
-                }
+                objectHelper?.handleStateChange(id, state);
             }
         }
-    }
+    };
+
+    onFileChange = (id, fileName, size) => {
+        this.log.debug(`[onFileChange]: id: ${id}, fileName: ${fileName}, size: ${size}`);
+    };
 
     /**
      * @param callback
      */
-    onUnload(callback) {
+    onUnload = callback => {
         this.isUnloaded = true;
+        this.deviceManagement?.destroy();
 
         if (this.onlineCheckTimeout) {
             this.clearTimeout(this.onlineCheckTimeout);
@@ -224,7 +236,7 @@ class Shelly extends utils.Adapter {
             // this.log.error('Error');
             callback();
         }
-    }
+    };
 
     /**
      * Online-Check via TCP ping (when using CoAP)
