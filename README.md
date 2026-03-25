@@ -137,7 +137,7 @@ Notes:
 | Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
 | Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0  |
 | Shelly I4 / I4DC Gen3 (shellyi4g3)            | ❌   | >= v8.5.0  |
-| Shelly Pill (shellypill) (2)                  | ❌   | >= v10.6.0 |
+| Shelly Pill (shellypill)                      | ❌   | >= v10.6.1 |
 | Shelly Plug M Gen3 (shellyplugmg3)            | ❌   | >= v10.6.0 |
 | Shelly Plug PM Gen3 (shellyplugpmg3)          | ❌   | >= v10.5.0 |
 | Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
@@ -147,7 +147,6 @@ Notes:
 
 Notes:
 (1) slat control requires >= v10.4.0
-(2) ALPHA implementation for testing purposes only as shelly has not yet published any API documentation
 
 ### Generation 4 (Gen 4)
 
@@ -215,7 +214,20 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 10.6.2-alpha.1 (2026-02-26)
+- (mcm1957) DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.
+
+### 10.6.2-alpha.0 (2026-02-26) - REVOKED
+- (copilot) Adapter requires admin >= 7.7.22 now
+- (mcm1957) PLUGS_UI component has been added to AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).
+- (mcm1957) PLUGS_UI component has been addepted for Plus Plug S (shellyplusplugs). No changes should be noticeable. 
+- (mcm1957) PLUGPM_UI component has been addepted for Plug PM (shellyplugpmg3).
+
+### 10.6.1 (2026-02-23)
+- (HGlab01) OnUnload handling has been improved. [#1279]
+- (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
+
+### 10.6.0 (2026-02-08)
 * (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
 * (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]
 * (@mcm1957) Shelly BLU H&T Display ZB support for light attribute has been added. [#1230]
@@ -223,31 +235,10 @@ Notes:
 * (@mcm1957) Power metering support has been added to RGB and RGBW components. [#1339]
 * (@mcm1957) FrankEver Smart Watervalve (watervalve) has been added. [#1341]
 * (@mcm1957) LinkedGo ST1820 (st1820) has been added. [#1257]
+* (@mcm1957) Dependencies have been updated
 
 ### 10.5.2 (2025-12-28)
 * (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
-
-### 10.5.1 (2025-12-27)
-* (@mcm1957) Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]
-* (@mcm1957) ResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.
-* (@mcm1957) Changes to shellypro3em could affect shellyemg3 and shellyproem50.
-* (@HGlab01) Several fixes for Shelly Ecowitt WS90 have been implemented. [#1293]
-
-### 10.5.0 (2025-12-13)
-* (@mcm1957) Changes to mqtt connect handling have been applied. This should fix error 'Unable to get MQTT.Prefix'[#931].
-* (@mcm1957) Addon support has been **removed** from Shelly Dimmer Gen 3 (shellydimmerg3) as it is not supported by shelly for this device.
-* (@mcm1957) Missing fields at light component have been added. This will effect several devices but should add additional states below light(n) only.
-* (@klein0r) Added speed, dewpoint, uv_index, pressure, direction and precipitation for weather station WS 90
-* (@mcm1957) Mqtt qos mode 2 has been removed from configuration as shelly does not support qos mode 2.
-* (@mcm1957) Shelly Plug PM Gen 3 (shellyplugpmg3) has been added.
-* (@mcm1957) Shelly Dimmer Gen 4 (shellydimmerg4) has been added. Some restrictions still exist. 
-* (@mcm1957) Dependencies have been updated
-
-### 10.4.1 (2025-11-03)
-* (@mcm1957) Shelly pro 3em400 has been added as dedicated device to improve detectio (shellypro3em400) [#1269].
-* (@mcm1957) Missing energy states have been added to Shelly Dimmer Gen 3 (shellydimmerg3) [#1274].
-* (@klein0r) Added distance support to ble sensors
-* (@mcm1957) Dependencies have been updated
 
 ## License
 

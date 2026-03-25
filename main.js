@@ -1,22 +1,21 @@
 'use strict';
 
 const crypto = require('node:crypto');
-const { EventEmitter } = require('node:events');
-const tcpPing = require('tcp-ping');
 
 const utils = require('@iobroker/adapter-core');
-const { objectHelper } = require('@apollon/iobroker-tools'); // Common adapter utils
-
+const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
-const { BleDecoder } = require('./lib/ble-decoder');
-const DeviceManagement = require('./lib/deviceManager').default;
+const BleDecoder = require('./lib/ble-decoder').BleDecoder;
+const adapterName = require('./package.json').name.split('.').pop();
+const tcpPing = require('tcp-ping');
+const EventEmitter = require('events').EventEmitter;
 
 class Shelly extends utils.Adapter {
     constructor(options) {
         super({
             ...options,
-            name: 'shelly',
+            name: adapterName,
         });
 
         this.isUnloaded = false;
@@ -25,22 +24,20 @@ class Shelly extends utils.Adapter {
         this.serverCoap = null;
         this.firmwareUpdateTimeout = null;
         this.onlineCheckTimeout = null;
-        this.deviceManagement = null;
 
         this.onlineDevices = {};
 
         this.eventEmitter = new EventEmitter();
         this.bleDecoder = new BleDecoder();
 
-        this.on('ready', this.onReady);
-        this.on('stateChange', this.onStateChange);
-        this.on('objectChange', this.onObjectChange);
-        this.on('fileChange', this.onFileChange);
-        // this.on('message', this.onMessage);
-        this.on('unload', this.onUnload);
+        this.on('ready', this.onReady.bind(this));
+        this.on('stateChange', this.onStateChange.bind(this));
+        this.on('objectChange', this.onObjectChange.bind(this));
+        this.on('fileChange', this.onFileChange.bind(this));
+        this.on('unload', this.onUnload.bind(this));
     }
 
-    onReady = async () => {
+    async onReady() {
         try {
             this.deviceManagement = new DeviceManagement(this, this.onlineDevices);
 
@@ -106,15 +103,7 @@ class Shelly extends utils.Adapter {
         } catch (err) {
             this.log.error(`[onReady] Startup error: ${err}`);
         }
-    };
-
-    // If onMassage will be used, do not forget to ignore device manager messages here
-    // onMessage = async obj => {
-    //     if (obj.command?.startsWith('dm:')) {
-    //         // Handled by Device Manager class itself, so ignored here
-    //         return;
-    //     }
-    // };
+    }
 
     /**
      * Validates and normalizes the QoS configuration value.
@@ -149,11 +138,11 @@ class Shelly extends utils.Adapter {
         this.config.qos = qos;
     }
 
-    onObjectChange = (id, obj) => {
+    onObjectChange(id, obj) {
         this.deviceManagement?.onObjectChange(id, obj);
-    };
+    }
 
-    onStateChange = (id, state) => {
+    onStateChange(id, state) {
         this.deviceManagement?.onStateChange(id, state);
 
         // Warning, state can be null if it was deleted
@@ -182,19 +171,21 @@ class Shelly extends utils.Adapter {
                     `[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`,
                 );
 
-                objectHelper?.handleStateChange(id, state);
+                if (objectHelper) {
+                    objectHelper.handleStateChange(id, state);
+                }
             }
         }
-    };
+    }
 
-    onFileChange = (id, fileName, size) => {
+    onFileChange(id, fileName, size) {
         this.log.debug(`[onFileChange]: id: ${id}, fileName: ${fileName}, size: ${size}`);
-    };
+    }
 
     /**
      * @param callback
      */
-    onUnload = callback => {
+    async onUnload(callback) {
         this.isUnloaded = true;
         this.deviceManagement?.destroy();
 
@@ -203,11 +194,15 @@ class Shelly extends utils.Adapter {
             this.onlineCheckTimeout = null;
         }
 
-        this.setOnlineFalse();
-
         if (this.firmwareUpdateTimeout) {
             this.clearTimeout(this.firmwareUpdateTimeout);
             this.firmwareUpdateTimeout = null;
+        }
+
+        try {
+            await this.setOnlineFalse();
+        } catch (e) {
+            this.log.debug(`[onUnload] Error in setOnlineFalse: ${e}`);
         }
 
         try {
@@ -236,7 +231,7 @@ class Shelly extends utils.Adapter {
             // this.log.error('Error');
             callback();
         }
-    };
+    }
 
     /**
      * Online-Check via TCP ping (when using CoAP)
@@ -252,13 +247,13 @@ class Shelly extends utils.Adapter {
         try {
             const deviceIds = await this.getAllDeviceIds();
             for (const deviceId of deviceIds) {
-                const stateHostName = await this.getStateAsync(`${deviceId}.hostname`);
-                const valHostName = stateHostName ? stateHostName.val : undefined;
+                const stateHostaname = await this.getStateAsync(`${deviceId}.hostname`);
+                const valHostname = stateHostaname ? stateHostaname.val : undefined;
 
-                if (valHostName) {
-                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostName}:${valPort}`);
+                if (valHostname) {
+                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
-                    tcpPing.probe(valHostName, valPort, (error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
+                    tcpPing.probe(valHostname, valPort, (error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
                 }
             }
         } catch (e) {
@@ -275,7 +270,6 @@ class Shelly extends utils.Adapter {
         if (this.isUnloaded) {
             return;
         }
-
         if (!deviceId) {
             return;
         }
@@ -299,7 +293,7 @@ class Shelly extends utils.Adapter {
             // Compare to previous value
             const prevValue = onlineState.val ? onlineState.val === 'true' || onlineState.val === true : false;
 
-            if (prevValue !== status) {
+            if (prevValue != status) {
                 await this.setState(idOnline, { val: status, ack: true });
             }
         }
