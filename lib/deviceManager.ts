@@ -1,20 +1,29 @@
-import { DeviceManagement, type DeviceInfo, type ActionContext, type DeviceDetails } from '@iobroker/dm-utils';
+import {
+    DeviceManagement,
+    type DeviceInfo,
+    type DeviceLoadContext,
+    type ActionContext,
+    type DeviceDetails,
+} from '@iobroker/dm-utils';
 import { type AdapterInstance, I18n } from '@iobroker/adapter-core';
-import type { DeviceRefresh } from '@iobroker/dm-utils/build/types/common';
+// It must be exported to index in dm-utils
+import type { DeviceRefresh } from '@iobroker/dm-utils/build/types/base';
+import type { ConfigItemAny } from '@iobroker/dm-utils/build/types/common';
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const datapoints = require('./datapoints');
 
 /**
  * DeviceManager Class
  */
 export default class ShellyDeviceManagement extends DeviceManagement {
-    private readonly onlineDevices: { [id: string]: true };
     private readonly ready: Promise<void>;
     private readonly states: { [id: string]: ioBroker.State } = {};
     private readonly objects: { [id: string]: ioBroker.DeviceObject | ioBroker.StateObject | ioBroker.ChannelObject } =
         {};
 
-    constructor(adapter: AdapterInstance, onlineDevices: { [id: string]: true }) {
+    constructor(adapter: AdapterInstance) {
         super(adapter);
-        this.onlineDevices = onlineDevices;
 
         // Initialize i18n
         this.ready = I18n.init(__dirname, adapter)
@@ -35,6 +44,22 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         for (const id in states) {
             this.states[id] = states[id];
         }
+
+        // Set icon on existing devices if not yet set or still using old base64 SVG icon
+        for (const device of devices) {
+            if (!device.common.icon || String(device.common.icon).startsWith('data:')) {
+                const shortDeviceId = device._id.split('.')[2];
+                const deviceClass = this.states[`${this.adapter.namespace}.${shortDeviceId}.class`]?.val as
+                    | string
+                    | undefined;
+                if (deviceClass) {
+                    const iconName = datapoints.getDeviceIcon(deviceClass);
+                    await this.adapter.extendObjectAsync(device._id, { common: { icon: `icons/${iconName}.png` } });
+                    device.common.icon = `icons/${iconName}.png`;
+                }
+            }
+        }
+
         await this.adapter.subscribeStatesAsync('*');
         await this.adapter.subscribeObjectsAsync('*');
     }
@@ -66,13 +91,13 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     }
 
     /**
-     * List all shelly devices
+     * Load all shelly devices
+     *
+     * @param context
      */
-    async listDevices(): Promise<DeviceInfo[]> {
+    async loadDevices(context: DeviceLoadContext<string>): Promise<void> {
         // Wait that i18n is initialized
         await this.ready;
-
-        const arrDevices: DeviceInfo[] = [];
 
         for (const deviceId in this.objects) {
             const device = this.objects[deviceId];
@@ -80,27 +105,37 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 continue;
             }
             const shortDeviceId = device._id.split('.')[2];
-            // Check for logging
-            const res: DeviceInfo = {
+
+            const ns = this.adapter.namespace;
+            const isOnline = !!this.states[`${ns}.${shortDeviceId}.online`]?.val;
+            const hostname = this.states[`${ns}.${shortDeviceId}.hostname`]?.val as string | undefined;
+            const firmwareUpdate = this.states[`${ns}.${shortDeviceId}.firmware`]?.val as boolean | undefined;
+
+            const battery = this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`]
+                ? (this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`].val as number)
+                : (this.states[`${ns}.${shortDeviceId}.sensor.battery`]?.val as number) || undefined;
+
+            const rssi = isOnline
+                ? (this.states[`${ns}.${shortDeviceId}.rssi`]?.val as number) || undefined
+                : undefined;
+
+            const res: DeviceInfo<string> = {
                 id: device._id,
+                identifier: hostname || undefined,
                 name: device.common.name,
                 icon: this.getIcon(device._id),
+                color: isOnline ? undefined : '#fff',
+                backgroundColor: isOnline ? undefined : '#f44336',
                 manufacturer: 'Shelly',
-                model:
-                    (this.states[`${this.adapter.namespace}.${shortDeviceId}.model`]?.val as string) ||
-                    I18n.getTranslatedObject('unknown'),
+                model: shortDeviceId.startsWith('ble.')
+                    ? 'Bluetooth'
+                    : (this.states[`${ns}.${shortDeviceId}.model`]?.val as string) ||
+                      I18n.getTranslatedObject('unknown'),
                 status: {
-                    battery: this.states[`${this.adapter.namespace}.${shortDeviceId}.DevicePower0.BatteryPercent`]
-                        ? (this.states[`${this.adapter.namespace}.${shortDeviceId}.DevicePower0.BatteryPercent`]
-                              .val as number)
-                        : (this.states[`${this.adapter.namespace}.${shortDeviceId}.sensor.battery`]?.val as number) ||
-                          undefined,
-                    connection: this.onlineDevices[device._id.substring(this.adapter.namespace.length + 1)]
-                        ? 'connected'
-                        : 'disconnected',
-                    rssi: this.onlineDevices[device._id.substring(this.adapter.namespace.length + 1)]
-                        ? (this.states[`${this.adapter.namespace}.${shortDeviceId}.rssi`]?.val as number) || undefined
-                        : undefined,
+                    connection: isOnline ? 'connected' : 'disconnected',
+                    rssi,
+                    battery,
+                    warning: firmwareUpdate ? I18n.getTranslatedObject('Firmware update available') : undefined,
                 },
                 hasDetails: true,
                 actions: [
@@ -115,56 +150,170 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                             refresh: DeviceRefresh;
                         }> => await this.handleRenameDevice(deviceId, context),
                     },
+                    ...(isOnline && firmwareUpdate
+                        ? [
+                              {
+                                  id: 'firmware-update',
+                                  icon: 'update' as const,
+                                  description: I18n.getTranslatedObject('Update firmware'),
+                                  handler: async (deviceId: string): Promise<{ refresh: DeviceRefresh }> =>
+                                      await this.handleFirmwareUpdate(deviceId),
+                              },
+                          ]
+                        : []),
                 ],
             };
 
-            /*if (res.status.connection === 'connected') {
-                res.actions.push({
-                    id: 'config',
-                    icon: 'settings',
-                    description: I18n.getTranslatedObject('Config this device'),
-                    handler: undefined, //async (_id, context) => await this.handleRenameDevice(_id, context),
-                });
-                res.actions.push({
-                    id: 'Info',
-                    icon: 'lines',
-                    description: I18n.getTranslatedObject('Info of this device'),
-                    handler: undefined, //async (_id, context) => await this.handleRenameDevice(_id, context),
-                });
-            }*/
-            arrDevices.push(res);
+            context.addDevice(res);
         }
-
-        return arrDevices;
     }
 
-    getDeviceDetails(deviceId: string): DeviceDetails {
+    getDeviceDetails(deviceId: string): DeviceDetails<string> | null {
+        const device = this.objects[deviceId];
+        if (device?.type !== 'device') {
+            return null;
+        }
+
+        const shortDeviceId = device._id.split('.')[2];
+        const ns = this.adapter.namespace;
+
+        const hostname = this.states[`${ns}.${shortDeviceId}.hostname`]?.val as string | undefined;
+        const version = this.states[`${ns}.${shortDeviceId}.version`]?.val as string | undefined;
+        const model = this.states[`${ns}.${shortDeviceId}.model`]?.val as string | undefined;
+        const gen = this.states[`${ns}.${shortDeviceId}.gen`]?.val as number | undefined;
+        const id = this.states[`${ns}.${shortDeviceId}.id`]?.val as string | undefined;
+        const type = this.states[`${ns}.${shortDeviceId}.type`]?.val as string | undefined;
+        const rssi = this.states[`${ns}.${shortDeviceId}.rssi`]?.val as number | undefined;
+        const uptime = this.states[`${ns}.${shortDeviceId}.uptime`]?.val as number | undefined;
+        const firmware = this.states[`${ns}.${shortDeviceId}.firmware`]?.val as boolean | undefined;
+        const protocol = this.states[`${ns}.${shortDeviceId}.protocol`]?.val as string | undefined;
+
+        const items: Record<string, ConfigItemAny> = {};
+        const data: Record<string, any> = {};
+
+        if (hostname) {
+            items._deviceLink = {
+                // @ts-expect-error staticLink is OK
+                type: 'staticLink',
+                href: `http://${hostname}`,
+                label: I18n.getTranslatedObject('Open device web interface'),
+                button: true,
+                icon: 'web',
+                newLine: true,
+            };
+        }
+
+        if (id) {
+            items.id = {
+                type: 'text',
+                label: I18n.getTranslatedObject('Device ID'),
+                readOnly: true,
+            };
+            data.id = id;
+        }
+
+        if (model) {
+            items.model = {
+                type: 'text',
+                label: I18n.getTranslatedObject('Model'),
+                readOnly: true,
+            };
+            data.model = model;
+        }
+
+        if (type) {
+            items.deviceType = {
+                type: 'text',
+                label: I18n.getTranslatedObject('Type'),
+                readOnly: true,
+            };
+            data.deviceType = type;
+        }
+
+        if (gen) {
+            items.gen = {
+                type: 'number',
+                label: I18n.getTranslatedObject('Generation'),
+                readOnly: true,
+            };
+            data.gen = gen;
+        }
+
+        if (hostname) {
+            items.hostname = {
+                type: 'text',
+                label: I18n.getTranslatedObject('IP address'),
+                readOnly: true,
+            };
+            data.hostname = hostname;
+        }
+
+        if (version) {
+            items.version = {
+                type: 'text',
+                label: I18n.getTranslatedObject('Firmware version'),
+                readOnly: true,
+            };
+            data.version = version;
+        }
+
+        if (firmware !== undefined) {
+            items.firmware = {
+                type: 'text',
+                label: I18n.getTranslatedObject('Firmware update available'),
+                readOnly: true,
+            };
+            data.firmware = firmware ? '✓' : '✗';
+        }
+
+        if (protocol) {
+            items.protocol = {
+                type: 'text',
+                label: I18n.getTranslatedObject('Protocol'),
+                readOnly: true,
+            };
+            data.protocol = protocol;
+        }
+
+        if (rssi !== undefined) {
+            items.rssi = {
+                type: 'number',
+                label: I18n.getTranslatedObject('RSSI'),
+                unit: 'dBm',
+                readOnly: true,
+            };
+            data.rssi = rssi;
+        }
+
+        if (uptime !== undefined) {
+            items.uptime = {
+                type: 'text',
+                label: I18n.getTranslatedObject('Uptime'),
+                readOnly: true,
+            };
+            data.uptime = `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m`;
+        }
+
         return {
             id: deviceId,
             schema: {
                 type: 'panel',
-                items: {
-                    _test: {
-                        type: 'text',
-                        label: 'Test',
-                        readOnly: true,
-                        default: 'This is a test',
-                    },
-                },
+                items,
             },
+            data,
         };
     }
 
-    getIcon(_deviceId: string): string {
-        // if (deviceValue.indicators) {
-        //     if (deviceValue.indicators.isThermostat) {
-        //         return 'thermostat';
-        //     } else if (deviceValue.indicators.isDoor) {
-        //         return 'door';
-        //     } else if (deviceValue.indicators.isWindow) {
-        //         return 'window';
-        //     }
-        // }
+    getIcon(deviceId: string): string {
+        const device = this.objects[deviceId];
+        if (device && 'icon' in device.common && device.common.icon) {
+            const icon = String(device.common.icon);
+            if (icon.startsWith('data:')) {
+                // Old base64 SVG icon - skip, will be migrated on next restart
+                return 'node';
+            }
+            return `adapter/shelly/${icon}`;
+        }
         return 'node';
     }
 
@@ -173,7 +322,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
      * @param id ID to rename
      * @param context context sendet from Backend
      */
-    async handleRenameDevice(id: string, context: ActionContext): Promise<{ refresh: boolean }> {
+    async handleRenameDevice(id: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {
         const result = await context.showForm(
             {
                 type: 'panel',
@@ -193,7 +342,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             },
         );
         if (result?.newName === undefined || result?.newName === '') {
-            return { refresh: false };
+            return { refresh: 'none' };
         }
         const obj = {
             common: {
@@ -204,9 +353,23 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const res = await this.adapter.extendForeignObjectAsync(id, obj);
         if (res === null) {
             this.adapter.log.warn(`Can not rename device ${id}: ${JSON.stringify(res)}`);
-            return { refresh: false };
+            return { refresh: 'none' };
         }
-        return { refresh: true };
+        return { refresh: 'device' as DeviceRefresh };
+    }
+
+    async handleFirmwareUpdate(id: string): Promise<{ refresh: DeviceRefresh }> {
+        const shortDeviceId = id.split('.')[2];
+        const stateId = `${this.adapter.namespace}.${shortDeviceId}.firmwareupdate`;
+
+        try {
+            await this.adapter.setStateAsync(stateId, true, false);
+            this.adapter.log.info(`[DeviceManager] Firmware update triggered for ${shortDeviceId}`);
+        } catch (err) {
+            this.adapter.log.error(`[DeviceManager] Error triggering firmware update for ${shortDeviceId}: ${err}`);
+        }
+
+        return { refresh: 'device' as DeviceRefresh };
     }
 
     public async destroy(): Promise<void> {

@@ -31,6 +31,7 @@
   "dependencies": {
     "@apollon/iobroker-tools": "^0.3.0",
     "@iobroker/adapter-core": "^3.3.2",
+    "@iobroker/dm-utils": "^3.0.0",
     "axios": "^1.13.6",
     "mqtt-connection": "^4.1.0",
     "shelly-iot": "^1.1.2",
@@ -55,6 +56,7 @@
     "admin{,/!(src)/**}/!(tsconfig|tsconfig.*).json",
     "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
     "lib/**/*.js",
+    "lib/**/*.json",
     "io-package.json",
     "LICENSE",
     "main.js"
@@ -64,6 +66,7 @@
     "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
     "test:package": "mocha test/package --exit",
     "test:integration": "mocha test/integration --exit",
+    "build": "tsc -p tsconfig.build.json",
     "lint": "eslint -c eslint.config.mjs .",
     "translate": "translate-adapter",
     "release": "release-script",

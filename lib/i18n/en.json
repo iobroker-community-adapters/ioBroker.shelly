@@ -1,5 +1,20 @@
 {
     "Enter new name": "Enter new name",
     "Rename this device": "Rename this device",
-    "unknown": "unknown"
+    "unknown": "unknown",
+    "Open device web interface": "Open device web interface",
+    "Device ID": "Device ID",
+    "Model": "Model",
+    "Type": "Type",
+    "Generation": "Generation",
+    "IP address": "IP address",
+    "Firmware version": "Firmware version",
+    "Firmware update available": "Firmware update available",
+    "Protocol": "Protocol",
+    "RSSI": "RSSI",
+    "Uptime": "Uptime",
+    "Authentication": "Authentication",
+    "enabled": "enabled",
+    "disabled": "disabled",
+    "Update firmware": "Update firmware"
 }

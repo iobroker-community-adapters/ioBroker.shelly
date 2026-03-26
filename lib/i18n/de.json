@@ -1,3 +1,20 @@
 {
-
+    "Enter new name": "Neuen Namen eingeben",
+    "Rename this device": "Dieses Gerät umbenennen",
+    "unknown": "unbekannt",
+    "Open device web interface": "Geräte-Weboberfläche öffnen",
+    "Device ID": "Geräte-ID",
+    "Model": "Modell",
+    "Type": "Typ",
+    "Generation": "Generation",
+    "IP address": "IP-Adresse",
+    "Firmware version": "Firmware-Version",
+    "Firmware update available": "Firmware-Update verfügbar",
+    "Protocol": "Protokoll",
+    "RSSI": "RSSI",
+    "Uptime": "Betriebszeit",
+    "Authentication": "Authentifizierung",
+    "enabled": "aktiviert",
+    "disabled": "deaktiviert",
+    "Update firmware": "Firmware aktualisieren"
 }

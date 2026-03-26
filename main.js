@@ -7,6 +7,7 @@ const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common 
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
 const BleDecoder = require('./lib/ble-decoder').BleDecoder;
+const DeviceManagement = require('./lib/deviceManager').default;
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
 const EventEmitter = require('events').EventEmitter;
@@ -24,6 +25,7 @@ class Shelly extends utils.Adapter {
         this.serverCoap = null;
         this.firmwareUpdateTimeout = null;
         this.onlineCheckTimeout = null;
+        this.deviceManagement = null;
 
         this.onlineDevices = {};
 
@@ -39,7 +41,7 @@ class Shelly extends utils.Adapter {
 
     async onReady() {
         try {
-            this.deviceManagement = new DeviceManagement(this, this.onlineDevices);
+            this.deviceManagement = new DeviceManagement(this);
 
             // Upgrade older config
             if (await this.migrateConfig()) {
