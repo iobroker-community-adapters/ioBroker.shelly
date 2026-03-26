@@ -1,194 +1,203 @@
 {
   "common": {
-      "name": "shelly",
-      "version": "10.6.2-alpha.1",
-      "news": {
-          "10.6.2-alpha.1": {
-              "en": "DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.",
-              "de": "DISABLE alle PLUG*_UI Funktionalität aufgrund von auffindbaren HW-Fehlern.",
-              "ru": "Отключить все функции PLUG*_UI из-за невосстановимых ошибок HW.",
-              "pt": "DÁVEIS todas as funcionalidades PLUG*_UI devido a falhas de HW irrecuperáveis.",
-              "nl": "KUNNEN alle PLUG*_UI functionaliteit als gevolg van onherstelbare HW fouten.",
-              "fr": "Désactiver toutes les fonctionnalités PLUG*_UI en raison de défauts HW non récupérables.",
-              "it": "DISABILE tutte le funzionalità PLUG*_UI a causa di guasti HW non recuperabili.",
-              "es": "DISABLE toda la funcionalidad PLUG*_UI debido a fallas de HW no recuperables.",
-              "pl": "USTALENIE wszystkich funkcji PLUG * _ UI z powodu niemożliwych do odzyskania błędów sprzętowych.",
-              "uk": "DISABLE all PLUG*_UI функціональність через невідновлювальні несправності HW.",
-              "zh-cn": "由于无法恢复的HW断层,所有PLUGXUI功能都无法恢复."
-          },
-          "10.6.2-alpha.0": {
-              "en": "Adapter requires admin >= 7.7.22 now\nPLUG_UI component has been added to AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nPLUG_UI component has been addepted for Plus Plug S (shellyplusplugs). No changes should be noticeable. \nPLUPM_UI component has been addepted for Plug PM (shellyplugpmg3).",
-              "de": "Adapter benötigt admin >= 7.7.22 jetzt\nPLUG_UI-Komponente wurde zu AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3) hinzugefügt.\nPLUG_UI-Komponente wurde für Plus Plug S (shellyplusplugs) hinzugefügt. Keine Änderungen sollten merkbar sein.\nPLUPM_UI-Komponente wurde für Plug PM (shellyplugpmg3) hinzugefügt.",
-              "ru": "Адаптер требует администратора >= 7.7.22\nКомпонент PLUG_UI был добавлен в AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nКомпонент PLUG_UI был добавлен для Plus Plug S (shellyplusplugs). Никакие изменения не должны быть заметны.\nКомпонент PLUPM_UI был добавлен для Plug PM (shellyplugpmg3).",
-              "pt": "Adaptador requer admin >= 7.7.22 agora\nO componente PLUG_UI foi adicionado ao AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nPLUG_UI componente foi adicionado para Plus Plug S (shellyplusplugs). Nenhuma mudança deve ser perceptível.\nO componente PLUPM_UI foi adicionado para Plug PM (shellyplugpmg3).",
-              "nl": "Adapter vereist admin < 7.7.22 nu\nPLUG_UI component is toegevoegd aan AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nPLUG_UI component is toegevoegd voor Plus Plug S (shellyplusplugs). Er moeten geen veranderingen merkbaar zijn.\nPLUPM_UI component is toegevoegd voor Plug PM (shellyplugpmg3).",
-              "fr": "Adaptateur nécessite admin >= 7.7.22 maintenant\nLe composant PLUG_UI a été ajouté à AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nLe composant PLUG_UI a été ajouté pour Plus Plug S (shellyplus plugs). Aucun changement ne doit être remarqué.\nLe composant PLUPM_UI a été ajouté pour Plug PM (shellyplugpmg3).",
-              "it": "Adattatore richiede admin >= 7.7.22 ora\nPLUG_UI componente è stato aggiunto a AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nIl componente PLUG_UI è stato aggiunto per Plus Plug S (shellyplusplugs). Nessun cambiamento dovrebbe essere evidente.\nPLUPM_UI componente è stato aggiunto per Plug PM (shellyplugpmg3).",
-              "es": "El adaptador requiere admin= 7.7.22 ahora\nPLUG_UI componente se ha añadido a AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nEl componente PLUG_UI ha sido agregado para Plus Plug S (shellyplusplugs). No deben notarse cambios.\nEl componente PLUPM_UI ha sido agregado para Plug PM (shellyplugpmg3).",
-              "pl": "Adapter wymaga admin > = 7.7.22\nSkładnik PLUG _ UI został dodany do AZ PLUG (szellyazplug), Plug M (szellyplugmg3), Plug S Gen 3 (szellyplugsg3).\nSkładnik PLUG _ UI został dodawany do Plus Plug S (shellyplussticks). Zmiany nie powinny być zauważalne.\nSkładnik PLUPM _ UI został dodawany do Plug PM (shellyplugpmg3).",
-              "uk": "Адаптер вимагає адмін >= 7.7.22 тепер\nPLUG_UI компонент був доданий до AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nPLUG_UI компонент був доданий для роз'єму Plus S (shellyplusplugs). Немає змін слід помітно.\nPLUPM_UI компонент додано для Plug PM (shellyplugpmg3).",
-              "zh-cn": "适任者需要管理员 \\ 7.7.22 现在\nPLUG_UI组件已添加到AZ PLUG(shellyazplug),插座M(shellyplugmg3),插座S Gen 3(shellyplugsg3)中.\nPLUG_UI 组件已被添加到 Plus Plug S (shellyplusplugs). 不应有任何变化.\nPLUPM_UI组件已添加到Plug PM(shellyplugpmg3)中."
-          },
-          "10.6.1": {
-              "en": "OnUnload handling has been improved. [#1279]\nshellypill: missing input 202 has been added, nonexisting analog input has been removed.",
-              "de": "OnUnload-Handling wurde verbessert. (#1279)\nshellypill: fehlender eingang 202 wurde hinzugefügt, nicht vorhandene analoge eingabe wurde entfernt.",
-              "ru": "Обработка OnUnload была улучшена. [#1279]\nshellypill: добавлен недостающий вход 202, удален несуществующий аналоговый вход.",
-              "pt": "O manuseio OnUnload foi melhorado. [#1279]\nshellypill: falta a entrada 202 foi adicionada, entrada analógica não existente foi removida.",
-              "nl": "OnUnload handling is verbeterd. [#1279]\nshellypill: ontbrekende input 202 is toegevoegd, niet bestaande analoge invoer is verwijderd.",
-              "fr": "La gestion du chargement a été améliorée. [#1279]\nshellypill: l'entrée manquante 202 a été ajoutée, l'entrée analogique non existante a été supprimée.",
-              "it": "La gestione di OnSload è stata migliorata. [#1279]\nshellypill: ingresso mancante 202 è stato aggiunto, ingresso analogico non esistente è stato rimosso.",
-              "es": "Se ha mejorado el manejo de onUnload. [#1279]\nshellypill: entrada faltante 202 se ha añadido, no se ha eliminado ninguna entrada analógica.",
-              "pl": "Ulepszono obchodzenie się z ładunkiem. [# 1279]\nshellypill: dodano brakujące wejście 202, usunięto nieistniejące wejście analogowe.",
-              "uk": "Удосконалено роботу над навантаженням. [#1279]\nоболонка: відсутній вхід 202 був доданий, неіснуючий аналоговий вхід був видалений.",
-              "zh-cn": "卸载处理已经改进 。 [#1279] (中文(简体) )\nshellypill:已添加缺失的输入 202,已删除不存在的模拟输入."
-          },
-          "10.6.0": {
-              "en": "The-Pill-By-Shelly (shellypill) has been added. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]\nShelly BLU H&T Display ZB support for light attribute has been added. [#1230]\nSupport for favorites for Gen 2+ devices with cover support has been added. [#1001]\nPower metering support has been added to RGB and RGBW components. [#1339]\nFrankEver Smart Watervalve (watervalve) has been added. [#1341]\nLinkedGo ST1820 (st1820) has been added. [#1257]\nDependencies have been updated",
-              "de": "The-Pill-By-Shelly (shellypill) wurde hinzugefügt. (#1232)\nShelly EM mini Gen 4 (shellyemminimg4) und Plug M Gen 3 (shellyplugmg3) wurden hinzugefügt. (#1327, #1332)\nShelly BLU H&T Display ZB Unterstützung für Licht Attribut hinzugefügt wurde. (#1230)\nUnterstützung für Favoriten für Gen 2+ Geräte mit Cover-Unterstützung wurde hinzugefügt. (#1001)\nDie Komponenten RGB und RGBW wurden mit Power-Dosierung unterstützt. (#1339)\nFrankEver Smart Watervalve (Wasserventil) wurde hinzugefügt. (#1341)\nLinkedGo ST1820 (st1820) wurde hinzugefügt. (#1257)\nAbhängigkeiten wurden aktualisiert",
-              "ru": "Добавлена Щеллипилль (The-Pill-By-Shelly). [#1232]\nДобавлены Shelly EM mini Gen 4 (shellyemminimg4) и Plug M Gen 3 (shellyplugmg3). [#1327, #1332]\nШелли Блю Добавлена поддержка H&T Display ZB для световых атрибутов. [#1230]\nДобавлена поддержка фаворитов для устройств Gen 2+ с поддержкой крышки. [#1001]\nПоддержка измерения мощности была добавлена к компонентам RGB и RGBW. [1339]\nДобавлен FrankEver Smart Watervalve (водяной клапан). [1341]\nДобавлен LinkedGo ST1820 (st1820). [#1257]\nЗависимости были обновлены",
-              "pt": "O-Pill-By-Shelly (shellypill) foi adicionado. [#1232]\nForam adicionados Shelly EM mini Gen 4 (shellyemminimg4) e Plug M Gen 3 (shellyplugmg3). [#1327,#1332]\nShelly BLU Foi adicionado o suporte ZB H&T Display para o atributo light. [#1230]\nSuporte para favoritos para dispositivos Gen 2+ com suporte de cobertura foi adicionado. [#1001]\nSuporte de medição de energia foi adicionado aos componentes RGB e RGBW. [#1339]\nFrankEver Smart Watervalve (válvula aquática) foi adicionado. [#1341]\nLinkedGo ST1820 (st1820) foi adicionado. [#1257]\nAs dependências foram atualizadas",
-              "nl": "De-Pill-By-Shelly (shellypill) is toegevoegd. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) en Plug M Gen 3 (shellyplugmg3) zijn toegevoegd. [#1327,#1332]\nShelly BLU H&T Display ZB-ondersteuning voor lichtattribuut is toegevoegd. [#1230]\nOndersteuning voor favorieten voor Gen 2+ apparaten met dekking is toegevoegd. [#1001]\nAan RGB- en RGBW-componenten is stroommeetondersteuning toegevoegd. [#1339]\nFrankEver Smart Watervalve (watervalve) is toegevoegd. [#1341]\nLinkedGo ST1820 (st1820) is toegevoegd. [#1257]\nAfhankelijkheden zijn bijgewerkt",
-              "fr": "Le-Pill-By-Shelly (shellypill) a été ajouté. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) et Plug M Gen 3 (shellyplugmg3) ont été ajoutés. [#1327,#1332]\nBLU Shelly Le support H&T Display ZB pour l'attribut lumière a été ajouté. [#1230]\nLe support des favoris pour les appareils Gen 2+ avec support de couverture a été ajouté. [#1001]\nLe support de mesure de puissance a été ajouté aux composants RGB et RGBW. [#1339]\nFrankEver Smart Watervalve (watervalve) a été ajouté. [#1341]\nLinkedinGo ST1820 (st1820) a été ajouté. [#1257]\nLes dépendances ont été actualisées",
-              "it": "Il-Pill-By-Shelly (shellypill) è stato aggiunto. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) e Plug M Gen 3 (shellyplugmg3) sono stati aggiunti. [#1327,#1332]\nShelly BLU È stato aggiunto il supporto H&T Display ZB per l'attributo leggero. [#1230]\nÈ stato aggiunto il supporto per i preferiti per i dispositivi Gen 2+ con supporto di copertura. [#1001]\nIl supporto di misura di potenza è stato aggiunto ai componenti RGB e RGBW. [#1339]\nFrankEver Smart Watervalve è stato aggiunto. [#1341]\nLinkedGo ST1820 (st1820) è stato aggiunto. [#1257]\nLe dipendenze sono state aggiornate",
-              "es": "Se ha añadido el Pill-By-Shelly (shellypill). [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) y Plug M Gen 3 (shellyplugmg3) se han añadido. [#1327,#1332]\nShelly BLU Se ha añadido soporte ZB para atributo ligero. [#1230]\nSe ha añadido soporte para dispositivos Gen 2+ con soporte de cubierta. [#1001]\nSe ha añadido soporte de medición de potencia a los componentes RGB y RGBW. [#1339]\nSe ha añadido FrankEver Smart Watervalve (watervalve). [#1341]\nLinkedGo ST1820 (st1820) se ha añadido. [#1257]\nSe han actualizado las dependencias",
-              "pl": "Dodano Pill- By- Shelly (shellypill). [# 1232]\nShelly EM mini Gen 4 (shellyemminimg4) i Plug M Gen 3 (shellyplugmg3) zostały dodane. [# 1327, # 1332]\nShelly BLU Dodano obsługę H & T Display ZB dla atrybutu światła. [# 1230]\nDodano obsługę ulubionych urządzeń Gen 2 + z obsługą okładki. [# 1001]\nDo komponentów RGB i RGBW dodano obsługę pomiaru mocy. [# 1339]\nDodano FrankEver Smart Waterzator (zawór wodny). [# 1341]\nDodano LinkedGo ST1820 (st1820). [# 1257]\nZaktualizowano zależności",
-              "uk": "Додана послуга \"Pill-By-Shelly\" [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) і Plug M Gen 3 (клапан мг) були додані. [#1327,#1332]\nShelly BLU Додано підтримку H&T Display ZB для атрибутів світла. [#1230]\nДодано підтримку улюблених пристроїв Gen 2+ з підтримкою кришки. [#1001]\nПідтримка енергозберігаючих пристроїв додано до компонентів RGB та RGBW. [#1339]\nДодано FrankEver Smart Watervalve. [#1341]\nLinkedGo ST1820 (st1820) було додано. [#1257]\nЗалежність було оновлено",
-              "zh-cn": "已添加-Pill-By-Shelly(英语:Shellypill). [#1232] (中文(简体) )\n增加了Shelly EM 迷你Gen 4(shellyemminimg4)和Plug M Gen 3(shellyplugmg3). [#1327,#1332] (中文(简体) )\n雪莉·布鲁 H&T 显示 ZB 对光属性的支持已被添加. [#1230] (中文(简体) )\n添加了对 Gen 2+ 设备最爱的封面支持 。 [# 1001] (中文(简体) )\n在RGB和RGBW组件中增加了功率计量支持. [#1339] (中文(简体) )\nFrankEver Smart Watervalve(水阀)已经加入. [#1341] (中文(简体) )\n已添加链接Go ST1820(st1820). [#1257] (中文(简体) )\n依赖关系已更新"
-          },
-          "10.5.2": {
-              "en": "Monophase profile support has been fixed for shellypro3em and shellypro3em400.",
-              "de": "Einphasiger Profilträger wurde für shellypro3em und shellypro3em400 fixiert.",
-              "ru": "Монофазная поддержка профиля была зафиксирована для shellypro3em и shellypro3em400.",
-              "pt": "O suporte do perfil monofásico foi fixado para shellypro3em e shellypro3em400.",
-              "nl": "Monophase profiel ondersteuning is vastgesteld voor shellypro3em en shellypro3em400.",
-              "fr": "Le support de profil monophase a été fixé pour shellypro3em et shellypro3em400.",
-              "it": "Il supporto del profilo monofase è stato fissato per shellypro3em e shellypro3em400.",
-              "es": "El soporte de perfil monofásico se ha fijado para shellypro3em y shellypro3em400.",
-              "pl": "Wsparcie profilu monofazy zostało ustalone dla shellypro3em i shellypro3em400.",
-              "uk": "Монофазний профільний супровід був закріплений для оболонкиpro3em і оболонкиpro3em400.",
-              "zh-cn": "Monophase profile 支持已固定为 Shellypro3em 和 shellypro3em 400 ."
-          },
-          "10.5.1": {
-              "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
-              "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nResetCounters Funktionalität wurde den Komponenten EMData und EM1Data hinzugefügt. Dieser Effekt shellypro3em* aber auch andere Shellyem* Geräte gen2 und später.\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
-              "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nФункциональность ResetCounters добавлена к компонентам EMData и EM1Data. Это эффект шеллипро3эм*, а также других шеллием* устройств ген2 и более поздних.\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
-              "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nA funcionalidade ResetCounters foi adicionada aos componentes EMData e EM1Data. Este efeito shellypro3em* mas também outros dispositivos shellyem* gen2 e posterior.\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
-              "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nResetCounters functionaliteit is toegevoegd aan componenten EMData en EM1Data. Dit effect shellypro3em* maar ook andere shellyem* apparaten gen2 en later.\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
-              "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLa fonctionnalité ResetCounters a été ajoutée aux composants EMData et EM1Data. Cet effet shellypro3em* mais aussi d'autres dispositifs shellyem* gen2 et plus tard.\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
-              "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLa funzionalità ResetCounters è stata aggiunta ai componenti EMData e EM1Data. Questo effetto shellypro3em* ma anche altri dispositivi shellyem* gen2 e successivi.\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
-              "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLa funcionalidad ResetCounters se ha añadido a los componentes EMData y EM1Data. Este efecto shellypro3em* pero también otros dispositivos shellyem* gen2 y posterior.\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
-              "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nDo komponentów EMData i EM1Data dodano funkcje ResetCounters. Ten efekt shelpro3em *ale także inne sheldem* urządzenia gen2 i później. \nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
-              "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nДодано функцію ResetCounters до компонентів EMData та EM1Data. Цей ефект Shellypro3em* але також інші оболонки * пристрої gen2 і пізніше.\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
-              "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n重新设置Counters功能已添加到组件EMData和EM1Data中. 这种效应Shellypro3em*,但也有其他Shellyem*设备gen2及以后.\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
-          },
-          "10.5.1-alpha.4": {
-              "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
-              "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
-              "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
-              "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
-              "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
-              "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
-              "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
-              "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
-              "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
-              "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
-              "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
-          }
+    "name": "shelly",
+    "version": "10.6.2-alpha.1",
+    "news": {
+      "10.6.2-alpha.1": {
+        "en": "DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.",
+        "de": "DISABLE alle PLUG*_UI Funktionalität aufgrund von auffindbaren HW-Fehlern.",
+        "ru": "Отключить все функции PLUG*_UI из-за невосстановимых ошибок HW.",
+        "pt": "DÁVEIS todas as funcionalidades PLUG*_UI devido a falhas de HW irrecuperáveis.",
+        "nl": "KUNNEN alle PLUG*_UI functionaliteit als gevolg van onherstelbare HW fouten.",
+        "fr": "Désactiver toutes les fonctionnalités PLUG*_UI en raison de défauts HW non récupérables.",
+        "it": "DISABILE tutte le funzionalità PLUG*_UI a causa di guasti HW non recuperabili.",
+        "es": "DISABLE toda la funcionalidad PLUG*_UI debido a fallas de HW no recuperables.",
+        "pl": "USTALENIE wszystkich funkcji PLUG * _ UI z powodu niemożliwych do odzyskania błędów sprzętowych.",
+        "uk": "DISABLE all PLUG*_UI функціональність через невідновлювальні несправності HW.",
+        "zh-cn": "由于无法恢复的HW断层,所有PLUGXUI功能都无法恢复."
       },
-      "titleLang": {
-          "en": "Shelly",
-          "de": "Shelly",
-          "ru": "Shelly",
-          "pt": "Shelly",
-          "nl": "Shelly",
-          "fr": "Shelly",
-          "it": "Shelly",
-          "es": "Shelly",
-          "pl": "Shelly",
-          "uk": "Shelly",
-          "zh-cn": "Shelly"
+      "10.6.2-alpha.0": {
+        "en": "Adapter requires admin >= 7.7.22 now\nPLUG_UI component has been added to AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nPLUG_UI component has been addepted for Plus Plug S (shellyplusplugs). No changes should be noticeable. \nPLUPM_UI component has been addepted for Plug PM (shellyplugpmg3).",
+        "de": "Adapter benötigt admin >= 7.7.22 jetzt\nPLUG_UI-Komponente wurde zu AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3) hinzugefügt.\nPLUG_UI-Komponente wurde für Plus Plug S (shellyplusplugs) hinzugefügt. Keine Änderungen sollten merkbar sein.\nPLUPM_UI-Komponente wurde für Plug PM (shellyplugpmg3) hinzugefügt.",
+        "ru": "Адаптер требует администратора >= 7.7.22\nКомпонент PLUG_UI был добавлен в AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nКомпонент PLUG_UI был добавлен для Plus Plug S (shellyplusplugs). Никакие изменения не должны быть заметны.\nКомпонент PLUPM_UI был добавлен для Plug PM (shellyplugpmg3).",
+        "pt": "Adaptador requer admin >= 7.7.22 agora\nO componente PLUG_UI foi adicionado ao AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nPLUG_UI componente foi adicionado para Plus Plug S (shellyplusplugs). Nenhuma mudança deve ser perceptível.\nO componente PLUPM_UI foi adicionado para Plug PM (shellyplugpmg3).",
+        "nl": "Adapter vereist admin < 7.7.22 nu\nPLUG_UI component is toegevoegd aan AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nPLUG_UI component is toegevoegd voor Plus Plug S (shellyplusplugs). Er moeten geen veranderingen merkbaar zijn.\nPLUPM_UI component is toegevoegd voor Plug PM (shellyplugpmg3).",
+        "fr": "Adaptateur nécessite admin >= 7.7.22 maintenant\nLe composant PLUG_UI a été ajouté à AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nLe composant PLUG_UI a été ajouté pour Plus Plug S (shellyplus plugs). Aucun changement ne doit être remarqué.\nLe composant PLUPM_UI a été ajouté pour Plug PM (shellyplugpmg3).",
+        "it": "Adattatore richiede admin >= 7.7.22 ora\nPLUG_UI componente è stato aggiunto a AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nIl componente PLUG_UI è stato aggiunto per Plus Plug S (shellyplusplugs). Nessun cambiamento dovrebbe essere evidente.\nPLUPM_UI componente è stato aggiunto per Plug PM (shellyplugpmg3).",
+        "es": "El adaptador requiere admin= 7.7.22 ahora\nPLUG_UI componente se ha añadido a AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nEl componente PLUG_UI ha sido agregado para Plus Plug S (shellyplusplugs). No deben notarse cambios.\nEl componente PLUPM_UI ha sido agregado para Plug PM (shellyplugpmg3).",
+        "pl": "Adapter wymaga admin > = 7.7.22\nSkładnik PLUG _ UI został dodany do AZ PLUG (szellyazplug), Plug M (szellyplugmg3), Plug S Gen 3 (szellyplugsg3).\nSkładnik PLUG _ UI został dodawany do Plus Plug S (shellyplussticks). Zmiany nie powinny być zauważalne.\nSkładnik PLUPM _ UI został dodawany do Plug PM (shellyplugpmg3).",
+        "uk": "Адаптер вимагає адмін >= 7.7.22 тепер\nPLUG_UI компонент був доданий до AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).\nPLUG_UI компонент був доданий для роз'єму Plus S (shellyplusplugs). Немає змін слід помітно.\nPLUPM_UI компонент додано для Plug PM (shellyplugpmg3).",
+        "zh-cn": "适任者需要管理员 \\ 7.7.22 现在\nPLUG_UI组件已添加到AZ PLUG(shellyazplug),插座M(shellyplugmg3),插座S Gen 3(shellyplugsg3)中.\nPLUG_UI 组件已被添加到 Plus Plug S (shellyplusplugs). 不应有任何变化.\nPLUPM_UI组件已添加到Plug PM(shellyplugpmg3)中."
       },
-      "desc": {
-          "en": "Integrate Shelly devices via CoAP or MQTT",
-          "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
-          "ru": "Интеграция Shelly устройств через CoAP или MQTT",
-          "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
-          "nl": "Integrate Shelly apparatuur via CoAP of MQT",
-          "fr": "Dispositifs Shelly intégrés via CoAP ou MQTT",
-          "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
-          "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
-          "pl": "Integracja Shelly poprzez CoAP lub MQTT",
-          "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT",
-          "zh-cn": "通过联合方案或技合中心将全套装置纳入"
+      "10.6.1": {
+        "en": "OnUnload handling has been improved. [#1279]\nshellypill: missing input 202 has been added, nonexisting analog input has been removed.",
+        "de": "OnUnload-Handling wurde verbessert. (#1279)\nshellypill: fehlender eingang 202 wurde hinzugefügt, nicht vorhandene analoge eingabe wurde entfernt.",
+        "ru": "Обработка OnUnload была улучшена. [#1279]\nshellypill: добавлен недостающий вход 202, удален несуществующий аналоговый вход.",
+        "pt": "O manuseio OnUnload foi melhorado. [#1279]\nshellypill: falta a entrada 202 foi adicionada, entrada analógica não existente foi removida.",
+        "nl": "OnUnload handling is verbeterd. [#1279]\nshellypill: ontbrekende input 202 is toegevoegd, niet bestaande analoge invoer is verwijderd.",
+        "fr": "La gestion du chargement a été améliorée. [#1279]\nshellypill: l'entrée manquante 202 a été ajoutée, l'entrée analogique non existante a été supprimée.",
+        "it": "La gestione di OnSload è stata migliorata. [#1279]\nshellypill: ingresso mancante 202 è stato aggiunto, ingresso analogico non esistente è stato rimosso.",
+        "es": "Se ha mejorado el manejo de onUnload. [#1279]\nshellypill: entrada faltante 202 se ha añadido, no se ha eliminado ninguna entrada analógica.",
+        "pl": "Ulepszono obchodzenie się z ładunkiem. [# 1279]\nshellypill: dodano brakujące wejście 202, usunięto nieistniejące wejście analogowe.",
+        "uk": "Удосконалено роботу над навантаженням. [#1279]\nоболонка: відсутній вхід 202 був доданий, неіснуючий аналоговий вхід був видалений.",
+        "zh-cn": "卸载处理已经改进 。 [#1279] (中文(简体) )\nshellypill:已添加缺失的输入 202,已删除不存在的模拟输入."
       },
-      "authors": [
-          "Thorsten Stueben <thorsten@stueben.de>",
-          "Apollon77 <iobroker@fischer-ka.de>",
-          "Matthias Kleine <info@haus-automatisierung.com>",
-          "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
+      "10.6.0": {
+        "en": "The-Pill-By-Shelly (shellypill) has been added. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]\nShelly BLU H&T Display ZB support for light attribute has been added. [#1230]\nSupport for favorites for Gen 2+ devices with cover support has been added. [#1001]\nPower metering support has been added to RGB and RGBW components. [#1339]\nFrankEver Smart Watervalve (watervalve) has been added. [#1341]\nLinkedGo ST1820 (st1820) has been added. [#1257]\nDependencies have been updated",
+        "de": "The-Pill-By-Shelly (shellypill) wurde hinzugefügt. (#1232)\nShelly EM mini Gen 4 (shellyemminimg4) und Plug M Gen 3 (shellyplugmg3) wurden hinzugefügt. (#1327, #1332)\nShelly BLU H&T Display ZB Unterstützung für Licht Attribut hinzugefügt wurde. (#1230)\nUnterstützung für Favoriten für Gen 2+ Geräte mit Cover-Unterstützung wurde hinzugefügt. (#1001)\nDie Komponenten RGB und RGBW wurden mit Power-Dosierung unterstützt. (#1339)\nFrankEver Smart Watervalve (Wasserventil) wurde hinzugefügt. (#1341)\nLinkedGo ST1820 (st1820) wurde hinzugefügt. (#1257)\nAbhängigkeiten wurden aktualisiert",
+        "ru": "Добавлена Щеллипилль (The-Pill-By-Shelly). [#1232]\nДобавлены Shelly EM mini Gen 4 (shellyemminimg4) и Plug M Gen 3 (shellyplugmg3). [#1327, #1332]\nШелли Блю Добавлена поддержка H&T Display ZB для световых атрибутов. [#1230]\nДобавлена поддержка фаворитов для устройств Gen 2+ с поддержкой крышки. [#1001]\nПоддержка измерения мощности была добавлена к компонентам RGB и RGBW. [1339]\nДобавлен FrankEver Smart Watervalve (водяной клапан). [1341]\nДобавлен LinkedGo ST1820 (st1820). [#1257]\nЗависимости были обновлены",
+        "pt": "O-Pill-By-Shelly (shellypill) foi adicionado. [#1232]\nForam adicionados Shelly EM mini Gen 4 (shellyemminimg4) e Plug M Gen 3 (shellyplugmg3). [#1327,#1332]\nShelly BLU Foi adicionado o suporte ZB H&T Display para o atributo light. [#1230]\nSuporte para favoritos para dispositivos Gen 2+ com suporte de cobertura foi adicionado. [#1001]\nSuporte de medição de energia foi adicionado aos componentes RGB e RGBW. [#1339]\nFrankEver Smart Watervalve (válvula aquática) foi adicionado. [#1341]\nLinkedGo ST1820 (st1820) foi adicionado. [#1257]\nAs dependências foram atualizadas",
+        "nl": "De-Pill-By-Shelly (shellypill) is toegevoegd. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) en Plug M Gen 3 (shellyplugmg3) zijn toegevoegd. [#1327,#1332]\nShelly BLU H&T Display ZB-ondersteuning voor lichtattribuut is toegevoegd. [#1230]\nOndersteuning voor favorieten voor Gen 2+ apparaten met dekking is toegevoegd. [#1001]\nAan RGB- en RGBW-componenten is stroommeetondersteuning toegevoegd. [#1339]\nFrankEver Smart Watervalve (watervalve) is toegevoegd. [#1341]\nLinkedGo ST1820 (st1820) is toegevoegd. [#1257]\nAfhankelijkheden zijn bijgewerkt",
+        "fr": "Le-Pill-By-Shelly (shellypill) a été ajouté. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) et Plug M Gen 3 (shellyplugmg3) ont été ajoutés. [#1327,#1332]\nBLU Shelly Le support H&T Display ZB pour l'attribut lumière a été ajouté. [#1230]\nLe support des favoris pour les appareils Gen 2+ avec support de couverture a été ajouté. [#1001]\nLe support de mesure de puissance a été ajouté aux composants RGB et RGBW. [#1339]\nFrankEver Smart Watervalve (watervalve) a été ajouté. [#1341]\nLinkedinGo ST1820 (st1820) a été ajouté. [#1257]\nLes dépendances ont été actualisées",
+        "it": "Il-Pill-By-Shelly (shellypill) è stato aggiunto. [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) e Plug M Gen 3 (shellyplugmg3) sono stati aggiunti. [#1327,#1332]\nShelly BLU È stato aggiunto il supporto H&T Display ZB per l'attributo leggero. [#1230]\nÈ stato aggiunto il supporto per i preferiti per i dispositivi Gen 2+ con supporto di copertura. [#1001]\nIl supporto di misura di potenza è stato aggiunto ai componenti RGB e RGBW. [#1339]\nFrankEver Smart Watervalve è stato aggiunto. [#1341]\nLinkedGo ST1820 (st1820) è stato aggiunto. [#1257]\nLe dipendenze sono state aggiornate",
+        "es": "Se ha añadido el Pill-By-Shelly (shellypill). [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) y Plug M Gen 3 (shellyplugmg3) se han añadido. [#1327,#1332]\nShelly BLU Se ha añadido soporte ZB para atributo ligero. [#1230]\nSe ha añadido soporte para dispositivos Gen 2+ con soporte de cubierta. [#1001]\nSe ha añadido soporte de medición de potencia a los componentes RGB y RGBW. [#1339]\nSe ha añadido FrankEver Smart Watervalve (watervalve). [#1341]\nLinkedGo ST1820 (st1820) se ha añadido. [#1257]\nSe han actualizado las dependencias",
+        "pl": "Dodano Pill- By- Shelly (shellypill). [# 1232]\nShelly EM mini Gen 4 (shellyemminimg4) i Plug M Gen 3 (shellyplugmg3) zostały dodane. [# 1327, # 1332]\nShelly BLU Dodano obsługę H & T Display ZB dla atrybutu światła. [# 1230]\nDodano obsługę ulubionych urządzeń Gen 2 + z obsługą okładki. [# 1001]\nDo komponentów RGB i RGBW dodano obsługę pomiaru mocy. [# 1339]\nDodano FrankEver Smart Waterzator (zawór wodny). [# 1341]\nDodano LinkedGo ST1820 (st1820). [# 1257]\nZaktualizowano zależności",
+        "uk": "Додана послуга \"Pill-By-Shelly\" [#1232]\nShelly EM mini Gen 4 (shellyemminimg4) і Plug M Gen 3 (клапан мг) були додані. [#1327,#1332]\nShelly BLU Додано підтримку H&T Display ZB для атрибутів світла. [#1230]\nДодано підтримку улюблених пристроїв Gen 2+ з підтримкою кришки. [#1001]\nПідтримка енергозберігаючих пристроїв додано до компонентів RGB та RGBW. [#1339]\nДодано FrankEver Smart Watervalve. [#1341]\nLinkedGo ST1820 (st1820) було додано. [#1257]\nЗалежність було оновлено",
+        "zh-cn": "已添加-Pill-By-Shelly(英语:Shellypill). [#1232] (中文(简体) )\n增加了Shelly EM 迷你Gen 4(shellyemminimg4)和Plug M Gen 3(shellyplugmg3). [#1327,#1332] (中文(简体) )\n雪莉·布鲁 H&T 显示 ZB 对光属性的支持已被添加. [#1230] (中文(简体) )\n添加了对 Gen 2+ 设备最爱的封面支持 。 [# 1001] (中文(简体) )\n在RGB和RGBW组件中增加了功率计量支持. [#1339] (中文(简体) )\nFrankEver Smart Watervalve(水阀)已经加入. [#1341] (中文(简体) )\n已添加链接Go ST1820(st1820). [#1257] (中文(简体) )\n依赖关系已更新"
+      },
+      "10.5.2": {
+        "en": "Monophase profile support has been fixed for shellypro3em and shellypro3em400.",
+        "de": "Einphasiger Profilträger wurde für shellypro3em und shellypro3em400 fixiert.",
+        "ru": "Монофазная поддержка профиля была зафиксирована для shellypro3em и shellypro3em400.",
+        "pt": "O suporte do perfil monofásico foi fixado para shellypro3em e shellypro3em400.",
+        "nl": "Monophase profiel ondersteuning is vastgesteld voor shellypro3em en shellypro3em400.",
+        "fr": "Le support de profil monophase a été fixé pour shellypro3em et shellypro3em400.",
+        "it": "Il supporto del profilo monofase è stato fissato per shellypro3em e shellypro3em400.",
+        "es": "El soporte de perfil monofásico se ha fijado para shellypro3em y shellypro3em400.",
+        "pl": "Wsparcie profilu monofazy zostało ustalone dla shellypro3em i shellypro3em400.",
+        "uk": "Монофазний профільний супровід був закріплений для оболонкиpro3em і оболонкиpro3em400.",
+        "zh-cn": "Monophase profile 支持已固定为 Shellypro3em 和 shellypro3em 400 ."
+      },
+      "10.5.1": {
+        "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
+        "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nResetCounters Funktionalität wurde den Komponenten EMData und EM1Data hinzugefügt. Dieser Effekt shellypro3em* aber auch andere Shellyem* Geräte gen2 und später.\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
+        "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nФункциональность ResetCounters добавлена к компонентам EMData и EM1Data. Это эффект шеллипро3эм*, а также других шеллием* устройств ген2 и более поздних.\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
+        "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nA funcionalidade ResetCounters foi adicionada aos componentes EMData e EM1Data. Este efeito shellypro3em* mas também outros dispositivos shellyem* gen2 e posterior.\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
+        "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nResetCounters functionaliteit is toegevoegd aan componenten EMData en EM1Data. Dit effect shellypro3em* maar ook andere shellyem* apparaten gen2 en later.\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
+        "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLa fonctionnalité ResetCounters a été ajoutée aux composants EMData et EM1Data. Cet effet shellypro3em* mais aussi d'autres dispositifs shellyem* gen2 et plus tard.\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
+        "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLa funzionalità ResetCounters è stata aggiunta ai componenti EMData e EM1Data. Questo effetto shellypro3em* ma anche altri dispositivi shellyem* gen2 e successivi.\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
+        "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLa funcionalidad ResetCounters se ha añadido a los componentes EMData y EM1Data. Este efecto shellypro3em* pero también otros dispositivos shellyem* gen2 y posterior.\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
+        "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nDo komponentów EMData i EM1Data dodano funkcje ResetCounters. Ten efekt shelpro3em *ale także inne sheldem* urządzenia gen2 i później. \nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
+        "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nДодано функцію ResetCounters до компонентів EMData та EM1Data. Цей ефект Shellypro3em* але також інші оболонки * пристрої gen2 і пізніше.\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
+        "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n重新设置Counters功能已添加到组件EMData和EM1Data中. 这种效应Shellypro3em*,但也有其他Shellyem*设备gen2及以后.\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
+      },
+      "10.5.1-alpha.4": {
+        "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
+        "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
+        "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
+        "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
+        "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
+        "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
+        "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
+        "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
+        "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
+        "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
+        "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
+      }
+    },
+    "titleLang": {
+      "en": "Shelly",
+      "de": "Shelly",
+      "ru": "Shelly",
+      "pt": "Shelly",
+      "nl": "Shelly",
+      "fr": "Shelly",
+      "it": "Shelly",
+      "es": "Shelly",
+      "pl": "Shelly",
+      "uk": "Shelly",
+      "zh-cn": "Shelly"
+    },
+    "desc": {
+      "en": "Integrate Shelly devices via CoAP or MQTT",
+      "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
+      "ru": "Интеграция Shelly устройств через CoAP или MQTT",
+      "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
+      "nl": "Integrate Shelly apparatuur via CoAP of MQT",
+      "fr": "Dispositifs Shelly intégrés via CoAP ou MQTT",
+      "it": "Integrare i dispositivi Shelly tramite CoAP o MQTT",
+      "es": "Integrar dispositivos Shelly a través de CoAP o MQTT",
+      "pl": "Integracja Shelly poprzez CoAP lub MQTT",
+      "uk": "Інтегруйте пристрої Shelly через CoAP або MQTT",
+      "zh-cn": "通过联合方案或技合中心将全套装置纳入"
+    },
+    "authors": [
+      "Thorsten Stueben <thorsten@stueben.de>",
+      "Apollon77 <iobroker@fischer-ka.de>",
+      "Matthias Kleine <info@haus-automatisierung.com>",
+      "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
+    ],
+    "docs": {
+      "en": [
+        "docs/en/README.md",
+        "docs/en/ble-devices.md",
+        "docs/en/protocol-coap.md",
+        "docs/en/protocol-mqtt.md",
+        "docs/en/restricted-login.md",
+        "docs/en/state-changes.md",
+        "docs/en/faq.md",
+        "docs/en/debug.md"
       ],
-      "docs": {
-          "en": [
-              "docs/en/README.md",
-              "docs/en/ble-devices.md",
-              "docs/en/protocol-coap.md",
-              "docs/en/protocol-mqtt.md",
-              "docs/en/restricted-login.md",
-              "docs/en/state-changes.md",
-              "docs/en/faq.md",
-              "docs/en/debug.md"
-          ],
-          "de": [
-              "docs/de/README.md",
-              "docs/de/ble-devices.md",
-              "docs/de/protocol-coap.md",
-              "docs/de/protocol-mqtt.md",
-              "docs/de/restricted-login.md",
-              "docs/de/state-changes.md",
-              "docs/de/faq.md",
-              "docs/de/debug.md"
-          ]
-      },
-      "keywords": ["Shelly", "IoT", "CoAP", "CoIoT", "MQTT"],
-      "tier": 2,
-      "licenseInformation": {
-          "license": "MIT",
-          "type": "free"
-      },
-      "platform": "Javascript/Node.js",
-      "mode": "daemon",
-      "icon": "shelly.png",
-      "enabled": false,
-      "compact": true,
-      "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
-      "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
-      "loglevel": "info",
-      "type": "iot-systems",
-      "restartAdapters": [],
-      "connectionType": "local",
-      "supportedMessages": {
-        "deviceManager": true
-      },
-      "dataSource": "push",
-      "plugins": {
-          "sentry": {
-              "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
-              "pathWhitelist": ["@apollon", "shelly-iot"]
-          }
-      },
-      "adminUI": {
-          "config": "json"
-      },
-      "dependencies": [
-          {
-              "js-controller": ">=6.0.11"
-          }
-      ],
-      "globalDependencies": [
-          {
-              "admin": ">=7.7.22"
-          }
+      "de": [
+        "docs/de/README.md",
+        "docs/de/ble-devices.md",
+        "docs/de/protocol-coap.md",
+        "docs/de/protocol-mqtt.md",
+        "docs/de/restricted-login.md",
+        "docs/de/state-changes.md",
+        "docs/de/faq.md",
+        "docs/de/debug.md"
       ]
+    },
+    "keywords": [
+      "Shelly",
+      "IoT",
+      "CoAP",
+      "CoIoT",
+      "MQTT"
+    ],
+    "tier": 2,
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "shelly.png",
+    "enabled": false,
+    "compact": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.shelly/master/admin/shelly.png",
+    "readme": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/README.md",
+    "loglevel": "info",
+    "type": "iot-systems",
+    "restartAdapters": [],
+    "connectionType": "local",
+    "supportedMessages": {
+      "deviceManager": true
+    },
+    "dataSource": "push",
+    "plugins": {
+      "sentry": {
+        "dsn": "https://4d0cc16e06844e6d9b930659db1f0492@sentry.iobroker.net/19",
+        "pathWhitelist": [
+          "@apollon",
+          "shelly-iot"
+        ]
+      }
+    },
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.7.22"
+      }
+    ]
   },
   "notifications": [
     {
