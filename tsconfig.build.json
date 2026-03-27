@@ -4,6 +4,6 @@
         "allowJs": false,
         "checkJs": false,
         "noEmit": false,
-        "types": ["@iobroker/types"]
+        "types": ["@iobroker/types", "node"]
     },
 }

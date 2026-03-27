@@ -420,6 +420,28 @@ class Shelly extends utils.Adapter {
         return bytes;
     }
 
+    classifyBleDevice(dataKeys) {
+        if (dataKeys.includes('precipitation') || dataKeys.includes('gust_speed') || dataKeys.includes('rain_status')) {
+            return { model: 'BLU Outdoor Weather Station', icon: 'ble-ht' };
+        }
+        if (dataKeys.includes('motion')) {
+            return { model: 'BLU Motion Sensor', icon: 'ble-motion' };
+        }
+        if (dataKeys.includes('window') || dataKeys.includes('rotation')) {
+            return { model: 'BLU Door/Window Sensor', icon: 'ble-door-window' };
+        }
+        if (dataKeys.includes('humidity') && dataKeys.includes('temperature')) {
+            return { model: 'BLU H&T Sensor', icon: 'ble-ht' };
+        }
+        if (dataKeys.includes('button_4')) {
+            return { model: 'BLU Button Tough 4', icon: 'ble-button4' };
+        }
+        if (dataKeys.includes('button_1')) {
+            return { model: 'BLU Button 1', icon: 'ble-button1' };
+        }
+        return { model: 'Bluetooth', icon: 'ble-button1' };
+    }
+
     async processBleMessage(val) {
         if (val && val.scriptVersion && val.src && val.payload) {
             this.log.debug(`[processBleMessage] Received payload ${JSON.stringify(val.payload)} from ${val.src}`);
@@ -431,17 +453,25 @@ class Shelly extends utils.Adapter {
                 );
             }
 
+            await this.extendObject('ble', {
+                type: 'folder',
+                common: {
+                    name: 'Bluetooth',
+                    icon: 'icons/ble.svg',
+                },
+                native: {},
+            });
+
             await this.extendObject(
                 `ble.${val.srcBle.mac}`,
                 {
                     type: 'device',
                     common: {
                         name: val.srcBle.mac,
-                        icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTk2LjQ4IDI2MC4wMjNsOTIuNjI2LTEwMy4zMzNMMTQzLjEyNSAwdjIwNi4zM2wtODYuMTExLTg2LjExMS0zMS40MDYgMzEuNDA1IDEwOC4wNjEgMTA4LjM5OUwyNS42MDggMzY4LjQyMmwzMS40MDYgMzEuNDA1IDg2LjExMS04Ni4xMTFMMTQ1Ljg0IDUxMmwxNDguNTUyLTE0OC42NDQtOTcuOTEyLTEwMy4zMzN6bTQwLjg2LTEwMi45OTZsLTQ5Ljk3NyA0OS45NzgtLjMzOC0xMDAuMjk1IDUwLjMxNSA1MC4zMTd6TTE4Ny4zNjMgMzEzLjA0bDQ5Ljk3NyA0OS45NzgtNTAuMzE1IDUwLjMxNi4zMzgtMTAwLjI5NHoiLz48L3N2Zz4=',
                     },
                     native: {},
                 },
-                { preserve: { common: ['name'] } },
+                { preserve: { common: ['name', 'icon'] } },
             );
 
             await this.delObjectAsync(`ble.${val.srcBle.mac}.rssi`); // moved to receivedBy
@@ -677,6 +707,24 @@ class Shelly extends utils.Adapter {
                                 }
                             } else {
                                 this.log.debug(`[processBleMessage] skipping unknown attribute ${key} from ${val.src}`);
+                            }
+                        }
+
+                        // Classify BLE device and set name/icon if still default
+                        const bleDeviceObj = await this.getObjectAsync(`ble.${val.srcBle.mac}`);
+                        if (bleDeviceObj) {
+                            const dataKeys = Object.keys(unpackedData);
+                            const bleType = this.classifyBleDevice(dataKeys);
+
+                            const updates = {};
+                            if (bleDeviceObj.common.name === val.srcBle.mac) {
+                                updates.name = bleType.model;
+                            }
+                            if (!bleDeviceObj.common.icon || String(bleDeviceObj.common.icon).startsWith('data:')) {
+                                updates.icon = `icons/${bleType.icon}.png`;
+                            }
+                            if (Object.keys(updates).length > 0) {
+                                await this.extendObject(`ble.${val.srcBle.mac}`, { common: updates });
                             }
                         }
                     } else {

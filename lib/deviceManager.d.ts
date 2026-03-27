@@ -1,6 +1,5 @@
-import { DeviceManagement, type DeviceLoadContext, type ActionContext, type DeviceDetails } from '@iobroker/dm-utils';
+import { DeviceManagement, type DeviceLoadContext, type ActionContext, type DeviceDetails, type InstanceDetails, type DeviceRefresh } from '@iobroker/dm-utils';
 import { type AdapterInstance } from '@iobroker/adapter-core';
-import type { DeviceRefresh } from '@iobroker/dm-utils/build/types/base';
 /**
  * DeviceManager Class
  */
@@ -10,6 +9,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     private readonly objects;
     constructor(adapter: AdapterInstance);
     private init;
+    protected getInstanceInfo(): InstanceDetails;
     onStateChange(id: string, state: ioBroker.State | null): void;
     onObjectChange(id: string, obj: ioBroker.DeviceObject | ioBroker.StateObject | ioBroker.ChannelObject | null): void;
     /**
@@ -19,6 +19,8 @@ export default class ShellyDeviceManagement extends DeviceManagement {
      */
     loadDevices(context: DeviceLoadContext<string>): Promise<void>;
     getDeviceDetails(deviceId: string): DeviceDetails<string> | null;
+    private classifyBleDevice;
+    private getDeviceGroup;
     getIcon(deviceId: string): string;
     /**
      *
@@ -30,6 +32,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     }>;
     handleFirmwareUpdate(id: string): Promise<{
         refresh: DeviceRefresh;
+    }>;
+    private mdnsScan;
+    private buildMdnsQuery;
+    private parseDnsName;
+    handleDiscoverDevices(context: ActionContext): Promise<{
+        refresh: boolean;
     }>;
     destroy(): Promise<void>;
 }

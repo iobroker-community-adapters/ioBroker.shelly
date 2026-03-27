@@ -463,6 +463,7 @@
                 "_dm": {
                     "type": "deviceManager",
                     "sm": 12,
+                    "smallCards": true,
                     "style": {
                         "width": "100%",
                         "height": "100%",
