@@ -23,7 +23,7 @@
     "No new Shelly devices found": "No new Shelly devices found",
     "New devices": "New devices",
     "Already known": "Already known",
-    "All found devices are already known": "All found devices are already known",
+    "All %s found devices are already known": "All %s found devices are already known",
     "Open device interface": "Open device interface",
     "Relays & Switches": "Relays & Switches",
     "Dimmers": "Dimmers",

@@ -805,7 +805,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             }
 
             if (newDevices.length === 0 && existingDevices.length > 0) {
-                await context.showMessage(I18n.getTranslatedObject('All found devices are already known'));
+                await context.showMessage(
+                    I18n.getTranslatedObject(
+                        'All %s found devices are already known',
+                        existingDevices.length.toString(),
+                    ),
+                );
             } else {
                 await context.showMessage(lines.join('\n'));
             }

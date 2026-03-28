@@ -3,7 +3,7 @@
 const crypto = require('node:crypto');
 
 const utils = require('@iobroker/adapter-core');
-const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
+const objectHelper = require('./lib/objectHelper'); // Common adapter utils
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
 const BleDecoder = require('./lib/ble-decoder').BleDecoder;
@@ -51,7 +51,7 @@ class Shelly extends utils.Adapter {
             this.eventEmitter.setMaxListeners(Infinity);
 
             await this.mkdirAsync(this.namespace, 'scripts');
-            this.subscribeForeignFiles(this.namespace, '*');
+            await this.subscribeForeignFiles(this.namespace, '*');
 
             this.subscribeStates('*');
             objectHelper.init(this);
@@ -165,7 +165,7 @@ class Shelly extends utils.Adapter {
                 this.log.debug(`[onStateChange] "${stateId}" state changed - checking new encryption key`);
 
                 const encryptionKey = String(state.val).replaceAll('-', '').toUpperCase();
-                if (encryptionKey.length == 32) {
+                if (encryptionKey.length === 32) {
                     this.setState(stateId, { val: encryptionKey, ack: true });
                 }
             } else {
@@ -173,9 +173,7 @@ class Shelly extends utils.Adapter {
                     `[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`,
                 );
 
-                if (objectHelper) {
-                    objectHelper.handleStateChange(id, state);
-                }
+                objectHelper?.handleStateChange(id, state);
             }
         }
     }
