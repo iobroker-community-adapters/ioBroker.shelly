@@ -9,7 +9,7 @@ const protocolCoap = require('./lib/protocol/coap');
 const BleDecoder = require('./lib/ble-decoder').BleDecoder;
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
-const EventEmitter = require('events').EventEmitter;
+const EventEmitter = require('node:events').EventEmitter;
 
 class Shelly extends utils.Adapter {
     constructor(options) {
