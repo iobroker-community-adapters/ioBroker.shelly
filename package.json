@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.3.2",
-    "@iobroker/dm-utils": "^3.0.10",
+    "@iobroker/dm-utils": "^3.0.11",
     "axios": "^1.13.6",
     "mqtt-connection": "^4.1.0",
     "shelly-iot": "^1.1.2",

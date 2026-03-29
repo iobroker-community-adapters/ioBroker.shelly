@@ -8,10 +8,15 @@ import {
     type ConfigItemAny,
     type DeviceRefresh,
     type ConfigItemState,
+    type DeviceControl,
+    type MessageContext,
+    type ErrorResponse,
 } from '@iobroker/dm-utils';
 import { type AdapterInstance, I18n } from '@iobroker/adapter-core';
 // It must be exported to index in dm-utils
 import * as dgram from 'node:dgram';
+import type { RetVal } from '@iobroker/dm-utils/build/types/common';
+import { ControlState } from '@iobroker/dm-utils/build/types/base';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const datapoints = require('./datapoints');
@@ -218,6 +223,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         await this.handleDiscoverDevices(context),
                 },
             ],
+            smallCards: true,
         };
     }
 
@@ -305,7 +311,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 },
                 hasDetails: true,
                 customInfo: this.buildCustomInfo(device._id, shortDeviceId, isBle),
-                controls: [],
+                controls: await this.buildControls(shortDeviceId, isBle),
                 actions: [
                     {
                         id: 'rename',
@@ -874,13 +880,87 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             id: deviceId,
             schema: {
                 type: 'panel',
-                style: {
-                    gap: '1px',
-                    marginTop: '5px',
-                },
                 items,
             },
         };
+    }
+
+    private async buildControls(shortDeviceId: string, isBle: boolean): Promise<DeviceControl<string>[]> {
+        if (isBle) {
+            return [];
+        }
+
+        const ns = this.adapter.namespace;
+        const prefix = `${ns}.${shortDeviceId}.`;
+        const controls: DeviceControl<string>[] = [];
+        let labelForFirstControl: ioBroker.StringOrTranslated | undefined;
+
+        // Collect all switch states for this device
+        const keys = Object.keys(this.objects);
+        for (const stateId of keys) {
+            if (!stateId.startsWith(prefix)) {
+                continue;
+            }
+
+            const obj = this.objects[stateId];
+            if (obj?.type !== 'state') {
+                continue;
+            }
+
+            const common = obj.common;
+            if (common?.role !== 'switch' || common?.type !== 'boolean' || !common?.write) {
+                continue;
+            }
+
+            const suffix = stateId.substring(prefix.length);
+
+            // Match Relay{id}.Switch, Light{id}.Switch, RGB{id}.Switch, RGBW{id}.Switch
+            const match = suffix.match(/^(Relay|Light|RGB|RGBW|lights|white)(\d*)\.Switch$/);
+            if (!match) {
+                continue;
+            }
+
+            const channelType = match[1];
+            const channelIdx = match[2];
+
+            // Build a label like "Relay 0", "Light 1", etc.
+            let label: string;
+            if (channelType === 'lights') {
+                label = 'Light';
+            } else if (channelType === 'white') {
+                label = `White ${channelIdx}`;
+            } else {
+                label = channelIdx ? `${channelType} ${channelIdx}` : channelType;
+            }
+
+            const control: DeviceControl<string> = {
+                id: suffix.replace('.', '_'),
+                type: 'switch',
+                stateId: `${shortDeviceId}.${suffix}`,
+                state:
+                    (await this.adapter.getForeignStateAsync(obj._id)) ||
+                    ({ val: null, ts: Date.now(), ack: true } as ioBroker.State),
+                handler: async (_deviceId: string, _actionId: string, state: ControlState): Promise<ioBroker.State> => {
+                    await this.adapter.setForeignStateAsync(obj._id, state);
+                    return { val: state, ts: Date.now(), ack: true } as ioBroker.State;
+                },
+            };
+            if (!controls.length) {
+                // If control has no label, it will be shown directly on
+                labelForFirstControl = label;
+                controls.push(control);
+                continue;
+            } else if (controls.length === 1 && labelForFirstControl) {
+                controls[0].label = labelForFirstControl;
+            }
+            control.label = label;
+            controls.push(control);
+        }
+
+        // Sort by ID for consistent order
+        controls.sort((a, b) => a.id.localeCompare(b.id));
+
+        return controls;
     }
 
     getIcon(deviceId: string): string {

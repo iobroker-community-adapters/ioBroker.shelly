@@ -22,6 +22,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     private classifyBleDevice;
     private getDeviceGroup;
     private buildCustomInfo;
+    private buildControls;
     getIcon(deviceId: string): string;
     /**
      *
