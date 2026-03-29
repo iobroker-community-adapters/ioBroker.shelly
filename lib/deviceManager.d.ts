@@ -19,6 +19,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
      */
     loadDevices(context: DeviceLoadContext<string>): Promise<void>;
     getDeviceDetails(deviceId: string): DeviceDetails<string> | null;
+    private getBleDeviceDetails;
     private classifyBleDevice;
     private getDeviceGroup;
     private buildCustomInfo;

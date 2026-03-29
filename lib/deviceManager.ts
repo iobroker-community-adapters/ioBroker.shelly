@@ -9,14 +9,11 @@ import {
     type DeviceRefresh,
     type ConfigItemState,
     type DeviceControl,
-    type MessageContext,
-    type ErrorResponse,
 } from '@iobroker/dm-utils';
 import { type AdapterInstance, I18n } from '@iobroker/adapter-core';
 // It must be exported to index in dm-utils
 import * as dgram from 'node:dgram';
-import type { RetVal } from '@iobroker/dm-utils/build/types/common';
-import { ControlState } from '@iobroker/dm-utils/build/types/base';
+import type { ControlState } from '@iobroker/dm-utils/build/types/base';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const datapoints = require('./datapoints');
@@ -365,6 +362,11 @@ export default class ShellyDeviceManagement extends DeviceManagement {
 
         const shortDeviceId = device._id.substring(this.adapter.namespace.length + 1);
         const ns = this.adapter.namespace;
+        const isBle = shortDeviceId.startsWith('ble.');
+
+        if (isBle) {
+            return this.getBleDeviceDetails(deviceId, shortDeviceId);
+        }
 
         const hostname = this.states[`${ns}.${shortDeviceId}.hostname`]?.val as string | undefined;
         const version = this.states[`${ns}.${shortDeviceId}.version`]?.val as string | undefined;
@@ -480,6 +482,70 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Uptime'),
                 data: `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m`,
+                addColon: true,
+            };
+        }
+
+        return {
+            id: deviceId,
+            schema: {
+                type: 'panel',
+                items,
+            },
+        };
+    }
+
+    private getBleDeviceDetails(deviceId: string, shortDeviceId: string): DeviceDetails<string> {
+        const ns = this.adapter.namespace;
+        const prefix = `${ns}.${shortDeviceId}.`;
+        const items: Record<string, ConfigItemAny> = {};
+
+        // Collect all states for this BLE device and show them as staticInfo
+        const stateEntries: { name: string; obj: ioBroker.StateObject }[] = [];
+
+        for (const id in this.objects) {
+            if (!id.startsWith(prefix) || this.objects[id].type !== 'state') {
+                continue;
+            }
+            stateEntries.push({
+                name: id.substring(prefix.length),
+                obj: this.objects[id],
+            });
+        }
+
+        stateEntries.sort((a, b) => a.name.localeCompare(b.name));
+
+        for (const entry of stateEntries) {
+            const state = this.states[`${prefix}${entry.name}`];
+            const common = entry.obj.common;
+            const val = state?.val;
+
+            if (val === undefined || val === null || entry.name === 'ReceivedBy' || entry.name === 'pid') {
+                continue;
+            }
+
+            // Format the label from state name (e.g. "temperature" -> "Temperature")
+            const label = entry.name.charAt(0).toUpperCase() + entry.name.slice(1).replace(/_/g, ' ');
+
+            // Format value: use common.states mapping if available, otherwise format by type
+            let displayVal: string | number | boolean;
+            const states = common.states as Record<string, string> | undefined;
+            if (states && String(val) in states) {
+                displayVal = states[String(val)] !== undefined ? `${states[String(val)]}(${String(val)})` : String(val);
+            } else if (typeof val === 'number') {
+                displayVal = common.unit
+                    ? `${Math.round(val * 100) / 100} ${common.unit}`
+                    : Math.round(val * 100) / 100;
+            } else if (typeof val === 'boolean') {
+                displayVal = val ? '✓' : '✗';
+            } else {
+                displayVal = String(val);
+            }
+
+            items[entry.name] = {
+                type: 'staticInfo',
+                label,
+                data: displayVal,
                 addColon: true,
             };
         }
@@ -895,6 +961,25 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const controls: DeviceControl<string>[] = [];
         let labelForFirstControl: ioBroker.StringOrTranslated | undefined;
 
+        // Check device mode to filter controls for multi-mode devices
+        const deviceMode = this.states[`${ns}.${shortDeviceId}.Sys.deviceMode`]?.val as string | undefined;
+
+        // Map device mode to allowed channel prefixes
+        const allowedChannels: Record<string, string[]> = {
+            rgb: ['RGB'],
+            rgbw: ['RGBW'],
+            light: ['Light'],
+            color: ['lights'],
+            white: ['white'],
+            switch: ['Relay'],
+            relay: ['Relay'],
+            cover: ['Cover'],
+            roller: ['Relay'], // Gen1 roller mode still uses Relay channels
+        };
+
+        const allowed = deviceMode ? allowedChannels[deviceMode] : undefined;
+
+        const ownStates: string[] = [];
         // Collect all switch states for this device
         const keys = Object.keys(this.objects);
         for (const stateId of keys) {
@@ -906,7 +991,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             if (obj?.type !== 'state') {
                 continue;
             }
-
+            ownStates.push(obj._id);
             const common = obj.common;
             if (common?.role !== 'switch' || common?.type !== 'boolean' || !common?.write) {
                 continue;
@@ -921,6 +1006,11 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             }
 
             const channelType = match[1];
+
+            // Filter by device mode if set
+            if (allowed && !allowed.includes(channelType)) {
+                continue;
+            }
             const channelIdx = match[2];
 
             // Build a label like "Relay 0", "Light 1", etc.
@@ -954,6 +1044,70 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 controls[0].label = labelForFirstControl;
             }
             control.label = label;
+            controls.push(control);
+        }
+
+        // Collect slider states (brightness, cover position)
+        for (const stateId of ownStates) {
+            const obj = this.objects[stateId];
+            const common = obj.common as ioBroker.StateCommon;
+            if (common?.type !== 'number' || !common?.write) {
+                continue;
+            }
+
+            const role = common.role || '';
+            if (!role.startsWith('level.') && role !== 'level') {
+                continue;
+            }
+
+            const suffix = stateId.substring(prefix.length);
+
+            // Match brightness: Light{id}.Brightness, RGB{id}.Brightness, RGBW{id}.Brightness, lights.brightness, white{id}.brightness
+            // Match cover: Cover{id}.Position
+            const match = suffix.match(
+                /^(Light|RGB|RGBW|lights|white|Cover|Number)(\d*)\.(Brightness|brightness|Position|Value)$/,
+            );
+            if (!match) {
+                continue;
+            }
+
+            const channelType = match[1];
+            const channelIdx = match[2];
+            const prop = match[3];
+
+            // Filter by device mode if set
+            if (allowed && !allowed.includes(channelType)) {
+                continue;
+            }
+
+            let label: string;
+            if (channelType === 'Cover') {
+                label = channelIdx ? `Cover ${channelIdx}` : 'Cover';
+            } else if (channelType === 'lights') {
+                label = 'Brightness';
+            } else if (channelType === 'white') {
+                label = `White ${channelIdx}`;
+            } else {
+                label = channelIdx ? `${channelType} ${channelIdx}` : channelType;
+            }
+
+            const control: DeviceControl<string> = {
+                id: suffix.replace('.', '_'),
+                type: 'slider',
+                stateId: `${shortDeviceId}.${suffix}`,
+                min: common.min ?? 0,
+                max: common.max ?? 100,
+                unit: prop === 'Position' ? '%' : '%',
+                label,
+                state:
+                    (await this.adapter.getForeignStateAsync(obj._id)) ||
+                    ({ val: null, ts: Date.now(), ack: true } as ioBroker.State),
+                handler: async (_deviceId: string, _actionId: string, state: ControlState): Promise<ioBroker.State> => {
+                    await this.adapter.setForeignStateAsync(obj._id, state);
+                    return { val: state, ts: Date.now(), ack: true } as ioBroker.State;
+                },
+            };
+
             controls.push(control);
         }
 
