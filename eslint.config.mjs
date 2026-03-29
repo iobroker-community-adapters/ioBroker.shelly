@@ -19,6 +19,8 @@ export default [
             '**/adapter-config.d.ts',
             'lib/deviceManager.d.ts',
             'lib/deviceManager.js',
+            'lib/objectHelper.d.ts',
+            'lib/objectHelper.js',
         ],
     },
     {

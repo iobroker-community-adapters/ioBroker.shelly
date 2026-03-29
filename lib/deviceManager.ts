@@ -7,6 +7,7 @@ import {
     type InstanceDetails,
     type ConfigItemAny,
     type DeviceRefresh,
+    type ConfigItemState,
 } from '@iobroker/dm-utils';
 import { type AdapterInstance, I18n } from '@iobroker/adapter-core';
 // It must be exported to index in dm-utils
@@ -294,6 +295,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 model: isBle
                     ? bleInfo!.model
                     : (this.states[`${ns}.${shortDeviceId}.model`]?.val as string) ||
+                      (this.states[`${ns}.${shortDeviceId}.type`]?.val as string) ||
                       I18n.getTranslatedObject('unknown'),
                 status: {
                     connection: isBle ? undefined : isOnline ? 'connected' : 'disconnected',
@@ -301,26 +303,9 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     battery,
                     warning: firmwareUpdate ? I18n.getTranslatedObject('Firmware update available') : undefined,
                 },
-                customInfo: {
-                    id: device._id,
-                    schema: {
-                        type: 'panel',
-                        items: {
-                            _test: {
-                                type: 'state',
-                                oid: 'javascript.0.licht',
-                                foreign: true,
-                                control: 'switch',
-                                trueTextStyle: { color: 'green' },
-                                falseTextStyle: { color: 'red' },
-                                label: 'Demo',
-                                trueText: 'ON',
-                                falseText: 'OFF',
-                            },
-                        },
-                    },
-                },
                 hasDetails: true,
+                customInfo: this.buildCustomInfo(device._id, shortDeviceId, isBle),
+                controls: [],
                 actions: [
                     {
                         id: 'rename',
@@ -351,8 +336,11 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                                   id: 'firmware-update',
                                   icon: 'update' as const,
                                   description: I18n.getTranslatedObject('Update firmware'),
-                                  handler: async (deviceId: string): Promise<{ refresh: DeviceRefresh }> =>
-                                      await this.handleFirmwareUpdate(deviceId),
+                                  handler: async (
+                                      deviceId: string,
+                                      context: ActionContext,
+                                  ): Promise<{ refresh: DeviceRefresh }> =>
+                                      await this.handleFirmwareUpdate(deviceId, context),
                               },
                           ]
                         : []),
@@ -402,6 +390,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Device ID'),
                 data: id,
+                addColon: true,
                 copyToClipboard: true,
             };
         }
@@ -411,6 +400,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Model'),
                 data: model,
+                addColon: true,
             };
         }
 
@@ -419,6 +409,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Type'),
                 data: type,
+                addColon: true,
             };
         }
 
@@ -427,6 +418,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Generation'),
                 data: gen,
+                addColon: true,
             };
         }
 
@@ -435,6 +427,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('IP address'),
                 data: hostname,
+                addColon: true,
                 copyToClipboard: true,
             };
         }
@@ -444,6 +437,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Firmware version'),
                 data: version,
+                addColon: true,
             };
         }
 
@@ -452,6 +446,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Firmware update available'),
                 data: firmware ? '✓' : '✗',
+                addColon: true,
             };
         }
 
@@ -460,6 +455,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Protocol'),
                 data: protocol,
+                addColon: true,
             };
         }
 
@@ -469,6 +465,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 label: I18n.getTranslatedObject('RSSI'),
                 data: rssi,
                 unit: 'dBm',
+                addColon: true,
             };
         }
 
@@ -477,6 +474,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Uptime'),
                 data: `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m`,
+                addColon: true,
             };
         }
 
@@ -541,6 +539,350 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         };
     }
 
+    private buildCustomInfo(
+        deviceId: string,
+        shortDeviceId: string,
+        isBle: boolean,
+    ): DeviceDetails<string> | undefined {
+        const ns = this.adapter.namespace;
+        const prefix = `${ns}.${shortDeviceId}.`;
+        const items: Record<string, ConfigItemAny> = {};
+
+        if (isBle) {
+            // BLE devices use direct state names
+            if (this.states[`${prefix}temperature`] !== undefined) {
+                items.temperature = {
+                    type: 'state',
+                    oid: `${shortDeviceId}.temperature`,
+                    control: 'text',
+                    unit: '°C',
+                    digits: 2,
+                    label: I18n.getTranslatedObject('Temperature'),
+                    size: 12,
+                    style: {
+                        opacity: 0.7,
+                    },
+                } as ConfigItemState;
+            }
+            if (this.states[`${prefix}humidity`] !== undefined) {
+                items.humidity = {
+                    type: 'state',
+                    oid: `${shortDeviceId}.humidity`,
+                    control: 'text',
+                    unit: '%',
+                    digits: 1,
+                    label: I18n.getTranslatedObject('Humidity'),
+                    size: 12,
+                    style: { opacity: 0.7 },
+                } as ConfigItemState;
+            }
+            if (this.states[`${prefix}illuminance`] !== undefined) {
+                items.illuminance = {
+                    type: 'state',
+                    oid: `${shortDeviceId}.illuminance`,
+                    control: 'text',
+                    unit: 'lux',
+                    digits: 0,
+                    label: I18n.getTranslatedObject('Illuminance'),
+                    size: 12,
+                    style: { opacity: 0.7 },
+                } as ConfigItemState;
+            }
+            // BLE boolean/alarm sensor states
+            const bleBoolSensors: {
+                stateId: string;
+                key: string;
+                label: string;
+                trueText: string;
+                falseText: string;
+                trueColor: string;
+            }[] = [
+                {
+                    stateId: 'motion',
+                    key: 'motion',
+                    label: 'Motion',
+                    trueText: 'Detected',
+                    falseText: 'Clear',
+                    trueColor: 'green',
+                },
+                {
+                    stateId: 'door',
+                    key: 'door',
+                    label: 'Door',
+                    trueText: 'Open',
+                    falseText: 'Closed',
+                    trueColor: 'orange',
+                },
+                {
+                    stateId: 'window',
+                    key: 'window',
+                    label: 'Window',
+                    trueText: 'Open',
+                    falseText: 'Closed',
+                    trueColor: 'orange',
+                },
+                {
+                    stateId: 'smoke',
+                    key: 'smoke',
+                    label: 'Smoke',
+                    trueText: 'Alarm',
+                    falseText: 'OK',
+                    trueColor: 'red',
+                },
+                {
+                    stateId: 'vibration',
+                    key: 'vibration',
+                    label: 'Vibration',
+                    trueText: 'Detected',
+                    falseText: 'Clear',
+                    trueColor: 'orange',
+                },
+            ];
+
+            for (const sensor of bleBoolSensors) {
+                if (this.states[`${prefix}${sensor.stateId}`] !== undefined) {
+                    items[sensor.key] = {
+                        type: 'state',
+                        oid: `${shortDeviceId}.${sensor.stateId}`,
+                        readOnly: true,
+                        options: [
+                            { label: I18n.getTranslatedObject(sensor.falseText), value: 0 },
+                            { label: I18n.getTranslatedObject(sensor.trueText), value: 1, color: sensor.trueColor },
+                        ],
+                        trueText: I18n.getTranslatedObject(sensor.trueText),
+                        falseText: I18n.getTranslatedObject(sensor.falseText),
+                        trueTextStyle: { color: sensor.trueColor },
+                        blinkOnUpdate: true,
+                        label: I18n.getTranslatedObject(sensor.label),
+                        size: 12,
+                        style: { opacity: 0.7 },
+                    } as ConfigItemState;
+                }
+            }
+
+            // BLE numeric sensors
+            if (this.states[`${prefix}rotation`] !== undefined) {
+                items.rotation = {
+                    type: 'state',
+                    oid: `${shortDeviceId}.rotation`,
+                    control: 'text',
+                    unit: '°',
+                    label: I18n.getTranslatedObject('Tilt'),
+                    size: 12,
+                    style: { opacity: 0.7 },
+                } as ConfigItemState;
+            }
+        } else {
+            // Gen1 sensor paths
+            // Gen1 numeric sensors
+            const gen1NumericSensors: { stateId: string; key: string; label: string; unit: string; digits?: number }[] =
+                [
+                    { stateId: 'tmp.temperatureC', key: 'temperature', label: 'Temperature', unit: '°C', digits: 2 },
+                    {
+                        stateId: 'sensor.temperatureC',
+                        key: 'sensorTemperature',
+                        label: 'Temperature',
+                        unit: '°C',
+                        digits: 2,
+                    },
+                    { stateId: 'hum.value', key: 'humidity', label: 'Humidity', unit: '%', digits: 1 },
+                    { stateId: 'sensor.humidity', key: 'sensorHumidity', label: 'Humidity', unit: '%', digits: 1 },
+                    { stateId: 'sensor.lux', key: 'lux', label: 'Illuminance', unit: 'lux', digits: 0 },
+                    { stateId: 'sensor.tilt', key: 'tilt', label: 'Tilt', unit: '°', digits: 0 },
+                    { stateId: 'tmp.valvePosition', key: 'valve', label: 'Valve position', unit: '%', digits: 0 },
+                ];
+
+            for (const sensor of gen1NumericSensors) {
+                if (this.states[`${prefix}${sensor.stateId}`] !== undefined) {
+                    items[sensor.key] = {
+                        type: 'state',
+                        oid: `${shortDeviceId}.${sensor.stateId}`,
+                        control: 'text',
+                        unit: sensor.unit,
+                        digits: sensor.digits,
+                        label: I18n.getTranslatedObject(sensor.label),
+                        size: 12,
+                        style: { opacity: 0.7 },
+                    } as ConfigItemState;
+                }
+            }
+
+            // Gen1 boolean sensors (true/false values - use trueText/falseText)
+            const gen1BoolSensors: {
+                stateId: string;
+                key: string;
+                label: string;
+                trueText: string;
+                falseText: string;
+                trueColor: string;
+            }[] = [
+                {
+                    stateId: 'sensor.motion',
+                    key: 'motion',
+                    label: 'Motion',
+                    trueText: 'Detected',
+                    falseText: 'Clear',
+                    trueColor: 'green',
+                },
+                {
+                    stateId: 'sensor.door',
+                    key: 'door',
+                    label: 'Door',
+                    trueText: 'Open',
+                    falseText: 'Closed',
+                    trueColor: 'orange',
+                },
+                {
+                    stateId: 'sensor.vibration',
+                    key: 'vibration',
+                    label: 'Vibration',
+                    trueText: 'Detected',
+                    falseText: 'Clear',
+                    trueColor: 'orange',
+                },
+                {
+                    stateId: 'sensor.flood',
+                    key: 'flood',
+                    label: 'Flood',
+                    trueText: 'Alarm',
+                    falseText: 'OK',
+                    trueColor: 'red',
+                },
+                {
+                    stateId: 'smoke.value',
+                    key: 'smoke',
+                    label: 'Smoke',
+                    trueText: 'Alarm',
+                    falseText: 'OK',
+                    trueColor: 'red',
+                },
+            ];
+
+            for (const sensor of gen1BoolSensors) {
+                if (this.states[`${prefix}${sensor.stateId}`] !== undefined) {
+                    items[sensor.key] = {
+                        type: 'state',
+                        oid: `${shortDeviceId}.${sensor.stateId}`,
+                        options: [
+                            { label: I18n.getTranslatedObject(sensor.falseText), value: 0 },
+                            { label: I18n.getTranslatedObject(sensor.trueText), value: 1, color: sensor.trueColor },
+                        ],
+                        trueText: I18n.getTranslatedObject(sensor.trueText),
+                        falseText: I18n.getTranslatedObject(sensor.falseText),
+                        trueTextStyle: { color: sensor.trueColor },
+                        blinkOnUpdate: true,
+                        label: I18n.getTranslatedObject(sensor.label),
+                        size: 12,
+                        style: { opacity: 0.7 },
+                    };
+                }
+            }
+
+            // Gen2+: scan for Temperature{id}.Celsius, Humidity{id}.Relative, Illuminance{id}.Lux
+            for (const stateId of Object.keys(this.states)) {
+                if (!stateId.startsWith(prefix)) {
+                    continue;
+                }
+                const suffix = stateId.substring(prefix.length);
+
+                const tempMatch = suffix.match(/^(Temperature\d+)\.Celsius$/);
+                if (tempMatch) {
+                    items[`temp_${tempMatch[1]}`] = {
+                        type: 'state',
+                        oid: `${shortDeviceId}.${suffix}`,
+                        control: 'text',
+                        unit: '°C',
+                        digits: 2,
+                        label: I18n.getTranslatedObject('Temperature'),
+                        size: 12,
+                        style: { opacity: 0.7 },
+                    } as ConfigItemState;
+                }
+
+                const humMatch = suffix.match(/^(Humidity\d+)\.Relative$/);
+                if (humMatch) {
+                    items[`hum_${humMatch[1]}`] = {
+                        type: 'state',
+                        oid: `${shortDeviceId}.${suffix}`,
+                        control: 'text',
+                        unit: '%',
+                        digits: 1,
+                        label: I18n.getTranslatedObject('Humidity'),
+                        size: 12,
+                        style: { opacity: 0.7 },
+                    } as ConfigItemState;
+                }
+
+                const luxMatch = suffix.match(/^(Illuminance\d+)\.Lux$/);
+                if (luxMatch) {
+                    items[`lux_${luxMatch[1]}`] = {
+                        type: 'state',
+                        oid: `${shortDeviceId}.${suffix}`,
+                        control: 'text',
+                        unit: 'lux',
+                        digits: 0,
+                        label: I18n.getTranslatedObject('Illuminance'),
+                        size: 12,
+                        style: { opacity: 0.7 },
+                    } as ConfigItemState;
+                }
+
+                // Flood alarm
+                const floodMatch = suffix.match(/^(Flood\d+)\.alarm$/);
+                if (floodMatch) {
+                    items[`flood_${floodMatch[1]}`] = {
+                        type: 'state',
+                        oid: `${shortDeviceId}.${suffix}`,
+                        readOnly: true,
+                        options: [
+                            { label: I18n.getTranslatedObject('OK'), value: 0 },
+                            { label: I18n.getTranslatedObject('Alarm'), value: 1, color: 'red' },
+                        ],
+                        trueText: I18n.getTranslatedObject('OK'),
+                        falseText: I18n.getTranslatedObject('Alarm'),
+                        trueTextStyle: { color: 'red' },
+                        blinkOnUpdate: true,
+                        label: I18n.getTranslatedObject('Flood'),
+                        size: 12,
+                        style: { opacity: 0.7 },
+                    } as ConfigItemState;
+                }
+
+                // Cover position
+                const coverMatch = suffix.match(/^(Cover\d+)\.Position$/);
+                if (coverMatch) {
+                    items[`cover_${coverMatch[1]}`] = {
+                        type: 'state',
+                        oid: `${shortDeviceId}.${suffix}`,
+                        control: 'text',
+                        unit: '%',
+                        label: I18n.getTranslatedObject('Cover position'),
+                        size: 12,
+                        style: {
+                            opacity: 0.7,
+                        },
+                    } as ConfigItemState;
+                }
+            }
+        }
+
+        if (Object.keys(items).length === 0) {
+            return undefined;
+        }
+
+        return {
+            id: deviceId,
+            schema: {
+                type: 'panel',
+                style: {
+                    gap: '1px',
+                    marginTop: '5px',
+                },
+                items,
+            },
+        };
+    }
+
     getIcon(deviceId: string): string {
         const device = this.objects[deviceId];
         if (device && 'icon' in device.common && device.common.icon) {
@@ -595,17 +937,78 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         return { refresh: 'device' as DeviceRefresh };
     }
 
-    async handleFirmwareUpdate(id: string): Promise<{ refresh: DeviceRefresh }> {
+    async handleFirmwareUpdate(id: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {
         const shortDeviceId = id.substring(this.adapter.namespace.length + 1);
-        const stateId = `${this.adapter.namespace}.${shortDeviceId}.firmwareupdate`;
+        const ns = this.adapter.namespace;
+        const stateId = `${ns}.${shortDeviceId}.firmwareupdate`;
+
+        const gen = this.states[`${ns}.${shortDeviceId}.gen`]?.val as number | undefined;
+        const hasProgress = gen !== undefined && gen >= 2;
+
+        const progress = await context.openProgress('Updating firmware...', {
+            indeterminate: !hasProgress,
+            value: hasProgress ? 0 : undefined,
+            label: I18n.getTranslatedObject('Starting update...'),
+        });
 
         try {
             await this.adapter.setStateAsync(stateId, true, false);
             this.adapter.log.info(`[DeviceManager] Firmware update triggered for ${shortDeviceId}`);
+
+            const progressStateId = `${ns}.${shortDeviceId}.firmwareupdateProgress`;
+            const firmwareStateId = `${ns}.${shortDeviceId}.firmware`;
+            const TIMEOUT = 5 * 60 * 1000; // 5 minutes
+
+            await new Promise<void>(resolve => {
+                const startTime = Date.now();
+
+                const checkInterval = setInterval(async () => {
+                    // Timeout
+                    if (Date.now() - startTime > TIMEOUT) {
+                        clearInterval(checkInterval);
+                        resolve();
+                        return;
+                    }
+
+                    // Check progress for Gen2+
+                    if (hasProgress) {
+                        const progressState = this.states[progressStateId];
+                        if (progressState?.val !== undefined && progressState?.val !== null) {
+                            const pct = Number(progressState.val);
+                            await progress.update({
+                                value: pct,
+                                label: `${pct}%`,
+                            });
+                        }
+                    }
+
+                    // Check if firmware update flag cleared (update complete)
+                    const firmwareState = this.states[firmwareStateId];
+                    if (firmwareState?.val === false) {
+                        clearInterval(checkInterval);
+                        await progress.update({
+                            value: 100,
+                            label: I18n.getTranslatedObject('Firmware update complete'),
+                        });
+                        resolve();
+                    }
+
+                    // Check if device went offline and came back (Gen1 reboot after update)
+                    if (!hasProgress) {
+                        const online = this.states[`${ns}.${shortDeviceId}.online`];
+                        if (online?.val === false) {
+                            await progress.update({
+                                label: I18n.getTranslatedObject('Device is rebooting...'),
+                            });
+                        }
+                    }
+                }, 2000);
+            });
         } catch (err) {
-            this.adapter.log.error(`[DeviceManager] Error triggering firmware update for ${shortDeviceId}: ${err}`);
+            this.adapter.log.error(`[DeviceManager] Error during firmware update for ${shortDeviceId}: ${err}`);
         }
 
+        await progress.close();
         return { refresh: 'device' as DeviceRefresh };
     }
 

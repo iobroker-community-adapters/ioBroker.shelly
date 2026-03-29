@@ -21,6 +21,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     getDeviceDetails(deviceId: string): DeviceDetails<string> | null;
     private classifyBleDevice;
     private getDeviceGroup;
+    private buildCustomInfo;
     getIcon(deviceId: string): string;
     /**
      *
@@ -30,7 +31,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     handleRenameDevice(id: string, context: ActionContext): Promise<{
         refresh: DeviceRefresh;
     }>;
-    handleFirmwareUpdate(id: string): Promise<{
+    handleFirmwareUpdate(id: string, context: ActionContext): Promise<{
         refresh: DeviceRefresh;
     }>;
     private mdnsScan;

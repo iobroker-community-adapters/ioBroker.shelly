@@ -83,7 +83,7 @@ export function setOrUpdateObject(
     if (adapterObjects[id] && isEquivalent(obj, adapterObjects[id])) {
         //adapter.log.debug('Object unchanged for ' + id + ': ' + JSON.stringify(adapterObjects[id]) + ' - update only: ' + JSON.stringify(value));
         if (value !== undefined) {
-            adapter.setState(id, value, true);
+            void adapter.setState(id, value, true);
         }
         if (stateChangeCallback) {
             stateChangeTrigger[id] = stateChangeCallback;
@@ -235,7 +235,7 @@ export function processObjectQueue(callback?: () => void): void {
             }
             return callback?.();
         }
-        adapter!.setState(queueEntry.id, queueEntry.value, true, () => {
+        void adapter!.setState(queueEntry.id, queueEntry.value, true, () => {
             if (queueEntry.stateChangeCallback) {
                 stateChangeTrigger[queueEntry.id] = queueEntry.stateChangeCallback;
             }
@@ -259,7 +259,7 @@ export function loadExistingObjects(callback?: () => void): void {
     if (!adapter) {
         throw new Error('Adapter is not set');
     }
-    adapter.getAdapterObjects(res => {
+    void adapter.getAdapterObjects(res => {
         if (!adapter) {
             throw new Error('Adapter is not set');
         }
