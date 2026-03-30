@@ -1686,6 +1686,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     {
                         data,
                         title: I18n.getTranslatedObject('Configure selected devices'),
+                        ignoreApplyDisabled: true,
                     },
                 );
 
