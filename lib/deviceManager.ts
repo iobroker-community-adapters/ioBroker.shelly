@@ -1882,9 +1882,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const devicePrefix = this.getDevicePrefix(dev.name);
         const customName = dev.customName.trim();
 
-        const mqttId = customName
-            ? `${devicePrefix}${customName.toLowerCase().replace(/[^a-z0-9_-]/g, '_')}`
-            : undefined;
+        let sanitizedName = customName ? customName.toLowerCase().replace(/[^a-z0-9_-]/g, '_') : '';
+        // Remove device prefix from custom name to avoid duplication (e.g., "shelly1lg3-kitchen" → "kitchen")
+        if (sanitizedName.startsWith(devicePrefix)) {
+            sanitizedName = sanitizedName.substring(devicePrefix.length);
+        }
+        const mqttId = sanitizedName ? `${devicePrefix}${sanitizedName}` : undefined;
 
         // Step 1: Configure MQTT, device name, timezone (no auth change yet)
         let needsRestart: boolean;
