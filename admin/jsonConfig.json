@@ -472,6 +472,7 @@
         "_deviceManager": {
             "type": "panel",
             "label": "Device manager",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+CiAgICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0yMiA5VjdoLTJWNWMwLTEuMS0uOS0yLTItMkg0Yy0xLjEgMC0yIC45LTIgMnYxNGMwIDEuMS45IDIgMiAyaDE0YzEuMSAwIDItLjkgMi0ydi0yaDJ2LTJoLTJ2LTJoMnYtMmgtMlY5em0tNCAxMEg0VjVoMTR6TTYgMTNoNXY0SDZ6bTYtNmg0djNoLTR6TTYgN2g1djVINnptNiA0aDR2NmgtNHoiIC8+Cjwvc3ZnPg==",
             "items": {
                 "_dm": {
                     "type": "deviceManager",
