@@ -215,16 +215,12 @@ Notes:
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (@GermanBluefox) Added support for Device manager: info and control of devices, provisioning, detect new devices in the background
-
-### 10.6.2-alpha.1 (2026-02-26)
-- (mcm1957) DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.
-
-### 10.6.2-alpha.0 (2026-02-26) - REVOKED
 - (copilot) Adapter requires admin >= 7.7.22 now
-- (mcm1957) PLUGS_UI component has been added to AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).
-- (mcm1957) PLUGS_UI component has been added for Plus Plug S (shellyplusplugs). No changes should be noticeable. 
-- (mcm1957) PLUGPM_UI component has been added for Plug PM (shellyplugpmg3).
+- (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
+- (@GermanBluefox) Added detection of new devices in the background
+- (mcm1957) DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.
+- (@mcm1957) Dependencies have been updated
+
 
 ### 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]
