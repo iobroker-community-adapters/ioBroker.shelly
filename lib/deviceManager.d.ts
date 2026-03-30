@@ -1,5 +1,5 @@
-import { DeviceManagement, type DeviceLoadContext, type ActionContext, type DeviceDetails, type InstanceDetails, type DeviceRefresh } from '@iobroker/dm-utils';
 import { type AdapterInstance } from '@iobroker/adapter-core';
+import { DeviceManagement, type ActionContext, type DeviceDetails, type DeviceLoadContext, type DeviceRefresh, type InstanceDetails } from '@iobroker/dm-utils';
 /**
  * DeviceManager Class
  */
