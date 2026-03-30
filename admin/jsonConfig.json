@@ -205,6 +205,19 @@
                     "xl": 4,
                     "label": "Update objects even if there is no value change"
                 },
+                "scanInterval": {
+                    "newLine": true,
+                    "type": "number",
+                    "min": 0,
+                    "max": 86400,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Scan for new devices every X seconds (0 = disabled)",
+                    "help": "Periodically scan network for new Shelly devices via mDNS"
+                },
                 "_headerDebugging": {
                     "newLine": true,
                     "type": "header",

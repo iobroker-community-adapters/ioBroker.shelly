@@ -25,6 +25,7 @@ class Shelly extends utils.Adapter {
         this.serverCoap = null;
         this.firmwareUpdateTimeout = null;
         this.onlineCheckTimeout = null;
+        this.deviceScanTimeout = null;
         this.deviceManagement = null;
 
         this.onlineDevices = {};
@@ -92,6 +93,13 @@ class Shelly extends utils.Adapter {
                     this.serverCoap.listen();
                 }
             });
+
+            // Periodic device scan
+            if (this.config.scanInterval > 0) {
+                const interval = Math.max(this.config.scanInterval, 60); // minimum 60 seconds
+                this.log.info(`[deviceScan] Periodic scan enabled every ${interval} seconds`);
+                this.setTimeout(() => this.deviceScan(), interval * 1000);
+            }
 
             if (this.config.autoupdate) {
                 this.log.info(`[firmwareUpdate] Auto-Update enabled - devices will be updated automatically`);
@@ -197,6 +205,11 @@ class Shelly extends utils.Adapter {
         if (this.firmwareUpdateTimeout) {
             this.clearTimeout(this.firmwareUpdateTimeout);
             this.firmwareUpdateTimeout = null;
+        }
+
+        if (this.deviceScanTimeout) {
+            this.clearTimeout(this.deviceScanTimeout);
+            this.deviceScanTimeout = null;
         }
 
         try {
@@ -406,6 +419,39 @@ class Shelly extends utils.Adapter {
                 },
                 15 * 60 * 1000,
             ); // Restart firmware check in 15 minutes
+        }
+    }
+
+    async deviceScan() {
+        if (this.isUnloaded) {
+            return;
+        }
+
+        try {
+            if (this.deviceManagement) {
+                const newDevices = await this.deviceManagement.scanForNewDevices();
+
+                if (newDevices.length > 0) {
+                    const deviceList = newDevices.map(d => `${d.name} (${d.ip})`).join('\n');
+
+                    this.log.info(`[deviceScan] Found ${newDevices.length} new device(s): ${deviceList.replace(/\n/g, ', ')}`);
+
+                    await this.registerNotification('shelly', 'newDevices', deviceList);
+                } else {
+                    this.log.debug('[deviceScan] No new devices found');
+                }
+            }
+        } catch (err) {
+            this.log.error(`[deviceScan] Error: ${err}`);
+        }
+
+        // Schedule next scan
+        if (!this.isUnloaded && this.config.scanInterval > 0) {
+            const interval = Math.max(this.config.scanInterval, 60);
+            this.deviceScanTimeout = this.setTimeout(() => {
+                this.deviceScanTimeout = null;
+                this.deviceScan();
+            }, interval * 1000);
         }
     }
 

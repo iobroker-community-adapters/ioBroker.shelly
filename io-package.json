@@ -260,6 +260,38 @@
           },
           "regex": [],
           "limit": 1
+        },
+        {
+          "category": "newDevices",
+          "name": {
+            "en": "New devices found",
+            "de": "Neue Geräte gefunden",
+            "ru": "Найдены новые устройства",
+            "pt": "Novos dispositivos encontrados",
+            "nl": "Nieuwe apparaten gevonden",
+            "fr": "Nouveaux appareils trouvés",
+            "it": "Nuovi dispositivi trovati",
+            "es": "Se encontraron nuevos dispositivos",
+            "pl": "Znaleziono nowe urządzenia",
+            "uk": "Знайдено нові пристрої",
+            "zh-cn": "发现新设备"
+          },
+          "severity": "notify",
+          "description": {
+            "en": "New Shelly devices have been found on the network.",
+            "de": "Neue Shelly-Geräte wurden im Netzwerk gefunden.",
+            "ru": "В сети обнаружены новые устройства Shelly.",
+            "pt": "Novos dispositivos Shelly foram encontrados na rede.",
+            "nl": "Nieuwe Shelly-apparaten zijn gevonden op het netwerk.",
+            "fr": "De nouveaux appareils Shelly ont été trouvés sur le réseau.",
+            "it": "Sono stati trovati nuovi dispositivi Shelly nella rete.",
+            "es": "Se encontraron nuevos dispositivos Shelly en la red.",
+            "pl": "W sieci znaleziono nowe urządzenia Shelly.",
+            "uk": "У мережі знайдено нові пристрої Shelly.",
+            "zh-cn": "在网络中发现了新的Shelly设备。"
+          },
+          "regex": [],
+          "limit": 1
         }
       ]
     }
