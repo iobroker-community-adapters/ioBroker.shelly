@@ -214,17 +214,12 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
-- (@GermanBluefox) Added support for Device manager: info and control of devices, provisioning, detect new devices in the background
-
-### 10.6.2-alpha.1 (2026-02-26)
-- (mcm1957) DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.
-
-### 10.6.2-alpha.0 (2026-02-26) - REVOKED
+### 11.0.0-alpha.0 (2026-03-30)
 - (copilot) Adapter requires admin >= 7.7.22 now
-- (mcm1957) PLUGS_UI component has been added to AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).
-- (mcm1957) PLUGS_UI component has been added for Plus Plug S (shellyplusplugs). No changes should be noticeable. 
-- (mcm1957) PLUGPM_UI component has been added for Plug PM (shellyplugpmg3).
+- (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
+- (@GermanBluefox) Added detection of new devices in the background
+- (mcm1957) DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.
+- (@mcm1957) Dependencies have been updated
 
 ### 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]
@@ -242,6 +237,12 @@ Notes:
 
 ### 10.5.2 (2025-12-28)
 * (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
+
+### 10.5.1 (2025-12-27)
+* (@mcm1957) Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]
+* (@mcm1957) ResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.
+* (@mcm1957) Changes to shellypro3em could affect shellyemg3 and shellyproem50.
+* (@HGlab01) Several fixes for Shelly Ecowitt WS90 have been implemented. [#1293]
 
 ## License
 

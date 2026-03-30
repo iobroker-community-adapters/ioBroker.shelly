@@ -10,7 +10,7 @@ const BleDecoder = require('./lib/ble-decoder').BleDecoder;
 const DeviceManagement = require('./lib/deviceManager').default;
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
-const EventEmitter = require('events').EventEmitter;
+const EventEmitter = require('node:events').EventEmitter;
 
 class Shelly extends utils.Adapter {
     constructor(options) {
@@ -434,7 +434,9 @@ class Shelly extends utils.Adapter {
                 if (newDevices.length > 0) {
                     const deviceList = newDevices.map(d => `${d.name} (${d.ip})`).join('\n');
 
-                    this.log.info(`[deviceScan] Found ${newDevices.length} new device(s): ${deviceList.replace(/\n/g, ', ')}`);
+                    this.log.info(
+                        `[deviceScan] Found ${newDevices.length} new device(s): ${deviceList.replace(/\n/g, ', ')}`,
+                    );
 
                     await this.registerNotification('shelly', 'newDevices', deviceList);
                 } else {
