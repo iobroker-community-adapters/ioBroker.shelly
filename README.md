@@ -33,7 +33,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 ## Supported devices
 
 Note that devices connected using **Shellies Range Extender** functionality are **not supported**.  
-Please connect you devices directly to your (W)LAN and use a classic WLAN Repeater if required.
+Please connect your devices directly to your (W)LAN and use a classic WLAN Repeater if required.
 
 ### Generation 1 (Gen 1)
 
@@ -176,7 +176,7 @@ Notes:
 
 ### Bluetooth Low Energy (BLU)
 
-**Experimental** - see [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required). Please note that currently no transmission of any data from teh adapter to the BLU devices is possible.
+**Experimental** - see [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required). Please note that currently no transmission of any data from the adapter to the BLU devices is possible.
 
 | Shelly Device                                 | Version     |
 |-----------------------------------------------| ----------- |
@@ -193,20 +193,20 @@ Notes:
 
 - Shelly Plus Wall Dimmer US
 - Shelly Plus Plug US
-- USB powered UVC LED strip
+- USB-powered UVC LED strip
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
 - Shelly Frankever Smart Sprinkler Controller (irrigation) (*)
 
 - Shelly BLU TRV
-- all BLU devices which need to receive data from the adapter.
+- all BLU devices that need to receive data from the adapter.
   
 (*) investigation still in progress
 (**) planned
 
 ## Sentry
 
-**This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information how to disable the error reporting see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
+**This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information on how to disable the error reporting, see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
 
 ## Changelog
 
@@ -214,14 +214,17 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (@GermanBluefox) Added support for Device manager: info and control of devices, provisioning, detect new devices in the background
+
 ### 10.6.2-alpha.1 (2026-02-26)
 - (mcm1957) DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.
 
 ### 10.6.2-alpha.0 (2026-02-26) - REVOKED
 - (copilot) Adapter requires admin >= 7.7.22 now
 - (mcm1957) PLUGS_UI component has been added to AZ PLUG (shellyazplug), Plug M (shellyplugmg3), Plug S Gen 3 (shellyplugsg3).
-- (mcm1957) PLUGS_UI component has been addepted for Plus Plug S (shellyplusplugs). No changes should be noticeable. 
-- (mcm1957) PLUGPM_UI component has been addepted for Plug PM (shellyplugpmg3).
+- (mcm1957) PLUGS_UI component has been added for Plus Plug S (shellyplusplugs). No changes should be noticeable. 
+- (mcm1957) PLUGPM_UI component has been added for Plug PM (shellyplugpmg3).
 
 ### 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]

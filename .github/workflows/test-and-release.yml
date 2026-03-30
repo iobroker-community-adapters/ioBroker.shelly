@@ -52,7 +52,7 @@ jobs:
   deploy:
     needs: [check-and-lint, adapter-tests]
 
-    # Permissions are required to create Github releases and npm trusted publishing
+    # Permissions are required to create GitHub releases and npm trusted publishing
     permissions:
       contents: write
       id-token: write

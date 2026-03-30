@@ -3,10 +3,11 @@
 const crypto = require('node:crypto');
 
 const utils = require('@iobroker/adapter-core');
-const objectHelper = require('@apollon/iobroker-tools').objectHelper; // Common adapter utils
+const objectHelper = require('./lib/objectHelper'); // Common adapter utils
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
 const BleDecoder = require('./lib/ble-decoder').BleDecoder;
+const DeviceManagement = require('./lib/deviceManager').default;
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
 const EventEmitter = require('events').EventEmitter;
@@ -24,6 +25,8 @@ class Shelly extends utils.Adapter {
         this.serverCoap = null;
         this.firmwareUpdateTimeout = null;
         this.onlineCheckTimeout = null;
+        this.deviceScanTimeout = null;
+        this.deviceManagement = null;
 
         this.onlineDevices = {};
 
@@ -32,12 +35,15 @@ class Shelly extends utils.Adapter {
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
+        this.on('objectChange', this.onObjectChange.bind(this));
         this.on('fileChange', this.onFileChange.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
     async onReady() {
         try {
+            this.deviceManagement = new DeviceManagement(this);
+
             // Upgrade older config
             if (await this.migrateConfig()) {
                 return;
@@ -46,7 +52,7 @@ class Shelly extends utils.Adapter {
             this.eventEmitter.setMaxListeners(Infinity);
 
             await this.mkdirAsync(this.namespace, 'scripts');
-            this.subscribeForeignFiles(this.namespace, '*');
+            await this.subscribeForeignFiles(this.namespace, '*');
 
             this.subscribeStates('*');
             objectHelper.init(this);
@@ -87,6 +93,13 @@ class Shelly extends utils.Adapter {
                     this.serverCoap.listen();
                 }
             });
+
+            // Periodic device scan
+            if (this.config.scanInterval > 0) {
+                const interval = Math.max(this.config.scanInterval, 60); // minimum 60 seconds
+                this.log.info(`[deviceScan] Periodic scan enabled every ${interval} seconds`);
+                this.setTimeout(() => this.deviceScan(), interval * 1000);
+            }
 
             if (this.config.autoupdate) {
                 this.log.info(`[firmwareUpdate] Auto-Update enabled - devices will be updated automatically`);
@@ -135,7 +148,13 @@ class Shelly extends utils.Adapter {
         this.config.qos = qos;
     }
 
+    onObjectChange(id, obj) {
+        this.deviceManagement?.onObjectChange(id, obj);
+    }
+
     onStateChange(id, state) {
+        this.deviceManagement?.onStateChange(id, state);
+
         // Warning, state can be null if it was deleted
         if (state && !state.ack) {
             const stateId = this.removeNamespace(id);
@@ -154,7 +173,7 @@ class Shelly extends utils.Adapter {
                 this.log.debug(`[onStateChange] "${stateId}" state changed - checking new encryption key`);
 
                 const encryptionKey = String(state.val).replaceAll('-', '').toUpperCase();
-                if (encryptionKey.length == 32) {
+                if (encryptionKey.length === 32) {
                     this.setState(stateId, { val: encryptionKey, ack: true });
                 }
             } else {
@@ -162,9 +181,7 @@ class Shelly extends utils.Adapter {
                     `[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`,
                 );
 
-                if (objectHelper) {
-                    objectHelper.handleStateChange(id, state);
-                }
+                objectHelper?.handleStateChange(id, state);
             }
         }
     }
@@ -178,6 +195,7 @@ class Shelly extends utils.Adapter {
      */
     async onUnload(callback) {
         this.isUnloaded = true;
+        this.deviceManagement?.destroy();
 
         if (this.onlineCheckTimeout) {
             this.clearTimeout(this.onlineCheckTimeout);
@@ -187,6 +205,11 @@ class Shelly extends utils.Adapter {
         if (this.firmwareUpdateTimeout) {
             this.clearTimeout(this.firmwareUpdateTimeout);
             this.firmwareUpdateTimeout = null;
+        }
+
+        if (this.deviceScanTimeout) {
+            this.clearTimeout(this.deviceScanTimeout);
+            this.deviceScanTimeout = null;
         }
 
         try {
@@ -399,6 +422,39 @@ class Shelly extends utils.Adapter {
         }
     }
 
+    async deviceScan() {
+        if (this.isUnloaded) {
+            return;
+        }
+
+        try {
+            if (this.deviceManagement) {
+                const newDevices = await this.deviceManagement.scanForNewDevices();
+
+                if (newDevices.length > 0) {
+                    const deviceList = newDevices.map(d => `${d.name} (${d.ip})`).join('\n');
+
+                    this.log.info(`[deviceScan] Found ${newDevices.length} new device(s): ${deviceList.replace(/\n/g, ', ')}`);
+
+                    await this.registerNotification('shelly', 'newDevices', deviceList);
+                } else {
+                    this.log.debug('[deviceScan] No new devices found');
+                }
+            }
+        } catch (err) {
+            this.log.error(`[deviceScan] Error: ${err}`);
+        }
+
+        // Schedule next scan
+        if (!this.isUnloaded && this.config.scanInterval > 0) {
+            const interval = Math.max(this.config.scanInterval, 60);
+            this.deviceScanTimeout = this.setTimeout(() => {
+                this.deviceScanTimeout = null;
+                this.deviceScan();
+            }, interval * 1000);
+        }
+    }
+
     convertFromHex(hexStr) {
         let bytes = [];
         for (let i = 0; i < hexStr.length; i += 2) {
@@ -406,6 +462,28 @@ class Shelly extends utils.Adapter {
             bytes.push(byte);
         }
         return bytes;
+    }
+
+    classifyBleDevice(dataKeys) {
+        if (dataKeys.includes('precipitation') || dataKeys.includes('gust_speed') || dataKeys.includes('rain_status')) {
+            return { model: 'BLU Outdoor Weather Station', icon: 'ble-ht' };
+        }
+        if (dataKeys.includes('motion')) {
+            return { model: 'BLU Motion Sensor', icon: 'ble-motion' };
+        }
+        if (dataKeys.includes('window') || dataKeys.includes('rotation')) {
+            return { model: 'BLU Door/Window Sensor', icon: 'ble-door-window' };
+        }
+        if (dataKeys.includes('humidity') && dataKeys.includes('temperature')) {
+            return { model: 'BLU H&T Sensor', icon: 'ble-ht' };
+        }
+        if (dataKeys.includes('button_4')) {
+            return { model: 'BLU Button Tough 4', icon: 'ble-button4' };
+        }
+        if (dataKeys.includes('button_1')) {
+            return { model: 'BLU Button 1', icon: 'ble-button1' };
+        }
+        return { model: 'Bluetooth', icon: 'ble-button1' };
     }
 
     async processBleMessage(val) {
@@ -419,17 +497,25 @@ class Shelly extends utils.Adapter {
                 );
             }
 
+            await this.extendObject('ble', {
+                type: 'folder',
+                common: {
+                    name: 'Bluetooth',
+                    icon: 'icons/ble.svg',
+                },
+                native: {},
+            });
+
             await this.extendObject(
                 `ble.${val.srcBle.mac}`,
                 {
                     type: 'device',
                     common: {
                         name: val.srcBle.mac,
-                        icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgNTEyIj48IS0tISBGb250IEF3ZXNvbWUgUHJvIDYuNC4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlIChDb21tZXJjaWFsIExpY2Vuc2UpIENvcHlyaWdodCAyMDIzIEZvbnRpY29ucywgSW5jLiAtLT48cGF0aCBkPSJNMTk2LjQ4IDI2MC4wMjNsOTIuNjI2LTEwMy4zMzNMMTQzLjEyNSAwdjIwNi4zM2wtODYuMTExLTg2LjExMS0zMS40MDYgMzEuNDA1IDEwOC4wNjEgMTA4LjM5OUwyNS42MDggMzY4LjQyMmwzMS40MDYgMzEuNDA1IDg2LjExMS04Ni4xMTFMMTQ1Ljg0IDUxMmwxNDguNTUyLTE0OC42NDQtOTcuOTEyLTEwMy4zMzN6bTQwLjg2LTEwMi45OTZsLTQ5Ljk3NyA0OS45NzgtLjMzOC0xMDAuMjk1IDUwLjMxNSA1MC4zMTd6TTE4Ny4zNjMgMzEzLjA0bDQ5Ljk3NyA0OS45NzgtNTAuMzE1IDUwLjMxNi4zMzgtMTAwLjI5NHoiLz48L3N2Zz4=',
                     },
                     native: {},
                 },
-                { preserve: { common: ['name'] } },
+                { preserve: { common: ['name', 'icon'] } },
             );
 
             await this.delObjectAsync(`ble.${val.srcBle.mac}.rssi`); // moved to receivedBy
@@ -665,6 +751,24 @@ class Shelly extends utils.Adapter {
                                 }
                             } else {
                                 this.log.debug(`[processBleMessage] skipping unknown attribute ${key} from ${val.src}`);
+                            }
+                        }
+
+                        // Classify BLE device and set name/icon if still default
+                        const bleDeviceObj = await this.getObjectAsync(`ble.${val.srcBle.mac}`);
+                        if (bleDeviceObj) {
+                            const dataKeys = Object.keys(unpackedData);
+                            const bleType = this.classifyBleDevice(dataKeys);
+
+                            const updates = {};
+                            if (bleDeviceObj.common.name === val.srcBle.mac) {
+                                updates.name = bleType.model;
+                            }
+                            if (!bleDeviceObj.common.icon || String(bleDeviceObj.common.icon).startsWith('data:')) {
+                                updates.icon = `icons/${bleType.icon}.png`;
+                            }
+                            if (Object.keys(updates).length > 0) {
+                                await this.extendObject(`ble.${val.srcBle.mac}`, { common: updates });
                             }
                         }
                     } else {

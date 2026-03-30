@@ -17,7 +17,11 @@ export default [
             'admin/words.js',
             'admin/admin.d.ts',
             '**/adapter-config.d.ts',
-        ]
+            'lib/deviceManager.d.ts',
+            'lib/deviceManager.js',
+            'lib/objectHelper.d.ts',
+            'lib/objectHelper.js',
+        ],
     },
     {
         rules: {
