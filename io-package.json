@@ -1,33 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "11.0.0-alpha.0",
+    "version": "11.0.0-alpha.1",
     "news": {
-      "11.0.0-alpha.0": {
-        "en": "Adapter requires admin >= 7.7.22 now\nAdded support for Device manager: info and control of devices and provisioning\nAdded detection of new devices in the background\nDISABLE all PLUG*_UI functionality due to unrecoverable HW faults.\nDependencies have been updated",
-        "de": "Adapter benötigt admin >= 7.7.22 jetzt\nUnterstützung für Gerätemanager: Informationen und Steuerung von Geräten und Bereitstellungen\nZusätzliche Erkennung neuer Geräte im Hintergrund\nDISABLE alle PLUG* UI Funktionalität aufgrund von auffindbaren HW-Fehlern.\nAbhängigkeiten wurden aktualisiert",
-        "ru": "Адаптер требует администратора >= 7.7.22\nДобавлена поддержка диспетчера устройств: информация и управление устройствами и обеспечение\nДобавлено обнаружение новых устройств в фоновом режиме\nОтключите все функции PLUG* UI из-за невосстановимых ошибок HW.\nЗависимости были обновлены",
-        "pt": "Adaptador requer admin >= 7.7.22 agora\nAdicionado suporte para o gerenciador de dispositivos: informação e controle de dispositivos e provisionamento\nAdicionado detecção de novos dispositivos em segundo plano\nDÁVEIS todas as funcionalidades PLUG* UI devido a falhas de HW irrecuperáveis.\nAs dependências foram atualizadas",
-        "nl": "Adapter vereist admin < 7.7.22 nu\nToegevoegde ondersteuning voor Apparaatbeheer: info en controle van apparaten en provisioning\nToegevoegd detectie van nieuwe apparaten op de achtergrond\nKUNNEN alle PLUG* UI functionaliteit als gevolg van onherstelbare HW fouten.\nAfhankelijkheden zijn bijgewerkt",
-        "fr": "Adaptateur nécessite admin >= 7.7.22 maintenant\nAjout du support pour le gestionnaire de périphériques : info et contrôle des périphériques et fourniture\nAjout de la détection de nouveaux dispositifs en arrière-plan\nDésactivez toutes les fonctionnalités PLUG* UI en raison de défauts HW non récupérables.\nLes dépendances ont été actualisées",
-        "it": "Adattatore richiede admin >= 7.7.22 ora\nAggiunto supporto per Device Manager: info e controllo dei dispositivi e provisioning\nAggiunto il rilevamento di nuovi dispositivi in background\nDISABILE tutte le funzionalità PLUG* UI a causa di guasti HW non recuperabili.\nLe dipendenze sono state aggiornate",
-        "es": "El adaptador requiere administrador= 7.7.22 ahora\nApoyo añadido para el administrador del dispositivo: información y control de dispositivos y provisión\nSe agregó la detección de nuevos dispositivos en el fondo\nDISABLE toda la funcionalidad PLUG* UI debido a fallas de HW no recuperables.\nSe han actualizado las dependencias",
-        "pl": "Adapter wymaga admin > = 7.7.22\nDodano wsparcie dla menedżera urządzeń: informacje i kontrola urządzeń i zaopatrzenie\nDodano wykrywanie nowych urządzeń w tle\nUSTALENIE wszystkich funkcji PLUG * _ UI z powodu niemożliwych do odzyskania błędów sprzętowych.\nZaktualizowano zależności",
-        "uk": "Адаптер вимагає адмін >= 7.7.22 тепер\nДодано підтримку диспетчера пристроїв: інформація та контроль пристроїв та надання\nДодано виявлення нових пристроїв у фоновому режимі\nDISABLE all PLUG* UI функціональність через невідновлювальні несправності HW.\nЗалежність було оновлено",
-        "zh-cn": "适任者需要管理员 \\ 7.7.22 现在\n添加设备管理器支持: 设备的信息和控制及提供\n在背景中添加检测新设备\n由于无法恢复的HW断层,所有PLUGXUI功能都无法恢复.\n依赖关系已更新"
-      },
-      "10.6.2-alpha.1": {
-        "en": "DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.",
-        "de": "DISABLE alle PLUG*_UI Funktionalität aufgrund von auffindbaren HW-Fehlern.",
-        "ru": "Отключить все функции PLUG*_UI из-за невосстановимых ошибок HW.",
-        "pt": "DÁVEIS todas as funcionalidades PLUG*_UI devido a falhas de HW irrecuperáveis.",
-        "nl": "KUNNEN alle PLUG*_UI functionaliteit als gevolg van onherstelbare HW fouten.",
-        "fr": "Désactiver toutes les fonctionnalités PLUG*_UI en raison de défauts HW non récupérables.",
-        "it": "DISABILE tutte le funzionalità PLUG*_UI a causa di guasti HW non recuperabili.",
-        "es": "DISABLE toda la funcionalidad PLUG*_UI debido a fallas de HW no recuperables.",
-        "pl": "USTALENIE wszystkich funkcji PLUG * _ UI z powodu niemożliwych do odzyskania błędów sprzętowych.",
-        "uk": "DISABLE all PLUG*_UI функціональність через невідновлювальні несправності HW.",
-        "zh-cn": "由于无法恢复的HW断层,所有PLUGXUI功能都无法恢复."
+      "11.0.0-alpha.1": {
+        "en": "Adapter requires admin >= 7.8.18 now\nAdded support for Device manager: info and control of devices and provisioning\nAdded detection of new devices in the background\nDISABLE all PLUG*_UI functionality due to unrecoverable HW faults.\nDependencies have been updated",
+        "de": "Adapter benötigt admin >= 7.8.18 jetzt\nUnterstützung für Gerätemanager: Informationen und Steuerung von Geräten und Bereitstellungen\nZusätzliche Erkennung neuer Geräte im Hintergrund\nDISABLE alle PLUG* UI Funktionalität aufgrund von auffindbaren HW-Fehlern.\nAbhängigkeiten wurden aktualisiert",
+        "ru": "Адаптер требует администратора >= 7.8.18\nДобавлена поддержка диспетчера устройств: информация и управление устройствами и обеспечение\nДобавлено обнаружение новых устройств в фоновом режиме\nОтключите все функции PLUG* UI из-за невосстановимых ошибок HW.\nЗависимости были обновлены",
+        "pt": "Adaptador requer admin >= 7.8.18 agora\nAdicionado suporte para o gerenciador de dispositivos: informação e controle de dispositivos e provisionamento\nAdicionado detecção de novos dispositivos em segundo plano\nDÁVEIS todas as funcionalidades PLUG* UI devido a falhas de HW irrecuperáveis.\nAs dependências foram atualizadas",
+        "nl": "Voor adapter is admin < 7.8.18 nu nodig\nToegevoegde ondersteuning voor Apparaatbeheer: info en controle van apparaten en provisioning\nToegevoegd detectie van nieuwe apparaten op de achtergrond\nKUNNEN alle PLUG* UI functionaliteit als gevolg van onherstelbare HW fouten.\nAfhankelijkheden zijn bijgewerkt",
+        "fr": "Adaptateur nécessite admin >= 7.8.18 maintenant\nAjout du support pour le gestionnaire de périphériques : info et contrôle des périphériques et fourniture\nAjout de la détection de nouveaux dispositifs en arrière-plan\nDésactivez toutes les fonctionnalités PLUG* UI en raison de défauts HW non récupérables.\nLes dépendances ont été actualisées",
+        "it": "Adattatore richiede admin >= 7.8.18 ora\nAggiunto supporto per Device Manager: info e controllo dei dispositivi e provisioning\nAggiunto il rilevamento di nuovi dispositivi in background\nDISABILE tutte le funzionalità PLUG* UI a causa di guasti HW non recuperabili.\nLe dipendenze sono state aggiornate",
+        "es": "Adaptador requiere administración= 7.8.18 ahora\nApoyo añadido para el administrador del dispositivo: información y control de dispositivos y provisión\nSe agregó la detección de nuevos dispositivos en el fondo\nDISABLE toda la funcionalidad PLUG* UI debido a fallas de HW no recuperables.\nSe han actualizado las dependencias",
+        "pl": "Adapter wymaga admin > = 7.8.18\nDodano wsparcie dla menedżera urządzeń: informacje i kontrola urządzeń i zaopatrzenie\nDodano wykrywanie nowych urządzeń w tle\nUSTALENIE wszystkich funkcji PLUG * _ UI z powodu niemożliwych do odzyskania błędów sprzętowych.\nZaktualizowano zależności",
+        "uk": "Адаптер вимагає адмін >= 7.8.18 тепер\nДодано підтримку диспетчера пристроїв: інформація та контроль пристроїв та надання\nДодано виявлення нових пристроїв у фоновому режимі\nDISABLE all PLUG* UI функціональність через невідновлювальні несправності HW.\nЗалежність було оновлено",
+        "zh-cn": "适任者现在需要管理\\\\ 7.8.18\n添加设备管理器支持: 设备的信息和控制及提供\n在背景中添加检测新设备\n由于无法恢复的HW断层,所有PLUGXUI功能都无法恢复.\n依赖关系已更新"
       },
       "10.6.1": {
         "en": "OnUnload handling has been improved. [#1279]\nshellypill: missing input 202 has been added, nonexisting analog input has been removed.",
@@ -80,19 +67,6 @@
         "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nDo komponentów EMData i EM1Data dodano funkcje ResetCounters. Ten efekt shelpro3em *ale także inne sheldem* urządzenia gen2 i później. \nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
         "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nДодано функцію ResetCounters до компонентів EMData та EM1Data. Цей ефект Shellypro3em* але також інші оболонки * пристрої gen2 і пізніше.\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
         "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n重新设置Counters功能已添加到组件EMData和EM1Data中. 这种效应Shellypro3em*,但也有其他Shellyem*设备gen2及以后.\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
-      },
-      "10.5.1-alpha.4": {
-        "en": "Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]\nChanges to shellypro3em could affect shellyemg3 and shellyproem50.\nSeveral fixes for Shelly Ecowitt WS90 have been implemented. [#1293]",
-        "de": "Einphasige Profilunterstützung wurde zu shellypro3em, shellypro3em63 und shellypro3em400 hinzugefügt. [#1016]\nÄnderungen an shellypro3em könnten Shellyemg3 und shellyproem50 beeinflussen.\nMehrere Fixes für Shelly Ecowitt WS90 wurden implementiert. (#1293)",
-        "ru": "Поддержка монофазного профиля была добавлена в shellypro3em, shellypro3em63 и shellypro3em400. [#1016]\nИзменения в shellypro3em могут повлиять на shellyemg3 и shellyproem50.\nНесколько исправлений для Shelly Ecowitt WS90 были реализованы. [#1293]",
-        "pt": "O suporte ao perfil monofásico foi adicionado ao shellypro3em, shellypro3em63 e shellypro3em400. [#1016]\nAlterações no shellypro3em podem afetar shellyemg3 e shellyproem50.\nVárias correções para Shelly Ecowitt WS90 foram implementadas. [#1293]",
-        "nl": "Monophase profiel ondersteuning is toegevoegd aan shellypro3em, shellypro3em63 en shellypro3em400. [#1016]\nVeranderingen in shellypro3em kunnen invloed hebben op shellyemg3 en shellyproem50.\nVerschillende oplossingen voor Shelly Ecowitt WS90 zijn geïmplementeerd. [#1293]",
-        "fr": "Le support du profil monophase a été ajouté à shellypro3em, shellypro3em63 et shellypro3em400. [#1016]\nLes changements à shellypro3em pourraient affecter shellyemg3 et shellyproem50.\nPlusieurs corrections pour Shelly Ecowitt WS90 ont été mises en œuvre. [#1293]",
-        "it": "Il supporto del profilo monofase è stato aggiunto a shellypro3em, shellypro3em63 e shellypro3em400\nLe modifiche a shellypro3em potrebbero influenzare shellyemg3 e shellyproem50.\nSono state implementate diverse correzioni per Shelly Ecowitt WS90. [#1293]",
-        "es": "El soporte de perfil monofásico se ha añadido a shellypro3em, shellypro3em63 y shellypro3em400. [#1016]\nLos cambios en el shellypro3em podrían afectar el shellyemg3 y el shellyproem50.\nSe han implementado varias correcciones para Shelly Ecowitt WS90. [#1293]",
-        "pl": "Wsparcie profilu monofazy zostało dodane do shelpro3em, shelpro3em63 i shelpro3em400. [# 1016]\nZmiany w stosunku do shellypro3em mogą wpływać na shellyemg3 i shellyproem50.\nKilka poprawek dla Shelly Ecowitt WS90 zostały wdrożone. [# 1293]",
-        "uk": "Монофазна профільна підтримка була додана в оболонкуpro3em63 і оболонкаpro3em400. [#1016]\nЗміни в оболонціpro3em можуть вплинути на оболонкуyemg3 і оболонкиproem50.\nРеалізовано декілька фіксаторів для Shelly Ecowitt WS90. [#1293]",
-        "zh-cn": "Monophase profile支持已添加到 shellypro3em, shellypro3em63 和 shellypro3em 400. [# 1016]\n舍利普罗3em的改变可能影响舍利普罗3和舍利普罗50.\n对Shelly Ecowitt WS90的若干规定已经实施。 [#1293] (中文(简体) )"
       }
     },
     "titleLang": {
@@ -195,7 +169,7 @@
     ],
     "globalDependencies": [
       {
-        "admin": ">=7.7.22"
+        "admin": ">=7.8.19"
       }
     ]
   },
