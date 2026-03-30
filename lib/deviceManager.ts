@@ -980,6 +980,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const allowed = deviceMode ? allowedChannels[deviceMode] : undefined;
 
         const ownStates: string[] = [];
+        const usedStates: string[] = [];
         // Collect all switch states for this device
         const keys = Object.keys(this.objects);
         for (const stateId of keys) {
@@ -993,7 +994,14 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             }
             ownStates.push(obj._id);
             const common = obj.common;
-            if (common?.role !== 'switch' || common?.type !== 'boolean' || !common?.write) {
+            if (
+                !common ||
+                common.role !== 'switch' ||
+                common.type !== 'boolean' ||
+                common.write === false ||
+                common.read === false ||
+                usedStates.includes(stateId)
+            ) {
                 continue;
             }
 
@@ -1035,6 +1043,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     return { val: state, ts: Date.now(), ack: true } as ioBroker.State;
                 },
             };
+            usedStates.push(obj._id);
             if (!controls.length) {
                 // If control has no label, it will be shown directly on
                 labelForFirstControl = label;
@@ -1051,7 +1060,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         for (const stateId of ownStates) {
             const obj = this.objects[stateId];
             const common = obj.common as ioBroker.StateCommon;
-            if (common?.type !== 'number' || !common?.write) {
+            if (
+                common?.type !== 'number' ||
+                common?.write === false ||
+                (common.max === undefined && common.unit !== '%') ||
+                usedStates.includes(stateId)
+            ) {
                 continue;
             }
 
@@ -1073,7 +1087,6 @@ export default class ShellyDeviceManagement extends DeviceManagement {
 
             const channelType = match[1];
             const channelIdx = match[2];
-            const prop = match[3];
 
             // Filter by device mode if set
             if (allowed && !allowed.includes(channelType)) {
@@ -1091,13 +1104,14 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 label = channelIdx ? `${channelType} ${channelIdx}` : channelType;
             }
 
+            usedStates.push(obj._id);
             const control: DeviceControl<string> = {
                 id: suffix.replace('.', '_'),
                 type: 'slider',
                 stateId: `${shortDeviceId}.${suffix}`,
                 min: common.min ?? 0,
                 max: common.max ?? 100,
-                unit: prop === 'Position' ? '%' : '%',
+                unit: common.unit || (common.max ?? 100) === 100 ? '%' : undefined,
                 label,
                 state:
                     (await this.adapter.getForeignStateAsync(obj._id)) ||
@@ -1111,8 +1125,174 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             controls.push(control);
         }
 
+        // Collect color controls (hex color states)
+        for (const stateId of ownStates) {
+            const obj = this.objects[stateId];
+            const common = obj.common as ioBroker.StateCommon;
+            if (common?.type !== 'string' || !common?.write || usedStates.includes(stateId)) {
+                continue;
+            }
+
+            const suffix = stateId.substring(prefix.length);
+
+            // Match Gen2+: RGB{id}.Color, RGBW{id}.Color; Gen1: lights.rgbw
+            const match = suffix.match(/^(RGB|RGBW)(\d*)\.Color$/) || suffix.match(/^(lights)\.(rgbw)$/);
+            if (!match) {
+                continue;
+            }
+
+            const channelType = match[1];
+
+            // Filter by device mode if set
+            if (allowed && !allowed.includes(channelType)) {
+                continue;
+            }
+
+            const control: DeviceControl<string> = {
+                id: suffix.replace('.', '_'),
+                type: 'color',
+                stateId: `${shortDeviceId}.${suffix}`,
+                label: I18n.getTranslatedObject('Color'),
+                state:
+                    (await this.adapter.getForeignStateAsync(obj._id)) ||
+                    ({ val: null, ts: Date.now(), ack: true } as ioBroker.State),
+                handler: async (_deviceId: string, _actionId: string, state: ControlState): Promise<ioBroker.State> => {
+                    await this.adapter.setForeignStateAsync(obj._id, state);
+                    return { val: state, ts: Date.now(), ack: true } as ioBroker.State;
+                },
+            };
+
+            controls.push(control);
+        }
+
+        let group: DeviceControl<string> | null = {
+            id: 'group_settings',
+            type: 'group',
+            label: I18n.getTranslatedObject('Settings'),
+        };
+
+        // Collect writable number states without common.max (not sliders)
+        for (const stateId of ownStates) {
+            const obj = this.objects[stateId];
+            const common = obj.common as ioBroker.StateCommon;
+            if (
+                common?.write === false ||
+                (common.type !== 'number' && common.type !== 'string') ||
+                usedStates.includes(stateId)
+            ) {
+                continue;
+            }
+
+            const suffix = stateId.substring(prefix.length);
+
+            // Skip states already handled above
+            if (controls.some(c => c.id === suffix.replace('.', '_'))) {
+                continue;
+            }
+
+            // Extract channel type for device mode filtering
+            const channelMatch = suffix.match(/^(Relay|Light|RGB|RGBW|lights|white|Cover)(\d*)\./);
+            if (channelMatch) {
+                const channelType = channelMatch[1];
+                if (allowed && !allowed.includes(channelType)) {
+                    continue;
+                }
+            }
+
+            // Build label from state name: "Relay0.transition" → "Relay 0 transition"
+            const label = suffix.replace(/(\d+)/, ' $1 ').replace(/\./g, ' ').trim();
+
+            let options: { label: string; value: string }[] | undefined;
+            if (common.states) {
+                if (Array.isArray(common.states)) {
+                    options = [];
+                    common.states.forEach((state: string) => options!.push({ value: state, label: state }));
+                } else {
+                    options = [];
+                    Object.keys(common.states).forEach(key =>
+                        options!.push({
+                            value: key,
+                            label: String((common.states as Record<string, string>)[key]),
+                        }),
+                    );
+                }
+            }
+            usedStates.push(obj._id);
+
+            const control: DeviceControl<string> = {
+                group: 'group_settings',
+                id: suffix.replace('.', '_'),
+                type: options ? 'select' : common.type === 'number' ? 'number' : 'text',
+                stateId: `${shortDeviceId}.${suffix}`,
+                min: common.min,
+                max: common.max,
+                unit: common.unit,
+                options,
+                label,
+                state:
+                    (await this.adapter.getForeignStateAsync(obj._id)) ||
+                    ({ val: null, ts: Date.now(), ack: true } as ioBroker.State),
+                handler: async (_deviceId: string, _actionId: string, state: ControlState): Promise<ioBroker.State> => {
+                    await this.adapter.setForeignStateAsync(obj._id, state);
+                    return { val: state, ts: Date.now(), ack: true } as ioBroker.State;
+                },
+            };
+            if (group) {
+                controls.push(group);
+                group = null;
+            }
+            controls.push(control);
+        }
+
+        // Collect buttons
+        for (const stateId of ownStates) {
+            const obj = this.objects[stateId];
+            const common = obj.common as ioBroker.StateCommon;
+            if (common?.write === false || common.type !== 'boolean' || usedStates.includes(stateId)) {
+                continue;
+            }
+
+            const suffix = stateId.substring(prefix.length);
+
+            // Skip states already handled above
+            if (controls.some(c => c.id === suffix.replace('.', '_'))) {
+                continue;
+            }
+
+            // Extract channel type for device mode filtering
+            const channelMatch = suffix.match(/^(Relay|Light|RGB|RGBW|lights|white|Cover)(\d*)\./);
+            if (channelMatch) {
+                const channelType = channelMatch[1];
+                if (allowed && !allowed.includes(channelType)) {
+                    continue;
+                }
+            }
+
+            // Build label from state name: "Relay0.transition" → "Relay 0 transition"
+            const label = suffix.replace(/(\d+)/, ' $1 ').replace(/\./g, ' ').trim();
+
+            usedStates.push(obj._id);
+            const control: DeviceControl<string> = {
+                group: 'group_settings',
+                id: suffix.replace('.', '_'),
+                type: 'button',
+                stateId: `${shortDeviceId}.${suffix}`,
+                label,
+                variant: 'outlined',
+                handler: async (_deviceId: string, _actionId: string, state: ControlState): Promise<ioBroker.State> => {
+                    await this.adapter.setForeignStateAsync(obj._id, state);
+                    return { val: state, ts: Date.now(), ack: true } as ioBroker.State;
+                },
+            };
+            if (group) {
+                controls.push(group);
+                group = null;
+            }
+            controls.push(control);
+        }
+
         // Sort by ID for consistent order
-        controls.sort((a, b) => a.id.localeCompare(b.id));
+        // controls.sort((a, b) => a.id.localeCompare(b.id));
 
         return controls;
     }
