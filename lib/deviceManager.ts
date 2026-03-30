@@ -2017,7 +2017,6 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         };
         if (mqttId) {
             mqttConfig.topic_prefix = mqttId;
-            mqttConfig.client_id = mqttId;
         }
         const mqttResult = await this.httpPost(
             `http://${ip}/rpc/Mqtt.SetConfig`,
