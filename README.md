@@ -214,7 +214,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
 -->
 ### 11.0.0-alpha.1 (2026-03-30)
-- (copilot) Adapter requires admin >= 7.8.18 now
+- (copilot) Adapter requires admin >= 7.8.19 now
 - (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
 - (@GermanBluefox) Added detection of new devices in the background
 - (mcm1957) DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.
