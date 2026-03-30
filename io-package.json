@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "10.6.2-alpha.1",
+    "version": "11.0.0-alpha.0",
     "news": {
+      "11.0.0-alpha.0": {
+        "en": "Adapter requires admin >= 7.7.22 now\nAdded support for Device manager: info and control of devices and provisioning\nAdded detection of new devices in the background\nDISABLE all PLUG*_UI functionality due to unrecoverable HW faults.\nDependencies have been updated",
+        "de": "Adapter benötigt admin >= 7.7.22 jetzt\nUnterstützung für Gerätemanager: Informationen und Steuerung von Geräten und Bereitstellungen\nZusätzliche Erkennung neuer Geräte im Hintergrund\nDISABLE alle PLUG* UI Funktionalität aufgrund von auffindbaren HW-Fehlern.\nAbhängigkeiten wurden aktualisiert",
+        "ru": "Адаптер требует администратора >= 7.7.22\nДобавлена поддержка диспетчера устройств: информация и управление устройствами и обеспечение\nДобавлено обнаружение новых устройств в фоновом режиме\nОтключите все функции PLUG* UI из-за невосстановимых ошибок HW.\nЗависимости были обновлены",
+        "pt": "Adaptador requer admin >= 7.7.22 agora\nAdicionado suporte para o gerenciador de dispositivos: informação e controle de dispositivos e provisionamento\nAdicionado detecção de novos dispositivos em segundo plano\nDÁVEIS todas as funcionalidades PLUG* UI devido a falhas de HW irrecuperáveis.\nAs dependências foram atualizadas",
+        "nl": "Adapter vereist admin < 7.7.22 nu\nToegevoegde ondersteuning voor Apparaatbeheer: info en controle van apparaten en provisioning\nToegevoegd detectie van nieuwe apparaten op de achtergrond\nKUNNEN alle PLUG* UI functionaliteit als gevolg van onherstelbare HW fouten.\nAfhankelijkheden zijn bijgewerkt",
+        "fr": "Adaptateur nécessite admin >= 7.7.22 maintenant\nAjout du support pour le gestionnaire de périphériques : info et contrôle des périphériques et fourniture\nAjout de la détection de nouveaux dispositifs en arrière-plan\nDésactivez toutes les fonctionnalités PLUG* UI en raison de défauts HW non récupérables.\nLes dépendances ont été actualisées",
+        "it": "Adattatore richiede admin >= 7.7.22 ora\nAggiunto supporto per Device Manager: info e controllo dei dispositivi e provisioning\nAggiunto il rilevamento di nuovi dispositivi in background\nDISABILE tutte le funzionalità PLUG* UI a causa di guasti HW non recuperabili.\nLe dipendenze sono state aggiornate",
+        "es": "El adaptador requiere administrador= 7.7.22 ahora\nApoyo añadido para el administrador del dispositivo: información y control de dispositivos y provisión\nSe agregó la detección de nuevos dispositivos en el fondo\nDISABLE toda la funcionalidad PLUG* UI debido a fallas de HW no recuperables.\nSe han actualizado las dependencias",
+        "pl": "Adapter wymaga admin > = 7.7.22\nDodano wsparcie dla menedżera urządzeń: informacje i kontrola urządzeń i zaopatrzenie\nDodano wykrywanie nowych urządzeń w tle\nUSTALENIE wszystkich funkcji PLUG * _ UI z powodu niemożliwych do odzyskania błędów sprzętowych.\nZaktualizowano zależności",
+        "uk": "Адаптер вимагає адмін >= 7.7.22 тепер\nДодано підтримку диспетчера пристроїв: інформація та контроль пристроїв та надання\nДодано виявлення нових пристроїв у фоновому режимі\nDISABLE all PLUG* UI функціональність через невідновлювальні несправності HW.\nЗалежність було оновлено",
+        "zh-cn": "适任者需要管理员 \\ 7.7.22 现在\n添加设备管理器支持: 设备的信息和控制及提供\n在背景中添加检测新设备\n由于无法恢复的HW断层,所有PLUGXUI功能都无法恢复.\n依赖关系已更新"
+      },
       "10.6.2-alpha.1": {
         "en": "DISABLE all PLUG*_UI functionality due to unrecoverable HW faults.",
         "de": "DISABLE alle PLUG*_UI Funktionalität aufgrund von auffindbaren HW-Fehlern.",
