@@ -48,7 +48,7 @@
     "@iobroker/testing": "^5.2.2",
     "@types/bl": "^5.1.4",
     "@types/node": "^25.5.0",
-    "typescript": "~5.9.3"
+    "typescript": "~6.0.2"
   },
   "main": "main.js",
   "files": [
