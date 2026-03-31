@@ -10,6 +10,7 @@ import {
     type DeviceLoadContext,
     type DeviceRefresh,
     type InstanceDetails,
+    type BackEndCommandJsonFormOptions,
 } from '@iobroker/dm-utils';
 // It must be exported to index in dm-utils
 import type { ControlState } from '@iobroker/dm-utils/build/types/base';
@@ -1627,6 +1628,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 // Build a form with checkbox + name input per new device
                 const items: Record<string, ConfigItemAny> = {};
                 const data: Record<string, unknown> = {};
+                const anyChecked: string[] = [];
 
                 if (newDevices.length > 0) {
                     // Fetch real device names from devices
@@ -1640,6 +1642,16 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         size: 4,
                     } as ConfigItemAny;
 
+                    if (newDevices.length > 1) {
+                        items.selectAll = {
+                            newLine: true,
+                            type: 'checkbox',
+                            label: I18n.getTranslatedObject('Select all'),
+                            xs: 12,
+                        };
+                    }
+                    data.selectAll = false;
+
                     for (let i = 0; i < newDevices.length; i++) {
                         items[`add_${i}`] = {
                             newLine: true,
@@ -1647,8 +1659,13 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                             label: `${newDevices[i].name} — ${newDevices[i].ip}`,
                             xs: 12,
                             md: 6,
+                            onChange: {
+                                alsoDependsOn: ['selectAll'],
+                                calculateFunc: 'data.selectAll',
+                                ignoreOwnChanges: true,
+                            },
                         };
-                        data[`add_${i}`] = true;
+                        data[`add_${i}`] = false;
 
                         items[`name_${i}`] = {
                             type: 'text',
@@ -1661,6 +1678,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                             md: 6,
                         };
                         data[`name_${i}`] = deviceNames[i] || newDevices[i].name;
+                        anyChecked.push(`!data["add_${i}"]`);
                     }
                 }
 
@@ -1681,14 +1699,17 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     }
                 }
 
-                const result = await context.showForm(
-                    { type: 'panel', items },
-                    {
-                        data,
-                        title: I18n.getTranslatedObject('Configure selected devices'),
-                        ignoreApplyDisabled: true,
-                    },
-                );
+                const options: BackEndCommandJsonFormOptions = {
+                    data,
+                    title: I18n.getTranslatedObject('Configure selected devices'),
+                };
+                if (anyChecked.length) {
+                    options.applyDisabledRule = anyChecked.join(' && ');
+                } else {
+                    options.ignoreApplyDisabled = true;
+                }
+
+                const result = await context.showForm({ type: 'panel', items }, options);
 
                 if (result) {
                     const selected: { name: string; ip: string; customName: string }[] = [];
@@ -1864,7 +1885,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         }
         await context.showForm(
             { type: 'panel', items },
-            { title: I18n.getTranslatedObject('Configuration results'), buttons: ['close'] },
+            { title: I18n.getTranslatedObject('Configuration results'), buttons: ['apply'], ignoreApplyDisabled: true },
         );
     }
 
