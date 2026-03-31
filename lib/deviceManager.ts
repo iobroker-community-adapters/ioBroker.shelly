@@ -1,22 +1,22 @@
+import { I18n, type AdapterInstance } from '@iobroker/adapter-core';
 import {
     DeviceManagement,
-    type DeviceInfo,
-    type DeviceLoadContext,
     type ActionContext,
-    type DeviceDetails,
-    type InstanceDetails,
     type ConfigItemAny,
-    type DeviceRefresh,
     type ConfigItemState,
     type DeviceControl,
+    type DeviceDetails,
+    type DeviceInfo,
+    type DeviceLoadContext,
+    type DeviceRefresh,
+    type InstanceDetails,
 } from '@iobroker/dm-utils';
-import { type AdapterInstance, I18n } from '@iobroker/adapter-core';
 // It must be exported to index in dm-utils
-import * as dgram from 'node:dgram';
+import type { ControlState } from '@iobroker/dm-utils/build/types/base';
 import * as crypto from 'node:crypto';
+import * as dgram from 'node:dgram';
 import * as http from 'node:http';
 import * as os from 'node:os';
-import type { ControlState } from '@iobroker/dm-utils/build/types/base';
 
 class HttpAuthError extends Error {
     constructor() {
