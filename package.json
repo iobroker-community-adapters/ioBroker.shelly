@@ -26,7 +26,7 @@
     "url": "git+https://github.com/iobroker-community-adapters/ioBroker.shelly.git"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.3.2",
