@@ -1748,6 +1748,26 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         return name.toLowerCase();
     }
 
+    /**
+     * Compute the MQTT ID from device mDNS name and custom name.
+     * Returns empty string if no custom name is provided.
+     *
+     * @param deviceName mDNS device name (e.g. "ShellyPlus1-44179394D4D4")
+     * @param customName User-provided custom name
+     */
+    private computeMqttId(deviceName: string, customName: string): string {
+        const devicePrefix = this.getDevicePrefix(deviceName);
+        let suffix = customName ? customName.toLowerCase() : '';
+        if (suffix.startsWith(devicePrefix)) {
+            suffix = suffix.substring(devicePrefix.length);
+        }
+        suffix = suffix
+            .replace(/[^a-z0-9_]/g, '_')
+            .replace(/_{2,}/g, '_')
+            .replace(/^_+|_+$/g, '');
+        return suffix ? `${devicePrefix}${suffix}` : '';
+    }
+
     private async provisionDevices(
         devices: { name: string; ip: string; customName: string }[],
         context: ActionContext,
@@ -1765,6 +1785,32 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         }
 
         const mqttServer = `${localIp}:${mqttPort}`;
+
+        // Collect existing device IDs to detect MQTT ID conflicts
+        const usedMqttIds = new Set<string>();
+        for (const id in this.objects) {
+            if (this.objects[id].type === 'device') {
+                usedMqttIds.add(id.substring(this.adapter.namespace.length + 1));
+            }
+        }
+
+        // Pre-compute MQTT IDs and check for conflicts before provisioning
+        const mqttIds: (string | undefined)[] = [];
+        for (let i = 0; i < devices.length; i++) {
+            const dev = devices[i];
+            const mqttId = this.computeMqttId(dev.name, dev.customName.trim());
+            if (mqttId) {
+                if (usedMqttIds.has(mqttId)) {
+                    await context.showMessage(
+                        `MQTT ID "${mqttId}" is already used by another device. Please choose a different name for "${dev.customName.trim()}".`,
+                    );
+                    return;
+                }
+                usedMqttIds.add(mqttId);
+            }
+            mqttIds.push(mqttId || undefined);
+        }
+
         let progress = await context.openProgress('Configuring devices...', { value: 0 });
         const results: string[] = [];
 
@@ -1776,7 +1822,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             });
 
             try {
-                await this.provisionSingleDevice(dev, mqttServer, mqttUser, mqttPass, httpPass, timeZone);
+                await this.provisionSingleDevice(dev, mqttServer, mqttUser, mqttPass, httpPass, timeZone, mqttIds[i]);
                 results.push(`✓ ${dev.name}${dev.customName.trim() ? ` → ${dev.customName.trim()}` : ''}`);
                 this.adapter.log.info(`[DeviceManager] Provisioned ${dev.name} (${dev.ip})`);
             } catch (err) {
@@ -1792,6 +1838,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                                 mqttPass,
                                 httpPass,
                                 timeZone,
+                                mqttIds[i],
                                 httpPass,
                             );
                             results.push(`✓ ${dev.name}${dev.customName.trim() ? ` → ${dev.customName.trim()}` : ''}`);
@@ -1847,6 +1894,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                                 mqttPass,
                                 httpPass,
                                 timeZone,
+                                mqttIds[i],
                                 devPass,
                             );
                             results.push(`✓ ${dev.name}${dev.customName.trim() ? ` → ${dev.customName.trim()}` : ''}`);
@@ -1896,19 +1944,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         mqttPass: string,
         httpPass: string,
         timeZone: string,
+        mqttId?: string,
         devicePassword?: string,
     ): Promise<void> {
         const auth = devicePassword ? { user: 'admin', pass: devicePassword } : undefined;
         const { gen, id: deviceId } = await this.detectDeviceGen(dev.ip, auth);
-        const devicePrefix = this.getDevicePrefix(dev.name);
         const customName = dev.customName.trim();
-
-        let sanitizedName = customName ? customName.toLowerCase().replace(/[^a-z0-9_-]/g, '_') : '';
-        // Remove device prefix from custom name to avoid duplication (e.g., "shelly1lg3-kitchen" → "kitchen")
-        if (sanitizedName.startsWith(devicePrefix)) {
-            sanitizedName = sanitizedName.substring(devicePrefix.length);
-        }
-        const mqttId = sanitizedName ? `${devicePrefix}${sanitizedName}` : undefined;
 
         // Step 1: Configure MQTT, device name, timezone (no auth change yet)
         let needsRestart: boolean;
@@ -2041,6 +2082,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         };
         if (mqttId) {
             mqttConfig.topic_prefix = mqttId;
+            mqttConfig.client_id = mqttId;
         }
         const mqttResult = await this.httpPost(
             `http://${ip}/rpc/Mqtt.SetConfig`,
