@@ -219,18 +219,24 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     }
 
     protected getInstanceInfo(): InstanceDetails {
+        const protocol = this.adapter.config.protocol || 'coap';
+        const actions =
+            protocol === 'coap'
+                ? []
+                : [
+                      {
+                          id: 'discover',
+                          icon: 'search',
+                          title: I18n.getTranslatedObject('Discover devices'),
+                          description: I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
+                          handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
+                              await this.handleDiscoverDevices(context),
+                      },
+                  ];
+
         return {
             apiVersion: 'v3',
-            actions: [
-                {
-                    id: 'discover',
-                    icon: 'search',
-                    title: I18n.getTranslatedObject('Discover devices'),
-                    description: I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
-                    handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
-                        await this.handleDiscoverDevices(context),
-                },
-            ],
+            actions,
             smallCards: true,
         };
     }
@@ -1950,6 +1956,13 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const auth = devicePassword ? { user: 'admin', pass: devicePassword } : undefined;
         const { gen, id: deviceId } = await this.detectDeviceGen(dev.ip, auth);
         const customName = dev.customName.trim();
+
+        // Gen1 devices must not be provisioned to MQTT — it disconnects them from Shelly Cloud and App
+        if (gen < 2) {
+            throw new Error(
+                'Gen1 devices cannot be provisioned via MQTT. Enabling MQTT on Gen1 devices disconnects them from Shelly Cloud and the Shelly App. Use CoAP protocol instead.',
+            );
+        }
 
         // Step 1: Configure MQTT, device name, timezone (no auth change yet)
         let needsRestart: boolean;
