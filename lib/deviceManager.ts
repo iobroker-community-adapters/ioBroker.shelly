@@ -229,6 +229,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                           icon: 'search',
                           title: I18n.getTranslatedObject('Discover devices'),
                           description: I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
+                          timeout: 40_000,
                           handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
                               await this.handleDiscoverDevices(context),
                       },
