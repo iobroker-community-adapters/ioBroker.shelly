@@ -48,6 +48,14 @@ export default class ShellyDeviceManagement extends DeviceManagement {
      * @param name
      */
     private getDevicePrefix;
+    /**
+     * Compute the MQTT ID from device mDNS name and custom name.
+     * Returns empty string if no custom name is provided.
+     *
+     * @param deviceName mDNS device name (e.g. "ShellyPlus1-44179394D4D4")
+     * @param customName User-provided custom name
+     */
+    private computeMqttId;
     private provisionDevices;
     private provisionSingleDevice;
     private provisionGen1;

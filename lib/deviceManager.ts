@@ -10,6 +10,7 @@ import {
     type DeviceLoadContext,
     type DeviceRefresh,
     type InstanceDetails,
+    type BackEndCommandJsonFormOptions,
 } from '@iobroker/dm-utils';
 // It must be exported to index in dm-utils
 import type { ControlState } from '@iobroker/dm-utils/build/types/base';
@@ -218,18 +219,25 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     }
 
     protected getInstanceInfo(): InstanceDetails {
+        const protocol = this.adapter.config.protocol || 'coap';
+        const actions =
+            protocol === 'coap'
+                ? []
+                : [
+                      {
+                          id: 'discover',
+                          icon: 'search',
+                          title: I18n.getTranslatedObject('Discover devices'),
+                          description: I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
+                          timeout: 40_000,
+                          handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
+                              await this.handleDiscoverDevices(context),
+                      },
+                  ];
+
         return {
             apiVersion: 'v3',
-            actions: [
-                {
-                    id: 'discover',
-                    icon: 'search',
-                    title: I18n.getTranslatedObject('Discover devices'),
-                    description: I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
-                    handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
-                        await this.handleDiscoverDevices(context),
-                },
-            ],
+            actions,
             smallCards: true,
         };
     }
@@ -1627,6 +1635,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 // Build a form with checkbox + name input per new device
                 const items: Record<string, ConfigItemAny> = {};
                 const data: Record<string, unknown> = {};
+                const anyChecked: string[] = [];
 
                 if (newDevices.length > 0) {
                     // Fetch real device names from devices
@@ -1640,6 +1649,16 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         size: 4,
                     } as ConfigItemAny;
 
+                    if (newDevices.length > 1) {
+                        items.selectAll = {
+                            newLine: true,
+                            type: 'checkbox',
+                            label: I18n.getTranslatedObject('Select all'),
+                            xs: 12,
+                        };
+                    }
+                    data.selectAll = false;
+
                     for (let i = 0; i < newDevices.length; i++) {
                         items[`add_${i}`] = {
                             newLine: true,
@@ -1647,8 +1666,13 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                             label: `${newDevices[i].name} — ${newDevices[i].ip}`,
                             xs: 12,
                             md: 6,
+                            onChange: {
+                                alsoDependsOn: ['selectAll'],
+                                calculateFunc: 'data.selectAll',
+                                ignoreOwnChanges: true,
+                            },
                         };
-                        data[`add_${i}`] = true;
+                        data[`add_${i}`] = false;
 
                         items[`name_${i}`] = {
                             type: 'text',
@@ -1661,6 +1685,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                             md: 6,
                         };
                         data[`name_${i}`] = deviceNames[i] || newDevices[i].name;
+                        anyChecked.push(`!data["add_${i}"]`);
                     }
                 }
 
@@ -1681,14 +1706,17 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     }
                 }
 
-                const result = await context.showForm(
-                    { type: 'panel', items },
-                    {
-                        data,
-                        title: I18n.getTranslatedObject('Configure selected devices'),
-                        ignoreApplyDisabled: true,
-                    },
-                );
+                const options: BackEndCommandJsonFormOptions = {
+                    data,
+                    title: I18n.getTranslatedObject('Configure selected devices'),
+                };
+                if (anyChecked.length) {
+                    options.applyDisabledRule = anyChecked.join(' && ');
+                } else {
+                    options.ignoreApplyDisabled = true;
+                }
+
+                const result = await context.showForm({ type: 'panel', items }, options);
 
                 if (result) {
                     const selected: { name: string; ip: string; customName: string }[] = [];
@@ -1727,6 +1755,26 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         return name.toLowerCase();
     }
 
+    /**
+     * Compute the MQTT ID from device mDNS name and custom name.
+     * Returns empty string if no custom name is provided.
+     *
+     * @param deviceName mDNS device name (e.g. "ShellyPlus1-44179394D4D4")
+     * @param customName User-provided custom name
+     */
+    private computeMqttId(deviceName: string, customName: string): string {
+        const devicePrefix = this.getDevicePrefix(deviceName);
+        let suffix = customName ? customName.toLowerCase() : '';
+        if (suffix.startsWith(devicePrefix)) {
+            suffix = suffix.substring(devicePrefix.length);
+        }
+        suffix = suffix
+            .replace(/[^a-z0-9_]/g, '_')
+            .replace(/_{2,}/g, '_')
+            .replace(/^_+|_+$/g, '');
+        return suffix ? `${devicePrefix}${suffix}` : '';
+    }
+
     private async provisionDevices(
         devices: { name: string; ip: string; customName: string }[],
         context: ActionContext,
@@ -1744,6 +1792,32 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         }
 
         const mqttServer = `${localIp}:${mqttPort}`;
+
+        // Collect existing device IDs to detect MQTT ID conflicts
+        const usedMqttIds = new Set<string>();
+        for (const id in this.objects) {
+            if (this.objects[id].type === 'device') {
+                usedMqttIds.add(id.substring(this.adapter.namespace.length + 1));
+            }
+        }
+
+        // Pre-compute MQTT IDs and check for conflicts before provisioning
+        const mqttIds: (string | undefined)[] = [];
+        for (let i = 0; i < devices.length; i++) {
+            const dev = devices[i];
+            const mqttId = this.computeMqttId(dev.name, dev.customName.trim());
+            if (mqttId) {
+                if (usedMqttIds.has(mqttId)) {
+                    await context.showMessage(
+                        `MQTT ID "${mqttId}" is already used by another device. Please choose a different name for "${dev.customName.trim()}".`,
+                    );
+                    return;
+                }
+                usedMqttIds.add(mqttId);
+            }
+            mqttIds.push(mqttId || undefined);
+        }
+
         let progress = await context.openProgress('Configuring devices...', { value: 0 });
         const results: string[] = [];
 
@@ -1755,7 +1829,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             });
 
             try {
-                await this.provisionSingleDevice(dev, mqttServer, mqttUser, mqttPass, httpPass, timeZone);
+                await this.provisionSingleDevice(dev, mqttServer, mqttUser, mqttPass, httpPass, timeZone, mqttIds[i]);
                 results.push(`✓ ${dev.name}${dev.customName.trim() ? ` → ${dev.customName.trim()}` : ''}`);
                 this.adapter.log.info(`[DeviceManager] Provisioned ${dev.name} (${dev.ip})`);
             } catch (err) {
@@ -1771,6 +1845,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                                 mqttPass,
                                 httpPass,
                                 timeZone,
+                                mqttIds[i],
                                 httpPass,
                             );
                             results.push(`✓ ${dev.name}${dev.customName.trim() ? ` → ${dev.customName.trim()}` : ''}`);
@@ -1826,6 +1901,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                                 mqttPass,
                                 httpPass,
                                 timeZone,
+                                mqttIds[i],
                                 devPass,
                             );
                             results.push(`✓ ${dev.name}${dev.customName.trim() ? ` → ${dev.customName.trim()}` : ''}`);
@@ -1864,7 +1940,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         }
         await context.showForm(
             { type: 'panel', items },
-            { title: I18n.getTranslatedObject('Configuration results'), buttons: ['close'] },
+            { title: I18n.getTranslatedObject('Configuration results'), buttons: ['apply'], ignoreApplyDisabled: true },
         );
     }
 
@@ -1875,16 +1951,19 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         mqttPass: string,
         httpPass: string,
         timeZone: string,
+        mqttId?: string,
         devicePassword?: string,
     ): Promise<void> {
         const auth = devicePassword ? { user: 'admin', pass: devicePassword } : undefined;
         const { gen, id: deviceId } = await this.detectDeviceGen(dev.ip, auth);
-        const devicePrefix = this.getDevicePrefix(dev.name);
         const customName = dev.customName.trim();
 
-        const mqttId = customName
-            ? `${devicePrefix}${customName.toLowerCase().replace(/[^a-z0-9_-]/g, '_')}`
-            : undefined;
+        // Gen1 devices must not be provisioned to MQTT — it disconnects them from Shelly Cloud and App
+        if (gen < 2) {
+            throw new Error(
+                'Gen1 devices cannot be provisioned via MQTT. Enabling MQTT on Gen1 devices disconnects them from Shelly Cloud and the Shelly App. Use CoAP protocol instead.',
+            );
+        }
 
         // Step 1: Configure MQTT, device name, timezone (no auth change yet)
         let needsRestart: boolean;
@@ -2015,11 +2094,10 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             rpc_ntf: true,
             status_ntf: true,
         };
-        // client_id must be left at factory default (at least for now)
-        // if (mqttId) {
-        //     mqttConfig.topic_prefix = mqttId;
-        //     mqttConfig.client_id = mqttId;
-        // }
+        if (mqttId) {
+            mqttConfig.topic_prefix = mqttId;
+            mqttConfig.client_id = mqttId;
+        }
         const mqttResult = await this.httpPost(
             `http://${ip}/rpc/Mqtt.SetConfig`,
             JSON.stringify({ config: mqttConfig }),
