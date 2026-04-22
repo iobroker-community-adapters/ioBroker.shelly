@@ -29,6 +29,7 @@ jobs:
       - uses: ioBroker/testing-action-check@v1
         with:
           node-version: '24.x'
+          type-checking: true
           lint: true
 
   adapter-tests:
@@ -47,6 +48,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           os: ${{ matrix.os }}
+          build: true
           extra-tests: npm run test:js
 
   deploy:
@@ -68,6 +70,7 @@ jobs:
       - uses: ioBroker/testing-action-deploy@v1
         with:
           node-version: '24.x'
+          build: true
           # npm-token: ${{ secrets.NPM_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
