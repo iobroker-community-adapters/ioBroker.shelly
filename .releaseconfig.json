@@ -1,3 +1,10 @@
 {
-    "plugins": ["iobroker", "license", "manual-review"]
+    "plugins": [
+        "iobroker",
+        "license",
+        "manual-review"
+    ],
+    "exec": {
+        "before_commit": "npm run build"
+    }
 }
