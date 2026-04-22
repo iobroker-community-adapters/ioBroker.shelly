@@ -25,6 +25,6 @@
         "useUnknownInCatchVariables": false,
         "types": ["@iobroker/types", "node"]
     },
-    "include": ["lib/**/*.ts", "lib/*.d.ts"],
+    "include": ["src/**/*.ts", "src/*.d.ts"],
     "exclude": ["build/**", "node_modules/**", "eslint.config.mjs"]
 }

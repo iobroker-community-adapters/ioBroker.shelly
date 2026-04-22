@@ -27,7 +27,7 @@ npm run test:integration
 # Run a single test file
 npx mocha path/to/file.test.js
 
-# Compile TypeScript (lib/deviceManager.ts)
+# Compile TypeScript (src/lib/deviceManager.ts, src/lib/objectHelper.ts → build/lib/)
 npx tsc -p tsconfig.build.json
 
 # Generate translations after modifying admin/jsonConfig.json
@@ -60,7 +60,8 @@ Organized by generation: `gen1/`, `gen2/`, `gen3/`, `gen4/`, `poweredbyshelly/`.
 - `lib/shelly-helper.js` - Utilities: temperature/color conversion, HTTP API calls, icon generation, state management
 - `lib/ble-decoder.js` - BTHome protocol BLE message decoding
 - `lib/colorconv.js` - Color space conversions (RGB, RGBW, HSV)
-- `lib/deviceManager.ts` - TypeScript module extending `@iobroker/dm-utils` for device lifecycle management (compiled output: `lib/deviceManager.js`, `lib/deviceManager.d.ts`)
+- `src/lib/deviceManager.ts` - TypeScript module extending `@iobroker/dm-utils` for device lifecycle management (compiled output: `build/lib/deviceManager.js`, `build/lib/deviceManager.d.ts`)
+- `src/lib/objectHelper.ts` - TypeScript helper for ioBroker object/state management (compiled output: `build/lib/objectHelper.js`, `build/lib/objectHelper.d.ts`)
 
 ### Admin UI
 
@@ -68,13 +69,13 @@ Organized by generation: `gen1/`, `gen2/`, `gen3/`, `gen4/`, `poweredbyshelly/`.
 
 ## Code Conventions
 
-- JavaScript codebase with one TypeScript file (`lib/deviceManager.ts`)
+- JavaScript codebase with TypeScript source files in `src/lib/` (compiled to `build/lib/`)
 - 4-space indentation (ioBroker standard)
 - ESLint config: `@iobroker/eslint-config` via `eslint.config.mjs`
 - JSDoc requirements are disabled
 - Use `adapter.log.{debug,info,warn,error}()` for logging, never `console.log`
 - Unused variables: remove or prefix with underscore
-- `lib/deviceManager.js` and `lib/deviceManager.d.ts` are compiled outputs - edit `lib/deviceManager.ts` instead
+- `build/lib/deviceManager.js` and `build/lib/objectHelper.js` are compiled outputs - edit files in `src/lib/` instead
 - Node.js >=20 required
 
 ## Testing

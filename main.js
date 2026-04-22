@@ -3,11 +3,11 @@
 const crypto = require('node:crypto');
 
 const utils = require('@iobroker/adapter-core');
-const objectHelper = require('./lib/objectHelper'); // Common adapter utils
+const objectHelper = require('./build/lib/objectHelper'); // Common adapter utils
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
 const BleDecoder = require('./lib/ble-decoder').BleDecoder;
-const DeviceManagement = require('./lib/deviceManager').default;
+const DeviceManagement = require('./build/lib/deviceManager').default;
 const adapterName = require('./package.json').name.split('.').pop();
 const tcpPing = require('tcp-ping');
 const EventEmitter = require('node:events').EventEmitter;

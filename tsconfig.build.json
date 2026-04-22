@@ -4,6 +4,8 @@
         "allowJs": false,
         "checkJs": false,
         "noEmit": false,
+        "rootDir": "./src",
+        "outDir": "./build",
         "types": ["@iobroker/types", "node"]
     },
 }
