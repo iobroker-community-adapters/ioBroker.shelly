@@ -248,6 +248,8 @@ Notes:
 -->
 ### **WORK IN PROGRESS**
 - (@mcm1957) Adapter requires node.js >= 22 now.
+
+### 11.0.0 (2026-02-23)
 - (@mcm1957) Adapter requires js-controller >= 6.0.11 now.
 - (copilot) Adapter requires admin >= 7.8.20 now.
 - (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
