@@ -246,7 +246,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 11.0.0-alpha.3 (2026-04-22)
+### **WORK IN PROGRESS**
 - (@mcm1957) Adapter requires node.js >= 22 now.
 - (@mcm1957) Adapter requires js-controller >= 6.0.11 now.
 - (copilot) Adapter requires admin >= 7.8.20 now.
