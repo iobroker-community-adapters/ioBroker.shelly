@@ -3,7 +3,7 @@
     "name": "shelly",
     "version": "11.0.0-alpha.3",
     "news": {
-      "11.0.0-alpha.3": {
+      "11.0.0-alpha.4": {
         "en": "Adapter requires node.js >= 22 now.\nAdapter requires js-controller >= 6.0.11 now.\nAdapter requires admin >= 7.8.20 now.\nAdded support for Device manager: info and control of devices and provisioning\nAdded detection of new devices in the background\nDISABLE all PLUG_UI functionality due to unrecoverable HW faults.\nDependencies have been updated\n",
         "de": "Der Adapter benötigt jetzt node.js >= 22.\nDer Adapter benötigt jetzt js-controller >= 6.0.11.\nDer Adapter benötigt jetzt Administratorrechte ab Version 7.8.20.\nUnterstützung für den Gerätemanager hinzugefügt: Informationen und Steuerung von Geräten sowie deren Bereitstellung.\nDie Erkennung neuer Geräte im Hintergrund wurde hinzugefügt.\nAufgrund nicht behebbarer Hardwarefehler wurden sämtliche PLUG_UI-Funktionen deaktiviert.\nDie Abhängigkeiten wurden aktualisiert.\n",
         "ru": "Для работы адаптера теперь требуется Node.js версии >= 22.\nДля работы адаптера теперь требуется js-controller версии не ниже 6.0.11.\nДля работы адаптера теперь требуется версия admin >= 7.8.20.\nДобавлена поддержка диспетчера устройств: информация и управление устройствами, а также их инициализация.\nДобавлено обнаружение новых устройств в фоновом режиме.\nОтключите все функции PLUG_UI из-за неустранимых аппаратных неисправностей.\nЗависимости обновлены.\n",
