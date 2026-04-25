@@ -4,18 +4,19 @@
 This is the German documentation - [🇺🇸 English version](../en/restricted-login.md)
 
 ## Geschützter Login
-Um die Shelly-Geräte vor unbefugtem Zugriff zu schützen, setze in der ioBroker Konfiguration einen beliebigen Benutzernamen und Passwort im Tab *Allgemeine Einstellungen*.
+
+Um die Shelly-Geräte vor unbefugtem Zugriff zu schützen, muss in der ioBroker Konfiguration ein Benutzername und ein Passwort im Tab *Allgemeine Einstellungen* festgelegt werden.
 
 ![iobroker_general_restrict_login](./img/iobroker_general_restrict_login.png)
 
-Aktiviere danach den geschützten Zugriff auf allen Shelly-Geräten.
+Anschließend muss der geschützte Zugriff auf allen Shelly-Geräten aktiviert werden.
 
 **Wichtig:**
 
 - Geräte der Generation 2+ bieten keine Option für einen Benutzernamen - der Benutzername kann frei gewählt werden, aber ist nur für Geräte der Generation 1 relevant
-- Konfiguriere auf allen Geräten das gleiche Passwort, welches in der Shelly-Instanz festgelegt wurde
-    - Generation 1: Konfiguriere Benutzername UND Passwort aus der Instanz
-    - Generation 2+: Konfiguriere nur das Passwort aus den Instanz-Einstellungen
+- Das gleiche Passwort muss auf allen Geräten konfiguriert werden
+    - Generation 1: Benutzername UND Passwort aus der Instanz müssen konfiguriert werden
+    - Generation 2+: Nur das Passwort aus den Instanz-Einstellungen muss konfiguriert werden
 
 ### Warnungen
 Ist ein Geräte-Passwort im ioBroker konfiguriert, wird der Adapter Warnungen ins Log schreiben, falls einige Shelly-Geräte ungeschützt sind!

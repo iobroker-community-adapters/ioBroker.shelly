@@ -23,13 +23,13 @@ Fragen? Schaue zuerst in die [FAQ](faq.md)!
 1. Öffne die Shelly-Adapter Konfiguration im ioBroker
 2. Wähle `MQTT (und HTTP)` als *Protokoll* in den *Allgemeinen Einstellungen*
 3. Öffne das Tab **MQTT Einstellungen**
-4. Wähle einen Benutzernamen und ein sicheres Passwort (Du musst diese Informationen auf allen Shelly-Geräten hinterlegen)
+4. Wähle einen Benutzernamen und ein sicheres Passwort (diese Informationen müssen auf allen Shelly-Geräten hinterlegt werden)
 
 > Der Shelly-Adapter startet einen eigenen MQTT-Broker (intern). Der konfigurierte Benutzername und das Passwort muss auf allen Shelly-Geräten hinterlegt werden, welche sich mit diesem Broker verbinden sollen.
 
 ![iobroker_mqtt](./img/iobroker_mqtt.png)
 
-Aktiviere MQTT auf deinen Shelly-Geräten.
+MQTT muss auf allen Shelly-Geräten aktiviert werden.
 
 ### Generation 2+ Geräte (Plus und Pro)
 
@@ -55,4 +55,8 @@ Aktiviere MQTT auf deinen Shelly-Geräten.
 
 ### Quality of Service (QoS)
 
-TODO (see en)
+Es gibt 3 QoS-Stufen in MQTT:
+
+- At most once (0) - keine Zustellungsgarantie (Fire and Forget)
+- At least once (1) - garantiert, dass eine Nachricht mindestens einmal beim Empfänger ankommt
+- Exactly once (2) - garantiert, dass jede Nachricht genau einmal beim Empfänger ankommt
