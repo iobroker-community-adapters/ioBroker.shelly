@@ -5,8 +5,5 @@ function copyI18nFiles() {
     copyFiles(['src/lib/i18n/*.json'], 'build/lib/i18n/');
 }
 
-if (process.argv.includes('--copyI18nFiles')) {
-    copyI18nFiles();
-} else {
-    copyI18nFiles().catch(e => console.error(e));
-}
+deleteFoldersRecursive(`${__dirname}/build`, ['.png']);
+copyI18nFiles();
