@@ -49,6 +49,7 @@
     "@iobroker/testing": "^5.2.2",
     "@types/bl": "^5.1.4",
     "@types/node": "^22.0.0",
+    "@types/iobroker": "npm:@iobroker/types@^7.0.7",
     "source-map-support": "^0.5.21",
     "typescript": "~5.9.3"
   },
