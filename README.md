@@ -246,10 +246,11 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 11.0.0-alpha.4 (2026-04-24)
-- (@mcm1957) Adapter requires node.js >= 22 now.
-- (@mcm1957) Adapter requires js-controller >= 6.0.11 now.
-- (copilot) Adapter requires admin >= 7.8.20 now.
+### **WORK IN PROGRESS**
+- (@mcm1957) Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.
+- (@mcm1957) IMPORTANT: Please read changelog at README.md listing more information.
+
+### 11.0.0 additional information 
 - (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
 - (@GermanBluefox) Added detection of new devices in the background
 - (@mcm1957) DISABLE all PLUG_UI functionality due to unrecoverable HW faults.
