@@ -214,7 +214,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 11.0.0-alpha.6 (2026-04-25)
 - (@mcm1957) Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.
 - (@mcm1957) IMPORTANT: Please read changelog at README.md listing more information.
 

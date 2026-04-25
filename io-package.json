@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "shelly",
-    "version": "11.0.0-alpha.5",
+    "version": "11.0.0-alpha.6",
     "news": {
-      "11.0.0-alpha.5": {
+      "11.0.0-alpha.6": {
         "en": "Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.\nIMPORTANT: Please read changelog at README.md listing more information.",
         "de": "Adapter erfordert jetzt node.js >= 22, js-controller >= 6.0.11 und admin >= 7.8.20.\nWICHTIG: Bitte lesen Sie das Changelog bei README.md mit weiteren Informationen.",
         "ru": "Адаптер требует node.js >= 22, js-контроллер >= 6.0.11 и админ >= 7.8.20 сейчас.\nВАЖНО: Пожалуйста, прочтите changelog на README.md, указав больше информации.",
@@ -15,19 +15,6 @@
         "pl": "Adapter wymaga node.js > = 22, kontroler js- i admin > = 7.8.20 teraz.\nWAŻNE: Proszę przeczytać changelog na README.md z listą więcej informacji.",
         "uk": "Адаптер вимагає node.js >= 22, js-controller >= 6.0.11 і admin >= 7.8.20 тепер.\nВАЖЛИВО: Будь ласка, почитайте перереєстрацію на README.md для отримання додаткової інформації.",
         "zh-cn": "适配器需要节点.js >= 22,js控制器 >= 6.0.11 和 admin >= 7.8.20 现在.\n重要信息:请在 README.md 上阅读更改日志,列出更多信息."
-      },
-      "11.0.0-alpha.4": {
-        "en": "Adapter requires node.js >= 22 now.\nAdapter requires js-controller >= 6.0.11 now.\nAdapter requires admin >= 7.8.20 now.\nAdded support for Device manager: info and control of devices and provisioning\nAdded detection of new devices in the background\nDISABLE all PLUG_UI functionality due to unrecoverable HW faults.\nDependencies have been updated\n",
-        "de": "Der Adapter benötigt jetzt node.js >= 22.\nDer Adapter benötigt jetzt js-controller >= 6.0.11.\nDer Adapter benötigt jetzt Administratorrechte ab Version 7.8.20.\nUnterstützung für den Gerätemanager hinzugefügt: Informationen und Steuerung von Geräten sowie deren Bereitstellung.\nDie Erkennung neuer Geräte im Hintergrund wurde hinzugefügt.\nAufgrund nicht behebbarer Hardwarefehler wurden sämtliche PLUG_UI-Funktionen deaktiviert.\nDie Abhängigkeiten wurden aktualisiert.\n",
-        "ru": "Для работы адаптера теперь требуется Node.js версии >= 22.\nДля работы адаптера теперь требуется js-controller версии не ниже 6.0.11.\nДля работы адаптера теперь требуется версия admin >= 7.8.20.\nДобавлена поддержка диспетчера устройств: информация и управление устройствами, а также их инициализация.\nДобавлено обнаружение новых устройств в фоновом режиме.\nОтключите все функции PLUG_UI из-за неустранимых аппаратных неисправностей.\nЗависимости обновлены.\n",
-        "pt": "O adaptador agora requer o Node.js versão 22 ou superior.\nO adaptador agora requer js-controller >= 6.0.11.\nO adaptador agora requer o admin versão >= 7.8.20.\nAdicionado suporte para o Gerenciador de Dispositivos: informações, controle e provisionamento de dispositivos.\nAdicionada detecção de novos dispositivos em segundo plano.\nDESATIVE todas as funcionalidades do PLUG_UI devido a falhas de hardware irrecuperáveis.\nAs dependências foram atualizadas.\n",
-        "nl": "Adapter vereist nu Node.js versie 22 of hoger.\nDe adapter vereist nu js-controller >= 6.0.11.\nDe adapter vereist nu admin >= 7.8.20.\nOndersteuning toegevoegd voor Apparaatbeheer: informatie over en controle van apparaten en configuratie.\nDetectie van nieuwe apparaten op de achtergrond is toegevoegd.\nAlle PLUG_UI-functionaliteit is uitgeschakeld vanwege onherstelbare hardwarefouten.\nAfhankelijkheden zijn bijgewerkt.\n",
-        "fr": "L'adaptateur requiert désormais node.js >= 22.\nL'adaptateur requiert désormais js-controller >= 6.0.11.\nL'adaptateur nécessite désormais une version d'administrateur supérieure ou égale à 7.8.20.\nAjout de la prise en charge du Gestionnaire de périphériques : informations, contrôle et provisionnement des périphériques\nAjout de la détection de nouveaux appareils en arrière-plan\nDésactivation de toutes les fonctionnalités PLUG_UI en raison de pannes matérielles irrécupérables.\nLes dépendances ont été mises à jour\n",
-        "it": "L'adattatore ora richiede Node.js >= 22.\nL'adattatore ora richiede js-controller >= 6.0.11.\nL'adattatore ora richiede admin >= 7.8.20.\nAggiunto il supporto per Gestione dispositivi: informazioni e controllo dei dispositivi e provisioning\nAggiunta la funzionalità di rilevamento automatico dei nuovi dispositivi in background.\nDISABILITARE tutte le funzionalità di PLUG_UI a causa di guasti hardware irreversibili.\nLe dipendenze sono state aggiornate\n",
-        "es": "El adaptador ahora requiere node.js >= 22.\nEl adaptador ahora requiere js-controller >= 6.0.11.\nEl adaptador ahora requiere admin >= 7.8.20.\nSe ha añadido compatibilidad con el Administrador de dispositivos: información y control de dispositivos y aprovisionamiento.\nSe ha añadido la detección de nuevos dispositivos en segundo plano.\nSe han desactivado todas las funciones de PLUG_UI debido a fallos de hardware irrecuperables.\nSe han actualizado las dependencias.\n",
-        "pl": "Adapter wymaga teraz node.js >= 22.\nAdapter wymaga teraz js-controller w wersji >= 6.0.11.\nAdapter wymaga teraz uprawnień administratora >= 7.8.20.\nDodano obsługę Menedżera urządzeń: informacje i kontrola urządzeń oraz ich udostępnianie\nDodano wykrywanie nowych urządzeń w tle\nWYŁĄCZ wszystkie funkcje PLUG_UI z powodu nieodwracalnych błędów sprzętowych.\nZaktualizowano zależności\n",
-        "uk": "Адаптер тепер вимагає node.js >= 22.\nАдаптер тепер вимагає js-controller >= 6.0.11.\nАдаптер тепер вимагає адміністратора версії >= 7.8.20.\nДодана підтримка для Диспетчера пристроїв: інформація та керування пристроями, а також налаштування.\nДодано виявлення нових пристроїв у фоновому режимі.\nВИМКНУТИ всі функції PLUG_UI через невиправні апаратні помилки.\nЗалежності оновлено\n",
-        "zh-cn": "适配器现在需要 node.js >= 22。\n适配器现在需要 js-controller >= 6.0.11。\n适配器现在需要管理员版本 >= 7.8.20。\n新增对设备管理器的支持：设备信息和控制以及配置\n新增后台新设备检测功能\n由于硬件故障无法恢复，请禁用所有 PLUG_UI 功能。\n依赖项已更新\n"
       },
       "10.6.1": {
         "en": "OnUnload handling has been improved. [#1279]\nshellypill: missing input 202 has been added, nonexisting analog input has been removed.",
