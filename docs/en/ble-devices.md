@@ -2,6 +2,9 @@
 
 # ioBroker.shelly
 
+This is the English documentation - [🇩🇪 German version](../de/ble-devices.md)
+
+
 **This feature is experimental!**
 
 You have to create a new script (see below) on a Plus or Pro device (Gen 2+) to get Events in this state as JSON: `shelly.0.<device>.BLE.Event`.
