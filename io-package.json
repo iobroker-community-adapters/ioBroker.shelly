@@ -1,20 +1,20 @@
 {
   "common": {
     "name": "shelly",
-    "version": "11.0.0-alpha.6",
+    "version": "11.0.0-alpha.7",
     "news": {
-      "11.0.0-alpha.6": {
-        "en": "Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.\nIMPORTANT: Please read changelog at README.md listing more information.",
-        "de": "Adapter erfordert jetzt node.js >= 22, js-controller >= 6.0.11 und admin >= 7.8.20.\nWICHTIG: Bitte lesen Sie das Changelog bei README.md mit weiteren Informationen.",
-        "ru": "Адаптер требует node.js >= 22, js-контроллер >= 6.0.11 и админ >= 7.8.20 сейчас.\nВАЖНО: Пожалуйста, прочтите changelog на README.md, указав больше информации.",
-        "pt": "O adaptador necessita de nodo.js >= 22, js-controlador >= 6,0.11 e administrador >= 7,8,20 agora.\nIMPORTANTE: Por favor, leia changelog no README.md listando mais informações.",
-        "nl": "Voor adapter zijn node.js (m.u.v. js-controller) en administrator (m.u.v. administrator) vereist.\nBELANGRIJK: Lees changelog bij README.md listing meer informatie.",
-        "fr": "Adapter nécessite node.js >= 22, js-controller >= 6.0.11 et admin >= 7.8.20 maintenant.\nIMPORTANT: Veuillez lire le journal des changements à README.md qui donne plus d'informations.",
-        "it": "Adattatore richiede node.js >= 22, js-controller >= 6.0.11 e admin >= 7.8.20 ora.\nIMPORTANTE: Si prega di leggere changelog al README.md elencando ulteriori informazioni.",
-        "es": "Adaptador requiere node.js >= 22, js-controller ≤ 6.0.11 y admin= 7.8.20 ahora.\nIMPORTANTE: Por favor lea el registro de cambios en README.md para más información.",
-        "pl": "Adapter wymaga node.js > = 22, kontroler js- i admin > = 7.8.20 teraz.\nWAŻNE: Proszę przeczytać changelog na README.md z listą więcej informacji.",
-        "uk": "Адаптер вимагає node.js >= 22, js-controller >= 6.0.11 і admin >= 7.8.20 тепер.\nВАЖЛИВО: Будь ласка, почитайте перереєстрацію на README.md для отримання додаткової інформації.",
-        "zh-cn": "适配器需要节点.js >= 22,js控制器 >= 6.0.11 和 admin >= 7.8.20 现在.\n重要信息:请在 README.md 上阅读更改日志,列出更多信息."
+      "11.0.0-alpha.7": {
+        "en": "Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.\nDevice manager has been added providing info and control of devices and provisioning.\nIMPORTANT: Please read changelog at README.md listing more information.",
+        "de": "Adapter erfordert jetzt node.js >= 22, js-controller >= 6.0.11 und admin >= 7.8.20.\nDer Gerätemanager wurde hinzugefügt, um Informationen und die Steuerung von Geräten und Bereitstellungen bereitzustellen.\nWICHTIG: Bitte lesen Sie das Changelog bei README.md mit weiteren Informationen.",
+        "ru": "Адаптер требует node.js >= 22, js-контроллер >= 6.0.11 и админ >= 7.8.20 сейчас.\nДобавлен диспетчер устройств, предоставляющий информацию и управление устройствами и обеспечением.\nВАЖНО: Пожалуйста, прочтите changelog на README.md, указав больше информации.",
+        "pt": "O adaptador necessita de nodo.js >= 22, js-controlador >= 6,0.11 e administrador >= 7,8,20 agora.\nO gerenciador de dispositivos foi adicionado fornecendo informações e controle de dispositivos e provisionamento.\nIMPORTANTE: Por favor, leia changelog no README.md listando mais informações.",
+        "nl": "Voor adapter zijn node.js (m.u.v. js-controller) en administrator (m.u.v. administrator) vereist.\nApparaatbeheerder is toegevoegd met informatie en controle van apparaten en provisioning.\nBELANGRIJK: Lees changelog bij README.md listing meer informatie.",
+        "fr": "Adapter nécessite node.js >= 22, js-controller >= 6.0.11 et admin >= 7.8.20 maintenant.\nLe gestionnaire d'appareils a été ajouté fournissant des informations et le contrôle des appareils et la fourniture.\nIMPORTANT: Veuillez lire le journal des changements à README.md qui donne plus d'informations.",
+        "it": "Adattatore richiede node.js >= 22, js-controller >= 6.0.11 e admin >= 7.8.20 ora.\nGestione dispositivi è stato aggiunto fornendo informazioni e controllo dei dispositivi e provisioning.\nIMPORTANTE: Si prega di leggere changelog al README.md elencando ulteriori informazioni.",
+        "es": "Adaptador requiere node.js >= 22, js-controller ≤ 6.0.11 y admin= 7.8.20 ahora.\nSe ha añadido un gestor de dispositivos que proporciona información y control de dispositivos y provisiones.\nIMPORTANTE: Por favor lea el registro de cambios en README.md para más información.",
+        "pl": "Adapter wymaga node.js > = 22, kontroler js- i admin > = 7.8.20 teraz.\nDodano menedżera urządzeń dostarczającego informacji i kontroli urządzeń i rezerw.\nWAŻNE: Proszę przeczytać changelog na README.md z listą więcej informacji.",
+        "uk": "Адаптер вимагає node.js >= 22, js-controller >= 6.0.11 і admin >= 7.8.20 тепер.\nДодана інформація та контроль пристроїв та надання.\nВАЖЛИВО: Будь ласка, почитайте перереєстрацію на README.md для отримання додаткової інформації.",
+        "zh-cn": "适配器需要节点.js >= 22,js控制器 >= 6.0.11 和 admin >= 7.8.20 现在.\n增加了设备管理器,以提供信息和控制设备及提供设备.\n重要信息:请在 README.md 上阅读更改日志,列出更多信息."
       },
       "10.6.1": {
         "en": "OnUnload handling has been improved. [#1279]\nshellypill: missing input 202 has been added, nonexisting analog input has been removed.",
