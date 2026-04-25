@@ -49,6 +49,15 @@ export default class ShellyDeviceManagement extends DeviceManagement {
      */
     private getDevicePrefix;
     /**
+     * Determine if a device found via mDNS is a Gen 1 device.
+     * Gen 1 devices use CoAP and should not be offered for MQTT provisioning via the Device Manager.
+     * Returns true only if the device is positively identified as Gen 1 in the known device list.
+     * Unknown devices return false (they will pass through and fail gracefully at provisioning if needed).
+     *
+     * @param name mDNS device name (e.g. "shelly1-AABBCC" or "ShellyPlus1-XXXXXXXXXXXX")
+     */
+    private isGen1DeviceByName;
+    /**
      * Compute the MQTT ID from device mDNS name and custom name.
      * Returns empty string if no custom name is provided.
      *
