@@ -246,7 +246,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 11.0.0-alpha.5 (2026-04-25)
 - (@mcm1957) Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.
 - (@mcm1957) IMPORTANT: Please read changelog at README.md listing more information.
 
@@ -272,12 +272,6 @@ Notes:
 
 ### 10.5.2 (2025-12-28)
 * (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
-
-### 10.5.1 (2025-12-27)
-* (@mcm1957) Monophase profile support has been added to shellypro3em, shellypro3em63 and shellypro3em400. [#1016]
-* (@mcm1957) ResetCounters functionality has been added to components EMData and EM1Data. This effect shellypro3em* but also other shellyem* devices gen2 and later.
-* (@mcm1957) Changes to shellypro3em could affect shellyemg3 and shellyproem50.
-* (@HGlab01) Several fixes for Shelly Ecowitt WS90 have been implemented. [#1293]
 
 ## License
 

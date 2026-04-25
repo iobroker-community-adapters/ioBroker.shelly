@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "11.0.0-alpha.4",
+    "version": "11.0.0-alpha.5",
     "news": {
+      "11.0.0-alpha.5": {
+        "en": "Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.\nIMPORTANT: Please read changelog at README.md listing more information.",
+        "de": "Adapter erfordert jetzt node.js >= 22, js-controller >= 6.0.11 und admin >= 7.8.20.\nWICHTIG: Bitte lesen Sie das Changelog bei README.md mit weiteren Informationen.",
+        "ru": "Адаптер требует node.js >= 22, js-контроллер >= 6.0.11 и админ >= 7.8.20 сейчас.\nВАЖНО: Пожалуйста, прочтите changelog на README.md, указав больше информации.",
+        "pt": "O adaptador necessita de nodo.js >= 22, js-controlador >= 6,0.11 e administrador >= 7,8,20 agora.\nIMPORTANTE: Por favor, leia changelog no README.md listando mais informações.",
+        "nl": "Voor adapter zijn node.js (m.u.v. js-controller) en administrator (m.u.v. administrator) vereist.\nBELANGRIJK: Lees changelog bij README.md listing meer informatie.",
+        "fr": "Adapter nécessite node.js >= 22, js-controller >= 6.0.11 et admin >= 7.8.20 maintenant.\nIMPORTANT: Veuillez lire le journal des changements à README.md qui donne plus d'informations.",
+        "it": "Adattatore richiede node.js >= 22, js-controller >= 6.0.11 e admin >= 7.8.20 ora.\nIMPORTANTE: Si prega di leggere changelog al README.md elencando ulteriori informazioni.",
+        "es": "Adaptador requiere node.js >= 22, js-controller ≤ 6.0.11 y admin= 7.8.20 ahora.\nIMPORTANTE: Por favor lea el registro de cambios en README.md para más información.",
+        "pl": "Adapter wymaga node.js > = 22, kontroler js- i admin > = 7.8.20 teraz.\nWAŻNE: Proszę przeczytać changelog na README.md z listą więcej informacji.",
+        "uk": "Адаптер вимагає node.js >= 22, js-controller >= 6.0.11 і admin >= 7.8.20 тепер.\nВАЖЛИВО: Будь ласка, почитайте перереєстрацію на README.md для отримання додаткової інформації.",
+        "zh-cn": "适配器需要节点.js >= 22,js控制器 >= 6.0.11 和 admin >= 7.8.20 现在.\n重要信息:请在 README.md 上阅读更改日志,列出更多信息."
+      },
       "11.0.0-alpha.4": {
         "en": "Adapter requires node.js >= 22 now.\nAdapter requires js-controller >= 6.0.11 now.\nAdapter requires admin >= 7.8.20 now.\nAdded support for Device manager: info and control of devices and provisioning\nAdded detection of new devices in the background\nDISABLE all PLUG_UI functionality due to unrecoverable HW faults.\nDependencies have been updated\n",
         "de": "Der Adapter benötigt jetzt node.js >= 22.\nDer Adapter benötigt jetzt js-controller >= 6.0.11.\nDer Adapter benötigt jetzt Administratorrechte ab Version 7.8.20.\nUnterstützung für den Gerätemanager hinzugefügt: Informationen und Steuerung von Geräten sowie deren Bereitstellung.\nDie Erkennung neuer Geräte im Hintergrund wurde hinzugefügt.\nAufgrund nicht behebbarer Hardwarefehler wurden sämtliche PLUG_UI-Funktionen deaktiviert.\nDie Abhängigkeiten wurden aktualisiert.\n",
