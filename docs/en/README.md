@@ -22,7 +22,7 @@ This is the English documentation - [🇩🇪 German version](../de/README.md)
 
 ## Device generations
 
-Check the list of [*supported devices*](../README.md#supported-devices) for more details.
+Check the list of [*supported devices*](../../README.md#supported-devices) for more details.
 
 - **Gen 1**: ESP8266 devices, [CoAP/CoIoT](protocol-coap.md) or [MQTT](protocol-mqtt.md)
 - **Gen 2+**: ESP32 devices, [MQTT](protocol-mqtt.md)
