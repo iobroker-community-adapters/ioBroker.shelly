@@ -6,7 +6,7 @@ This is the English documentation - [🇩🇪 German version](../de/protocol-coa
 
 ## CoAP (CoIoT)
 
-**CoAP/CoIoT is just supported by Gen1 devices - Plus and Pro devices (Gen2) don't support this protocol!**
+**CoAP/CoIoT is only supported by Gen1 devices - Plus and Pro devices (Gen2) don't support this protocol!**
 
 ![iobroker_general_coap](./img/iobroker_general_coap.png)
 

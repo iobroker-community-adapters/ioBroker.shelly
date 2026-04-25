@@ -4,7 +4,7 @@
 
 This is the English documentation - [🇩🇪 German version](../de/faq.md)
 
-## Is is possible to use the Shelly App to configure the devices?
+## Is it possible to use the Shelly App to configure the devices?
 
 The documentation is based on the settings in the web interface of the devices. Some options may be missing in the app. Therefore, this option is not recommended!
 

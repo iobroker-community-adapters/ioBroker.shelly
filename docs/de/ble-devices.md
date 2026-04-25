@@ -2,6 +2,8 @@
 
 # ioBroker.shelly
 
+This is the German documentation - [🇺🇸 English version](../en/ble-devices.md)
+
 **Diese Funktion ist experimentell!**
 
 Ein neues Skript (siehe unten) muss auf einem Plus- oder Pro-Gerät (Gen 2+) erstellt werden, um Ereignisse in diesem Zustand als JSON zu erhalten: `shelly.0.<device>.BLE.Event`.
@@ -60,7 +62,7 @@ Danach kann das nächste BLE-Ereignis entschlüsselt werden.
 ## Bluetooth aktivieren
 
 **WICHTIG**
-Bitte nicht vergessen die Bluetooth-Funktionalität am Shelly der als Gateway verwendet werden soll zu aktivieren.
+Die Bluetooth-Funktionalität am Shelly-Gerät, das als Gateway verwendet werden soll, muss aktiviert werden.
 
 ## JavaScript (Shelly Scripting)
 

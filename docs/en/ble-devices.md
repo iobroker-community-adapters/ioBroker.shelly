@@ -47,7 +47,7 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 | [>= 6.8.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.8.0/docs/en/ble-devices.md)   | v0.2           |
 | [>= 6.6.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.6.0/docs/en/ble-devices.md)   | v0.1           |
 
-*Since script version v1.0 the processing of the ble message has been migrated to ioBroker. Older versions may not run on Gen3 devices, since they need more ressources to unpack the Bluetooth messages.*
+*Since script version v1.0 the processing of the ble message has been migrated to ioBroker. Older versions may not run on Gen3 devices, since they need more resources to unpack the Bluetooth messages.*
 
 ## Encryption
 
@@ -63,7 +63,7 @@ After that, the next BLE event can be decrypted.
 ## Enable Bluetooth
 
 **IMPORTANT**
-Do not forget to enable bluetooth functionalita at the Shelly to be used as gateway.
+Do not forget to enable the Bluetooth functionality at the Shelly device to be used as a gateway.
 
 ## JavaScript (Shelly Scripting)
 
