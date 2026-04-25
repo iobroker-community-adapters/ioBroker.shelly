@@ -1326,8 +1326,14 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     }
                 }
             }
-            const newDevices = found.filter(d => !knownIps.has(d.ip));
+            const unknownDevices = found.filter(d => !knownIps.has(d.ip));
             const existingDevices = found.filter(d => knownIps.has(d.ip));
+            // Exclude Gen 1 devices – they use CoAP and must not be configured for MQTT via Device Manager
+            const gen1Devices = unknownDevices.filter(d => this.isGen1DeviceByName(d.name));
+            const newDevices = unknownDevices.filter(d => !this.isGen1DeviceByName(d.name));
+            if (gen1Devices.length > 0) {
+                this.adapter.log.debug(`[DeviceManager] Excluded ${gen1Devices.length} Gen 1 device(s) from MQTT discovery (use CoAP instead): ${gen1Devices.map(d => d.name).join(', ')}`);
+            }
             if (!newDevices.length && existingDevices.length) {
                 await context.showMessage(adapter_core_1.I18n.getTranslatedObject('All %s found devices are already known', existingDevices.length.toString()));
             }
@@ -1441,6 +1447,28 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
             return name.substring(0, idx + 1).toLowerCase();
         }
         return name.toLowerCase();
+    }
+    /**
+     * Determine if a device found via mDNS is a Gen 1 device.
+     * Gen 1 devices use CoAP and should not be offered for MQTT provisioning via the Device Manager.
+     * Returns true only if the device is positively identified as Gen 1 in the known device list.
+     * Unknown devices return false (they will pass through and fail gracefully at provisioning if needed).
+     *
+     * @param name mDNS device name (e.g. "shelly1-AABBCC" or "ShellyPlus1-XXXXXXXXXXXX")
+     */
+    isGen1DeviceByName(name) {
+        const prefix = this.getDevicePrefix(name);
+        const deviceClass = prefix.endsWith('-') ? prefix.slice(0, -1) : prefix;
+        const lowerClass = deviceClass.toLowerCase();
+        // Case-insensitive lookup in the known device generation map
+        const deviceGenMap = datapoints.deviceGen;
+        for (const [key, gen] of Object.entries(deviceGenMap)) {
+            if (key.toLowerCase() === lowerClass) {
+                return gen < 2;
+            }
+        }
+        // Unknown device – do not filter out (provisioning will fail gracefully if it turns out to be Gen 1)
+        return false;
     }
     /**
      * Compute the MQTT ID from device mDNS name and custom name.
@@ -1862,7 +1890,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 }
             }
         }
-        return found.filter(d => !knownIps.has(d.ip));
+        return found.filter(d => !knownIps.has(d.ip) && !this.isGen1DeviceByName(d.name));
     }
     async destroy() {
         await this.adapter.unsubscribeObjectsAsync('*');
