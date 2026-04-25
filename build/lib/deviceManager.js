@@ -47,117 +47,6 @@ class HttpAuthError extends Error {
 }
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const datapoints = require('../../lib/datapoints');
-/** Map device class to group key */
-const deviceGroupMap = {
-    // Relays & Switches
-    shelly1: 'relay',
-    shelly1pm: 'relay',
-    shelly1l: 'relay',
-    shellyswitch: 'relay',
-    shellyswitch25: 'relay',
-    shelly4pro: 'relay',
-    shellyplus1: 'relay',
-    shellyplus1pm: 'relay',
-    shellyplus2pm: 'relay',
-    shellypro1: 'relay',
-    shellypro1pm: 'relay',
-    shellypro2: 'relay',
-    shellypro2pm: 'relay',
-    shellypro3: 'relay',
-    shellypro4pm: 'relay',
-    shelly1mini: 'relay',
-    shelly1pmmini: 'relay',
-    shelly1minig3: 'relay',
-    shelly1pmminig3: 'relay',
-    shelly1pmg3: 'relay',
-    shelly1g3: 'relay',
-    shelly1lg3: 'relay',
-    shelly2lg3: 'relay',
-    shelly2pmg3: 'relay',
-    shelly1g4: 'relay',
-    shelly1pmg4: 'relay',
-    shelly1minig4: 'relay',
-    shelly1pmminig4: 'relay',
-    shelly2pmg4: 'relay',
-    // Dimmers
-    shellydimmer: 'dimmer',
-    shellydimmer2: 'dimmer',
-    shellyplus010v: 'dimmer',
-    shellypro0110pm: 'dimmer',
-    shellyprodm1pm: 'dimmer',
-    shellyprodm2pm: 'dimmer',
-    shelly0110dimg3: 'dimmer',
-    shellyddimmerg3: 'dimmer',
-    shellydimmerg3: 'dimmer',
-    shellydimmerg4: 'dimmer',
-    // Plugs
-    shellyplug: 'plug',
-    'shellyplug-s': 'plug',
-    shellyplusplugs: 'plug',
-    shellyplugmg3: 'plug',
-    shellyplugpmg3: 'plug',
-    shellyplugsg3: 'plug',
-    shellyazplug: 'plug',
-    // Lights
-    shellybulb: 'light',
-    ShellyBulbDuo: 'light',
-    ShellyVintage: 'light',
-    shellycolorbulb: 'light',
-    shellyrgbw2: 'light',
-    shelly2led: 'light',
-    shellyplusrgbwpm: 'light',
-    shellyprorgbwwpm: 'light',
-    shellypstripg4: 'light',
-    // Energy Meters
-    shellyem: 'meter',
-    shellyem3: 'meter',
-    shellypro3em: 'meter',
-    shellypro3em400: 'meter',
-    shellypro3em63: 'meter',
-    shellyproem50: 'meter',
-    shellypmmini: 'meter',
-    shellypmminig3: 'meter',
-    shelly3em63g3: 'meter',
-    shellyemg3: 'meter',
-    shellyemminig4: 'meter',
-    // Sensors
-    shellyht: 'sensor',
-    shellysense: 'sensor',
-    shellyplusht: 'sensor',
-    shellyhtg3: 'sensor',
-    shellypill: 'sensor',
-    shellydw: 'sensor',
-    shellydw2: 'sensor',
-    shellymotionsensor: 'sensor',
-    shellymotion2: 'sensor',
-    shellyoutdoorsg3: 'sensor',
-    shellysmoke: 'sensor',
-    shellyplussmoke: 'sensor',
-    shellyflood: 'sensor',
-    shellyfloodg4: 'sensor',
-    shellygas: 'sensor',
-    // Shutters & Covers
-    shellypro2cover: 'cover',
-    shellyshutter: 'cover',
-    // Buttons & Inputs
-    shellybutton1: 'input',
-    shellyplusi4: 'input',
-    shellyix3: 'input',
-    shellyi4g3: 'input',
-    // Climate
-    shellytrv: 'climate',
-    // Gateways
-    shellyblugw: 'gateway',
-    shellyblugwg3: 'gateway',
-    shellyuni: 'gateway',
-    shellyplusuni: 'gateway',
-    ShellyWallDisplay: 'gateway',
-    // Powered by Shelly
-    irrigation: 'other',
-    ogemray25a: 'other',
-    st1820: 'other',
-    watervalve: 'other',
-};
 /** Group metadata: display name key (for i18n) and representative icon */
 const groupMeta = {
     relay: { nameKey: 'Relays & Switches', icon: 'adapter/shelly/icons/shellyplus1.png' },
@@ -559,7 +448,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         return { model: 'Bluetooth', icon: 'ble-button1' };
     }
     getDeviceGroup(deviceClass, isBle) {
-        const groupKey = isBle ? 'ble' : deviceGroupMap[deviceClass || ''] || 'other';
+        const groupKey = isBle ? 'ble' : datapoints.deviceGroupMap[deviceClass || ''] || 'other';
         const meta = groupMeta[groupKey] || groupMeta.other;
         return {
             key: groupKey,
