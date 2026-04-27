@@ -220,7 +220,7 @@ Notes:
 - (@mcm1957) IMPORTANT: Please read changelog at README.md listing more information.
 
 ### 11.0.0 additional information 
-- (@mcm1957) Shelly Presence Gen 4 added for debugging only 
+- (@mcm1957) Added Shelly Presence Gen 4 (experimental state)
 - (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
 - (@GermanBluefox) Added detection of new devices in the background
 - (@mcm1957) DISABLE all PLUG_UI functionality due to unrecoverable HW faults.
