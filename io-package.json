@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "shelly",
-    "version": "11.0.0-alpha.11",
+    "version": "11.0.0-alpha.12",
     "news": {
       "11.0.0-alpha.12": {
         "en": "Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.\nDevice manager has been added providing info and control of devices and provisioning.\nIMPORTANT: Please read changelog at README.md listing more information.",
