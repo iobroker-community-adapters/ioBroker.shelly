@@ -216,13 +216,14 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 11.0.0-alpha.11 (2026-04-28)
+### **WORK IN PROGRESS**
 - (@mcm1957) Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.
 - (@GermanBluefox) Device manager has been added providing info and control of devices and provisioning.
 - (@mcm1957) IMPORTANT: Please read changelog at README.md listing more information.
 
 ### 11.0.0 additional information 
-- (@mcm1957) Added Shelly Presence Gen 4 (experimental state)
+- (@mcm1957) Added Shelly Presence Gen 4
+- (@mcm1957) Added Shelly Cury
 - (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
 - (@GermanBluefox) Added detection of new devices in the background
 - (@mcm1957) Some missing states added at illuminance component
