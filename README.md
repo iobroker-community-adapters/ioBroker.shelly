@@ -223,6 +223,7 @@ Notes:
 - (@mcm1957) Added Shelly Presence Gen 4 (experimental state)
 - (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
 - (@GermanBluefox) Added detection of new devices in the background
+- (@mcm1957) Some missing states added at illuminance component
 - (@mcm1957) DISABLE all PLUG_UI functionality due to unrecoverable HW faults.
 - (@mcm1957) Dependencies have been updated
 
