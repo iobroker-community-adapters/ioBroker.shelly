@@ -161,6 +161,7 @@ Notes:
 | Shelly EM mini Gen4 (shellypemminig4)         | ❌   | >= v10.6.0 |
 | Shelly Flood Gen4 (shellyfloodg4)             | ❌   | >= v10.3.0 |
 | Shelly Power Strip Gen4 (shellypstripg4) (*)  | ❌   | >= v10.3.0 |
+| Shelly Presence Gen4 (shellypresenceg4)       | ❌   | >= v11.0.0 |
 
 Notes:
 (1) slat control requires >= v10.4.0
