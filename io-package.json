@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "shelly",
-    "version": "11.0.0-alpha.9",
+    "version": "11.0.0-alpha.10",
     "news": {
-      "11.0.0-alpha.9": {
+      "11.0.0-alpha.10": {
         "en": "Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.\nDevice manager has been added providing info and control of devices and provisioning.\nIMPORTANT: Please read changelog at README.md listing more information.",
         "de": "Adapter erfordert jetzt node.js >= 22, js-controller >= 6.0.11 und admin >= 7.8.20.\nDer Gerätemanager wurde hinzugefügt, um Informationen und die Steuerung von Geräten und Bereitstellungen bereitzustellen.\nWICHTIG: Bitte lesen Sie das Changelog bei README.md mit weiteren Informationen.",
         "ru": "Адаптер требует node.js >= 22, js-контроллер >= 6.0.11 и админ >= 7.8.20 сейчас.\nДобавлен диспетчер устройств, предоставляющий информацию и управление устройствами и обеспечением.\nВАЖНО: Пожалуйста, прочтите changelog на README.md, указав больше информации.",
