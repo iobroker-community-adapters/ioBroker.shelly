@@ -171,9 +171,10 @@ Notes:
 
 | Device                                        | CoAP | MQTT       |
 |-----------------------------------------------| ---- | ---------- |
-| Ogemray 25A (ogemray25a)                      | ❌   | >= v9.5.0  |
 | FrankEver Smart Watervalve (watervalve)       | ❌   | >= v10.6.0 |
 | LinkedGo Smart Thermost (st1820)              | ❌   | >= v10.6.0 |
+| Ogemray 25A (ogemray25a)                      | ❌   | >= v9.5.0  |
+| Shelly Cury (cury)                            | ❌   | >= v11.0.0 |
 
 ### Bluetooth Low Energy (BLU)
 
