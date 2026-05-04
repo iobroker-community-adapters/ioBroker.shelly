@@ -173,7 +173,7 @@ Notes:
 | Device                                        | CoAP | MQTT       |
 |-----------------------------------------------| ---- | ---------- |
 | FrankEver Smart Watervalve (watervalve)       | ❌   | >= v10.6.0 |
-| HiluX DS8 by Shelly (hiluxds8)               | ❌   | >= v11.1.0 |
+| HiluX DS8 by Shelly (hiluxds8)                | ❌   | >= v11.0.0 |
 | LinkedGo Smart Thermost (st1820)              | ❌   | >= v10.6.0 |
 | Ogemray 25A (ogemray25a)                      | ❌   | >= v9.5.0  |
 | Shelly Cury (cury)                            | ❌   | >= v11.0.0 |
