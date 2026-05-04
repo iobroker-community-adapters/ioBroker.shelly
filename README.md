@@ -173,6 +173,7 @@ Notes:
 | Device                                        | CoAP | MQTT       |
 |-----------------------------------------------| ---- | ---------- |
 | FrankEver Smart Watervalve (watervalve)       | ❌   | >= v10.6.0 |
+| HiluX DS8 by Shelly (hiluxds8)               | ❌   | >= v11.1.0 |
 | LinkedGo Smart Thermost (st1820)              | ❌   | >= v10.6.0 |
 | Ogemray 25A (ogemray25a)                      | ❌   | >= v9.5.0  |
 | Shelly Cury (cury)                            | ❌   | >= v11.0.0 |
@@ -218,6 +219,7 @@ Notes:
   ### **WORK IN PROGRESS**
 -->
 ### 11.0.0-alpha.13 (2026-05-04)
+- (@copilot) Added HiluX DS8 by Shelly (hiluxds8) with CCT support
 - (@copilot) Added Shelly EM Gen4 (shellyemg4)
 - (@mcm1957) Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.
 - (@GermanBluefox) Device manager has been added providing info and control of devices and provisioning.
