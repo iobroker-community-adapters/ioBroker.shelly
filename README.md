@@ -153,7 +153,6 @@ Notes:
 | Shelly Device                                   | CoAP | MQTT       |
 |-------------------------------------------------| ---- | ---------- |
 | Shelly 1 Gen4 (shelly1g4)                       | ❌   | >= v9.4.0  |
-| Shelly 1 Gen4 (shelly1g4)                       | ❌   | >= v9.4.0  |
 | Shelly 1 PM Gen4 (shelly1pmg4)                  | ❌   | >= v9.4.0  |
 | Shelly 1 Mini Gen4 (shelly1minig4)              | ❌   | >= v9.4.0  |
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)         | ❌   | >= v9.4.0  |
