@@ -219,7 +219,7 @@ Notes:
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (@copilot) Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).
+- (@copilot) **NEW**: Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).
 
 ### 11.0.0-alpha.14 (2026-05-04)
 - (@copilot) Added HiluX DS8 by Shelly (hiluxds8)
