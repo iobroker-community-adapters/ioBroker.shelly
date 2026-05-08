@@ -150,19 +150,21 @@ Notes:
 
 ### Generation 4 (Gen 4)
 
-| Shelly Device                                 | CoAP | MQTT       |
-|-----------------------------------------------| ---- | ---------- |
-| Shelly 1 Gen4 (shelly1g4)                     | ❌   | >= v9.4.0  |
-| Shelly 1 PM Gen4 (shelly1pmg4)                | ❌   | >= v9.4.0  |
-| Shelly 1 Mini Gen4 (shelly1minig4)            | ❌   | >= v9.4.0  |
-| Shelly 1 PM Mini Gen4 (shelly1pmminig4)       | ❌   | >= v9.4.0  |
-| Shelly 2 PM Gen4 (shelly2pmg4) (1)            | ❌   | >= v10.2.0 |
-| Shelly Dimmer Gen4 (shellydimmerg4) (*)       | ❌   | >= v10.5.0 |
-| Shelly EM Gen4 (shellyemg4)                   | ❌   | >= v11.0.0 |
-| Shelly EM mini Gen4 (shellyemminig4)          | ❌   | >= v10.6.0 |
-| Shelly Flood Gen4 (shellyfloodg4)             | ❌   | >= v10.3.0 |
-| Shelly Power Strip Gen4 (shellypstripg4) (*)  | ❌   | >= v10.3.0 |
-| Shelly Presence Gen4 (shellypresenceg4)       | ❌   | >= v11.0.0 |
+| Shelly Device                                   | CoAP | MQTT       |
+|-------------------------------------------------| ---- | ---------- |
+| Shelly 1 Gen4 (shelly1g4)                       | ❌   | >= v9.4.0  |
+| Shelly 1 Gen4 (shelly1g4)                       | ❌   | >= v9.4.0  |
+| Shelly 1 PM Gen4 (shelly1pmg4)                  | ❌   | >= v9.4.0  |
+| Shelly 1 Mini Gen4 (shelly1minig4)              | ❌   | >= v9.4.0  |
+| Shelly 1 PM Mini Gen4 (shelly1pmminig4)         | ❌   | >= v9.4.0  |
+| Shelly 2 PM Gen4 (shelly2pmg4) (1)              | ❌   | >= v10.2.0 |
+| Shelly Dimmer Gen4 (shellydimmerg4) (*)         | ❌   | >= v10.5.0 |
+| Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimG4) | ❌   | >= v11.0.0 |
+| Shelly EM Gen4 (shellyemg4)                     | ❌   | >= v11.0.0 |
+| Shelly EM mini Gen4 (shellyemminig4)            | ❌   | >= v10.6.0 |
+| Shelly Flood Gen4 (shellyfloodg4)               | ❌   | >= v10.3.0 |
+| Shelly Power Strip Gen4 (shellypstripg4) (*)    | ❌   | >= v10.3.0 |
+| Shelly Presence Gen4 (shellypresenceg4)         | ❌   | >= v11.0.0 |
 
 Notes:
 (1) slat control requires >= v10.4.0
