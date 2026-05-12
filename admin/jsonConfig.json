@@ -262,11 +262,35 @@
                     "type": "select",
                     "options": [
                         {
-                            "label": "MQTT broker (internal)",
+                            "label": {
+                                "en": "MQTT broker (internal)",
+                                "de": "MQTT-Broker (intern)",
+                                "ru": "MQTT-брокер (внутренний)",
+                                "pt": "MQTT broker (interno)",
+                                "nl": "MQTT-broker (intern)",
+                                "fr": "Broker MQTT (interne)",
+                                "it": "Broker MQTT (interno)",
+                                "es": "Broker MQTT (interno)",
+                                "pl": "Broker MQTT (wewnętrzny)",
+                                "uk": "MQTT-брокер (внутрішній)",
+                                "zh-cn": "MQTT 代理（内部）"
+                            },
                             "value": "broker"
                         },
                         {
-                            "label": "MQTT client (external broker)",
+                            "label": {
+                                "en": "MQTT client (external broker)",
+                                "de": "MQTT-Client (externer Broker)",
+                                "ru": "MQTT-клиент (внешний брокер)",
+                                "pt": "Cliente MQTT (broker externo)",
+                                "nl": "MQTT-client (externe broker)",
+                                "fr": "Client MQTT (broker externe)",
+                                "it": "Client MQTT (broker esterno)",
+                                "es": "Cliente MQTT (broker externo)",
+                                "pl": "Klient MQTT (zewnętrzny broker)",
+                                "uk": "MQTT-клієнт (зовнішній брокер)",
+                                "zh-cn": "MQTT 客户端（外部代理）"
+                            },
                             "value": "client"
                         }
                     ],
