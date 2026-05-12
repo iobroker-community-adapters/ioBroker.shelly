@@ -71,6 +71,8 @@ class Shelly extends utils.Adapter {
                     const mqttMode = this.config.mqttMode || 'broker';
 
                     if (mqttMode === 'client') {
+                        this.validateQosConfig();
+
                         this.log.info(
                             `Starting in MQTT mode (external broker client). Connecting to ${this.config.mqttClientHost}:${this.config.mqttClientPort || 1883}`,
                         );
