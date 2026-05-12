@@ -273,15 +273,23 @@
   "protectedNative": [
     "mqttusername",
     "mqttpassword",
+    "mqttClientUsername",
+    "mqttClientPassword",
     "httpusername",
     "httppassword"
   ],
   "encryptedNative": [
     "mqttpassword",
+    "mqttClientPassword",
     "httppassword"
   ],
   "native": {
     "protocol": "mqtt",
+    "mqttMode": "broker",
+    "mqttClientHost": "",
+    "mqttClientPort": 1883,
+    "mqttClientUsername": "",
+    "mqttClientPassword": "",
     "httpusername": "admin",
     "httppassword": "",
     "polltime": 15,
