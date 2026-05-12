@@ -75,7 +75,7 @@ Der Shelly-Adapter verbindet sich in diesem Modus als MQTT-Client mit deinem bes
 - Der Adapter startet in diesem Modus **keinen** eigenen Broker
 - Deine Shelly-Geräte müssen bereits so konfiguriert sein, dass sie sich mit dem externen Broker verbinden (siehe Gerätekonfiguration oben für Gen1 / Gen2+, jedoch auf deinen eigenen Broker verweisen)
 - Der Adapter abonniert `shellies/#` (Gen1) sowie `+/events/#`, `+/rpc`, `+/online`, `+/debug/#` (Gen2+) zur automatischen Geräteerkennung
-- Die Standard-Client-ID der Shelly-Geräte darf **nicht** geändert werden - der Adapter nutzt sie zur Geräteerkennung
+- Entscheidend für die Geräteerkennung ist ein **stabiles Topic-Präfix** der Shelly-Geräte; dieses sollte Modell und Seriennummer enthalten, damit der Adapter die Geräte korrekt zuordnen kann. Die MQTT-CONNECT-Client-ID ist hierfür **nicht** maßgeblich.
 
 ### Konfiguration
 
