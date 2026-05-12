@@ -303,18 +303,6 @@
                     "lg": 4,
                     "xl": 4
                 },
-                "_headerBrokerOptions": {
-                    "hidden": "data.mqttMode === 'client'",
-                    "newLine": true,
-                    "type": "header",
-                    "size": 2,
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 12,
-                    "lg": 12,
-                    "xl": 12,
-                    "text": "Internal MQTT broker options"
-                },
                 "bind": {
                     "hidden": "data.mqttMode === 'client'",
                     "newLine": true,
@@ -338,78 +326,6 @@
                     "lg": 2,
                     "xl": 2,
                     "label": "Port"
-                },
-                "_headerAuthenticationMqtt": {
-                    "hidden": "data.mqttMode === 'client'",
-                    "newLine": true,
-                    "type": "header",
-                    "size": 3,
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 12,
-                    "lg": 12,
-                    "xl": 12,
-                    "text": "MQTT Server credentials"
-                },
-                "mqttusername": {
-                    "hidden": "data.mqttMode === 'client'",
-                    "newLine": true,
-                    "type": "text",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 4,
-                    "lg": 4,
-                    "xl": 4,
-                    "label": "MQTT Username",
-                    "help": "Must be configured on all Shelly devices"
-                },
-                "mqttpassword": {
-                    "hidden": "data.mqttMode === 'client'",
-                    "type": "password",
-                    "repeat": false,
-                    "visible": true,
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 4,
-                    "lg": 4,
-                    "xl": 4,
-                    "label": "MQTT Password",
-                    "help": "Must be configured on all Shelly devices"
-                },
-                "_mqttAuthGen2": {
-                    "hidden": "data.mqttMode === 'client' || !data.mqttpassword",
-                    "newLine": true,
-                    "type": "staticImage",
-                    "tooltip": "Gen2",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 6,
-                    "lg": 6,
-                    "xl": 6,
-                    "src": "img/mqttGen2.png"
-                },
-                "_mqttAuthGen1": {
-                    "hidden": "data.mqttMode === 'client' || !data.mqttpassword",
-                    "type": "staticImage",
-                    "tooltip": "Gen1",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 6,
-                    "lg": 6,
-                    "xl": 6,
-                    "src": "img/mqttGen1.png"
-                },
-                "_headerClientOptions": {
-                    "hidden": "data.mqttMode !== 'client'",
-                    "newLine": true,
-                    "type": "header",
-                    "size": 2,
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 12,
-                    "lg": 12,
-                    "xl": 12,
-                    "text": "External MQTT broker connection"
                 },
                 "mqttClientHost": {
                     "hidden": "data.mqttMode !== 'client'",
@@ -436,8 +352,18 @@
                     "label": "MQTT broker port",
                     "help": "Port of the external MQTT broker (default: 1883)"
                 },
-                "mqttClientUsername": {
-                    "hidden": "data.mqttMode !== 'client'",
+                "_headerAuthenticationMqtt": {
+                    "newLine": true,
+                    "type": "header",
+                    "size": 2,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
+                    "text": "MQTT Server options"
+                },
+                "mqttusername": {
                     "newLine": true,
                     "type": "text",
                     "xs": 12,
@@ -445,11 +371,10 @@
                     "md": 4,
                     "lg": 4,
                     "xl": 4,
-                    "label": "MQTT broker username",
-                    "help": "Username for the external MQTT broker (optional)"
+                    "label": "MQTT Username",
+                    "help": "Must be configured on all Shelly devices"
                 },
-                "mqttClientPassword": {
-                    "hidden": "data.mqttMode !== 'client'",
+                "mqttpassword": {
                     "type": "password",
                     "repeat": false,
                     "visible": true,
@@ -458,8 +383,31 @@
                     "md": 4,
                     "lg": 4,
                     "xl": 4,
-                    "label": "MQTT broker password",
-                    "help": "Password for the external MQTT broker (optional)"
+                    "label": "MQTT Password",
+                    "help": "Must be configured on all Shelly devices"
+                },
+                "_mqttAuthGen2": {
+                    "hidden": "!data.mqttpassword",
+                    "newLine": true,
+                    "type": "staticImage",
+                    "tooltip": "Gen2",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6,
+                    "src": "img/mqttGen2.png"
+                },
+                "_mqttAuthGen1": {
+                    "hidden": "!data.mqttpassword",
+                    "type": "staticImage",
+                    "tooltip": "Gen1",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6,
+                    "src": "img/mqttGen1.png"
                 },
                 "_headerExpertMqtt": {
                     "newLine": true,
