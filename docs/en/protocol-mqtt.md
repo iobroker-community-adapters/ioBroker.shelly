@@ -74,7 +74,7 @@ The Shelly adapter will connect to your existing broker as a MQTT client and aut
 
 - The adapter does **not** start its own broker in this mode
 - Your Shelly devices must already be configured to connect to the external broker (see device configuration steps above for Gen1 / Gen2+, but point them to your own broker)
-- The adapter subscribes to `shellies/#` (Gen1) and `+/events/#`, `+/status/#`, `+/rpc`, `+/online`, `+/debug/#` (Gen2+) to auto-discover devices and receive live status changes
+- The adapter subscribes to `shellies/#` (Gen1) and `+/events/#`, `+/status/#`, `+/rpc`, `+/online`, `+/debug/#` plus one-folder Gen2+ variants `+/+/events/#`, `+/+/status/#`, `+/+/rpc`, `+/+/online`, `+/+/debug/#` to auto-discover devices and receive live status changes
 - To avoid stale retained topics from old devices, new device clients are only created after an `<prefix>/online` (`true`) or `shellies/<prefix>/online` (`true`) message is received
 - Keep the default Shelly MQTT topic prefix on your devices. In external-broker mode, the adapter identifies devices from the published topic prefix (for example, the Shelly model + serial in the topic), **not** from the MQTT CONNECT client ID
 
