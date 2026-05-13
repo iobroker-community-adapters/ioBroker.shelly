@@ -33,7 +33,7 @@ Entweder ist das Gerät noch nicht in der Liste der unterstützen Geräte des Ad
 ## Ist es möglich, den Shelly-Adapter mit einem bestehenden MQTT-Broker zu verbinden?
 
 Ja. Nutze das MQTT-Protokoll und stelle den Adapter in den MQTT-Einstellungen auf **MQTT-Client (externer Broker)**.
-Der Adapter verbindet sich dann mit dem bestehenden Broker und abonniert die notwendigen Shelly-Topics (`shellies/#`, `shelly/+/events/#`, `shelly/+/status/#`, `shelly/+/rpc`, `shelly/+/online`, `shelly/+/debug/#`).
+Der Adapter verbindet sich dann mit dem bestehenden Broker und abonniert die notwendigen Shelly-Topics (`shellies/#`, `shelly/+/events/#`, `shelly/+/status/#`, `shelly/+/rpc`, `shelly/+/online`, `shelly/+/debug/#`). Dazu muss das MQTT Topic ab der 2. Generation am Anfang um `shelly/` erweitert werden.
 Damit alte retained Topics von nicht mehr vorhandenen Geräten keine Fehlmeldungen verursachen, werden neue Geräte erst erkannt, wenn ein Online-Topic `true` meldet.
 
 ## Kann die Cloud-Verbindung weiterhin genutzt werden, wenn der Shelly-Adapter verwendet wird?
