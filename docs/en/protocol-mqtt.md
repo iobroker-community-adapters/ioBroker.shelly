@@ -86,7 +86,8 @@ The Shelly adapter will connect to your existing broker as a MQTT client and aut
 4. Set **MQTT mode** to `MQTT client (external broker)`
 5. Enter the **MQTT broker host** (IP address or hostname of your broker, e.g. `192.168.1.10`)
 6. Enter the **MQTT broker port** (default: `1883`)
-7. Optionally enter the **MQTT broker username** and **MQTT broker password** if your broker requires authentication
+7. Enter at the begin of the MQTT Topic `shelly/`
+8. Optionally enter the **MQTT broker username** and **MQTT broker password** if your broker requires authentication
 
 ---
 
