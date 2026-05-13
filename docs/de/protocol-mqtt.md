@@ -86,7 +86,8 @@ Der Shelly-Adapter verbindet sich in diesem Modus als MQTT-Client mit deinem bes
 4. Setze **MQTT-Modus** auf `MQTT-Client (externer Broker)`
 5. Trage den **MQTT-Broker Host** ein (IP-Adresse oder Hostname deines Brokers, z.B. `192.168.1.10`)
 6. Trage den **MQTT-Broker Port** ein (Standard: `1883`)
-7. Trage optional **MQTT-Broker Benutzername** und **MQTT-Broker Passwort** ein, falls dein Broker eine Authentifizierung erfordert
+7. Trage bei Geräten der zweiten Generatation vor dem MQTT Topic `shelly/`ein
+8. Trage optional **MQTT-Broker Benutzername** und **MQTT-Broker Passwort** ein, falls dein Broker eine Authentifizierung erfordert
 
 ---
 
