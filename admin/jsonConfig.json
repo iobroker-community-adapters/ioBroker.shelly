@@ -257,7 +257,78 @@
             "label": "MQTT settings",
             "icon": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmlld0JveD0iMCAwIDQ0OCA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMi4wNDY4NDYsIDAsIDAsIDIuMDQ2ODQ2LCAtNzkuMTM2MzIyLCAtMzcuNTUzNzMpIiBzdHlsZT0iIj4NCiAgICAgICAgPHBhdGggZD0iTTQ2LDY0LjJ2MzFjMC4yLDAsMC40LDAsMC42LDBjODQuNCwwLDE1My4yLDY4LDE1My45LDE1MS44aDMwLjFDMjI5LjgsMTQ2LjMsMTQ3LjQsNjQuNSw0Niw2NC4yeiIgZmlsbD0iI0ZGRkZGRiIgc3R5bGU9IiIvPg0KICAgICAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNDYsMTI4LjJ2MzFjMC4yLDAsMC40LDAsMC42LDBjNDguOSwwLDg4LjgsMzkuMyw4OS41LDg3LjhoMzAuMUMxNjUuNSwxODEuNiwxMTEuOSwxMjguNSw0NiwxMjguMnoiIHN0eWxlPSIiLz4NCiAgICAgICAgPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTI0OC44LDE2Ni44di02Mi41Yy03LjctMTAuNS0xNy4yLTIyLjUtMjYuNy0zMS44Yy0xMC42LTEwLjUtMjMtMjAtMzUtMjguM2gtNjYuNCBDMTc4LjksNjUuMSwyMjUuNiwxMTAsMjQ4LjgsMTY2Ljh6IiBzdHlsZT0iIi8+DQogICAgICAgIDxwYXRoIGQ9Ik00Ni41LDE1OS4yYy0wLjIsMC0wLjQsMC0wLjYsMHY3Ny42YzAsNS42LDQuNiwxMC4yLDEwLjIsMTAuMkgxMzZDMTM1LjMsMTk4LjUsOTUuNSwxNTkuMiw0Ni41LDE1OS4yeiIgc3R5bGU9IiIvPg0KICAgICAgICA8cGF0aCBkPSJNNDYuNSw5NS4yYy0wLjIsMC0wLjQsMC0wLjYsMHYzM2M2NS45LDAuMywxMTkuNSw1My4zLDEyMC4yLDExOC44aDM0LjJDMTk5LjcsMTYzLjIsMTMxLDk1LjIsNDYuNSw5NS4yeiIgc3R5bGU9IiIvPg0KICAgICAgICA8cGF0aCBkPSJNMjQ4LjgsMjM2Ljl2LTcwLjFjLTIzLjItNTYuOC02OS45LTEwMS43LTEyOC0xMjIuNkg1Ni4xYy01LjYsMC0xMC4yLDQuNi0xMC4yLDEwLjJ2OS45IGMxMDEuNCwwLjMsMTgzLjksODIsMTg0LjUsMTgyLjhoOC4yQzI0NC4zLDI0NywyNDguOCwyNDIuNSwyNDguOCwyMzYuOXoiIHN0eWxlPSIiLz4NCiAgICAgICAgPHBhdGggZD0iTTIyMi4xLDcyLjVjOS40LDkuNCwxOSwyMS4zLDI2LjcsMzEuOHYtNTBjMC01LjYtNC41LTEwLjEtMTAuMS0xMC4xaC01MS41QzE5OS4yLDUyLjUsMjExLjYsNjIsMjIyLjEsNzIuNSB6IiBzdHlsZT0iIi8+DQogICAgPC9nPg0KPC9zdmc+DQo=",
             "items": {
+                "mqttMode": {
+                    "newLine": true,
+                    "type": "select",
+                    "options": [
+                        {
+                            "label": {
+                                "en": "MQTT broker (internal)",
+                                "de": "MQTT-Broker (intern)",
+                                "ru": "MQTT-брокер (внутренний)",
+                                "pt": "MQTT broker (interno)",
+                                "nl": "MQTT-broker (intern)",
+                                "fr": "Broker MQTT (interne)",
+                                "it": "Broker MQTT (interno)",
+                                "es": "Broker MQTT (interno)",
+                                "pl": "Broker MQTT (wewnętrzny)",
+                                "uk": "MQTT-брокер (внутрішній)",
+                                "zh-cn": "MQTT 代理（内部）"
+                            },
+                            "value": "broker"
+                        },
+                        {
+                            "label": {
+                                "en": "MQTT client (external broker)",
+                                "de": "MQTT-Client (externer Broker)",
+                                "ru": "MQTT-клиент (внешний брокер)",
+                                "pt": "Cliente MQTT (broker externo)",
+                                "nl": "MQTT-client (externe broker)",
+                                "fr": "Client MQTT (broker externe)",
+                                "it": "Client MQTT (broker esterno)",
+                                "es": "Cliente MQTT (broker externo)",
+                                "pl": "Klient MQTT (zewnętrzny broker)",
+                                "uk": "MQTT-клієнт (зовнішній брокер)",
+                                "zh-cn": "MQTT 客户端（外部代理）"
+                            },
+                            "value": "client"
+                        }
+                    ],
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6,
+                    "label": "MQTT mode",
+                    "help": "Use the internal MQTT broker or connect to an existing external MQTT broker"
+                },
+                "_documentationLinkMqtt": {
+                    "type": "staticLink",
+                    "href": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/protocol-mqtt.md",
+                    "label": {
+                        "en": "How to configure MQTT",
+                        "de": "So konfigurieren Sie MQTT",
+                        "ru": "Как настроить MQTT",
+                        "pt": "Como configurar o MQTT",
+                        "nl": "Hoe je MQTT configureert",
+                        "fr": "Comment configurer MQTT",
+                        "it": "Come configurare MQTT",
+                        "es": "Cómo configurar MQTT",
+                        "pl": "Jak skonfigurować MQTT",
+                        "uk": "Як налаштувати MQTT",
+                        "zh-cn": "如何配置MQTT"
+                    },
+                    "button": true,
+                    "variant": "contained",
+                    "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj4NCiAgICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik05NiAwQzQzIDAgMCA0MyAwIDk2VjQxNmMwIDUzIDQzIDk2IDk2IDk2SDM4NGgzMmMxNy43IDAgMzItMTQuMyAzMi0zMnMtMTQuMy0zMi0zMi0zMlYzODRjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzJjMC0xNy43LTE0LjMtMzItMzItMzJIMzg0IDk2em0wIDM4NEgzNTJ2NjRIOTZjLTE3LjcgMC0zMi0xNC4zLTMyLTMyczE0LjMtMzIgMzItMzJ6bTMyLTI0MGMwLTguOCA3LjItMTYgMTYtMTZIMzM2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2SDE0NGMtOC44IDAtMTYtNy4yLTE2LTE2em0xNiA0OEgzMzZjOC44IDAgMTYgNy4yIDE2IDE2cy03LjIgMTYtMTYgMTZIMTQ0Yy04LjggMC0xNi03LjItMTYtMTZzNy4yLTE2IDE2LTE2eiIvPg0KPC9zdmc+DQo=",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4
+                },
                 "bind": {
+                    "hidden": "data.mqttMode === 'client'",
                     "newLine": true,
                     "type": "ip",
                     "listenOnAllPorts": true,
@@ -269,6 +340,7 @@
                     "label": "MQTT Listen IP"
                 },
                 "port": {
+                    "hidden": "data.mqttMode === 'client'",
                     "type": "number",
                     "min": 1,
                     "max": 65535,
@@ -278,6 +350,31 @@
                     "lg": 2,
                     "xl": 2,
                     "label": "Port"
+                },
+                "mqttClientHost": {
+                    "hidden": "data.mqttMode !== 'client'",
+                    "newLine": true,
+                    "type": "text",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "MQTT broker host",
+                    "help": "IP address or hostname of the external MQTT broker"
+                },
+                "mqttClientPort": {
+                    "hidden": "data.mqttMode !== 'client'",
+                    "type": "number",
+                    "min": 1,
+                    "max": 65535,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 2,
+                    "lg": 2,
+                    "xl": 2,
+                    "label": "MQTT broker port",
+                    "help": "Port of the external MQTT broker (default: 1883)"
                 },
                 "_headerAuthenticationMqtt": {
                     "newLine": true,
@@ -312,31 +409,6 @@
                     "xl": 4,
                     "label": "MQTT Password",
                     "help": "Must be configured on all Shelly devices"
-                },
-                "_documentationLinkRestrictedLogin": {
-                    "type": "staticLink",
-                    "href": "https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/protocol-mqtt.md",
-                    "label": {
-                        "en": "How to configure MQTT",
-                        "de": "So konfigurieren Sie MQTT",
-                        "ru": "Как настроить MQTT",
-                        "pt": "Como configurar o MQTT",
-                        "nl": "Hoe je MQTT te overtuigen",
-                        "fr": "Comment configurer MQTT",
-                        "it": "Come configurare MQTT",
-                        "es": "Cómo configurar MQTT",
-                        "pl": "Jak skonfigurować MQTT",
-                        "uk": "Як налаштувати MQTT",
-                        "zh-cn": "如何配置MQTT"
-                    },
-                    "button": true,
-                    "variant": "contained",
-                    "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj4NCiAgICA8cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik05NiAwQzQzIDAgMCA0MyAwIDk2VjQxNmMwIDUzIDQzIDk2IDk2IDk2SDM4NGgzMmMxNy43IDAgMzItMTQuMyAzMi0zMnMtMTQuMy0zMi0zMi0zMlYzODRjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzJjMC0xNy43LTE0LjMtMzItMzItMzJIMzg0IDk2em0wIDM4NEgzNTJ2NjRIOTZjLTE3LjcgMC0zMi0xNC4zLTMyLTMyczE0LjMtMzIgMzItMzJ6bTMyLTI0MGMwLTguOCA3LjItMTYgMTYtMTZIMzM2YzguOCAwIDE2IDcuMiAxNiAxNnMtNy4yIDE2LTE2IDE2SDE0NGMtOC44IDAtMTYtNy4yLTE2LTE2em0xNiA0OEgzMzZjOC44IDAgMTYgNy4yIDE2IDE2cy03LjIgMTYtMTYgMTZIMTQ0Yy04LjggMC0xNi03LjItMTYtMTZzNy4yLTE2IDE2LTE2eiIvPg0KPC9zdmc+DQo=",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 4,
-                    "lg": 4,
-                    "xl": 4
                 },
                 "_mqttAuthGen2": {
                     "hidden": "!data.mqttpassword",

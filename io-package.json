@@ -282,6 +282,9 @@
   ],
   "native": {
     "protocol": "mqtt",
+    "mqttMode": "broker",
+    "mqttClientHost": "",
+    "mqttClientPort": 1883,
     "httpusername": "admin",
     "httppassword": "",
     "polltime": 15,

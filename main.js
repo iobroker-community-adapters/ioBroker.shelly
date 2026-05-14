@@ -22,6 +22,7 @@ class Shelly extends utils.Adapter {
         this.isUnloaded = false;
 
         this.serverMqtt = null;
+        this.serverMqttExternal = null;
         this.serverCoap = null;
         this.firmwareUpdateTimeout = null;
         this.onlineCheckTimeout = null;
@@ -67,21 +68,38 @@ class Shelly extends utils.Adapter {
             // Start MQTT server
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'mqtt') {
-                    this.validateQosConfig();
+                    const mqttMode = this.config.mqttMode || 'broker';
 
-                    this.log.info(
-                        `Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port} (QoS ${this.config.qos})`,
-                    );
+                    if (mqttMode === 'client') {
+                        this.validateQosConfig();
 
-                    if (!this.config.mqttusername || this.config.mqttusername.length === 0) {
-                        this.log.error('MQTT Username is missing!');
+                        this.log.info(
+                            `Starting in MQTT mode (external broker client). Connecting to ${this.config.mqttClientHost}:${this.config.mqttClientPort || 1883}`,
+                        );
+
+                        this.serverMqttExternal = new protocolMqtt.MQTTServerExternal(
+                            this,
+                            objectHelper,
+                            this.eventEmitter,
+                        );
+                        this.serverMqttExternal.listen();
+                    } else {
+                        this.validateQosConfig();
+
+                        this.log.info(
+                            `Starting in MQTT mode. Listening on ${this.config.bind}:${this.config.port} (QoS ${this.config.qos})`,
+                        );
+
+                        if (!this.config.mqttusername || this.config.mqttusername.length === 0) {
+                            this.log.error('MQTT Username is missing!');
+                        }
+                        if (!this.config.mqttpassword || this.config.mqttpassword.length === 0) {
+                            this.log.error('MQTT Password is missing!');
+                        }
+
+                        this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
+                        this.serverMqtt.listen();
                     }
-                    if (!this.config.mqttpassword || this.config.mqttpassword.length === 0) {
-                        this.log.error('MQTT Password is missing!');
-                    }
-
-                    this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
-                    this.serverMqtt.listen();
                 }
             });
 
@@ -234,6 +252,15 @@ class Shelly extends utils.Adapter {
                 try {
                     this.log.debug(`[onUnload] Stopping MQTT server`);
                     this.serverMqtt.destroy();
+                } catch {
+                    // ignore
+                }
+            }
+
+            if (this.serverMqttExternal) {
+                try {
+                    this.log.debug(`[onUnload] Stopping external MQTT client`);
+                    this.serverMqttExternal.destroy();
                 } catch {
                     // ignore
                 }
