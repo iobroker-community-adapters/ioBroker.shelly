@@ -32,7 +32,9 @@ Maybe the device isn't listed in the adapter's supported devices, or the client 
 
 ## Is it possible to connect the Shelly adapter to an existing MQTT broker?
 
-It is not possible to connect the Shelly adapter to an existing MQTT broker in your network. The Shelly adapter starts an own MQTT broker which is running on the (non default) port ``1882`` to avoid conflicts with other MQTT brokers on the same system.
+Yes. Use MQTT protocol and switch the adapter to **MQTT client (external broker)** mode in the MQTT settings.
+The adapter will then connect to your existing broker and subscribe to the required Shelly topics (`shellies/#`, `shelly/+/events/#`, `shelly/+/status/#`, `shelly/+/rpc`, `shelly/+/online`, `shelly/+/debug/#`). Therefor the MQTT Topic has to extend at the begin with `shelly/`.
+To avoid stale retained topics from removed/old devices, new devices are discovered only after an online topic reports `true`.
 
 ## Can I still use the cloud connection when using the adapter?
 
