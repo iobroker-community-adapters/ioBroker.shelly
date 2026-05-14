@@ -1,0 +1,25 @@
+# Workflow for auto-merging ioBroker-Bot PRs
+# This workflow uses the action-automerge-iobroker-bot action to automatically merge
+# PRs created by ioBroker-Bot if all required checks pass successfully.
+
+name: Auto-Merge ioBroker-Bot PRs
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.actor == 'ioBroker-Bot'
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Auto-merge ioBroker-Bot PRs
+        uses: iobroker-bot-orga/action-automerge-iobroker-bot@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-ref: ${{ github.event.pull_request.number }}
