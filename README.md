@@ -222,7 +222,7 @@ Notes:
 
 ### **WORK IN PROGRESS**
 
-* (patricknitsch) **NEW**: Added support for external MQTT broker (client mode). The adapter can now connect to an existing MQTT broker instead of starting its own internal broker. Configure the mode via the new "MQTT mode" setting in the MQTT settings tab.
+* (patricknitsch) **NEW**: Added support for external MQTT broker (client mode). The adapter can now connect to an existing MQTT broker instead of starting its own internal broker. Configure the mode via the new "MQTT mode" setting in the MQTT settings tab. **IMPORTANT**: The MQTT Prefix in device config needs `shelly/`at the beginn. The adapter will only listen to `shelly/` and ignores all other traffic.
 
 ### 11.0.0-alpha.15 (2026-05-10)
 - (@copilot) Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).
