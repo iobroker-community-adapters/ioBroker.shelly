@@ -37,6 +37,7 @@ Seit Adapter-Version 7.1.0 wird eine Liste aller Geräte (JSON-Objekt) bereitges
 
 | Adapterversion                                                                                                 | Skriptversion |
 |-----------------------------------------------------------------------------------------------------------------|----------------|
+| [>= 11.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v11.0.0/docs/en/ble-devices.md) | v1.3           |
 | [>= 10.3.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.3.0/docs/en/ble-devices.md) | v1.2           |
 | [>= 10.2.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.2.0/docs/en/ble-devices.md) | v1.1           |
 | [>= 10.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.1.0/docs/en/ble-devices.md) | v1.0           |
@@ -69,7 +70,7 @@ Die Bluetooth-Funktionalität am Shelly-Gerät, das als Gateway verwendet werden
 Dieses Skript im Shelly Scripting-Bereich eines Shelly Plus- oder Pro-Geräts (Gen 2+) hinzufügen und starten:
 
 ```javascript
-// v1.2
+// v1.3
 const SCRIPT_VERSION = '1.2';
 const BTHOME_SVC_ID_STR = 'fcd2';
 
@@ -122,7 +123,7 @@ function init() {
     let bleConfig = Shelly.getComponentConfig('ble');
 
     // exit if the BLE isn't enabled
-    if (!bleConfig.enable) {
+    if (!bleConfig.rpc.enable) {
         console.log('Error: The Bluetooth is not enabled, please enable it in the settings');
         return;
     }
