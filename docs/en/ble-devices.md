@@ -72,7 +72,7 @@ Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (
 
 ```javascript
 // v1.3
-const SCRIPT_VERSION = '1.2';
+const SCRIPT_VERSION = '1.3';
 const BTHOME_SVC_ID_STR = 'fcd2';
 
 let SHELLY_ID = undefined;

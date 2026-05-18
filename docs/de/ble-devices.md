@@ -71,7 +71,7 @@ Dieses Skript im Shelly Scripting-Bereich eines Shelly Plus- oder Pro-Geräts (G
 
 ```javascript
 // v1.3
-const SCRIPT_VERSION = '1.2';
+const SCRIPT_VERSION = '1.3';
 const BTHOME_SVC_ID_STR = 'fcd2';
 
 let SHELLY_ID = undefined;
