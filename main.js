@@ -98,17 +98,32 @@ class Shelly extends utils.Adapter {
             if (this.config.scanInterval > 0) {
                 const interval = Math.max(this.config.scanInterval, 60); // minimum 60 seconds
                 this.log.info(`[deviceScan] Periodic scan enabled every ${interval} seconds`);
-                this.setTimeout(() => this.deviceScan(), interval * 1000);
+                this.deviceScanTimeout = this.setTimeout(() => {
+                    this.deviceScanTimeout = null;
+                    if (!this.isUnloaded) {
+                        this.deviceScan();
+                    }
+                }, interval * 1000);
             }
 
             if (this.config.autoupdate) {
                 this.log.info(`[firmwareUpdate] Auto-Update enabled - devices will be updated automatically`);
 
                 // Wait 10 seconds for devices to connect
-                this.setTimeout(() => this.autoFirmwareUpdate(), 10 * 1000);
+                this.firmwareUpdateTimeout = this.setTimeout(() => {
+                    this.firmwareUpdateTimeout = null;
+                    if (!this.isUnloaded) {
+                        this.autoFirmwareUpdate();
+                    }
+                }, 10 * 1000);
             } else {
                 // Wait 10 seconds for devices to connect
-                this.setTimeout(() => this.firmwareNotify(), 10 * 1000);
+                this.firmwareUpdateTimeout = this.setTimeout(() => {
+                    this.firmwareUpdateTimeout = null;
+                    if (!this.isUnloaded) {
+                        this.firmwareNotify();
+                    }
+                }, 10 * 1000);
             }
         } catch (err) {
             this.log.error(`[onReady] Startup error: ${err}`);
@@ -273,10 +288,12 @@ class Shelly extends utils.Adapter {
             this.log.error(e.toString());
         }
 
-        this.onlineCheckTimeout = this.setTimeout(() => {
-            this.onlineCheckTimeout = null;
-            this.onlineCheck();
-        }, 60 * 1000); // Restart online check in 60 seconds
+        if (!this.isUnloaded) {
+            this.onlineCheckTimeout = this.setTimeout(() => {
+                this.onlineCheckTimeout = null;
+                this.onlineCheck();
+            }, 60 * 1000); // Restart online check in 60 seconds
+        }
     }
 
     async deviceStatusUpdate(deviceId, status) {
@@ -373,13 +390,15 @@ class Shelly extends utils.Adapter {
 
             this.eventEmitter.emit('onFirmwareUpdate');
 
-            this.firmwareUpdateTimeout = this.setTimeout(
-                () => {
-                    this.firmwareUpdateTimeout = null;
-                    this.autoFirmwareUpdate();
-                },
-                15 * 60 * 1000,
-            ); // Restart firmware update in 15 minutes
+            if (!this.isUnloaded) {
+                this.firmwareUpdateTimeout = this.setTimeout(
+                    () => {
+                        this.firmwareUpdateTimeout = null;
+                        this.autoFirmwareUpdate();
+                    },
+                    15 * 60 * 1000,
+                ); // Restart firmware update in 15 minutes
+            }
         }
     }
 
@@ -412,13 +431,15 @@ class Shelly extends utils.Adapter {
                 this.registerNotification('shelly', 'deviceUpdates', availableUpdates.join('\n'));
             }
 
-            this.firmwareUpdateTimeout = this.setTimeout(
-                () => {
-                    this.firmwareUpdateTimeout = null;
-                    this.firmwareNotify();
-                },
-                15 * 60 * 1000,
-            ); // Restart firmware check in 15 minutes
+            if (!this.isUnloaded) {
+                this.firmwareUpdateTimeout = this.setTimeout(
+                    () => {
+                        this.firmwareUpdateTimeout = null;
+                        this.firmwareNotify();
+                    },
+                    15 * 60 * 1000,
+                ); // Restart firmware check in 15 minutes
+            }
         }
     }
 

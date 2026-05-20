@@ -220,6 +220,7 @@ Notes:
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+- (@copilot) **FIXED**: Prevented delayed periodic scan/firmware timers from being rescheduled after adapter unload, avoiding race conditions during shutdown.
 - (@klein0r) Updated ble script (v1.3) for Shelly firmware > 2.0
 
 ### 11.0.0-alpha.15 (2026-05-10)
