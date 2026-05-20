@@ -99,10 +99,12 @@ class Shelly extends utils.Adapter {
                 const interval = Math.max(this.config.scanInterval, 60); // minimum 60 seconds
                 this.log.info(`[deviceScan] Periodic scan enabled every ${interval} seconds`);
                 this.deviceScanTimeout = this.setTimeout(() => {
-                    this.deviceScanTimeout = null;
-                    if (!this.isUnloaded) {
-                        this.deviceScan();
+                    if (this.isUnloaded) {
+                        this.deviceScanTimeout = null;
+                        return;
                     }
+                    this.deviceScanTimeout = null;
+                    this.deviceScan();
                 }, interval * 1000);
             }
 
@@ -111,18 +113,22 @@ class Shelly extends utils.Adapter {
 
                 // Wait 10 seconds for devices to connect
                 this.firmwareUpdateTimeout = this.setTimeout(() => {
-                    this.firmwareUpdateTimeout = null;
-                    if (!this.isUnloaded) {
-                        this.autoFirmwareUpdate();
+                    if (this.isUnloaded) {
+                        this.firmwareUpdateTimeout = null;
+                        return;
                     }
+                    this.firmwareUpdateTimeout = null;
+                    this.autoFirmwareUpdate();
                 }, 10 * 1000);
             } else {
                 // Wait 10 seconds for devices to connect
                 this.firmwareUpdateTimeout = this.setTimeout(() => {
-                    this.firmwareUpdateTimeout = null;
-                    if (!this.isUnloaded) {
-                        this.firmwareNotify();
+                    if (this.isUnloaded) {
+                        this.firmwareUpdateTimeout = null;
+                        return;
                     }
+                    this.firmwareUpdateTimeout = null;
+                    this.firmwareNotify();
                 }, 10 * 1000);
             }
         } catch (err) {
