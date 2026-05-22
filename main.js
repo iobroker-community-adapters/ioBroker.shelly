@@ -287,6 +287,13 @@ class Shelly extends utils.Adapter {
         try {
             const deviceIds = await this.getAllDeviceIds();
             for (const deviceId of deviceIds) {
+                // Skip TCP ping for devices already online via MQTT/CoAP.
+                // A failed port-80 ping must not override an active protocol connection
+                // (e.g. Range Extender devices whose port 80 is unreachable from ioBroker).
+                if (this.isOnline(deviceId)) {
+                    continue;
+                }
+
                 const stateHostaname = await this.getStateAsync(`${deviceId}.hostname`);
                 const valHostname = stateHostaname ? stateHostaname.val : undefined;
 
