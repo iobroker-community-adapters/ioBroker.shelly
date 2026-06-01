@@ -205,10 +205,13 @@ Notes:
 
 - Shelly BLU TRV
 - all BLU devices that need to receive data from the adapter.
-  
+
 (*) investigation still in progress
 (**) planned
 
+>[!IMPORTANT]
+>The Shelly adapter does not support Shellies connecting using any sort of NAT, i.e. most vpns and shelly range extender.
+  
 ## Sentry
 
 **This adapter uses Sentry libraries to automatically report exceptions and code errors to the developers.** For more details and for information on how to disable the error reporting, see [Sentry-Plugin Documentation](https://github.com/ioBroker/plugin-sentry#plugin-sentry)! Sentry reporting is used starting with js-controller 3.0.
