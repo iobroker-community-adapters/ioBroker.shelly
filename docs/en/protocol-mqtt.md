@@ -18,6 +18,9 @@ This is the English documentation - [🇩🇪 German version](../de/protocol-mqt
 
 Questions? Check the [FAQ](faq.md) section first!
 
+>[!IMPORTANT]
+>The Shelly adapter does not support support Shellies connection using any sort of NAT, i.e. most vpns and shelly range extender.
+
 ### Configuration
 
 1. Open the Shelly Adapter configuration in ioBroker
