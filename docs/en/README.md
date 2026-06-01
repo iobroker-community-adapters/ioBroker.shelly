@@ -42,4 +42,9 @@ Questions? Check the [FAQ](faq.md) section first!
 
 ## Features
 
-The adapter integrates with the ioBroker Device Manager. See [Devicemanager support documentation](devicemanager.md).
+- The adapter integrates with the ioBroker Device Manager. See [Devicemanager support documentation](devicemanager.md).
+
+## Restrictions
+
+- The Shelly adapter does not support Shellies connecting using any sort of NAT, i.e. most vpns and shelly range extender.
+
