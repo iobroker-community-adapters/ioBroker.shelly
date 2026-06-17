@@ -382,6 +382,76 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             };
         }
 
+        // Power metering section – only shown when power-related states exist
+        const pmPrefix = `${ns}.${shortDeviceId}.`;
+        const pmRoleToLabel: Record<string, string> = {
+            'value.power': 'Power',
+            'value.power.active': 'Power',
+            'value.voltage': 'Voltage',
+            'value.current': 'Current',
+            'value.energy': 'Energy',
+            'value.energy.active': 'Energy',
+            'value.energy.produced': 'Returned energy',
+            'value.frequency': 'Frequency',
+        };
+        const pmMetricOrder: Record<string, number> = {
+            Power: 0,
+            Voltage: 1,
+            Current: 2,
+            Energy: 3,
+            'Returned energy': 4,
+            Frequency: 5,
+        };
+        const pmEntries: { suffix: string; channel: string; metricKey: string; unit: string }[] = [];
+
+        for (const stateId of Object.keys(this.states)) {
+            if (!stateId.startsWith(pmPrefix)) {
+                continue;
+            }
+            const pmSuffix = stateId.substring(pmPrefix.length);
+            const pmStateObj = this.objects[stateId] as ioBroker.StateObject | undefined;
+            if (!pmStateObj?.common) {
+                continue;
+            }
+            const pmRole = pmStateObj.common.role || '';
+            if (!(pmRole in pmRoleToLabel) || pmStateObj.common.write === true) {
+                continue;
+            }
+            const pmUnit = pmStateObj.common.unit || '';
+            const pmChannel = pmSuffix.split(/[.:]/)[0];
+            pmEntries.push({ suffix: pmSuffix, channel: pmChannel, metricKey: pmRoleToLabel[pmRole], unit: pmUnit });
+        }
+
+        pmEntries.sort((a, b) => {
+            if (a.channel !== b.channel) {
+                return a.channel.localeCompare(b.channel);
+            }
+            return (pmMetricOrder[a.metricKey] ?? 99) - (pmMetricOrder[b.metricKey] ?? 99);
+        });
+
+        if (pmEntries.length > 0) {
+            items._pmHeader = {
+                type: 'header',
+                text: I18n.getTranslatedObject('Power metering'),
+                size: 4,
+                newLine: true,
+            } as ConfigItemAny;
+
+            const uniqueChannels = new Set(pmEntries.map(e => e.channel));
+            const multiChannel = uniqueChannels.size > 1;
+
+            for (const { suffix, channel, metricKey, unit } of pmEntries) {
+                const pmVal = this.states[`${pmPrefix}${suffix}`]?.val;
+                items[`pm_${suffix.replace(/[.:]/g, '_')}`] = {
+                    type: 'staticInfo',
+                    label: multiChannel ? `${channel}: ${metricKey}` : I18n.getTranslatedObject(metricKey),
+                    data: typeof pmVal === 'number' ? Math.round(pmVal * 100) / 100 : String(pmVal ?? '—'),
+                    unit,
+                    addColon: true,
+                };
+            }
+        }
+
         return {
             id: deviceId,
             schema: {
@@ -829,6 +899,25 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         style: {
                             opacity: 0.7,
                         },
+                    } as ConfigItemState;
+                }
+
+                // Power on main tile: any state with role value.power or value.power.active
+                const powerStateObj = this.objects[stateId] as ioBroker.StateObject | undefined;
+                const powerRole = powerStateObj?.common?.role;
+                if (
+                    (powerRole === 'value.power' || powerRole === 'value.power.active') &&
+                    powerStateObj?.common?.write !== true
+                ) {
+                    items[`power_${suffix.replace(/[.:]/g, '_')}`] = {
+                        type: 'state',
+                        oid: `${shortDeviceId}.${suffix}`,
+                        control: 'text',
+                        unit: 'W',
+                        digits: 1,
+                        label: I18n.getTranslatedObject('Power'),
+                        size: 12,
+                        style: { opacity: 0.7 },
                     } as ConfigItemState;
                 }
             }
