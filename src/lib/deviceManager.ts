@@ -965,7 +965,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 items._powerSpacer = {
                     type: 'divider',
                     color: 'transparent',
-                    height: 8,
+                    height: 4,
                 } as ConfigItemAny;
             }
         }
