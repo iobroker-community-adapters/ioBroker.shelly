@@ -875,7 +875,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     digits: 1,
                     label,
                     addColon: true,
-                    style: { fontWeight: 'bold' },
+                    //style: { fontWeight: 'bold' },
                 };
             }
             if (visiblePowerItems.length > 0) {
