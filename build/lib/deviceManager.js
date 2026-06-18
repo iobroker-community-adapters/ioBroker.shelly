@@ -853,12 +853,17 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 if ((pwRole === 'value.power' || pwRole === 'value.power.active') &&
                     pwObj?.common?.write !== true &&
                     pwObj?.common?.unit !== 'VA') {
-                    powerItems.push({ key: `power_${suffix.replace(/[.:]/g, '_')}`, suffix });
+                    const channel = suffix.split(/[.:]/)[0];
+                    powerItems.push({ key: `power_${suffix.replace(/[.:]/g, '_')}`, suffix, channel });
                 }
             }
-            const multiPower = powerItems.length > 1;
-            for (const { key, suffix } of powerItems) {
-                const channel = suffix.split(/[.:]/)[0];
+            // If RGB/RGBW channels exist, skip individual Light channels
+            const hasColorChannel = powerItems.some(({ channel }) => /^(RGBW?)\d*$/.test(channel));
+            const visiblePowerItems = hasColorChannel
+                ? powerItems.filter(({ channel }) => !/^Light\d+$/.test(channel))
+                : powerItems;
+            const multiPower = visiblePowerItems.length > 1;
+            for (const { key, suffix, channel } of visiblePowerItems) {
                 const label = multiPower
                     ? channel.replace(/(\d+)/, ' $1').trim()
                     : adapter_core_1.I18n.getTranslatedObject('Power');
@@ -870,13 +875,14 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     digits: 1,
                     label,
                     addColon: true,
+                    style: { fontWeight: 'bold' },
                 };
             }
-            if (powerItems.length > 0) {
+            if (visiblePowerItems.length > 0) {
                 items._powerSpacer = {
                     type: 'divider',
                     color: 'transparent',
-                    height: 8,
+                    height: 2,
                 };
             }
         }
