@@ -870,12 +870,12 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     digits: 1,
                     label,
                     addColon: true,
-                    style: { opacity: 0.6 },
                 };
             }
             if (powerItems.length > 0) {
                 items._powerSpacer = {
                     type: 'divider',
+                    color: 'transparent',
                     height: 8,
                 };
             }

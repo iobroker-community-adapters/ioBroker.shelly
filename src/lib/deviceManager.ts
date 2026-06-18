@@ -959,12 +959,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     digits: 1,
                     label,
                     addColon: true,
-                    style: { opacity: 0.6 },
                 } as ConfigItemState;
             }
             if (powerItems.length > 0) {
                 items._powerSpacer = {
                     type: 'divider',
+                    color: 'transparent',
                     height: 8,
                 } as ConfigItemAny;
             }
