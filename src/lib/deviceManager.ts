@@ -958,9 +958,15 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     unit: 'W',
                     digits: 1,
                     label,
-                    size: 12,
-                    style: { opacity: 0.7 },
+                    addColon: true,
+                    style: { opacity: 0.6 },
                 } as ConfigItemState;
+            }
+            if (powerItems.length > 0) {
+                items._powerSpacer = {
+                    type: 'divider',
+                    height: 8,
+                } as ConfigItemAny;
             }
         }
 
