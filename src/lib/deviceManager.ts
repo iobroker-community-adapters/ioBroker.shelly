@@ -382,6 +382,101 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             };
         }
 
+        // Power metering section – only shown when power-related states exist
+        const pmPrefix = `${ns}.${shortDeviceId}.`;
+        const pmRoleToLabel: Record<string, string> = {
+            'value.power': 'Power',
+            'value.power.active': 'Power',
+            'value.voltage': 'Voltage',
+            'value.current': 'Current',
+            'value.energy': 'Energy',
+            'value.energy.active': 'Energy',
+            'value.energy.produced': 'Returned energy',
+            'value.frequency': 'Frequency',
+        };
+        const pmMetricOrder: Record<string, number> = {
+            Power: 0,
+            Voltage: 1,
+            Current: 2,
+            Energy: 3,
+            'Returned energy': 4,
+            Frequency: 5,
+        };
+        const pmEntries: { suffix: string; channel: string; metricKey: string; unit: string }[] = [];
+
+        for (const stateId of Object.keys(this.states)) {
+            if (!stateId.startsWith(pmPrefix)) {
+                continue;
+            }
+            const pmSuffix = stateId.substring(pmPrefix.length);
+            const pmStateObj = this.objects[stateId] as ioBroker.StateObject | undefined;
+            if (!pmStateObj?.common) {
+                continue;
+            }
+            const pmRole = pmStateObj.common.role || '';
+            const pmUnit = pmStateObj.common.unit || '';
+            if (!(pmRole in pmRoleToLabel) || pmStateObj.common.write === true || pmUnit === 'VA') {
+                continue;
+            }
+            const pmChannel = pmSuffix.split(/[.:]/)[0];
+            pmEntries.push({ suffix: pmSuffix, channel: pmChannel, metricKey: pmRoleToLabel[pmRole], unit: pmUnit });
+        }
+
+        pmEntries.sort((a, b) => {
+            if (a.channel !== b.channel) {
+                return a.channel.localeCompare(b.channel);
+            }
+            return (pmMetricOrder[a.metricKey] ?? 99) - (pmMetricOrder[b.metricKey] ?? 99);
+        });
+
+        if (pmEntries.length > 0) {
+            items._pmHeader = {
+                type: 'header',
+                text: I18n.getTranslatedObject('Power metering'),
+                size: 4,
+                newLine: true,
+            } as ConfigItemAny;
+
+            const uniqueChannels = [...new Set(pmEntries.map(e => e.channel))];
+            const multiChannel = uniqueChannels.length > 1;
+
+            if (multiChannel) {
+                for (const ch of uniqueChannels) {
+                    const chLabel = ch.replace(/(\d+)/, ' $1').trim();
+                    items[`pm_ch_${ch}`] = {
+                        type: 'staticInfo',
+                        label: chLabel as ioBroker.StringOrTranslated,
+                        data: '',
+                        newLine: true,
+                    };
+                    for (const { suffix, channel, metricKey, unit } of pmEntries) {
+                        if (channel !== ch) {
+                            continue;
+                        }
+                        const pmVal = this.states[`${pmPrefix}${suffix}`]?.val;
+                        items[`pm_${suffix.replace(/[.:]/g, '_')}`] = {
+                            type: 'staticInfo',
+                            label: I18n.getTranslatedObject(metricKey),
+                            data: typeof pmVal === 'number' ? Math.round(pmVal * 100) / 100 : String(pmVal ?? '—'),
+                            unit,
+                            addColon: true,
+                        };
+                    }
+                }
+            } else {
+                for (const { suffix, metricKey, unit } of pmEntries) {
+                    const pmVal = this.states[`${pmPrefix}${suffix}`]?.val;
+                    items[`pm_${suffix.replace(/[.:]/g, '_')}`] = {
+                        type: 'staticInfo',
+                        label: I18n.getTranslatedObject(metricKey),
+                        data: typeof pmVal === 'number' ? Math.round(pmVal * 100) / 100 : String(pmVal ?? '—'),
+                        unit,
+                        addColon: true,
+                    };
+                }
+            }
+        }
+
         return {
             id: deviceId,
             schema: {
@@ -831,6 +926,53 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         },
                     } as ConfigItemState;
                 }
+            }
+
+            // Power on main tile: collect all active-power states first to decide labeling
+            const powerItems: { key: string; suffix: string; channel: string }[] = [];
+            for (const stateId of Object.keys(this.states)) {
+                if (!stateId.startsWith(prefix)) {
+                    continue;
+                }
+                const suffix = stateId.substring(prefix.length);
+                const pwObj = this.objects[stateId] as ioBroker.StateObject | undefined;
+                const pwRole = pwObj?.common?.role;
+                if (
+                    (pwRole === 'value.power' || pwRole === 'value.power.active') &&
+                    pwObj?.common?.write !== true &&
+                    pwObj?.common?.unit !== 'VA'
+                ) {
+                    const channel = suffix.split(/[.:]/)[0];
+                    powerItems.push({ key: `power_${suffix.replace(/[.:]/g, '_')}`, suffix, channel });
+                }
+            }
+            // If RGB/RGBW channels exist, skip individual Light channels
+            const hasColorChannel = powerItems.some(({ channel }) => /^(RGBW?)\d*$/.test(channel));
+            const visiblePowerItems = hasColorChannel
+                ? powerItems.filter(({ channel }) => !/^Light\d+$/.test(channel))
+                : powerItems;
+            const multiPower = visiblePowerItems.length > 1;
+            for (const { key, suffix, channel } of visiblePowerItems) {
+                const label = multiPower
+                    ? (channel.replace(/(\d+)/, ' $1').trim() as ioBroker.StringOrTranslated)
+                    : I18n.getTranslatedObject('Power');
+                items[key] = {
+                    type: 'state',
+                    oid: `${shortDeviceId}.${suffix}`,
+                    control: 'text',
+                    unit: 'W',
+                    digits: 1,
+                    label,
+                    addColon: true,
+                    style: { fontWeight: 'bold' },
+                } as ConfigItemState;
+            }
+            if (visiblePowerItems.length > 0) {
+                items._powerSpacer = {
+                    type: 'divider',
+                    color: 'transparent',
+                    height: 2,
+                } as ConfigItemAny;
             }
         }
 

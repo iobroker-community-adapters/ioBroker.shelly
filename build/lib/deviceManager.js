@@ -348,6 +348,96 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 addColon: true,
             };
         }
+        // Power metering section – only shown when power-related states exist
+        const pmPrefix = `${ns}.${shortDeviceId}.`;
+        const pmRoleToLabel = {
+            'value.power': 'Power',
+            'value.power.active': 'Power',
+            'value.voltage': 'Voltage',
+            'value.current': 'Current',
+            'value.energy': 'Energy',
+            'value.energy.active': 'Energy',
+            'value.energy.produced': 'Returned energy',
+            'value.frequency': 'Frequency',
+        };
+        const pmMetricOrder = {
+            Power: 0,
+            Voltage: 1,
+            Current: 2,
+            Energy: 3,
+            'Returned energy': 4,
+            Frequency: 5,
+        };
+        const pmEntries = [];
+        for (const stateId of Object.keys(this.states)) {
+            if (!stateId.startsWith(pmPrefix)) {
+                continue;
+            }
+            const pmSuffix = stateId.substring(pmPrefix.length);
+            const pmStateObj = this.objects[stateId];
+            if (!pmStateObj?.common) {
+                continue;
+            }
+            const pmRole = pmStateObj.common.role || '';
+            const pmUnit = pmStateObj.common.unit || '';
+            if (!(pmRole in pmRoleToLabel) || pmStateObj.common.write === true || pmUnit === 'VA') {
+                continue;
+            }
+            const pmChannel = pmSuffix.split(/[.:]/)[0];
+            pmEntries.push({ suffix: pmSuffix, channel: pmChannel, metricKey: pmRoleToLabel[pmRole], unit: pmUnit });
+        }
+        pmEntries.sort((a, b) => {
+            if (a.channel !== b.channel) {
+                return a.channel.localeCompare(b.channel);
+            }
+            return (pmMetricOrder[a.metricKey] ?? 99) - (pmMetricOrder[b.metricKey] ?? 99);
+        });
+        if (pmEntries.length > 0) {
+            items._pmHeader = {
+                type: 'header',
+                text: adapter_core_1.I18n.getTranslatedObject('Power metering'),
+                size: 4,
+                newLine: true,
+            };
+            const uniqueChannels = [...new Set(pmEntries.map(e => e.channel))];
+            const multiChannel = uniqueChannels.length > 1;
+            if (multiChannel) {
+                for (const ch of uniqueChannels) {
+                    const chLabel = ch.replace(/(\d+)/, ' $1').trim();
+                    items[`pm_ch_${ch}`] = {
+                        type: 'staticInfo',
+                        label: chLabel,
+                        data: '',
+                        newLine: true,
+                    };
+                    for (const { suffix, channel, metricKey, unit } of pmEntries) {
+                        if (channel !== ch) {
+                            continue;
+                        }
+                        const pmVal = this.states[`${pmPrefix}${suffix}`]?.val;
+                        items[`pm_${suffix.replace(/[.:]/g, '_')}`] = {
+                            type: 'staticInfo',
+                            label: adapter_core_1.I18n.getTranslatedObject(metricKey),
+                            data: typeof pmVal === 'number' ? Math.round(pmVal * 100) / 100 : String(pmVal ?? '—'),
+                            unit,
+                            addColon: true,
+                        };
+                    }
+                }
+            }
+            else {
+                for (const { suffix, metricKey, unit } of pmEntries) {
+                    const pmVal = this.states[`${pmPrefix}${suffix}`]?.val;
+                    items[`pm_${suffix.replace(/[.:]/g, '_')}`] = {
+                        type: 'staticInfo',
+                        label: adapter_core_1.I18n.getTranslatedObject(metricKey),
+                        data: typeof pmVal === 'number' ? Math.round(pmVal * 100) / 100 : String(pmVal ?? '—'),
+                        unit,
+                        addColon: true,
+                    };
+                }
+            }
+        }
         return {
             id: deviceId,
             schema: {
@@ -750,6 +840,50 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         },
                     };
                 }
+            }
+            // Power on main tile: collect all active-power states first to decide labeling
+            const powerItems = [];
+            for (const stateId of Object.keys(this.states)) {
+                if (!stateId.startsWith(prefix)) {
+                    continue;
+                }
+                const suffix = stateId.substring(prefix.length);
+                const pwObj = this.objects[stateId];
+                const pwRole = pwObj?.common?.role;
+                if ((pwRole === 'value.power' || pwRole === 'value.power.active') &&
+                    pwObj?.common?.write !== true &&
+                    pwObj?.common?.unit !== 'VA') {
+                    const channel = suffix.split(/[.:]/)[0];
+                    powerItems.push({ key: `power_${suffix.replace(/[.:]/g, '_')}`, suffix, channel });
+                }
+            }
+            // If RGB/RGBW channels exist, skip individual Light channels
+            const hasColorChannel = powerItems.some(({ channel }) => /^(RGBW?)\d*$/.test(channel));
+            const visiblePowerItems = hasColorChannel
+                ? powerItems.filter(({ channel }) => !/^Light\d+$/.test(channel))
+                : powerItems;
+            const multiPower = visiblePowerItems.length > 1;
+            for (const { key, suffix, channel } of visiblePowerItems) {
+                const label = multiPower
+                    ? channel.replace(/(\d+)/, ' $1').trim()
+                    : adapter_core_1.I18n.getTranslatedObject('Power');
+                items[key] = {
+                    type: 'state',
+                    oid: `${shortDeviceId}.${suffix}`,
+                    control: 'text',
+                    unit: 'W',
+                    digits: 1,
+                    label,
+                    addColon: true,
+                    style: { fontWeight: 'bold' },
+                };
+            }
+            if (visiblePowerItems.length > 0) {
+                items._powerSpacer = {
+                    type: 'divider',
+                    color: 'transparent',
+                    height: 2,
+                };
             }
         }
         if (Object.keys(items).length === 0) {
