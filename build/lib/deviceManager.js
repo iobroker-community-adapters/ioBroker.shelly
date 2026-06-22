@@ -66,16 +66,12 @@ const groupMeta = {
  */
 class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
     config;
-    ready;
     states = {};
     objects = {};
     constructor(adapter) {
         super(adapter);
         this.config = adapter.config;
-        // Initialize i18n
-        this.ready = adapter_core_1.I18n.init(__dirname, adapter)
-            .catch(error => this.adapter.log.error(`Cannot initialize i18n: ${error}`))
-            .then(() => this.init());
+        this.init().catch(e => this.adapter.log.error(`Cannot init manager: ${e}`));
     }
     async init() {
         const devices = await this.adapter.getDevicesAsync();
@@ -155,8 +151,6 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
      * @param context
      */
     async loadDevices(context) {
-        // Wait that i18n is initialized
-        await this.ready;
         for (const deviceId in this.objects) {
             const device = this.objects[deviceId];
             if (device.type !== 'device') {
@@ -1889,7 +1883,6 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
      * Scan for new Shelly devices and return names/IPs of unknown ones.
      */
     async scanForNewDevices() {
-        await this.ready;
         const found = await this.mdnsScan(5000);
         const knownIps = new Set();
         for (const stateId in this.states) {

@@ -8,6 +8,7 @@ exports.getObject = getObject;
 exports.loadExistingObjects = loadExistingObjects;
 exports.handleStateChange = handleStateChange;
 exports.init = init;
+const adapter_core_1 = require("@iobroker/adapter-core");
 let adapter = null;
 const stateChangeTrigger = {};
 const objectQueue = [];
@@ -20,6 +21,12 @@ function setOrUpdateObject(id, obj, obtainCustomFields, value, stateChangeCallba
     obj.type ||= 'state';
     obj.common ||= {};
     obj.native ||= {};
+    // Device definitions store common.name as a plain English i18n key (see deviceTypes.ts).
+    // Resolve it to a full translation object at runtime - I18n is initialized in onReady before
+    // any object is created. Names that are not dictionary keys fall back to `{ en: <name> }`.
+    if (typeof obj.common.name === 'string') {
+        obj.common.name = adapter_core_1.I18n.getTranslatedObject(obj.common.name);
+    }
     if (obj.common && obj.common.type === undefined) {
         if (value !== null && value !== undefined) {
             obj.common.type = typeof value;

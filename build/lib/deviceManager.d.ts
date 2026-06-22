@@ -5,7 +5,6 @@ import type { ShellyAdapter } from '../main';
  */
 export default class ShellyDeviceManagement extends DeviceManagement {
     private config;
-    private readonly ready;
     private readonly states;
     private readonly objects;
     constructor(adapter: ShellyAdapter);

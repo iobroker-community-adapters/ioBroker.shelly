@@ -70,7 +70,7 @@
         "test:js": "mocha --config test/mocharc.custom.json \"test/**/*.test.js\"",
         "test:package": "mocha test/package --exit",
         "test:integration": "mocha test/integration --exit",
-        "build": "node tasks && npm run build:tsc",
+        "build": "node tasks.mts && npm run build:tsc",
         "build:tsc": "tsc -p tsconfig.build.json",
         "check": "tsc --noEmit",
         "lint": "eslint -c eslint.config.mjs .",

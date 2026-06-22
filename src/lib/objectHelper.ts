@@ -1,3 +1,5 @@
+import { I18n } from '@iobroker/adapter-core';
+
 let adapter: ioBroker.Adapter | null = null;
 
 const stateChangeTrigger: { [id: string]: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void } = {};
@@ -26,6 +28,12 @@ export function setOrUpdateObject(
     (obj as ioBroker.StateObject).type ||= 'state';
     obj.common ||= {} as ioBroker.ObjectCommon;
     obj.native ||= {};
+    // Device definitions store common.name as a plain English i18n key (see deviceTypes.ts).
+    // Resolve it to a full translation object at runtime - I18n is initialized in onReady before
+    // any object is created. Names that are not dictionary keys fall back to `{ en: <name> }`.
+    if (typeof obj.common.name === 'string') {
+        obj.common.name = I18n.getTranslatedObject(obj.common.name);
+    }
     if (obj.common && obj.common.type === undefined) {
         if (value !== null && value !== undefined) {
             obj.common.type = typeof value;

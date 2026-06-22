@@ -503,13 +503,24 @@ export class ShellyAdapter extends Adapter {
     }
 
     public async processBleMessage(val: any): Promise<void> {
-        if (val && val.scriptVersion && val.src && val.payload) {
-            this.log.debug(`[processBleMessage] Received payload ${JSON.stringify(val.payload)} from ${val.src}`);
+        const valTyped: {
+            scriptVersion: '1.2' | '1.3';
+            src: string;
+            srcBle: {
+                mac: string;
+                rssi: number;
+            };
+            payload: string;
+        } = val;
+        if (valTyped?.scriptVersion && valTyped.src && valTyped.payload) {
+            this.log.debug(
+                `[processBleMessage] Received payload ${JSON.stringify(valTyped.payload)} from ${valTyped.src}`,
+            );
 
             const expectedScriptVersion = '1.3';
-            if (val.scriptVersion !== expectedScriptVersion) {
+            if (valTyped.scriptVersion !== expectedScriptVersion) {
                 this.log.warn(
-                    `[BLE] ${val.srcBle.mac} (via ${val.src}): Script version ${val.scriptVersion} is not supported (expected ${expectedScriptVersion}), see documentation for latest version`,
+                    `[BLE] ${valTyped.srcBle.mac} (via ${valTyped.src}): Script version ${valTyped.scriptVersion} is not supported (expected ${expectedScriptVersion}), see documentation for latest version`,
                 );
             }
 
@@ -523,20 +534,20 @@ export class ShellyAdapter extends Adapter {
             });
 
             await this.extendObject(
-                `ble.${val.srcBle.mac}`,
+                `ble.${valTyped.srcBle.mac}`,
                 {
                     type: 'device',
                     common: {
-                        name: val.srcBle.mac,
+                        name: valTyped.srcBle.mac,
                     },
                     native: {},
                 },
                 { preserve: { common: ['name', 'icon'] } },
             );
 
-            await this.delObjectAsync(`ble.${val.srcBle.mac}.rssi`); // moved to receivedBy
+            await this.delObjectAsync(`ble.${valTyped.srcBle.mac}.rssi`); // moved to receivedBy
 
-            await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.pid`, {
+            await this.setObjectNotExistsAsync(`ble.${valTyped.srcBle.mac}.pid`, {
                 type: 'state',
                 common: {
                     name: I18n.getTranslatedObject('Packet ID') /*{
@@ -560,22 +571,10 @@ export class ShellyAdapter extends Adapter {
                 native: {},
             });
 
-            await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.receivedBy`, {
+            await this.setObjectNotExistsAsync(`ble.${valTyped.srcBle.mac}.receivedBy`, {
                 type: 'state',
                 common: {
-                    name: {
-                        en: 'Received by devices',
-                        de: 'Empfangen von Geräten',
-                        ru: 'Получено устройствами',
-                        pt: 'Recebido por dispositivos',
-                        nl: 'Ontvangen door apparaten',
-                        fr: 'Reçu par les appareils',
-                        it: 'Ricevuto da dispositivi',
-                        es: 'Recibido por dispositivos',
-                        pl: 'Otrzymane przez urządzenia',
-                        uk: 'Пристрої',
-                        'zh-cn': '设备接收',
-                    },
+                    name: I18n.getTranslatedObject('Received by devices'),
                     type: 'string',
                     role: 'json',
                     read: true,
@@ -585,22 +584,10 @@ export class ShellyAdapter extends Adapter {
                 native: {},
             });
 
-            await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.encrypted`, {
+            await this.setObjectNotExistsAsync(`ble.${valTyped.srcBle.mac}.encrypted`, {
                 type: 'state',
                 common: {
-                    name: {
-                        en: 'Encrypted',
-                        de: 'Verschlüsselt',
-                        ru: 'Зашифрованный',
-                        pt: 'Criptografado',
-                        nl: 'Versleuteld',
-                        fr: 'Chiffres',
-                        it: 'Crittografia',
-                        es: 'Encriptado',
-                        pl: 'Zaszyfrowane',
-                        uk: 'Зашифрований',
-                        'zh-cn': '已加密',
-                    },
+                    name: I18n.getTranslatedObject('Encrypted'),
                     type: 'boolean',
                     role: 'value',
                     read: true,
@@ -610,22 +597,10 @@ export class ShellyAdapter extends Adapter {
                 native: {},
             });
 
-            await this.setObjectNotExistsAsync(`ble.${val.srcBle.mac}.encryptionKey`, {
+            await this.setObjectNotExistsAsync(`ble.${valTyped.srcBle.mac}.encryptionKey`, {
                 type: 'state',
                 common: {
-                    name: {
-                        en: 'Encryption key',
-                        de: 'Schlüssel zur Verschlüsselung',
-                        ru: 'Ключ шифрования',
-                        pt: 'Chave de criptografia',
-                        nl: 'Versleutelingssleutel',
-                        fr: 'Clé de chiffrement',
-                        it: 'Chiave di crittografia',
-                        es: 'Clave de cifrado',
-                        pl: 'Klucz szyfrowania',
-                        uk: 'Ключ шифрування',
-                        'zh-cn': '加密密钥',
-                    },
+                    name: I18n.getTranslatedObject('Encryption key'),
                     type: 'string',
                     role: 'value',
                     read: true,
@@ -635,24 +610,27 @@ export class ShellyAdapter extends Adapter {
                 native: {},
             });
 
-            const rawData = this.convertFromHex(val.payload); // convert hex to bytes
+            const rawData = this.convertFromHex(valTyped.payload); // convert hex to bytes
             let unpackedData: any = this.bleDecoder.unpack(Buffer.from(rawData));
 
             if (unpackedData !== null) {
                 this.log.debug(
-                    `[processBleMessage] Received unpacked payload ${JSON.stringify(unpackedData)} from ${val.src}`,
+                    `[processBleMessage] Received unpacked payload ${JSON.stringify(unpackedData)} from ${valTyped.src}`,
                 );
 
-                await this.setState(`ble.${val.srcBle.mac}.encrypted`, { val: unpackedData.encryption, ack: true });
+                await this.setState(`ble.${valTyped.srcBle.mac}.encrypted`, {
+                    val: unpackedData.encryption,
+                    ack: true,
+                });
 
                 if (unpackedData.encryption) {
-                    const encryptionKeyState = await this.getStateAsync(`ble.${val.srcBle.mac}.encryptionKey`);
+                    const encryptionKeyState = await this.getStateAsync(`ble.${valTyped.srcBle.mac}.encryptionKey`);
                     const encryptionKeyHex = encryptionKeyState
                         ? String(encryptionKeyState.val)
                         : '00000000-0000-0000-0000-000000000000';
 
                     const encryptionKey = Buffer.from(encryptionKeyHex.replaceAll('-', ''), 'hex');
-                    const macBuffer = Buffer.from(val.srcBle.mac.replaceAll(':', ''), 'hex');
+                    const macBuffer = Buffer.from(valTyped.srcBle.mac.replaceAll(':', ''), 'hex');
 
                     const dataPrefix = Buffer.concat([Buffer.from('d2fc', 'hex'), Buffer.from(rawData)]);
 
@@ -674,13 +652,15 @@ export class ShellyAdapter extends Adapter {
 
                         unpackedData = this.bleDecoder.unpack(decrypted, true);
                     } catch (err) {
-                        this.log.error(`[processBleMessage] unable to process encrypted payload by ${val.src}: ${err}`);
+                        this.log.error(
+                            `[processBleMessage] unable to process encrypted payload by ${valTyped.src}: ${err}`,
+                        );
                     }
                 }
 
                 if (unpackedData !== null) {
                     this.log.debug(
-                        `[processBleMessage] Processing (decrypted) payload ${JSON.stringify(unpackedData)} from ${val.src}`,
+                        `[processBleMessage] Processing (decrypted) payload ${JSON.stringify(unpackedData)} from ${valTyped.src}`,
                     );
 
                     const typesList: Record<
@@ -714,18 +694,18 @@ export class ShellyAdapter extends Adapter {
                         window: { type: 'number', states: { 0: 'Closed', 1: 'Open' } },
                     };
 
-                    const pidState = await this.getStateAsync(`ble.${val.srcBle.mac}.pid`);
-                    const pidOld = pidState && pidState.val ? pidState.val : -1;
+                    const pidState = await this.getStateAsync(`ble.${valTyped.srcBle.mac}.pid`);
+                    const pidOld = pidState?.val ? pidState.val : -1;
                     const pidNew = unpackedData.pid;
 
                     // Check if same message has been received by other Shellys
                     if (pidOld !== pidNew) {
-                        await this.setState(`ble.${val.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
-                        await this.setState(`ble.${val.srcBle.mac}.receivedBy`, {
+                        await this.setState(`ble.${valTyped.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
+                        await this.setState(`ble.${valTyped.srcBle.mac}.receivedBy`, {
                             val: JSON.stringify(
                                 {
-                                    [val.src]: {
-                                        rssi: val.srcBle.rssi,
+                                    [valTyped.src]: {
+                                        rssi: valTyped.srcBle.rssi,
                                         ts: Date.now(),
                                     },
                                 },
@@ -744,10 +724,10 @@ export class ShellyAdapter extends Adapter {
                                 if (stateType === 'number') {
                                     stateValue = value as ioBroker.StateValue;
                                 } else if (stateType === 'boolean') {
-                                    stateValue = value ? true : false;
+                                    stateValue = !!value;
                                 }
 
-                                await this.extendObject(`ble.${val.srcBle.mac}.${key}`, {
+                                await this.extendObject(`ble.${valTyped.srcBle.mac}.${key}`, {
                                     type: 'state',
                                     common: {
                                         name: key,
@@ -762,52 +742,54 @@ export class ShellyAdapter extends Adapter {
                                 });
 
                                 if (stateValue != undefined) {
-                                    await this.setState(`ble.${val.srcBle.mac}.${key}`, {
+                                    await this.setState(`ble.${valTyped.srcBle.mac}.${key}`, {
                                         val: stateValue,
                                         ack: true,
-                                        c: val.src,
+                                        c: valTyped.src,
                                     });
                                 }
                             } else {
-                                this.log.debug(`[processBleMessage] skipping unknown attribute ${key} from ${val.src}`);
+                                this.log.debug(
+                                    `[processBleMessage] skipping unknown attribute ${key} from ${valTyped.src}`,
+                                );
                             }
                         }
 
                         // Classify BLE device and set name/icon if still default
-                        const bleDeviceObj = await this.getObjectAsync(`ble.${val.srcBle.mac}`);
+                        const bleDeviceObj = await this.getObjectAsync(`ble.${valTyped.srcBle.mac}`);
                         if (bleDeviceObj) {
                             const dataKeys = Object.keys(unpackedData);
                             const bleType = this.classifyBleDevice(dataKeys);
 
                             const updates: { name?: string; icon?: string } = {};
-                            if (bleDeviceObj.common.name === val.srcBle.mac) {
+                            if (bleDeviceObj.common.name === valTyped.srcBle.mac) {
                                 updates.name = bleType.model;
                             }
                             if (!bleDeviceObj.common.icon || String(bleDeviceObj.common.icon).startsWith('data:')) {
                                 updates.icon = `icons/${bleType.icon}.png`;
                             }
                             if (Object.keys(updates).length > 0) {
-                                await this.extendObject(`ble.${val.srcBle.mac}`, { common: updates });
+                                await this.extendObject(`ble.${valTyped.srcBle.mac}`, { common: updates });
                             }
                         }
                     } else {
                         try {
-                            const receivedByState = await this.getStateAsync(`ble.${val.srcBle.mac}.receivedBy`);
+                            const receivedByState = await this.getStateAsync(`ble.${valTyped.srcBle.mac}.receivedBy`);
                             if (receivedByState) {
                                 const deviceList = JSON.parse(receivedByState.val as string);
-                                deviceList[val.src] = {
-                                    rssi: val.srcBle.rssi,
+                                deviceList[valTyped.src] = {
+                                    rssi: valTyped.srcBle.rssi,
                                     ts: Date.now(),
                                 };
 
-                                await this.setState(`ble.${val.srcBle.mac}.receivedBy`, {
+                                await this.setState(`ble.${valTyped.srcBle.mac}.receivedBy`, {
                                     val: JSON.stringify(deviceList, null, 2),
                                     ack: true,
                                 });
                             }
                         } catch (err) {
                             this.log.error(
-                                `[processBleMessage] Unable to extend device list (receivedBy) of ${val.srcBle.mac}: ${err}`,
+                                `[processBleMessage] Unable to extend device list (receivedBy) of ${valTyped.srcBle.mac}: ${err}`,
                             );
                         }
                     }
