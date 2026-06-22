@@ -1,13 +1,14 @@
-import { type AdapterInstance } from '@iobroker/adapter-core';
 import { DeviceManagement, type ActionContext, type DeviceDetails, type DeviceLoadContext, type DeviceRefresh, type InstanceDetails } from '@iobroker/dm-utils';
+import type { ShellyAdapter } from '../main';
 /**
  * DeviceManager Class
  */
 export default class ShellyDeviceManagement extends DeviceManagement {
+    private config;
     private readonly ready;
     private readonly states;
     private readonly objects;
-    constructor(adapter: AdapterInstance);
+    constructor(adapter: ShellyAdapter);
     private init;
     protected getInstanceInfo(): InstanceDetails;
     onStateChange(id: string, state: ioBroker.State | null): void;

@@ -295,6 +295,7 @@
     "mqttpassword": "mqttuser",
     "qos": 0,
     "coapbind": "0.0.0.0",
+    "scanInterval": 0,
     "blacklist": [
       {
         "id": "SHBDUO-1#123456789#2"

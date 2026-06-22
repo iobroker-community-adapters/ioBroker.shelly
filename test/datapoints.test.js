@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const fs = require('fs');
 const path = require('path');
-const datapoints = require('../lib/datapoints');
+const datapoints = require('../build/lib/datapoints');
 
 const allDevices = datapoints.getAllDeviceDefinitions();
 

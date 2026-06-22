@@ -83,7 +83,9 @@ export function setOrUpdateObject(
     if (adapterObjects[id] && isEquivalent(obj, adapterObjects[id])) {
         //adapter.log.debug('Object unchanged for ' + id + ': ' + JSON.stringify(adapterObjects[id]) + ' - update only: ' + JSON.stringify(value));
         if (value !== undefined) {
-            void adapter.setState(id, value, true);
+            adapter
+                .setState(id, value, true)
+                .catch((e: unknown) => adapter!.log.error(`[objectHelper] setState failed: ${String(e)}`));
         }
         if (stateChangeCallback) {
             stateChangeTrigger[id] = stateChangeCallback;

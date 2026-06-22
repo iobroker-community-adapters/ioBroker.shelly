@@ -68,5 +68,6 @@
     "Yes": "Yes",
     "disabled": "disabled",
     "enabled": "enabled",
-    "unknown": "unknown"
+    "unknown": "unknown",
+    "Packet ID": "Packet ID"
 }

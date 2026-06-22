@@ -39,14 +39,13 @@ const crypto = __importStar(require("node:crypto"));
 const dgram = __importStar(require("node:dgram"));
 const http = __importStar(require("node:http"));
 const os = __importStar(require("node:os"));
+const datapoints = __importStar(require("./datapoints"));
 class HttpAuthError extends Error {
     constructor() {
         super('Device is password-protected');
         this.name = 'HttpAuthError';
     }
 }
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const datapoints = require('../../lib/datapoints');
 /** Group metadata: display name key (for i18n) and representative icon */
 const groupMeta = {
     relay: { nameKey: 'Relays & Switches', icon: 'adapter/shelly/icons/shellyplus1.png' },
@@ -66,11 +65,13 @@ const groupMeta = {
  * DeviceManager Class
  */
 class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
+    config;
     ready;
     states = {};
     objects = {};
     constructor(adapter) {
         super(adapter);
+        this.config = adapter.config;
         // Initialize i18n
         this.ready = adapter_core_1.I18n.init(__dirname, adapter)
             .catch(error => this.adapter.log.error(`Cannot initialize i18n: ${error}`))
@@ -105,7 +106,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         await this.adapter.subscribeObjectsAsync('*');
     }
     getInstanceInfo() {
-        const protocol = this.adapter.config.protocol || 'coap';
+        const protocol = this.config.protocol || 'coap';
         const actions = protocol === 'coap'
             ? []
             : [
@@ -1353,7 +1354,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 const anyChecked = [];
                 if (newDevices.length > 0) {
                     // Fetch real device names from devices
-                    const deviceNames = await Promise.all(newDevices.map(dev => this.fetchDeviceName(dev.ip, this.adapter.config.httppassword || '')));
+                    const deviceNames = await Promise.all(newDevices.map(dev => this.fetchDeviceName(dev.ip, this.config.httppassword || '')));
                     items._newHeader = {
                         type: 'header',
                         text: `New devices (${newDevices.length})`,
@@ -1499,10 +1500,10 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         return suffix ? `${devicePrefix}${suffix}` : '';
     }
     async provisionDevices(devices, context) {
-        const mqttPort = this.adapter.config.port || 1882;
-        const mqttUser = this.adapter.config.mqttusername || '';
-        const mqttPass = this.adapter.config.mqttpassword || '';
-        const httpPass = this.adapter.config.httppassword || '';
+        const mqttPort = this.config.port || 1882;
+        const mqttUser = this.config.mqttusername || '';
+        const mqttPass = this.config.mqttpassword || '';
+        const httpPass = this.config.httppassword || '';
         const localIp = this.getLocalIp(devices[0].ip);
         const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         if (!localIp) {
