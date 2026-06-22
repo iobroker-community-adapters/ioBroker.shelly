@@ -131,6 +131,7 @@
       "MQTT"
     ],
     "tier": 2,
+    "nogit": true,
     "licenseInformation": {
       "license": "MIT",
       "type": "free"
