@@ -1,0 +1,18 @@
+import type { DeviceDefinition } from '../../deviceTypes';
+import * as shellyHelperGen2 from '../gen2-helper';
+
+/**
+ * Shelly Plus I4 / shellyplusi4
+ *
+ * https://shelly-api-docs.shelly.cloud/gen2/Devices/Gen2/ShellyPlusI4
+ */
+const shellyplusi4: DeviceDefinition = {};
+
+shellyHelperGen2.addInput(shellyplusi4, 0);
+shellyHelperGen2.addInput(shellyplusi4, 1);
+shellyHelperGen2.addInput(shellyplusi4, 2);
+shellyHelperGen2.addInput(shellyplusi4, 3);
+
+shellyHelperGen2.addPlusAddon(shellyplusi4);
+
+export { shellyplusi4 };
