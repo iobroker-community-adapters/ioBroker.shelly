@@ -5,6 +5,7 @@ import type { EventEmitter } from 'node:events';
 import type { DeviceDefinition, DeviceState, ShellyClient } from '../deviceTypes';
 import type { ShellyAdapter } from '../../main';
 import type { ShellyAdapterConfig } from '../types';
+import type ObjectHelper from '../objectHelper';
 
 /**
  * Whether `funct` is an `async` function (so the caller knows to `await` its result).
@@ -24,12 +25,16 @@ function isAsync(funct: unknown): boolean | undefined {
  * `*_publish_funct`/`*_cmd_funct` callbacks, polls HTTP, and creates/deletes ioBroker objects.
  * Abstract pieces (serial id, device class/type, value publishing) are implemented by subclasses.
  */
-class BaseClient implements ShellyClient {
+export class BaseClient implements ShellyClient {
     type: 'mqtt' | 'coap';
     config: ShellyAdapterConfig;
     adapter: ShellyAdapter;
-    /** The shared object/state queue helper (build/lib/objectHelper). */
-    objectHelper: any;
+    /**
+     * The shared object/state queue helper (build/lib/objectHelper). Heterogeneous partial-object
+     * factory whose `setOrUpdateObject(id, { type?, common, native? }, …)` fills in defaults, so it is
+     * deliberately left untyped here rather than fighting its loose contract.
+     */
+    objectHelper: ObjectHelper;
     eventEmitter: EventEmitter;
     httpIoBrokerStateTimeout: NodeJS.Timeout | null;
     msgId: number;
@@ -50,7 +55,7 @@ class BaseClient implements ShellyClient {
     nonceCount: number;
     httpTimeout: number;
 
-    constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: any, eventEmitter: EventEmitter) {
+    constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         this.type = type; // mqtt or coap
 
         this.adapter = adapter;
@@ -656,6 +661,10 @@ class BaseClient implements ShellyClient {
                         }
 
                         const deviceId = this.getDeviceId();
+                        if (!deviceId) {
+                            this.adapter.log.warn('No ID');
+                            continue;
+                        }
                         const iconName = datapoints.getDeviceIcon(this.getDeviceClass());
                         this.objectHelper.setOrUpdateObject(
                             deviceId,
@@ -931,24 +940,18 @@ class BaseClient implements ShellyClient {
                 // Search for states in current channel
                 let found = false;
                 for (const j in objList) {
-                    const tmpidj = objList[j];
-                    if (!tmpidj) {
+                    const tmpIDj = objList[j];
+                    if (!tmpIDj) {
                         continue;
                     }
 
-                    if (
-                        tmpidj &&
-                        tmpidj.type &&
-                        tmpidj._id &&
-                        tmpidj.type === 'state' &&
-                        tmpidj._id.startsWith(tmpObj._id)
-                    ) {
+                    if (tmpIDj?.type && tmpIDj._id && tmpIDj.type === 'state' && tmpIDj._id.startsWith(tmpObj._id)) {
                         found = true;
                         break;
                     }
                 }
 
-                if (found === false) {
+                if (!found) {
                     try {
                         if (this.objectHelper.getObject(tmpObj._id)) {
                             this.objectHelper.deleteObject(tmpObj._id);
@@ -1075,12 +1078,12 @@ class BaseClient implements ShellyClient {
 }
 
 /** Base class shared by the MQTT and CoAP servers (holds adapter/objectHelper/eventEmitter). */
-class BaseServer {
+export class BaseServer {
     adapter: ShellyAdapter;
-    objectHelper: any;
+    objectHelper: ObjectHelper;
     eventEmitter: EventEmitter;
 
-    constructor(adapter: ShellyAdapter, objectHelper: any, eventEmitter: EventEmitter) {
+    constructor(adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         this.adapter = adapter;
         this.objectHelper = objectHelper;
         this.eventEmitter = eventEmitter;
@@ -1090,5 +1093,3 @@ class BaseServer {
         this.adapter.log.debug(`[BaseServer] Destroying`);
     }
 }
-
-export { BaseClient, BaseServer };

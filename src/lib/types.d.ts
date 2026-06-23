@@ -19,8 +19,6 @@ export interface ShellyAdapterConfig {
     scanInterval: number | string;
 }
 
-// Ambient stubs for runtime dependencies that ship without TypeScript declarations.
-// These let the adapter `import`/`require` them under strict type checking; the modules
-// themselves remain untyped (`any`), which is acceptable for these low-level helpers.
-declare module 'shelly-iot';
-declare module 'mqtt-connection';
+// The ambient stubs for the two untyped runtime dependencies (shelly-iot, mqtt-connection) live
+// in the script-style declaration file `external-modules.d.ts`. Ambient `declare module` blocks
+// must sit in a non-module .d.ts to take effect, which this file is not (it has top-level exports).

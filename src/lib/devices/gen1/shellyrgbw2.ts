@@ -426,13 +426,17 @@ const shellyrgbw2: DeviceDefinition = {
         coap: {
             http_publish: '/status',
             http_publish_funct: value => {
-                return value ? JSON.parse(value).lights.reduce((pv: number, cv: any) => pv + cv.power, 0) : undefined;
+                return value
+                    ? JSON.parse(value).lights.reduce((pv: number, cv: { power: number }) => pv + cv.power, 0)
+                    : undefined;
             },
         },
         mqtt: {
             http_publish: '/status',
             http_publish_funct: value => {
-                return value ? JSON.parse(value).lights.reduce((pv: number, cv: any) => pv + cv.power, 0) : undefined;
+                return value
+                    ? JSON.parse(value).lights.reduce((pv: number, cv: { power: number }) => pv + cv.power, 0)
+                    : undefined;
             },
         },
         common: {

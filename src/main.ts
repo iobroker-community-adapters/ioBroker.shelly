@@ -1,23 +1,23 @@
-import * as crypto from 'node:crypto';
+import { createDecipheriv } from 'node:crypto';
 import { EventEmitter } from 'node:events';
 import tcpPing from 'tcp-ping';
 
 import { Adapter, type AdapterOptions, I18n } from '@iobroker/adapter-core';
 
 import { name as packageName } from '../package.json';
-import * as objectHelper from './lib/objectHelper';
-import * as protocolMqtt from './lib/protocol/mqtt';
-import * as protocolCoap from './lib/protocol/coap';
+import { MQTTServer } from './lib/protocol/mqtt';
+import { CoAPServer } from './lib/protocol/coap';
 import { BleDecoder } from './lib/ble-decoder';
 import DeviceManagement from './lib/deviceManager';
 import type { ShellyAdapterConfig } from './lib/types';
+import ObjectHelper from './lib/objectHelper';
 
 const adapterName = packageName.split('.').pop() ?? 'shelly';
 
 export class ShellyAdapter extends Adapter {
     declare config: ShellyAdapterConfig;
-    private serverMqtt: protocolMqtt.MQTTServer | null = null;
-    private serverCoap: protocolCoap.CoAPServer | null = null;
+    private serverMqtt: MQTTServer | null = null;
+    private serverCoap: CoAPServer | null = null;
     private firmwareUpdateTimeout: ioBroker.Timeout | null | undefined = null;
     private onlineCheckTimeout: ioBroker.Timeout | null | undefined = null;
     private deviceScanTimeout: ioBroker.Timeout | null | undefined = null;
@@ -27,12 +27,15 @@ export class ShellyAdapter extends Adapter {
     private readonly eventEmitter: EventEmitter = new EventEmitter();
     private readonly bleDecoder: BleDecoder = new BleDecoder();
     public isUnloaded = false;
+    private readonly objectHelper: ObjectHelper;
 
     constructor(options: Partial<AdapterOptions> = {}) {
         super({
             ...options,
             name: adapterName,
         });
+
+        this.objectHelper = new ObjectHelper(this);
 
         this.on('ready', this.onReady);
         this.on('stateChange', this.onStateChange);
@@ -59,7 +62,6 @@ export class ShellyAdapter extends Adapter {
             await this.subscribeForeignFiles(this.namespace, '*');
 
             this.subscribeStates('*');
-            objectHelper.init(this);
 
             const protocol = this.config.protocol || 'coap';
 
@@ -84,7 +86,7 @@ export class ShellyAdapter extends Adapter {
                         this.log.error('MQTT Password is missing!');
                     }
 
-                    this.serverMqtt = new protocolMqtt.MQTTServer(this, objectHelper, this.eventEmitter);
+                    this.serverMqtt = new MQTTServer(this, this.objectHelper, this.eventEmitter);
                     this.serverMqtt.listen();
                 }
             });
@@ -93,7 +95,7 @@ export class ShellyAdapter extends Adapter {
             setImmediate(() => {
                 if (protocol === 'both' || protocol === 'coap') {
                     this.log.info(`Starting in CoAP mode. Listening on ${this.config.coapbind}:5683`);
-                    this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
+                    this.serverCoap = new CoAPServer(this, this.objectHelper, this.eventEmitter);
                     this.serverCoap.listen();
                 }
             });
@@ -191,7 +193,7 @@ export class ShellyAdapter extends Adapter {
                     `[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`,
                 );
 
-                objectHelper?.handleStateChange(id, state);
+                this.objectHelper?.handleStateChange(id, state);
             }
         }
     };
@@ -502,8 +504,8 @@ export class ShellyAdapter extends Adapter {
         return { model: 'Bluetooth', icon: 'ble-button1' };
     }
 
-    public async processBleMessage(val: any): Promise<void> {
-        const valTyped: {
+    public async processBleMessage(val: unknown): Promise<void> {
+        const valTyped = val as {
             scriptVersion: '1.2' | '1.3';
             src: string;
             srcBle: {
@@ -511,7 +513,7 @@ export class ShellyAdapter extends Adapter {
                 rssi: number;
             };
             payload: string;
-        } = val;
+        };
         if (valTyped?.scriptVersion && valTyped.src && valTyped.payload) {
             this.log.debug(
                 `[processBleMessage] Received payload ${JSON.stringify(valTyped.payload)} from ${valTyped.src}`,
@@ -611,7 +613,7 @@ export class ShellyAdapter extends Adapter {
             });
 
             const rawData = this.convertFromHex(valTyped.payload); // convert hex to bytes
-            let unpackedData: any = this.bleDecoder.unpack(Buffer.from(rawData));
+            let unpackedData: Record<string, unknown> | null = this.bleDecoder.unpack(Buffer.from(rawData));
 
             if (unpackedData !== null) {
                 this.log.debug(
@@ -619,7 +621,7 @@ export class ShellyAdapter extends Adapter {
                 );
 
                 await this.setState(`ble.${valTyped.srcBle.mac}.encrypted`, {
-                    val: unpackedData.encryption,
+                    val: unpackedData.encryption as boolean,
                     ack: true,
                 });
 
@@ -643,7 +645,7 @@ export class ShellyAdapter extends Adapter {
                     const nonce = Buffer.concat([macBuffer, uuid, deviceInfo, counter]);
 
                     try {
-                        const decipher = crypto.createDecipheriv('aes-128-ccm', encryptionKey, nonce, {
+                        const decipher = createDecipheriv('aes-128-ccm', encryptionKey, nonce, {
                             authTagLength: 4,
                         });
                         decipher.setAuthTag(mic);
@@ -696,11 +698,15 @@ export class ShellyAdapter extends Adapter {
 
                     const pidState = await this.getStateAsync(`ble.${valTyped.srcBle.mac}.pid`);
                     const pidOld = pidState?.val ? pidState.val : -1;
-                    const pidNew = unpackedData.pid;
+                    const pidNew = unpackedData.pid as ioBroker.StateValue;
 
                     // Check if same message has been received by other Shellys
                     if (pidOld !== pidNew) {
-                        await this.setState(`ble.${valTyped.srcBle.mac}.pid`, { val: pidNew, ack: true, c: val.src });
+                        await this.setState(`ble.${valTyped.srcBle.mac}.pid`, {
+                            val: pidNew,
+                            ack: true,
+                            c: valTyped.src,
+                        });
                         await this.setState(`ble.${valTyped.srcBle.mac}.receivedBy`, {
                             val: JSON.stringify(
                                 {
@@ -806,7 +812,7 @@ export class ShellyAdapter extends Adapter {
     private async migrateConfig(): Promise<boolean> {
         const native: Record<string, unknown> = {};
         // Read legacy config keys that are no longer part of the typed AdapterConfig.
-        const legacy = this.config as Record<string, any>;
+        const legacy = this.config as unknown as Record<string, unknown>;
         if (legacy?.http_username) {
             native.httpusername = legacy.http_username;
             native.http_username = '';
@@ -824,7 +830,7 @@ export class ShellyAdapter extends Adapter {
             native.password = '';
         }
         if (legacy?.keys) {
-            native.blacklist = legacy.keys.map((b: { blacklist: string }) => {
+            native.blacklist = (legacy.keys as { blacklist: string }[]).map(b => {
                 return { id: b.blacklist };
             });
             native.keys = null;

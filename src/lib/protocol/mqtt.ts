@@ -1,14 +1,23 @@
 import type { EventEmitter } from 'node:events';
-// @ts-expect-error no types
-import mqtt from 'mqtt-connection';
+import mqtt, { type Connection, type MqttPacket } from 'mqtt-connection';
 import * as net from 'node:net';
 
 import { BaseClient, BaseServer } from './base';
 import * as datapoints from '../datapoints';
 import { version as adapterVersion } from '../../../package.json';
 import type { ShellyAdapter } from '../../main';
+import type ObjectHelper from '../objectHelper';
 
 const INIT_SRC = 'iobroker-init';
+
+/** A queued/awaited MQTT message kept for QoS>0 resends, keyed by message id. */
+interface CachedMessage {
+    ts: number;
+    cmd: string;
+    count: number;
+    message?: MqttPacket;
+    resendid?: NodeJS.Timeout;
+}
 
 // Whether `funct` is an `async` function (so the caller knows to `await` its result).
 function isAsync(funct: unknown): boolean | undefined {
@@ -26,20 +35,20 @@ class MQTTClient extends BaseClient {
     /** MQTT topic prefix announced by the device (e.g. `shellyplus1-abc`). */
     mqttprefix: string | undefined;
     /** Pending fragmented/awaited messages by id. */
-    messageCache: Record<string, any>;
+    messageCache: Record<string, CachedMessage>;
     messageId: number;
     /** The MQTT "last will" packet of the device, once known. */
-    will: any;
+    will: MqttPacket | undefined;
     /** True while delaying publishes right after a new connection. */
     initializing: boolean;
     /** Publish packets queued during initialization. */
-    publishQueue: any[];
+    publishQueue: MqttPacket[];
     /** True while the publish queue is being drained. */
     processingQueue: boolean;
     /** True during destruction, to stop queuing new packets. */
     destroying: boolean;
-    /** The mqtt-connection wrapper around the stream. */
-    client: any;
+    /** The mqtt-connection wrapper around the stream (assigned in `start()`, called from the ctor). */
+    client!: Connection;
 
     constructor(adapter: ShellyAdapter, objectHelper: any, eventEmitter: EventEmitter, stream: net.Socket) {
         super('mqtt', adapter, objectHelper, eventEmitter);
@@ -164,6 +173,9 @@ class MQTTClient extends BaseClient {
         try {
             while (this.publishQueue.length > 0) {
                 const packet = this.publishQueue.shift();
+                if (!packet) {
+                    continue;
+                }
                 try {
                     await this.processPublishPacket(packet);
                 } catch (err) {
@@ -183,7 +195,7 @@ class MQTTClient extends BaseClient {
      *
      * @param packet - MQTT publish packet
      */
-    async processPublishPacket(packet: any): Promise<void> {
+    async processPublishPacket(packet: MqttPacket): Promise<void> {
         if (this.adapter.isUnloaded) {
             return;
         }
@@ -199,7 +211,7 @@ class MQTTClient extends BaseClient {
             if (this.getDeviceGen() === 1) {
                 if (packet.topic === 'shellies/announce') {
                     try {
-                        const payloadObj = JSON.parse(packet.payload);
+                        const payloadObj = JSON.parse(packet.payload.toString());
 
                         // Update IP address
                         const ip = payloadObj?.ip;
@@ -274,7 +286,9 @@ class MQTTClient extends BaseClient {
             }
         }
 
-        await this.createIoBrokerState(packet.topic, packet.payload);
+        if (packet.topic !== undefined && packet.payload !== undefined) {
+            await this.createIoBrokerState(packet.topic, packet.payload);
+        }
     }
 
     async destroy(): Promise<void> {
@@ -370,7 +384,10 @@ class MQTTClient extends BaseClient {
         }
     }
 
-    resendState2Client(cmd: string, messageId: number, message?: any): void {
+    resendState2Client(cmd: string, messageId: number | undefined, message?: MqttPacket): void {
+        if (messageId === undefined) {
+            return;
+        }
         const retaintime = 5 * 1000;
 
         if (
@@ -394,9 +411,12 @@ class MQTTClient extends BaseClient {
                     this.messageCache[messageId].count++;
                     this.messageCache[messageId].ts = ts;
                     switch (this.messageCache[messageId].cmd) {
-                        case 'publish':
+                        case 'publish': {
+                            const cachedMessage = this.messageCache[messageId].message;
                             try {
-                                this.client.publish(this.messageCache[messageId].message);
+                                if (cachedMessage) {
+                                    this.client.publish(cachedMessage);
+                                }
                             } catch (err) {
                                 this.adapter.log.debug(
                                     `[MQTT] Client communication error (publish): ${this.getLogInfo()} - error: ${err}`,
@@ -404,6 +424,7 @@ class MQTTClient extends BaseClient {
                             }
 
                             break;
+                        }
                         case 'pubrel':
                             try {
                                 this.client.pubrel({ messageId });
@@ -444,8 +465,8 @@ class MQTTClient extends BaseClient {
         }
     }
 
-    deleteResendState2Client(messageId: number): void {
-        if (this.messageCache[messageId]) {
+    deleteResendState2Client(messageId: number | undefined): void {
+        if (messageId !== undefined && this.messageCache[messageId]) {
             clearTimeout(this.messageCache[messageId].resendid);
             delete this.messageCache[messageId];
         }
@@ -464,8 +485,8 @@ class MQTTClient extends BaseClient {
         }
     }
 
-    getCachedMessage(messageId: number): any {
-        return this.messageCache[messageId];
+    getCachedMessage(messageId: number | undefined): CachedMessage | undefined {
+        return messageId === undefined ? undefined : this.messageCache[messageId];
     }
 
     /**
@@ -474,7 +495,7 @@ class MQTTClient extends BaseClient {
      * @param topic
      * @param payload - object can be ervery type of value
      */
-    async createIoBrokerState(topic: string, payload: any): Promise<void> {
+    async createIoBrokerState(topic: string, payload: Buffer | string): Promise<void> {
         this.adapter.log.silly(
             `[MQTT] Message for ${this.getLogInfo()}: ${topic} / ${JSON.stringify(payload)} (${payload.toString()})`,
         );
@@ -483,27 +504,28 @@ class MQTTClient extends BaseClient {
         for (const dp of dps) {
             const deviceId = this.getDeviceId();
             const fullStateId = `${deviceId}.${dp.state}`;
-            let value: any = payload.toString();
+            const valueStr: string = payload.toString();
+            let value: any;
 
             this.adapter.log.silly(
-                `[MQTT] Message with value for ${this.getLogInfo()}: ${topic} -> state: ${fullStateId}, value: ${value}`,
+                `[MQTT] Message with value for ${this.getLogInfo()}: ${topic} -> state: ${fullStateId}, value: ${valueStr}`,
             );
 
             try {
                 if (this.replacePrefixIn(dp.mqtt?.mqtt_publish ?? '') === topic) {
                     if (dp.mqtt?.mqtt_publish_funct) {
                         value = isAsync(dp.mqtt.mqtt_publish_funct)
-                            ? await dp.mqtt.mqtt_publish_funct(value, this)
-                            : dp.mqtt.mqtt_publish_funct(value, this);
+                            ? await dp.mqtt.mqtt_publish_funct(valueStr, this)
+                            : dp.mqtt.mqtt_publish_funct(valueStr, this);
+                    } else {
+                        value = valueStr;
                     }
 
                     if (dp.common.type === 'boolean' && value === 'false') {
                         value = false;
-                    }
-                    if (dp.common.type === 'boolean' && value === 'true') {
+                    } else if (dp.common.type === 'boolean' && value === 'true') {
                         value = true;
-                    }
-                    if (dp.common.type === 'number' && value !== undefined && value !== null) {
+                    } else if (dp.common.type === 'number' && value !== undefined && value !== null) {
                         value = Number(value);
                     }
 
@@ -622,7 +644,7 @@ class MQTTClient extends BaseClient {
 
     listener(): void {
         // client connected
-        this.client.on('connect', async (packet: any) => {
+        this.client.on('connect', async packet => {
             this.id = packet.clientId;
 
             this.adapter.log.debug(`[MQTT] Client connected: ${JSON.stringify(packet)}`);
@@ -803,13 +825,13 @@ class MQTTClient extends BaseClient {
             }
         });
 
-        this.client.on('close', (status: any) => {
+        this.client.on('close', status => {
             this.initializing = false;
-            this.adapter.log.info(`[MQTT] Client Close: ${this.getLogInfo()} (${status})`);
+            this.adapter.log.info(`[MQTT] Client Close: ${this.getLogInfo()} (${String(status)})`);
             this.destroy().catch((e: unknown) => this.adapter.log.error(`[MQTT] destroy failed: ${String(e)}`));
         });
 
-        this.client.on('error', (error: any) => {
+        this.client.on('error', error => {
             this.adapter.log.info(`[MQTT] Client Error: ${this.getLogInfo()} (${error})`);
             // this.destroy();
         });
@@ -825,7 +847,7 @@ class MQTTClient extends BaseClient {
             // this.destroy();
         });
 
-        this.client.on('publish', async (packet: any) => {
+        this.client.on('publish', async packet => {
             if (this.adapter.isUnloaded) {
                 return;
             }
@@ -888,7 +910,7 @@ class MQTTClient extends BaseClient {
         });
 
         // response for QoS2
-        this.client.on('pubrec', (packet: any) => {
+        this.client.on('pubrec', packet => {
             const qosmsg = this.getCachedMessage(packet.messageId);
             if (qosmsg && qosmsg.cmd === 'publish') {
                 try {
@@ -907,7 +929,7 @@ class MQTTClient extends BaseClient {
         });
 
         // response for QoS2
-        this.client.on('pubcomp', (packet: any) => {
+        this.client.on('pubcomp', packet => {
             const qosmsg = this.getCachedMessage(packet.messageId);
             if (qosmsg && qosmsg.cmd === 'pubrec') {
                 this.deleteResendState2Client(packet.messageId);
@@ -919,7 +941,7 @@ class MQTTClient extends BaseClient {
         });
 
         // response for QoS2
-        this.client.on('pubrel', (packet: any) => {
+        this.client.on('pubrel', packet => {
             const qosmsg = this.getCachedMessage(packet.messageId);
             if (qosmsg && qosmsg.cmd === 'pubrec') {
                 try {
@@ -938,7 +960,7 @@ class MQTTClient extends BaseClient {
         });
 
         // response for QoS1
-        this.client.on('puback', (packet: any) => {
+        this.client.on('puback', packet => {
             // remove this message from queue
             const qosmsg = this.getCachedMessage(packet.messageId);
             if (qosmsg && qosmsg.cmd === 'publish') {
@@ -950,7 +972,7 @@ class MQTTClient extends BaseClient {
             }
         });
 
-        this.client.on('unsubscribe', (packet: any) => {
+        this.client.on('unsubscribe', packet => {
             this.adapter.log.debug(`[MQTT] Unsubscribe ${this.getLogInfo()}: ${JSON.stringify(packet)}`);
 
             try {
@@ -963,12 +985,12 @@ class MQTTClient extends BaseClient {
         });
 
         // this.client subscribed
-        this.client.on('subscribe', (packet: any) => {
+        this.client.on('subscribe', packet => {
             // send a suback with messageId and granted QoS level
             this.adapter.log.debug(`[MQTT] Subscribe ${this.getLogInfo()}: ${JSON.stringify(packet)}`);
-            const granted = [];
-            for (const i in packet.subscriptions) {
-                granted.push(packet.subscriptions[i].qos);
+            const granted: number[] = [];
+            for (const subscription of packet.subscriptions ?? []) {
+                granted.push(subscription.qos);
             }
             if (packet.topic) {
                 this.adapter.log.debug(`[MQTT] Subscribe topic ${this.getLogInfo()}: ${packet.topic}`);
@@ -991,7 +1013,7 @@ export class MQTTServer extends BaseServer {
     /** Active MQTT clients keyed by remote address. */
     private clients: Record<string, MQTTClient> = {};
 
-    constructor(adapter: ShellyAdapter, objectHelper: any, eventEmitter: EventEmitter) {
+    constructor(adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         super(adapter, objectHelper, eventEmitter);
     }
 

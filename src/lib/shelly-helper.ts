@@ -99,6 +99,16 @@ async function setChannelName(self: ShellyClient, id: string, name: string): Pro
     return name;
 }
 
+/** Parsed device payload carrying external temperature sensors, e.g. `{ ext_temperature: { '0': { tC, tF } } }`. */
+interface ExtTemperaturePayload {
+    ext_temperature?: Record<string, Record<string, number>>;
+}
+
+/** Parsed device payload carrying external humidity sensors, e.g. `{ ext_humidity: { '0': { hum } } }`. */
+interface ExtHumidityPayload {
+    ext_humidity?: Record<string, { hum: number }>;
+}
+
 /**
  * Get external temperature for a device with a key in unit C or F
  *
@@ -106,7 +116,7 @@ async function setChannelName(self: ShellyClient, id: string, name: string): Pro
  * @param key  - '0', '1', ....
  * @param unit . 'C' or 'F'
  */
-function getExtTemp(value: any, key: string, unit: string): number | null {
+function getExtTemp(value: ExtTemperaturePayload | null | undefined, key: string, unit: string): number | null {
     let unitkey = '';
     switch (unit) {
         case 'C':
@@ -130,7 +140,7 @@ function getExtTemp(value: any, key: string, unit: string): number | null {
  * @param value - like JSON.parse(value)
  * @param key  - '0', '1', ....
  */
-function getExtHum(value: any, key: string): number | null {
+function getExtHum(value: ExtHumidityPayload | null | undefined, key: string): number | null {
     if (value?.ext_humidity?.[key]?.hum) {
         return value.ext_humidity[key].hum;
     }

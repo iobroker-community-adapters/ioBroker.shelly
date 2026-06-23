@@ -23,15 +23,17 @@ let changed = false;
  * @param base64icon - the `data:image/svg+xml;base64,…` data URL to assign to matching nodes
  * @returns `true` if at least one node's icon was changed, otherwise `false`
  */
-function updateConfig(config: any, name: string, base64icon: string): boolean {
+function updateConfig(config: Record<string, unknown>, name: string, base64icon: string): boolean {
     let didChange = false;
     for (const key in config) {
-        if (typeof config[key] === 'object' && config[key] !== null) {
-            if (key === name || (key === `_${name}` && config[key].icon && config[key].icon !== base64icon)) {
+        const child = config[key];
+        if (typeof child === 'object' && child !== null) {
+            const node = child as Record<string, unknown>;
+            if (key === name || (key === `_${name}` && node.icon && node.icon !== base64icon)) {
                 didChange = true;
-                config[key].icon = base64icon;
+                node.icon = base64icon;
             }
-            didChange = updateConfig(config[key], name, base64icon) || didChange;
+            didChange = updateConfig(node, name, base64icon) || didChange;
         }
     }
     return didChange;

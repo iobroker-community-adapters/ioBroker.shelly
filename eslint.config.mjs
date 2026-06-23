@@ -18,6 +18,7 @@ export default [
             'admin/words.js',
             'admin/admin.d.ts',
             '**/adapter-config.d.ts',
+            '**/external-modules.d.ts',
         ],
     },
     {

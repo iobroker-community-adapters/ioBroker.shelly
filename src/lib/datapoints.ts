@@ -834,27 +834,32 @@ const pollTime: Record<string, number> = {
  *
  * @param obj
  */
-function clone(obj: any): any {
-    if (obj === null || typeof obj !== 'object' || 'isActiveClone' in obj) {
+function clone<T>(obj: T): T {
+    if (obj === null || typeof obj !== 'object') {
         return obj;
     }
 
-    let temp;
-    if (obj instanceof Date) {
-        temp = new (obj.constructor as any)(); // or new Date(obj);
-    } else {
-        temp = obj.constructor();
+    const source = obj as Record<string, unknown>;
+    if ('isActiveClone' in source) {
+        return obj;
     }
 
-    for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            obj.isActiveClone = null;
-            temp[key] = clone(obj[key]);
-            delete obj.isActiveClone;
+    let temp: Record<string, unknown>;
+    if (source instanceof Date) {
+        temp = new (source.constructor as new () => Record<string, unknown>)(); // or new Date(obj);
+    } else {
+        temp = (source.constructor as () => Record<string, unknown>)();
+    }
+
+    for (const key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+            source.isActiveClone = null;
+            temp[key] = clone(source[key]);
+            delete source.isActiveClone;
         }
     }
 
-    return temp;
+    return temp as T;
 }
 
 function deleteNoDisplay(device: DeviceDefinition, protocol: 'coap' | 'mqtt', mode?: string): DeviceDefinition {

@@ -1,9 +1,9 @@
 import { BaseClient, BaseServer } from './base';
 import * as datapoints from '../datapoints';
-// @ts-expect-error no types
-import Shelly from 'shelly-iot';
+import Shelly, { type CoapStatusPayload, type CoapTuple } from 'shelly-iot';
 import type { EventEmitter } from 'node:events';
 import type { ShellyAdapter } from '../../main';
+import type ObjectHelper from '../objectHelper';
 
 // Whether `funct` is an `async` function (so the caller knows to `await` its result).
 function isAsync(funct: unknown): boolean | undefined {
@@ -19,42 +19,40 @@ function isAsync(funct: unknown): boolean | undefined {
  * @param objKey - like 112 or '112' or [11,12] or ['11','12']
  * @param payload - [[0,111,0],[0,112,1]]
  */
-function getCoapValue(objKey: any, payload: any[]): any {
-    const isArray = typeof objKey !== 'string' && typeof objKey !== 'number';
-    if (!isArray) {
+function getCoapValue(
+    objKey: string | number | (string | number)[] | undefined,
+    payload: CoapTuple[],
+): ioBroker.StateValue | (ioBroker.StateValue | undefined)[] | undefined {
+    if (!Array.isArray(objKey)) {
         const key = Number(objKey);
         const index = payload.findIndex(item => item[1] === key);
         return index >= 0 ? payload[index][2] : undefined;
     }
 
-    const ret = [];
-    for (const i in objKey) {
-        const key = Number(objKey[i]);
+    const ret: (ioBroker.StateValue | undefined)[] = [];
+    for (const entry of objKey) {
+        const key = Number(entry);
         const index = payload.findIndex(item => item[1] === key);
-        if (index >= 0) {
-            ret.push(payload[index][2]);
-        } else {
-            ret.push(undefined);
-        }
+        ret.push(index >= 0 ? payload[index][2] : undefined);
     }
     return ret;
 }
 
 class CoAPClient extends BaseClient {
-    /** The shared shelly-iot listener instance (untyped third-party module). */
-    shelly: any;
-    listenerus?: (deviceId: string, payload: any) => void;
+    /** The shared shelly-iot listener instance. */
+    shelly: Shelly;
+    listenerus?: (deviceId: string, payload: CoapStatusPayload) => void;
     listenerds?: (deviceId: string, connected: boolean) => void;
 
     constructor(
         adapter: ShellyAdapter,
-        objectHelper: any,
+        objectHelper: ObjectHelper,
         eventEmitter: EventEmitter,
-        shelly: any,
+        shelly: Shelly,
         deviceId: string,
         ip: string,
-        payload: any,
-        description: any,
+        payload: CoapStatusPayload,
+        description: unknown,
     ) {
         super('coap', adapter, objectHelper, eventEmitter);
 
@@ -63,8 +61,10 @@ class CoAPClient extends BaseClient {
         this.deviceId = deviceId; // e.g. SHRGBW2#D88040#2
         this.setIP(ip, 'CoAP').catch((e: unknown) => this.adapter.log.error(`[CoAP] setIP failed: ${String(e)}`)); // e.g. 192.168.1.2
 
-        // Device Mode information (init)
-        this.deviceMode = getCoapValue('9101', payload.G); // 9101 = Mode
+        // Device Mode information (init). A single-key lookup yields a scalar; coerce to the
+        // string-or-undefined that `deviceMode` expects.
+        const mode = getCoapValue('9101', payload.G); // 9101 = Mode
+        this.deviceMode = mode === undefined || mode === null ? undefined : String(mode);
 
         this.adapter.log.debug(
             `[CoAP] Starting new client. Device ID: "${this.deviceId}", Device Mode: "${this.deviceMode ?? '<default>'}", IP: ${ip}`,
@@ -145,36 +145,36 @@ class CoAPClient extends BaseClient {
      *
      * @param payload - object can be every type of value
      */
-    async createIoBrokerState(payload: any): Promise<void> {
+    async createIoBrokerState(payload: CoapStatusPayload): Promise<void> {
         this.adapter.log.silly(`[CoAP] Message for ${this.getLogInfo()}: ${JSON.stringify(payload)}`);
 
         const dps = this.getAllTypePublishStates();
         for (const dp of dps) {
             const deviceId = this.getDeviceId();
             const fullStateId = `${deviceId}.${dp.state}`;
-            let value: any = payload;
+            let value: any;
 
             this.adapter.log.silly(
                 `[CoAP] Message with value for ${this.getLogInfo()}: state: ${fullStateId}, payload: ${JSON.stringify(payload)}`,
             );
 
             try {
-                value = getCoapValue(dp.coap?.coap_publish, value.G);
+                const coapValue = getCoapValue(dp.coap?.coap_publish, payload.G);
 
-                if (value !== undefined) {
+                if (coapValue !== undefined) {
                     if (dp.coap?.coap_publish_funct) {
                         value = isAsync(dp.coap.coap_publish_funct)
-                            ? await dp.coap.coap_publish_funct(value, this)
-                            : dp.coap.coap_publish_funct(value, this);
+                            ? await dp.coap.coap_publish_funct(coapValue, this)
+                            : dp.coap.coap_publish_funct(coapValue, this);
+                    } else {
+                        value = coapValue;
                     }
 
                     if (dp.common.type === 'boolean' && value === 'false') {
                         value = false;
-                    }
-                    if (dp.common.type === 'boolean' && value === 'true') {
+                    } else if (dp.common.type === 'boolean' && value === 'true') {
                         value = true;
-                    }
-                    if (dp.common.type === 'number' && value !== undefined) {
+                    } else if (dp.common.type === 'number' && value !== undefined) {
                         value = Number(value);
                     }
 
@@ -210,7 +210,7 @@ class CoAPClient extends BaseClient {
         this.objectHelper.processObjectQueue(() => {});
     }
 
-    async start(payload: any, description: any): Promise<void> {
+    async start(payload: CoapStatusPayload, description: unknown): Promise<void> {
         if (this.deviceExists()) {
             // needs getDeviceClass()
             const polltime = this.getPollTime();
@@ -273,7 +273,7 @@ class CoAPClient extends BaseClient {
                     // Device Mode information (new)
                     const newDeviceMode = getCoapValue('9101', payload.G); // 9101 = Mode
                     if (newDeviceMode) {
-                        await this.setDeviceMode(newDeviceMode);
+                        await this.setDeviceMode(String(newDeviceMode));
                     }
 
                     await this.createIoBrokerState(payload);
@@ -297,13 +297,13 @@ class CoAPClient extends BaseClient {
     }
 }
 
-class CoAPServer extends BaseServer {
+export class CoAPServer extends BaseServer {
     /** Active CoAP clients by device id. */
     clients: Record<string, CoAPClient>;
     /** Device ids that matched a blacklist entry (cached). */
     blacklist: Record<string, string>;
 
-    constructor(adapter: ShellyAdapter, objectHelper: any, eventEmitter: EventEmitter) {
+    constructor(adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         super(adapter, objectHelper, eventEmitter);
 
         this.clients = {};
@@ -350,50 +350,53 @@ class CoAPServer extends BaseServer {
         }
 
         this.adapter.log.debug(`[CoAP Server] Starting shelly listener with options: ${JSON.stringify(options)}`);
-        const shelly: any = new Shelly(options);
+        const shelly = new Shelly(options);
 
         shelly.on('error', (err: unknown) =>
             this.adapter.log.debug(`[CoAP Server] Error - handling data: ${String(err)}`),
         );
 
-        shelly.on('update-device-status', (deviceId: string, status: any) => {
+        shelly.on('update-device-status', (deviceId: string, status: CoapStatusPayload) => {
             this.adapter.log.debug(`[CoAP Server] Status update received for ${deviceId}: ${JSON.stringify(status)}`);
 
             if (deviceId && typeof deviceId === 'string') {
-                shelly.getDeviceDescription(deviceId, (err: any, deviceId: string, description: any, ip: string) => {
-                    if (!err && deviceId && ip) {
-                        this.adapter.log.debug(
-                            `[CoAP Server] Received device description for ${deviceId} (${ip}): ${JSON.stringify(description)}`,
-                        );
-
-                        // ip address of coap device changed
-                        if (this.clients[deviceId] && this.clients[deviceId].getIP() !== ip) {
+                shelly.getDeviceDescription(
+                    deviceId,
+                    (err: unknown, deviceId: string, description: unknown, ip: string) => {
+                        if (!err && deviceId && ip) {
                             this.adapter.log.debug(
-                                `[CoAP Server] IP of device ${deviceId} changed from ${this.clients[deviceId].getIP()} to ${ip}`,
+                                `[CoAP Server] Received device description for ${deviceId} (${ip}): ${JSON.stringify(description)}`,
                             );
 
-                            this.clients[deviceId].destroy();
-                            delete this.clients[deviceId];
-                        }
-
-                        if (!this.clients[deviceId]) {
-                            if (!this.isBlackListed(deviceId) && !this.isBlackListed(ip)) {
-                                this.clients[deviceId] = new CoAPClient(
-                                    this.adapter,
-                                    this.objectHelper,
-                                    this.eventEmitter,
-                                    shelly,
-                                    deviceId,
-                                    ip,
-                                    status,
-                                    description,
+                            // ip address of coap device changed
+                            if (this.clients[deviceId] && this.clients[deviceId].getIP() !== ip) {
+                                this.adapter.log.debug(
+                                    `[CoAP Server] IP of device ${deviceId} changed from ${this.clients[deviceId].getIP()} to ${ip}`,
                                 );
-                            } else {
-                                this.adapter.log.info(`[CoAP Server] Device is blacklisted: ${deviceId}`);
+
+                                this.clients[deviceId].destroy();
+                                delete this.clients[deviceId];
+                            }
+
+                            if (!this.clients[deviceId]) {
+                                if (!this.isBlackListed(deviceId) && !this.isBlackListed(ip)) {
+                                    this.clients[deviceId] = new CoAPClient(
+                                        this.adapter,
+                                        this.objectHelper,
+                                        this.eventEmitter,
+                                        shelly,
+                                        deviceId,
+                                        ip,
+                                        status,
+                                        description,
+                                    );
+                                } else {
+                                    this.adapter.log.info(`[CoAP Server] Device is blacklisted: ${deviceId}`);
+                                }
                             }
                         }
-                    }
-                });
+                    },
+                );
             } else {
                 this.adapter.log.debug(`[CoAP Server] Device ID is missing: ${deviceId}`);
             }
@@ -416,5 +419,3 @@ class CoAPServer extends BaseServer {
         // TODO: Disconnect all clients
     }
 }
-
-export { CoAPServer };
