@@ -50,7 +50,7 @@ class MQTTClient extends BaseClient {
     /** The mqtt-connection wrapper around the stream (assigned in `start()`, called from the ctor). */
     client!: Connection;
 
-    constructor(adapter: ShellyAdapter, objectHelper: any, eventEmitter: EventEmitter, stream: net.Socket) {
+    constructor(adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter, stream: net.Socket) {
         super('mqtt', adapter, objectHelper, eventEmitter);
 
         this.stream = stream;
