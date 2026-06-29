@@ -440,6 +440,119 @@
             "label": "HTTP polling settings",
             "icon": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjQwIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik02MjQgMzUySDUyMGMtOC44IDAtMTYtNy4yLTE2LTE2VjE3NmMwLTguOCA3LjItMTYgMTYtMTZoMTA0YzguOCAwIDE2IDcuMiAxNiAxNnYxNjBjMCA4LjgtNy4yIDE2LTE2IDE2ek0xMjAgMzUySDE2Yy04LjggMC0xNi03LjItMTYtMTZWMTc2YzAtOC44IDcuMi0xNiAxNi0xNmgxMDRjOC44IDAgMTYgNy4yIDE2IDE2djE2MGMwIDguOC03LjIgMTYtMTYgMTZ6bTM5MiAxMTJIMTI4Yy0zNS4zIDAtNjQtMjguNy02NC02NFYxMTJjMC0zNS4zIDI4LjctNjQgNjQtNjRoMzg0YzM1LjMgMCA2NCAyOC43IDY0IDY0djI4OGMwIDM1LjMtMjguNyA2NC02NCA2NHpNMTI4IDk2Yy04LjggMC0xNiA3LjItMTYgMTZ2Mjg4YzAgOC44IDcuMiAxNiAxNiAxNmgzODRjOC44IDAgMTYtNy4yIDE2LTE2VjExMmMwLTguOC03LjItMTYtMTYtMTZIMTI4eiIvPjwvc3ZnPg==",
             "items": {
+                "_httpIntro": {
+                    "type": "staticText",
+                    "text": {
+                        "en": "HTTP polling keeps Shelly Cloud enabled and does not require CoAP, MQTT, or inbound UDP ports. Gen1 devices use classic REST endpoints; Gen2+ devices use RPC endpoints.",
+                        "de": "HTTP-Polling laesst die Shelly Cloud aktiv und benoetigt weder CoAP, MQTT noch eingehende UDP-Ports. Gen1-Geraete nutzen klassische REST-Endpunkte, Gen2+ nutzt RPC-Endpunkte."
+                    },
+                    "newLine": true
+                },
+                "_httpCoreHeader": {
+                    "type": "header",
+                    "size": 2,
+                    "text": "Polling and discovery",
+                    "newLine": true
+                },
+                "httpDiscoveryEnabled": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Discover devices by HTTP scan"
+                },
+                "httpAutoCreate": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Automatically create discovered devices"
+                },
+                "httpSaveRawJson": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Create raw JSON states"
+                },
+                "httpTimeout": {
+                    "type": "number",
+                    "min": 1000,
+                    "max": 60000,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "HTTP timeout in ms"
+                },
+                "httpRetries": {
+                    "type": "number",
+                    "min": 0,
+                    "max": 5,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "HTTP retries"
+                },
+                "httpMaxParallel": {
+                    "type": "number",
+                    "min": 1,
+                    "max": 100,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Parallel discovery probes"
+                },
+                "httpNetworks": {
+                    "type": "table",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
+                    "label": "HTTP discovery network ranges",
+                    "items": [
+                        {
+                            "type": "checkbox",
+                            "attr": "enabled",
+                            "width": "10%",
+                            "title": {
+                                "en": "Enabled",
+                                "de": "Aktiv"
+                            },
+                            "default": true
+                        },
+                        {
+                            "type": "text",
+                            "attr": "range",
+                            "width": "90%",
+                            "title": {
+                                "en": "IP, range, or CIDR /24-/32",
+                                "de": "IP, Bereich oder CIDR /24-/32"
+                            },
+                            "filter": true,
+                            "sort": true,
+                            "default": ""
+                        }
+                    ]
+                },
+                "_httpManualHeader": {
+                    "type": "header",
+                    "size": 2,
+                    "text": "Manual devices",
+                    "newLine": true
+                },
                 "httpDevices": {
                     "type": "table",
                     "xs": 12,
@@ -497,11 +610,26 @@
                         }
                     ]
                 },
+                "_httpAdminHeader": {
+                    "type": "header",
+                    "size": 3,
+                    "text": "Administrative functions",
+                    "newLine": true
+                },
+                "httpAllowAdmin": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Allow administrative HTTP functions"
+                },
                 "_httpHint": {
                     "type": "staticText",
                     "text": {
-                        "en": "HTTP polling currently targets Gen1/classic REST devices. It keeps Shelly Cloud enabled and does not require CoAP or MQTT.",
-                        "de": "HTTP-Polling ist aktuell für Gen1/classic-REST-Geräte gedacht. Shelly Cloud bleibt aktiv, CoAP und MQTT werden nicht benötigt."
+                        "en": "Administrative functions are intentionally disabled unless the option above is enabled. State polling and normal switching do not require it.",
+                        "de": "Administrative Funktionen sind absichtlich deaktiviert, solange die Option oben nicht aktiv ist. Status-Polling und normales Schalten benoetigen sie nicht."
                     },
                     "newLine": true
                 }

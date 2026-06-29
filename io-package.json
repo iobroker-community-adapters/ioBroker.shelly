@@ -107,6 +107,7 @@
         "docs/en/ble-devices.md",
         "docs/en/protocol-coap.md",
         "docs/en/protocol-mqtt.md",
+        "docs/en/protocol-http.md",
         "docs/en/restricted-login.md",
         "docs/en/state-changes.md",
         "docs/en/faq.md",
@@ -117,6 +118,7 @@
         "docs/de/ble-devices.md",
         "docs/de/protocol-coap.md",
         "docs/de/protocol-mqtt.md",
+        "docs/de/protocol-http.md",
         "docs/de/restricted-login.md",
         "docs/de/state-changes.md",
         "docs/de/faq.md",
@@ -300,7 +302,15 @@
       {
         "id": "SHBDUO-1#123456789#2"
       }
-    ]
+    ],
+    "httpDiscoveryEnabled": false,
+    "httpAutoCreate": true,
+    "httpNetworks": [],
+    "httpTimeout": 8000,
+    "httpRetries": 1,
+    "httpMaxParallel": 10,
+    "httpSaveRawJson": false,
+    "httpAllowAdmin": false
   },
   "objects": [],
   "instanceObjects": [
