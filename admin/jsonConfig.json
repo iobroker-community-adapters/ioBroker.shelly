@@ -71,6 +71,22 @@
                                 "zh-cn": "CoAP (和 HTTP)"
                             },
                             "value": "coap"
+                        },
+                        {
+                            "label": {
+                                "en": "HTTP polling",
+                                "de": "HTTP-Polling",
+                                "ru": "HTTP опрос",
+                                "pt": "Polling HTTP",
+                                "nl": "HTTP polling",
+                                "fr": "Interrogation HTTP",
+                                "it": "Polling HTTP",
+                                "es": "Sondeo HTTP",
+                                "pl": "Odpytywanie HTTP",
+                                "uk": "HTTP опитування",
+                                "zh-cn": "HTTP 轮询"
+                            },
+                            "value": "http"
                         }
                     ],
                     "xs": 12,
@@ -415,6 +431,79 @@
                     "lg": 4,
                     "xl": 4,
                     "label": "Default QoS"
+                }
+            }
+        },
+        "_http": {
+            "hidden": "data.protocol !== 'http'",
+            "type": "panel",
+            "label": "HTTP polling settings",
+            "icon": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjQwIDUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik02MjQgMzUySDUyMGMtOC44IDAtMTYtNy4yLTE2LTE2VjE3NmMwLTguOCA3LjItMTYgMTYtMTZoMTA0YzguOCAwIDE2IDcuMiAxNiAxNnYxNjBjMCA4LjgtNy4yIDE2LTE2IDE2ek0xMjAgMzUySDE2Yy04LjggMC0xNi03LjItMTYtMTZWMTc2YzAtOC44IDcuMi0xNiAxNi0xNmgxMDRjOC44IDAgMTYgNy4yIDE2IDE2djE2MGMwIDguOC03LjIgMTYtMTYgMTZ6bTM5MiAxMTJIMTI4Yy0zNS4zIDAtNjQtMjguNy02NC02NFYxMTJjMC0zNS4zIDI4LjctNjQgNjQtNjRoMzg0YzM1LjMgMCA2NCAyOC43IDY0IDY0djI4OGMwIDM1LjMtMjguNyA2NC02NCA2NHpNMTI4IDk2Yy04LjggMC0xNiA3LjItMTYgMTZ2Mjg4YzAgOC44IDcuMiAxNiAxNiAxNmgzODRjOC44IDAgMTYtNy4yIDE2LTE2VjExMmMwLTguOC03LjItMTYtMTYtMTZIMTI4eiIvPjwvc3ZnPg==",
+            "items": {
+                "httpDevices": {
+                    "type": "table",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12,
+                    "label": "HTTP polling devices",
+                    "items": [
+                        {
+                            "type": "checkbox",
+                            "attr": "enabled",
+                            "width": "10%",
+                            "title": {
+                                "en": "Enabled",
+                                "de": "Aktiv"
+                            },
+                            "default": true
+                        },
+                        {
+                            "type": "text",
+                            "attr": "ip",
+                            "width": "30%",
+                            "title": {
+                                "en": "IP address",
+                                "de": "IP-Adresse"
+                            },
+                            "filter": true,
+                            "sort": true,
+                            "default": ""
+                        },
+                        {
+                            "type": "text",
+                            "attr": "name",
+                            "width": "25%",
+                            "title": {
+                                "en": "Name",
+                                "de": "Name"
+                            },
+                            "filter": true,
+                            "sort": true,
+                            "default": ""
+                        },
+                        {
+                            "type": "text",
+                            "attr": "deviceId",
+                            "width": "35%",
+                            "title": {
+                                "en": "Device ID override",
+                                "de": "Device-ID überschreiben"
+                            },
+                            "filter": true,
+                            "sort": true,
+                            "default": ""
+                        }
+                    ]
+                },
+                "_httpHint": {
+                    "type": "staticText",
+                    "text": {
+                        "en": "HTTP polling currently targets Gen1/classic REST devices. It keeps Shelly Cloud enabled and does not require CoAP or MQTT.",
+                        "de": "HTTP-Polling ist aktuell für Gen1/classic-REST-Geräte gedacht. Shelly Cloud bleibt aktiv, CoAP und MQTT werden nicht benötigt."
+                    },
+                    "newLine": true
                 }
             }
         },

@@ -6,6 +6,7 @@ const utils = require('@iobroker/adapter-core');
 const objectHelper = require('./build/lib/objectHelper'); // Common adapter utils
 const protocolMqtt = require('./lib/protocol/mqtt');
 const protocolCoap = require('./lib/protocol/coap');
+const protocolHttp = require('./lib/protocol/http');
 const BleDecoder = require('./lib/ble-decoder').BleDecoder;
 const DeviceManagement = require('./build/lib/deviceManager').default;
 const adapterName = require('./package.json').name.split('.').pop();
@@ -23,6 +24,7 @@ class Shelly extends utils.Adapter {
 
         this.serverMqtt = null;
         this.serverCoap = null;
+        this.serverHttp = null;
         this.firmwareUpdateTimeout = null;
         this.onlineCheckTimeout = null;
         this.deviceScanTimeout = null;
@@ -91,6 +93,15 @@ class Shelly extends utils.Adapter {
                     this.log.info(`Starting in CoAP mode. Listening on ${this.config.coapbind}:5683`);
                     this.serverCoap = new protocolCoap.CoAPServer(this, objectHelper, this.eventEmitter);
                     this.serverCoap.listen();
+                }
+            });
+
+            // Start HTTP polling client
+            setImmediate(() => {
+                if (protocol === 'http') {
+                    this.log.info(`Starting in HTTP polling mode`);
+                    this.serverHttp = new protocolHttp.HTTPPollingServer(this, objectHelper, this.eventEmitter);
+                    this.serverHttp.listen();
                 }
             });
 
@@ -234,6 +245,15 @@ class Shelly extends utils.Adapter {
                 try {
                     this.log.debug(`[onUnload] Stopping MQTT server`);
                     this.serverMqtt.destroy();
+                } catch {
+                    // ignore
+                }
+            }
+
+            if (this.serverHttp) {
+                try {
+                    this.log.debug(`[onUnload] Stopping HTTP polling`);
+                    this.serverHttp.destroy();
                 } catch {
                     // ignore
                 }
