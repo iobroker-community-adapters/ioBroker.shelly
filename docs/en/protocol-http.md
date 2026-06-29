@@ -41,10 +41,12 @@ Raw JSON states are only created when `Create raw JSON states` is enabled. Unkno
 
 ## Configuration
 
-Use the regular HTTP credentials fields in the general adapter settings. The adapter uses the configured password for Gen2+ digest authentication and the configured username/password for Gen1 basic authentication.
+Use the HTTP authentication fields in the HTTP polling settings. The adapter supports Basic Auth for Gen1 classic REST requests and Gen2+ RPC requests. Gen2+ digest authentication is still handled when a device requests it.
 
 HTTP-specific settings:
 
+- `Use global HTTP Basic Auth`: Enable default HTTP credentials for all HTTP polling devices.
+- `Default HTTP username` and `Default HTTP password`: Global credentials. Use these when all Shelly devices share the same restricted-login password.
 - `Discover devices by HTTP scan`: Probe configured IP ranges for Shelly devices.
 - `Automatically create discovered devices`: Start polling clients for discovered devices. Disable this if you only want the scan result in the log and prefer manual entries.
 - `HTTP discovery network ranges`: IP ranges to scan. Supported formats are a single IP, `192.168.1.10-192.168.1.30`, `192.168.1.10-30`, and CIDR ranges from `/24` to `/32`.
@@ -53,6 +55,18 @@ HTTP-specific settings:
 - `Parallel discovery probes`: Maximum number of concurrent discovery requests.
 - `Create raw JSON states`: Also store raw info/status/config payloads below the device.
 - `Allow administrative HTTP functions`: Allow potentially disruptive calls such as firmware update, reboot, network configuration, MQTT/cloud configuration, and script writes.
+
+Manual HTTP devices support an authentication mode:
+
+- `No auth`: Never send credentials for this device.
+- `Use global auth`: Use the global default credentials.
+- `Custom auth`: Use the username/password configured on this manual device.
+
+Custom device credentials take precedence over global credentials. If neither custom nor global credentials are active, requests are sent without authentication.
+
+During discovery the adapter first probes without credentials. If that request fails or returns `401` and global HTTP authentication is enabled, it retries with the global credentials.
+
+Passwords and authorization headers are never written to logs, object IDs, state names, or raw JSON states. Raw JSON payloads are sanitized before they are stored.
 
 ## Commands
 

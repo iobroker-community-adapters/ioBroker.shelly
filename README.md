@@ -36,6 +36,8 @@ HTTP polling is available for installations where ioBroker can reach Shelly devi
 
 The mode keeps Shelly Cloud usable because MQTT does not need to be enabled on the Shelly devices. Discovery can scan configured IP ranges such as `192.168.178.0/24`, and devices can also be entered manually. Known devices reuse the existing adapter profiles. Unknown devices are represented by generic capability states for switches, inputs, lights, RGB/RGBW lights, covers, power/energy, temperature, humidity, network, system, configuration, and diagnostics.
 
+HTTP polling supports global Basic Auth credentials and optional per-device credentials. If all Shelly devices use the same restricted-login password, enable global HTTP Basic Auth and enter the default username/password once. Manual devices can override this with custom credentials or explicitly disable authentication.
+
 See [HTTP polling documentation](./docs/en/protocol-http.md) for setup, security behavior, supported commands, and limitations.
 
 ## Supported devices

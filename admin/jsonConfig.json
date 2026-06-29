@@ -454,6 +454,52 @@
                     "text": "Polling and discovery",
                     "newLine": true
                 },
+                "_httpAuthHeader": {
+                    "type": "header",
+                    "size": 2,
+                    "text": "HTTP authentication",
+                    "newLine": true
+                },
+                "httpAuthEnabled": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Use global HTTP Basic Auth"
+                },
+                "httpDefaultUsername": {
+                    "type": "text",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Default HTTP username",
+                    "hidden": "!data.httpAuthEnabled"
+                },
+                "httpDefaultPassword": {
+                    "type": "password",
+                    "repeat": false,
+                    "visible": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Default HTTP password",
+                    "hidden": "!data.httpAuthEnabled"
+                },
+                "_httpAuthHint": {
+                    "type": "staticText",
+                    "hidden": "!data.httpAuthEnabled",
+                    "text": {
+                        "en": "Global credentials are used for all HTTP devices unless a manual device is configured for no auth or custom auth.",
+                        "de": "Globale Zugangsdaten werden fuer alle HTTP-Geraete verwendet, sofern ein manuelles Geraet nicht auf keine Authentifizierung oder eigene Authentifizierung gestellt ist."
+                    },
+                    "newLine": true
+                },
                 "httpDiscoveryEnabled": {
                     "type": "checkbox",
                     "xs": 12,
@@ -606,6 +652,81 @@
                             },
                             "filter": true,
                             "sort": true,
+                            "default": ""
+                        },
+                        {
+                            "type": "select",
+                            "attr": "authMode",
+                            "width": "20%",
+                            "title": {
+                                "en": "Authentication",
+                                "de": "Authentifizierung"
+                            },
+                            "default": "global",
+                            "options": [
+                                {
+                                    "label": {
+                                        "en": "No auth",
+                                        "de": "Keine Auth"
+                                    },
+                                    "value": "none"
+                                },
+                                {
+                                    "label": {
+                                        "en": "Use global auth",
+                                        "de": "Globale Auth"
+                                    },
+                                    "value": "global"
+                                },
+                                {
+                                    "label": {
+                                        "en": "Custom auth",
+                                        "de": "Eigene Auth"
+                                    },
+                                    "value": "custom"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "checkbox",
+                            "attr": "authEnabled",
+                            "width": "10%",
+                            "title": {
+                                "en": "Auth enabled",
+                                "de": "Auth aktiv"
+                            },
+                            "default": true
+                        },
+                        {
+                            "type": "checkbox",
+                            "attr": "useCustomAuth",
+                            "width": "10%",
+                            "title": {
+                                "en": "Custom",
+                                "de": "Eigene"
+                            },
+                            "default": false
+                        },
+                        {
+                            "type": "text",
+                            "attr": "username",
+                            "width": "20%",
+                            "title": {
+                                "en": "Username",
+                                "de": "Benutzername"
+                            },
+                            "filter": true,
+                            "sort": true,
+                            "default": ""
+                        },
+                        {
+                            "type": "password",
+                            "attr": "password",
+                            "width": "20%",
+                            "title": {
+                                "en": "Password",
+                                "de": "Passwort"
+                            },
                             "default": ""
                         }
                     ]

@@ -41,10 +41,12 @@ Raw-JSON-States werden nur angelegt, wenn `Create raw JSON states` aktiviert ist
 
 ## Konfiguration
 
-Nutze die normalen HTTP-Credentials in den allgemeinen Adapter-Einstellungen. Der Adapter verwendet das konfigurierte Passwort fuer Gen2+ Digest-Auth und Benutzername/Passwort fuer Gen1 Basic-Auth.
+Nutze die HTTP-Authentifizierungsfelder in den HTTP-Polling-Einstellungen. Der Adapter unterstuetzt Basic Auth fuer Gen1 classic REST und Gen2+ RPC-Requests. Gen2+ Digest-Auth wird weiterhin verwendet, wenn ein Geraet sie anfordert.
 
 HTTP-spezifische Einstellungen:
 
+- `Use global HTTP Basic Auth`: Aktiviert globale HTTP-Zugangsdaten fuer alle HTTP-Polling-Geraete.
+- `Default HTTP username` und `Default HTTP password`: Globale Zugangsdaten. Das ist die empfohlene Variante, wenn alle Shelly-Geraete dasselbe Restricted-Login-Passwort verwenden.
 - `Discover devices by HTTP scan`: Sucht in konfigurierten IP-Bereichen nach Shelly-Geraeten.
 - `Automatically create discovered devices`: Startet Polling-Clients fuer gefundene Geraete. Deaktivieren, wenn der Scan nur ins Log schreiben soll und Geraete manuell eingetragen werden.
 - `HTTP discovery network ranges`: IP-Bereiche fuer den Scan. Unterstuetzt werden einzelne IPs, `192.168.1.10-192.168.1.30`, `192.168.1.10-30` und CIDR-Bereiche von `/24` bis `/32`.
@@ -53,6 +55,18 @@ HTTP-spezifische Einstellungen:
 - `Parallel discovery probes`: Maximale Anzahl paralleler Discovery-Requests.
 - `Create raw JSON states`: Speichert zusaetzlich Raw-Info/Status/Config-Payloads unterhalb des Geraets.
 - `Allow administrative HTTP functions`: Erlaubt potenziell invasive Aufrufe wie Firmware-Update, Reboot, Netzwerk-Konfiguration, MQTT/Cloud-Konfiguration und Script-Schreibzugriffe.
+
+Manuelle HTTP-Geraete unterstuetzen einen Authentifizierungsmodus:
+
+- `No auth`: Fuer dieses Geraet werden nie Zugangsdaten gesendet.
+- `Use global auth`: Das Geraet verwendet die globalen Standard-Zugangsdaten.
+- `Custom auth`: Das Geraet verwendet Benutzername/Passwort aus dem manuellen Geraeteeintrag.
+
+Eigene Geraete-Zugangsdaten haben Vorrang vor globalen Zugangsdaten. Wenn weder eigene noch globale Zugangsdaten aktiv sind, werden Requests ohne Authentifizierung gesendet.
+
+Bei der Discovery versucht der Adapter zuerst einen Request ohne Zugangsdaten. Wenn dieser Request fehlschlaegt oder `401` liefert und globale HTTP-Authentifizierung aktiv ist, wird mit den globalen Zugangsdaten erneut versucht.
+
+Passwoerter und Authorization-Header werden nicht in Logs, Objekt-IDs, State-Namen oder Raw-JSON-States geschrieben. Raw-JSON-Payloads werden vor dem Speichern maskiert.
 
 ## Befehle
 

@@ -276,16 +276,23 @@
     "mqttusername",
     "mqttpassword",
     "httpusername",
-    "httppassword"
+    "httppassword",
+    "httpDefaultPassword",
+    "httpDevices.*.password"
   ],
   "encryptedNative": [
     "mqttpassword",
-    "httppassword"
+    "httppassword",
+    "httpDefaultPassword",
+    "httpDevices.*.password"
   ],
   "native": {
     "protocol": "mqtt",
     "httpusername": "admin",
     "httppassword": "",
+    "httpAuthEnabled": false,
+    "httpDefaultUsername": "admin",
+    "httpDefaultPassword": "",
     "polltime": 15,
     "autoupdate": false,
     "updateUnchangedObjects": false,
