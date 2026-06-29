@@ -16,7 +16,7 @@ Der HTTP-Polling-Server baut seine Geraeteliste aus zwei Quellen:
 Fuer jedes Geraet ruft der Adapter zuerst `/shelly` auf. Danach liest er Status- und Konfigurationsendpunkte, um die vorhandenen Funktionen zu analysieren:
 
 - Gen1-Geraete werden ueber klassische Endpunkte wie `/status` und `/settings` analysiert.
-- Gen2, Gen3 und Gen4 werden ueber RPC-Endpunkte wie `/rpc/Shelly.GetStatus` und `/rpc/Sys.GetConfig` analysiert.
+- Gen2, Gen3 und Gen4 werden ueber RPC-Endpunkte wie `/rpc/Shelly.GetStatus` und `/rpc/Sys.GetConfig` analysiert. Wenn `Sys.GetConfig` nicht verfuegbar ist, verwendet der Adapter `Shelly.GetConfig` als Fallback.
 - Bekannte Geraete verwenden weiterhin die bestehenden Adapterprofile, damit Objektnamen konsistent zu MQTT/CoAP bleiben.
 - Unbekannte Geraete bekommen ein generisches HTTP-Capability-Profil.
 
@@ -82,6 +82,29 @@ Generische Commands werden nur erzeugt, wenn die analysierten Statusdaten die je
 - Cover open, close, stop und Position
 
 Administrative RPC-Methoden sind gesperrt, solange `Allow administrative HTTP functions` nicht aktiviert ist. Fuer bekannte Adapterprofile setzt die HTTP-Schicht Konfigurations- und Maintenance-Command-States standardmaessig zusaetzlich auf nicht schreibbar. Factory-Reset-, WLAN-Reset- oder Firmware-Update-Commands werden vom generischen Profil nicht automatisch angeboten.
+
+## Device Manager
+
+HTTP-Polling-Geraete werden im ioBroker Device Manager zusammen mit CoAP-, MQTT- und BLE-Geraeten angezeigt. Die Karten verwenden die vorhandenen ioBroker-States und koennen Online/Offline, aktuellen Schaltzustand, Leistung, Energie, Temperatur, RSSI, IP/Hostname, Modell, Firmware und den zuletzt beobachteten Poll-Zeitpunkt anzeigen, sofern diese States vorhanden sind.
+
+Direkte Bedienelemente werden nur angezeigt, wenn die erkannte Capability vorhanden ist:
+
+- Switch/Relay und Plug: an, aus und toggle
+- Light/Dimmer: an/aus und Helligkeit
+- RGB/RGBW: an/aus, Helligkeit/Gain, Farbe, Weisskanal, Effekt und Transition, sofern unterstuetzt
+- Cover/Rollladen: open, close, stop und Position
+- Sensoren: nur Werte, keine Schaltflaechen
+
+Device-Manager-Befehle schreiben auf dieselben writable ioBroker-States, die auch ausserhalb des Device Managers verwendet werden. Die HTTP-Schicht fuehrt danach das bestehende Gen1-REST- oder Gen2+-RPC-Command-Mapping aus und loest Zugangsdaten mit derselben Custom/Global/No-Auth-Logik auf wie beim Polling.
+
+Das Geraetemenue enthaelt HTTP-spezifische Diagnoseaktionen:
+
+- HTTP-Verbindung testen: prueft Erreichbarkeit, Authentifizierung, erkannte Generation, Status-Endpunkt, Config-Endpunkt, Antwortzeit und eine maskierte Fehlermeldung.
+- Geraet neu erkennen: startet den HTTP-Polling-Client fuer dieses Geraet neu und fuehrt die Capability-Erkennung erneut aus.
+- Konfiguration neu laden: aktualisiert Status-/Config-Daten ohne kompletten Adapter-Neustart.
+- States neu erzeugen: fuehrt die Objektanlage fuer das aktuelle HTTP-Geraet erneut aus.
+
+Der Detaildialog zeigt Device Info, erkannte Capabilities, aktuelle Werte, aus State-Zeitstempeln abgeleiteten Polling-Status und maskierte letzte Fehler, sofern vorhanden. Raw-Info/Status/Config-JSON wird nur angezeigt, wenn `Create raw JSON states` aktiviert ist.
 
 ## Polling und Offline-Erkennung
 

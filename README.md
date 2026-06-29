@@ -38,6 +38,8 @@ The mode keeps Shelly Cloud usable because MQTT does not need to be enabled on t
 
 HTTP polling supports global Basic Auth credentials and optional per-device credentials. If all Shelly devices use the same restricted-login password, enable global HTTP Basic Auth and enter the default username/password once. Manual devices can override this with custom credentials or explicitly disable authentication.
 
+In HTTP polling mode the Device Manager can show live values, test the HTTP connection, rediscover a device, recreate states, and expose direct controls for supported switches, lights, RGB/RGBW lights, and covers. Device Manager actions use the same writable ioBroker states as normal object control, so HTTP command mapping and authentication stay centralized.
+
 See [HTTP polling documentation](./docs/en/protocol-http.md) for setup, security behavior, supported commands, and limitations.
 
 ## Supported devices
@@ -234,6 +236,10 @@ Notes:
 -->
 ### **WORK IN PROGRESS**
 - (@klein0r) Updated ble script (v1.3) for Shelly firmware > 2.0
+- (@Holly86) Added HTTP polling and discovery with Gen1 REST and Gen2/Gen3/Gen4 RPC capability detection.
+- (@Holly86) Added global and per-device HTTP Basic Auth for discovery, polling, diagnostics, and commands.
+- (@Holly86) Extended the Device Manager for HTTP polling devices with direct controls, live values, connection tests, rediscovery, and diagnostics.
+- (@Holly86) Breaking changes: none.
 
 ### 11.0.0-alpha.15 (2026-05-10)
 - (@copilot) Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).

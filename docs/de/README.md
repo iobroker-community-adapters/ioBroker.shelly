@@ -7,6 +7,7 @@ This is the German documentation - [🇺🇸 English version](../en/README.md)
 ## Inhaltsverzeichnis
 
 - [Devicemanager](devicemanager.md)
+- [HTTP-Polling-Protokoll](protocol-http.md)
 - [MQTT Protokoll](protocol-mqtt.md)
 - [CoAP/CoIoT Protokoll](protocol-coap.md)
 - [BLE Geräte](ble-devices.md)
@@ -25,16 +26,16 @@ This is the German documentation - [🇺🇸 English version](../en/README.md)
 
 Für mehr Informationen, siehe [*unterstützte Geräte*](../../README.md#supported-devices).
 
-- **Gen 1**: ESP8266 Geräte, [CoAP/CoIoT](protocol-coap.md) oder [MQTT](protocol-mqtt.md)
-- **Gen 2+**: ESP32 Geräte, [MQTT](protocol-mqtt.md)
+- **Gen 1**: ESP8266 Geräte, [CoAP/CoIoT](protocol-coap.md), [MQTT](protocol-mqtt.md) oder [HTTP-Polling](protocol-http.md)
+- **Gen 2+**: ESP32 Geräte, [MQTT](protocol-mqtt.md) oder [HTTP-Polling](protocol-http.md)
 
 ## Allgemein
 
-Der Adapter kann über MQTT (empfohlen) oder CoAP/CoIoT mit den Geräten kommunizieren.
+Der Adapter kann über MQTT (empfohlen), CoAP/CoIoT oder HTTP-Polling mit den Geräten kommunizieren.
 
 - Der Standard-Modus des Adapters ist MQTT (siehe [Dokumentation](protocol-mqtt.md) für mehr Informationen)
 - CoAP/CoIoT ist ausschließlich mit Gen1 Geräten kompatibel!
-- **Falls Gen2-Geräte integriert werden sollen, muss MQTT konfiguriert werden!**
+- HTTP-Polling ist fuer Installationen gedacht, in denen ioBroker die Geraete per HTTP erreicht, CoAP oder MQTT-Rueckkanaele aber nicht nutzbar sind.
 
 Fragen? Schaue zuerst in die [FAQ](faq.md)!
 

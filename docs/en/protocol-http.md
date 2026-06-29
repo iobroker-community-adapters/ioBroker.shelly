@@ -16,7 +16,7 @@ The HTTP polling server builds its device list from two sources:
 For every device the adapter calls `/shelly` first. It then reads the status and configuration endpoints to analyze the available capabilities:
 
 - Gen1 devices are analyzed through classic endpoints such as `/status` and `/settings`.
-- Gen2, Gen3, and Gen4 devices are analyzed through RPC endpoints such as `/rpc/Shelly.GetStatus` and `/rpc/Sys.GetConfig`.
+- Gen2, Gen3, and Gen4 devices are analyzed through RPC endpoints such as `/rpc/Shelly.GetStatus` and `/rpc/Sys.GetConfig`. If `Sys.GetConfig` is not available, the adapter falls back to `Shelly.GetConfig`.
 - Known devices reuse the existing adapter profiles so object names remain consistent with MQTT/CoAP operation.
 - Unknown devices get a generic HTTP capability profile.
 
@@ -82,6 +82,29 @@ Generic commands are created only when the analyzed status contains the matching
 - Cover open, close, stop, and position
 
 Administrative RPC methods are blocked unless `Allow administrative HTTP functions` is enabled. For known adapter profiles the HTTP layer also marks configuration and maintenance command states as non-writable by default. No factory reset, WiFi reset, or firmware update commands are exposed automatically by the generic profile.
+
+## Device Manager
+
+HTTP polling devices are shown in the ioBroker Device Manager together with CoAP, MQTT, and BLE devices. The cards reuse the existing ioBroker states and can show online/offline state, current switch state, power, energy, temperature, RSSI, IP/hostname, model, firmware, and the last observed poll timestamp when those states exist.
+
+Supported direct controls are shown only when the detected capability exists:
+
+- Switch/relay and plug devices: on, off, and toggle
+- Light/dimmer devices: on/off and brightness
+- RGB/RGBW devices: on/off, brightness/gain, color, white channel, effect, and transition states where supported
+- Cover/roller devices: open, close, stop, and position
+- Sensors: values only, no command buttons
+
+Device Manager commands write to the same writable ioBroker states that are used outside the Device Manager. The HTTP layer then performs the existing Gen1 REST or Gen2+ RPC command mapping and resolves credentials with the same custom/global/no-auth logic used for polling.
+
+The device menu contains HTTP-specific diagnostics:
+
+- Test HTTP connection: checks reachability, authentication, detected generation, status endpoint, config endpoint, response time, and a sanitized error message.
+- Rediscover device: restarts the HTTP polling client for this device and reruns capability detection.
+- Reload configuration: refreshes status/config data without a full adapter restart.
+- Recreate states: reruns object creation for the current HTTP device.
+
+The details dialog shows device information, detected capabilities, current values, polling status derived from state timestamps, and last sanitized errors when available. Raw info/status/config JSON is shown only when `Create raw JSON states` is enabled.
 
 ## Polling and Offline Handling
 

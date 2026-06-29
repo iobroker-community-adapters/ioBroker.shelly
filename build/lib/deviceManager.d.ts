@@ -1,5 +1,14 @@
 import { type AdapterInstance } from '@iobroker/adapter-core';
 import { DeviceManagement, type ActionContext, type DeviceDetails, type DeviceLoadContext, type DeviceRefresh, type InstanceDetails } from '@iobroker/dm-utils';
+import type { ControlState } from '@iobroker/dm-utils/build/types/base';
+type HttpDeviceManagerCommand = {
+    id: string;
+    icon: string;
+    label: string;
+    stateSuffix: string;
+    value: ControlState;
+};
+export declare function getHttpDeviceManagerCommands(objects: Record<string, ioBroker.DeviceObject | ioBroker.StateObject | ioBroker.ChannelObject>, namespace: string, shortDeviceId: string): HttpDeviceManagerCommand[];
 /**
  * DeviceManager Class
  */
@@ -19,10 +28,23 @@ export default class ShellyDeviceManagement extends DeviceManagement {
      */
     loadDevices(context: DeviceLoadContext<string>): Promise<void>;
     getDeviceDetails(deviceId: string): DeviceDetails<string> | null;
+    private getCapabilitySummary;
+    private getLastStateUpdate;
+    private getReadableStateSummaries;
+    private getRawStateSummaries;
+    private isHttpDevice;
+    private getDeviceIp;
+    private getHttpDeviceConfig;
+    private buildHttpDeviceActions;
+    private handleHttpStateCommand;
+    private handleHttpConnectionTest;
+    private handleHttpRefreshDevice;
     private getBleDeviceDetails;
     private classifyBleDevice;
     private getDeviceGroup;
     private buildCustomInfo;
+    private addFirstCardValue;
+    private addCardValue;
     private buildControls;
     getIcon(deviceId: string): string;
     /**
@@ -90,3 +112,4 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     }[]>;
     destroy(): Promise<void>;
 }
+export {};
