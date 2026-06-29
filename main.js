@@ -101,7 +101,7 @@ class Shelly extends utils.Adapter {
                 if (protocol === 'http') {
                     this.log.info(`Starting in HTTP polling mode`);
                     this.serverHttp = new protocolHttp.HTTPPollingServer(this, objectHelper, this.eventEmitter);
-                    this.serverHttp.listen();
+                    this.serverHttp.listen().catch(err => this.log.error(`[HTTP] Unable to start HTTP polling: ${err}`));
                 }
             });
 

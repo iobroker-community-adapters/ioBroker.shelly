@@ -20,7 +20,7 @@
 ![Stable](http://iobroker.live/badges/shelly-stable.svg)
 ![Installed](http://iobroker.live/badges/shelly-installed.svg)
 
-The adapter communicates with Shelly devices by REST API and the CoAP or MQTT protocol.
+The adapter communicates with Shelly devices by REST API and the CoAP, MQTT, or HTTP polling protocol.
 
 It uses the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here: [Shelly](https://shelly.cloud/)
 
@@ -29,6 +29,14 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 [🇺🇸 Documentation](./docs/en/README.md)
 
 [🇩🇪 Dokumentation](./docs/de/README.md)
+
+### HTTP polling
+
+HTTP polling is available for installations where ioBroker can reach Shelly devices by HTTP, but CoAP packets or an MQTT callback path are not available, for example in Docker or NAS environments.
+
+The mode keeps Shelly Cloud usable because MQTT does not need to be enabled on the Shelly devices. Discovery can scan configured IP ranges such as `192.168.178.0/24`, and devices can also be entered manually. Known devices reuse the existing adapter profiles. Unknown devices are represented by generic capability states for switches, inputs, lights, RGB/RGBW lights, covers, power/energy, temperature, humidity, network, system, configuration, and diagnostics.
+
+See [HTTP polling documentation](./docs/en/protocol-http.md) for setup, security behavior, supported commands, and limitations.
 
 ## Supported devices
 
