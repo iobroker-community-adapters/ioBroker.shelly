@@ -178,12 +178,16 @@ class Shelly extends utils.Adapter {
         this.deviceManagement?.onStateChange(id, state);
 
         // Warning, state can be null if it was deleted
+        const stateId = this.removeNamespace(id);
+        this.log.debug(
+            `[HTTP CMD] onStateChange id=${id}, stateId=${stateId}, value=${JSON.stringify(state?.val)}, ack=${
+                state?.ack
+            }, from=${state?.from ?? '<unknown>'}, user=${state?.user ?? '<unknown>'}, ts=${state?.ts ?? '<unknown>'}`,
+        );
         this.log.debug(
             `[onStateChange] received id=${id}, value=${JSON.stringify(state?.val)}, ack=${state?.ack}, from=${state?.from ?? '<unknown>'}`,
         );
         if (state && !state.ack) {
-            const stateId = this.removeNamespace(id);
-
             if (stateId === 'info.update') {
                 this.log.debug(`[onStateChange] "info.update" state changed - starting update on every device`);
 

@@ -105,6 +105,20 @@ function toSafeString(value) {
 function getHttpDeviceManagerCommands(objects, namespace, shortDeviceId) {
     return deviceManagerHttpActions.getHttpDeviceManagerCommands(objects, namespace, shortDeviceId);
 }
+function translate(text, ...args) {
+    try {
+        const translated = adapter_core_1.I18n.getTranslatedObject(text);
+        if (args.length && typeof translated === 'string') {
+            let index = 0;
+            return String(translated).replace(/%s/g, () => args[index++] || '');
+        }
+        return translated;
+    }
+    catch {
+        let index = 0;
+        return text.replace(/%s/g, () => args[index++] || '');
+    }
+}
 /**
  * DeviceManager Class
  */
@@ -155,8 +169,8 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 {
                     id: 'discover',
                     icon: 'search',
-                    title: adapter_core_1.I18n.getTranslatedObject('Discover devices'),
-                    description: adapter_core_1.I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
+                    title: translate('Discover devices'),
+                    description: translate('Scan network for Shelly devices via mDNS'),
                     timeout: 40_000,
                     handler: async (context) => await this.handleDiscoverDevices(context),
                 },
@@ -234,12 +248,12 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     ? bleInfo.model
                     : this.states[`${ns}.${shortDeviceId}.model`]?.val ||
                         this.states[`${ns}.${shortDeviceId}.type`]?.val ||
-                        adapter_core_1.I18n.getTranslatedObject('unknown'),
+                        translate('unknown'),
                 status: {
                     connection: isBle ? undefined : isOnline ? 'connected' : 'disconnected',
                     rssi,
                     battery,
-                    warning: firmwareUpdate ? adapter_core_1.I18n.getTranslatedObject('Firmware update available') : undefined,
+                    warning: firmwareUpdate ? translate('Firmware update available') : undefined,
                 },
                 hasDetails: true,
                 customInfo: this.buildCustomInfo(device._id, shortDeviceId, isBle),
@@ -248,7 +262,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     {
                         id: 'rename',
                         icon: 'edit',
-                        description: adapter_core_1.I18n.getTranslatedObject('Rename this device'),
+                        description: translate('Rename this device'),
                         handler: async (deviceId, context) => await this.handleRenameDevice(deviceId, context),
                     },
                     ...(this.states[`${this.adapter.namespace}.${shortDeviceId}.hostname`]?.val
@@ -256,7 +270,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                             {
                                 id: 'web',
                                 icon: 'web',
-                                description: adapter_core_1.I18n.getTranslatedObject('Open device interface'),
+                                description: translate('Open device interface'),
                                 url: `http://${this.states[`${this.adapter.namespace}.${shortDeviceId}.hostname`]?.val}`,
                             },
                         ]
@@ -267,7 +281,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                             {
                                 id: 'firmware-update',
                                 icon: 'update',
-                                description: adapter_core_1.I18n.getTranslatedObject('Update firmware'),
+                                description: translate('Update firmware'),
                                 handler: async (deviceId, context) => await this.handleFirmwareUpdate(deviceId, context),
                             },
                         ]
@@ -304,7 +318,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 // @ts-expect-error staticLink is OK
                 type: 'staticLink',
                 href: `http://${hostname}`,
-                label: adapter_core_1.I18n.getTranslatedObject('Open device web interface'),
+                label: translate('Open device web interface'),
                 button: true,
                 icon: 'web',
                 newLine: true,
@@ -313,7 +327,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (id) {
             items.id = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Device ID'),
+                label: translate('Device ID'),
                 data: id,
                 addColon: true,
                 copyToClipboard: true,
@@ -322,7 +336,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (model) {
             items.model = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Model'),
+                label: translate('Model'),
                 data: model,
                 addColon: true,
             };
@@ -330,7 +344,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (type) {
             items.deviceType = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Type'),
+                label: translate('Type'),
                 data: type,
                 addColon: true,
             };
@@ -338,7 +352,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (gen) {
             items.gen = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Generation'),
+                label: translate('Generation'),
                 data: gen,
                 addColon: true,
             };
@@ -346,7 +360,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (hostname) {
             items.hostname = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('IP address'),
+                label: translate('IP address'),
                 data: hostname,
                 addColon: true,
                 copyToClipboard: true,
@@ -355,7 +369,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (version) {
             items.version = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Firmware version'),
+                label: translate('Firmware version'),
                 data: version,
                 addColon: true,
             };
@@ -363,7 +377,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (firmware !== undefined) {
             items.firmware = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Firmware update available'),
+                label: translate('Firmware update available'),
                 data: firmware ? '✓' : '✗',
                 addColon: true,
             };
@@ -371,7 +385,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (protocol) {
             items.protocol = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Protocol'),
+                label: translate('Protocol'),
                 data: protocol,
                 addColon: true,
             };
@@ -379,7 +393,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (rssi !== undefined) {
             items.rssi = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('RSSI'),
+                label: translate('RSSI'),
                 data: rssi,
                 unit: 'dBm',
                 addColon: true,
@@ -388,7 +402,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (uptime !== undefined) {
             items.uptime = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Uptime'),
+                label: translate('Uptime'),
                 data: `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m`,
                 addColon: true,
             };
@@ -397,7 +411,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (capabilitySummary.length) {
             items.capabilities = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Capabilities'),
+                label: translate('Capabilities'),
                 data: capabilitySummary.join(', '),
                 addColon: true,
             };
@@ -406,7 +420,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (lastPoll) {
             items.lastPoll = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Last poll'),
+                label: translate('Last poll'),
                 data: new Date(lastPoll).toLocaleString(),
                 addColon: true,
             };
@@ -415,7 +429,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (readableStates.length) {
             items._statusHeader = {
                 type: 'header',
-                text: adapter_core_1.I18n.getTranslatedObject('Current values'),
+                text: translate('Current values'),
                 size: 4,
                 newLine: true,
             };
@@ -579,45 +593,114 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         const commandActions = commands.map(command => ({
             id: command.id,
             icon: command.icon,
-            description: adapter_core_1.I18n.getTranslatedObject(command.label),
-            handler: async (deviceId) => await this.handleHttpStateCommand(deviceId, command.stateSuffix, command.value),
+            description: translate(command.label),
+            timeout: 15_000,
+            handler: async (deviceId, context) => await this.handleHttpStateCommand(deviceId, command, context),
         }));
         return [
             ...commandActions,
             {
                 id: 'http-test',
                 icon: 'info',
-                description: adapter_core_1.I18n.getTranslatedObject('Test HTTP connection'),
+                description: translate('Test HTTP connection'),
                 timeout: 15_000,
                 handler: async (deviceId, context) => await this.handleHttpConnectionTest(deviceId, context),
             },
             {
                 id: 'http-rediscover',
                 icon: 'refresh',
-                description: adapter_core_1.I18n.getTranslatedObject('Rediscover device'),
+                description: translate('Rediscover device'),
                 timeout: 30_000,
                 handler: async (deviceId, context) => await this.handleHttpRefreshDevice(deviceId, context, 'Rediscover device'),
             },
             {
                 id: 'http-reload-config',
                 icon: 'settings',
-                description: adapter_core_1.I18n.getTranslatedObject('Reload configuration'),
+                description: translate('Reload configuration'),
                 timeout: 30_000,
                 handler: async (deviceId, context) => await this.handleHttpRefreshDevice(deviceId, context, 'Reload configuration'),
             },
             {
                 id: 'http-recreate-states',
                 icon: 'lines',
-                description: adapter_core_1.I18n.getTranslatedObject('Recreate states'),
+                description: translate('Recreate states'),
                 timeout: 30_000,
                 handler: async (deviceId, context) => await this.handleHttpRefreshDevice(deviceId, context, 'Recreate states'),
             },
         ];
     }
-    async handleHttpStateCommand(deviceId, stateSuffix, value) {
+    async handleHttpStateCommand(deviceId, command, context) {
         const shortDeviceId = deviceId.substring(this.adapter.namespace.length + 1);
-        const fullStateId = `${this.adapter.namespace}.${shortDeviceId}.${stateSuffix}`;
-        await this.adapter.setForeignStateAsync(fullStateId, value);
+        const fullStateId = `${this.adapter.namespace}.${shortDeviceId}.${command.stateSuffix}`;
+        const started = Date.now();
+        const progress = await context.openProgress(translate(command.label), { indeterminate: true });
+        let status = 'OK';
+        let error;
+        let currentState;
+        try {
+            await this.adapter.setForeignStateAsync(fullStateId, command.value);
+            currentState = await this.adapter.getForeignStateAsync(fullStateId);
+        }
+        catch (err) {
+            status = 'Error';
+            error = err;
+        }
+        finally {
+            await progress.close();
+        }
+        const items = {
+            device: {
+                type: 'staticInfo',
+                label: translate('Device'),
+                data: shortDeviceId,
+                addColon: true,
+            },
+            action: {
+                type: 'staticInfo',
+                label: translate('Action'),
+                data: command.label,
+                addColon: true,
+            },
+            request: {
+                type: 'staticInfo',
+                label: translate('HTTP/RPC request'),
+                data: fullStateId,
+                addColon: true,
+            },
+            status: {
+                type: 'staticInfo',
+                label: translate('Status'),
+                data: status,
+                addColon: true,
+            },
+            responseTime: {
+                type: 'staticInfo',
+                label: translate('Response time'),
+                data: `${Date.now() - started} ms`,
+                addColon: true,
+            },
+            result: {
+                type: 'staticInfo',
+                label: translate('Result'),
+                data: error
+                    ? sanitizeDeviceManagerMessage(error instanceof Error ? error.message : error)
+                    : 'Command sent',
+                addColon: true,
+            },
+            currentStatus: {
+                type: 'staticInfo',
+                label: translate('Current status after refresh'),
+                data: currentState && currentState.val !== undefined
+                    ? `${String(currentState.val)} (ack=${String(currentState.ack)})`
+                    : translate('unknown'),
+                addColon: true,
+            },
+        };
+        await context.showForm({ type: 'panel', items }, {
+            title: translate('Command Result'),
+            buttons: ['apply'],
+            ignoreApplyDisabled: true,
+        });
         return { refresh: 'devices' };
     }
     async handleHttpConnectionTest(deviceId, context) {
@@ -627,37 +710,37 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         const items = {
             reachable: {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('HTTP reachable'),
+                label: translate('HTTP reachable'),
                 data: result.reachable ? '✓' : '✗',
                 addColon: true,
             },
             auth: {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Authentication'),
-                data: result.authOk === false ? adapter_core_1.I18n.getTranslatedObject('Auth error') : adapter_core_1.I18n.getTranslatedObject('OK'),
+                label: translate('Authentication'),
+                data: result.authOk === false ? translate('Auth error') : translate('OK'),
                 addColon: true,
             },
             generation: {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Generation'),
-                data: result.generation || adapter_core_1.I18n.getTranslatedObject('unknown'),
+                label: translate('Generation'),
+                data: result.generation || translate('unknown'),
                 addColon: true,
             },
             status: {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Status readable'),
+                label: translate('Status readable'),
                 data: result.statusOk ? '✓' : '✗',
                 addColon: true,
             },
             config: {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Config readable'),
+                label: translate('Config readable'),
                 data: result.configOk ? '✓' : '✗',
                 addColon: true,
             },
             responseTime: {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Response time'),
+                label: translate('Response time'),
                 data: `${result.responseTimeMs} ms`,
                 addColon: true,
             },
@@ -665,7 +748,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (result.error) {
             items.error = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Last error'),
+                label: translate('Last error'),
                 data: sanitizeDeviceManagerMessage(result.error),
                 addColon: true,
             };
@@ -683,7 +766,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
             }
         }
         await context.showForm({ type: 'panel', items }, {
-            title: adapter_core_1.I18n.getTranslatedObject('HTTP connection test'),
+            title: translate('HTTP connection test'),
             buttons: ['apply'],
             ignoreApplyDisabled: true,
         });
@@ -694,17 +777,17 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         const ip = this.getDeviceIp(shortDeviceId);
         const serverHttp = this.adapter.serverHttp;
         if (!ip || !serverHttp?.refreshDeviceByIp) {
-            await context.showMessage(adapter_core_1.I18n.getTranslatedObject('HTTP polling is not active for this device'));
+            await context.showMessage(translate('HTTP polling is not active for this device'));
             return { refresh: 'devices' };
         }
-        const progress = await context.openProgress(adapter_core_1.I18n.getTranslatedObject(title), { indeterminate: true });
+        const progress = await context.openProgress(translate(title), { indeterminate: true });
         try {
             await serverHttp.refreshDeviceByIp(ip);
-            await context.showMessage(adapter_core_1.I18n.getTranslatedObject('Device refreshed'));
+            await context.showMessage(translate('Device refreshed'));
         }
         catch (err) {
             const message = sanitizeDeviceManagerMessage(err instanceof Error ? err.message : err);
-            const errorText = adapter_core_1.I18n.getTranslatedObject('Error');
+            const errorText = translate('Error');
             this.adapter.log.warn(`[DeviceManager] HTTP refresh failed for ${shortDeviceId}: ${message}`);
             await context.showMessage(`${typeof errorText === 'string' ? errorText : 'Error'}: ${message}`);
         }
@@ -809,7 +892,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         const meta = groupMeta[groupKey] || groupMeta.other;
         return {
             key: groupKey,
-            name: adapter_core_1.I18n.getTranslatedObject(meta.nameKey),
+            name: translate(meta.nameKey),
             icon: meta.icon,
         };
     }
@@ -826,7 +909,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     control: 'text',
                     unit: '°C',
                     digits: 2,
-                    label: adapter_core_1.I18n.getTranslatedObject('Temperature'),
+                    label: translate('Temperature'),
                     size: 12,
                     style: {
                         opacity: 0.7,
@@ -840,7 +923,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     control: 'text',
                     unit: '%',
                     digits: 1,
-                    label: adapter_core_1.I18n.getTranslatedObject('Humidity'),
+                    label: translate('Humidity'),
                     size: 12,
                     style: { opacity: 0.7 },
                 };
@@ -852,7 +935,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     control: 'text',
                     unit: 'lux',
                     digits: 0,
-                    label: adapter_core_1.I18n.getTranslatedObject('Illuminance'),
+                    label: translate('Illuminance'),
                     size: 12,
                     style: { opacity: 0.7 },
                 };
@@ -907,14 +990,14 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         oid: `${shortDeviceId}.${sensor.stateId}`,
                         readOnly: true,
                         options: [
-                            { label: adapter_core_1.I18n.getTranslatedObject(sensor.falseText), value: 0 },
-                            { label: adapter_core_1.I18n.getTranslatedObject(sensor.trueText), value: 1, color: sensor.trueColor },
+                            { label: translate(sensor.falseText), value: 0 },
+                            { label: translate(sensor.trueText), value: 1, color: sensor.trueColor },
                         ],
-                        trueText: adapter_core_1.I18n.getTranslatedObject(sensor.trueText),
-                        falseText: adapter_core_1.I18n.getTranslatedObject(sensor.falseText),
+                        trueText: translate(sensor.trueText),
+                        falseText: translate(sensor.falseText),
                         trueTextStyle: { color: sensor.trueColor },
                         blinkOnUpdate: true,
-                        label: adapter_core_1.I18n.getTranslatedObject(sensor.label),
+                        label: translate(sensor.label),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -927,7 +1010,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     oid: `${shortDeviceId}.rotation`,
                     control: 'text',
                     unit: '°',
-                    label: adapter_core_1.I18n.getTranslatedObject('Tilt'),
+                    label: translate('Tilt'),
                     size: 12,
                     style: { opacity: 0.7 },
                 };
@@ -959,7 +1042,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         control: 'text',
                         unit: sensor.unit,
                         digits: sensor.digits,
-                        label: adapter_core_1.I18n.getTranslatedObject(sensor.label),
+                        label: translate(sensor.label),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -1014,14 +1097,14 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         type: 'state',
                         oid: `${shortDeviceId}.${sensor.stateId}`,
                         options: [
-                            { label: adapter_core_1.I18n.getTranslatedObject(sensor.falseText), value: 0 },
-                            { label: adapter_core_1.I18n.getTranslatedObject(sensor.trueText), value: 1, color: sensor.trueColor },
+                            { label: translate(sensor.falseText), value: 0 },
+                            { label: translate(sensor.trueText), value: 1, color: sensor.trueColor },
                         ],
-                        trueText: adapter_core_1.I18n.getTranslatedObject(sensor.trueText),
-                        falseText: adapter_core_1.I18n.getTranslatedObject(sensor.falseText),
+                        trueText: translate(sensor.trueText),
+                        falseText: translate(sensor.falseText),
                         trueTextStyle: { color: sensor.trueColor },
                         blinkOnUpdate: true,
-                        label: adapter_core_1.I18n.getTranslatedObject(sensor.label),
+                        label: translate(sensor.label),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -1041,7 +1124,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         control: 'text',
                         unit: '°C',
                         digits: 2,
-                        label: adapter_core_1.I18n.getTranslatedObject('Temperature'),
+                        label: translate('Temperature'),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -1054,7 +1137,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         control: 'text',
                         unit: '%',
                         digits: 1,
-                        label: adapter_core_1.I18n.getTranslatedObject('Humidity'),
+                        label: translate('Humidity'),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -1067,7 +1150,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         control: 'text',
                         unit: 'lux',
                         digits: 0,
-                        label: adapter_core_1.I18n.getTranslatedObject('Illuminance'),
+                        label: translate('Illuminance'),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -1080,14 +1163,14 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         oid: `${shortDeviceId}.${suffix}`,
                         readOnly: true,
                         options: [
-                            { label: adapter_core_1.I18n.getTranslatedObject('OK'), value: 0 },
-                            { label: adapter_core_1.I18n.getTranslatedObject('Alarm'), value: 1, color: 'red' },
+                            { label: translate('OK'), value: 0 },
+                            { label: translate('Alarm'), value: 1, color: 'red' },
                         ],
-                        trueText: adapter_core_1.I18n.getTranslatedObject('OK'),
-                        falseText: adapter_core_1.I18n.getTranslatedObject('Alarm'),
+                        trueText: translate('OK'),
+                        falseText: translate('Alarm'),
                         trueTextStyle: { color: 'red' },
                         blinkOnUpdate: true,
-                        label: adapter_core_1.I18n.getTranslatedObject('Flood'),
+                        label: translate('Flood'),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -1100,7 +1183,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         oid: `${shortDeviceId}.${suffix}`,
                         control: 'text',
                         unit: '%',
-                        label: adapter_core_1.I18n.getTranslatedObject('Cover position'),
+                        label: translate('Cover position'),
                         size: 12,
                         style: {
                             opacity: 0.7,
@@ -1122,7 +1205,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         if (lastPoll && !items.lastPoll) {
             items.lastPoll = {
                 type: 'staticInfo',
-                label: adapter_core_1.I18n.getTranslatedObject('Last poll'),
+                label: translate('Last poll'),
                 data: new Date(lastPoll).toLocaleString(),
                 addColon: true,
             };
@@ -1156,7 +1239,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         const key = suffix.replace(/[^a-zA-Z0-9_]/g, '_');
         items[key] = {
             type: 'staticInfo',
-            label: adapter_core_1.I18n.getTranslatedObject(label),
+            label: translate(label),
             data: formatValue(state.val, unit || common?.unit),
             addColon: true,
             size,
@@ -1336,7 +1419,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 id: suffix.replace('.', '_'),
                 type: 'color',
                 stateId: `${shortDeviceId}.${suffix}`,
-                label: adapter_core_1.I18n.getTranslatedObject('Color'),
+                label: translate('Color'),
                 state: (await this.adapter.getForeignStateAsync(obj._id)) ||
                     { val: null, ts: Date.now(), ack: true },
                 handler: async (_deviceId, _actionId, state) => {
@@ -1349,7 +1432,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         let group = {
             id: 'group_settings',
             type: 'group',
-            label: adapter_core_1.I18n.getTranslatedObject('Settings'),
+            label: translate('Settings'),
         };
         // Collect writable number states without common.max (not sliders)
         for (const stateId of ownStates) {
@@ -1489,7 +1572,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
             data: {
                 newName: '',
             },
-            title: adapter_core_1.I18n.getTranslatedObject('Enter new name'),
+            title: translate('Enter new name'),
         });
         if (result?.newName === undefined || result?.newName === '') {
             return { refresh: 'none' };
@@ -1515,7 +1598,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         const progress = await context.openProgress('Updating firmware...', {
             indeterminate: !hasProgress,
             value: hasProgress ? 0 : undefined,
-            label: adapter_core_1.I18n.getTranslatedObject('Starting update...'),
+            label: translate('Starting update...'),
         });
         try {
             await this.adapter.setStateAsync(stateId, true, false);
@@ -1549,7 +1632,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         clearInterval(checkInterval);
                         await progress.update({
                             value: 100,
-                            label: adapter_core_1.I18n.getTranslatedObject('Firmware update complete'),
+                            label: translate('Firmware update complete'),
                         });
                         resolve();
                     }
@@ -1558,7 +1641,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         const online = this.states[`${ns}.${shortDeviceId}.online`];
                         if (online?.val === false) {
                             await progress.update({
-                                label: adapter_core_1.I18n.getTranslatedObject('Device is rebooting...'),
+                                label: translate('Device is rebooting...'),
                             });
                         }
                     }
@@ -1707,14 +1790,14 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         return { name: parts.join('.'), nextOffset: jumped ? savedPos : pos };
     }
     async handleDiscoverDevices(context) {
-        const progress = await context.openProgress(adapter_core_1.I18n.getTranslatedObject('Searching for Shelly devices...'), {
+        const progress = await context.openProgress(translate('Searching for Shelly devices...'), {
             indeterminate: true,
         });
         try {
             const found = await this.mdnsScan(5000);
             await progress.close();
             if (!found.length) {
-                await context.showMessage(adapter_core_1.I18n.getTranslatedObject('No new Shelly devices found'));
+                await context.showMessage(translate('No new Shelly devices found'));
                 return { refresh: false };
             }
             // Filter out devices already known
@@ -1736,7 +1819,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 this.adapter.log.debug(`[DeviceManager] Excluded ${gen1Devices.length} Gen 1 device(s) from MQTT discovery (use CoAP instead): ${gen1Devices.map(d => d.name).join(', ')}`);
             }
             if (!newDevices.length && existingDevices.length) {
-                await context.showMessage(adapter_core_1.I18n.getTranslatedObject('All %s found devices are already known', existingDevices.length.toString()));
+                await context.showMessage(translate('All %s found devices are already known', existingDevices.length.toString()));
             }
             else {
                 // Build a form with checkbox + name input per new device
@@ -1755,7 +1838,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         items.selectAll = {
                             newLine: true,
                             type: 'checkbox',
-                            label: adapter_core_1.I18n.getTranslatedObject('Select all'),
+                            label: translate('Select all'),
                             xs: 12,
                         };
                     }
@@ -1776,7 +1859,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                         data[`add_${i}`] = false;
                         items[`name_${i}`] = {
                             type: 'text',
-                            label: adapter_core_1.I18n.getTranslatedObject('Device name'),
+                            label: translate('Device name'),
                             hidden: `!data.add_${i}`,
                             validator: `!data.add_${i} || !!data.name_${i}`,
                             validatorNoSaveOnError: true,
@@ -1805,7 +1888,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 }
                 const options = {
                     data,
-                    title: adapter_core_1.I18n.getTranslatedObject('Configure selected devices'),
+                    title: translate('Configure selected devices'),
                 };
                 if (anyChecked.length) {
                     options.applyDisabledRule = anyChecked.join(' && ');
@@ -1898,7 +1981,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         const localIp = this.getLocalIp(devices[0].ip);
         const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         if (!localIp) {
-            await context.showMessage(adapter_core_1.I18n.getTranslatedObject('Could not determine local IP address'));
+            await context.showMessage(translate('Could not determine local IP address'));
             return;
         }
         const mqttServer = `${localIp}:${mqttPort}`;
@@ -1966,12 +2049,12 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                             _info: {
                                 type: 'staticInfo',
                                 label: dev.name,
-                                data: adapter_core_1.I18n.getTranslatedObject('Device is password-protected'),
+                                data: translate('Device is password-protected'),
                                 addColon: true,
                             },
                             devicePassword: {
                                 type: 'text',
-                                label: adapter_core_1.I18n.getTranslatedObject('Enter device password'),
+                                label: translate('Enter device password'),
                             },
                         },
                     }, { data: { devicePassword: '' }, title: dev.name });
@@ -2015,7 +2098,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 data: '',
             };
         }
-        await context.showForm({ type: 'panel', items }, { title: adapter_core_1.I18n.getTranslatedObject('Configuration results'), buttons: ['apply'], ignoreApplyDisabled: true });
+        await context.showForm({ type: 'panel', items }, { title: translate('Configuration results'), buttons: ['apply'], ignoreApplyDisabled: true });
     }
     async provisionSingleDevice(dev, mqttServer, mqttUser, mqttPass, httpPass, timeZone, mqttId, devicePassword) {
         const auth = devicePassword ? { user: 'admin', pass: devicePassword } : undefined;

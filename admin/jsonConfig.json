@@ -536,6 +536,33 @@
                     "xl": 4,
                     "label": "Detailed HTTP command debug logs"
                 },
+                "httpDebugDiscovery": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Detailed HTTP discovery debug logs"
+                },
+                "httpDebugPolling": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Detailed HTTP polling debug logs"
+                },
+                "httpDebugRawResponses": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Detailed HTTP raw response debug logs"
+                },
                 "httpTimeout": {
                     "type": "number",
                     "min": 1000,

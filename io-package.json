@@ -318,6 +318,9 @@
     "httpMaxParallel": 10,
     "httpSaveRawJson": false,
     "httpDebugCommands": false,
+    "httpDebugDiscovery": false,
+    "httpDebugPolling": false,
+    "httpDebugRawResponses": false,
     "httpAllowAdmin": false
   },
   "objects": [],
