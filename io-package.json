@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "11.0.0-alpha.15",
+    "version": "11.0.1-f1",
     "news": {
+      "11.0.1-f1": {
+        "en": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender.",
+        "de": "Fork-Build: Unterstützung für Shelly Gen2+ Geräte über Shelly Range Extender hinzugefügt.",
+        "ru": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender.",
+        "pt": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender.",
+        "nl": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender.",
+        "fr": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender.",
+        "it": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender.",
+        "es": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender.",
+        "pl": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender.",
+        "uk": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender.",
+        "zh-cn": "Fork build: Added support for Shelly Gen2+ devices connected via Shelly Range Extender."
+      },
       "11.0.0-alpha.15": {
         "en": "Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).\nAdded HiluX DS8 by Shelly (hiluxds8)\nAdded Shelly EM Gen4 (shellyemg4)\nAdapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.20 now.\nDevice manager has been added providing info and control of devices and provisioning.\nIMPORTANT: Please read changelog at README.md listing more information.",
         "de": "Hinzugefügt Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).\nHinzugefügt HiluX DS8 von Shelly (hiluxds8)\nHinzugefügt Shelly EM Gen4 (shellyemg4)\nAdapter erfordert jetzt node.js >= 22, js-controller >= 6.0.11 und admin >= 7.8.20.\nDer Gerätemanager wurde hinzugefügt, um Informationen und die Steuerung von Geräten und Bereitstellungen bereitzustellen.\nWICHTIG: Bitte lesen Sie das Changelog bei README.md mit weiteren Informationen.",
