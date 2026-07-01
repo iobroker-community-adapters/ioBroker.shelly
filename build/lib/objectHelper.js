@@ -244,14 +244,18 @@ function loadExistingObjects(callback) {
     });
 }
 function handleStateChange(id, state) {
+    const originalId = id;
     if (!state || state.ack) {
+        adapter?.log.debug(`handleStateChange received ${originalId}, value=${JSON.stringify(state?.val)}, ack=${state?.ack}; ignored`);
         return;
     }
     if (!adapter) {
         throw new Error('Adapter is not set');
     }
     id = id.substring(adapter.namespace.length + 1);
+    adapter.log.debug(`handleStateChange received ${originalId} as ${id}, value=${JSON.stringify(state.val)}, ack=${state.ack}, from=${state.from ?? '<unknown>'}`);
     if (typeof stateChangeTrigger[id] === 'function') {
+        adapter.log.debug(`stateChangeTrigger found for ${id}; executing HTTP command callback`);
         const obj = exports.adapterObjects[id];
         if (obj?.common?.type && obj.common.type !== 'mixed') {
             if (obj.common.type === 'boolean') {
@@ -271,7 +275,12 @@ function handleStateChange(id, state) {
         stateChangeTrigger[id](state.val, state);
     }
     else {
-        adapter.log.debug(`No stateChangeTrigger registered for ${id}; ignoring writable state change`);
+        const [device, channel] = id.split('.');
+        const prefix = channel ? `${device}.${channel}.` : `${device}.`;
+        const similarTriggerKeys = Object.keys(stateChangeTrigger)
+            .filter(triggerId => triggerId === id || triggerId.startsWith(prefix))
+            .slice(0, 25);
+        adapter.log.debug(`No stateChangeTrigger registered for ${id}; ignoring writable state change. Similar trigger keys: ${similarTriggerKeys.length ? similarTriggerKeys.join(', ') : '<none>'}`);
     }
 }
 function init(adapterInstance) {

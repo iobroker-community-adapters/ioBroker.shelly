@@ -167,6 +167,9 @@ class Shelly extends utils.Adapter {
         this.deviceManagement?.onStateChange(id, state);
 
         // Warning, state can be null if it was deleted
+        this.log.debug(
+            `[onStateChange] received id=${id}, value=${JSON.stringify(state?.val)}, ack=${state?.ack}, from=${state?.from ?? '<unknown>'}`,
+        );
         if (state && !state.ack) {
             const stateId = this.removeNamespace(id);
 
@@ -189,11 +192,13 @@ class Shelly extends utils.Adapter {
                 }
             } else {
                 this.log.debug(
-                    `[onStateChange] "${id}" state changed: ${JSON.stringify(state)} - forwarding to objectHelper`,
+                    `[onStateChange] forwarding id=${id}, stateId=${stateId}, value=${JSON.stringify(state.val)}, ack=${state.ack}, from=${state.from ?? '<unknown>'} to objectHelper.handleStateChange()`,
                 );
 
                 objectHelper?.handleStateChange(id, state);
             }
+        } else {
+            this.log.debug(`[onStateChange] not forwarded id=${id}, reason=${state ? 'ack=true' : 'state deleted'}`);
         }
     }
 

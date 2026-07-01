@@ -527,6 +527,15 @@
                     "xl": 4,
                     "label": "Create raw JSON states"
                 },
+                "httpDebugCommands": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Detailed HTTP command debug logs"
+                },
                 "httpTimeout": {
                     "type": "number",
                     "min": 1000,
