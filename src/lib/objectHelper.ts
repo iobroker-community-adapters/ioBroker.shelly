@@ -309,6 +309,8 @@ export function handleStateChange(id: string, state: ioBroker.State | null | und
             }
         }
         stateChangeTrigger[id](state.val, state);
+    } else {
+        adapter.log.debug(`No stateChangeTrigger registered for ${id}; ignoring writable state change`);
     }
 }
 

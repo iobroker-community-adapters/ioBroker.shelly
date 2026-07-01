@@ -270,6 +270,9 @@ function handleStateChange(id, state) {
         }
         stateChangeTrigger[id](state.val, state);
     }
+    else {
+        adapter.log.debug(`No stateChangeTrigger registered for ${id}; ignoring writable state change`);
+    }
 }
 function init(adapterInstance) {
     adapter = adapterInstance;
