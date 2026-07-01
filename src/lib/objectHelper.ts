@@ -17,9 +17,15 @@ export function getStateChangeTriggerKeys(): string[] {
 }
 
 function logTriggerRegistration(id: string, source: string): void {
-    adapter!.log.debug(
-        `[HTTP CMD] registering stateChangeTrigger source=${source}, key=${id}, total=${Object.keys(stateChangeTrigger).length}`,
-    );
+    if (isHttpCommandDebugEnabled()) {
+        adapter!.log.debug(
+            `[HTTP CMD] registering stateChangeTrigger source=${source}, key=${id}, total=${Object.keys(stateChangeTrigger).length}`,
+        );
+    }
+}
+
+function isHttpCommandDebugEnabled(): boolean {
+    return adapter?.config?.httpDebugCommands === true;
 }
 
 function getSimilarTriggerKeys(id: string): string[] {
@@ -47,13 +53,15 @@ export function setOrUpdateObject(
     }
     const hasExistingTrigger = Object.prototype.hasOwnProperty.call(stateChangeTrigger, id);
     const existingTrigger = hasExistingTrigger ? stateChangeTrigger[id] : undefined;
-    adapter.log.debug(
-        `[HTTP CMD] setOrUpdateObject id=${id}, read=${(obj as ioBroker.StateObject).common?.read}, write=${
-            (obj as ioBroker.StateObject).common?.write
-        }, callback=${!!stateChangeCallback}, existingTrigger=${!!existingTrigger}, registeredTriggers=${
-            Object.keys(stateChangeTrigger).length
-        }`,
-    );
+    if (isHttpCommandDebugEnabled()) {
+        adapter.log.debug(
+            `[HTTP CMD] setOrUpdateObject id=${id}, read=${(obj as ioBroker.StateObject).common?.read}, write=${
+                (obj as ioBroker.StateObject).common?.write
+            }, callback=${!!stateChangeCallback}, existingTrigger=${!!existingTrigger}, registeredTriggers=${
+                Object.keys(stateChangeTrigger).length
+            }`,
+        );
+    }
     (obj as ioBroker.StateObject).type ||= 'state';
     obj.common ||= {} as ioBroker.ObjectCommon;
     obj.native ||= {};
@@ -123,9 +131,11 @@ export function setOrUpdateObject(
             stateChangeTrigger[id] = stateChangeCallback;
             logTriggerRegistration(id, 'equivalent-object');
         } else if (hasExistingTrigger) {
-            adapter.log.debug(
-                `[HTTP CMD] preserving existing stateChangeTrigger for ${id} during equivalent object update`,
-            );
+            if (isHttpCommandDebugEnabled()) {
+                adapter.log.debug(
+                    `[HTTP CMD] preserving existing stateChangeTrigger for ${id} during equivalent object update`,
+                );
+            }
         }
         callback?.();
         return;
@@ -274,9 +284,11 @@ export function processObjectQueue(callback?: () => void): void {
                 stateChangeTrigger[queueEntry.id] = queueEntry.stateChangeCallback;
                 logTriggerRegistration(queueEntry.id, 'queued-object');
             } else if (stateChangeTrigger[queueEntry.id]) {
-                adapter!.log.debug(
-                    `[HTTP CMD] preserving existing stateChangeTrigger for ${queueEntry.id} during queued object update`,
-                );
+                if (isHttpCommandDebugEnabled()) {
+                    adapter!.log.debug(
+                        `[HTTP CMD] preserving existing stateChangeTrigger for ${queueEntry.id} during queued object update`,
+                    );
+                }
             }
             return callback?.();
         }
@@ -285,9 +297,11 @@ export function processObjectQueue(callback?: () => void): void {
                 stateChangeTrigger[queueEntry.id] = queueEntry.stateChangeCallback;
                 logTriggerRegistration(queueEntry.id, 'queued-state');
             } else if (stateChangeTrigger[queueEntry.id]) {
-                adapter!.log.debug(
-                    `[HTTP CMD] preserving existing stateChangeTrigger for ${queueEntry.id} during queued state update`,
-                );
+                if (isHttpCommandDebugEnabled()) {
+                    adapter!.log.debug(
+                        `[HTTP CMD] preserving existing stateChangeTrigger for ${queueEntry.id} during queued state update`,
+                    );
+                }
             }
             return callback?.();
         });
@@ -333,9 +347,11 @@ export function loadExistingObjects(callback?: () => void): void {
 export function handleStateChange(id: string, state: ioBroker.State | null | undefined): void {
     const originalId = id;
     if (!state || state.ack) {
-        adapter?.log.debug(
-            `[HTTP CMD] handleStateChange ignored id=${originalId}, value=${JSON.stringify(state?.val)}, ack=${state?.ack}`,
-        );
+        if (isHttpCommandDebugEnabled()) {
+            adapter?.log.debug(
+                `[HTTP CMD] handleStateChange ignored id=${originalId}, value=${JSON.stringify(state?.val)}, ack=${state?.ack}`,
+            );
+        }
         return;
     }
     if (!adapter) {
@@ -343,16 +359,20 @@ export function handleStateChange(id: string, state: ioBroker.State | null | und
     }
 
     id = id.substring(adapter.namespace.length + 1);
-    adapter.log.debug(
-        `[HTTP CMD] handleStateChange called originalId=${originalId}, stateId=${id}, value=${JSON.stringify(
-            state.val,
-        )}, ack=${state.ack}, from=${state.from ?? '<unknown>'}, user=${state.user ?? '<unknown>'}, ts=${
-            state.ts ?? '<unknown>'
-        }, triggerCount=${Object.keys(stateChangeTrigger).length}`,
-    );
+    if (isHttpCommandDebugEnabled()) {
+        adapter.log.debug(
+            `[HTTP CMD] handleStateChange called originalId=${originalId}, stateId=${id}, value=${JSON.stringify(
+                state.val,
+            )}, ack=${state.ack}, from=${state.from ?? '<unknown>'}, user=${state.user ?? '<unknown>'}, ts=${
+                state.ts ?? '<unknown>'
+            }, triggerCount=${Object.keys(stateChangeTrigger).length}`,
+        );
+    }
 
     if (typeof stateChangeTrigger[id] === 'function') {
-        adapter.log.debug(`[HTTP CMD] stateChangeTrigger found key=${id}; executing HTTP command callback`);
+        if (isHttpCommandDebugEnabled()) {
+            adapter.log.debug(`[HTTP CMD] stateChangeTrigger found key=${id}; executing HTTP command callback`);
+        }
         const obj = adapterObjects[id];
         if (obj?.common?.type && obj.common.type !== 'mixed') {
             if (obj.common.type === 'boolean') {
@@ -374,11 +394,13 @@ export function handleStateChange(id: string, state: ioBroker.State | null | und
     } else {
         const similarTriggerKeys = getSimilarTriggerKeys(id);
         const allTriggerKeys = Object.keys(stateChangeTrigger).slice(0, 100);
-        adapter.log.debug(
-            `[HTTP CMD] No stateChangeTrigger registered for ${id}; ignoring writable state change. Similar trigger keys: ${
-                similarTriggerKeys.length ? similarTriggerKeys.join(', ') : '<none>'
-            }; allTriggerKeys=${allTriggerKeys.length ? allTriggerKeys.join(', ') : '<none>'}`,
-        );
+        if (isHttpCommandDebugEnabled()) {
+            adapter.log.debug(
+                `[HTTP CMD] No stateChangeTrigger registered for ${id}; ignoring writable state change. Similar trigger keys: ${
+                    similarTriggerKeys.length ? similarTriggerKeys.join(', ') : '<none>'
+                }; allTriggerKeys=${allTriggerKeys.length ? allTriggerKeys.join(', ') : '<none>'}`,
+            );
+        }
     }
 }
 

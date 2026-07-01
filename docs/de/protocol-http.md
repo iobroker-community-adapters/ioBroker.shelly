@@ -8,10 +8,13 @@ HTTP-Polling erfordert kein aktiviertes MQTT auf den Shelly-Geraeten. Die Shelly
 
 Wenn `HTTP-Polling` als Adapter-Protokoll gewaehlt ist, startet der Adapter einen HTTP-Polling-Server statt eines CoAP- oder MQTT-Listeners.
 
-Der HTTP-Polling-Server baut seine Geraeteliste aus zwei Quellen:
+Der HTTP-Polling-Server baut seine Geraeteliste beim Start aus drei Quellen:
 
 - Manuell konfigurierte Geraete in `HTTP polling devices`
+- Bestehende Shelly-Geraeteobjekte in der ioBroker-Registry, wenn sie einen `hostname`- oder `Network.ip`-State besitzen
 - Optionale HTTP-Discovery ueber konfigurierte IP-Bereiche
+
+`Discover devices by HTTP scan` steuert nur den aktiven Netzwerkscan. Bereits bekannte HTTP-Geraete werden dadurch nicht deaktiviert. Nachdem eine Discovery die Geraeteobjekte angelegt hat, kann der Scan ausgeschaltet werden; beim naechsten Adapterstart werden diese Geraete aus der ioBroker-Registry geladen, vollstaendig als HTTP-Polling-Clients initialisiert und ihre writable Command-States wieder registriert.
 
 Fuer jedes Geraet ruft der Adapter zuerst `/shelly` auf. Danach liest er Status- und Konfigurationsendpunkte, um die vorhandenen Funktionen zu analysieren:
 
@@ -41,11 +44,11 @@ Raw-JSON-States werden nur angelegt, wenn `Create raw JSON states` aktiviert ist
 
 ## Konfiguration
 
-Nutze die HTTP-Authentifizierungsfelder in den HTTP-Polling-Einstellungen. Der Adapter unterstuetzt Basic Auth fuer Gen1 classic REST und Gen2+ RPC-Requests. Gen2+ Digest-Auth wird weiterhin verwendet, wenn ein Geraet sie anfordert.
+Nutze die HTTP-Authentifizierungsfelder in den HTTP-Polling-Einstellungen. Der Adapter erkennt das vom Geraet angebotene Verfahren und unterstuetzt Basic Auth und HTTP Digest Auth fuer Gen1 classic REST und Gen2+ RPC-Requests.
 
 HTTP-spezifische Einstellungen:
 
-- `Use global HTTP Basic Auth`: Aktiviert globale HTTP-Zugangsdaten fuer alle HTTP-Polling-Geraete.
+- `Use global HTTP authentication`: Aktiviert globale HTTP-Zugangsdaten fuer alle HTTP-Polling-Geraete.
 - `Default HTTP username` und `Default HTTP password`: Globale Zugangsdaten. Das ist die empfohlene Variante, wenn alle Shelly-Geraete dasselbe Restricted-Login-Passwort verwenden.
 - `Discover devices by HTTP scan`: Sucht in konfigurierten IP-Bereichen nach Shelly-Geraeten.
 - `Automatically create discovered devices`: Startet Polling-Clients fuer gefundene Geraete. Deaktivieren, wenn der Scan nur ins Log schreiben soll und Geraete manuell eingetragen werden.
@@ -96,6 +99,8 @@ Direkte Bedienelemente werden nur angezeigt, wenn die erkannte Capability vorhan
 - Sensoren: nur Werte, keine Schaltflaechen
 
 Device-Manager-Befehle schreiben auf dieselben writable ioBroker-States, die auch ausserhalb des Device Managers verwendet werden. Die HTTP-Schicht fuehrt danach das bestehende Gen1-REST- oder Gen2+-RPC-Command-Mapping aus und loest Zugangsdaten mit derselben Custom/Global/No-Auth-Logik auf wie beim Polling.
+
+Ein Device-Manager-Befehl wird erst als erfolgreich gemeldet, wenn der Ziel-State mit `ack=true` bestaetigt wurde. Wenn kein Command-Handler registriert ist oder der HTTP/RPC-Befehl nicht abgeschlossen wird, zeigt der Ergebnisdialog einen Fehler statt eines erfolgreichen State-Writes.
 
 Das Geraetemenue enthaelt HTTP-spezifische Diagnoseaktionen:
 

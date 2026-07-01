@@ -467,7 +467,7 @@
                     "md": 4,
                     "lg": 4,
                     "xl": 4,
-                    "label": "Use global HTTP Basic Auth"
+                    "label": "Use global HTTP authentication"
                 },
                 "httpDefaultUsername": {
                     "type": "text",

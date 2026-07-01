@@ -8,10 +8,13 @@ HTTP polling does not require enabling MQTT on Shelly devices, so the Shelly Clo
 
 When `HTTP polling` is selected as the adapter protocol, the adapter starts an HTTP polling server instead of a CoAP or MQTT listener.
 
-The HTTP polling server builds its device list from two sources:
+The HTTP polling server builds its startup device list from three sources:
 
 - Manually configured devices in `HTTP polling devices`
+- Existing Shelly device objects in the ioBroker registry that have a `hostname` or `Network.ip` state
 - Optional HTTP discovery scans over configured IP ranges
+
+`Discover devices by HTTP scan` only controls the active network scan. It does not disable already known HTTP devices. After a successful discovery has created device objects, the scan can be disabled; on the next adapter start those devices are loaded from the ioBroker registry, fully initialized as HTTP polling clients, and their writable command states are registered again.
 
 For every device the adapter calls `/shelly` first. It then reads the status and configuration endpoints to analyze the available capabilities:
 
@@ -41,11 +44,11 @@ Raw JSON states are only created when `Create raw JSON states` is enabled. Unkno
 
 ## Configuration
 
-Use the HTTP authentication fields in the HTTP polling settings. The adapter supports Basic Auth for Gen1 classic REST requests and Gen2+ RPC requests. Gen2+ digest authentication is still handled when a device requests it.
+Use the HTTP authentication fields in the HTTP polling settings. The adapter negotiates the authentication scheme from the device response and supports Basic Auth and HTTP Digest Auth for Gen1 classic REST requests and Gen2+ RPC requests.
 
 HTTP-specific settings:
 
-- `Use global HTTP Basic Auth`: Enable default HTTP credentials for all HTTP polling devices.
+- `Use global HTTP authentication`: Enable default HTTP credentials for all HTTP polling devices.
 - `Default HTTP username` and `Default HTTP password`: Global credentials. Use these when all Shelly devices share the same restricted-login password.
 - `Discover devices by HTTP scan`: Probe configured IP ranges for Shelly devices.
 - `Automatically create discovered devices`: Start polling clients for discovered devices. Disable this if you only want the scan result in the log and prefer manual entries.
@@ -96,6 +99,8 @@ Supported direct controls are shown only when the detected capability exists:
 - Sensors: values only, no command buttons
 
 Device Manager commands write to the same writable ioBroker states that are used outside the Device Manager. The HTTP layer then performs the existing Gen1 REST or Gen2+ RPC command mapping and resolves credentials with the same custom/global/no-auth logic used for polling.
+
+A Device Manager command is reported as successful only after the target state is acknowledged with `ack=true`. If no command handler is registered or the HTTP/RPC command does not complete, the result dialog reports an error instead of a successful state write.
 
 The device menu contains HTTP-specific diagnostics:
 

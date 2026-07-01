@@ -6,9 +6,10 @@
 - Start a fresh adapter instance and verify that the default protocol remains unchanged until HTTP polling is selected.
 - Select HTTP polling mode with discovery disabled and add one manual device.
 - Select HTTP polling mode with discovery enabled and scan a small neutral range such as `192.168.1.0/24`.
+- Disable HTTP discovery after devices have been created, restart the adapter, and verify that known devices are loaded from the ioBroker registry.
 - Test a device without authentication.
-- Test a device using global HTTP Basic Auth.
-- Test a device using per-device HTTP Basic Auth.
+- Test a device using global HTTP authentication with Basic or Digest.
+- Test a device using per-device HTTP authentication with Basic or Digest.
 - Verify that per-device credentials override global credentials.
 - Switch a supported device from ioBroker object states.
 - Switch the same supported device from the Device Manager.
@@ -39,9 +40,11 @@ Docker and NAS installations often cannot receive CoAP traffic or incoming MQTT/
 - Gen2, Gen3, and Gen4 discovery and capability detection through RPC endpoints.
 - Fallback from `Sys.GetConfig` to `Shelly.GetConfig`.
 - Generic capability profile for unknown devices.
-- Global and per-device HTTP Basic Auth.
+- Global and per-device HTTP authentication with Basic/Digest negotiation.
+- Startup loading from the ioBroker device registry when discovery is disabled.
 - HTTP command support for switch/relay, light, RGB/RGBW, and cover capabilities.
 - Device Manager support for direct controls, live values, HTTP connection tests, rediscovery, config reload, state recreation, and diagnostics.
+- Device Manager controls report success only after command acknowledgement.
 - Polling hardening with retries, offline detection, online recovery, and isolated per-device failures.
 
 ### Security
@@ -65,7 +68,7 @@ Docker and NAS installations often cannot receive CoAP traffic or incoming MQTT/
 - `npm run lint`
 - `npm test`
 
-Additional covered areas include Gen1 discovery, Gen2+ RPC discovery, polling, offline/online behavior, global Basic Auth, per-device Basic Auth, auth override, command mapping for switch/light/RGB/RGBW/cover, Device Manager HTTP actions, and credential sanitizing.
+Additional covered areas include Gen1 discovery, Gen2+ RPC discovery, polling, offline/online behavior, global HTTP authentication, per-device HTTP authentication, auth override, command mapping for switch/light/RGB/RGBW/cover, Device Manager HTTP actions, and credential sanitizing.
 
 ### Known Limitations
 
