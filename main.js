@@ -61,6 +61,11 @@ class Shelly extends utils.Adapter {
 
             const protocol = this.config.protocol || 'coap';
             this.log.info(`[startup] active protocol=${protocol}`);
+            if (protocol === 'http') {
+                this.log.debug(
+                    `[HTTP] Auth config: httpAuthEnabled=${!!this.config.httpAuthEnabled}, globalUsernamePresent=${typeof this.config.httpDefaultUsername === 'string' && this.config.httpDefaultUsername.length > 0}, globalPasswordPresent=${typeof this.config.httpDefaultPassword === 'string' && this.config.httpDefaultPassword.length > 0}`,
+                );
+            }
 
             await this.setOnlineFalse();
 
