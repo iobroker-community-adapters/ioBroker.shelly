@@ -224,8 +224,6 @@ Notes:
 -->
 ### **WORK IN PROGRESS**
 - (@klein0r) Updated ble script (v1.3) for Shelly firmware > 2.0
-
-### 11.0.1-f1 (2026-07-01)
 - (@typhosj) Added support for Shelly Gen2+ devices connected via Shelly Range Extender.
 
 ### 11.0.0-alpha.15 (2026-05-10)

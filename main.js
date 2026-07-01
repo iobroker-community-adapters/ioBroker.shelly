@@ -279,12 +279,19 @@ class Shelly extends utils.Adapter {
     }
 
     parseHostnameWithPort(hostname) {
-        const url = new URL(`http://${hostname}`);
+        try {
+            const url = new URL(`http://${hostname}`);
 
-        return {
-            hostname: url.hostname,
-            port: Number(url.port) || 80,
-        };
+            return {
+                hostname: url.hostname,
+                port: Number(url.port) || 80,
+            };
+        } catch {
+            return {
+                hostname,
+                port: 80,
+            };
+        }
     }
 
     async deviceStatusUpdate(deviceId, status) {
