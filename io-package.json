@@ -305,6 +305,7 @@
     "qos": 0,
     "coapbind": "0.0.0.0",
     "httpDevices": [],
+    "httpDiscoveredDevices": [],
     "blacklist": [
       {
         "id": "SHBDUO-1#123456789#2"

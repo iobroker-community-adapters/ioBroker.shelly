@@ -106,7 +106,7 @@ class Shelly extends utils.Adapter {
             setImmediate(() => {
                 if (protocol === 'http') {
                     this.log.info(
-                        `[HTTP] Starting HTTPPollingServer; discovery=${!!this.config.httpDiscoveryEnabled}, configuredDevices=${Array.isArray(this.config.httpDevices) ? this.config.httpDevices.length : 0}`,
+                        `[HTTP] Starting HTTPPollingServer; discovery=${!!this.config.httpDiscoveryEnabled}, configuredDevices=${Array.isArray(this.config.httpDevices) ? this.config.httpDevices.length : 0}, persistedDevices=${Array.isArray(this.config.httpDiscoveredDevices) ? this.config.httpDiscoveredDevices.length : 0}`,
                     );
                     this.serverHttp = new protocolHttp.HTTPPollingServer(this, objectHelper, this.eventEmitter);
                     this.log.debug(`[HTTP] HTTPPollingServer created`);
