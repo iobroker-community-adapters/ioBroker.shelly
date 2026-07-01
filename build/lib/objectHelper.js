@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.adapterObjects = exports.existingStates = void 0;
+exports.getStateChangeTriggerKeys = getStateChangeTriggerKeys;
 exports.setOrUpdateObject = setOrUpdateObject;
 exports.deleteObject = deleteObject;
 exports.processObjectQueue = processObjectQueue;
@@ -13,10 +14,14 @@ const stateChangeTrigger = {};
 const objectQueue = [];
 exports.existingStates = {};
 exports.adapterObjects = {};
+function getStateChangeTriggerKeys() {
+    return Object.keys(stateChangeTrigger);
+}
 function setOrUpdateObject(id, obj, obtainCustomFields, value, stateChangeCallback, createNow = true, callback) {
     if (!adapter) {
         throw new Error('Adapter is not set');
     }
+    adapter.log.debug(`setOrUpdateObject called for ${id}; stateChangeCallback=${!!stateChangeCallback}; registeredTriggers=${Object.keys(stateChangeTrigger).length}`);
     obj.type ||= 'state';
     obj.common ||= {};
     obj.native ||= {};
@@ -82,6 +87,7 @@ function setOrUpdateObject(id, obj, obtainCustomFields, value, stateChangeCallba
         }
         if (stateChangeCallback) {
             stateChangeTrigger[id] = stateChangeCallback;
+            adapter.log.debug(`registering stateChangeTrigger for ${id}; total stateChangeTriggers=${Object.keys(stateChangeTrigger).length}`);
         }
         return;
     }
@@ -200,12 +206,14 @@ function processObjectQueue(callback) {
         if (queueEntry.value === null || queueEntry.value === undefined) {
             if (queueEntry.stateChangeCallback) {
                 stateChangeTrigger[queueEntry.id] = queueEntry.stateChangeCallback;
+                adapter.log.debug(`registering stateChangeTrigger for ${queueEntry.id}; total stateChangeTriggers=${Object.keys(stateChangeTrigger).length}`);
             }
             return callback?.();
         }
         void adapter.setState(queueEntry.id, queueEntry.value, true, () => {
             if (queueEntry.stateChangeCallback) {
                 stateChangeTrigger[queueEntry.id] = queueEntry.stateChangeCallback;
+                adapter.log.debug(`registering stateChangeTrigger for ${queueEntry.id}; total stateChangeTriggers=${Object.keys(stateChangeTrigger).length}`);
             }
             return callback?.();
         });
@@ -294,6 +302,7 @@ exports.default = {
     loadExistingObjects,
     getObject,
     handleStateChange,
+    getStateChangeTriggerKeys,
     existingStates: exports.existingStates,
     adapterObjects: exports.adapterObjects,
 };

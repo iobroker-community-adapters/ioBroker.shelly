@@ -60,6 +60,7 @@ class Shelly extends utils.Adapter {
             objectHelper.init(this);
 
             const protocol = this.config.protocol || 'coap';
+            this.log.info(`[startup] active protocol=${protocol}`);
 
             await this.setOnlineFalse();
 
@@ -99,9 +100,14 @@ class Shelly extends utils.Adapter {
             // Start HTTP polling client
             setImmediate(() => {
                 if (protocol === 'http') {
-                    this.log.info(`Starting in HTTP polling mode`);
+                    this.log.info(
+                        `[HTTP] Starting HTTPPollingServer; discovery=${!!this.config.httpDiscoveryEnabled}, configuredDevices=${Array.isArray(this.config.httpDevices) ? this.config.httpDevices.length : 0}`,
+                    );
                     this.serverHttp = new protocolHttp.HTTPPollingServer(this, objectHelper, this.eventEmitter);
-                    this.serverHttp.listen().catch(err => this.log.error(`[HTTP] Unable to start HTTP polling: ${err}`));
+                    this.log.debug(`[HTTP] HTTPPollingServer created`);
+                    this.serverHttp
+                        .listen()
+                        .catch(err => this.log.error(`[HTTP] Unable to start HTTP polling: ${err}`));
                 }
             });
 
