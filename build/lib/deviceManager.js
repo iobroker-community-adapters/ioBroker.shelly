@@ -639,7 +639,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
         let currentState;
         try {
             await this.adapter.setForeignStateAsync(fullStateId, command.value);
-            currentState = await this.adapter.getForeignStateAsync(fullStateId);
+            currentState = await deviceManagerHttpActions.waitForAcknowledgedHttpCommand(this.adapter, fullStateId, command.value);
         }
         catch (err) {
             status = 'Error';
@@ -684,7 +684,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                 label: translate('Result'),
                 data: error
                     ? sanitizeDeviceManagerMessage(error instanceof Error ? error.message : error)
-                    : 'Command sent',
+                    : 'Command acknowledged',
                 addColon: true,
             },
             currentStatus: {

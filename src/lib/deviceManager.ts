@@ -715,7 +715,11 @@ export default class ShellyDeviceManagement extends DeviceManagement {
 
         try {
             await this.adapter.setForeignStateAsync(fullStateId, command.value);
-            currentState = await this.adapter.getForeignStateAsync(fullStateId);
+            currentState = await deviceManagerHttpActions.waitForAcknowledgedHttpCommand(
+                this.adapter,
+                fullStateId,
+                command.value,
+            );
         } catch (err) {
             status = 'Error';
             error = err;
@@ -759,7 +763,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 label: translate('Result'),
                 data: error
                     ? sanitizeDeviceManagerMessage(error instanceof Error ? error.message : error)
-                    : 'Command sent',
+                    : 'Command acknowledged',
                 addColon: true,
             },
             currentStatus: {
