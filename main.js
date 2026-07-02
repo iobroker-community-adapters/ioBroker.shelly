@@ -250,8 +250,6 @@ class Shelly extends utils.Adapter {
      * Online-Check via TCP ping (when using CoAP)
      */
     async onlineCheck() {
-        const valPort = 80;
-
         if (this.onlineCheckTimeout) {
             this.clearTimeout(this.onlineCheckTimeout);
             this.onlineCheckTimeout = null;
@@ -264,9 +262,10 @@ class Shelly extends utils.Adapter {
                 const valHostname = stateHostaname ? stateHostaname.val : undefined;
 
                 if (valHostname) {
-                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
+                    const { hostname, port } = this.parseHostnameWithPort(valHostname);
+                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${hostname}:${port}`);
 
-                    tcpPing.probe(valHostname, valPort, (error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
+                    tcpPing.probe(hostname, port, (error, isAlive) => this.deviceStatusUpdate(deviceId, isAlive));
                 }
             }
         } catch (e) {
@@ -277,6 +276,22 @@ class Shelly extends utils.Adapter {
             this.onlineCheckTimeout = null;
             this.onlineCheck();
         }, 60 * 1000); // Restart online check in 60 seconds
+    }
+
+    parseHostnameWithPort(hostname) {
+        try {
+            const url = new URL(`http://${hostname}`);
+
+            return {
+                hostname: url.hostname,
+                port: Number(url.port) || 80,
+            };
+        } catch {
+            return {
+                hostname,
+                port: 80,
+            };
+        }
     }
 
     async deviceStatusUpdate(deviceId, status) {

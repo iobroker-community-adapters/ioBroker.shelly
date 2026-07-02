@@ -224,6 +224,7 @@ Notes:
 -->
 ### **WORK IN PROGRESS**
 - (@klein0r) Updated ble script (v1.3) for Shelly firmware > 2.0
+- (@typhosj) Added support for Shelly Gen2+ devices connected via Shelly Range Extender.
 
 ### 11.0.0-alpha.15 (2026-05-10)
 - (@copilot) Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).
