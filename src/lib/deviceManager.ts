@@ -205,12 +205,13 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 // Firmware update indicator. BLE devices are updated through their gateway, not here.
                 // `available` is read live from the firmware state, so the indicator stays in sync
                 // without a full device-list refresh and the device can be filtered by "update available".
-                update: isBle
-                    ? undefined
-                    : {
-                          available: { stateId: `${ns}.${shortDeviceId}.firmware` },
-                          version: firmwareVersion || undefined,
-                      },
+                update:
+                    isBle || firmwareUpdate === undefined
+                        ? undefined
+                        : {
+                              available: { stateId: `${ns}.${shortDeviceId}.firmware` },
+                              version: firmwareVersion || undefined,
+                          },
                 hasDetails: true,
                 customInfo: this.buildCustomInfo(device._id, shortDeviceId, isBle),
                 controls: await this.buildControls(shortDeviceId, isBle),
