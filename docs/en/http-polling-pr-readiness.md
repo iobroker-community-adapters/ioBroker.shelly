@@ -50,6 +50,7 @@ Automated checks run for this PR preparation:
 - `npm test`: passed.
 - Targeted ESLint on changed files: passed.
 - `git diff --check`: passed.
+- Repo-wide `npm run lint`: known pre-existing CRLF/Prettier findings in unchanged legacy files.
 
 Additional covered areas include Gen1 discovery, Gen2+ RPC discovery, polling, offline/online behavior, global HTTP authentication, per-device HTTP authentication, auth override, command mapping for switch/light/RGB/RGBW/cover, Device Manager HTTP actions, registry startup loading, and credential sanitizing.
 
