@@ -225,6 +225,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
             const hostname = this.states[`${ns}.${shortDeviceId}.hostname`]?.val;
             const firmwareUpdate = this.states[`${ns}.${shortDeviceId}.firmware`]?.val;
             const isHttpDevice = this.isHttpDevice(shortDeviceId);
+            const firmwareVersion = this.states[`${ns}.${shortDeviceId}.version`]?.val;
             const battery = this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`]
                 ? this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`].val
                 : this.states[`${ns}.${shortDeviceId}.sensor.battery`]?.val ||
@@ -253,8 +254,16 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     connection: isBle ? undefined : isOnline ? 'connected' : 'disconnected',
                     rssi,
                     battery,
-                    warning: firmwareUpdate ? translate('Firmware update available') : undefined,
                 },
+                // Firmware update indicator. BLE devices are updated through their gateway, not here.
+                // `available` is read live from the firmware state, so the indicator stays in sync
+                // without a full device-list refresh and the device can be filtered by "update available".
+                update: isBle || firmwareUpdate === undefined
+                    ? undefined
+                    : {
+                        available: { stateId: `${ns}.${shortDeviceId}.firmware` },
+                        version: firmwareVersion || undefined,
+                    },
                 hasDetails: true,
                 customInfo: this.buildCustomInfo(device._id, shortDeviceId, isBle),
                 controls: await this.buildControls(shortDeviceId, isBle),
@@ -279,7 +288,7 @@ class ShellyDeviceManagement extends dm_utils_1.DeviceManagement {
                     ...(isOnline && firmwareUpdate && (!isHttpDevice || this.adapter.config.httpAllowAdmin)
                         ? [
                             {
-                                id: 'firmware-update',
+                                id: dm_utils_1.ACTIONS.UPDATE,
                                 icon: 'update',
                                 description: translate('Update firmware'),
                                 handler: async (deviceId, context) => await this.handleFirmwareUpdate(deviceId, context),

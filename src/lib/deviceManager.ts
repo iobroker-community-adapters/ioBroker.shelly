@@ -3,16 +3,16 @@ import {
     DeviceManagement,
     type ActionContext,
     type ConfigItemAny,
-    type ConfigItemState,
     type DeviceControl,
     type DeviceDetails,
-    type DeviceInfo,
     type DeviceLoadContext,
     type DeviceRefresh,
     type InstanceDetails,
     type BackEndCommandJsonFormOptions,
+    ACTIONS,
 } from '@iobroker/dm-utils';
 // It must be exported to index in dm-utils
+import type { DeviceInfo } from '@iobroker/dm-utils/build/types/adapter';
 import type { ControlState } from '@iobroker/dm-utils/build/types/base';
 import * as crypto from 'node:crypto';
 import * as dgram from 'node:dgram';
@@ -241,6 +241,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             const hostname = this.states[`${ns}.${shortDeviceId}.hostname`]?.val as string | undefined;
             const firmwareUpdate = this.states[`${ns}.${shortDeviceId}.firmware`]?.val as boolean | undefined;
             const isHttpDevice = this.isHttpDevice(shortDeviceId);
+            const firmwareVersion = this.states[`${ns}.${shortDeviceId}.version`]?.val as string | undefined;
 
             const battery = this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`]
                 ? (this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`].val as number)
@@ -274,8 +275,17 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     connection: isBle ? undefined : isOnline ? 'connected' : 'disconnected',
                     rssi,
                     battery,
-                    warning: firmwareUpdate ? translate('Firmware update available') : undefined,
                 },
+                // Firmware update indicator. BLE devices are updated through their gateway, not here.
+                // `available` is read live from the firmware state, so the indicator stays in sync
+                // without a full device-list refresh and the device can be filtered by "update available".
+                update:
+                    isBle || firmwareUpdate === undefined
+                        ? undefined
+                        : {
+                              available: { stateId: `${ns}.${shortDeviceId}.firmware` },
+                              version: firmwareVersion || undefined,
+                          },
                 hasDetails: true,
                 customInfo: this.buildCustomInfo(device._id, shortDeviceId, isBle),
                 controls: await this.buildControls(shortDeviceId, isBle),
@@ -307,7 +317,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     ...(isOnline && firmwareUpdate && (!isHttpDevice || this.adapter.config.httpAllowAdmin)
                         ? [
                               {
-                                  id: 'firmware-update',
+                                  id: ACTIONS.UPDATE,
                                   icon: 'update' as const,
                                   description: translate('Update firmware'),
                                   handler: async (
@@ -1039,7 +1049,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     style: {
                         opacity: 0.7,
                     },
-                } as ConfigItemState;
+                };
             }
             if (this.states[`${prefix}humidity`] !== undefined) {
                 items.humidity = {
@@ -1051,7 +1061,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     label: translate('Humidity'),
                     size: 12,
                     style: { opacity: 0.7 },
-                } as ConfigItemState;
+                };
             }
             if (this.states[`${prefix}illuminance`] !== undefined) {
                 items.illuminance = {
@@ -1063,7 +1073,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     label: translate('Illuminance'),
                     size: 12,
                     style: { opacity: 0.7 },
-                } as ConfigItemState;
+                };
             }
             // BLE boolean/alarm sensor states
             const bleBoolSensors: {
@@ -1133,7 +1143,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         label: translate(sensor.label),
                         size: 12,
                         style: { opacity: 0.7 },
-                    } as ConfigItemState;
+                    };
                 }
             }
 
@@ -1147,7 +1157,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     label: translate('Tilt'),
                     size: 12,
                     style: { opacity: 0.7 },
-                } as ConfigItemState;
+                };
             }
         } else {
             // Gen1 sensor paths
@@ -1180,7 +1190,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         label: translate(sensor.label),
                         size: 12,
                         style: { opacity: 0.7 },
-                    } as ConfigItemState;
+                    };
                 }
             }
 
@@ -1273,7 +1283,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         label: translate('Temperature'),
                         size: 12,
                         style: { opacity: 0.7 },
-                    } as ConfigItemState;
+                    };
                 }
 
                 const humMatch = suffix.match(/^(Humidity\d+)\.Relative$/);
@@ -1287,7 +1297,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         label: translate('Humidity'),
                         size: 12,
                         style: { opacity: 0.7 },
-                    } as ConfigItemState;
+                    };
                 }
 
                 const luxMatch = suffix.match(/^(Illuminance\d+)\.Lux$/);
@@ -1301,7 +1311,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         label: translate('Illuminance'),
                         size: 12,
                         style: { opacity: 0.7 },
-                    } as ConfigItemState;
+                    };
                 }
 
                 // Flood alarm
@@ -1322,7 +1332,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         label: translate('Flood'),
                         size: 12,
                         style: { opacity: 0.7 },
-                    } as ConfigItemState;
+                    };
                 }
 
                 // Cover position
@@ -1338,7 +1348,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         style: {
                             opacity: 0.7,
                         },
-                    } as ConfigItemState;
+                    };
                 }
             }
         }
@@ -2118,7 +2128,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         type: 'header',
                         text: `New devices (${newDevices.length})`,
                         size: 4,
-                    } as ConfigItemAny;
+                    };
 
                     if (newDevices.length > 1) {
                         items.selectAll = {
@@ -2165,7 +2175,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         type: 'header',
                         text: `Known devices (${existingDevices.length})`,
                         size: 4,
-                    } as ConfigItemAny;
+                    };
 
                     for (let i = 0; i < existingDevices.length; i++) {
                         items[`known_${i}`] = {

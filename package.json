@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "11.0.0-alpha.15",
+  "version": "11.0.0",
   "description": "Integrate your Shelly devices into ioBroker via MQTT, CoAP, or HTTP polling",
   "author": "Thorsten Stueben <thorsten@stueben.de>",
   "contributors": [
@@ -31,9 +31,9 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.3.2",
-    "@iobroker/dm-utils": "^3.0.19",
-    "axios": "^1.17.0",
+    "@iobroker/adapter-core": "^3.4.1",
+    "@iobroker/dm-utils": "^3.1.1",
+    "axios": "^1.18.0",
     "mqtt-connection": "^4.1.0",
     "shelly-iot": "^1.1.2",
     "tcp-ping": "^0.1.1",
@@ -41,20 +41,20 @@
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
-    "@alcalzone/release-script": "^5.2.0",
+    "@alcalzone/release-script": "^5.2.1",
     "@alcalzone/release-script-plugin-iobroker": "^5.2.0",
     "@alcalzone/release-script-plugin-license": "^5.2.0",
     "@alcalzone/release-script-plugin-manual-review": "^5.2.0",
     "@iobroker/adapter-dev": "^1.5.0",
     "@iobroker/build-tools": "^3.0.1",
-    "@iobroker/eslint-config": "^2.2.0",
+    "@iobroker/eslint-config": "^2.3.4",
     "@iobroker/testing": "^5.2.2",
     "@tsconfig/node22": "^22.0.5",
     "@types/bl": "^5.1.4",
-    "@types/iobroker": "npm:@iobroker/types@^7.0.7",
-    "@types/node": "^22.19.19",
+    "@types/iobroker": "npm:@iobroker/types@^7.2.2",
+    "@types/node": "^22.19.21",
     "source-map-support": "^0.5.21",
-    "typescript": "~5.9.3"
+    "typescript": "~6.0.3"
   },
   "main": "main.js",
   "files": [
