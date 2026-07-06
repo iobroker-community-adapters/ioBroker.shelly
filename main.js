@@ -674,7 +674,7 @@ class Shelly extends utils.Adapter {
                         battery_low: { type: 'number' },
                         button: {
                             type: 'number',
-                            states: { 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 254: 'Long' },
+                            states: { 0: 'Nothing', 1: 'Single', 2: 'Double', 3: 'Triple', 4: 'Long', 128: 'Hold', 254: 'Hold' },
                         },
                         dewpoint: { type: 'number', unit: '°C' },
                         direction: { type: 'number', unit: '°' },
