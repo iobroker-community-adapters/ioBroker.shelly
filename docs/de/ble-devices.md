@@ -153,62 +153,34 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
 });
 ```
 
-## Beispiel-Payloads (nur für Entwicklung)
+## Getestete Geräte
 
-**Shelly BLU Button (und Tough 1)**
+**Shelly BLU Button (and Tough 1)**
 
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/button
-- Getestet mit Firmware: `20250314-080633/v1.0.22@cb5ca611`
-
-```json
-{
-  "encryption": false,
-  "BTHome_version": 2,
-  "pid": 6,
-  "battery": 70,
-  "button": 1 // 1 = einzelner Druck, 2 = Doppeldruck, 3 = Dreifachdruck, 4 = langer Druck
-}
-```
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/button
+- Knowledge Base: https://kb.shelly.cloud/knowledge-base/shellyblu-button1
+- Getestet mit Firmware: `20250314-080633/v1.0.22`
 
 **Shelly BLU H&T**
 
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/ht
-- Getestet mit Firmware: `20250314-080647/v1.0.22@cb5ca611`
-
-```json
-
-```
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/ht
+- Knowledge Base: 
+- Getestet mit Firmware: `20250314-080647/v1.0.22`
 
 **Shelly BLU Door/Window**
 
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/dw
-- Getestet mit Firmware: `20250314-080641/v1.0.22@cb5ca611`
-
-```json
-{
-  "encryption": false,
-  "BTHome_version": 2,
-  "pid": 12,
-  "battery": 100,
-  "illuminance": 13,
-  "window": 0, // 1 = offen, 0 = geschlossen
-  "rotation": 0
-}
-```
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/dw
+- Knowledge Base: https://kb.shelly.cloud/knowledge-base/shellyblu-door-window
+- Getestet mit Firmware: `20250314-080641/v1.0.22`
 
 **Shelly BLU Motion**
 
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/motion
-- Getestet mit Firmware: `20250314-080656/v1.0.22@cb5ca611`
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/motion
+- Knowledge Base: https://kb.shelly.cloud/knowledge-base/shellyblu-motion
+- Getestet mit Firmware: `20250314-080656/v1.0.22`
 
-```json
-{
-  "encryption": false,
-  "BTHome_version": 2,
-  "pid": 182,
-  "battery": 100,
-  "temperature": 25.9,
-  "illuminance": 427,
-  "motion": 1 // 1 = Bewegung, 0 = Bewegung beendet
-}
-```
+**Shelly BLU Wall Switch 4**
+
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/wall_eu
+- Knowledge Base: https://kb.shelly.cloud/knowledge-base/shelly-blu-wall-switch-4
+- Getestet mit Firmware: `20250824-135711/v1.0.23`
