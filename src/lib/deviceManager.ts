@@ -5,7 +5,6 @@ import {
     type ConfigItemAny,
     type DeviceControl,
     type DeviceDetails,
-    type DeviceInfo,
     type DeviceLoadContext,
     type DeviceRefresh,
     type InstanceDetails,
@@ -13,11 +12,17 @@ import {
     ACTIONS,
 } from '@iobroker/dm-utils';
 // It must be exported to index in dm-utils
+import type { DeviceInfo } from '@iobroker/dm-utils/build/types/adapter';
 import type { ControlState } from '@iobroker/dm-utils/build/types/base';
 import * as crypto from 'node:crypto';
 import * as dgram from 'node:dgram';
 import * as http from 'node:http';
 import * as os from 'node:os';
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const protocolHttp = require('../../lib/protocol/http');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const deviceManagerHttpActions = require('../../lib/deviceManagerHttpActions');
 
 class HttpAuthError extends Error {
     constructor() {
@@ -44,6 +49,74 @@ const groupMeta: Record<string, { nameKey: string; icon: string }> = {
     ble: { nameKey: 'BLE Devices', icon: 'adapter/shelly/icons/ble.svg' },
     other: { nameKey: 'Other', icon: 'adapter/shelly/icons/shellyplus1.png' },
 };
+
+type HttpDeviceManagerCommand = {
+    id: string;
+    icon: string;
+    label: string;
+    stateSuffix: string;
+    value: ControlState;
+};
+
+function formatValue(value: unknown, unit?: string, digits?: number): string | number | boolean {
+    if (typeof value === 'number') {
+        const rounded = digits === undefined ? Math.round(value * 100) / 100 : Number(value.toFixed(digits));
+        return unit ? `${rounded} ${unit}` : rounded;
+    }
+    if (typeof value === 'boolean') {
+        return value ? '✓' : '✗';
+    }
+    return value === undefined || value === null ? '' : toSafeString(value);
+}
+
+function isSensitiveText(value: unknown): boolean {
+    return /authorization|password|passwd|secret|token|key/i.test(toSafeString(value));
+}
+
+function sanitizeDeviceManagerMessage(value: unknown): string {
+    return protocolHttp._private
+        .sanitizeLogMessage(toSafeString(value))
+        .replace(/(authorization|password|passwd|secret|token|key)(["'\s:=]+)([^"',\s}]+)/gi, '$1$2<masked>');
+}
+
+function toSafeString(value: unknown): string {
+    if (value instanceof Error) {
+        return value.message;
+    }
+    if (typeof value === 'string') {
+        return value;
+    }
+    if (typeof value === 'number' || typeof value === 'boolean' || value === null || value === undefined) {
+        return `${value ?? ''}`;
+    }
+    try {
+        return JSON.stringify(value);
+    } catch {
+        return 'Unknown value';
+    }
+}
+
+export function getHttpDeviceManagerCommands(
+    objects: Record<string, ioBroker.DeviceObject | ioBroker.StateObject | ioBroker.ChannelObject>,
+    namespace: string,
+    shortDeviceId: string,
+): HttpDeviceManagerCommand[] {
+    return deviceManagerHttpActions.getHttpDeviceManagerCommands(objects, namespace, shortDeviceId);
+}
+
+function translate(text: string, ...args: string[]): ioBroker.StringOrTranslated {
+    try {
+        const translated = I18n.getTranslatedObject(text) as ioBroker.StringOrTranslated;
+        if (args.length && typeof translated === 'string') {
+            let index = 0;
+            return String(translated).replace(/%s/g, () => args[index++] || '');
+        }
+        return translated;
+    } catch {
+        let index = 0;
+        return text.replace(/%s/g, () => args[index++] || '');
+    }
+}
 
 /**
  * DeviceManager Class
@@ -105,8 +178,8 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                       {
                           id: 'discover',
                           icon: 'search',
-                          title: I18n.getTranslatedObject('Discover devices'),
-                          description: I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
+                          title: translate('Discover devices'),
+                          description: translate('Scan network for Shelly devices via mDNS'),
                           timeout: 40_000,
                           handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
                               await this.handleDiscoverDevices(context),
@@ -167,6 +240,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             const isOnline = isBle || !!this.states[`${ns}.${shortDeviceId}.online`]?.val;
             const hostname = this.states[`${ns}.${shortDeviceId}.hostname`]?.val as string | undefined;
             const firmwareUpdate = this.states[`${ns}.${shortDeviceId}.firmware`]?.val as boolean | undefined;
+            const isHttpDevice = this.isHttpDevice(shortDeviceId);
             const firmwareVersion = this.states[`${ns}.${shortDeviceId}.version`]?.val as string | undefined;
 
             const battery = this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`]
@@ -196,7 +270,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     ? bleInfo!.model
                     : (this.states[`${ns}.${shortDeviceId}.model`]?.val as string) ||
                       (this.states[`${ns}.${shortDeviceId}.type`]?.val as string) ||
-                      I18n.getTranslatedObject('unknown'),
+                      translate('unknown'),
                 status: {
                     connection: isBle ? undefined : isOnline ? 'connected' : 'disconnected',
                     rssi,
@@ -219,7 +293,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     {
                         id: 'rename',
                         icon: 'edit',
-                        description: I18n.getTranslatedObject('Rename this device'),
+                        description: translate('Rename this device'),
                         handler: async (
                             deviceId: string,
                             context: ActionContext,
@@ -232,19 +306,20 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                               {
                                   id: 'web',
                                   icon: 'web',
-                                  description: I18n.getTranslatedObject('Open device interface'),
+                                  description: translate('Open device interface'),
                                   url: `http://${
                                       this.states[`${this.adapter.namespace}.${shortDeviceId}.hostname`]?.val as string
                                   }`,
                               },
                           ]
                         : []),
-                    ...(isOnline && firmwareUpdate
+                    ...this.buildHttpDeviceActions(shortDeviceId, isBle),
+                    ...(isOnline && firmwareUpdate && (!isHttpDevice || this.adapter.config.httpAllowAdmin)
                         ? [
                               {
                                   id: ACTIONS.UPDATE,
                                   icon: 'update' as const,
-                                  description: I18n.getTranslatedObject('Update firmware'),
+                                  description: translate('Update firmware'),
                                   handler: async (
                                       deviceId: string,
                                       context: ActionContext,
@@ -292,7 +367,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 // @ts-expect-error staticLink is OK
                 type: 'staticLink',
                 href: `http://${hostname}`,
-                label: I18n.getTranslatedObject('Open device web interface'),
+                label: translate('Open device web interface'),
                 button: true,
                 icon: 'web',
                 newLine: true,
@@ -302,7 +377,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (id) {
             items.id = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('Device ID'),
+                label: translate('Device ID'),
                 data: id,
                 addColon: true,
                 copyToClipboard: true,
@@ -312,7 +387,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (model) {
             items.model = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('Model'),
+                label: translate('Model'),
                 data: model,
                 addColon: true,
             };
@@ -321,7 +396,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (type) {
             items.deviceType = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('Type'),
+                label: translate('Type'),
                 data: type,
                 addColon: true,
             };
@@ -330,7 +405,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (gen) {
             items.gen = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('Generation'),
+                label: translate('Generation'),
                 data: gen,
                 addColon: true,
             };
@@ -339,7 +414,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (hostname) {
             items.hostname = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('IP address'),
+                label: translate('IP address'),
                 data: hostname,
                 addColon: true,
                 copyToClipboard: true,
@@ -349,7 +424,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (version) {
             items.version = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('Firmware version'),
+                label: translate('Firmware version'),
                 data: version,
                 addColon: true,
             };
@@ -358,7 +433,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (firmware !== undefined) {
             items.firmware = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('Firmware update available'),
+                label: translate('Firmware update available'),
                 data: firmware ? '✓' : '✗',
                 addColon: true,
             };
@@ -367,7 +442,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (protocol) {
             items.protocol = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('Protocol'),
+                label: translate('Protocol'),
                 data: protocol,
                 addColon: true,
             };
@@ -376,7 +451,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (rssi !== undefined) {
             items.rssi = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('RSSI'),
+                label: translate('RSSI'),
                 data: rssi,
                 unit: 'dBm',
                 addColon: true,
@@ -386,10 +461,68 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (uptime !== undefined) {
             items.uptime = {
                 type: 'staticInfo',
-                label: I18n.getTranslatedObject('Uptime'),
+                label: translate('Uptime'),
                 data: `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m`,
                 addColon: true,
             };
+        }
+
+        const capabilitySummary = this.getCapabilitySummary(shortDeviceId);
+        if (capabilitySummary.length) {
+            items.capabilities = {
+                type: 'staticInfo',
+                label: translate('Capabilities'),
+                data: capabilitySummary.join(', '),
+                addColon: true,
+            };
+        }
+
+        const lastPoll = this.getLastStateUpdate(shortDeviceId);
+        if (lastPoll) {
+            items.lastPoll = {
+                type: 'staticInfo',
+                label: translate('Last poll'),
+                data: new Date(lastPoll).toLocaleString(),
+                addColon: true,
+            };
+        }
+
+        const readableStates = this.getReadableStateSummaries(shortDeviceId);
+        if (readableStates.length) {
+            items._statusHeader = {
+                type: 'header',
+                text: translate('Current values'),
+                size: 4,
+                newLine: true,
+            };
+            for (const entry of readableStates.slice(0, 40)) {
+                items[`state_${entry.key}`] = {
+                    type: 'staticInfo',
+                    label: entry.label,
+                    data: entry.value,
+                    addColon: true,
+                };
+            }
+        }
+
+        if (this.adapter.config.httpSaveRawJson) {
+            const rawStates = this.getRawStateSummaries(shortDeviceId);
+            if (rawStates.length) {
+                items._rawHeader = {
+                    type: 'header',
+                    text: 'Raw JSON',
+                    size: 4,
+                    newLine: true,
+                };
+                for (const entry of rawStates) {
+                    items[`raw_${entry.key}`] = {
+                        type: 'staticInfo',
+                        label: entry.label,
+                        data: entry.value,
+                        addColon: true,
+                    };
+                }
+            }
         }
 
         return {
@@ -399,6 +532,382 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 items,
             },
         };
+    }
+
+    private getCapabilitySummary(shortDeviceId: string): string[] {
+        const prefix = `${this.adapter.namespace}.${shortDeviceId}.`;
+        const capabilities = new Set<string>();
+        for (const id in this.objects) {
+            if (!id.startsWith(prefix) || this.objects[id].type !== 'state') {
+                continue;
+            }
+            const suffix = id.substring(prefix.length);
+            if (/^(Relay|Switch)\d*\./.test(suffix)) {
+                capabilities.add('Switch/Relay');
+            } else if (/^Light\d*\./.test(suffix)) {
+                capabilities.add('Light/Dimmer');
+            } else if (/^RGBW?\d*\./.test(suffix)) {
+                capabilities.add('RGB/RGBW');
+            } else if (/^Cover\d*\./.test(suffix)) {
+                capabilities.add('Cover/Roller');
+            } else if (/Power$/.test(suffix)) {
+                capabilities.add('Power');
+            } else if (/Energy$/.test(suffix)) {
+                capabilities.add('Energy');
+            } else if (/Temperature|tmp\.temperature/.test(suffix)) {
+                capabilities.add('Temperature');
+            } else if (/Humidity|hum\.value/.test(suffix)) {
+                capabilities.add('Humidity');
+            } else if (/^Network\.|rssi$|hostname$/.test(suffix)) {
+                capabilities.add('Network');
+            } else if (/^Sys\.|uptime$|firmware$|version$/.test(suffix)) {
+                capabilities.add('System');
+            }
+        }
+        return [...capabilities];
+    }
+
+    private getLastStateUpdate(shortDeviceId: string): number | undefined {
+        const prefix = `${this.adapter.namespace}.${shortDeviceId}.`;
+        let last = 0;
+        for (const [id, state] of Object.entries(this.states)) {
+            if (id.startsWith(prefix) && state?.ts && state.ts > last) {
+                last = state.ts;
+            }
+        }
+        return last || undefined;
+    }
+
+    private getReadableStateSummaries(
+        shortDeviceId: string,
+    ): { key: string; label: string; value: string | number | boolean }[] {
+        const prefix = `${this.adapter.namespace}.${shortDeviceId}.`;
+        const relevant =
+            /(\.Switch$|\.Power$|\.Energy$|\.Celsius$|\.Relative$|\.Position$|\.State$|\.Brightness$|rssi$|hostname$|version$|model$|gen$|online$|protocol$)/;
+        const entries: { key: string; label: string; value: string | number | boolean }[] = [];
+
+        for (const id in this.objects) {
+            const obj = this.objects[id];
+            if (!id.startsWith(prefix) || obj.type !== 'state' || id.includes('.raw.') || !relevant.test(id)) {
+                continue;
+            }
+            const state = this.states[id];
+            if (!state || isSensitiveText(id)) {
+                continue;
+            }
+            const suffix = id.substring(prefix.length);
+            entries.push({
+                key: suffix.replace(/[^a-zA-Z0-9_]/g, '_'),
+                label: suffix.replace(/\./g, ' '),
+                value: formatValue(state.val, obj.common.unit),
+            });
+        }
+
+        return entries.sort((a, b) => a.label.localeCompare(b.label));
+    }
+
+    private getRawStateSummaries(shortDeviceId: string): { key: string; label: string; value: string }[] {
+        const prefix = `${this.adapter.namespace}.${shortDeviceId}.raw.`;
+        const entries: { key: string; label: string; value: string }[] = [];
+        for (const id in this.states) {
+            if (!id.startsWith(prefix)) {
+                continue;
+            }
+            const suffix = id.substring(prefix.length);
+            const value = sanitizeDeviceManagerMessage(this.states[id]?.val);
+            entries.push({
+                key: suffix.replace(/[^a-zA-Z0-9_]/g, '_'),
+                label: suffix,
+                value,
+            });
+        }
+        return entries;
+    }
+
+    private isHttpDevice(shortDeviceId: string): boolean {
+        const protocol = this.states[`${this.adapter.namespace}.${shortDeviceId}.protocol`]?.val;
+        return protocol === 'HTTP polling' || this.adapter.config.protocol === 'http';
+    }
+
+    private getDeviceIp(shortDeviceId: string): string | undefined {
+        const ns = this.adapter.namespace;
+        return (
+            (this.states[`${ns}.${shortDeviceId}.hostname`]?.val as string | undefined) ||
+            (this.states[`${ns}.${shortDeviceId}.Network.ip`]?.val as string | undefined)
+        );
+    }
+
+    private getHttpDeviceConfig(shortDeviceId: string): Record<string, unknown> {
+        const ip = this.getDeviceIp(shortDeviceId);
+        const manualDevice = Array.isArray(this.adapter.config.httpDevices)
+            ? this.adapter.config.httpDevices.find((device: Record<string, unknown>) => {
+                  return (
+                      device &&
+                      (device.ip === ip ||
+                          device.deviceId === shortDeviceId ||
+                          device.name === shortDeviceId ||
+                          (typeof device.deviceId === 'string' && device.deviceId.endsWith(shortDeviceId)))
+                  );
+              })
+            : undefined;
+
+        return {
+            ...(manualDevice || {}),
+            ip,
+            deviceId: shortDeviceId,
+        };
+    }
+
+    private buildHttpDeviceActions(shortDeviceId: string, isBle: boolean): NonNullable<DeviceInfo<string>['actions']> {
+        if (isBle || !this.isHttpDevice(shortDeviceId)) {
+            return [];
+        }
+
+        const commands = getHttpDeviceManagerCommands(this.objects, this.adapter.namespace, shortDeviceId);
+        const commandActions = commands.map(command => ({
+            id: command.id,
+            icon: command.icon,
+            description: translate(command.label),
+            timeout: 15_000,
+            handler: async (deviceId: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> =>
+                await this.handleHttpStateCommand(deviceId, command, context),
+        }));
+
+        return [
+            ...commandActions,
+            {
+                id: 'http-test',
+                icon: 'info',
+                description: translate('Test HTTP connection'),
+                timeout: 15_000,
+                handler: async (deviceId: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> =>
+                    await this.handleHttpConnectionTest(deviceId, context),
+            },
+            {
+                id: 'http-rediscover',
+                icon: 'refresh',
+                description: translate('Rediscover device'),
+                timeout: 30_000,
+                handler: async (deviceId: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> =>
+                    await this.handleHttpRefreshDevice(deviceId, context, 'Rediscover device'),
+            },
+            {
+                id: 'http-reload-config',
+                icon: 'settings',
+                description: translate('Reload configuration'),
+                timeout: 30_000,
+                handler: async (deviceId: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> =>
+                    await this.handleHttpRefreshDevice(deviceId, context, 'Reload configuration'),
+            },
+            {
+                id: 'http-recreate-states',
+                icon: 'lines',
+                description: translate('Recreate states'),
+                timeout: 30_000,
+                handler: async (deviceId: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> =>
+                    await this.handleHttpRefreshDevice(deviceId, context, 'Recreate states'),
+            },
+        ];
+    }
+
+    private async handleHttpStateCommand(
+        deviceId: string,
+        command: HttpDeviceManagerCommand,
+        context: ActionContext,
+    ): Promise<{ refresh: DeviceRefresh }> {
+        const shortDeviceId = deviceId.substring(this.adapter.namespace.length + 1);
+        const fullStateId = `${this.adapter.namespace}.${shortDeviceId}.${command.stateSuffix}`;
+        const started = Date.now();
+        const progress = await context.openProgress(translate(command.label), { indeterminate: true });
+        let status = 'OK';
+        let error: unknown;
+        let currentState: ioBroker.State | null | undefined;
+
+        try {
+            await this.adapter.setForeignStateAsync(fullStateId, command.value);
+            currentState = await deviceManagerHttpActions.waitForAcknowledgedHttpCommand(
+                this.adapter,
+                fullStateId,
+                command.value,
+            );
+        } catch (err) {
+            status = 'Error';
+            error = err;
+        } finally {
+            await progress.close();
+        }
+
+        const items: Record<string, ConfigItemAny> = {
+            device: {
+                type: 'staticInfo',
+                label: translate('Device'),
+                data: shortDeviceId,
+                addColon: true,
+            },
+            action: {
+                type: 'staticInfo',
+                label: translate('Action'),
+                data: command.label,
+                addColon: true,
+            },
+            request: {
+                type: 'staticInfo',
+                label: translate('HTTP/RPC request'),
+                data: fullStateId,
+                addColon: true,
+            },
+            status: {
+                type: 'staticInfo',
+                label: translate('Status'),
+                data: status,
+                addColon: true,
+            },
+            responseTime: {
+                type: 'staticInfo',
+                label: translate('Response time'),
+                data: `${Date.now() - started} ms`,
+                addColon: true,
+            },
+            result: {
+                type: 'staticInfo',
+                label: translate('Result'),
+                data: error
+                    ? sanitizeDeviceManagerMessage(error instanceof Error ? error.message : error)
+                    : 'Command acknowledged',
+                addColon: true,
+            },
+            currentStatus: {
+                type: 'staticInfo',
+                label: translate('Current status after refresh'),
+                data:
+                    currentState && currentState.val !== undefined
+                        ? `${String(currentState.val)} (ack=${String(currentState.ack)})`
+                        : translate('unknown'),
+                addColon: true,
+            },
+        };
+
+        await context.showForm(
+            { type: 'panel', items },
+            {
+                title: translate('Command Result'),
+                buttons: ['apply'],
+                ignoreApplyDisabled: true,
+            },
+        );
+        return { refresh: 'devices' };
+    }
+
+    private async handleHttpConnectionTest(
+        deviceId: string,
+        context: ActionContext,
+    ): Promise<{ refresh: DeviceRefresh }> {
+        const shortDeviceId = deviceId.substring(this.adapter.namespace.length + 1);
+        const deviceConfig = this.getHttpDeviceConfig(shortDeviceId);
+        const result = await protocolHttp._private.testHttpDeviceConnection(this.adapter, deviceConfig);
+        const items: Record<string, ConfigItemAny> = {
+            reachable: {
+                type: 'staticInfo',
+                label: translate('HTTP reachable'),
+                data: result.reachable ? '✓' : '✗',
+                addColon: true,
+            },
+            auth: {
+                type: 'staticInfo',
+                label: translate('Authentication'),
+                data: result.authOk === false ? translate('Auth error') : translate('OK'),
+                addColon: true,
+            },
+            generation: {
+                type: 'staticInfo',
+                label: translate('Generation'),
+                data: result.generation || translate('unknown'),
+                addColon: true,
+            },
+            status: {
+                type: 'staticInfo',
+                label: translate('Status readable'),
+                data: result.statusOk ? '✓' : '✗',
+                addColon: true,
+            },
+            config: {
+                type: 'staticInfo',
+                label: translate('Config readable'),
+                data: result.configOk ? '✓' : '✗',
+                addColon: true,
+            },
+            responseTime: {
+                type: 'staticInfo',
+                label: translate('Response time'),
+                data: `${result.responseTimeMs} ms`,
+                addColon: true,
+            },
+        };
+
+        if (result.error) {
+            items.error = {
+                type: 'staticInfo',
+                label: translate('Last error'),
+                data: sanitizeDeviceManagerMessage(result.error),
+                addColon: true,
+            };
+        }
+
+        if (this.adapter.config.httpSaveRawJson) {
+            for (const key of ['info', 'status', 'config'] as const) {
+                if (result[key]) {
+                    items[`raw_${key}`] = {
+                        type: 'staticInfo',
+                        label: `Raw ${key}`,
+                        data: JSON.stringify(result[key], null, 2),
+                        addColon: true,
+                    };
+                }
+            }
+        }
+
+        await context.showForm(
+            { type: 'panel', items },
+            {
+                title: translate('HTTP connection test'),
+                buttons: ['apply'],
+                ignoreApplyDisabled: true,
+            },
+        );
+
+        return { refresh: 'devices' };
+    }
+
+    private async handleHttpRefreshDevice(
+        deviceId: string,
+        context: ActionContext,
+        title: string,
+    ): Promise<{ refresh: DeviceRefresh }> {
+        const shortDeviceId = deviceId.substring(this.adapter.namespace.length + 1);
+        const ip = this.getDeviceIp(shortDeviceId);
+        const serverHttp = (
+            this.adapter as unknown as { serverHttp?: { refreshDeviceByIp: (ip: string) => Promise<void> } }
+        ).serverHttp;
+
+        if (!ip || !serverHttp?.refreshDeviceByIp) {
+            await context.showMessage(translate('HTTP polling is not active for this device'));
+            return { refresh: 'devices' };
+        }
+
+        const progress = await context.openProgress(translate(title), { indeterminate: true });
+        try {
+            await serverHttp.refreshDeviceByIp(ip);
+            await context.showMessage(translate('Device refreshed'));
+        } catch (err) {
+            const message = sanitizeDeviceManagerMessage(err instanceof Error ? err.message : err);
+            const errorText = translate('Error');
+            this.adapter.log.warn(`[DeviceManager] HTTP refresh failed for ${shortDeviceId}: ${message}`);
+            await context.showMessage(`${typeof errorText === 'string' ? errorText : 'Error'}: ${message}`);
+        } finally {
+            await progress.close();
+        }
+
+        return { refresh: 'all' };
     }
 
     private getBleDeviceDetails(deviceId: string, shortDeviceId: string): DeviceDetails<string> {
@@ -512,7 +1021,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
 
         return {
             key: groupKey,
-            name: I18n.getTranslatedObject(meta.nameKey),
+            name: translate(meta.nameKey),
             icon: meta.icon,
         };
     }
@@ -535,7 +1044,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     control: 'text',
                     unit: '°C',
                     digits: 2,
-                    label: I18n.getTranslatedObject('Temperature'),
+                    label: translate('Temperature'),
                     size: 12,
                     style: {
                         opacity: 0.7,
@@ -549,7 +1058,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     control: 'text',
                     unit: '%',
                     digits: 1,
-                    label: I18n.getTranslatedObject('Humidity'),
+                    label: translate('Humidity'),
                     size: 12,
                     style: { opacity: 0.7 },
                 };
@@ -561,7 +1070,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     control: 'text',
                     unit: 'lux',
                     digits: 0,
-                    label: I18n.getTranslatedObject('Illuminance'),
+                    label: translate('Illuminance'),
                     size: 12,
                     style: { opacity: 0.7 },
                 };
@@ -624,14 +1133,14 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         oid: `${shortDeviceId}.${sensor.stateId}`,
                         readOnly: true,
                         options: [
-                            { label: I18n.getTranslatedObject(sensor.falseText), value: 0 },
-                            { label: I18n.getTranslatedObject(sensor.trueText), value: 1, color: sensor.trueColor },
+                            { label: translate(sensor.falseText), value: 0 },
+                            { label: translate(sensor.trueText), value: 1, color: sensor.trueColor },
                         ],
-                        trueText: I18n.getTranslatedObject(sensor.trueText),
-                        falseText: I18n.getTranslatedObject(sensor.falseText),
+                        trueText: translate(sensor.trueText),
+                        falseText: translate(sensor.falseText),
                         trueTextStyle: { color: sensor.trueColor },
                         blinkOnUpdate: true,
-                        label: I18n.getTranslatedObject(sensor.label),
+                        label: translate(sensor.label),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -645,7 +1154,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     oid: `${shortDeviceId}.rotation`,
                     control: 'text',
                     unit: '°',
-                    label: I18n.getTranslatedObject('Tilt'),
+                    label: translate('Tilt'),
                     size: 12,
                     style: { opacity: 0.7 },
                 };
@@ -678,7 +1187,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         control: 'text',
                         unit: sensor.unit,
                         digits: sensor.digits,
-                        label: I18n.getTranslatedObject(sensor.label),
+                        label: translate(sensor.label),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -742,14 +1251,14 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         type: 'state',
                         oid: `${shortDeviceId}.${sensor.stateId}`,
                         options: [
-                            { label: I18n.getTranslatedObject(sensor.falseText), value: 0 },
-                            { label: I18n.getTranslatedObject(sensor.trueText), value: 1, color: sensor.trueColor },
+                            { label: translate(sensor.falseText), value: 0 },
+                            { label: translate(sensor.trueText), value: 1, color: sensor.trueColor },
                         ],
-                        trueText: I18n.getTranslatedObject(sensor.trueText),
-                        falseText: I18n.getTranslatedObject(sensor.falseText),
+                        trueText: translate(sensor.trueText),
+                        falseText: translate(sensor.falseText),
                         trueTextStyle: { color: sensor.trueColor },
                         blinkOnUpdate: true,
-                        label: I18n.getTranslatedObject(sensor.label),
+                        label: translate(sensor.label),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -771,7 +1280,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         control: 'text',
                         unit: '°C',
                         digits: 2,
-                        label: I18n.getTranslatedObject('Temperature'),
+                        label: translate('Temperature'),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -785,7 +1294,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         control: 'text',
                         unit: '%',
                         digits: 1,
-                        label: I18n.getTranslatedObject('Humidity'),
+                        label: translate('Humidity'),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -799,7 +1308,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         control: 'text',
                         unit: 'lux',
                         digits: 0,
-                        label: I18n.getTranslatedObject('Illuminance'),
+                        label: translate('Illuminance'),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -813,14 +1322,14 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         oid: `${shortDeviceId}.${suffix}`,
                         readOnly: true,
                         options: [
-                            { label: I18n.getTranslatedObject('OK'), value: 0 },
-                            { label: I18n.getTranslatedObject('Alarm'), value: 1, color: 'red' },
+                            { label: translate('OK'), value: 0 },
+                            { label: translate('Alarm'), value: 1, color: 'red' },
                         ],
-                        trueText: I18n.getTranslatedObject('OK'),
-                        falseText: I18n.getTranslatedObject('Alarm'),
+                        trueText: translate('OK'),
+                        falseText: translate('Alarm'),
                         trueTextStyle: { color: 'red' },
                         blinkOnUpdate: true,
-                        label: I18n.getTranslatedObject('Flood'),
+                        label: translate('Flood'),
                         size: 12,
                         style: { opacity: 0.7 },
                     };
@@ -834,7 +1343,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         oid: `${shortDeviceId}.${suffix}`,
                         control: 'text',
                         unit: '%',
-                        label: I18n.getTranslatedObject('Cover position'),
+                        label: translate('Cover position'),
                         size: 12,
                         style: {
                             opacity: 0.7,
@@ -842,6 +1351,43 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     };
                 }
             }
+        }
+
+        this.addCardValue(items, shortDeviceId, 'online', 'Online', undefined, 12);
+        this.addFirstCardValue(items, shortDeviceId, ['Relay0.Switch', 'Switch0.Switch', 'Light0.Switch'], 'Switch');
+        this.addFirstCardValue(
+            items,
+            shortDeviceId,
+            ['Relay0.Power', 'Switch0.Power', 'Light0.Power', 'RGB0.Power', 'RGBW0.Power', 'Energy0.Power'],
+            'Power',
+            'W',
+        );
+        this.addFirstCardValue(
+            items,
+            shortDeviceId,
+            ['Relay0.Energy', 'Switch0.Energy', 'Meter0.Energy', 'Energy0.Energy'],
+            'Energy',
+        );
+        this.addFirstCardValue(
+            items,
+            shortDeviceId,
+            ['Temperature0.Celsius', 'tmp.temperatureC', 'sensor.temperatureC'],
+            'Temperature',
+            '°C',
+        );
+        this.addFirstCardValue(items, shortDeviceId, ['Network.rssi', 'rssi'], 'RSSI', 'dBm');
+        this.addFirstCardValue(items, shortDeviceId, ['hostname', 'Network.ip'], 'IP address');
+        this.addFirstCardValue(items, shortDeviceId, ['model', 'Info.model', 'type'], 'Model');
+        this.addFirstCardValue(items, shortDeviceId, ['version', 'Info.firmware'], 'Firmware version');
+
+        const lastPoll = this.getLastStateUpdate(shortDeviceId);
+        if (lastPoll && !items.lastPoll) {
+            items.lastPoll = {
+                type: 'staticInfo',
+                label: translate('Last poll'),
+                data: new Date(lastPoll).toLocaleString(),
+                addColon: true,
+            };
         }
 
         if (Object.keys(items).length === 0) {
@@ -855,6 +1401,47 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 items,
             },
         };
+    }
+
+    private addFirstCardValue(
+        items: Record<string, ConfigItemAny>,
+        shortDeviceId: string,
+        suffixes: string[],
+        label: string,
+        unit?: string,
+    ): void {
+        for (const suffix of suffixes) {
+            if (this.addCardValue(items, shortDeviceId, suffix, label, unit)) {
+                return;
+            }
+        }
+    }
+
+    private addCardValue(
+        items: Record<string, ConfigItemAny>,
+        shortDeviceId: string,
+        suffix: string,
+        label: string,
+        unit?: string,
+        size = 12,
+    ): boolean {
+        const id = `${this.adapter.namespace}.${shortDeviceId}.${suffix}`;
+        const state = this.states[id];
+        if (!state || items[suffix.replace(/[^a-zA-Z0-9_]/g, '_')]) {
+            return false;
+        }
+        const object = this.objects[id] as ioBroker.StateObject | undefined;
+        const common = object?.common;
+        const key = suffix.replace(/[^a-zA-Z0-9_]/g, '_');
+        items[key] = {
+            type: 'staticInfo',
+            label: translate(label),
+            data: formatValue(state.val, unit || common?.unit),
+            addColon: true,
+            size,
+            style: { opacity: 0.7 },
+        };
+        return true;
     }
 
     private async buildControls(shortDeviceId: string, isBle: boolean): Promise<DeviceControl<string>[]> {
@@ -1058,7 +1645,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 id: suffix.replace('.', '_'),
                 type: 'color',
                 stateId: `${shortDeviceId}.${suffix}`,
-                label: I18n.getTranslatedObject('Color'),
+                label: translate('Color'),
                 state:
                     (await this.adapter.getForeignStateAsync(obj._id)) ||
                     ({ val: null, ts: Date.now(), ack: true } as ioBroker.State),
@@ -1074,7 +1661,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         let group: DeviceControl<string> | null = {
             id: 'group_settings',
             type: 'group',
-            label: I18n.getTranslatedObject('Settings'),
+            label: translate('Settings'),
         };
 
         // Collect writable number states without common.max (not sliders)
@@ -1237,7 +1824,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 data: {
                     newName: '',
                 },
-                title: I18n.getTranslatedObject('Enter new name'),
+                title: translate('Enter new name'),
             },
         );
         if (result?.newName === undefined || result?.newName === '') {
@@ -1268,7 +1855,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const progress = await context.openProgress('Updating firmware...', {
             indeterminate: !hasProgress,
             value: hasProgress ? 0 : undefined,
-            label: I18n.getTranslatedObject('Starting update...'),
+            label: translate('Starting update...'),
         });
 
         try {
@@ -1308,7 +1895,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         clearInterval(checkInterval);
                         await progress.update({
                             value: 100,
-                            label: I18n.getTranslatedObject('Firmware update complete'),
+                            label: translate('Firmware update complete'),
                         });
                         resolve();
                     }
@@ -1318,7 +1905,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         const online = this.states[`${ns}.${shortDeviceId}.online`];
                         if (online?.val === false) {
                             await progress.update({
-                                label: I18n.getTranslatedObject('Device is rebooting...'),
+                                label: translate('Device is rebooting...'),
                             });
                         }
                     }
@@ -1485,7 +2072,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     }
 
     async handleDiscoverDevices(context: ActionContext): Promise<{ refresh: boolean }> {
-        const progress = await context.openProgress(I18n.getTranslatedObject('Searching for Shelly devices...'), {
+        const progress = await context.openProgress(translate('Searching for Shelly devices...'), {
             indeterminate: true,
         });
 
@@ -1494,7 +2081,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             await progress.close();
 
             if (!found.length) {
-                await context.showMessage(I18n.getTranslatedObject('No new Shelly devices found'));
+                await context.showMessage(translate('No new Shelly devices found'));
                 return { refresh: false };
             }
 
@@ -1523,10 +2110,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
 
             if (!newDevices.length && existingDevices.length) {
                 await context.showMessage(
-                    I18n.getTranslatedObject(
-                        'All %s found devices are already known',
-                        existingDevices.length.toString(),
-                    ),
+                    translate('All %s found devices are already known', existingDevices.length.toString()),
                 );
             } else {
                 // Build a form with checkbox + name input per new device
@@ -1550,7 +2134,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         items.selectAll = {
                             newLine: true,
                             type: 'checkbox',
-                            label: I18n.getTranslatedObject('Select all'),
+                            label: translate('Select all'),
                             xs: 12,
                         };
                     }
@@ -1573,7 +2157,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
 
                         items[`name_${i}`] = {
                             type: 'text',
-                            label: I18n.getTranslatedObject('Device name'),
+                            label: translate('Device name'),
                             hidden: `!data.add_${i}`,
                             validator: `!data.add_${i} || !!data.name_${i}`,
                             validatorNoSaveOnError: true,
@@ -1605,7 +2189,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
 
                 const options: BackEndCommandJsonFormOptions = {
                     data,
-                    title: I18n.getTranslatedObject('Configure selected devices'),
+                    title: translate('Configure selected devices'),
                 };
                 if (anyChecked.length) {
                     options.applyDisabledRule = anyChecked.join(' && ');
@@ -1709,7 +2293,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
         if (!localIp) {
-            await context.showMessage(I18n.getTranslatedObject('Could not determine local IP address'));
+            await context.showMessage(translate('Could not determine local IP address'));
             return;
         }
 
@@ -1798,12 +2382,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                                 _info: {
                                     type: 'staticInfo',
                                     label: dev.name,
-                                    data: I18n.getTranslatedObject('Device is password-protected'),
+                                    data: translate('Device is password-protected'),
                                     addColon: true,
                                 },
                                 devicePassword: {
                                     type: 'text',
-                                    label: I18n.getTranslatedObject('Enter device password'),
+                                    label: translate('Enter device password'),
                                 },
                             },
                         },
@@ -1862,7 +2446,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         }
         await context.showForm(
             { type: 'panel', items },
-            { title: I18n.getTranslatedObject('Configuration results'), buttons: ['apply'], ignoreApplyDisabled: true },
+            { title: translate('Configuration results'), buttons: ['apply'], ignoreApplyDisabled: true },
         );
     }
 

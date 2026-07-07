@@ -14,6 +14,19 @@ The adapter integrates with the ioBroker Device Manager (requires admin >= 7.8.2
 - **Device actions** - Rename devices, open the device web interface, or trigger firmware updates
 - **Device grouping** - Devices are automatically categorized by type (Relays, Dimmers, Plugs, Lights, Meters, Sensors, Covers, Inputs, Climate, Gateways, BLE)
 
+### HTTP Polling Devices
+
+When the adapter runs in HTTP polling mode, the Device Manager can operate and diagnose devices without requiring an adapter restart.
+
+- **Direct controls** - Switch/relay and plug devices can be switched on, off, or toggled. Lights and dimmers expose on/off and brightness controls. RGB/RGBW devices expose color-related states when supported. Covers expose open, close, stop, and position controls.
+- **Capability-aware UI** - Controls are only shown when the detected HTTP capability exists. Sensor-only devices show values but no command buttons.
+- **Live values** - Device cards can show online/offline state, current switch state, power, energy, temperature, RSSI, IP/hostname, model, firmware, and last poll timestamp.
+- **HTTP connection test** - The device menu can test reachability, authentication, detected generation, status endpoint, config endpoint, and response time. Errors are shown without passwords or Authorization headers.
+- **Rediscovery and state recreation** - The device menu can rediscover an HTTP device, reload its configuration, and recreate states by restarting only the device's HTTP polling client.
+- **Diagnostics** - The details dialog shows device info, capabilities, current values, polling status, and sanitized raw JSON only when raw JSON states are enabled.
+
+Administrative operations such as firmware updates are hidden for HTTP devices unless administrative HTTP functions are explicitly enabled in the adapter configuration.
+
 ### Background Monitoring for New Devices
 
 The adapter can periodically scan your network for new Shelly devices using mDNS discovery.

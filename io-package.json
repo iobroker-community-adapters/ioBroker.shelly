@@ -4,8 +4,8 @@
     "version": "11.0.0",
     "news": {
       "11.0.0": {
-        "en": "Updated ble script (v1.3) for Shelly firmware > 2.0\nAdded firmware update available indicator for devices supporting this feature.\nAdded Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).\nAdded HiluX DS8 by Shelly (hiluxds8)\nAdded Shelly EM Gen4 (shellyemg4)\nAdapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.23 now.\nDevice manager has been added providing info and control of devices and provisioning.\nIMPORTANT: Please read the changelog at README.md listing more information.",
-        "de": "Aktualisiertes BLE-Skript (v1.3) für Shelly-Firmware > 2.0\nAnzeige für verfügbare Firmware-Updates für Geräte hinzugefügt, die diese Funktion unterstützen.\nShelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4) hinzugefügt.\nHiluX DS8 hinzugefügt von Shelly (hiluxds8)\nShelly EM Gen4 (shellyemg4) hinzugefügt\nDer Adapter benötigt jetzt node.js >= 22, js-controller >= 6.0.11 und admin >= 7.8.23.\nEin Gerätemanager wurde hinzugefügt, der Informationen und die Steuerung von Geräten sowie deren Bereitstellung ermöglicht.\nWICHTIG: Bitte lesen Sie das Änderungsprotokoll in der Datei README.md, in dem weitere Informationen aufgeführt sind.",
+        "en": "HTTP polling and discovery have been added for environments without usable CoAP or MQTT callback paths.\nKnown HTTP devices are loaded from the ioBroker device registry after restart, so discovery can be disabled after initial setup.\nHTTP authentication now supports global defaults, per-device credentials, and Basic/Digest negotiation for discovery, polling, diagnostics, and commands.\nDevice Manager controls and diagnostics have been extended for HTTP polling devices.\nBreaking changes: none.\nUpdated ble script (v1.3) for Shelly firmware > 2.0\nAdded firmware update available indicator for devices supporting this feature.\nAdded Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).\nAdded HiluX DS8 by Shelly (hiluxds8)\nAdded Shelly EM Gen4 (shellyemg4)\nAdapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.23 now.\nDevice manager has been added providing info and control of devices and provisioning.\nIMPORTANT: Please read the changelog at README.md listing more information.",
+        "de": "HTTP-Polling und Discovery wurden fuer Umgebungen ohne nutzbare CoAP- oder MQTT-Rueckkanalverbindung hinzugefuegt.\nBekannte HTTP-Geraete werden nach einem Neustart aus der ioBroker-Geraeteregistry geladen, sodass Discovery nach der Einrichtung deaktiviert werden kann.\nHTTP-Authentifizierung unterstuetzt jetzt globale Standarddaten, geraetespezifische Zugangsdaten und Basic/Digest-Aushandlung fuer Discovery, Polling, Diagnose und Befehle.\nDer Device Manager wurde um Bedienung und Diagnose fuer HTTP-Polling-Geraete erweitert.\nBreaking Changes: keine.\nAktualisiertes BLE-Skript (v1.3) für Shelly-Firmware > 2.0\nAnzeige für verfügbare Firmware-Updates für Geräte hinzugefügt, die diese Funktion unterstützen.\nShelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4) hinzugefügt.\nHiluX DS8 hinzugefügt von Shelly (hiluxds8)\nShelly EM Gen4 (shellyemg4) hinzugefügt\nDer Adapter benötigt jetzt node.js >= 22, js-controller >= 6.0.11 und admin >= 7.8.23.\nEin Gerätemanager wurde hinzugefügt, der Informationen und die Steuerung von Geräten sowie deren Bereitstellung ermöglicht.\nWICHTIG: Bitte lesen Sie das Änderungsprotokoll in der Datei README.md, in dem weitere Informationen aufgeführt sind.",
         "ru": "Обновлен скрипт ble (v1.3) для прошивки Shelly > 2.0\nДобавлен индикатор доступности обновления прошивки для устройств, поддерживающих эту функцию.\nДобавлен диммер Shelly 0/1-10V PM Gen4 (shelly0110dimg4).\nДобавлен HiluX DS8 от Shelly (hiluxds8)\nДобавлена Shelly EM Gen4 (shellyemg4)\nДля работы адаптера требуются Node.js >= 22, js-controller >= 6.0.11 и admin >= 7.8.23.\nДобавлен диспетчер устройств, предоставляющий информацию и возможности управления устройствами, а также настройки параметров.\nВАЖНО: Пожалуйста, ознакомьтесь с журналом изменений в файле README.md, где приведена более подробная информация.",
         "pt": "Script BLE atualizado (v1.3) para firmware Shelly > 2.0\nAdicionada indicação de atualização de firmware disponível para dispositivos compatíveis com esse recurso.\nAdicionado Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).\nAdicionado HiluX DS8 por Shelly (hiluxds8)\nAdicionada Shelly EM Gen4 (shellyemg4)\nO adaptador agora requer node.js >= 22, js-controller >= 6.0.11 e admin >= 7.8.23.\nFoi adicionado um gerenciador de dispositivos, que fornece informações e controle sobre os dispositivos, além de recursos de provisionamento.\nIMPORTANTE: Leia o changelog no arquivo README.md para obter mais informações.",
         "nl": "Bijgewerkt BLE-script (v1.3) voor Shelly-firmware > 2.0\nEr is een indicator toegevoegd die aangeeft of een firmware-update beschikbaar is voor apparaten die deze functie ondersteunen.\nShelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4) toegevoegd.\nToegevoegd door Shelly (hiluxds8)\nShelly EM Gen4 (shellyemg4) toegevoegd\nDe adapter vereist momenteel Node.js >= 22, js-controller >= 6.0.11 en admin >= 7.8.23.\nApparaatbeheer is toegevoegd voor informatie over en controle van apparaten en voor het instellen ervan.\nBELANGRIJK: Lees de wijzigingslog in README.md voor meer informatie.",
@@ -83,8 +83,8 @@
       "zh-cn": "Shelly"
     },
     "desc": {
-      "en": "Integrate Shelly devices via CoAP or MQTT",
-      "de": "Shelly-Geräte über CoAP oder MQTT integrieren",
+      "en": "Integrate Shelly devices via CoAP, MQTT, or HTTP polling",
+      "de": "Shelly-Geraete ueber CoAP, MQTT oder HTTP-Polling integrieren",
       "ru": "Интеграция Shelly устройств через CoAP или MQTT",
       "pt": "Integrar dispositivos Shelly via CoAP ou MQTT",
       "nl": "Integrate Shelly apparatuur via CoAP of MQT",
@@ -107,6 +107,7 @@
         "docs/en/ble-devices.md",
         "docs/en/protocol-coap.md",
         "docs/en/protocol-mqtt.md",
+        "docs/en/protocol-http.md",
         "docs/en/restricted-login.md",
         "docs/en/state-changes.md",
         "docs/en/faq.md",
@@ -117,6 +118,7 @@
         "docs/de/ble-devices.md",
         "docs/de/protocol-coap.md",
         "docs/de/protocol-mqtt.md",
+        "docs/de/protocol-http.md",
         "docs/de/restricted-login.md",
         "docs/de/state-changes.md",
         "docs/de/faq.md",
@@ -128,7 +130,9 @@
       "IoT",
       "CoAP",
       "CoIoT",
-      "MQTT"
+      "MQTT",
+      "HTTP",
+      "polling"
     ],
     "tier": 2,
     "licenseInformation": {
@@ -274,16 +278,23 @@
     "mqttusername",
     "mqttpassword",
     "httpusername",
-    "httppassword"
+    "httppassword",
+    "httpDefaultPassword",
+    "httpDevices.*.password"
   ],
   "encryptedNative": [
     "mqttpassword",
-    "httppassword"
+    "httppassword",
+    "httpDefaultPassword",
+    "httpDevices.*.password"
   ],
   "native": {
     "protocol": "mqtt",
     "httpusername": "admin",
     "httppassword": "",
+    "httpAuthEnabled": false,
+    "httpDefaultUsername": "admin",
+    "httpDefaultPassword": "",
     "polltime": 15,
     "autoupdate": false,
     "updateUnchangedObjects": false,
@@ -295,11 +306,24 @@
     "mqttpassword": "mqttuser",
     "qos": 0,
     "coapbind": "0.0.0.0",
+    "httpDevices": [],
     "blacklist": [
       {
         "id": "SHBDUO-1#123456789#2"
       }
-    ]
+    ],
+    "httpDiscoveryEnabled": false,
+    "httpAutoCreate": true,
+    "httpNetworks": [],
+    "httpTimeout": 8000,
+    "httpRetries": 1,
+    "httpMaxParallel": 10,
+    "httpSaveRawJson": false,
+    "httpDebugCommands": false,
+    "httpDebugDiscovery": false,
+    "httpDebugPolling": false,
+    "httpDebugRawResponses": false,
+    "httpAllowAdmin": false
   },
   "objects": [],
   "instanceObjects": [

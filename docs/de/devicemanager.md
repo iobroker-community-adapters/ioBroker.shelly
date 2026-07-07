@@ -14,6 +14,19 @@ Der Adapter ist in den ioBroker Device Manager integriert (erfordert Admin >= 7.
 - **Geräteaktionen** - Geräte umbenennen, die Weboberfläche des Geräts öffnen oder Firmware-Updates auslösen
 - **Gerätegruppierung** - Geräte werden automatisch nach Typ kategorisiert (Relays, Dimmers, Plugs, Lights, Meters, Sensors, Covers, Inputs, Climate, Gateways, BLE)
 
+### HTTP-Polling-Geraete
+
+Wenn der Adapter im HTTP-Polling-Modus laeuft, kann der Device Manager Geraete bedienen und diagnostizieren, ohne dass ein kompletter Adapter-Neustart erforderlich ist.
+
+- **Direkte Bedienung** - Switch/Relay- und Plug-Geraete koennen an, aus oder per Toggle geschaltet werden. Lights und Dimmer zeigen an/aus und Helligkeit. RGB/RGBW-Geraete zeigen farbbezogene States, sofern unterstuetzt. Cover zeigen open, close, stop und Position.
+- **Capability-abhaengige UI** - Bedienelemente werden nur angezeigt, wenn die erkannte HTTP-Capability vorhanden ist. Reine Sensorgeraete zeigen Werte, aber keine Schaltflaechen.
+- **Live-Werte** - Geraetekarten koennen Online/Offline, aktuellen Schaltzustand, Leistung, Energie, Temperatur, RSSI, IP/Hostname, Modell, Firmware und letzten Poll-Zeitpunkt anzeigen.
+- **HTTP-Verbindungstest** - Das Geraetemenue prueft Erreichbarkeit, Authentifizierung, erkannte Generation, Status-Endpunkt, Config-Endpunkt und Antwortzeit. Fehler werden ohne Passwoerter oder Authorization-Header angezeigt.
+- **Neu erkennen und States erzeugen** - Das Geraetemenue kann ein HTTP-Geraet neu erkennen, die Konfiguration neu laden und States neu erzeugen, indem nur der HTTP-Polling-Client dieses Geraets neu gestartet wird.
+- **Diagnose** - Der Detaildialog zeigt Device Info, Capabilities, aktuelle Werte, Polling-Status und maskiertes Raw JSON nur dann, wenn Raw-JSON-States aktiviert sind.
+
+Administrative Aktionen wie Firmware-Updates werden fuer HTTP-Geraete ausgeblendet, solange administrative HTTP-Funktionen in der Adapterkonfiguration nicht explizit aktiviert sind.
+
 ### Hintergrundüberwachung für neue Geräte
 
 Der Adapter kann das Netzwerk regelmäßig mithilfe von mDNS-Discovery nach neuen Shelly-Geräten durchsuchen.

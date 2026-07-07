@@ -4,6 +4,7 @@ export declare const existingStates: {
 export declare const adapterObjects: {
     [id: string]: ioBroker.Object;
 };
+export declare function getStateChangeTriggerKeys(): string[];
 export declare function setOrUpdateObject(id: string, obj: ioBroker.Object, obtainCustomFields: string[] | undefined, value?: ioBroker.StateValue | null, stateChangeCallback?: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void, createNow?: boolean, callback?: () => void): void;
 export declare function deleteObject(id: string): void;
 export declare function processObjectQueue(callback?: () => void): void;
@@ -19,6 +20,7 @@ declare const _default: {
     loadExistingObjects: typeof loadExistingObjects;
     getObject: typeof getObject;
     handleStateChange: typeof handleStateChange;
+    getStateChangeTriggerKeys: typeof getStateChangeTriggerKeys;
     existingStates: {
         [id: string]: ioBroker.Object;
     };

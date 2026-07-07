@@ -1,7 +1,7 @@
 {
   "name": "iobroker.shelly",
   "version": "11.0.0",
-  "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
+  "description": "Integrate your Shelly devices into ioBroker via MQTT, CoAP, or HTTP polling",
   "author": "Thorsten Stueben <thorsten@stueben.de>",
   "contributors": [
     "Apollon77 <iobroker@fischer-ka.de>",
@@ -19,7 +19,9 @@
     "IoT",
     "CoAP",
     "CoIoT",
-    "MQTT"
+    "MQTT",
+    "HTTP",
+    "polling"
   ],
   "repository": {
     "type": "git",
