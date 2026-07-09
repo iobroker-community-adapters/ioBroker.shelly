@@ -248,6 +248,22 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                               },
                           ]
                         : []),
+                    // Deleting is only offered for devices that are currently unreachable (offline).
+                    // Reachable devices would immediately recreate their objects, so they must not be deletable here.
+                    ...(!isOnline
+                        ? [
+                              {
+                                  id: 'delete',
+                                  icon: 'delete' as const,
+                                  description: I18n.getTranslatedObject('Delete this unreachable device'),
+                                  handler: async (
+                                      deviceId: string,
+                                      context: ActionContext,
+                                  ): Promise<{ refresh: DeviceRefresh } | { delete: string }> =>
+                                      await this.handleDeleteDevice(deviceId, context),
+                              },
+                          ]
+                        : []),
                 ],
             };
 
@@ -1250,6 +1266,57 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             return { refresh: 'none' };
         }
         return { refresh: 'device' as DeviceRefresh };
+    }
+
+    /**
+     * Delete an unreachable device and all of its objects/states.
+     * Only offered for offline devices – a reachable device would just recreate its objects.
+     *
+     * @param id full object id of the device (e.g. shelly.0.shellyplus1-xxxxxx)
+     * @param context context sent from the backend, used to confirm the destructive action
+     */
+    async handleDeleteDevice(
+        id: string,
+        context: ActionContext,
+    ): Promise<{ refresh: DeviceRefresh } | { delete: string }> {
+        const shortDeviceId = id.substring(this.adapter.namespace.length + 1);
+        const device = this.objects[id];
+        const deviceName = typeof device?.common?.name === 'string' ? device.common.name : shortDeviceId;
+
+        const confirmed = await context.showConfirmation(
+            I18n.getTranslatedObject(
+                'Do you really want to delete the unreachable device "%s" and all its objects?',
+                deviceName,
+            ),
+        );
+        if (!confirmed) {
+            return { refresh: 'none' };
+        }
+
+        try {
+            // Recursively removes the device object together with all channels and states below it
+            await this.adapter.delObjectAsync(shortDeviceId, { recursive: true });
+        } catch (err) {
+            this.adapter.log.error(`[DeviceManager] Could not delete device ${shortDeviceId}: ${err}`);
+            await context.showMessage(I18n.getTranslatedObject('Could not delete device: %s', String(err)));
+            return { refresh: 'none' };
+        }
+
+        // Drop the device from the local caches so it does not reappear until it comes back online
+        const prefix = `${id}.`;
+        for (const objId of Object.keys(this.objects)) {
+            if (objId === id || objId.startsWith(prefix)) {
+                delete this.objects[objId];
+            }
+        }
+        for (const stateId of Object.keys(this.states)) {
+            if (stateId === id || stateId.startsWith(prefix)) {
+                delete this.states[stateId];
+            }
+        }
+
+        this.adapter.log.info(`[DeviceManager] Deleted unreachable device ${shortDeviceId}`);
+        return { delete: id };
     }
 
     async handleFirmwareUpdate(id: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {

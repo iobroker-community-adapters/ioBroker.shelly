@@ -760,7 +760,7 @@ export class BaseClient implements ShellyClient {
                                             );
                                         }
                                     } catch (err) {
-                                        if (err && err.response && err.response.status == 401) {
+                                        if (err?.response?.status == 401) {
                                             this.adapter.log.error(
                                                 `[http controlFunction] Error in function state.${this.type}.http_cmd of state ${fullStateId} for ${this.getLogInfo()}: Wrong http username or http password! Please enter user credentials for restricted login.`,
                                             );
