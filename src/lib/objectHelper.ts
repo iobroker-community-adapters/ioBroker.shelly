@@ -1,329 +1,319 @@
-let adapter: ioBroker.Adapter | null = null;
+import { I18n } from '@iobroker/adapter-core';
 
-const stateChangeTrigger: { [id: string]: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void } = {};
-const objectQueue: {
-    id: string;
-    value?: ioBroker.StateValue;
-    obj: ioBroker.Object;
-    stateChangeCallback?: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void;
-    obtainCustomFields?: string[];
-}[] = [];
+export default class ObjectHelper {
+    private readonly adapter: ioBroker.Adapter;
+    private readonly stateChangeTrigger: {
+        [id: string]: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void;
+    } = {};
+    private readonly objectQueue: {
+        id: string;
+        value?: ioBroker.StateValue;
+        obj: ioBroker.Object;
+        stateChangeCallback?: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void;
+        obtainCustomFields?: string[];
+    }[] = [];
 
-export const existingStates: { [id: string]: ioBroker.Object } = {};
-export const adapterObjects: { [id: string]: ioBroker.Object } = {};
-export function setOrUpdateObject(
-    id: string,
-    obj: ioBroker.Object,
-    obtainCustomFields: string[] | undefined,
-    value?: ioBroker.StateValue | null,
-    stateChangeCallback?: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void,
-    createNow: boolean = true,
-    callback?: () => void,
-): void {
-    if (!adapter) {
-        throw new Error('Adapter is not set');
-    }
-    (obj as ioBroker.StateObject).type ||= 'state';
-    obj.common ||= {} as ioBroker.ObjectCommon;
-    obj.native ||= {};
-    if (obj.common && obj.common.type === undefined) {
-        if (value !== null && value !== undefined) {
-            obj.common.type = typeof value;
-        } else if (obj.common.def !== undefined) {
-            obj.common.type = typeof obj.common.def;
-        } else if (obj.type === 'state') {
-            obj.common.type = 'mixed';
-        }
-    }
-    if (obj.common && obj.common.read === undefined) {
-        obj.common.read = true; //!(obj.common.type === 'boolean' && !!stateChangeCallback);
-    }
-    if (obj.common && obj.common.write === undefined) {
-        obj.common.write = !!stateChangeCallback || stateChangeTrigger[id];
-    }
-    /*    if (obj.common && obj.common.def === undefined && value !== null && value !== undefined) {
-            obj.common.def = value;
-        }*/
-    if (obj.common && obj.common.name === undefined) {
-        obj.common.name = id.split('.').pop() || '';
+    private readonly existingStates: { [id: string]: ioBroker.Object } = {};
+    private readonly adapterObjects: { [id: string]: ioBroker.Object } = {};
+
+    constructor(adapterInstance: ioBroker.Adapter) {
+        this.adapter = adapterInstance;
     }
 
-    if (!adapterObjects[id] && existingStates[id]) {
-        adapterObjects[id] = existingStates[id];
-        if (adapterObjects[id].from) {
-            delete adapterObjects[id].from;
+    public setOrUpdateObject(
+        id: string,
+        obj: Partial<ioBroker.Object>,
+        obtainCustomFields: string[] | undefined,
+        value?: ioBroker.StateValue | null,
+        stateChangeCallback?: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void,
+        createNow: boolean = true,
+        callback?: () => void,
+    ): void {
+        (obj as ioBroker.StateObject).type ||= 'state';
+        obj.common ||= {} as ioBroker.ObjectCommon;
+        obj.native ||= {};
+        // Device definitions store common.name as a plain English i18n key (see deviceTypes.ts).
+        // Resolve it to a full translation object at runtime - I18n is initialized in onReady before
+        // any object is created. Names that are not dictionary keys fall back to `{ en: <name> }`.
+        if (typeof obj.common.name === 'string') {
+            obj.common.name = I18n.getTranslatedObject(obj.common.name);
         }
-        if (adapterObjects[id].ts) {
-            delete adapterObjects[id].ts;
+        if (obj.common && obj.common.type === undefined) {
+            if (value !== null && value !== undefined) {
+                obj.common.type = typeof value;
+            } else if (obj.common.def !== undefined) {
+                obj.common.type = typeof obj.common.def;
+            } else if (obj.type === 'state') {
+                obj.common.type = 'mixed';
+            }
         }
-        if (adapterObjects[id].acl) {
-            delete adapterObjects[id].acl;
+        if (obj.common && obj.common.read === undefined) {
+            obj.common.read = true; //!(obj.common.type === 'boolean' && !!stateChangeCallback);
         }
-        if (adapterObjects[id]._id) {
-            // @ts-expect-error it is Ok
-            delete adapterObjects[id]._id;
+        if (obj.common && obj.common.write === undefined) {
+            obj.common.write = !!stateChangeCallback || this.stateChangeTrigger[id];
         }
-        if (obj.common.def === undefined && adapterObjects[id].common.def !== undefined) {
-            delete adapterObjects[id].common.def;
+        /*    if (obj.common && obj.common.def === undefined && value !== null && value !== undefined) {
+                obj.common.def = value;
+            }*/
+        if (obj.common && obj.common.name === undefined) {
+            obj.common.name = id.split('.').pop() || '';
         }
-        if (obj.common.unit === undefined && adapterObjects[id].common.unit !== undefined) {
-            delete adapterObjects[id].common.unit;
-        }
-        if (obj.common.min === undefined && adapterObjects[id].common.min !== undefined) {
-            delete adapterObjects[id].common.min;
-        }
-        if (obj.common.max === undefined && adapterObjects[id].common.max !== undefined) {
-            delete adapterObjects[id].common.max;
-        }
-        value = undefined; // when exists, and it is first time do not overwrite value!
-    }
-    if (existingStates[id]) {
-        delete existingStates[id];
-    }
-    if (adapterObjects[id] && isEquivalent(obj, adapterObjects[id])) {
-        //adapter.log.debug('Object unchanged for ' + id + ': ' + JSON.stringify(adapterObjects[id]) + ' - update only: ' + JSON.stringify(value));
-        if (value !== undefined) {
-            void adapter.setState(id, value, true);
-        }
-        if (stateChangeCallback) {
-            stateChangeTrigger[id] = stateChangeCallback;
-        }
-        return;
-    }
-    // adapter.log.debug('Add Object for ' + id + ': ' + JSON.stringify(adapterObjects[id]) + '/' + JSON.stringify(obj));
 
-    objectQueue.push({
-        id,
-        value,
-        obj,
-        stateChangeCallback,
-        obtainCustomFields,
-    });
-    adapterObjects[id] = JSON.parse(JSON.stringify(obj));
-    // adapter.log.debug('Create object for ' + id + ': ' + JSON.stringify(obj) + ' with value: ' + JSON.stringify(value));
+        if (!this.adapterObjects[id] && this.existingStates[id]) {
+            this.adapterObjects[id] = this.existingStates[id];
+            if (this.adapterObjects[id].from) {
+                delete this.adapterObjects[id].from;
+            }
+            if (this.adapterObjects[id].ts) {
+                delete this.adapterObjects[id].ts;
+            }
+            if (this.adapterObjects[id].acl) {
+                delete this.adapterObjects[id].acl;
+            }
+            if (this.adapterObjects[id]._id) {
+                // @ts-expect-error it is Ok
+                delete this.adapterObjects[id]._id;
+            }
+            if (obj.common.def === undefined && this.adapterObjects[id].common.def !== undefined) {
+                delete this.adapterObjects[id].common.def;
+            }
+            if (obj.common.unit === undefined && this.adapterObjects[id].common.unit !== undefined) {
+                delete this.adapterObjects[id].common.unit;
+            }
+            if (obj.common.min === undefined && this.adapterObjects[id].common.min !== undefined) {
+                delete this.adapterObjects[id].common.min;
+            }
+            if (obj.common.max === undefined && this.adapterObjects[id].common.max !== undefined) {
+                delete this.adapterObjects[id].common.max;
+            }
+            value = undefined; // when exists, and it is first time do not overwrite value!
+        }
+        if (this.existingStates[id]) {
+            delete this.existingStates[id];
+        }
+        if (this.adapterObjects[id] && this.isEquivalent(obj, this.adapterObjects[id])) {
+            //adapter.log.debug('Object unchanged for ' + id + ': ' + JSON.stringify(this.adapterObjects[id]) + ' - update only: ' + JSON.stringify(value));
+            if (value !== undefined) {
+                this.adapter
+                    .setState(id, value, true)
+                    .catch((e: unknown) => this.adapter.log.error(`[objectHelper] setState failed: ${String(e)}`));
+            }
+            if (stateChangeCallback) {
+                this.stateChangeTrigger[id] = stateChangeCallback;
+            }
+            return;
+        }
+        // adapter.log.debug('Add Object for ' + id + ': ' + JSON.stringify(this.adapterObjects[id]) + '/' + JSON.stringify(obj));
 
-    if (createNow) {
-        processObjectQueue(callback);
-    }
-}
+        this.objectQueue.push({
+            id,
+            value,
+            obj: obj as ioBroker.Object,
+            stateChangeCallback,
+            obtainCustomFields,
+        });
+        this.adapterObjects[id] = JSON.parse(JSON.stringify(obj));
+        // adapter.log.debug('Create object for ' + id + ': ' + JSON.stringify(obj) + ' with value: ' + JSON.stringify(value));
 
-export function deleteObject(id: string): void {
-    const obj = adapterObjects[id];
-    if (!adapter) {
-        throw new Error('Adapter is not set');
+        if (createNow) {
+            this.processObjectQueue(callback);
+        }
     }
-    if (obj?.type) {
-        if (obj.type !== 'state') {
-            Object.keys(adapterObjects).forEach(objId => {
-                if (objId.startsWith(`${id}.`)) {
-                    adapter!.delObject(objId, (err: Error | null | undefined): void => {
-                        adapter!.log.info(`${adapterObjects[objId].type} ${objId} deleted${err ? ` (${err})` : ''}`);
-                        if (!err) {
-                            delete adapterObjects[objId];
-                            delete stateChangeTrigger[objId];
-                        }
-                    });
+
+    public deleteObject(id: string): void {
+        const obj = this.adapterObjects[id];
+        if (obj?.type) {
+            if (obj.type !== 'state') {
+                Object.keys(this.adapterObjects).forEach(objId => {
+                    if (objId.startsWith(`${id}.`)) {
+                        this.adapter.delObject(objId, (err: Error | null | undefined): void => {
+                            this.adapter.log.info(
+                                `${this.adapterObjects[objId].type} ${objId} deleted${err ? ` (${err})` : ''}`,
+                            );
+                            if (!err) {
+                                delete this.adapterObjects[objId];
+                                delete this.stateChangeTrigger[objId];
+                            }
+                        });
+                    }
+                });
+            }
+            this.adapter.delObject(id, err => {
+                this.adapter.log.info(`${this.adapterObjects[id].type} ${id} deleted (${err})`);
+                if (!err) {
+                    delete this.adapterObjects[id];
+                    delete this.stateChangeTrigger[id];
                 }
             });
         }
-        adapter.delObject(id, err => {
-            adapter!.log.info(`${adapterObjects[id].type} ${id} deleted (${err})`);
-            if (!err) {
-                delete adapterObjects[id];
-                delete stateChangeTrigger[id];
-            }
-        });
-    }
-}
-
-function isEquivalent(a: any, b: any): boolean {
-    //adapter.log.debug('Compare ' + JSON.stringify(a) + ' with ' +  JSON.stringify(b));
-    // Create arrays of property names
-    if (a === null || a === undefined || b === null || b === undefined) {
-        return a === b;
-    }
-    const aProps = Object.getOwnPropertyNames(a);
-    const bProps = Object.getOwnPropertyNames(b);
-
-    // If number of properties is different,
-    // objects are not equivalent
-    if (aProps.length !== bProps.length) {
-        //console.log('num props different: ' + JSON.stringify(aProps) + ' / ' + JSON.stringify(bProps));
-        return false;
     }
 
-    for (let i = 0; i < aProps.length; i++) {
-        const propName = aProps[i];
+    public isEquivalent(a: unknown, b: unknown): boolean {
+        // this.adapter.log.debug('Compare ' + JSON.stringify(a) + ' with ' +  JSON.stringify(b));
+        // Create arrays of property names
+        if (a === null || a === undefined || b === null || b === undefined) {
+            return a === b;
+        }
+        const objA = a as Record<string, unknown>;
+        const objB = b as Record<string, unknown>;
+        const aProps = Object.getOwnPropertyNames(objA);
+        const bProps = Object.getOwnPropertyNames(objB);
 
-        if (typeof a[propName] !== typeof b[propName]) {
-            // console.log('type props ' + propName + ' different');
+        // If number of properties is different,
+        // objects are not equivalent
+        if (aProps.length !== bProps.length) {
+            //console.log('num props different: ' + JSON.stringify(aProps) + ' / ' + JSON.stringify(bProps));
             return false;
         }
-        if (typeof a[propName] === 'object') {
-            if (!isEquivalent(a[propName], b[propName])) {
+
+        for (let i = 0; i < aProps.length; i++) {
+            const propName = aProps[i];
+
+            if (typeof objA[propName] !== typeof objB[propName]) {
+                // console.log('type props ' + propName + ' different');
                 return false;
             }
-        } else {
-            // If values of same property are not equal,
-            // objects are not equivalent
-            if (a[propName] !== b[propName]) {
-                // console.log('props ' + propName + ' different');
-                return false;
-            }
-        }
-    }
-
-    // If we made it this far, objects
-    // are considered equivalent
-    return true;
-}
-
-export function processObjectQueue(callback?: () => void): void {
-    if (!objectQueue.length) {
-        callback?.();
-        return;
-    }
-
-    function handleObject(
-        queueEntry: {
-            id: string;
-            value?: ioBroker.StateValue;
-            obj: ioBroker.Object;
-            stateChangeCallback?: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void;
-            obtainCustomFields?: string[];
-        },
-        callback?: () => void,
-    ): void {
-        if (!queueEntry.obj) {
-            handleValue(queueEntry, () => callback?.());
-        }
-        if (!adapter) {
-            throw new Error('Adapter is not set');
-        }
-        adapter.getObject(queueEntry.id, (err, obj) => {
-            if (!adapter) {
-                throw new Error('Adapter is not set');
-            }
-            if (!err && obj) {
-                if (Array.isArray(queueEntry.obtainCustomFields)) {
-                    queueEntry.obtainCustomFields.forEach(name => {
-                        if (queueEntry.obj.common?.[name]) {
-                            delete queueEntry.obj.common[name];
-                        }
-                    });
+            if (typeof objA[propName] === 'object') {
+                if (!this.isEquivalent(objA[propName], objB[propName])) {
+                    return false;
                 }
-                adapter.extendObject(queueEntry.id, queueEntry.obj, () => handleValue(queueEntry, () => callback?.()));
             } else {
-                adapter.setObject(queueEntry.id, queueEntry.obj, () => handleValue(queueEntry, () => callback?.()));
-            }
-        });
-    }
-
-    function handleValue(
-        queueEntry: {
-            id: string;
-            value?: ioBroker.StateValue;
-            obj: ioBroker.Object;
-            stateChangeCallback?: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void;
-            obtainCustomFields?: string[];
-        },
-        callback: () => void,
-    ): void {
-        if (queueEntry.value === null || queueEntry.value === undefined) {
-            if (queueEntry.stateChangeCallback) {
-                stateChangeTrigger[queueEntry.id] = queueEntry.stateChangeCallback;
-            }
-            return callback?.();
-        }
-        void adapter!.setState(queueEntry.id, queueEntry.value, true, () => {
-            if (queueEntry.stateChangeCallback) {
-                stateChangeTrigger[queueEntry.id] = queueEntry.stateChangeCallback;
-            }
-            return callback?.();
-        });
-    }
-
-    const queueEntry = objectQueue.shift();
-    if (queueEntry) {
-        handleObject(queueEntry, () => processObjectQueue(callback));
-    } else {
-        processObjectQueue(callback);
-    }
-}
-
-export function getObject(id: string): ioBroker.Object | undefined {
-    return adapterObjects[id];
-}
-
-export function loadExistingObjects(callback?: () => void): void {
-    if (!adapter) {
-        throw new Error('Adapter is not set');
-    }
-    void adapter.getAdapterObjects(res => {
-        if (!adapter) {
-            throw new Error('Adapter is not set');
-        }
-        const objectKeys = Object.keys(res);
-        for (let i = 0; i < objectKeys.length; i++) {
-            if (objectKeys[i].indexOf(`${adapter.namespace}.info`) === 0) {
-                continue;
-            }
-            existingStates[objectKeys[i].substr(adapter.namespace.length + 1)] = res[objectKeys[i]];
-        }
-        // adapter.log.debug('Existing States: ' + JSON.stringify(Object.keys(existingStates), null, 4));
-
-        // devId + '.Bluetooth' = device , ChannelsOd = MACs
-        // devId + '.Notifications' = channel, statesOf ??
-        // devId + '.Routines' = channel, statesOf
-
-        callback?.();
-    });
-}
-
-export function handleStateChange(id: string, state: ioBroker.State | null | undefined): void {
-    if (!state || state.ack) {
-        return;
-    }
-    if (!adapter) {
-        throw new Error('Adapter is not set');
-    }
-
-    id = id.substring(adapter.namespace.length + 1);
-
-    if (typeof stateChangeTrigger[id] === 'function') {
-        const obj = adapterObjects[id];
-        if (obj?.common?.type && obj.common.type !== 'mixed') {
-            if (obj.common.type === 'boolean') {
-                if (state.val === 'true') {
-                    state.val = true;
-                } else if (state.val === 'false') {
-                    state.val = false;
+                // If values of same property are not equal,
+                // objects are not equivalent
+                if (objA[propName] !== objB[propName]) {
+                    // console.log('props ' + propName + ' different');
+                    return false;
                 }
-                state.val = !!state.val;
-            }
-            if (typeof state.val !== obj.common.type) {
-                adapter.log.error(
-                    `Datatype for ${id} differs from expected, ignore state change! Please write correct datatype (${obj.common.type})`,
-                );
-                return;
             }
         }
-        stateChangeTrigger[id](state.val, state);
+
+        // If we made it this far, objects
+        // are considered equivalent
+        return true;
+    }
+
+    public processObjectQueue(callback?: () => void): void {
+        if (!this.objectQueue.length) {
+            callback?.();
+            return;
+        }
+
+        const handleValue = (
+            queueEntry: {
+                id: string;
+                value?: ioBroker.StateValue;
+                obj: ioBroker.Object;
+                stateChangeCallback?: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void;
+                obtainCustomFields?: string[];
+            },
+            callback: () => void,
+        ): void => {
+            if (queueEntry.value === null || queueEntry.value === undefined) {
+                if (queueEntry.stateChangeCallback) {
+                    this.stateChangeTrigger[queueEntry.id] = queueEntry.stateChangeCallback;
+                }
+                return callback?.();
+            }
+            void this.adapter.setState(queueEntry.id, queueEntry.value, true, () => {
+                if (queueEntry.stateChangeCallback) {
+                    this.stateChangeTrigger[queueEntry.id] = queueEntry.stateChangeCallback;
+                }
+                return callback?.();
+            });
+        };
+
+        const handleObject = (
+            queueEntry: {
+                id: string;
+                value?: ioBroker.StateValue;
+                obj: ioBroker.Object;
+                stateChangeCallback?: (stateVal: ioBroker.StateValue, state: ioBroker.State) => void;
+                obtainCustomFields?: string[];
+            },
+            callback?: () => void,
+        ): void => {
+            if (!queueEntry.obj) {
+                handleValue(queueEntry, () => callback?.());
+            }
+
+            this.adapter.getObject(queueEntry.id, (err, obj) => {
+                if (!err && obj) {
+                    if (Array.isArray(queueEntry.obtainCustomFields)) {
+                        queueEntry.obtainCustomFields.forEach(name => {
+                            if (queueEntry.obj.common?.[name]) {
+                                delete queueEntry.obj.common[name];
+                            }
+                        });
+                    }
+                    this.adapter.extendObject(queueEntry.id, queueEntry.obj, () =>
+                        handleValue(queueEntry, () => callback?.()),
+                    );
+                } else {
+                    this.adapter.setObject(queueEntry.id, queueEntry.obj, () =>
+                        handleValue(queueEntry, () => callback?.()),
+                    );
+                }
+            });
+        };
+
+        const queueEntry = this.objectQueue.shift();
+        if (queueEntry) {
+            handleObject(queueEntry, () => this.processObjectQueue(callback));
+        } else {
+            this.processObjectQueue(callback);
+        }
+    }
+
+    public getObject(id: string): ioBroker.Object | undefined {
+        return this.adapterObjects[id];
+    }
+
+    public loadExistingObjects(callback?: () => void): void {
+        void this.adapter.getAdapterObjects(res => {
+            const objectKeys = Object.keys(res);
+            for (let i = 0; i < objectKeys.length; i++) {
+                if (objectKeys[i].indexOf(`${this.adapter.namespace}.info`) === 0) {
+                    continue;
+                }
+                this.existingStates[objectKeys[i].substr(this.adapter.namespace.length + 1)] = res[objectKeys[i]];
+            }
+            // this.adapter.log.debug('Existing States: ' + JSON.stringify(Object.keys(this.existingStates), null, 4));
+
+            // devId + '.Bluetooth' = device , ChannelsOd = MACs
+            // devId + '.Notifications' = channel, statesOf ??
+            // devId + '.Routines' = channel, statesOf
+
+            callback?.();
+        });
+    }
+
+    public handleStateChange(id: string, state: ioBroker.State | null | undefined): void {
+        if (!state || state.ack) {
+            return;
+        }
+
+        id = id.substring(this.adapter.namespace.length + 1);
+
+        if (typeof this.stateChangeTrigger[id] === 'function') {
+            const obj = this.adapterObjects[id];
+            if (obj?.common?.type && obj.common.type !== 'mixed') {
+                if (obj.common.type === 'boolean') {
+                    if (state.val === 'true') {
+                        state.val = true;
+                    } else if (state.val === 'false') {
+                        state.val = false;
+                    }
+                    state.val = !!state.val;
+                }
+                if (typeof state.val !== obj.common.type) {
+                    this.adapter.log.error(
+                        `Datatype for ${id} differs from expected, ignore state change! Please write correct datatype (${obj.common.type})`,
+                    );
+                    return;
+                }
+            }
+            this.stateChangeTrigger[id](state.val, state);
+        }
     }
 }
-
-export function init(adapterInstance: ioBroker.Adapter): void {
-    adapter = adapterInstance;
-}
-
-export default {
-    init,
-    setOrUpdateObject,
-    deleteObject,
-    processObjectQueue,
-    loadExistingObjects,
-    getObject,
-    handleStateChange,
-    existingStates,
-    adapterObjects,
-};

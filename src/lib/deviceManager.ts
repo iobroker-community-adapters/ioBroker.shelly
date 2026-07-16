@@ -1,4 +1,4 @@
-import { I18n, type AdapterInstance } from '@iobroker/adapter-core';
+import { I18n } from '@iobroker/adapter-core';
 import {
     DeviceManagement,
     type ActionContext,
@@ -18,6 +18,9 @@ import * as crypto from 'node:crypto';
 import * as dgram from 'node:dgram';
 import * as http from 'node:http';
 import * as os from 'node:os';
+import * as datapoints from './datapoints';
+import type { ShellyAdapter } from '../main';
+import type { ShellyAdapterConfig } from './types';
 
 class HttpAuthError extends Error {
     constructor() {
@@ -25,9 +28,6 @@ class HttpAuthError extends Error {
         this.name = 'HttpAuthError';
     }
 }
-
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const datapoints = require('../../lib/datapoints');
 
 /** Group metadata: display name key (for i18n) and representative icon */
 const groupMeta: Record<string, { nameKey: string; icon: string }> = {
@@ -49,18 +49,17 @@ const groupMeta: Record<string, { nameKey: string; icon: string }> = {
  * DeviceManager Class
  */
 export default class ShellyDeviceManagement extends DeviceManagement {
-    private readonly ready: Promise<void>;
+    private config: ShellyAdapterConfig;
     private readonly states: { [id: string]: ioBroker.State } = {};
     private readonly objects: { [id: string]: ioBroker.DeviceObject | ioBroker.StateObject | ioBroker.ChannelObject } =
         {};
 
-    constructor(adapter: AdapterInstance) {
+    constructor(adapter: ShellyAdapter) {
         super(adapter);
 
-        // Initialize i18n
-        this.ready = I18n.init(__dirname, adapter)
-            .catch(error => this.adapter.log.error(`Cannot initialize i18n: ${error}`))
-            .then(() => this.init());
+        this.config = adapter.config;
+
+        this.init().catch(e => this.adapter.log.error(`Cannot init manager: ${e}`));
     }
 
     private async init(): Promise<void> {
@@ -97,7 +96,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
     }
 
     protected getInstanceInfo(): InstanceDetails {
-        const protocol = this.adapter.config.protocol || 'coap';
+        const protocol = this.config.protocol || 'coap';
         const actions =
             protocol === 'coap'
                 ? []
@@ -152,9 +151,6 @@ export default class ShellyDeviceManagement extends DeviceManagement {
      * @param context
      */
     async loadDevices(context: DeviceLoadContext<string>): Promise<void> {
-        // Wait that i18n is initialized
-        await this.ready;
-
         for (const deviceId in this.objects) {
             const device = this.objects[deviceId];
             if (device.type !== 'device') {
@@ -205,13 +201,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 // Firmware update indicator. BLE devices are updated through their gateway, not here.
                 // `available` is read live from the firmware state, so the indicator stays in sync
                 // without a full device-list refresh and the device can be filtered by "update available".
-                update:
-                    isBle || firmwareUpdate === undefined
-                        ? undefined
-                        : {
-                              available: { stateId: `${ns}.${shortDeviceId}.firmware` },
-                              version: firmwareVersion || undefined,
-                          },
+                update: isBle
+                    ? undefined
+                    : {
+                          available: { stateId: `${ns}.${shortDeviceId}.firmware` },
+                          version: firmwareVersion || undefined,
+                      },
                 hasDetails: true,
                 customInfo: this.buildCustomInfo(device._id, shortDeviceId, isBle),
                 controls: await this.buildControls(shortDeviceId, isBle),
@@ -250,6 +245,22 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                                       context: ActionContext,
                                   ): Promise<{ refresh: DeviceRefresh }> =>
                                       await this.handleFirmwareUpdate(deviceId, context),
+                              },
+                          ]
+                        : []),
+                    // Deleting is only offered for devices that are currently unreachable (offline).
+                    // Reachable devices would immediately recreate their objects, so they must not be deletable here.
+                    ...(!isOnline
+                        ? [
+                              {
+                                  id: 'delete',
+                                  icon: 'delete' as const,
+                                  description: I18n.getTranslatedObject('Delete this unreachable device'),
+                                  handler: async (
+                                      deviceId: string,
+                                      context: ActionContext,
+                                  ): Promise<{ refresh: DeviceRefresh } | { delete: string }> =>
+                                      await this.handleDeleteDevice(deviceId, context),
                               },
                           ]
                         : []),
@@ -1257,6 +1268,57 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         return { refresh: 'device' as DeviceRefresh };
     }
 
+    /**
+     * Delete an unreachable device and all of its objects/states.
+     * Only offered for offline devices – a reachable device would just recreate its objects.
+     *
+     * @param id full object id of the device (e.g. shelly.0.shellyplus1-xxxxxx)
+     * @param context context sent from the backend, used to confirm the destructive action
+     */
+    async handleDeleteDevice(
+        id: string,
+        context: ActionContext,
+    ): Promise<{ refresh: DeviceRefresh } | { delete: string }> {
+        const shortDeviceId = id.substring(this.adapter.namespace.length + 1);
+        const device = this.objects[id];
+        const deviceName = typeof device?.common?.name === 'string' ? device.common.name : shortDeviceId;
+
+        const confirmed = await context.showConfirmation(
+            I18n.getTranslatedObject(
+                'Do you really want to delete the unreachable device "%s" and all its objects?',
+                deviceName,
+            ),
+        );
+        if (!confirmed) {
+            return { refresh: 'none' };
+        }
+
+        try {
+            // Recursively removes the device object together with all channels and states below it
+            await this.adapter.delObjectAsync(shortDeviceId, { recursive: true });
+        } catch (err) {
+            this.adapter.log.error(`[DeviceManager] Could not delete device ${shortDeviceId}: ${err}`);
+            await context.showMessage(I18n.getTranslatedObject('Could not delete device: %s', String(err)));
+            return { refresh: 'none' };
+        }
+
+        // Drop the device from the local caches so it does not reappear until it comes back online
+        const prefix = `${id}.`;
+        for (const objId of Object.keys(this.objects)) {
+            if (objId === id || objId.startsWith(prefix)) {
+                delete this.objects[objId];
+            }
+        }
+        for (const stateId of Object.keys(this.states)) {
+            if (stateId === id || stateId.startsWith(prefix)) {
+                delete this.states[stateId];
+            }
+        }
+
+        this.adapter.log.info(`[DeviceManager] Deleted unreachable device ${shortDeviceId}`);
+        return { delete: id };
+    }
+
     async handleFirmwareUpdate(id: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {
         const shortDeviceId = id.substring(this.adapter.namespace.length + 1);
         const ns = this.adapter.namespace;
@@ -1537,7 +1599,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 if (newDevices.length > 0) {
                     // Fetch real device names from devices
                     const deviceNames = await Promise.all(
-                        newDevices.map(dev => this.fetchDeviceName(dev.ip, this.adapter.config.httppassword || '')),
+                        newDevices.map(dev => this.fetchDeviceName(dev.ip, this.config.httppassword || '')),
                     );
 
                     items._newHeader = {
@@ -1666,7 +1728,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const lowerClass = deviceClass.toLowerCase();
 
         // Case-insensitive lookup in the known device generation map
-        const deviceGenMap = datapoints.deviceGen as Record<string, number>;
+        const deviceGenMap = datapoints.deviceGen;
         for (const [key, gen] of Object.entries(deviceGenMap)) {
             if (key.toLowerCase() === lowerClass) {
                 return gen < 2;
@@ -1701,10 +1763,10 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         devices: { name: string; ip: string; customName: string }[],
         context: ActionContext,
     ): Promise<void> {
-        const mqttPort = this.adapter.config.port || 1882;
-        const mqttUser = this.adapter.config.mqttusername || '';
-        const mqttPass = this.adapter.config.mqttpassword || '';
-        const httpPass = this.adapter.config.httppassword || '';
+        const mqttPort = this.config.port || 1882;
+        const mqttUser = this.config.mqttusername || '';
+        const mqttPass = this.config.mqttpassword || '';
+        const httpPass = this.config.httppassword || '';
         const localIp = this.getLocalIp(devices[0].ip);
         const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -2224,8 +2286,6 @@ export default class ShellyDeviceManagement extends DeviceManagement {
      * Scan for new Shelly devices and return names/IPs of unknown ones.
      */
     public async scanForNewDevices(): Promise<{ name: string; ip: string }[]> {
-        await this.ready;
-
         const found = await this.mdnsScan(5000);
 
         const knownIps = new Set<string>();

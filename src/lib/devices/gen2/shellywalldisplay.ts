@@ -1,0 +1,69 @@
+import type { DeviceDefinition } from '../../deviceTypes';
+import * as shellyHelperGen2 from '../gen2-helper';
+
+/**
+ * Shelly Wall Display / shellywalldisplay
+ */
+const shellywalldisplay: DeviceDefinition = {
+    'UI.screensaverEnabled': {
+        mqtt: {
+            http_publish: '/rpc/UI.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value).screen_saver.enable : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'UI.SetConfig',
+                    params: { config: { screen_saver: { enable: value } } },
+                });
+            },
+        },
+        common: {
+            name: 'Screensaver',
+            type: 'boolean',
+            role: 'switch.enable',
+            read: true,
+            write: true,
+        },
+    },
+    'UI.screensaverLock': {
+        mqtt: {
+            http_publish: '/rpc/UI.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value).lock_type : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'UI.SetConfig',
+                    params: { config: { lock_type: value } },
+                });
+            },
+        },
+        common: {
+            name: 'Lock screen',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+            states: {
+                none: 'none',
+                home: 'home',
+                sett: 'settings',
+                full: 'full',
+            },
+        },
+    },
+    // https://community.shelly.cloud/topic/1793-walldisplay-list-for-useful-rpc-commands/
+    // http://<IPofWalldisplay>/rpc/Ui.Tap?x=300&y=300 [0..719]
+    //     payload: '{"jsonrpc": "2.0",  "method": "Ui.Tap",  "params": {},  "id": 1}'
+};
+
+shellyHelperGen2.addSwitch(shellywalldisplay, 0, false);
+shellyHelperGen2.addInput(shellywalldisplay, 0);
+shellyHelperGen2.addHumiditySensor(shellywalldisplay, 0);
+shellyHelperGen2.addTemperatureSensor(shellywalldisplay, 0);
+shellyHelperGen2.addIlluminanceSensor(shellywalldisplay, 0);
+
+export { shellywalldisplay };

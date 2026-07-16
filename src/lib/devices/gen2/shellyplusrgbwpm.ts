@@ -1,0 +1,81 @@
+import type { DeviceDefinition } from '../../deviceTypes';
+import * as shellyHelperGen2 from '../gen2-helper';
+
+/**
+ * Shelly Plus RGBW PM / shellyplusrgbwpm
+ *
+ * https://shelly-api-docs.shelly.cloud/gen2/Devices/Gen2/ShellyPlusRGBWPM
+ */
+const shellyplusrgbwpm: DeviceDefinition = {
+    'Sys.deviceMode': {
+        mqtt: {
+            init_funct: self => self.getDeviceMode(),
+            http_publish: '/rpc/Sys.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value).device.profile : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'Shelly.SetProfile',
+                    params: { name: value },
+                });
+            },
+        },
+        common: {
+            name: 'Mode / Profile',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+            states: {
+                light: '4xLight',
+                rgb: 'RGB',
+                rgbw: 'RGBW',
+            },
+        },
+    },
+    'PLUSRGBWPM.HighFrequency': {
+        mqtt: {
+            http_publish: '/rpc/PlusRGBWPM.GetStatus',
+            http_publish_funct: value => (value ? JSON.parse(value).hf_mode : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'PlusRGBWPM.SetConfig',
+                    params: { hf_mode: value },
+                });
+            },
+        },
+        common: {
+            name: 'High Frequency',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: true,
+            states: {
+                true: 'HF on',
+                false: 'HF off',
+            },
+        },
+    },
+};
+
+shellyHelperGen2.addLight(shellyplusrgbwpm, 0, true);
+shellyHelperGen2.addLight(shellyplusrgbwpm, 1, true);
+shellyHelperGen2.addLight(shellyplusrgbwpm, 2, true);
+shellyHelperGen2.addLight(shellyplusrgbwpm, 3, true);
+
+shellyHelperGen2.addRGB(shellyplusrgbwpm, 0, true);
+shellyHelperGen2.addRGBW(shellyplusrgbwpm, 0, true);
+
+shellyHelperGen2.addInput(shellyplusrgbwpm, 0);
+shellyHelperGen2.addInput(shellyplusrgbwpm, 1);
+shellyHelperGen2.addInput(shellyplusrgbwpm, 2);
+shellyHelperGen2.addInput(shellyplusrgbwpm, 3);
+
+shellyHelperGen2.addPlusAddon(shellyplusrgbwpm);
+
+export { shellyplusrgbwpm };
