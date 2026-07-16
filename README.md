@@ -223,11 +223,11 @@ Notes:
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (@klein0r) Added hold (128) and nothing (0) to BLE states for buttons
+- (@GermanBluefox) Codebase has been migrated to typescript.
+
+### 11.0.0 (2026-07-03)
 - (@klein0r) Updated ble script (v1.3) for Shelly firmware > 2.0
 - (@GermanBluefox) Added firmware update available indicator for devices supporting this feature.
-
-### 11.0.0-alpha.15 (2026-05-10)
 - (@copilot) Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).
 - (@copilot) Added HiluX DS8 by Shelly (hiluxds8)
 - (@copilot) Added Shelly EM Gen4 (shellyemg4)
