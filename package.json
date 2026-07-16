@@ -1,88 +1,88 @@
 {
-    "name": "iobroker.shelly",
-    "version": "11.0.0",
-    "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
-    "author": "Thorsten Stueben <thorsten@stueben.de>",
-    "contributors": [
-        "Apollon77 <iobroker@fischer-ka.de>",
-        "Matthias Kleine <info@haus-automatisierung.com>",
-        "Christian Scholz <chs@ip4.de>",
-        "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
-    ],
-    "homepage": "https://github.com/iobroker-community-adapters/ioBroker.shelly",
-    "license": "MIT",
-    "keywords": [
-        "ioBroker",
-        "Smart Home",
-        "home automation",
-        "Shelly",
-        "IoT",
-        "CoAP",
-        "CoIoT",
-        "MQTT"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/iobroker-community-adapters/ioBroker.shelly.git"
-    },
-    "engines": {
-        "node": ">=22"
-    },
-    "dependencies": {
-        "@iobroker/adapter-core": "^3.4.1",
-        "@iobroker/dm-utils": "^3.1.1",
-        "axios": "^1.18.1",
-        "mqtt-connection": "^4.1.0",
-        "shelly-iot": "^1.1.2",
-        "tcp-ping": "^0.1.1",
-        "xml2js": "^0.6.2",
-        "xmlbuilder": "^15.1.1"
-    },
-    "devDependencies": {
-        "@alcalzone/release-script": "^5.2.1",
-        "@alcalzone/release-script-plugin-iobroker": "^5.2.0",
-        "@alcalzone/release-script-plugin-license": "^5.2.0",
-        "@alcalzone/release-script-plugin-manual-review": "^5.2.0",
-        "@iobroker/adapter-dev": "^1.5.0",
-        "@iobroker/build-tools": "^3.0.1",
-        "@iobroker/eslint-config": "^2.3.4",
-        "@iobroker/testing": "^5.2.2",
-        "@iobroker/types": "^7.2.2",
-        "@tsconfig/node22": "^22.0.5",
-        "@types/bl": "^5.1.4",
-        "@types/node": "^22.20.1",
-        "@types/tcp-ping": "^0.1.6",
-        "source-map-support": "^0.5.21",
-        "typescript": "~6.0.3"
-    },
-    "main": "build/main.js",
-    "files": [
-        "admin{,/!(src)/**}/!(tsconfig|tsconfig.*).json",
-        "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
-        "build/**/*.js",
-        "build/**/*.js.map",
-        "build/**/*.json",
-        "io-package.json",
-        "LICENSE"
-    ],
-    "scripts": {
-        "test": "npm run test:js && npm run test:package",
-        "test:js": "mocha --config test/mocharc.custom.json \"test/**/*.test.js\"",
-        "test:package": "mocha test/package --exit",
-        "test:integration": "mocha test/integration --exit",
-        "build": "node tasks.mts && npm run build:tsc",
-        "build:tsc": "tsc -p tsconfig.build.json",
-        "check": "tsc --noEmit",
-        "lint": "eslint -c eslint.config.mjs .",
-        "translate": "translate-adapter",
-        "release": "release-script",
-        "update-svg": "npm run build && node build/lib/jsonConfigSvg",
-        "release-patch": "release-script patch --yes",
-        "release-minor": "release-script minor --yes",
-        "release-major": "release-script major --yes"
-    },
-    "bugs": {
-        "url": "https://github.com/iobroker-community-adapters/ioBroker.shelly/issues"
-    },
-    "readmeFilename": "README.md"
+  "name": "iobroker.shelly",
+  "version": "12.0.0-alpha.0",
+  "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
+  "author": "Thorsten Stueben <thorsten@stueben.de>",
+  "contributors": [
+    "Apollon77 <iobroker@fischer-ka.de>",
+    "Matthias Kleine <info@haus-automatisierung.com>",
+    "Christian Scholz <chs@ip4.de>",
+    "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
+  ],
+  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.shelly",
+  "license": "MIT",
+  "keywords": [
+    "ioBroker",
+    "Smart Home",
+    "home automation",
+    "Shelly",
+    "IoT",
+    "CoAP",
+    "CoIoT",
+    "MQTT"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iobroker-community-adapters/ioBroker.shelly.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@iobroker/adapter-core": "^3.4.1",
+    "@iobroker/dm-utils": "^3.1.1",
+    "axios": "^1.18.1",
+    "mqtt-connection": "^4.1.0",
+    "shelly-iot": "^1.1.2",
+    "tcp-ping": "^0.1.1",
+    "xml2js": "^0.6.2",
+    "xmlbuilder": "^15.1.1"
+  },
+  "devDependencies": {
+    "@alcalzone/release-script": "^5.2.1",
+    "@alcalzone/release-script-plugin-iobroker": "^5.2.0",
+    "@alcalzone/release-script-plugin-license": "^5.2.0",
+    "@alcalzone/release-script-plugin-manual-review": "^5.2.0",
+    "@iobroker/adapter-dev": "^1.5.0",
+    "@iobroker/build-tools": "^3.0.1",
+    "@iobroker/eslint-config": "^2.3.4",
+    "@iobroker/testing": "^5.2.2",
+    "@iobroker/types": "^7.2.2",
+    "@tsconfig/node22": "^22.0.5",
+    "@types/bl": "^5.1.4",
+    "@types/node": "^22.20.1",
+    "@types/tcp-ping": "^0.1.6",
+    "source-map-support": "^0.5.21",
+    "typescript": "~6.0.3"
+  },
+  "main": "build/main.js",
+  "files": [
+    "admin{,/!(src)/**}/!(tsconfig|tsconfig.*).json",
+    "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
+    "build/**/*.js",
+    "build/**/*.js.map",
+    "build/**/*.json",
+    "io-package.json",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "npm run test:js && npm run test:package",
+    "test:js": "mocha --config test/mocharc.custom.json \"test/**/*.test.js\"",
+    "test:package": "mocha test/package --exit",
+    "test:integration": "mocha test/integration --exit",
+    "build": "node tasks.mts && npm run build:tsc",
+    "build:tsc": "tsc -p tsconfig.build.json",
+    "check": "tsc --noEmit",
+    "lint": "eslint -c eslint.config.mjs .",
+    "translate": "translate-adapter",
+    "release": "release-script",
+    "update-svg": "npm run build && node build/lib/jsonConfigSvg",
+    "release-patch": "release-script patch --yes",
+    "release-minor": "release-script minor --yes",
+    "release-major": "release-script major --yes"
+  },
+  "bugs": {
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.shelly/issues"
+  },
+  "readmeFilename": "README.md"
 }

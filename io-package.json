@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "11.0.0",
+    "version": "12.0.0-alpha.0",
     "news": {
+      "12.0.0-alpha.0": {
+        "en": "Codebase has been migrated to typescript.",
+        "de": "Die Codebasis wurde auf TypeScript migriert.",
+        "ru": "Код переведён на TypeScript.",
+        "pt": "A base de código foi migrada para TypeScript.",
+        "nl": "De codebase is gemigreerd naar TypeScript.",
+        "fr": "Le code source a été migré vers TypeScript.",
+        "it": "Il codice sorgente è stato migrato a TypeScript.",
+        "es": "El código fuente se ha migrado a TypeScript.",
+        "pl": "Baza kodu została przeniesiona do języka TypeScript.",
+        "uk": "Кодову базу перенесено на TypeScript.",
+        "zh-cn": "代码库已迁移至 TypeScript。"
+      },
       "11.0.0": {
         "en": "Updated ble script (v1.3) for Shelly firmware > 2.0\nAdded firmware update available indicator for devices supporting this feature.\nAdded Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).\nAdded HiluX DS8 by Shelly (hiluxds8)\nAdded Shelly EM Gen4 (shellyemg4)\nAdapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.23 now.\nDevice manager has been added providing info and control of devices and provisioning.\nIMPORTANT: Please read the changelog at README.md listing more information.",
         "de": "Aktualisiertes BLE-Skript (v1.3) für Shelly-Firmware > 2.0\nAnzeige für verfügbare Firmware-Updates für Geräte hinzugefügt, die diese Funktion unterstützen.\nShelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4) hinzugefügt.\nHiluX DS8 hinzugefügt von Shelly (hiluxds8)\nShelly EM Gen4 (shellyemg4) hinzugefügt\nDer Adapter benötigt jetzt node.js >= 22, js-controller >= 6.0.11 und admin >= 7.8.23.\nEin Gerätemanager wurde hinzugefügt, der Informationen und die Steuerung von Geräten sowie deren Bereitstellung ermöglicht.\nWICHTIG: Bitte lesen Sie das Änderungsprotokoll in der Datei README.md, in dem weitere Informationen aufgeführt sind.",

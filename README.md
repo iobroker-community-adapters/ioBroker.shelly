@@ -222,7 +222,7 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 12.0.0-alpha.0 (2026-07-16)
 - (@GermanBluefox) Codebase has been migrated to typescript.
 
 ### 11.0.0 (2026-07-03)
@@ -257,9 +257,6 @@ Notes:
 * (@mcm1957) FrankEver Smart Watervalve (watervalve) has been added. [#1341]
 * (@mcm1957) LinkedGo ST1820 (st1820) has been added. [#1257]
 * (@mcm1957) Dependencies have been updated
-
-### 10.5.2 (2025-12-28)
-* (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 
