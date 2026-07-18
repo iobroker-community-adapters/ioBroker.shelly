@@ -44,6 +44,23 @@ describe('Test Device Definitions', function () {
         });
     });
 
+    it('Gen 2+ input states use specific roles', function () {
+        runTestOnEachDevice((deviceClass, device) => {
+            for (const [stateId, state] of Object.entries(device)) {
+                const expectedRoles = {
+                    'Input enable': 'switch.enable',
+                    'Input Inverted': 'switch',
+                    'Input Status': 'indicator',
+                };
+                const expectedRole = expectedRoles[state.common.name];
+
+                if (expectedRole) {
+                    expect(state.common.role, `${deviceClass} (${stateId})`).to.equal(expectedRole);
+                }
+            }
+        });
+    });
+
     it('Protocol properties', function () {
         this.timeout(5000);
 

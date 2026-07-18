@@ -114,7 +114,7 @@ function addAnalogInput(deviceObj: DeviceDefinition, inputId: number): void {
         common: {
             name: 'Input enable',
             type: 'boolean',
-            role: 'state',
+            role: 'switch.enable',
             read: true,
             write: true,
         },
@@ -137,7 +137,7 @@ function addAnalogInput(deviceObj: DeviceDefinition, inputId: number): void {
         common: {
             name: 'Input Inverted',
             type: 'boolean',
-            role: 'state',
+            role: 'switch',
             read: true,
             write: true,
         },
@@ -1172,7 +1172,7 @@ function addCounterInput(deviceObj: DeviceDefinition, inputId: number): void {
         common: {
             name: 'Input enable',
             type: 'boolean',
-            role: 'state',
+            role: 'switch.enable',
             read: true,
             write: true,
         },
@@ -4148,7 +4148,7 @@ function addInput(deviceObj: DeviceDefinition, inputId: number): void {
         common: {
             name: 'Input enable',
             type: 'boolean',
-            role: 'state',
+            role: 'switch.enable',
             read: true,
             write: true,
         },
@@ -4171,7 +4171,7 @@ function addInput(deviceObj: DeviceDefinition, inputId: number): void {
         common: {
             name: 'Input Inverted',
             type: 'boolean',
-            role: 'state',
+            role: 'switch',
             read: true,
             write: true,
         },
@@ -4185,7 +4185,7 @@ function addInput(deviceObj: DeviceDefinition, inputId: number): void {
         common: {
             name: 'Input Status',
             type: 'boolean',
-            role: 'state',
+            role: 'indicator',
             read: true,
             write: false,
         },
