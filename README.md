@@ -222,6 +222,9 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (@floze-the-genius) Corrected roles for Gen 2+ input states. [#1498]
+
 ### 12.0.0-alpha.0 (2026-07-16)
 - (@GermanBluefox) Codebase has been migrated to typescript.
 
