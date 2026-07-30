@@ -181,7 +181,7 @@ Notes:
 
 ### Bluetooth Low Energy (BLU)
 
-**Experimental** - see [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required). Please note that currently no transmission of any data from the adapter to the BLU devices is possible.
+See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required). Please note that currently no transmission of any data from the adapter to the BLU devices is possible.
 
 | Shelly Device                                 | Version     |
 |-----------------------------------------------| ----------- |
@@ -222,6 +222,9 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (@klein0r) Updated ble script (v1.4) for Shelly firmware > 2.0
+
 ### 12.0.0-alpha.0 (2026-07-16)
 - (@GermanBluefox) Codebase has been migrated to typescript.
 

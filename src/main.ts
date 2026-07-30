@@ -5,12 +5,12 @@ import tcpPing from 'tcp-ping';
 import { Adapter, type AdapterOptions, I18n } from '@iobroker/adapter-core';
 
 import { name as packageName } from '../package.json';
-import { MQTTServer } from './lib/protocol/mqtt';
-import { CoAPServer } from './lib/protocol/coap';
 import { BleDecoder } from './lib/ble-decoder';
 import DeviceManagement from './lib/deviceManager';
-import type { ShellyAdapterConfig } from './lib/types';
 import ObjectHelper from './lib/objectHelper';
+import { CoAPServer } from './lib/protocol/coap';
+import { MQTTServer } from './lib/protocol/mqtt';
+import type { ShellyAdapterConfig } from './lib/types';
 
 const adapterName = packageName.split('.').pop() ?? 'shelly';
 
@@ -506,7 +506,7 @@ export class ShellyAdapter extends Adapter {
 
     public async processBleMessage(val: unknown): Promise<void> {
         const valTyped = val as {
-            scriptVersion: '1.2' | '1.3';
+            scriptVersion: '1.2' | '1.3' | '1.4.0';
             src: string;
             srcBle: {
                 mac: string;
@@ -519,8 +519,8 @@ export class ShellyAdapter extends Adapter {
                 `[processBleMessage] Received payload ${JSON.stringify(valTyped.payload)} from ${valTyped.src}`,
             );
 
-            const expectedScriptVersion = '1.3';
-            if (valTyped.scriptVersion !== expectedScriptVersion) {
+            const expectedScriptVersion = '1.4';
+            if (!String(valTyped.scriptVersion).startsWith(expectedScriptVersion)) {
                 this.log.warn(
                     `[BLE] ${valTyped.srcBle.mac} (via ${valTyped.src}): Script version ${valTyped.scriptVersion} is not supported (expected ${expectedScriptVersion}), see documentation for latest version`,
                 );
@@ -720,6 +720,7 @@ export class ShellyAdapter extends Adapter {
                                 {
                                     [valTyped.src]: {
                                         rssi: valTyped.srcBle.rssi,
+                                        scriptVersion: valTyped.scriptVersion,
                                         ts: Date.now(),
                                     },
                                 },
@@ -793,6 +794,7 @@ export class ShellyAdapter extends Adapter {
                                 const deviceList = JSON.parse(receivedByState.val as string);
                                 deviceList[valTyped.src] = {
                                     rssi: valTyped.srcBle.rssi,
+                                    scriptVersion: valTyped.scriptVersion,
                                     ts: Date.now(),
                                 };
 

@@ -1067,7 +1067,7 @@ const defaultsgen2: DeviceDefinition = {
             },
         },
         common: {
-            name: 'BLE JSON-Payload (experimental!)',
+            name: 'BLE JSON-Payload',
             desc: 'Help: https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md',
             type: 'string',
             role: 'json',
