@@ -19,7 +19,7 @@ This is the German documentation - [🇺🇸 English version](../en/README.md)
 
 1. Node.js 22 (oder neuer)
 2. js-controller 6.0.11 (oder neuer)
-3. Admin Adapter 7.8.20 (oder neuer)
+3. Admin Adapter 7.8.23 (oder neuer)
 
 ## Geräte-Generationen
 
