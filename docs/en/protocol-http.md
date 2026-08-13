@@ -24,7 +24,7 @@ Select `HTTP polling` as the protocol. Historic `both` continues to mean MQTT pl
 
 ## Authentication
 
-Global credentials can be enabled for all devices. A manual device can use the global credentials, custom credentials, or no authentication. Gen1 devices use Basic authentication when challenged; Gen2 and newer devices use Shelly RPC Digest authentication. Digest requests support MD5 and SHA-256 challenges, `qop=auth`, nonce counts, cnonce, and at most one authenticated retry per request.
+Encrypted global credentials can be enabled for all devices. A manual device can use the global credentials or no authentication. Per-device passwords are deliberately not persisted because the adapter still supports controller versions that cannot reliably encrypt secrets inside configuration arrays. Gen1 devices use Basic authentication when challenged; Gen2 and newer devices use Shelly RPC Digest authentication. Digest requests support MD5 and SHA-256 challenges, `qop=auth`, nonce counts, cnonce, and at most one authenticated retry per request.
 
 Passwords and Authorization headers are never logged. Redirects are disabled and responses are size-limited.
 

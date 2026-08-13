@@ -495,8 +495,8 @@
                     "type": "staticText",
                     "hidden": "!data.httpAuthEnabled",
                     "text": {
-                        "en": "Global credentials are used for all HTTP devices unless a manual device is configured for no auth or custom auth.",
-                        "de": "Globale Zugangsdaten werden fuer alle HTTP-Geraete verwendet, sofern ein manuelles Geraet nicht auf keine Authentifizierung oder eigene Authentifizierung gestellt ist."
+                        "en": "Global credentials are used for all HTTP devices unless a manual device is configured for no authentication.",
+                        "de": "Globale Zugangsdaten werden fuer alle HTTP-Geraete verwendet, sofern ein manuelles Geraet nicht auf keine Authentifizierung gestellt ist."
                     },
                     "newLine": true
                 },
@@ -518,15 +518,6 @@
                     "xl": 4,
                     "label": "Automatically create discovered devices"
                 },
-                "httpDebugCommands": {
-                    "type": "checkbox",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 4,
-                    "lg": 4,
-                    "xl": 4,
-                    "label": "Detailed HTTP command debug logs"
-                },
                 "httpDebugDiscovery": {
                     "type": "checkbox",
                     "xs": 12,
@@ -535,24 +526,6 @@
                     "lg": 4,
                     "xl": 4,
                     "label": "Detailed HTTP discovery debug logs"
-                },
-                "httpDebugPolling": {
-                    "type": "checkbox",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 4,
-                    "lg": 4,
-                    "xl": 4,
-                    "label": "Detailed HTTP polling debug logs"
-                },
-                "httpDebugRawResponses": {
-                    "type": "checkbox",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 4,
-                    "lg": 4,
-                    "xl": 4,
-                    "label": "Detailed HTTP raw response debug logs"
                 },
                 "httpTimeout": {
                     "type": "number",
@@ -568,7 +541,7 @@
                 "httpRetries": {
                     "type": "number",
                     "min": 0,
-                    "max": 5,
+                    "max": 3,
                     "xs": 12,
                     "sm": 12,
                     "md": 4,
@@ -579,7 +552,7 @@
                 "httpMaxParallel": {
                     "type": "number",
                     "min": 1,
-                    "max": 100,
+                    "max": 50,
                     "xs": 12,
                     "sm": 12,
                     "md": 4,
@@ -611,8 +584,8 @@
                             "attr": "range",
                             "width": "90%",
                             "title": {
-                                "en": "IP, range, or CIDR /24-/32",
-                                "de": "IP, Bereich oder CIDR /24-/32"
+                                "en": "IP, range, or CIDR /24-/32 (1,024 hosts maximum)",
+                                "de": "IP, Bereich oder CIDR /24-/32 (maximal 1.024 Hosts)"
                             },
                             "filter": true,
                             "sort": true,
@@ -704,37 +677,8 @@
                                         "de": "Globale Auth"
                                     },
                                     "value": "global"
-                                },
-                                {
-                                    "label": {
-                                        "en": "Custom auth",
-                                        "de": "Eigene Auth"
-                                    },
-                                    "value": "custom"
                                 }
                             ]
-                        },
-                        {
-                            "type": "text",
-                            "attr": "username",
-                            "width": "20%",
-                            "title": {
-                                "en": "Username",
-                                "de": "Benutzername"
-                            },
-                            "filter": true,
-                            "sort": true,
-                            "default": ""
-                        },
-                        {
-                            "type": "password",
-                            "attr": "password",
-                            "width": "20%",
-                            "title": {
-                                "en": "Password",
-                                "de": "Passwort"
-                            },
-                            "default": ""
                         }
                     ]
                 }

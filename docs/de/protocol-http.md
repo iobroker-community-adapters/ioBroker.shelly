@@ -24,7 +24,7 @@ Als Protokoll wird `HTTP-Polling` gewählt. Das historische `both` bedeutet weit
 
 ## Authentifizierung
 
-Globale Zugangsdaten können für alle Geräte aktiviert werden. Ein manuelles Gerät kann globale, eigene oder keine Zugangsdaten verwenden. Gen1 nutzt bei entsprechender Challenge Basic Auth; Gen2 und neuer verwenden Shelly-RPC-Digest-Auth. Digest unterstützt MD5 und SHA-256, `qop=auth`, Nonce Count und cnonce sowie höchstens einen authentifizierten Wiederholungsversuch pro Request.
+Verschlüsselte globale Zugangsdaten können für alle Geräte aktiviert werden. Ein manuelles Gerät kann globale oder keine Zugangsdaten verwenden. Gerätespezifische Passwörter werden bewusst nicht gespeichert, weil der Adapter weiterhin Controller-Versionen unterstützt, die Secrets in Konfigurations-Arrays nicht zuverlässig verschlüsseln können. Gen1 nutzt bei entsprechender Challenge Basic Auth; Gen2 und neuer verwenden Shelly-RPC-Digest-Auth. Digest unterstützt MD5 und SHA-256, `qop=auth`, Nonce Count und cnonce sowie höchstens einen authentifizierten Wiederholungsversuch pro Request.
 
 Passwörter und Authorization-Header werden nie protokolliert. Redirects sind deaktiviert und Antwortgrößen begrenzt.
 

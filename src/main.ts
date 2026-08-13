@@ -10,7 +10,7 @@ import DeviceManagement from './lib/deviceManager';
 import ObjectHelper from './lib/objectHelper';
 import { CoAPServer } from './lib/protocol/coap';
 import { MQTTServer } from './lib/protocol/mqtt';
-import { HTTPPollingServer } from './lib/protocol/http';
+import { HTTPPollingServer, sanitizeHttpDeviceCredentials } from './lib/protocol/http';
 import type { ShellyAdapterConfig } from './lib/types';
 
 const adapterName = packageName.split('.').pop() ?? 'shelly';
@@ -57,6 +57,7 @@ export class ShellyAdapter extends Adapter {
             if (await this.migrateConfig()) {
                 return;
             }
+            await this.removeUnsafeHttpDeviceCredentials();
 
             this.eventEmitter.setMaxListeners(Infinity);
 
@@ -133,6 +134,18 @@ export class ShellyAdapter extends Adapter {
             this.log.error(`[onReady] Startup error: ${err}`);
         }
     };
+
+    private async removeUnsafeHttpDeviceCredentials(): Promise<void> {
+        const sanitized = sanitizeHttpDeviceCredentials(this.config.httpDevices);
+        if (!sanitized.changed) {
+            return;
+        }
+        this.config.httpDevices = sanitized.devices;
+        await this.updateConfig({ httpDevices: sanitized.devices });
+        this.log.warn(
+            '[HTTP] Removed unsupported per-device credentials from the configuration; use encrypted global HTTP credentials instead.',
+        );
+    }
 
     /**
      * Validates and normalizes the QoS configuration value.

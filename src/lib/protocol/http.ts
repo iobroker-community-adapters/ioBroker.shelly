@@ -1,4 +1,4 @@
-import axios, { AxiosError, type AxiosRequestConfig } from 'axios';
+import axios, { type AxiosError, type AxiosRequestConfig } from 'axios';
 import { createHash, randomBytes } from 'node:crypto';
 import type { EventEmitter } from 'node:events';
 
@@ -8,7 +8,11 @@ import type ObjectHelper from '../objectHelper';
 import { BaseClient, BaseServer } from './base';
 
 const DEFAULT_TIMEOUT_MS = 8_000;
+const MIN_TIMEOUT_MS = 1_000;
+const MAX_TIMEOUT_MS = 60_000;
+const MAX_RETRIES = 3;
 const DEFAULT_MAX_PARALLEL = 10;
+const MAX_PARALLEL = 50;
 const DEFAULT_MAX_HOSTS = 1024;
 const MAX_RESPONSE_BYTES = 2 * 1024 * 1024;
 const OFFLINE_FAILURE_THRESHOLD = 3;
@@ -23,9 +27,7 @@ export interface HttpDeviceConfig {
     deviceId?: string;
     name?: string;
     enabled?: boolean;
-    username?: string;
-    password?: string;
-    authMode?: 'default' | 'global' | 'custom' | 'none';
+    authMode?: 'global' | 'none';
     source?: 'manual' | 'http-discovery' | 'ioBroker-registry';
 }
 
@@ -65,10 +67,25 @@ interface RequestOptions {
     data?: unknown;
     credentials?: HttpCredentials;
     nonceCount?: number;
+    /** Used by local request-level tests; Shelly devices use the default HTTP port. */
+    port?: number;
 }
 
 function asError(error: unknown): Error {
     return error instanceof Error ? error : new Error(String(error));
+}
+
+function normalizeInteger(value: unknown, fallback: number, minimum: number, maximum: number): number {
+    if (value === undefined || value === null || value === '') {
+        return fallback;
+    }
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? Math.max(minimum, Math.min(maximum, Math.trunc(parsed))) : fallback;
+}
+
+function authenticationError(error: unknown): Error {
+    const status = (error as AxiosError)?.response?.status;
+    return new Error(`HTTP authentication failed${status ? ` (status ${status})` : ''}`);
 }
 
 function parseJsonObject(body: string): Record<string, unknown> | undefined {
@@ -83,7 +100,7 @@ function parseJsonObject(body: string): Record<string, unknown> | undefined {
 }
 
 function normalizeMac(value: unknown): string {
-    return String(value ?? '')
+    return (typeof value === 'string' || typeof value === 'number' ? String(value) : '')
         .replace(/[^a-fA-F0-9]/g, '')
         .toUpperCase();
 }
@@ -91,8 +108,7 @@ function normalizeMac(value: unknown): string {
 export function isValidIpv4(value: string): boolean {
     const parts = value.split('.');
     return (
-        parts.length === 4 &&
-        parts.every(part => /^\d{1,3}$/.test(part) && Number(part) >= 0 && Number(part) <= 255)
+        parts.length === 4 && parts.every(part => /^\d{1,3}$/.test(part) && Number(part) >= 0 && Number(part) <= 255)
     );
 }
 
@@ -286,21 +302,27 @@ export async function requestShelly(
     timeoutMs: number,
     options: RequestOptions = {},
 ): Promise<string> {
-    if (!isValidIpv4(ip) || !path.startsWith('/') || path.startsWith('//')) {
+    if (
+        !isValidIpv4(ip) ||
+        !path.startsWith('/') ||
+        path.startsWith('//') ||
+        (options.port !== undefined && (!Number.isInteger(options.port) || options.port < 1 || options.port > 65535))
+    ) {
         throw new Error('HTTP requests require a validated IPv4 address and an absolute device path');
     }
     const method = options.method ?? 'GET';
     const config: AxiosRequestConfig = {
-        baseURL: `http://${ip}`,
+        baseURL: `http://${ip}${options.port === undefined ? '' : `:${options.port}`}`,
         url: path,
         method,
         data: options.data,
-        timeout: Math.max(250, timeoutMs),
+        timeout: normalizeInteger(timeoutMs, DEFAULT_TIMEOUT_MS, MIN_TIMEOUT_MS, MAX_TIMEOUT_MS),
         responseType: 'text',
         transformResponse: body => body,
         maxRedirects: 0,
         maxContentLength: MAX_RESPONSE_BYTES,
         maxBodyLength: MAX_RESPONSE_BYTES,
+        proxy: false,
         validateStatus: status => status >= 200 && status < 300,
     };
     try {
@@ -314,13 +336,27 @@ export async function requestShelly(
         }
         const digest = parseDigestChallenge(challengeHeader);
         if (digest) {
-            const authorization = digestAuthorization(method, path, options.credentials, digest, options.nonceCount ?? 1);
-            const response = await axios({ ...config, headers: { Authorization: authorization } });
-            return String(response.data);
+            const authorization = digestAuthorization(
+                method,
+                path,
+                options.credentials,
+                digest,
+                options.nonceCount ?? 1,
+            );
+            try {
+                const response = await axios({ ...config, headers: { Authorization: authorization } });
+                return String(response.data);
+            } catch (retryError) {
+                throw authenticationError(retryError);
+            }
         }
         if (/^Basic\s/i.test(challengeHeader)) {
-            const response = await axios({ ...config, auth: options.credentials });
-            return String(response.data);
+            try {
+                const response = await axios({ ...config, auth: options.credentials });
+                return String(response.data);
+            } catch (retryError) {
+                throw authenticationError(retryError);
+            }
         }
         throw asError(error);
     }
@@ -330,13 +366,39 @@ function configuredCredentials(adapter: ShellyAdapter, device: HttpDeviceConfig)
     if (device.authMode === 'none') {
         return undefined;
     }
-    if (!device.authMode && adapter.config.httpAuthEnabled === false) {
+    if (adapter.config.httpAuthEnabled !== true) {
         return undefined;
     }
-    const custom = device.authMode === 'custom' || Boolean(device.username && device.password);
-    const username = custom ? device.username : adapter.config.httpDefaultUsername || adapter.config.httpusername;
-    const password = custom ? device.password : adapter.config.httpDefaultPassword || adapter.config.httppassword;
+    const username = adapter.config.httpDefaultUsername || adapter.config.httpusername;
+    const password = adapter.config.httpDefaultPassword || adapter.config.httppassword;
     return username && password ? { username, password } : undefined;
+}
+
+export function sanitizeHttpDeviceCredentials(devices: unknown): {
+    devices: HttpDeviceConfig[];
+    changed: boolean;
+} {
+    if (!Array.isArray(devices)) {
+        return { devices: [], changed: false };
+    }
+    let changed = false;
+    const sanitized = devices.map(device => {
+        if (!device || typeof device !== 'object') {
+            return device as HttpDeviceConfig;
+        }
+        const entry = { ...(device as Record<string, unknown>) };
+        if ('username' in entry || 'password' in entry) {
+            delete entry.username;
+            delete entry.password;
+            changed = true;
+        }
+        if (entry.authMode === 'custom' || entry.authMode === 'default') {
+            entry.authMode = 'global';
+            changed = true;
+        }
+        return entry as unknown as HttpDeviceConfig;
+    });
+    return { devices: sanitized, changed };
 }
 
 export class HTTPPollingClient extends BaseClient {
@@ -347,15 +409,25 @@ export class HTTPPollingClient extends BaseClient {
     private requestRunning = false;
     private stopped = false;
 
-    constructor(adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter, device: HttpDeviceConfig) {
+    constructor(
+        adapter: ShellyAdapter,
+        objectHelper: ObjectHelper,
+        eventEmitter: EventEmitter,
+        device: HttpDeviceConfig,
+    ) {
         super('coap', adapter, objectHelper, eventEmitter);
         this.transport = 'http';
         this.deviceConfig = device;
         this.credentials = configuredCredentials(adapter, device);
         this.ip = device.ip;
         this.deviceId = device.deviceId;
-        this.httpTimeout = Number(adapter.config.httpTimeout) || DEFAULT_TIMEOUT_MS;
-        this.retries = Math.max(0, Math.min(3, Number(adapter.config.httpRetries) || 0));
+        this.httpTimeout = normalizeInteger(
+            adapter.config.httpTimeout,
+            DEFAULT_TIMEOUT_MS,
+            MIN_TIMEOUT_MS,
+            MAX_TIMEOUT_MS,
+        );
+        this.retries = normalizeInteger(adapter.config.httpRetries, 0, 0, MAX_RETRIES);
     }
 
     override getId(): string | undefined {
@@ -403,7 +475,9 @@ export class HTTPPollingClient extends BaseClient {
             /\.(?:GetStatus|GetConfig)$/.test(rpcMethod) ||
             /^(?:Switch|Light|RGB|RGBW|CCT)\.(?:Set|Toggle)$/.test(rpcMethod) ||
             /^Cover\.(?:Open|Close|Stop|GoToPosition)$/.test(rpcMethod);
-        const safeGen1 = /^\/(?:shelly|status|settings)(?:\?|$)/.test(path) || /^\/(?:relay|light|color|white|roller)\/\d+(?:\?|$)/.test(path);
+        const safeGen1 =
+            /^\/(?:shelly|status|settings)(?:\?|$)/.test(path) ||
+            /^\/(?:relay|light|color|white|roller)\/\d+(?:\?|$)/.test(path);
         if ((!rpcMethod && !safeGen1) || !safeRpc) {
             throw new Error(`HTTP endpoint is not permitted in polling mode: ${path.split('?')[0]}`);
         }
@@ -452,9 +526,19 @@ export class HTTPPollingClient extends BaseClient {
         const params = rpc.params && typeof rpc.params === 'object' ? (rpc.params as Record<string, unknown>) : {};
         const query = new URLSearchParams();
         for (const [key, item] of Object.entries(params)) {
-            query.set(key, typeof item === 'object' ? JSON.stringify(item) : String(item));
+            let encoded: string;
+            if (typeof item === 'string') {
+                encoded = item;
+            } else if (typeof item === 'number' || typeof item === 'boolean' || typeof item === 'bigint') {
+                encoded = `${item}`;
+            } else if (item !== undefined) {
+                encoded = JSON.stringify(item);
+            } else {
+                throw new Error(`Shelly RPC parameter ${key} is undefined`);
+            }
+            query.set(key, encoded);
         }
-        await this.requestAsync(`/rpc/${rpc.method}${query.size ? `?${query}` : ''}`);
+        await this.requestAsync(`/rpc/${rpc.method}${query.size ? `?${query.toString()}` : ''}`);
     }
 
     private async identify(): Promise<void> {
@@ -485,7 +569,9 @@ export class HTTPPollingClient extends BaseClient {
             }
         } catch (error) {
             if (this.adapter.config.httpDebugDiscovery) {
-                this.adapter.log.debug(`[HTTP] Could not read device profile for ${this.ip}: ${asError(error).message}`);
+                this.adapter.log.debug(
+                    `[HTTP] Could not read device profile for ${this.ip}: ${asError(error).message}`,
+                );
             }
         }
     }
@@ -568,10 +654,13 @@ export class HTTPPollingServer extends BaseServer {
     private stopped = false;
 
     private get configuredDevices(): HttpDeviceConfig[] {
-        return Array.isArray(this.adapter.config.httpDevices)
-            ? this.adapter.config.httpDevices
+        const { devices } = sanitizeHttpDeviceCredentials(this.adapter.config.httpDevices);
+        return Array.isArray(devices)
+            ? devices
                   .filter((device): device is HttpDeviceConfig =>
-                      Boolean(device && typeof device.ip === 'string' && device.enabled !== false && isValidIpv4(device.ip)),
+                      Boolean(
+                          device && typeof device.ip === 'string' && device.enabled !== false && isValidIpv4(device.ip),
+                      ),
                   )
                   .map(device => ({ ...device, source: 'manual' }))
             : [];
@@ -587,7 +676,12 @@ export class HTTPPollingServer extends BaseServer {
             if (!ip || !isValidIpv4(ip)) {
                 continue;
             }
-            result.push({ ip, deviceId, name: String(object.common.name ?? deviceId), source: 'ioBroker-registry' });
+            result.push({
+                ip,
+                deviceId,
+                name: typeof object.common.name === 'string' ? object.common.name : deviceId,
+                source: 'ioBroker-registry',
+            });
         }
         return result;
     }
@@ -598,9 +692,12 @@ export class HTTPPollingServer extends BaseServer {
         }
         try {
             const credentials = configuredCredentials(this.adapter, { ip });
-            const body = await requestShelly(ip, '/shelly', Number(this.adapter.config.httpTimeout) || DEFAULT_TIMEOUT_MS, {
-                credentials,
-            });
+            const body = await requestShelly(
+                ip,
+                '/shelly',
+                normalizeInteger(this.adapter.config.httpTimeout, DEFAULT_TIMEOUT_MS, MIN_TIMEOUT_MS, MAX_TIMEOUT_MS),
+                { credentials },
+            );
             const info = parseJsonObject(body) as ShellyInfo | undefined;
             const normalized = info && normalizeShellyInfo(info);
             if (!normalized) {
@@ -626,7 +723,7 @@ export class HTTPPollingServer extends BaseServer {
             return [];
         }
         const ips = expandHttpNetworkRanges(this.adapter.config.httpNetworks);
-        const limit = Math.max(1, Math.min(50, Number(this.adapter.config.httpMaxParallel) || DEFAULT_MAX_PARALLEL));
+        const limit = normalizeInteger(this.adapter.config.httpMaxParallel, DEFAULT_MAX_PARALLEL, 1, MAX_PARALLEL);
         const results = await runWithConcurrency(ips, limit, ip => this.probeIp(ip));
         return results.filter((device): device is DiscoveredHttpDevice => device !== undefined);
     }

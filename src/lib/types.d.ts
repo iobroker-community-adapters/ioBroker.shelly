@@ -32,14 +32,9 @@ export interface ShellyAdapterConfig {
         deviceId?: string;
         name?: string;
         enabled?: boolean;
-        username?: string;
-        password?: string;
-        authMode?: 'default' | 'global' | 'custom' | 'none';
+        authMode?: 'global' | 'none';
     }[];
-    httpDebugCommands?: boolean;
     httpDebugDiscovery?: boolean;
-    httpDebugPolling?: boolean;
-    httpDebugRawResponses?: boolean;
 }
 
 // The ambient stubs for the two untyped runtime dependencies (shelly-iot, mqtt-connection) live
