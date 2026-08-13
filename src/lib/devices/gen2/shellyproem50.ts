@@ -1,0 +1,22 @@
+import type { DeviceDefinition } from '../../deviceTypes';
+import * as shellyHelperGen2 from '../gen2-helper';
+
+/**
+ * Shelly Pro EM 2x50 / shellyproem50
+ *
+ * https://shelly-api-docs.shelly.cloud/gen2/Devices/Gen2/ShellyProEM
+ *
+ * NOTE:
+ * EM1Data is added twice for compatibility reasons. Shoudl be removed from EM1 with next major release.
+ */
+const shellyproem50: DeviceDefinition = {};
+
+shellyHelperGen2.addEM1(shellyproem50, 0, true);
+shellyHelperGen2.addEM1Data(shellyproem50, 0);
+
+shellyHelperGen2.addEM1(shellyproem50, 1, true);
+shellyHelperGen2.addEM1Data(shellyproem50, 1);
+
+shellyHelperGen2.addSwitch(shellyproem50, 0, false);
+
+export { shellyproem50 };

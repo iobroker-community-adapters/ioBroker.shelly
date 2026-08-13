@@ -34,11 +34,11 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 HTTP polling is available for installations where ioBroker can reach Shelly devices by HTTP, but CoAP packets or an MQTT callback path are not available, for example in Docker or NAS environments.
 
-The mode keeps Shelly Cloud usable because MQTT does not need to be enabled on the Shelly devices. Discovery can scan configured IP ranges such as `192.168.1.0/24`, and devices can also be entered manually. Once HTTP devices have been created, they are loaded again from the ioBroker device registry on adapter start, so the network scan can be disabled afterwards. Known devices reuse the existing adapter profiles. Unknown devices are represented by generic capability states for switches, inputs, lights, RGB/RGBW lights, covers, power/energy, temperature, humidity, network, system, configuration, and diagnostics.
+The mode keeps Shelly Cloud usable because MQTT does not need to be enabled on the Shelly devices. Discovery can scan configured IP ranges such as `192.168.1.0/24`, and devices can also be entered manually. Once HTTP devices have been created, they are loaded again from the ioBroker device registry on adapter start, so the network scan can be disabled afterwards. Known devices reuse the existing adapter profiles and object model.
 
 HTTP polling supports global HTTP authentication credentials and optional per-device credentials. The adapter negotiates Basic or Digest authentication depending on the device response. If all Shelly devices use the same restricted-login password, enable global HTTP authentication and enter the default username/password once. Manual devices can override this with custom credentials or explicitly disable authentication.
 
-In HTTP polling mode the Device Manager can show live values, test the HTTP connection, rediscover a device, recreate states, and expose direct controls for supported switches, lights, RGB/RGBW lights, and covers. Device Manager actions use the same writable ioBroker states as normal object control, so HTTP command mapping and authentication stay centralized.
+In HTTP polling mode the Device Manager can show live values, test the HTTP connection, rediscover devices, reload known devices, and expose the normal controls for supported switches, lights, RGB/RGBW lights, and covers.
 
 See [HTTP polling documentation](./docs/en/protocol-http.md) for setup, security behavior, supported commands, and limitations.
 
@@ -47,7 +47,7 @@ See [HTTP polling documentation](./docs/en/protocol-http.md) for setup, security
 Note that devices connected using **Shellies Range Extender** functionality are **not supported**.  
 Please connect your devices directly to your (W)LAN and use a classic WLAN Repeater if required.
 
-The tables below list the established CoAP/MQTT profile support. HTTP polling reuses these profiles where possible and falls back to generic capability detection for unknown HTTP devices.
+The tables below list the established CoAP/MQTT profile support. HTTP polling reuses these profiles.
 
 ### Generation 1 (Gen 1)
 
@@ -195,7 +195,7 @@ Notes:
 
 ### Bluetooth Low Energy (BLU)
 
-**Experimental** - see [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required). Please note that currently no transmission of any data from the adapter to the BLU devices is possible.
+See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md) / [documentation (de)](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/de/ble-devices.md) for details (Shelly Scripting required). Please note that currently no transmission of any data from the adapter to the BLU devices is possible.
 
 | Shelly Device                                 | Version     |
 |-----------------------------------------------| ----------- |
@@ -236,12 +236,15 @@ Notes:
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (@floze-the-genius) Corrected roles for Gen 2+ input states. [#1498]
+- (@klein0r) Updated ble script (v1.4) for Shelly firmware > 2.0
+
+### 12.0.0-alpha.0 (2026-07-16)
+- (@GermanBluefox) Codebase has been migrated to typescript.
+
 ### 11.0.0 (2026-07-03)
 - (@klein0r) Updated ble script (v1.3) for Shelly firmware > 2.0
-- (@Holly86) Added HTTP polling and discovery with Gen1 REST and Gen2/Gen3/Gen4 RPC capability detection.
-- (@Holly86) Added global and per-device HTTP authentication with Basic/Digest negotiation for discovery, polling, diagnostics, and commands.
-- (@Holly86) Extended the Device Manager for HTTP polling devices with direct controls, live values, connection tests, rediscovery, and diagnostics.
-- (@Holly86) Breaking changes: none.
 - (@GermanBluefox) Added firmware update available indicator for devices supporting this feature.
 - (@copilot) Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).
 - (@copilot) Added HiluX DS8 by Shelly (hiluxds8)
@@ -272,10 +275,6 @@ Notes:
 * (@mcm1957) FrankEver Smart Watervalve (watervalve) has been added. [#1341]
 * (@mcm1957) LinkedGo ST1820 (st1820) has been added. [#1257]
 * (@mcm1957) Dependencies have been updated
-
-### 10.5.2 (2025-12-28)
-* (@mcm1957) Monophase profile support has been fixed for shellypro3em and shellypro3em400.
-
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

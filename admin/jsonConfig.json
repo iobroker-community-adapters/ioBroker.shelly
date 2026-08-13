@@ -518,15 +518,6 @@
                     "xl": 4,
                     "label": "Automatically create discovered devices"
                 },
-                "httpSaveRawJson": {
-                    "type": "checkbox",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 4,
-                    "lg": 4,
-                    "xl": 4,
-                    "label": "Create raw JSON states"
-                },
                 "httpDebugCommands": {
                     "type": "checkbox",
                     "xs": 12,
@@ -724,26 +715,6 @@
                             ]
                         },
                         {
-                            "type": "checkbox",
-                            "attr": "authEnabled",
-                            "width": "10%",
-                            "title": {
-                                "en": "Auth enabled",
-                                "de": "Auth aktiv"
-                            },
-                            "default": true
-                        },
-                        {
-                            "type": "checkbox",
-                            "attr": "useCustomAuth",
-                            "width": "10%",
-                            "title": {
-                                "en": "Custom",
-                                "de": "Eigene"
-                            },
-                            "default": false
-                        },
-                        {
                             "type": "text",
                             "attr": "username",
                             "width": "20%",
@@ -766,29 +737,6 @@
                             "default": ""
                         }
                     ]
-                },
-                "_httpAdminHeader": {
-                    "type": "header",
-                    "size": 3,
-                    "text": "Administrative functions",
-                    "newLine": true
-                },
-                "httpAllowAdmin": {
-                    "type": "checkbox",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 4,
-                    "lg": 4,
-                    "xl": 4,
-                    "label": "Allow administrative HTTP functions"
-                },
-                "_httpHint": {
-                    "type": "staticText",
-                    "text": {
-                        "en": "Administrative functions are intentionally disabled unless the option above is enabled. State polling and normal switching do not require it.",
-                        "de": "Administrative Funktionen sind absichtlich deaktiviert, solange die Option oben nicht aktiv ist. Status-Polling und normales Schalten benoetigen sie nicht."
-                    },
-                    "newLine": true
                 }
             }
         },

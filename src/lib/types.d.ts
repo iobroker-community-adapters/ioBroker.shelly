@@ -1,5 +1,6 @@
 export interface ShellyAdapterConfig {
-    protocol: 'mqtt' | 'coap';
+    /** `both` retains its historic meaning: MQTT and CoAP. HTTP is an exclusive polling mode. */
+    protocol: 'mqtt' | 'coap' | 'both' | 'http';
     httpusername: string;
     httppassword: string;
     polltime: number | string;
@@ -16,4 +17,31 @@ export interface ShellyAdapterConfig {
     blacklist: {
         [id: string]: string;
     }[];
+    scanInterval: number | string;
+    httpAuthEnabled?: boolean;
+    httpDefaultUsername?: string;
+    httpDefaultPassword?: string;
+    httpDiscoveryEnabled?: boolean;
+    httpAutoCreate?: boolean;
+    httpTimeout?: number | string;
+    httpRetries?: number | string;
+    httpMaxParallel?: number | string;
+    httpNetworks?: ({ range?: string; ip?: string; enabled?: boolean } | string)[];
+    httpDevices?: {
+        ip: string;
+        deviceId?: string;
+        name?: string;
+        enabled?: boolean;
+        username?: string;
+        password?: string;
+        authMode?: 'default' | 'global' | 'custom' | 'none';
+    }[];
+    httpDebugCommands?: boolean;
+    httpDebugDiscovery?: boolean;
+    httpDebugPolling?: boolean;
+    httpDebugRawResponses?: boolean;
 }
+
+// The ambient stubs for the two untyped runtime dependencies (shelly-iot, mqtt-connection) live
+// in the script-style declaration file `external-modules.d.ts`. Ambient `declare module` blocks
+// must sit in a non-module .d.ts to take effect, which this file is not (it has top-level exports).

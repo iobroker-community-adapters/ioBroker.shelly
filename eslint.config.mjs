@@ -12,11 +12,13 @@ export default [
             '**/*.test.js',
             'test/**/*.js',
             '*.config.mjs',
+            'tasks.mts',
             'build',
             'admin/build',
             'admin/words.js',
             'admin/admin.d.ts',
             '**/adapter-config.d.ts',
+            '**/external-modules.d.ts',
         ],
     },
     {

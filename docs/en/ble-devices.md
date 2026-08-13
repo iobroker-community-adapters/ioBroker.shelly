@@ -4,9 +4,6 @@
 
 This is the English documentation - [🇩🇪 German version](../de/ble-devices.md)
 
-
-**This feature is experimental!**
-
 You have to create a new script (see below) on a Plus or Pro device (Gen 2+) to get Events in this state as JSON: `shelly.0.<device>.BLE.Event`.
 
 Devices status of all known BLE-Devices will be collected in `shelly.0.ble.<macAddress>`. *Feel free to change the name of the device object to identify the device.*
@@ -38,6 +35,7 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 
 | Adapter version                                                                                                 | Script version |
 |-----------------------------------------------------------------------------------------------------------------|----------------|
+| [>= 12.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v12.0.0/docs/en/ble-devices.md) | v1.4           |
 | [>= 11.0.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v11.0.0/docs/en/ble-devices.md) | v1.3           |
 | [>= 10.3.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.3.0/docs/en/ble-devices.md) | v1.2           |
 | [>= 10.2.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v10.2.0/docs/en/ble-devices.md) | v1.1           |
@@ -71,8 +69,8 @@ Do not forget to enable the Bluetooth functionality at the Shelly device to be u
 Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2+) and start it:
 
 ```javascript
-// v1.3
-const SCRIPT_VERSION = '1.3';
+// v1.4.0
+const SCRIPT_VERSION = '1.4.0';
 const BTHOME_SVC_ID_STR = 'fcd2';
 
 let SHELLY_ID = undefined;
@@ -101,19 +99,20 @@ function bleScanCallback(event, result) {
         return;
     }
 
-    // create MQTT-Payload
-    let message = {
-        scriptVersion: SCRIPT_VERSION,
-        src: SHELLY_ID,
-        srcBle: {
-            type: result.local_name,
-            mac: result.addr,
-            rssi: result.rssi
-        },
-        payload: convertToHex(result.service_data[BTHOME_SVC_ID_STR])
-    };
-
     if (MQTT.isConnected()) {
+        let message = {
+            scriptVersion: SCRIPT_VERSION,
+            src: SHELLY_ID,
+            srcScript: {
+                id: Script.id
+            },
+            srcBle: {
+                mac: result.addr,
+                rssi: result.rssi
+            },
+            payload: convertToHex(result.service_data[BTHOME_SVC_ID_STR])
+        };
+
         MQTT.publish(SHELLY_ID + '/events/ble', JSON.stringify(message));
     }
 }
@@ -123,28 +122,21 @@ function init() {
     // get the config of ble component
     let bleConfig = Shelly.getComponentConfig('ble');
 
-    // exit if the BLE isn't enabled
-    if (!bleConfig.rpc.enable) {
-        console.log('Error: The Bluetooth is not enabled, please enable it in the settings');
+    // exit if Bluetooth isn't enabled
+    if (typeof bleConfig.enable !== 'undefined' && bleConfig.enable === false) {
+        console.log('Error: Bluetooth is not enabled, please enable it in the settings');
         return;
     }
 
-    // check if the scanner is already running
-    if (BLE.Scanner.isRunning()) {
-        console.log('Info: The BLE gateway is running, the BLE scan configuration is managed by the device');
-    } else {
-        // start the scanner
-        let bleScanner = BLE.Scanner.Start({
+    BLE.Scanner.Start(
+        {
             duration_ms: BLE.Scanner.INFINITE_SCAN,
-            active: true
-        });
-
-        if (!bleScanner) {
-            console.log('Error: Can not start new scanner');
-        }
-    }
-
-    BLE.Scanner.Subscribe(bleScanCallback);
+            active: false,
+            interval_ms: 240,
+            window_ms: 80
+        },
+        bleScanCallback
+    );
 }
 
 Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
@@ -154,62 +146,34 @@ Shelly.call('Mqtt.GetConfig', '', function (res, err_code, err_msg, ud) {
 });
 ```
 
-## Example Payloads (just for development)
+## Tested devices
 
 **Shelly BLU Button (and Tough 1)**
 
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/button
-- Tested with firmware: `20250314-080633/v1.0.22@cb5ca611`
-
-```json
-{
-  "encryption": false,
-  "BTHome_version": 2,
-  "pid": 6,
-  "battery": 70,
-  "button": 1 // 1 = single press, 2 = double press, 3 = triple press, 4 = long press
-}
-```
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/button
+- Knowledge Base: https://kb.shelly.cloud/knowledge-base/shellyblu-button1
+- Tested with firmware: `20250818-045355/v1.0.23`
 
 **Shelly BLU H&T**
 
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/ht
-- Tested with firmware: `20250314-080647/v1.0.22@cb5ca611`
-
-```json
-
-```
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/ht
+- Knowledge Base: 
+- Tested with firmware: `20250314-080647/v1.0.22`
 
 **Shelly BLU Door/Window**
 
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/dw
-- Tested with firmware: `20250314-080641/v1.0.22@cb5ca611`
-
-```json
-{
-  "encryption": false,
-  "BTHome_version": 2,
-  "pid": 12,
-  "battery": 100,
-  "illuminance": 13,
-  "window": 0, // 1 = open, 0 = closed
-  "rotation": 0
-}
-```
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/dw
+- Knowledge Base: https://kb.shelly.cloud/knowledge-base/shellyblu-door-window
+- Tested with firmware: `20250314-080641/v1.0.22`
 
 **Shelly BLU Motion**
 
-- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/motion
-- Tested with firmware: `20250314-080656/v1.0.22@cb5ca611`
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/motion
+- Knowledge Base: https://kb.shelly.cloud/knowledge-base/shellyblu-motion
+- Tested with firmware: `20250314-080656/v1.0.22`
 
-```json
-{
-  "encryption": false,
-  "BTHome_version": 2,
-  "pid": 182,
-  "battery": 100,
-  "temperature": 25.9,
-  "illuminance": 427,
-  "motion": 1 // 1 = motion, 0 = motion ended
-}
-```
+**Shelly BLU Wall Switch 4**
+
+- Docs: https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU/wall_eu
+- Knowledge Base: https://kb.shelly.cloud/knowledge-base/shelly-blu-wall-switch-4
+- Tested with firmware: `20250824-135711/v1.0.23`

@@ -10,7 +10,6 @@ This is the English documentation - [🇩🇪 German version](../de/README.md)
 - [HTTP polling protocol](protocol-http.md)
 - [MQTT protocol](protocol-mqtt.md)
 - [CoAP/CoIoT protocol](protocol-coap.md)
-- [HTTP polling PR readiness](http-polling-pr-readiness.md)
 - [BLE device support](ble-devices.md)
 - [Restricted login](restricted-login.md)
 - [State changes](state-changes.md)
@@ -21,7 +20,7 @@ This is the English documentation - [🇩🇪 German version](../de/README.md)
 
 1. Node.js 22 (or later)
 2. js-controller 6.0.11 (or later)
-3. Admin Adapter 7.8.20 (or later)
+3. Admin Adapter 7.8.23 (or later)
 
 ## Device generations
 
@@ -49,4 +48,3 @@ Questions? Check the [FAQ](faq.md) section first!
 ## Restrictions
 
 - The Shelly adapter does not support Shellies connecting using any sort of NAT, i.e. most vpns and shelly range extender.
-
