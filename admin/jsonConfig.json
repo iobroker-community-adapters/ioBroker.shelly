@@ -205,6 +205,16 @@
                     "xl": 4,
                     "label": "Update objects even if there is no value change"
                 },
+                "ignoreTimezoneMismatch": {
+                    "type": "checkbox",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Ignore timezone mismatch",
+                    "help": "Do not log a message if the timezone of a device differs from the timezone of the ioBroker host"
+                },
                 "scanInterval": {
                     "newLine": true,
                     "type": "number",
