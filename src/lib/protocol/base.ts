@@ -19,6 +19,10 @@ function isAsync(funct: unknown): boolean | undefined {
     return undefined;
 }
 
+function httpPathForLog(url: string): string {
+    return url.split('?')[0];
+}
+
 /**
  * Base class shared by the MQTT and CoAP protocol clients. Holds the per-device state and
  * implements the generic state<->device mapping: it walks the device definition, wires up the
@@ -27,6 +31,7 @@ function isAsync(funct: unknown): boolean | undefined {
  */
 export class BaseClient implements ShellyClient {
     type: 'mqtt' | 'coap';
+    transport: 'mqtt' | 'coap' | 'http';
     config: ShellyAdapterConfig;
     adapter: ShellyAdapter;
     /**
@@ -57,6 +62,7 @@ export class BaseClient implements ShellyClient {
 
     constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         this.type = type; // mqtt or coap
+        this.transport = type;
 
         this.adapter = adapter;
         this.config = adapter.config;
@@ -82,6 +88,7 @@ export class BaseClient implements ShellyClient {
 
     async requestAsync(url: string): Promise<string> {
         const httpDebugDir = `httpDebug/${this.getDirectoryName()}`;
+        const logPath = httpPathForLog(url);
 
         if (this.adapter.config.saveHttpResponses) {
             await this.adapter.mkdirAsync(this.adapter.namespace, 'httpDebug');
@@ -92,12 +99,12 @@ export class BaseClient implements ShellyClient {
             if (!this.getIP()) {
                 reject(
                     new Error(
-                        `[requestAsync] Unable to perform HTTP request "${url}" - IP address is unknown of ${this.getLogInfo()}`,
+                        `[requestAsync] Unable to perform HTTP request "${logPath}" - IP address is unknown of ${this.getLogInfo()}`,
                     ),
                 );
             }
 
-            const httpDebugFilePath = `${httpDebugDir}/${url.replace(/[^a-zA-Z0-9-_.]/g, '_')}.json`;
+            const httpDebugFilePath = `${httpDebugDir}/${logPath.replace(/[^a-zA-Z0-9-_.]/g, '_')}.json`;
 
             let axiosRequestObj: AxiosRequestConfig = {
                 method: 'get',
@@ -114,7 +121,7 @@ export class BaseClient implements ShellyClient {
                 if (this.adapter.config.httpusername && this.adapter.config.httppassword) {
                     // Add basic auth if configured
                     this.adapter.log.silly(
-                        `[requestAsync] HTTP request to gen 1 device with basic auth: "${axiosRequestObj.baseURL}${url}"`,
+                        `[requestAsync] HTTP request to gen 1 device with basic auth: "${axiosRequestObj.baseURL}${logPath}"`,
                     );
 
                     axiosRequestObj = {
@@ -126,14 +133,14 @@ export class BaseClient implements ShellyClient {
                     };
                 } else {
                     this.adapter.log.silly(
-                        `[requestAsync] HTTP request to gen 1 device: "${axiosRequestObj.baseURL}${url}"`,
+                        `[requestAsync] HTTP request to gen 1 device: "${axiosRequestObj.baseURL}${logPath}"`,
                     );
                 }
 
                 axios(axiosRequestObj)
                     .then(response => {
                         this.adapter.log.silly(
-                            `[requestAsync] HTTP response of gen 1 device: "${axiosRequestObj.baseURL}${url}" -> "${response.data}"`,
+                            `[requestAsync] HTTP response of gen 1 device: "${axiosRequestObj.baseURL}${logPath}" (${String(response.data).length} bytes)`,
                         );
 
                         if (this.adapter.config.saveHttpResponses) {
@@ -152,13 +159,13 @@ export class BaseClient implements ShellyClient {
                     .catch(reject);
             } else if (this.getDeviceGen() >= 2) {
                 this.adapter.log.silly(
-                    `[requestAsync] HTTP request to Gen 2+ device (with digest auth): "${axiosRequestObj.baseURL}${url}"`,
+                    `[requestAsync] HTTP request to Gen 2+ device (with digest auth): "${axiosRequestObj.baseURL}${logPath}"`,
                 );
 
                 axios(axiosRequestObj)
                     .then(response => {
                         this.adapter.log.silly(
-                            `[requestAsync] HTTP response of Gen 2+ device without auth: "${axiosRequestObj.baseURL}${url}" -> "${response.data}"`,
+                            `[requestAsync] HTTP response of Gen 2+ device without auth: "${axiosRequestObj.baseURL}${logPath}" (${String(response.data).length} bytes)`,
                         );
 
                         if (this.adapter.config.saveHttpResponses) {
@@ -240,7 +247,7 @@ export class BaseClient implements ShellyClient {
                             axios(axiosRequestObj)
                                 .then(response => {
                                     this.adapter.log.silly(
-                                        `[requestAsync] HTTP response of Gen 2+ device with digest auth: "${axiosRequestObj.baseURL}${url}" -> "${response.data}"`,
+                                        `[requestAsync] HTTP response of Gen 2+ device with digest auth: "${axiosRequestObj.baseURL}${logPath}" (${String(response.data).length} bytes)`,
                                     );
 
                                     if (this.adapter.config.saveHttpResponses) {
@@ -352,7 +359,7 @@ export class BaseClient implements ShellyClient {
         throw new Error('You have to implement the method getMqttPrefix!');
     }
 
-    publishStateValue(cmd: string, value: unknown): void {
+    publishStateValue(cmd: string, value: unknown): void | Promise<void> {
         throw new Error(`You have to implement the method publishStateValue! ${cmd} ${String(value)}`);
     }
 
@@ -527,10 +534,13 @@ export class BaseClient implements ShellyClient {
             return;
         }
 
-        this.adapter.log.silly(`[httpIoBrokerState] Running for ${this.getLogInfo()}: ${JSON.stringify(this.http)}`);
+        this.adapter.log.silly(
+            `[httpIoBrokerState] Running for ${this.getLogInfo()}: ${JSON.stringify(Object.keys(this.http).map(httpPathForLog))}`,
+        );
 
         let pollTime = this.getPollTime();
         for (const httpUrl in this.http) {
+            const logPath = httpPathForLog(httpUrl);
             const dps = this.http[httpUrl];
             try {
                 const body = await this.requestAsync(httpUrl);
@@ -541,7 +551,7 @@ export class BaseClient implements ShellyClient {
                         let value: any = body;
                         try {
                             this.adapter.log.silly(
-                                `[httpIoBrokerState] Updating state ${fullStateId} for ${this.getLogInfo()}: ${body}`,
+                                `[httpIoBrokerState] Updating state ${fullStateId} for ${this.getLogInfo()}`,
                             );
 
                             const block = dp[this.type];
@@ -586,11 +596,11 @@ export class BaseClient implements ShellyClient {
                         } catch (err) {
                             if (err.name?.startsWith('TypeError')) {
                                 this.adapter.log.debug(
-                                    `[httpIoBrokerState] Could not find property for state ${fullStateId} for ${this.getLogInfo()} "${httpUrl}": ${err}`,
+                                    `[httpIoBrokerState] Could not find property for state ${fullStateId} for ${this.getLogInfo()} "${logPath}": ${err}`,
                                 );
                             } else {
                                 this.adapter.log.error(
-                                    `[httpIoBrokerState] Error for state ${fullStateId} for ${this.getLogInfo()} "${httpUrl}": ${err} - value: "${value}"`,
+                                    `[httpIoBrokerState] Error for state ${fullStateId} for ${this.getLogInfo()} "${logPath}": ${err}`,
                                 );
                             }
                         }
@@ -605,15 +615,15 @@ export class BaseClient implements ShellyClient {
                 }
                 if (err?.response?.status == 401) {
                     this.adapter.log.error(
-                        `[httpIoBrokerState] HTTP request error for ${this.getLogInfo()} "${httpUrl}": Wrong http username or http password! Please enter user credentials for restricted login.`,
+                        `[httpIoBrokerState] HTTP request error for ${this.getLogInfo()} "${logPath}": Wrong http username or http password! Please enter user credentials for restricted login.`,
                     );
                 } else if (err?.response?.status == 404) {
                     this.adapter.log.debug(
-                        `[httpIoBrokerState] HTTP request error for ${this.getLogInfo()} "${httpUrl}": 404 Not Found - this can happen if the current device configuration doesn't support this feature.`,
+                        `[httpIoBrokerState] HTTP request error for ${this.getLogInfo()} "${logPath}": 404 Not Found - this can happen if the current device configuration doesn't support this feature.`,
                     );
                 } else {
                     this.adapter.log.debug(
-                        `[httpIoBrokerState] HTTP request error for ${this.getLogInfo()} "${httpUrl}": ${err}`,
+                        `[httpIoBrokerState] HTTP request error for ${this.getLogInfo()} "${logPath}": ${err}`,
                     );
                 }
             }
@@ -652,12 +662,12 @@ export class BaseClient implements ShellyClient {
 
                         if (this.type === 'coap') {
                             hasTypeCmd = !!state?.coap?.coap_cmd;
-                            hasTypePublishCmd = !!state?.coap?.coap_publish;
+                            hasTypePublishCmd = this.transport !== 'http' && !!state?.coap?.coap_publish;
                         }
 
                         if (this.type === 'mqtt') {
                             hasTypeCmd = !!state.mqtt?.mqtt_cmd;
-                            hasTypePublishCmd = !!state?.mqtt?.mqtt_publish;
+                            hasTypePublishCmd = this.transport !== 'http' && !!state?.mqtt?.mqtt_publish;
                         }
 
                         const deviceId = this.getDeviceId();
@@ -744,7 +754,7 @@ export class BaseClient implements ShellyClient {
                                             }
 
                                             this.adapter.log.debug(
-                                                `[http controlFunction] Executing gen 1 state.${this.type}.http_cmd of state ${fullStateId} for ${this.getLogInfo()} from url: ${url.href}`,
+                                                `[http controlFunction] Executing gen 1 state.${this.type}.http_cmd of state ${fullStateId} for ${this.getLogInfo()} from path: ${url.pathname}`,
                                             );
                                             body = await this.requestAsync(url.pathname + url.search);
 
@@ -822,7 +832,7 @@ export class BaseClient implements ShellyClient {
                                     }
 
                                     if (this.publishStateValue !== undefined) {
-                                        this.publishStateValue(httpBlock?.mqtt_cmd ?? '', publishValue);
+                                        await this.publishStateValue(httpBlock?.mqtt_cmd ?? '', publishValue);
                                     }
 
                                     if (value == this.stateValueCache?.[fullStateId]) {
@@ -859,7 +869,9 @@ export class BaseClient implements ShellyClient {
                         // Init value or funct
                         let value: ioBroker.StateValue | undefined;
 
-                        if (httpBlock?.init_value) {
+                        if (stateId === 'protocol' && this.transport === 'http') {
+                            value = 'http';
+                        } else if (httpBlock?.init_value) {
                             value = httpBlock.init_value;
                         } else if (httpBlock?.init_funct) {
                             value = httpBlock.init_funct(this);

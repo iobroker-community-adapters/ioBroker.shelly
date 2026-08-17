@@ -10,6 +10,7 @@ import DeviceManagement from './lib/deviceManager';
 import ObjectHelper from './lib/objectHelper';
 import { CoAPServer } from './lib/protocol/coap';
 import { MQTTServer } from './lib/protocol/mqtt';
+import { HTTPPollingServer, sanitizeHttpDeviceCredentials } from './lib/protocol/http';
 import type { ShellyAdapterConfig } from './lib/types';
 
 const adapterName = packageName.split('.').pop() ?? 'shelly';
@@ -18,6 +19,7 @@ export class ShellyAdapter extends Adapter {
     declare config: ShellyAdapterConfig;
     private serverMqtt: MQTTServer | null = null;
     private serverCoap: CoAPServer | null = null;
+    private serverHttp: HTTPPollingServer | null = null;
     private firmwareUpdateTimeout: ioBroker.Timeout | null | undefined = null;
     private onlineCheckTimeout: ioBroker.Timeout | null | undefined = null;
     private deviceScanTimeout: ioBroker.Timeout | null | undefined = null;
@@ -55,6 +57,7 @@ export class ShellyAdapter extends Adapter {
             if (await this.migrateConfig()) {
                 return;
             }
+            await this.removeUnsafeHttpDeviceCredentials();
 
             this.eventEmitter.setMaxListeners(Infinity);
 
@@ -100,6 +103,15 @@ export class ShellyAdapter extends Adapter {
                 }
             });
 
+            // HTTP is intentionally an exclusive mode. Historic `both` continues to mean MQTT + CoAP.
+            setImmediate(() => {
+                if (protocol === 'http') {
+                    this.log.info('Starting in HTTP polling mode');
+                    this.serverHttp = new HTTPPollingServer(this, this.objectHelper, this.eventEmitter);
+                    void this.serverHttp.listen().catch(error => this.log.error(`[HTTP] Startup failed: ${error}`));
+                }
+            });
+
             this.config.scanInterval = parseInt(this.config.scanInterval as string, 10) || 0;
 
             // Periodic device scan
@@ -122,6 +134,18 @@ export class ShellyAdapter extends Adapter {
             this.log.error(`[onReady] Startup error: ${err}`);
         }
     };
+
+    private async removeUnsafeHttpDeviceCredentials(): Promise<void> {
+        const sanitized = sanitizeHttpDeviceCredentials(this.config.httpDevices);
+        if (!sanitized.changed) {
+            return;
+        }
+        this.config.httpDevices = sanitized.devices;
+        await this.updateConfig({ httpDevices: sanitized.devices });
+        this.log.warn(
+            '[HTTP] Removed unsupported per-device credentials from the configuration; use encrypted global HTTP credentials instead.',
+        );
+    }
 
     /**
      * Validates and normalizes the QoS configuration value.
@@ -250,6 +274,15 @@ export class ShellyAdapter extends Adapter {
                 }
             }
 
+            if (this.serverHttp) {
+                try {
+                    this.log.debug('[onUnload] Stopping HTTP polling');
+                    this.serverHttp.destroy();
+                } catch {
+                    // ignore
+                }
+            }
+
             callback();
         } catch {
             // this.log.error('Error');
@@ -344,6 +377,27 @@ export class ShellyAdapter extends Adapter {
                 await this.setState('info.connection', { val: false, ack: true });
             }
         }
+    }
+
+    public async rediscoverHttpDevices(): Promise<number> {
+        if (!this.serverHttp) {
+            throw new Error('HTTP polling is not active');
+        }
+        return this.serverHttp.rediscover();
+    }
+
+    public async reloadKnownHttpDevices(): Promise<number> {
+        if (!this.serverHttp) {
+            throw new Error('HTTP polling is not active');
+        }
+        return this.serverHttp.reloadKnownDevices();
+    }
+
+    public async testHttpDevice(ip: string): Promise<boolean> {
+        if (!this.serverHttp) {
+            throw new Error('HTTP polling is not active');
+        }
+        return (await this.serverHttp.probeIp(ip)) !== undefined;
     }
 
     public isOnline(deviceId: string | undefined): boolean {

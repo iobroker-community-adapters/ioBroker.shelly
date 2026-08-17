@@ -100,17 +100,56 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const actions =
             protocol === 'coap'
                 ? []
-                : [
-                      {
-                          id: 'discover',
-                          icon: 'search',
-                          title: I18n.getTranslatedObject('Discover devices'),
-                          description: I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
-                          timeout: 40_000,
-                          handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
-                              await this.handleDiscoverDevices(context),
-                      },
-                  ];
+                : protocol === 'http'
+                  ? [
+                        {
+                            id: 'http-rediscover',
+                            icon: 'search',
+                            title: I18n.getTranslatedObject('Rediscover HTTP devices'),
+                            description: I18n.getTranslatedObject('Scan configured ranges for new Shelly devices'),
+                            timeout: 60_000,
+                            handler: async (context: ActionContext): Promise<{ refresh: boolean }> => {
+                                try {
+                                    const count = await (this.adapter as ShellyAdapter).rediscoverHttpDevices();
+                                    await context.showMessage(`HTTP discovery found ${count} device(s)`);
+                                    return { refresh: true };
+                                } catch (error) {
+                                    await context.showMessage(`HTTP discovery failed: ${String(error)}`);
+                                    return { refresh: false };
+                                }
+                            },
+                        },
+                        {
+                            id: 'http-reload-known',
+                            icon: 'refresh',
+                            title: I18n.getTranslatedObject('Reload known HTTP devices'),
+                            description: I18n.getTranslatedObject(
+                                'Reload devices from configuration and ioBroker objects',
+                            ),
+                            timeout: 60_000,
+                            handler: async (context: ActionContext): Promise<{ refresh: boolean }> => {
+                                try {
+                                    const count = await (this.adapter as ShellyAdapter).reloadKnownHttpDevices();
+                                    await context.showMessage(`Reloaded ${count} known HTTP device(s)`);
+                                    return { refresh: true };
+                                } catch (error) {
+                                    await context.showMessage(`HTTP reload failed: ${String(error)}`);
+                                    return { refresh: false };
+                                }
+                            },
+                        },
+                    ]
+                  : [
+                        {
+                            id: 'discover',
+                            icon: 'search',
+                            title: I18n.getTranslatedObject('Discover devices'),
+                            description: I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
+                            timeout: 40_000,
+                            handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
+                                await this.handleDiscoverDevices(context),
+                        },
+                    ];
 
         return {
             apiVersion: 'v3',
@@ -231,6 +270,29 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                                   url: `http://${
                                       this.states[`${this.adapter.namespace}.${shortDeviceId}.hostname`]?.val as string
                                   }`,
+                              },
+                          ]
+                        : []),
+                    ...(this.config.protocol === 'http' && hostname
+                        ? [
+                              {
+                                  id: 'http-test',
+                                  icon: 'check',
+                                  description: I18n.getTranslatedObject('Test HTTP connection'),
+                                  handler: async (
+                                      _deviceId: string,
+                                      context: ActionContext,
+                                  ): Promise<{ refresh: DeviceRefresh }> => {
+                                      try {
+                                          const ok = await (this.adapter as ShellyAdapter).testHttpDevice(hostname);
+                                          await context.showMessage(
+                                              ok ? 'HTTP connection successful' : 'HTTP connection failed',
+                                          );
+                                      } catch (error) {
+                                          await context.showMessage(`HTTP connection failed: ${String(error)}`);
+                                      }
+                                      return { refresh: 'devices' };
+                                  },
                               },
                           ]
                         : []),
@@ -1980,13 +2042,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (needsRestart) {
             try {
                 this.adapter.log.info(`[DeviceManager] ${dev.ip}: Rebooting device...`);
-                let rebootResult: string;
                 if (gen >= 2) {
-                    rebootResult = await this.httpGet(`http://${dev.ip}/rpc/Shelly.Reboot`, auth);
+                    await this.httpGet(`http://${dev.ip}/rpc/Shelly.Reboot`, auth);
                 } else {
-                    rebootResult = await this.httpGet(`http://${dev.ip}/reboot`, auth);
+                    await this.httpGet(`http://${dev.ip}/reboot`, auth);
                 }
-                this.adapter.log.info(`[DeviceManager] ${dev.ip}: Reboot response: ${rebootResult || 'OK'}`);
+                this.adapter.log.info(`[DeviceManager] ${dev.ip}: Reboot request completed`);
             } catch (err) {
                 // Device may disconnect immediately during reboot
                 this.adapter.log.info(
@@ -2005,12 +2066,12 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         if (httpPass && gen >= 2) {
             this.adapter.log.info(`[DeviceManager] ${dev.ip}: Setting auth (deviceId=${deviceId})`);
             const ha1 = crypto.createHash('sha256').update(`admin:${deviceId}:${httpPass}`).digest('hex');
-            const authResult = await this.httpPost(
+            await this.httpPost(
                 `http://${dev.ip}/rpc/Shelly.SetAuth`,
                 JSON.stringify({ user: 'admin', realm: deviceId, ha1 }),
                 auth,
             );
-            this.adapter.log.debug(`[DeviceManager] ${dev.ip}: Shelly.SetAuth response: ${authResult}`);
+            this.adapter.log.debug(`[DeviceManager] ${dev.ip}: Shelly.SetAuth completed`);
         }
     }
 
@@ -2047,8 +2108,8 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         this.adapter.log.info(
             `[DeviceManager] ${ip}: Setting Gen1 config (server=${mqttServer}, name=${deviceName || 'unchanged'}, tz=${timeZone})`,
         );
-        const result = await this.httpGet(url, auth);
-        this.adapter.log.debug(`[DeviceManager] ${ip}: Gen1 /settings response: ${result.substring(0, 200)}`);
+        await this.httpGet(url, auth);
+        this.adapter.log.debug(`[DeviceManager] ${ip}: Gen1 /settings completed`);
 
         // Gen1 always needs reboot after MQTT config change
         return true;
@@ -2087,7 +2148,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             JSON.stringify({ config: mqttConfig }),
             auth,
         );
-        this.adapter.log.debug(`[DeviceManager] ${ip}: Mqtt.SetConfig response: ${mqttResult}`);
+        this.adapter.log.debug(`[DeviceManager] ${ip}: Mqtt.SetConfig completed`);
         if (JSON.parse(mqttResult).restart_required) {
             restartRequired = true;
         }
@@ -2107,7 +2168,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             JSON.stringify({ config: sysConfig }),
             auth,
         );
-        this.adapter.log.debug(`[DeviceManager] ${ip}: Sys.SetConfig response: ${sysResult}`);
+        this.adapter.log.debug(`[DeviceManager] ${ip}: Sys.SetConfig completed`);
         if (JSON.parse(sysResult).restart_required) {
             restartRequired = true;
         }
@@ -2223,7 +2284,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         } else if (res.statusCode === 401) {
                             reject(new HttpAuthError());
                         } else {
-                            reject(new Error(`HTTP GET ${parsed.pathname} → ${res.statusCode}: ${data}`));
+                            reject(new Error(`HTTP GET ${parsed.pathname} → ${res.statusCode}`));
                         }
                     });
                 },
@@ -2267,7 +2328,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                         } else if (res.statusCode === 401) {
                             reject(new HttpAuthError());
                         } else {
-                            reject(new Error(`HTTP POST ${parsed.pathname} → ${res.statusCode}: ${data}`));
+                            reject(new Error(`HTTP POST ${parsed.pathname} → ${res.statusCode}`));
                         }
                     });
                 },

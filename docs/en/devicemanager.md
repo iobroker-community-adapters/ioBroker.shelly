@@ -14,6 +14,17 @@ The adapter integrates with the ioBroker Device Manager (requires admin >= 7.8.2
 - **Device actions** - Rename devices, open the device web interface, or trigger firmware updates
 - **Device grouping** - Devices are automatically categorized by type (Relays, Dimmers, Plugs, Lights, Meters, Sensors, Covers, Inputs, Climate, Gateways, BLE)
 
+### HTTP Polling Devices
+
+When the adapter runs in HTTP polling mode, normal Device Manager controls continue to use the writable ioBroker states and therefore the same Gen1 REST or Gen2+ RPC mapping as other state writes.
+
+- **Direct controls** - Existing switch, light, RGB/RGBW, and cover controls are shown when their writable states exist.
+- **HTTP connection test** - A device action checks reachability, authentication, and Shelly identity detection.
+- **Rediscovery** - An instance action scans the configured ranges for new devices.
+- **Reload known devices** - An instance action reloads manual devices and devices stored in the ioBroker object tree.
+
+Errors are reported without passwords or Authorization headers.
+
 ### Background Monitoring for New Devices
 
 The adapter can periodically scan your network for new Shelly devices using mDNS discovery.
@@ -36,4 +47,3 @@ Discovered devices can be provisioned directly from the Device Manager with a gu
 - **Timezone sync** - Device timezone is automatically set to match the server
 - **Authentication** - Supports password-protected devices with automatic fallback: tries without auth, then the configured HTTP password, then prompts for a device-specific password
 - **HTTP auth setup** - For Gen2+ devices, HTTP authentication (SHA-256 digest) can be configured automatically when an HTTP password is set in the adapter config
-

@@ -1,5 +1,6 @@
 export interface ShellyAdapterConfig {
-    protocol: 'mqtt' | 'coap' | 'both';
+    /** `both` retains its historic meaning: MQTT and CoAP. HTTP is an exclusive polling mode. */
+    protocol: 'mqtt' | 'coap' | 'both' | 'http';
     httpusername: string;
     httppassword: string;
     polltime: number | string;
@@ -17,6 +18,23 @@ export interface ShellyAdapterConfig {
         [id: string]: string;
     }[];
     scanInterval: number | string;
+    httpAuthEnabled?: boolean;
+    httpDefaultUsername?: string;
+    httpDefaultPassword?: string;
+    httpDiscoveryEnabled?: boolean;
+    httpAutoCreate?: boolean;
+    httpTimeout?: number | string;
+    httpRetries?: number | string;
+    httpMaxParallel?: number | string;
+    httpNetworks?: ({ range?: string; ip?: string; enabled?: boolean } | string)[];
+    httpDevices?: {
+        ip: string;
+        deviceId?: string;
+        name?: string;
+        enabled?: boolean;
+        authMode?: 'global' | 'none';
+    }[];
+    httpDebugDiscovery?: boolean;
 }
 
 // The ambient stubs for the two untyped runtime dependencies (shelly-iot, mqtt-connection) live

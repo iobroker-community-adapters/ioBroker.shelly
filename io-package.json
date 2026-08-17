@@ -288,16 +288,30 @@
     "mqttusername",
     "mqttpassword",
     "httpusername",
-    "httppassword"
+    "httppassword",
+    "httpDefaultUsername",
+    "httpDefaultPassword"
   ],
   "encryptedNative": [
     "mqttpassword",
-    "httppassword"
+    "httppassword",
+    "httpDefaultPassword"
   ],
   "native": {
     "protocol": "mqtt",
     "httpusername": "admin",
     "httppassword": "",
+    "httpAuthEnabled": false,
+    "httpDefaultUsername": "admin",
+    "httpDefaultPassword": "",
+    "httpDiscoveryEnabled": false,
+    "httpAutoCreate": true,
+    "httpTimeout": 8000,
+    "httpRetries": 1,
+    "httpMaxParallel": 10,
+    "httpNetworks": [],
+    "httpDevices": [],
+    "httpDebugDiscovery": false,
     "polltime": 15,
     "autoupdate": false,
     "updateUnchangedObjects": false,

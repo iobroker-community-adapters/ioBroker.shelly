@@ -39,6 +39,8 @@ export interface ShellyClient {
     config: ShellyAdapterConfig;
     /** Active transport for this client. */
     type: 'mqtt' | 'coap';
+    /** Physical transport. HTTP clients reuse the generation-specific CoAP/MQTT definition profile. */
+    transport: 'mqtt' | 'coap' | 'http';
     /** The owning ioBroker adapter instance (logging, state/object access, `config`, …). */
     adapter: ShellyAdapter;
 
@@ -83,7 +85,7 @@ export interface ShellyClient {
     /** Performs an authenticated HTTP GET against the device and resolves the raw response body. */
     requestAsync: (url: string) => Promise<string>;
     /** Publishes a value to the device (implemented by the MQTT/CoAP subclasses). */
-    publishStateValue: (cmd: string, value: unknown) => void;
+    publishStateValue: (cmd: string, value: unknown) => void | Promise<void>;
 }
 
 /**

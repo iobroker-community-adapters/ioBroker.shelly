@@ -20,7 +20,7 @@
 ![Stable](http://iobroker.live/badges/shelly-stable.svg)
 ![Installed](http://iobroker.live/badges/shelly-installed.svg)
 
-The adapter communicates with Shelly devices by REST API and the CoAP or MQTT protocol.
+The adapter communicates with Shelly devices by REST API and the CoAP, MQTT, or HTTP polling protocol.
 
 It uses the default Shelly firmware (no flashing of firmware needed!). You will find more and detailed information about the device here: [Shelly](https://shelly.cloud/)
 
@@ -30,10 +30,24 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 [🇩🇪 Dokumentation](./docs/de/README.md)
 
+### HTTP polling
+
+HTTP polling is available for installations where ioBroker can reach Shelly devices by HTTP, but CoAP packets or an MQTT callback path are not available, for example in Docker or NAS environments.
+
+The mode keeps Shelly Cloud usable because MQTT does not need to be enabled on the Shelly devices. Discovery can scan configured IP ranges such as `192.168.1.0/24`, and devices can also be entered manually. Once HTTP devices have been created, they are loaded again from the ioBroker device registry on adapter start, so the network scan can be disabled afterwards. Known devices reuse the existing adapter profiles and object model.
+
+HTTP polling supports encrypted global HTTP authentication credentials. The adapter negotiates Basic or Digest authentication depending on the device response. Enable global HTTP authentication and enter the default username/password once; manual devices can explicitly disable authentication.
+
+In HTTP polling mode the Device Manager can show live values, test the HTTP connection, rediscover devices, reload known devices, and expose the normal controls for supported switches, lights, RGB/RGBW lights, and covers.
+
+See [HTTP polling documentation](./docs/en/protocol-http.md) for setup, security behavior, supported commands, and limitations.
+
 ## Supported devices
 
 Note that devices connected using **Shellies Range Extender** functionality are **not supported**.  
 Please connect your devices directly to your (W)LAN and use a classic WLAN Repeater if required.
+
+The tables below list the established CoAP/MQTT profile support. HTTP polling reuses these profiles.
 
 ### Generation 1 (Gen 1)
 

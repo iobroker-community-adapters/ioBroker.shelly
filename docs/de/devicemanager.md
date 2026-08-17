@@ -14,6 +14,17 @@ Der Adapter ist in den ioBroker Device Manager integriert (erfordert Admin >= 7.
 - **Geräteaktionen** - Geräte umbenennen, die Weboberfläche des Geräts öffnen oder Firmware-Updates auslösen
 - **Gerätegruppierung** - Geräte werden automatisch nach Typ kategorisiert (Relays, Dimmers, Plugs, Lights, Meters, Sensors, Covers, Inputs, Climate, Gateways, BLE)
 
+### HTTP-Polling-Geraete
+
+Im HTTP-Polling-Modus verwenden die normalen Device-Manager-Bedienelemente weiterhin die beschreibbaren ioBroker-States und damit dieselbe Gen1-REST- oder Gen2+-RPC-Abbildung wie andere State-Schreibzugriffe.
+
+- **Direkte Bedienung** - Vorhandene Bedienelemente fuer Switch, Light, RGB/RGBW und Cover werden angezeigt, wenn die passenden beschreibbaren States existieren.
+- **HTTP-Verbindungstest** - Eine Geraeteaktion prueft Erreichbarkeit, Authentifizierung und Shelly-Identitaet.
+- **Rediscovery** - Eine Instanzaktion durchsucht die konfigurierten Bereiche nach neuen Geraeten.
+- **Bekannte Geraete neu laden** - Eine Instanzaktion laedt manuelle Geraete und Geraete aus dem ioBroker-Objektbaum erneut.
+
+Fehler werden ohne Passwoerter oder Authorization-Header angezeigt.
+
 ### Hintergrundüberwachung für neue Geräte
 
 Der Adapter kann das Netzwerk regelmäßig mithilfe von mDNS-Discovery nach neuen Shelly-Geräten durchsuchen.
