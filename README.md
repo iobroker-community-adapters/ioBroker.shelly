@@ -226,7 +226,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 12.0.0-alpha.2 (2026-08-19)
 - (@mcm1957) The transition time can now be written for Shelly Dimmer1/Dimmer2 and for Gen2+ dimmers/lights (incl. Dimmer Gen3 and Dimmer Gen4). [#1214][#1224]
 - (@mcm1957) Added support for Top AC Portable EV Charger (topacportableevcharger) - **EXPERIMENTAL ONLY** [#1401]
 - (@mcm1957) Added support for Shelly Flood S Gen 4 (shellyfloodsg4). [#1380]
@@ -261,17 +261,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 ### 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]
 - (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
-
-### 10.6.0 (2026-02-08)
-* (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
-* (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]
-* (@mcm1957) Shelly BLU H&T Display ZB support for light attribute has been added. [#1230]
-* (@mcm1957) Support for favorites for Gen 2+ devices with cover support has been added. [#1001]
-* (@mcm1957) Power metering support has been added to RGB and RGBW components. [#1339]
-* (@mcm1957) FrankEver Smart Watervalve (watervalve) has been added. [#1341]
-* (@mcm1957) LinkedGo ST1820 (st1820) has been added. [#1257]
-* (@mcm1957) Dependencies have been updated
-
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 
