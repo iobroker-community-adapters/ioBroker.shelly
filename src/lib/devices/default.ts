@@ -12,11 +12,17 @@ import * as shellyHelper from '../shelly-helper';
 function checkTimezone(timeZone: string | undefined, self: ShellyClient): string | undefined {
     const systemTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    if (!self.adapter.config.ignoreTimezoneMismatch && timeZone && timeZone !== systemTimeZone) {
-        self.adapter.log.info(
-            `[Sys.timezone] ${self.getLogInfo()}: Configured timezone "${timeZone}" and system timezone "${systemTimeZone}" do not match. Please check configuration`,
-        );
-    }
+    if (timeZone && timeZone !== systemTimeZone) {
+        if (!self.adapter.config.ignoreTimezoneMismatch) {
+            self.adapter.log.info(
+                `[Sys.timezone] ${self.getLogInfo()}: Configured timezone "${timeZone}" and system timezone "${systemTimeZone}" do not match. Please check configuration`,
+            );
+        } else {
+            self.adapter.log.debug(
+                `[Sys.timezone] ${self.getLogInfo()}: Configured timezone "${timeZone}" and system timezone "${systemTimeZone}" do not match. Please check configuration`,
+            );
+        }
+    } 
 
     return timeZone;
 }
