@@ -22,7 +22,7 @@ function checkTimezone(timeZone: string | undefined, self: ShellyClient): string
                 `[Sys.timezone] ${self.getLogInfo()}: Configured timezone "${timeZone}" and system timezone "${systemTimeZone}" do not match. Please check configuration`,
             );
         }
-    } 
+    }
 
     return timeZone;
 }
