@@ -113,6 +113,7 @@ import { hiluxds8 } from './devices/poweredbyshelly/hiluxds8';
 import { irrigation } from './devices/poweredbyshelly/irrigation';
 import { ogemray25a } from './devices/poweredbyshelly/ogemray25a';
 import { st1820 } from './devices/poweredbyshelly/st1820';
+import { topacportableevcharger } from './devices/poweredbyshelly/topacportableevcharger';
 import { watervalve } from './devices/poweredbyshelly/watervalve';
 
 const devices: Record<string, DeviceDefinition> = {
@@ -227,6 +228,7 @@ const devices: Record<string, DeviceDefinition> = {
     irrigation,
     ogemray25a,
     st1820,
+    topacportableevcharger,
     watervalve,
 };
 
@@ -342,6 +344,7 @@ const deviceGen: Record<string, number> = {
     irrigation: 3,
     ogemray25a: 3,
     st1820: 3,
+    topacportableevcharger: 3,
     watervalve: 3,
 };
 
@@ -458,6 +461,7 @@ const deviceGroupMap: Record<string, string> = {
     irrigation: 'other',
     ogemray25a: 'other',
     st1820: 'other',
+    topacportableevcharger: 'other',
     watervalve: 'other',
 };
 
@@ -573,6 +577,7 @@ const deviceIcons: Record<string, string> = {
     irrigation: 'shellyplus1',
     ogemray25a: 'shellyplus1',
     st1820: 'shellyplus1',
+    topacportableevcharger: 'shellyplus1',
     watervalve: 'shellyplus1',
 };
 
@@ -689,6 +694,7 @@ const deviceKnowledgeBase: Record<string, string | undefined> = {
     irrigation: undefined, // no knowledgebase entry exists
     ogemray25a: 'https://www.shelly.com/de/products/ogemray-25a-smart-relay',
     st1820: undefined, // no knowledgebase entry exists,
+    topacportableevcharger: undefined, // no knowledgebase entry exists,
     watervalve: undefined, // no knowledgebase entry exists,
 };
 
@@ -806,6 +812,7 @@ const deviceTypes: Record<string, string[]> = {
     irrigation: ['irrigation'],
     ogemray25a: ['ogemray25a'],
     st1820: ['st1820'],
+    topacportableevcharger: ['topacportableevcharger'],
     watervalve: ['watervalve'],
 };
 
