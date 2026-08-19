@@ -4439,6 +4439,31 @@ function addLight(deviceObj: DeviceDefinition, lightId: number, hasPowerMetering
         },
     };
 
+    deviceObj[`Light${lightId}.transition`] = {
+        mqtt: {
+            mqtt_publish: `<mqttprefix>/status/light:${lightId}`,
+            mqtt_publish_funct: value => JSON.parse(value)?.transition?.duration,
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'Light.Set',
+                    params: { id: lightId, transition_duration: value },
+                });
+            },
+        },
+        common: {
+            name: 'Transition Time',
+            type: 'number',
+            role: 'value',
+            def: 0,
+            unit: 's',
+            read: true,
+            write: true,
+        },
+    };
+
     deviceObj[`Light${lightId}.CalibrationProgress`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/light:${lightId}`,

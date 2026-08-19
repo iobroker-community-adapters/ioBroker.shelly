@@ -419,17 +419,21 @@ const shellydimmer: DeviceDefinition = {
         coap: {
             http_publish: '/settings',
             http_publish_funct: value => (value ? JSON.parse(value).transition : undefined),
+            http_cmd: '/settings/light/0',
+            http_cmd_funct: value => ({ transition: value }),
         },
         mqtt: {
             http_publish: '/settings',
             http_publish_funct: value => (value ? JSON.parse(value).transition : undefined),
+            http_cmd: '/settings/light/0',
+            http_cmd_funct: value => ({ transition: value }),
         },
         common: {
             name: 'Fade Rate',
             type: 'number',
             role: 'state',
             read: true,
-            write: false,
+            write: true,
             unit: 'ms',
             min: 0,
             max: 5000,
