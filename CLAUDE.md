@@ -107,5 +107,5 @@ GitHub Actions workflow (`.github/workflows/test-and-release.yml`): lint-first (
 
 - Minimize all code changes. Do not beautify code and do not perform optimizations unless technical required or explicitly requested.
 - Do not use any commmit remark (like closes, fixes, ...) which causes issues to be closed autoimatically - simply use refers to ...issuenumber...
-- Always add a changelog entry to README.md below header ### **WORK IN PROGRESS**. Add ### **WORK IN PROGRESS** if not yet existing.
+- Always add a changelog entry to README.md below header `### **WORK IN PROGRESS**`. Add `### **WORK IN PROGRESS**` if not yet existing.
 
