@@ -1,5 +1,31 @@
-import type { DeviceDefinition } from '../deviceTypes';
+import type { DeviceDefinition, ShellyClient } from '../deviceTypes';
 import * as shellyHelper from '../shelly-helper';
+
+/**
+ * Logs a message if the timezone configured on the device differs from the timezone of the ioBroker host.
+ * Can be disabled with the instance option "ignoreTimezoneMismatch".
+ *
+ * @param timeZone - timezone which is configured on the device
+ * @param self - client of the device
+ * @returns the timezone of the device (unchanged)
+ */
+function checkTimezone(timeZone: string | undefined, self: ShellyClient): string | undefined {
+    const systemTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    if (timeZone && timeZone !== systemTimeZone) {
+        if (!self.adapter.config.ignoreTimezoneMismatch) {
+            self.adapter.log.info(
+                `[Sys.timezone] ${self.getLogInfo()}: Configured timezone "${timeZone}" and system timezone "${systemTimeZone}" do not match. Please check configuration`,
+            );
+        } else {
+            self.adapter.log.debug(
+                `[Sys.timezone] ${self.getLogInfo()}: Configured timezone "${timeZone}" and system timezone "${systemTimeZone}" do not match. Please check configuration`,
+            );
+        }
+    }
+
+    return timeZone;
+}
 
 /**
  * Default, used for all Shelly devices Gen 1
@@ -345,31 +371,11 @@ const defaultsgen1: DeviceDefinition = {
     'Sys.timezone': {
         coap: {
             http_publish: '/settings',
-            http_publish_funct: (value, self) => {
-                const timeZone = value ? JSON.parse(value).timezone : undefined;
-
-                if (timeZone && timeZone !== Intl.DateTimeFormat().resolvedOptions().timeZone) {
-                    self.adapter.log.info(
-                        `[Sys.timezone] ${self.getLogInfo()}: Configured timezone "${timeZone}" and system timezone "${Intl.DateTimeFormat().resolvedOptions().timeZone}" do not match. Please check configuration`,
-                    );
-                }
-
-                return timeZone;
-            },
+            http_publish_funct: (value, self) => checkTimezone(value ? JSON.parse(value).timezone : undefined, self),
         },
         mqtt: {
             http_publish: '/settings',
-            http_publish_funct: (value, self) => {
-                const timeZone = value ? JSON.parse(value).timezone : undefined;
-
-                if (timeZone && timeZone !== Intl.DateTimeFormat().resolvedOptions().timeZone) {
-                    self.adapter.log.info(
-                        `[Sys.timezone] ${self.getLogInfo()}: Configured timezone "${timeZone}" and system timezone "${Intl.DateTimeFormat().resolvedOptions().timeZone}" do not match. Please check configuration`,
-                    );
-                }
-
-                return timeZone;
-            },
+            http_publish_funct: (value, self) => checkTimezone(value ? JSON.parse(value).timezone : undefined, self),
         },
         common: {
             name: 'Timezone',
@@ -830,17 +836,7 @@ const defaultsgen2: DeviceDefinition = {
     'Sys.timezone': {
         mqtt: {
             http_publish: '/rpc/Sys.GetConfig',
-            http_publish_funct: (value, self) => {
-                const timeZone = value ? JSON.parse(value).location.tz : undefined;
-
-                if (timeZone && timeZone !== Intl.DateTimeFormat().resolvedOptions().timeZone) {
-                    self.adapter.log.info(
-                        `[Sys.timezone] ${self.getLogInfo()}: Configured timezone "${timeZone}" and system timezone "${Intl.DateTimeFormat().resolvedOptions().timeZone}" do not match. Please check configuration`,
-                    );
-                }
-
-                return timeZone;
-            },
+            http_publish_funct: (value, self) => checkTimezone(value ? JSON.parse(value).location.tz : undefined, self),
             mqtt_cmd: '<mqttprefix>/rpc',
             mqtt_cmd_funct: (value, self) => {
                 return JSON.stringify({

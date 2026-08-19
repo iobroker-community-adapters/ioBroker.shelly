@@ -81,9 +81,10 @@ export class BaseClient implements ShellyClient {
     }
 
     async requestAsync(url: string): Promise<string> {
-        const httpDebugDir = `httpDebug/${this.getDirectoryName()}`;
+        let httpDebugDir = '';
 
         if (this.adapter.config.saveHttpResponses) {
+            httpDebugDir = `httpDebug/${this.getDirectoryName()}`;
             await this.adapter.mkdirAsync(this.adapter.namespace, 'httpDebug');
             await this.adapter.mkdirAsync(this.adapter.namespace, httpDebugDir);
         }
@@ -95,6 +96,7 @@ export class BaseClient implements ShellyClient {
                         `[requestAsync] Unable to perform HTTP request "${url}" - IP address is unknown of ${this.getLogInfo()}`,
                     ),
                 );
+                return;
             }
 
             const httpDebugFilePath = `${httpDebugDir}/${url.replace(/[^a-zA-Z0-9-_.]/g, '_')}.json`;
@@ -357,7 +359,8 @@ export class BaseClient implements ShellyClient {
     }
 
     getDirectoryName(): string {
-        return this.getId()!.replace(/[^a-zA-Z0-9-_.]/g, '_');
+        // The id is cleared by destroy(), so it can be undefined while an async operation is still running
+        return (this.getId() ?? 'unknown').replace(/[^a-zA-Z0-9-_.]/g, '_');
     }
 
     getDeviceMode(): string | undefined {

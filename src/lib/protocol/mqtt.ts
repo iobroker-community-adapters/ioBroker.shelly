@@ -291,6 +291,30 @@ class MQTTClient extends BaseClient {
         }
     }
 
+    /**
+     * Checks whether the running connect initialization has to be aborted.
+     *
+     * The connect handler is async, so a device can close the connection while objects are created or
+     * HTTP requests are pending - this happens regularly with battery powered devices, which disconnect
+     * right after publishing their values. In that case destroy() is already running (and waiting for
+     * this initialization), so continuing would work on a half destroyed client.
+     *
+     * @param step - name of the initialization step (for logging)
+     * @returns true if the caller has to stop the initialization
+     */
+    isInitAborted(step: string): boolean {
+        if (this.destroying) {
+            this.adapter.log.debug(
+                `[MQTT] Initialization of ${this.getLogInfo()} aborted after "${step}" - connection was closed`,
+            );
+
+            this.initializing = false; // let destroy() continue
+            return true;
+        }
+
+        return false;
+    }
+
     async destroy(): Promise<void> {
         // Set destroying flag to prevent new packets from being queued
         this.destroying = true;
@@ -682,6 +706,10 @@ class MQTTClient extends BaseClient {
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" create objects`);
                     await this.createObjects();
 
+                    if (this.isInitAborted('createObjects')) {
+                        return;
+                    }
+
                     // Save last will
                     // Gen 1:  {"retain": false, "qos": 0, "topic" :"shellies/shellyswitch25-C45BBE798F0F/online", "payload": {"type":"Buffer","data": [102,97,108,115,101]}}
                     // Gen 2+: {"retain": false, "qos": 0, "topic": "shellypro2pm-30c6f7850a64/online", "payload": {"type":"Buffer","data":[102,97,108,115,101]}}
@@ -705,6 +733,10 @@ class MQTTClient extends BaseClient {
 
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting http states`);
                     await this.httpIoBrokerState();
+
+                    if (this.isInitAborted('httpIoBrokerState')) {
+                        return;
+                    }
 
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting mqtt prefix`);
                     if (this.will?.topic) {
@@ -826,7 +858,7 @@ class MQTTClient extends BaseClient {
         });
 
         this.client.on('close', status => {
-            this.initializing = false;
+            // Don't reset this.initializing here - destroy() has to wait for a running initialization
             this.adapter.log.info(`[MQTT] Client Close: ${this.getLogInfo()} (${String(status)})`);
             this.destroy().catch((e: unknown) => this.adapter.log.error(`[MQTT] destroy failed: ${String(e)}`));
         });
@@ -837,7 +869,7 @@ class MQTTClient extends BaseClient {
         });
 
         this.client.on('disconnect', () => {
-            this.initializing = false;
+            // Don't reset this.initializing here - destroy() has to wait for a running initialization
             this.adapter.log.info(`[MQTT] Client Disconnect: ${this.getLogInfo()}`);
             this.destroy().catch((e: unknown) => this.adapter.log.error(`[MQTT] destroy failed: ${String(e)}`));
         });

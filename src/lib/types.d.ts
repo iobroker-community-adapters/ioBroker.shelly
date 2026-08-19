@@ -5,6 +5,7 @@ export interface ShellyAdapterConfig {
     polltime: number | string;
     autoupdate: boolean;
     updateUnchangedObjects: boolean;
+    ignoreTimezoneMismatch: boolean;
     logDebugMessages: boolean;
     saveHttpResponses: boolean;
     bind: string;

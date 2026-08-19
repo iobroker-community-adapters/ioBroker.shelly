@@ -301,6 +301,7 @@
     "polltime": 15,
     "autoupdate": false,
     "updateUnchangedObjects": false,
+    "ignoreTimezoneMismatch": false,
     "logDebugMessages": false,
     "saveHttpResponses": false,
     "bind": "0.0.0.0",
