@@ -103,6 +103,7 @@ import { shellydimmerg4 } from './devices/gen4/shellydimmerg4';
 import { shellyemg4 } from './devices/gen4/shellyemg4';
 import { shellyemminig4 } from './devices/gen4/shellyemminig4';
 import { shellyfloodg4 } from './devices/gen4/shellyfloodg4';
+import { shellyfloodsg4 } from './devices/gen4/shellyfloodsg4';
 import { shellypresence } from './devices/gen4/shellypresence';
 import { shellypstripg4 } from './devices/gen4/shellypstripg4';
 
@@ -216,6 +217,7 @@ const devices: Record<string, DeviceDefinition> = {
     shellyemg4,
     shellyemminig4,
     shellyfloodg4,
+    shellyfloodsg4,
     shellypresence,
     shellypstripg4,
 
@@ -330,6 +332,7 @@ const deviceGen: Record<string, number> = {
     shellyemg4: 4,
     shellyemminig4: 4,
     shellyfloodg4: 4,
+    shellyfloodsg4: 4,
     shellypresence: 4,
     shellypstripg4: 4,
 
@@ -445,6 +448,7 @@ const deviceGroupMap: Record<string, string> = {
     shellyemg4: 'meter',
     shellyemminig4: 'meter',
     shellyfloodg4: 'sensor',
+    shellyfloodsg4: 'sensor',
     shellypresence: 'sensor',
     shellypstripg4: 'light',
 
@@ -559,6 +563,7 @@ const deviceIcons: Record<string, string> = {
     shellyemg4: 'shellyemg3',
     shellyemminig4: 'shellyemminig4',
     shellyfloodg4: 'shellyfloodg4',
+    shellyfloodsg4: 'shellyfloodg4',
     shellypresence: 'shellypresence',
     shellypstripg4: 'shelly2pmg4',
 
@@ -674,6 +679,7 @@ const deviceKnowledgeBase: Record<string, string | undefined> = {
     shellyemg4: 'https://kb.shelly.cloud/knowledge-base/shelly-em-gen4',
     shellyemminig4: 'https://kb.shelly.cloud/knowledge-base/shelly-em-mini-gen4',
     shellyfloodg4: 'https://kb.shelly.cloud/knowledge-base/shelly-flood-gen4',
+    shellyfloodsg4: 'https://kb.shelly.cloud/knowledge-base/shelly-flood-s-gen4',
     shellypresence: 'https://kb.shelly.cloud/knowledge-base/shelly-presence-gen4',
     shellypstripg4: 'https://kb.shelly.cloud/knowledge-base/shelly-power-strip-gen4',
 
@@ -790,6 +796,7 @@ const deviceTypes: Record<string, string[]> = {
     shellyemg4: ['shellyemg4'],
     shellyemminig4: ['shellyemminig4'],
     shellyfloodg4: ['shellyfloodg4'],
+    shellyfloodsg4: ['shellyfloodsg4'],
     shellypresence: ['shellypresence'],
     shellypstripg4: ['shellypstripg4'],
 
@@ -827,6 +834,7 @@ const pollTime: Record<string, number> = {
 
     // Gen 4
     shellyfloodg4: 3600,
+    shellyfloodsg4: 3600,
 };
 
 /**
