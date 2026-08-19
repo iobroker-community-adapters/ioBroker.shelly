@@ -171,14 +171,17 @@ Notes:
 
 ### Powered By Shelly
 
-| Device                                        | CoAP | MQTT       |
-|-----------------------------------------------| ---- | ---------- |
-| FrankEver Smart Watervalve (watervalve)       | ❌   | >= v10.6.0 |
-| HiluX DS8 by Shelly (hiluxds8)                | ❌   | >= v11.0.0 |
-| LinkedGo Smart Thermost (st1820)              | ❌   | >= v10.6.0 |
-| Ogemray 25A (ogemray25a)                      | ❌   | >= v9.5.0  |
-| Shelly Cury (cury)                            | ❌   | >= v11.0.0 |
-| Top AC Portable EV Charger (topacportableevcharger) | ❌   | >= v12.0.0 |
+| Device                                                     | CoAP | MQTT       |
+|------------------------------------------------------------| ---- | ---------- |
+| FrankEver Smart Watervalve (watervalve)                    | ❌   | >= v10.6.0 |
+| HiluX DS8 by Shelly (hiluxds8)                             | ❌   | >= v11.0.0 |
+| LinkedGo Smart Thermost (st1820)                           | ❌   | >= v10.6.0 |
+| Ogemray 25A (ogemray25a)                                   | ❌   | >= v9.5.0  |
+| Shelly Cury (cury)                                         | ❌   | >= v11.0.0 |
+| Top AC Portable EV Charger (topacportableevcharger) (1)(*) | ❌   | >= v12.0.0 |
+
+(1) device id must be set to something like `topacportableevcharger-12345`.
+(*) support is experimental only
 
 ### Bluetooth Low Energy (BLU)
 
@@ -224,7 +227,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (@mcm1957) Added support for Top AC Portable EV Charger (topacportableevcharger). [#1401]
+- (@mcm1957) Added support for Top AC Portable EV Charger (topacportableevcharger) - **EXPERIMENTAL ONLY** [#1401]
 - (@mcm1957) Added support for Shelly Flood S Gen 4 (shellyfloodsg4). [#1380]
 - (@mcm1957) Added monophase mode support for Shelly 3EM G3 (shelly3em63g3). [#1540]
 
