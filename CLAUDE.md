@@ -102,3 +102,9 @@ Uses Mocha with `@iobroker/testing` framework. Test setup in `test/mocha.setup.j
 ## CI/CD
 
 GitHub Actions workflow (`.github/workflows/test-and-release.yml`): lint-first (Node 24), then adapter tests across Node 22/24 on ubuntu/windows/macos. Deploys to npm on version tags via Trusted Publishing. Releases managed by `@alcalzone/release-script`.
+
+## General instructions
+
+- Minimize all code changes. Do not beautify code and do not perform optimizations unless technical required or explicitly requested.
+- Do not use any commmit remark (like closes, fixes, ...) which causes issues to be closed autoimatically - simply use refers to ...issuenumber...
+
