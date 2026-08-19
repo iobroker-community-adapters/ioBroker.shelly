@@ -227,8 +227,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (@GermanBluefox) Fixed MQTT errors ("Cannot read properties of undefined") if a device closes the connection while it is still being initialized (e.g. battery powered devices).
 - (@floze-the-genius) Corrected roles for Gen 2+ input states. [#1498]
 - (@klein0r) Updated ble script (v1.4) for Shelly firmware > 2.0
-
-### 12.0.0-alpha.0 (2026-07-16)
 - (@GermanBluefox) Codebase has been migrated to typescript.
 
 ### 11.0.0 (2026-07-03)
