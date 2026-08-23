@@ -853,6 +853,52 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     };
                 }
             }
+
+            // Energy values (Power, Voltage, Current, Energy, Frequency): shown automatically
+            // for any channel that reports them, based on the state's role rather than a
+            // fixed list of channel names, so this works for every device generation.
+            const energyRoleDigits: Record<string, number> = {
+                'value.power': 1,
+                'value.power.active': 1,
+                'value.power.reactive': 1,
+                'value.power.consumption': 2,
+                'value.energy': 2,
+                'value.energy.consumed': 2,
+                'value.energy.produced': 2,
+                'value.voltage': 1,
+                'value.current': 2,
+                'value.frequency': 2,
+            };
+
+            for (const stateId of Object.keys(this.states)) {
+                if (!stateId.startsWith(prefix)) {
+                    continue;
+                }
+                const common = this.objects[stateId]?.common as ioBroker.StateCommon | undefined;
+                const role = common?.role;
+                if (!role || !(role in energyRoleDigits)) {
+                    continue;
+                }
+
+                const suffix = stateId.substring(prefix.length);
+                const channel = suffix.substring(0, suffix.lastIndexOf('.'));
+                const channelLabel = channel
+                    .replace(/:/g, ' ')
+                    .replace(/([a-zA-Z])(\d)/g, '$1 $2')
+                    .trim();
+                const metricLabel = typeof common?.name === 'string' ? common.name : suffix;
+
+                items[`energy_${suffix.replace(/[.:]/g, '_')}`] = {
+                    type: 'state',
+                    oid: `${shortDeviceId}.${suffix}`,
+                    control: 'text',
+                    unit: common?.unit,
+                    digits: energyRoleDigits[role],
+                    label: `${channelLabel} ${metricLabel}`.trim(),
+                    size: 12,
+                    style: { opacity: 0.7 },
+                };
+            }
         }
 
         if (Object.keys(items).length === 0) {
