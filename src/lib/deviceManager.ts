@@ -29,6 +29,23 @@ class HttpAuthError extends Error {
     }
 }
 
+/** Digits to round to, per ioBroker role, for energy-related states (power, voltage, current, energy, frequency) */
+const ENERGY_ROLE_DIGITS: Record<string, number> = {
+    'value.power': 1,
+    'value.power.active': 1,
+    'value.power.reactive': 1,
+    'value.power.consumption': 2,
+    'value.energy': 2,
+    'value.energy.consumed': 2,
+    'value.energy.produced': 2,
+    'value.voltage': 1,
+    'value.current': 2,
+    'value.frequency': 2,
+};
+
+/** Roles considered "power" for the compact main tile - voltage/current/energy are only shown in the device info panel */
+const ENERGY_TILE_ROLES = ['value.power', 'value.power.active'];
+
 /** Group metadata: display name key (for i18n) and representative icon */
 const groupMeta: Record<string, { nameKey: string; icon: string }> = {
     relay: { nameKey: 'Relays & Switches', icon: 'adapter/shelly/icons/shellyplus1.png' },
@@ -403,6 +420,11 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             };
         }
 
+        // Power, voltage, current and energy: shown here in full (the main tile only shows power,
+        // to keep it compact), for any channel that reports them, based on the state's role rather
+        // than a fixed list of channel names, so this works for every device generation.
+        Object.assign(items, this.buildEnergyValueItems(shortDeviceId, Object.keys(ENERGY_ROLE_DIGITS)));
+
         return {
             id: deviceId,
             schema: {
@@ -410,6 +432,54 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 items,
             },
         };
+    }
+
+    /**
+     * Build customInfo/details items for energy-related states (power, voltage, current, energy,
+     * frequency) of a device, based on the state's ioBroker role. Works for any channel naming
+     * scheme, so it applies automatically to every device generation that reports these values.
+     *
+     * @param shortDeviceId device id without adapter namespace
+     * @param allowedRoles roles to include (a subset of the keys of ENERGY_ROLE_DIGITS)
+     */
+    private buildEnergyValueItems(
+        shortDeviceId: string,
+        allowedRoles: readonly string[],
+    ): Record<string, ConfigItemAny> {
+        const prefix = `${this.adapter.namespace}.${shortDeviceId}.`;
+        const items: Record<string, ConfigItemAny> = {};
+
+        for (const stateId of Object.keys(this.states)) {
+            if (!stateId.startsWith(prefix)) {
+                continue;
+            }
+            const common = this.objects[stateId]?.common as ioBroker.StateCommon | undefined;
+            const role = common?.role;
+            if (!role || !allowedRoles.includes(role) || !(role in ENERGY_ROLE_DIGITS)) {
+                continue;
+            }
+
+            const suffix = stateId.substring(prefix.length);
+            const channel = suffix.substring(0, suffix.lastIndexOf('.'));
+            const channelLabel = channel
+                .replace(/:/g, ' ')
+                .replace(/([a-zA-Z])(\d)/g, '$1 $2')
+                .trim();
+            const metricLabel = typeof common?.name === 'string' ? common.name : suffix;
+
+            items[`energy_${suffix.replace(/[.:]/g, '_')}`] = {
+                type: 'state',
+                oid: `${shortDeviceId}.${suffix}`,
+                control: 'text',
+                unit: common?.unit,
+                digits: ENERGY_ROLE_DIGITS[role],
+                label: `${channelLabel} ${metricLabel}`.trim(),
+                size: 12,
+                style: { opacity: 0.7 },
+            };
+        }
+
+        return items;
     }
 
     private getBleDeviceDetails(deviceId: string, shortDeviceId: string): DeviceDetails<string> {
@@ -854,51 +924,9 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 }
             }
 
-            // Energy values (Power, Voltage, Current, Energy, Frequency): shown automatically
-            // for any channel that reports them, based on the state's role rather than a
-            // fixed list of channel names, so this works for every device generation.
-            const energyRoleDigits: Record<string, number> = {
-                'value.power': 1,
-                'value.power.active': 1,
-                'value.power.reactive': 1,
-                'value.power.consumption': 2,
-                'value.energy': 2,
-                'value.energy.consumed': 2,
-                'value.energy.produced': 2,
-                'value.voltage': 1,
-                'value.current': 2,
-                'value.frequency': 2,
-            };
-
-            for (const stateId of Object.keys(this.states)) {
-                if (!stateId.startsWith(prefix)) {
-                    continue;
-                }
-                const common = this.objects[stateId]?.common as ioBroker.StateCommon | undefined;
-                const role = common?.role;
-                if (!role || !(role in energyRoleDigits)) {
-                    continue;
-                }
-
-                const suffix = stateId.substring(prefix.length);
-                const channel = suffix.substring(0, suffix.lastIndexOf('.'));
-                const channelLabel = channel
-                    .replace(/:/g, ' ')
-                    .replace(/([a-zA-Z])(\d)/g, '$1 $2')
-                    .trim();
-                const metricLabel = typeof common?.name === 'string' ? common.name : suffix;
-
-                items[`energy_${suffix.replace(/[.:]/g, '_')}`] = {
-                    type: 'state',
-                    oid: `${shortDeviceId}.${suffix}`,
-                    control: 'text',
-                    unit: common?.unit,
-                    digits: energyRoleDigits[role],
-                    label: `${channelLabel} ${metricLabel}`.trim(),
-                    size: 12,
-                    style: { opacity: 0.7 },
-                };
-            }
+            // Power values are shown directly on the compact main tile so it does not get
+            // overloaded; voltage, current and energy are shown separately in the device info panel.
+            Object.assign(items, this.buildEnergyValueItems(shortDeviceId, ENERGY_TILE_ROLES));
         }
 
         if (Object.keys(items).length === 0) {

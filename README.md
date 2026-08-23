@@ -227,7 +227,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (@patricknitsch) Device Manager now automatically shows energy values (power, voltage, current, energy) for any device that reports them.
+- (@patricknitsch) Device Manager now automatically shows power values on the device tile, and voltage/current/energy in the device info, for any device that reports them.
 
 ### 12.0.0-alpha.2 (2026-08-19)
 - (@mcm1957) The transition time can now be written for Shelly Dimmer1/Dimmer2 and for Gen2+ dimmers/lights (incl. Dimmer Gen3 and Dimmer Gen4). [#1214][#1224]
