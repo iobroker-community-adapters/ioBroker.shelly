@@ -533,6 +533,107 @@ describe('Test Device Definitions', function () {
     });
 });
 
+describe('Test i18n translations', function () {
+    const i18nDir = path.join(__dirname, '..', 'src', 'i18n');
+    const enPath = path.join(i18nDir, 'en.json');
+    const en = JSON.parse(fs.readFileSync(enPath, 'utf8'));
+
+    const langFiles = fs.readdirSync(i18nDir).filter(file => file.endsWith('.json'));
+
+    // Recursively collect all device source files so a missing name can be traced to its file
+    function collectDeviceSourceFiles(dir) {
+        const result = [];
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+            const fullPath = path.join(dir, entry.name);
+            if (entry.isDirectory()) {
+                result.push(...collectDeviceSourceFiles(fullPath));
+            } else if (entry.isFile() && entry.name.endsWith('.ts')) {
+                result.push(fullPath);
+            }
+        }
+        return result;
+    }
+
+    function findSourceFilesForName(name) {
+        const devicesDir = path.join(__dirname, '..', 'src', 'lib', 'devices');
+        const files = collectDeviceSourceFiles(devicesDir);
+        const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        // Match name: 'value' / "value" / `value`
+        const regex = new RegExp(`name:\\s*(['"\`])${escaped}\\1`);
+        const matches = [];
+        for (const file of files) {
+            if (regex.test(fs.readFileSync(file, 'utf8'))) {
+                matches.push(path.relative(path.join(__dirname, '..'), file).replace(/\\/g, '/'));
+            }
+        }
+        return matches;
+    }
+
+    it('Every "name" used in object creation exists as key in src/i18n/en.json', function () {
+        this.timeout(10000);
+
+        // key => missing name, value => Set of "deviceClass (stateId)" occurrences
+        const missing = new Map();
+
+        runTestOnEachDevice((deviceClass, device) => {
+            for (const stateId in device) {
+                const name = device[stateId]?.common?.name;
+
+                if (typeof name === 'string' && !Object.prototype.hasOwnProperty.call(en, name)) {
+                    if (!missing.has(name)) {
+                        missing.set(name, new Set());
+                    }
+                    missing.get(name).add(`${deviceClass} (${stateId})`);
+                }
+            }
+        });
+
+        if (missing.size > 0) {
+            const lines = [];
+            for (const [name, occurrences] of missing) {
+                const files = findSourceFilesForName(name);
+                lines.push(`  - Missing key: "${name}"`);
+                lines.push(`      used in: ${[...occurrences].join(', ')}`);
+                lines.push(`      file(s): ${files.length ? files.join(', ') : '(source file not located)'}`);
+            }
+
+            expect.fail(
+                `${missing.size} "name" value(s) are missing as keys in src/i18n/en.json:\n${lines.join('\n')}`,
+            );
+        }
+    });
+
+    it('Every key in src/i18n/en.json exists in all other src/i18n/*.json files', function () {
+        const enKeys = Object.keys(en);
+
+        for (const langFile of langFiles) {
+            if (langFile === 'en.json') {
+                continue;
+            }
+
+            const lang = JSON.parse(fs.readFileSync(path.join(i18nDir, langFile), 'utf8'));
+            const missing = enKeys.filter(key => !Object.prototype.hasOwnProperty.call(lang, key));
+
+            expect(missing, `Keys missing in src/i18n/${langFile}`).to.be.an('array').that.is.empty;
+        }
+    });
+
+    it('No key exists in any src/i18n/*.json file which is missing in src/i18n/en.json', function () {
+        for (const langFile of langFiles) {
+            if (langFile === 'en.json') {
+                continue;
+            }
+
+            const lang = JSON.parse(fs.readFileSync(path.join(i18nDir, langFile), 'utf8'));
+            const extra = Object.keys(lang).filter(key => !Object.prototype.hasOwnProperty.call(en, key));
+
+            expect(extra, `Keys in src/i18n/${langFile} that are missing in src/i18n/en.json`).to.be.an(
+                'array',
+            ).that.is.empty;
+        }
+    });
+});
+
 describe('Test Device Registry Completeness', function () {
     const deviceKeys = Object.keys(devices);
 

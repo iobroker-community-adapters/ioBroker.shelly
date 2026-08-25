@@ -227,6 +227,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+- (@mcm1957) Added tests to validate that all datapoint names are translated and that all i18n language files are consistent.
 - (@mcm1957) Added support for Shelly Duo Bulb E27 Gen 3 (shellyduobulbg3). [#1385]
 
 ### 12.0.0-alpha.2 (2026-08-19)
