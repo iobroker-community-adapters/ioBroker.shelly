@@ -103,6 +103,15 @@ Uses Mocha with `@iobroker/testing` framework. Test setup in `test/mocha.setup.j
 
 GitHub Actions workflow (`.github/workflows/test-and-release.yml`): lint-first (Node 24), then adapter tests across Node 22/24 on ubuntu/windows/macos. Deploys to npm on version tags via Trusted Publishing. Releases managed by `@alcalzone/release-script`.
 
+## Instructions for adding a new device
+
+The device-id is the first part of the data transmitted by a device or specified at shelly documentation. Example: The device id for the shelly bulb duo gen 3 is 'shellybulbduog3'.
+
+- Every device uses a seperate file name name '<device-id>.ts' located at 'src/lib/devices/<genx>/' where 'genx' specifies the device generation (gen1/gen2/gen3/gen4) or poweredbyshelly if the device is an external device poswered by shelly.
+- Header of <device-id.ts> must contain a comment specifying device description, id and product code. Add human readyble description if available. Links to device api and knowledgebase must be added. See src/lib/devices/gen3/sellybulbduog3 as an example. 
+- Device must be added into all tables at src/lib/datapoints.ts
+- If device provides a new component add the new component to gen2-helper.ts unless instructed otherwise
+
 ## General instructions
 
 - Minimize all code changes. Do not beautify code and do not perform optimizations unless technical required or explicitly requested.
