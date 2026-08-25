@@ -7188,7 +7188,10 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
             mqtt_cmd: '<mqttprefix>/rpc',
             mqtt_cmd_funct: (value, self) => {
                 const matches = String(value).match(/[a-f0-9]{2}/gi);
-                const rgb = matches && matches.length >= 3 ? matches.slice(0, 3).map((x: string) => parseInt(x, 16)) : undefined;
+                const rgb =
+                    matches && matches.length >= 3
+                        ? matches.slice(0, 3).map((x: string) => parseInt(x, 16))
+                        : undefined;
                 return JSON.stringify({
                     id: self.getNextMsgId(),
                     src: 'iobroker',
