@@ -111,6 +111,8 @@ The device-id is the first part of the data transmitted by a device or specified
 - Header of <device-id.ts> must contain a comment specifying device description, id and product code. Add human readyble description if available. Links to device api and knowledgebase must be added. See src/lib/devices/gen3/sellybulbduog3 as an example. 
 - Device must be added into all tables at src/lib/datapoints.ts
 - If device provides a new component add the new component to gen2-helper.ts unless instructed otherwise
+- Add new device to table of supported devices (https://github.com/iobroker-community-adapters/ioBroker.shelly#supported-devices)
+using next minor version.
 
 ## General instructions
 
