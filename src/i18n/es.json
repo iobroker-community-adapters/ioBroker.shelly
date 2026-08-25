@@ -241,6 +241,7 @@
     "Presence threshold": "Umbral de presencia",
     "Protocol": "Protocolo",
     "RGB Event": "Evento RGB",
+    "RGBCCT Event": "Evento RGBCCT",
     "RGBW Event": "Evento RGBW",
     "RPC status notifications enabled": "Se han habilitado notificaciones de la categoría RPC",
     "RSSI": "RSSI",

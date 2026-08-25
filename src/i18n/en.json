@@ -241,6 +241,7 @@
     "Presence threshold": "Presence threshold",
     "Protocol": "Protocol",
     "RGB Event": "RGB Event",
+    "RGBCCT Event": "RGBCCT Event",
     "RGBW Event": "RGBW Event",
     "RPC status notifications enabled": "RPC status notifications enabled",
     "RSSI": "RSSI",
