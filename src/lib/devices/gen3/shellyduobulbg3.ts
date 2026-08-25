@@ -6,7 +6,9 @@ import * as shellyHelperGen2 from '../gen2-helper';
  *
  * Tunable white bulb (2700 K - 6500 K) with power metering, uses the CCT component.
  *
- * https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/CCT
+ * https://shelly-api-docs.shelly.cloud/gen2/Devices/Gen3/shellyduabulbg3/
+ * https://kb.shelly.cloud/knowledge-base/shelly-duo-bulb-e27-gen3
+ *
  */
 const shellyduobulbg3: DeviceDefinition = {};
 
