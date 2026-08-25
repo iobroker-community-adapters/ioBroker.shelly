@@ -7179,17 +7179,21 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
     deviceObj[`RGBCCT${rgbcctId}.Color`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
-            mqtt_publish_funct: value =>
-                `#${JSON.parse(value)
-                    .rgb.map((x: number) => x.toString(16).padStart(2, '0'))
-                    .join('')}`,
+            mqtt_publish_funct: value => {
+                const rgb = JSON.parse(value).rgb;
+                return Array.isArray(rgb)
+                    ? `#${rgb.map((x: number) => x.toString(16).padStart(2, '0')).join('')}`
+                    : null;
+            },
             mqtt_cmd: '<mqttprefix>/rpc',
             mqtt_cmd_funct: (value, self) => {
+                const matches = String(value).match(/[a-f0-9]{2}/gi);
+                const rgb = matches && matches.length >= 3 ? matches.slice(0, 3).map((x: string) => parseInt(x, 16)) : undefined;
                 return JSON.stringify({
                     id: self.getNextMsgId(),
                     src: 'iobroker',
                     method: 'RGBCCT.Set',
-                    params: { id: rgbcctId, rgb: value.match(/[a-f0-9]{2}/gi).map((x: string) => parseInt(x, 16)) },
+                    params: rgb ? { id: rgbcctId, rgb } : { id: rgbcctId },
                 });
             },
         },
