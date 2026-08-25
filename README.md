@@ -136,9 +136,9 @@ Notes:
 | Shelly Dimmer Gen3 (shellydimmerg3)           | ❌   | >= v9.2.0  |
 | Shelly Duo Bulb E27 Gen3 (shellyduobulbg3)    | ❌   | >= v12.0.0 |
 | Shelly EM Gen 3 (shellyemg3)                  | ❌   | >= v9.5.0  |
-| Shelly Multicolor Bulb E27 Gen3 (shellycolorblbg3) | ❌   | >= v12.0.0 |
 | Shelly H&T Gen3 (shellyhtg3)                  | ❌   | >= v8.0.0  |
 | Shelly I4 / I4DC Gen3 (shellyi4g3)            | ❌   | >= v8.5.0  |
+| Shelly Multicolor Bulb E27 Gen3 (shellycolorblbg3) | ❌   | >= v12.0.0 |
 | Shelly Pill (shellypill)                      | ❌   | >= v10.6.1 |
 | Shelly Plug M Gen3 (shellyplugmg3)            | ❌   | >= v10.6.0 |
 | Shelly Plug PM Gen3 (shellyplugpmg3)          | ❌   | >= v10.5.0 |
