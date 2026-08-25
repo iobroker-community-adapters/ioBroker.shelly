@@ -540,25 +540,67 @@ describe('Test i18n translations', function () {
 
     const langFiles = fs.readdirSync(i18nDir).filter(file => file.endsWith('.json'));
 
-    it('Every "name" used in object creation exists as key in src/i18n/en.json', function () {
-        this.timeout(5000);
+    // Recursively collect all device source files so a missing name can be traced to its file
+    function collectDeviceSourceFiles(dir) {
+        const result = [];
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+            const fullPath = path.join(dir, entry.name);
+            if (entry.isDirectory()) {
+                result.push(...collectDeviceSourceFiles(fullPath));
+            } else if (entry.isFile() && entry.name.endsWith('.ts')) {
+                result.push(fullPath);
+            }
+        }
+        return result;
+    }
 
-        const missing = new Set();
+    function findSourceFilesForName(name) {
+        const devicesDir = path.join(__dirname, '..', 'src', 'lib', 'devices');
+        const files = collectDeviceSourceFiles(devicesDir);
+        const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        // Match name: 'value' / "value" / `value`
+        const regex = new RegExp(`name:\\s*(['"\`])${escaped}\\1`);
+        const matches = [];
+        for (const file of files) {
+            if (regex.test(fs.readFileSync(file, 'utf8'))) {
+                matches.push(path.relative(path.join(__dirname, '..'), file).replace(/\\/g, '/'));
+            }
+        }
+        return matches;
+    }
+
+    it('Every "name" used in object creation exists as key in src/i18n/en.json', function () {
+        this.timeout(10000);
+
+        // key => missing name, value => Set of "deviceClass (stateId)" occurrences
+        const missing = new Map();
 
         runTestOnEachDevice((deviceClass, device) => {
             for (const stateId in device) {
                 const name = device[stateId]?.common?.name;
 
                 if (typeof name === 'string' && !Object.prototype.hasOwnProperty.call(en, name)) {
-                    missing.add(`${name}  (${deviceClass} - ${stateId})`);
+                    if (!missing.has(name)) {
+                        missing.set(name, new Set());
+                    }
+                    missing.get(name).add(`${deviceClass} (${stateId})`);
                 }
             }
         });
 
-        expect(
-            [...missing],
-            `The following "name" values are missing as keys in src/i18n/en.json`,
-        ).to.be.an('array').that.is.empty;
+        if (missing.size > 0) {
+            const lines = [];
+            for (const [name, occurrences] of missing) {
+                const files = findSourceFilesForName(name);
+                lines.push(`  - Missing key: "${name}"`);
+                lines.push(`      used in: ${[...occurrences].join(', ')}`);
+                lines.push(`      file(s): ${files.length ? files.join(', ') : '(source file not located)'}`);
+            }
+
+            expect.fail(
+                `${missing.size} "name" value(s) are missing as keys in src/i18n/en.json:\n${lines.join('\n')}`,
+            );
+        }
     });
 
     it('Every key in src/i18n/en.json exists in all other src/i18n/*.json files', function () {
