@@ -128,6 +128,7 @@
     "Generation": "Поколение",
     "Generic status notifications enabled": "Уведомления о генерическом статусе включены",
     "Green": "Зелёный",
+    "Help: https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md": "Справка: https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/master/docs/en/ble-devices.md",
     "High Frequency": "Высокая частота",
     "Hue": "Оттенок",
     "Humidity": "Влажность",
