@@ -117,4 +117,4 @@ The device-id is the first part of the data transmitted by a device or specified
 - Minimize all code changes. Do not beautify code and do not perform optimizations unless technical required or explicitly requested.
 - Do not use any commmit remark (like closes, fixes, ...) which causes issues to be closed autoimatically - simply use refers to ...issuenumber...
 - Always add a changelog entry to README.md below header `### **WORK IN PROGRESS**`. Add `### **WORK IN PROGRESS**` if not yet existing. Entry must describe the change in a short user oriented form. Do not add technical details.
-
+- Always check if a PR is already merged before adding changes to an existing PR. Create a new PR is a PR is already merged.
