@@ -7401,6 +7401,69 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
+    deviceObj[`RGBCCT${rgbcctId}.DimUp`] = {
+        mqtt: {
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.DimUp',
+                    params: { id: rgbcctId },
+                });
+            },
+        },
+        common: {
+            name: 'Dim Up',
+            type: 'boolean',
+            role: 'button',
+            read: false,
+            write: true,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.DimDown`] = {
+        mqtt: {
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.DimDown',
+                    params: { id: rgbcctId },
+                });
+            },
+        },
+        common: {
+            name: 'Dim Down',
+            type: 'boolean',
+            role: 'button',
+            read: false,
+            write: true,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.DimStop`] = {
+        mqtt: {
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.DimStop',
+                    params: { id: rgbcctId },
+                });
+            },
+        },
+        common: {
+            name: 'Dim Stop',
+            type: 'boolean',
+            role: 'button',
+            read: false,
+            write: true,
+        },
+    };
+
     if (hasPowerMetering) {
         deviceObj[`RGBCCT${rgbcctId}.Power`] = {
             mqtt: {
