@@ -7233,28 +7233,96 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
-    deviceObj[`RGBCCT${rgbcctId}.transition`] = {
+    deviceObj[`RGBCCT${rgbcctId}.transition_target_output`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
-            mqtt_publish_funct: value => JSON.parse(value)?.transition?.duration,
-            mqtt_cmd: '<mqttprefix>/rpc',
-            mqtt_cmd_funct: (value, self) => {
-                return JSON.stringify({
-                    id: self.getNextMsgId(),
-                    src: 'iobroker',
-                    method: 'RGBCCT.Set',
-                    params: { id: rgbcctId, transition_duration: value },
-                });
+            mqtt_publish_funct: value => JSON.parse(value)?.transition?.target?.output,
+        },
+        common: {
+            name: 'Target output state',
+            type: 'boolean',
+            role: 'sensor.switch',
+            read: true,
+            write: false,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.transition_target_rgb`] = {
+        mqtt: {
+            mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
+            mqtt_publish_funct: value => {
+                const rgb = JSON.parse(value)?.transition?.target?.rgb;
+                return Array.isArray(rgb) ? rgb.join(',') : undefined;
             },
         },
         common: {
-            name: 'Transition Time',
+            name: 'Target color',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.transition_target_ct`] = {
+        mqtt: {
+            mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
+            mqtt_publish_funct: value => JSON.parse(value)?.transition?.target?.ct,
+        },
+        common: {
+            name: 'Target color temperature',
             type: 'number',
-            role: 'value',
+            role: 'level.color.temperature',
+            read: true,
+            write: false,
+            unit: 'K',
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.transition_target_brightness`] = {
+        mqtt: {
+            mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
+            mqtt_publish_funct: value => JSON.parse(value)?.transition?.target?.brightness,
+        },
+        common: {
+            name: 'Target brightness',
+            type: 'number',
+            role: 'level.brightness',
+            read: true,
+            write: false,
+            min: 0,
+            max: 100,
+            unit: '%',
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.transition_started_at`] = {
+        mqtt: {
+            mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
+            mqtt_publish_funct: value => JSON.parse(value)?.transition?.started_at,
+        },
+        common: {
+            name: 'Start time of transition',
+            type: 'number',
+            role: 'date',
+            read: true,
+            write: false,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.transition_duration`] = {
+        mqtt: {
+            mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
+            mqtt_publish_funct: value => JSON.parse(value)?.transition?.duration,
+        },
+        common: {
+            name: 'Duration of transition',
+            type: 'number',
+            role: 'value.timer',
+            read: true,
+            write: false,
             def: 0,
             unit: 's',
-            read: true,
-            write: true,
         },
     };
 
@@ -7352,31 +7420,6 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
                 off: 'off',
                 restore_last: 'restore_last',
             },
-        },
-    };
-
-    deviceObj[`RGBCCT${rgbcctId}.TransitionDuration`] = {
-        mqtt: {
-            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
-            http_publish_funct: value => (value ? JSON.parse(value).transition_duration : undefined),
-            mqtt_cmd: '<mqttprefix>/rpc',
-            mqtt_cmd_funct: (value, self) => {
-                return JSON.stringify({
-                    id: self.getNextMsgId(),
-                    src: 'iobroker',
-                    method: 'RGBCCT.SetConfig',
-                    params: { id: rgbcctId, config: { transition_duration: value } },
-                });
-            },
-        },
-        common: {
-            name: 'Transition Duration',
-            type: 'number',
-            role: 'level.timer',
-            def: 0,
-            unit: 's',
-            read: true,
-            write: true,
         },
     };
 
