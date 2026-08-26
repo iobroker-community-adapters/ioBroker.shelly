@@ -7464,6 +7464,333 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
+    deviceObj[`RGBCCT${rgbcctId}.ToggleAfter`] = {
+        mqtt: {
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.Set',
+                    params: { id: rgbcctId, on: true, toggle_after: value },
+                });
+            },
+        },
+        common: {
+            name: 'Toggle After',
+            type: 'number',
+            role: 'level.timer',
+            def: 0,
+            unit: 's',
+            read: false,
+            write: true,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.Offset`] = {
+        mqtt: {
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.Set',
+                    params: { id: rgbcctId, offset: value },
+                });
+            },
+        },
+        common: {
+            name: 'Brightness Offset',
+            type: 'number',
+            role: 'level.brightness',
+            read: false,
+            write: true,
+            min: -100,
+            max: 100,
+            unit: '%',
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.AutoTimerOn`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => (value ? JSON.parse(value).auto_on : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { auto_on: value } },
+                });
+            },
+        },
+        common: {
+            name: 'Auto Timer On',
+            type: 'boolean',
+            role: 'switch.enable',
+            def: false,
+            read: true,
+            write: true,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.AutoTimerOnDelay`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => (value ? JSON.parse(value).auto_on_delay : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { auto_on_delay: value } },
+                });
+            },
+        },
+        common: {
+            name: 'Auto Timer On Delay',
+            type: 'number',
+            role: 'level.timer',
+            def: 0,
+            unit: 's',
+            read: true,
+            write: true,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.AutoTimerOff`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => (value ? JSON.parse(value).auto_off : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { auto_off: value } },
+                });
+            },
+        },
+        common: {
+            name: 'Auto Timer Off',
+            type: 'boolean',
+            role: 'switch.enable',
+            def: false,
+            read: true,
+            write: true,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.AutoTimerOffDelay`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => (value ? JSON.parse(value).auto_off_delay : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { auto_off_delay: value } },
+                });
+            },
+        },
+        common: {
+            name: 'Auto Timer Off Delay',
+            type: 'number',
+            role: 'level.timer',
+            def: 0,
+            unit: 's',
+            read: true,
+            write: true,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.MinBrightnessOnToggle`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => (value ? JSON.parse(value).min_brightness_on_toggle : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { min_brightness_on_toggle: value } },
+                });
+            },
+        },
+        common: {
+            name: 'Min Brightness on Toggle',
+            type: 'number',
+            role: 'level.brightness',
+            read: true,
+            write: true,
+            min: 0,
+            max: 100,
+            unit: '%',
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.NightModeEnable`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => (value ? JSON.parse(value).night_mode?.enable : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { night_mode: { enable: value } } },
+                });
+            },
+        },
+        common: {
+            name: 'Night Mode Enable',
+            type: 'boolean',
+            role: 'switch.enable',
+            def: false,
+            read: true,
+            write: true,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.NightModeBrightness`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => (value ? JSON.parse(value).night_mode?.brightness : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { night_mode: { brightness: value } } },
+                });
+            },
+        },
+        common: {
+            name: 'Night Mode Brightness',
+            type: 'number',
+            role: 'level.brightness',
+            read: true,
+            write: true,
+            min: 0,
+            max: 100,
+            unit: '%',
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.NightModeColorRGB`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => {
+                const rgb = value ? JSON.parse(value).night_mode?.rgb : undefined;
+                return Array.isArray(rgb) ? rgb.join(',') : undefined;
+            },
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { night_mode: { rgb: String(value).split(',').map(Number) } } },
+                });
+            },
+        },
+        common: {
+            name: 'Night Mode Color',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.NightModeColorTemperature`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => (value ? JSON.parse(value).night_mode?.ct : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { night_mode: { ct: value } } },
+                });
+            },
+        },
+        common: {
+            name: 'Night Mode Color Temperature',
+            type: 'number',
+            role: 'level.color.temperature',
+            read: true,
+            write: true,
+            unit: 'K',
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.NightModeMode`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => (value ? JSON.parse(value).night_mode?.mode : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: { id: rgbcctId, config: { night_mode: { mode: value } } },
+                });
+            },
+        },
+        common: {
+            name: 'Night Mode Mode',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+            states: {
+                rgb: 'rgb',
+                cct: 'cct',
+            },
+        },
+    };
+
+    deviceObj[`RGBCCT${rgbcctId}.NightModeActiveBetween`] = {
+        mqtt: {
+            http_publish: `/rpc/RGBCCT.GetConfig?id=${rgbcctId}`,
+            http_publish_funct: value => {
+                const activeBetween = value ? JSON.parse(value).night_mode?.active_between : undefined;
+                return Array.isArray(activeBetween) ? activeBetween.join(',') : undefined;
+            },
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'RGBCCT.SetConfig',
+                    params: {
+                        id: rgbcctId,
+                        config: { night_mode: { active_between: String(value).split(',') } },
+                    },
+                });
+            },
+        },
+        common: {
+            name: 'Night Mode Active Between',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+        },
+    };
+
     if (hasPowerMetering) {
         deviceObj[`RGBCCT${rgbcctId}.Power`] = {
             mqtt: {
