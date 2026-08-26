@@ -7272,30 +7272,30 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
-    deviceObj[`RGBCCT${rgbcctId}.Event`] = {
-        mqtt: {
-            mqtt_publish: '<mqttprefix>/events/rpc',
-            mqtt_publish_funct: value => {
-                const valueObj = JSON.parse(value);
-                if (valueObj?.method === 'NotifyEvent' && valueObj?.params?.events) {
-                    for (const e in valueObj.params.events) {
-                        const event = valueObj.params.events[e];
-                        if (typeof event === 'object' && event.component === `rgbcct:${rgbcctId}`) {
-                            return event.event;
-                        }
-                    }
-                }
-                return undefined;
-            },
-        },
-        common: {
-            name: 'RGBCCT Event',
-            type: 'string',
-            role: 'state',
-            read: true,
-            write: false,
-        },
-    };
+    // deviceObj[`RGBCCT${rgbcctId}.Event`] = {
+    //     mqtt: {
+    //         mqtt_publish: '<mqttprefix>/events/rpc',
+    //         mqtt_publish_funct: value => {
+    //             const valueObj = JSON.parse(value);
+    //             if (valueObj?.method === 'NotifyEvent' && valueObj?.params?.events) {
+    //                 for (const e in valueObj.params.events) {
+    //                     const event = valueObj.params.events[e];
+    //                     if (typeof event === 'object' && event.component === `rgbcct:${rgbcctId}`) {
+    //                         return event.event;
+    //                     }
+    //                 }
+    //             }
+    //             return undefined;
+    //         },
+    //     },
+    //     common: {
+    //         name: 'RGBCCT Event',
+    //         type: 'string',
+    //         role: 'state',
+    //         read: true,
+    //         write: false,
+    //     },
+    // };
 
     deviceObj[`RGBCCT${rgbcctId}.TimerStartedAt`] = {
         mqtt: {
