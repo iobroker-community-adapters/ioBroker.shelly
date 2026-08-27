@@ -147,6 +147,17 @@ class MQTTClient extends BaseClient {
         return this.deviceId;
     }
 
+    /**
+     * Serial id reduced to plain lowercase hex, so it can be compared to a MAC address.
+     *
+     * @returns
+     */
+    getNormalizedSerialId(): string {
+        return this.getSerialId()
+            .replace(/[^a-fA-F0-9]/g, '')
+            .toLowerCase();
+    }
+
     getMqttPrefix(): string {
         return this.mqttprefix ?? '';
     }
@@ -257,6 +268,13 @@ class MQTTClient extends BaseClient {
                         // Update IP address
                         const ip = payloadObj?.result?.eth?.ip || payloadObj?.result?.wifi?.sta_ip;
                         if (ip && ip !== this.getIP()) {
+                            const remoteIp = this.stream?.remoteAddress;
+                            if (ip === remoteIp) {
+                                this.clearHttpEndpoint(`Gen 2+ ${INIT_SRC}/rpc`);
+                            } else if (remoteIp && !remoteIp.endsWith('.1')) {
+                                // TODO: remove workaround to skip in Docker env
+                                await this.setRangeExtenderHttpEndpoint(remoteIp);
+                            }
                             await this.setIP(ip, `Gen 2+ ${INIT_SRC}/rpc`);
                             await this.adapter.deviceStatusUpdate(this.getDeviceId(), true); // Device online
                         }
@@ -666,6 +684,59 @@ class MQTTClient extends BaseClient {
         return undefined;
     }
 
+    /**
+     * A Gen 2+ device connected through a range extender is reachable at the extender's
+     * address and a mapped port only. Ask every extender candidate that shares the remote
+     * address for its AP clients and pick the port belonging to this device.
+     *
+     * @param remoteIp address the MQTT connection of this device came from
+     * @returns whether an endpoint was found
+     */
+    async setRangeExtenderHttpEndpoint(remoteIp: string | null | undefined): Promise<boolean> {
+        if (this.getDeviceGen() < 2 || !remoteIp || !this.getNormalizedSerialId()) {
+            return false;
+        }
+
+        const clients = MQTTClient.clientlist ?? {};
+        for (const clientId in clients) {
+            const client = clients[clientId];
+            if (
+                !client ||
+                client === this ||
+                client.getDeviceGen() < 2 ||
+                client.getIP() !== remoteIp ||
+                !client.getHttpEndpoint()
+            ) {
+                continue;
+            }
+
+            try {
+                const body = await client.requestAsync('/rpc/WiFi.ListAPClients');
+                const apClients = JSON.parse(body)?.ap_clients ?? [];
+                const apClient = apClients.find(
+                    (entry: { mac?: string; mport?: number }) =>
+                        String(entry?.mac ?? '')
+                            .replace(/[^a-fA-F0-9]/g, '')
+                            .toLowerCase() === this.getNormalizedSerialId(),
+                );
+
+                if (apClient?.mport > 0) {
+                    await this.setHttpEndpoint(`${remoteIp}:${apClient.mport}`, `range extender ${client.getId()}`);
+                    this.adapter.log.info(
+                        `[MQTT] Device ${this.getId()} uses range extender ${client.getId()} via ${this.getHttpEndpoint()}`,
+                    );
+                    return true;
+                }
+            } catch (err) {
+                this.adapter.log.debug(
+                    `[MQTT] Unable to check range extender clients of ${client.getLogInfo()} for ${this.getLogInfo()}: ${err}`,
+                );
+            }
+        }
+
+        return false;
+    }
+
     listener(): void {
         // client connected
         this.client.on('connect', async packet => {
@@ -724,19 +795,13 @@ class MQTTClient extends BaseClient {
                     if (ip && !String(ip).endsWith('.1')) {
                         // TODO: remove workaround to skip in Docker env
                         await this.setIP(ip, 'MQTT connect');
+                        await this.setRangeExtenderHttpEndpoint(ip);
                     } else {
                         await this.initIPFromState();
                     }
 
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" updating device status`);
                     await this.adapter.deviceStatusUpdate(this.getDeviceId(), true); // Device online
-
-                    this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting http states`);
-                    await this.httpIoBrokerState();
-
-                    if (this.isInitAborted('httpIoBrokerState')) {
-                        return;
-                    }
 
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting mqtt prefix`);
                     if (this.will?.topic) {
@@ -792,6 +857,13 @@ class MQTTClient extends BaseClient {
                         this.adapter.log.debug(
                             `[MQTT] Client communication error (connack): "${packet.clientId}" - error: ${err}`,
                         );
+                    }
+
+                    this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting http states`);
+                    await this.httpIoBrokerState();
+
+                    if (this.isInitAborted('httpIoBrokerState')) {
+                        return;
                     }
 
                     this.adapter.log.info(`[MQTT] Device with client id "${packet.clientId}" initialized.`);

@@ -46,6 +46,7 @@ export class BaseClient implements ShellyClient {
     http: Record<string, string[]>;
     deviceId: string | undefined; // e.g. SHBDUO-1#8CAAB5616291#2 (used in object IDs)
     ip: string | undefined; // e.g. 192.168.1.2
+    httpEndpoint: string | undefined; // e.g. 192.168.1.2 or 192.168.1.3:23456 (range extender NAT)
     id: string | undefined; // e.g. ShellyBulbDuo-8CAAB5616291
     deviceType: string | undefined; // e.g. SHBDUO-1 or SHRGBW2
     deviceMode: string | undefined; // e.g. color or white / relay or roller
@@ -90,10 +91,10 @@ export class BaseClient implements ShellyClient {
         }
 
         return new Promise((resolve, reject) => {
-            if (!this.getIP()) {
+            if (!this.getHttpEndpoint()) {
                 reject(
                     new Error(
-                        `[requestAsync] Unable to perform HTTP request "${url}" - IP address is unknown of ${this.getLogInfo()}`,
+                        `[requestAsync] Unable to perform HTTP request "${url}" - HTTP endpoint is unknown of ${this.getLogInfo()}`,
                     ),
                 );
                 return;
@@ -107,7 +108,7 @@ export class BaseClient implements ShellyClient {
                 transformResponse: (res: string) => {
                     return res; // Avoid automatic json parse
                 },
-                baseURL: `http://${this.getIP()}`,
+                baseURL: `http://${this.getHttpEndpoint()}`,
                 timeout: this.httpTimeout,
                 url,
             };
@@ -405,6 +406,43 @@ export class BaseClient implements ShellyClient {
         return this.ip;
     }
 
+    /**
+     * Returns the host (and port) HTTP requests have to go to.
+     * Same as the IP address unless the device sits behind a range extender.
+     *
+     * @returns
+     */
+    getHttpEndpoint(): string | undefined {
+        return this.httpEndpoint ?? this.ip;
+    }
+
+    clearHttpEndpoint(source: string): void {
+        if (!this.httpEndpoint) {
+            return;
+        }
+
+        this.adapter.log.debug(
+            `[clearHttpEndpoint] Removed HTTP endpoint for device ${this.getDeviceId()}: ${this.httpEndpoint} (source: ${source})`,
+        );
+        this.httpEndpoint = undefined;
+    }
+
+    async setHttpEndpoint(endpoint: string | undefined, source: string): Promise<void> {
+        if (!endpoint) {
+            return;
+        }
+
+        this.httpEndpoint = endpoint;
+        this.adapter.log.debug(
+            `[setHttpEndpoint] New HTTP endpoint for device ${this.getDeviceId()}: ${endpoint} (source: ${source})`,
+        );
+
+        const hostNameObj = await this.adapter.getObjectAsync(`${this.getDeviceId()}.hostname`);
+        if (hostNameObj) {
+            await this.adapter.setState(`${this.getDeviceId()}.hostname`, { val: endpoint, ack: true, c: source });
+        }
+    }
+
     async setIP(ip: string | undefined, source: string): Promise<void> {
         if (!ip) {
             return;
@@ -415,7 +453,11 @@ export class BaseClient implements ShellyClient {
 
         const hostNameObj = await this.adapter.getObjectAsync(`${this.getDeviceId()}.hostname`);
         if (hostNameObj) {
-            await this.adapter.setState(`${this.getDeviceId()}.hostname`, { val: ip, ack: true, c: source });
+            await this.adapter.setState(`${this.getDeviceId()}.hostname`, {
+                val: this.getHttpEndpoint(),
+                ack: true,
+                c: source,
+            });
         }
     }
 
@@ -437,7 +479,8 @@ export class BaseClient implements ShellyClient {
      * @returns
      */
     getLogInfo(): string {
-        return `${this.getIP() ?? ''} (${this.getDeviceClass()} / ${this.getId()} / ${this.getDeviceId()})`.trim();
+        const via = this.httpEndpoint && this.httpEndpoint !== this.ip ? ` via ${this.httpEndpoint}` : '';
+        return `${this.getIP() ?? ''}${via} (${this.getDeviceClass()} / ${this.getId()} / ${this.getDeviceId()})`.trim();
     }
 
     /**
@@ -518,9 +561,9 @@ export class BaseClient implements ShellyClient {
      * Missing data will be pulled by HTTP
      */
     async httpIoBrokerState(): Promise<void> {
-        if (!this.isOnline() || !this.getIP()) {
+        if (!this.isOnline() || !this.getHttpEndpoint()) {
             this.adapter.log.silly(
-                `[httpIoBrokerState] Device ${this.getLogInfo()} is offline (or IP is unknown) - waiting`,
+                `[httpIoBrokerState] Device ${this.getLogInfo()} is offline (or HTTP endpoint is unknown) - waiting`,
             );
 
             this.httpIoBrokerStateTimeout = setTimeout(
@@ -739,7 +782,9 @@ export class BaseClient implements ShellyClient {
                                     try {
                                         if (this.getDeviceGen() === 1) {
                                             // Append value parameters
-                                            const url = new URL(`http://${this.getIP()}${httpBlock?.http_cmd}`);
+                                            const url = new URL(
+                                                `http://${this.getHttpEndpoint()}${httpBlock?.http_cmd}`,
+                                            );
                                             if (typeof publishValue === 'object') {
                                                 Object.keys(publishValue).forEach(key =>
                                                     url.searchParams.append(key, publishValue[key]),
@@ -1070,6 +1115,7 @@ export class BaseClient implements ShellyClient {
 
         this.deviceId = undefined;
         this.ip = undefined;
+        this.httpEndpoint = undefined;
 
         this.id = undefined;
         this.deviceType = undefined;
