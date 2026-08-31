@@ -103,9 +103,20 @@ Uses Mocha with `@iobroker/testing` framework. Test setup in `test/mocha.setup.j
 
 GitHub Actions workflow (`.github/workflows/test-and-release.yml`): lint-first (Node 24), then adapter tests across Node 22/24 on ubuntu/windows/macos. Deploys to npm on version tags via Trusted Publishing. Releases managed by `@alcalzone/release-script`.
 
+## Instructions for adding a new device
+
+The device-id is the first part of the data transmitted by a device or specified at shelly documentation. Example: The device id for the shelly bulb duo gen 3 is 'shellybulbduog3'.
+
+- Every device uses a seperate file name name '<device-id>.ts' located at 'src/lib/devices/<genx>/' where 'genx' specifies the device generation (gen1/gen2/gen3/gen4) or poweredbyshelly if the device is an external device poswered by shelly.
+- Header of <device-id.ts> must contain a comment specifying device description, id and product code. Add human readyble description if available. Links to device api and knowledgebase must be added. See src/lib/devices/gen3/sellybulbduog3 as an example. 
+- Device must be added into all tables at src/lib/datapoints.ts
+- If device provides a new component add the new component to gen2-helper.ts unless instructed otherwise
+- Add new device to table of supported devices (https://github.com/iobroker-community-adapters/ioBroker.shelly#supported-devices)
+using next minor version. Use correct alphabetically sorting within table.
+
 ## General instructions
 
 - Minimize all code changes. Do not beautify code and do not perform optimizations unless technical required or explicitly requested.
 - Do not use any commmit remark (like closes, fixes, ...) which causes issues to be closed autoimatically - simply use refers to ...issuenumber...
 - Always add a changelog entry to README.md below header `### **WORK IN PROGRESS**`. Add `### **WORK IN PROGRESS**` if not yet existing. Entry must describe the change in a short user oriented form. Do not add technical details.
-
+- Always check if a PR is already merged before adding changes to an existing PR. Create a new PR is a PR is already merged.

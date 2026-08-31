@@ -228,6 +228,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 - (@patricknitsch) Device Manager now automatically shows power values on the device tile, and voltage/current/energy in the device info, for any device that reports them.
+- (@mcm1957) Added the missing translations for all datapoint names in all supported languages.
+- (@mcm1957) Added tests to validate that all datapoint names and descriptions are translated and that all i18n language files are consistent.
+- (@mcm1957) Added support for Shelly Duo Bulb E27 Gen 3 (shellyduobulbg3). [#1385]
 
 ### 12.0.0-alpha.2 (2026-08-19)
 - (@mcm1957) The transition time can now be written for Shelly Dimmer1/Dimmer2 and for Gen2+ dimmers/lights (incl. Dimmer Gen3 and Dimmer Gen4). [#1214][#1224]
