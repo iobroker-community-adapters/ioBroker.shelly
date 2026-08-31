@@ -449,7 +449,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         const prefix = `${this.adapter.namespace}.${shortDeviceId}.`;
         const items: Record<string, ConfigItemAny> = {};
 
-        for (const stateId of Object.keys(this.states)) {
+        for (const stateId in this.states) {
             if (!stateId.startsWith(prefix)) {
                 continue;
             }
