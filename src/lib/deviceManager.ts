@@ -34,8 +34,12 @@ const ENERGY_ROLE_DIGITS: Record<string, number> = {
     'value.power': 1,
     'value.power.active': 1,
     'value.power.reactive': 1,
-    'value.power.consumption': 2,
+    'value.power.consumed': 1,
+    'value.power.produced': 1,
+    'value.power.consumption': 2, // deprecated, still used by Gen1 devices
     'value.energy': 2,
+    'value.energy.active': 2,
+    'value.energy.reactive': 2,
     'value.energy.consumed': 2,
     'value.energy.produced': 2,
     'value.voltage': 1,
@@ -44,7 +48,7 @@ const ENERGY_ROLE_DIGITS: Record<string, number> = {
 };
 
 /** Roles considered "power" for the compact main tile - voltage/current/energy are only shown in the device info panel */
-const ENERGY_TILE_ROLES = ['value.power', 'value.power.active'];
+const ENERGY_TILE_ROLES = ['value.power', 'value.power.active', 'value.power.consumed', 'value.power.produced'];
 
 /** Group metadata: display name key (for i18n) and representative icon */
 const groupMeta: Record<string, { nameKey: string; icon: string }> = {
