@@ -432,8 +432,32 @@ async function getState(self: ShellyClient, id: string): Promise<ioBroker.StateV
     return state ? state.val : undefined;
 }
 
+/**
+ * Splits a hostname state into host and port. A device behind a range extender is
+ * stored as "address:port", everything else answers on port 80.
+ *
+ * @param hostname value of the hostname state
+ * @returns
+ */
+function parseHostnameWithPort(hostname: string): { hostname: string; port: number } {
+    try {
+        const url = new URL(`http://${hostname}`);
+
+        return {
+            hostname: url.hostname,
+            port: Number(url.port) || 80,
+        };
+    } catch {
+        return {
+            hostname,
+            port: 80,
+        };
+    }
+}
+
 export {
     getIcon,
+    parseHostnameWithPort,
     celsiusToFahrenheit,
     fahrenheitToCelsius,
     setDeviceName,
