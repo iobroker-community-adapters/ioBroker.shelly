@@ -1631,6 +1631,192 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
         return { delete: id };
     }
 
+    /**
+     * While a progress dialog is open, the device manager GUI waits only five seconds for the next
+     * message from the adapter and otherwise reports "No response from the backend". Installing a
+     * script takes longer than that, so the dialog is updated regularly - every update is such a
+     * message. The returned function stops the heartbeat again.
+     *
+     * @param progress the open progress dialog
+     * @param label text to show in the dialog
+     */
+    private static startProgressHeartbeat(
+        progress: Awaited<ReturnType<ActionContext['openProgress']>>,
+        label: () => string,
+    ): () => void {
+        let running = false;
+
+        const timer = setInterval(() => {
+            if (running) {
+                return;
+            }
+            running = true;
+            progress
+                .update({ label: label() })
+                .catch(() => {
+                    /* the dialog may have been closed in the meantime */
+                })
+                .finally(() => (running = false));
+        }, 2000);
+
+        return () => clearInterval(timer);
+    }
+
+    /**
+     * Install or update the BLE gateway script on one device.
+     *
+     * @param id full object id of the device
+     * @param context action context of the device manager
+     */
+    async handleBleScriptInstall(id: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {
+        const shortDeviceId = id.substring(this.adapter.namespace.length + 1);
+        const progress = await context.openProgress('Installing BLE gateway script...', { indeterminate: true });
+        const stopHeartbeat = ShellyDeviceManagement.startProgressHeartbeat(progress, () =>
+            I18n.translate('Installing BLE gateway script...'),
+        );
+
+        let result: { status: string; version?: string; message: string; restartRequired?: boolean };
+        try {
+            result = await this.installBleGatewayScript(shortDeviceId);
+        } finally {
+            stopHeartbeat();
+            // The progress dialog must be closed before a message dialog can be opened
+            await progress.close();
+        }
+
+        if (result.status === 'error') {
+            await context.showMessage(
+                I18n.getTranslatedObject('Could not install the BLE gateway script: %s', result.message),
+            );
+        } else if (result.status === 'uptodate') {
+            await context.showMessage(
+                I18n.getTranslatedObject(
+                    'The BLE gateway script is already up to date (version %s)',
+                    result.version ?? '',
+                ),
+            );
+        } else {
+            await context.showMessage(
+                I18n.getTranslatedObject(
+                    'The BLE gateway script (version %s) has been installed',
+                    result.version ?? '',
+                ),
+            );
+        }
+
+        // Bluetooth was switched off on the device - it applies that only after a restart
+        if (result.restartRequired) {
+            await context.showMessage(
+                I18n.getTranslatedObject('Bluetooth has been enabled - please restart the device to activate it'),
+            );
+        }
+
+        // 'device' is not a valid value - the GUI only knows 'all', 'instance' and 'devices'
+        return { refresh: 'devices' };
+    }
+
+    /**
+     * Update the BLE gateway script on every device which already has it installed. Devices without
+     * the script are not touched - installing it everywhere is done per device on purpose.
+     *
+     * @param context action context of the device manager
+     */
+    async handleUpdateAllBleScripts(context: ActionContext): Promise<{ refresh: boolean }> {
+        const ns = this.adapter.namespace;
+        const progress = await context.openProgress('Updating BLE gateway scripts...', { indeterminate: true });
+
+        let currentLabel = I18n.translate('Updating BLE gateway scripts...');
+        const stopHeartbeat = ShellyDeviceManagement.startProgressHeartbeat(progress, () => currentLabel);
+
+        const updated: string[] = [];
+        const failed: string[] = [];
+        let upToDate = 0;
+
+        try {
+            for (const deviceId of Object.keys(this.objects)
+                .filter(objectId => this.objects[objectId].type === 'device')
+                .map(objectId => objectId.substring(ns.length + 1))
+                .filter(deviceId => !deviceId.startsWith('ble.'))) {
+                // Only devices which are online and already report a script version are candidates.
+                // Everything else would need an HTTP request per device just to find out.
+                const installedVersion = this.states[`${ns}.${deviceId}.BLE.scriptVersion`]?.val as string | undefined;
+                if (!installedVersion || !this.states[`${ns}.${deviceId}.online`]?.val) {
+                    continue;
+                }
+                if (installedVersion === bleGatewayScriptVersion) {
+                    this.adapter.log.debug(
+                        `[DeviceManager] ${deviceId}: BLE gateway script ${installedVersion} is up to date`,
+                    );
+                    upToDate++;
+                    continue;
+                }
+
+                const name = this.objects[`${ns}.${deviceId}`]?.common?.name;
+                const label = typeof name === 'string' && name ? name : deviceId;
+
+                currentLabel = I18n.translate('Updating %s...', label);
+
+                this.adapter.log.info(
+                    `[DeviceManager] ${deviceId}: updating the BLE gateway script from ${installedVersion} to ${bleGatewayScriptVersion}`,
+                );
+
+                const result = await this.installBleGatewayScript(deviceId);
+                if (result.status === 'error') {
+                    this.adapter.log.warn(`[DeviceManager] ${deviceId}: ${result.message}`);
+                    failed.push(label);
+                } else {
+                    updated.push(label);
+                }
+            }
+        } finally {
+            stopHeartbeat();
+            await progress.close();
+        }
+
+        this.adapter.log.info(
+            `[DeviceManager] BLE gateway scripts: ${updated.length} updated, ${failed.length} failed, ${upToDate} already up to date`,
+        );
+
+        if (!updated.length && !failed.length) {
+            await context.showMessage(
+                I18n.getTranslatedObject('All %s installed BLE gateway scripts are up to date', String(upToDate)),
+            );
+        } else if (!failed.length) {
+            await context.showMessage(
+                I18n.getTranslatedObject('Updated the BLE gateway script on: %s', updated.join(', ')),
+            );
+        } else {
+            await context.showMessage(
+                I18n.getTranslatedObject(
+                    'Updated the BLE gateway script on: %s. Failed for: %s - see the log for details',
+                    updated.join(', ') || '-',
+                    failed.join(', '),
+                ),
+            );
+        }
+
+        return { refresh: true };
+    }
+
+    /**
+     * Run the script installation on the connected client of a device.
+     *
+     * @param shortDeviceId device id without the namespace, e.g. `SNSN-0013A#a1b2c3#1`
+     */
+    private async installBleGatewayScript(
+        shortDeviceId: string,
+    ): Promise<{ status: string; version?: string; message: string; restartRequired?: boolean }> {
+        const client = this.adapter.getClientByDeviceId(shortDeviceId);
+
+        if (!client) {
+            return { status: 'error', message: `Device ${shortDeviceId} is not connected` };
+        }
+
+        this.adapter.log.info(`[DeviceManager] Installing BLE gateway script on ${shortDeviceId}`);
+
+        return await client.installBleGatewayScript();
+    }
+
     async handleFirmwareUpdate(id: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {
         const shortDeviceId = id.substring(this.adapter.namespace.length + 1);
         const ns = this.adapter.namespace;
