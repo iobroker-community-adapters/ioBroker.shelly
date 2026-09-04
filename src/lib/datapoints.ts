@@ -77,6 +77,7 @@ import { shelly1pmminig3 } from './devices/gen3/shelly1pmminig3';
 import { shelly2lg3 } from './devices/gen3/shelly2lg3';
 import { shelly2pmg3 } from './devices/gen3/shelly2pmg3';
 import { shelly3em63g3 } from './devices/gen3/shelly3em63g3';
+import { shellyazht } from './devices/gen3/shellyazht';
 import { shellyazplug } from './devices/gen3/shellyazplug';
 import { shellyblugwg3 } from './devices/gen3/shellyblugwg3';
 import { shellyddimmerg3 } from './devices/gen3/shellyddimmerg3';
@@ -194,6 +195,7 @@ const devices: Record<string, DeviceDefinition> = {
     shelly2lg3,
     shelly2pmg3,
     shelly3em63g3,
+    shellyazht,
     shellyazplug,
     shellyblugwg3,
     shellyddimmerg3,
@@ -312,6 +314,7 @@ const deviceGen: Record<string, number> = {
     shelly2lg3: 3,
     shelly2pmg3: 3,
     shelly3em63g3: 3,
+    shellyazht: 3,
     shellyazplug: 3,
     shellyblugwg3: 3,
     shellyddimmerg3: 3,
@@ -431,6 +434,7 @@ const deviceGroupMap: Record<string, string> = {
     shelly2lg3: 'relay',
     shelly2pmg3: 'relay',
     shelly3em63g3: 'meter',
+    shellyazht: 'sensor',
     shellyazplug: 'plug',
     shellyblugwg3: 'gateway',
     shellyddimmerg3: 'dimmer',
@@ -549,6 +553,7 @@ const deviceIcons: Record<string, string> = {
     shelly2lg3: 'shelly2lg3',
     shelly2pmg3: 'shelly2pmg3',
     shelly3em63g3: 'shellyemg3',
+    shellyazht: 'shellyhtg3',
     shellyazplug: 'shellyplugsg3',
     shellyblugwg3: 'shellyblugwg3',
     shellyddimmerg3: 'shellydimmerg3',
@@ -668,6 +673,7 @@ const deviceKnowledgeBase: Record<string, string | undefined> = {
     shelly2lg3: 'https://kb.shelly.cloud/knowledge-base/shelly-2l-gen3',
     shelly2pmg3: 'https://kb.shelly.cloud/knowledge-base/shelly-2pm-gen3',
     shelly3em63g3: 'https://kb.shelly.cloud/knowledge-base/shelly-3em-63-gen3',
+    shellyazht: 'https://kb.shelly.cloud/knowledge-base/shelly-az-h-t',
     shellyazplug: 'https://kb.shelly.cloud/knowledge-base/shelly-az-plug',
     shellyblugwg3: 'https://kb.shelly.cloud/knowledge-base/shelly-blu-gateway-gen3',
     shellyddimmerg3: 'https://kb.shelly.cloud/knowledge-base/shelly-dali-dimmer-gen3',
@@ -788,6 +794,7 @@ const deviceTypes: Record<string, string[]> = {
     shelly2lg3: ['shelly2lg3'],
     shelly2pmg3: ['shelly2pmg3'],
     shelly3em63g3: ['shelly3em63g3'],
+    shellyazht: ['shellyazht'],
     shellyazplug: ['shellyazplug'],
     shellyblugwg3: ['shellyblugwg3'],
     shellyddimmerg3: ['shellyddimmerg3'],
@@ -851,6 +858,7 @@ const pollTime: Record<string, number> = {
     shellyplussmoke: 3600,
 
     // Gen 3
+    shellyazht: 3600,
     shellyhtg3: 3600,
 
     // Gen 4

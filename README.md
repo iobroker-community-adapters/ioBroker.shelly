@@ -130,6 +130,7 @@ Notes:
 | Shelly 2L Gen3 (shelly2lg3)                   | ❌   | >= v10.2.0 |
 | Shelly 2 PM Gen3 (shelly2pmg3) (1)            | ❌   | >= v8.3.0  |
 | Shelly 3EM-63 Gen3 (shelly3em63g3)            | ❌   | >= v9.2.0  |
+| Shelly AZ H&T (shellyazht)                    | ❌   | >= v12.1.0 |
 | Shelly AZ Plug (shellyazplug)                 | ❌   | >= v9.5.0  |
 | Shelly BLU Gateway Gen3 (shellyblugwg3)       | ❌   | >= v8.5.0  |
 | Shelly DALI Dimmer Gen3 (shellyddimmerg3)     | ❌   | >= v10.2.0 |
@@ -235,6 +236,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (@mcm1957) Added tests to validate that all datapoint names and descriptions are translated and that all i18n language files are consistent.
 - (@mcm1957) Added support for Shelly Duo Bulb E27 Gen 3 (shellyduobulbg3). [#1385]
 - (@mcm1957) Added support for Shelly Multicolor Bulb E27 Gen 3 (shellycolorblbg3). [#1386]
+- (@mcm1957) Added support for Shelly AZ H&T (shellyazht). [#1573]
 
 ### 12.0.0-alpha.2 (2026-08-19)
 - (@mcm1957) The transition time can now be written for Shelly Dimmer1/Dimmer2 and for Gen2+ dimmers/lights (incl. Dimmer Gen3 and Dimmer Gen4). [#1214][#1224]
