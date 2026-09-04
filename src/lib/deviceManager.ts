@@ -1632,6 +1632,37 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
     }
 
     /**
+     * While a progress dialog is open, the device manager GUI waits only five seconds for the next
+     * message from the adapter and otherwise reports "No response from the backend". Installing a
+     * script takes longer than that, so the dialog is updated regularly - every update is such a
+     * message. The returned function stops the heartbeat again.
+     *
+     * @param progress the open progress dialog
+     * @param label text to show in the dialog
+     */
+    private static startProgressHeartbeat(
+        progress: Awaited<ReturnType<ActionContext['openProgress']>>,
+        label: () => string,
+    ): () => void {
+        let running = false;
+
+        const timer = setInterval(() => {
+            if (running) {
+                return;
+            }
+            running = true;
+            progress
+                .update({ label: label() })
+                .catch(() => {
+                    /* the dialog may have been closed in the meantime */
+                })
+                .finally(() => (running = false));
+        }, 2000);
+
+        return () => clearInterval(timer);
+    }
+
+    /**
      * Install or update the BLE gateway script on one device.
      *
      * @param id full object id of the device
@@ -1640,11 +1671,15 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
     async handleBleScriptInstall(id: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {
         const shortDeviceId = id.substring(this.adapter.namespace.length + 1);
         const progress = await context.openProgress('Installing BLE gateway script...', { indeterminate: true });
+        const stopHeartbeat = ShellyDeviceManagement.startProgressHeartbeat(progress, () =>
+            I18n.translate('Installing BLE gateway script...'),
+        );
 
         let result: { status: string; version?: string; message: string; restartRequired?: boolean };
         try {
             result = await this.installBleGatewayScript(shortDeviceId);
         } finally {
+            stopHeartbeat();
             // The progress dialog must be closed before a message dialog can be opened
             await progress.close();
         }
@@ -1690,6 +1725,9 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
         const ns = this.adapter.namespace;
         const progress = await context.openProgress('Updating BLE gateway scripts...', { indeterminate: true });
 
+        let currentLabel = I18n.translate('Updating BLE gateway scripts...');
+        const stopHeartbeat = ShellyDeviceManagement.startProgressHeartbeat(progress, () => currentLabel);
+
         const updated: string[] = [];
         const failed: string[] = [];
         let upToDate = 0;
@@ -1716,7 +1754,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
                 const name = this.objects[`${ns}.${deviceId}`]?.common?.name;
                 const label = typeof name === 'string' && name ? name : deviceId;
 
-                await progress.update({ label: I18n.translate('Updating %s...', label) });
+                currentLabel = I18n.translate('Updating %s...', label);
 
                 this.adapter.log.info(
                     `[DeviceManager] ${deviceId}: updating the BLE gateway script from ${installedVersion} to ${bleGatewayScriptVersion}`,
@@ -1731,6 +1769,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
                 }
             }
         } finally {
+            stopHeartbeat();
             await progress.close();
         }
 

@@ -1035,7 +1035,7 @@ export class BaseClient implements ShellyClient {
                 const scriptDir = `scripts/${this.getDirectoryName()}`;
                 await this.adapter.mkdirAsync(this.adapter.namespace, scriptDir);
 
-                const body = await this.rpcRequest('/rpc/Script.List');
+                const body = await this.requestWithRetry('/rpc/Script.List');
 
                 this.adapter.log.debug(`[downloadAllScripts] Found scripts on device ${this.getLogInfo()}: ${body}`);
 
@@ -1071,14 +1071,14 @@ export class BaseClient implements ShellyClient {
      * @returns information about the installed script or `null` if it is not installed
      */
     /**
-     * Perform an RPC request and retry it if the device answers with 429 (too many requests). Shelly
-     * devices reject a request which arrives while they are still busy with another one - and the
-     * adapter polls the same device over HTTP in parallel, so that happens easily.
+     * Perform an HTTP request and retry it if the device answers with 429 (too many requests).
+     * Shelly devices reject a request which arrives while they are still busy with another one - and
+     * the adapter polls the same device over HTTP in parallel, so that happens easily.
      *
      * @param url path of the request, e.g. `/rpc/Script.List`
      * @param postData body of a POST request. If omitted, a GET request is performed.
      */
-    private async rpcRequest(url: string, postData?: unknown): Promise<string> {
+    protected async requestWithRetry(url: string, postData?: unknown): Promise<string> {
         let lastError: unknown;
 
         for (let attempt = 0; attempt < 4; attempt++) {
@@ -1086,7 +1086,7 @@ export class BaseClient implements ShellyClient {
                 // 300 ms, 600 ms, 1200 ms - the device only needs to finish its current request
                 const delay = 300 * 2 ** (attempt - 1);
                 this.adapter.log.debug(
-                    `[rpcRequest] ${this.getLogInfo()}: device is busy (429), repeating "${url}" in ${delay} ms`,
+                    `[requestWithRetry] ${this.getLogInfo()}: device is busy (429), repeating "${url}" in ${delay} ms`,
                 );
                 await new Promise(resolve => setTimeout(resolve, delay));
             }
@@ -1116,7 +1116,7 @@ export class BaseClient implements ShellyClient {
     private async getBleGatewayScripts(): Promise<
         { id: number; name: string; version: string | null; running: boolean }[]
     > {
-        const body = await this.rpcRequest('/rpc/Script.List');
+        const body = await this.requestWithRetry('/rpc/Script.List');
         const scriptList = JSON.parse(body) as { scripts?: { id: number; name: string; running?: boolean }[] };
         const scripts = scriptList.scripts ?? [];
 
@@ -1158,7 +1158,7 @@ export class BaseClient implements ShellyClient {
         let code = '';
 
         for (let guard = 0; guard < 20; guard++) {
-            const body = await this.rpcRequest(`/rpc/Script.GetCode?id=${id}&offset=${code.length}`);
+            const body = await this.requestWithRetry(`/rpc/Script.GetCode?id=${id}&offset=${code.length}`);
             const chunk = JSON.parse(body) as { data?: string; left?: number };
 
             code += chunk.data ?? '';
@@ -1214,10 +1214,10 @@ export class BaseClient implements ShellyClient {
                 this.adapter.log.warn(
                     `[installBleGatewayScript] ${this.getLogInfo()}: stopping additional gateway script id ${duplicate.id} "${duplicate.name}" (version ${duplicate.version ?? '<unknown>'})`,
                 );
-                await this.rpcRequest(`/rpc/Script.Stop?id=${duplicate.id}`).catch(() => {
+                await this.requestWithRetry(`/rpc/Script.Stop?id=${duplicate.id}`).catch(() => {
                     /* may not be running */
                 });
-                await this.rpcRequest('/rpc/Script.SetConfig', {
+                await this.requestWithRetry('/rpc/Script.SetConfig', {
                     id: duplicate.id,
                     config: { enable: false },
                 }).catch(() => {
@@ -1246,11 +1246,11 @@ export class BaseClient implements ShellyClient {
             if (installed) {
                 scriptId = installed.id;
                 this.adapter.log.info(`[installBleGatewayScript] ${this.getLogInfo()}: stopping script ${scriptId}`);
-                await this.rpcRequest(`/rpc/Script.Stop?id=${scriptId}`).catch(() => {
+                await this.requestWithRetry(`/rpc/Script.Stop?id=${scriptId}`).catch(() => {
                     /* the script may not be running - not an error */
                 });
             } else {
-                const createBody = await this.rpcRequest('/rpc/Script.Create', {
+                const createBody = await this.requestWithRetry('/rpc/Script.Create', {
                     name: bleGatewayScriptName,
                 });
                 const created = JSON.parse(createBody) as { id?: number };
@@ -1276,7 +1276,7 @@ export class BaseClient implements ShellyClient {
                 this.adapter.log.debug(
                     `[installBleGatewayScript] ${this.getLogInfo()}: chunk ${Math.floor(offset / chunkSize) + 1}/${chunks}`,
                 );
-                const putResult = await this.rpcRequest('/rpc/Script.PutCode', {
+                const putResult = await this.requestWithRetry('/rpc/Script.PutCode', {
                     id: scriptId,
                     code: bleGatewayScriptCode.substring(offset, offset + chunkSize),
                     append: offset > 0,
@@ -1301,11 +1301,11 @@ export class BaseClient implements ShellyClient {
 
             // enable = start automatically after a reboot of the device. The name is set as well, so
             // an adopted script is found by its name the next time.
-            await this.rpcRequest('/rpc/Script.SetConfig', {
+            await this.requestWithRetry('/rpc/Script.SetConfig', {
                 id: scriptId,
                 config: { enable: true, name: bleGatewayScriptName },
             });
-            await this.rpcRequest(`/rpc/Script.Start?id=${scriptId}`);
+            await this.requestWithRetry(`/rpc/Script.Start?id=${scriptId}`);
 
             const started = await this.getBleGatewayScript();
             this.adapter.log.info(
@@ -1344,7 +1344,7 @@ export class BaseClient implements ShellyClient {
      * @returns `true` if the device must be restarted to apply the change
      */
     private async enableBle(): Promise<boolean> {
-        const bleConfigBody = await this.rpcRequest('/rpc/BLE.GetConfig');
+        const bleConfigBody = await this.requestWithRetry('/rpc/BLE.GetConfig');
         const bleConfig = JSON.parse(bleConfigBody) as { enable?: boolean };
 
         if (bleConfig.enable === true) {
@@ -1353,7 +1353,7 @@ export class BaseClient implements ShellyClient {
         }
 
         this.adapter.log.info(`[installBleGatewayScript] Enabling Bluetooth of ${this.getLogInfo()}`);
-        const result = await this.rpcRequest('/rpc/BLE.SetConfig', { config: { enable: true } });
+        const result = await this.requestWithRetry('/rpc/BLE.SetConfig', { config: { enable: true } });
 
         return !!(JSON.parse(result) as { restart_required?: boolean }).restart_required;
     }
