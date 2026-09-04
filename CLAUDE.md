@@ -112,7 +112,7 @@ The device-id is the first part of the data transmitted by a device or specified
 - Device must be added into all tables at src/lib/datapoints.ts
 - If device provides a new component add the new component to gen2-helper.ts unless instructed otherwise
 - Add new device to table of supported devices (https://github.com/iobroker-community-adapters/ioBroker.shelly#supported-devices)
-using next minor version.
+using next minor version. Use correct alphabetically sorting within table.
 
 ## General instructions
 

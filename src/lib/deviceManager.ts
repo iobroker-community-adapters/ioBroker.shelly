@@ -29,6 +29,33 @@ class HttpAuthError extends Error {
     }
 }
 
+/** Digits to round to, per ioBroker role, for energy-related states (power, voltage, current, energy, frequency) */
+const ENERGY_ROLE_DIGITS: Record<string, number> = {
+    'value.power': 1,
+    'value.power.active': 1,
+    'value.power.reactive': 1,
+    'value.power.consumed': 1,
+    'value.power.produced': 1,
+    'value.power.consumption': 2, // deprecated, still used by Gen1 devices
+    'value.energy': 2,
+    'value.energy.active': 2,
+    'value.energy.reactive': 2,
+    'value.energy.consumed': 2,
+    'value.energy.produced': 2,
+    'value.voltage': 1,
+    'value.current': 2,
+    'value.frequency': 2,
+};
+
+/** Roles considered "power" for the compact main tile - voltage/current/energy are only shown in the device info panel */
+const ENERGY_TILE_ROLES = ['value.power', 'value.power.active', 'value.power.consumed', 'value.power.produced'];
+
+/**
+ * Units kept off the compact main tile. 'value.power' is used for both active power (W) and
+ * apparent power (VA), so without this a three-phase meter would list every value twice.
+ */
+const ENERGY_TILE_EXCLUDED_UNITS = ['VA', 'kVA', 'VAR', 'kVAR', 'var', 'kvar'];
+
 /** Group metadata: display name key (for i18n) and representative icon */
 const groupMeta: Record<string, { nameKey: string; icon: string }> = {
     relay: { nameKey: 'Relays & Switches', icon: 'adapter/shelly/icons/shellyplus1.png' },
@@ -403,6 +430,11 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             };
         }
 
+        // Power, voltage, current and energy: shown here in full (the main tile only shows power,
+        // to keep it compact), for any channel that reports them, based on the state's role rather
+        // than a fixed list of channel names, so this works for every device generation.
+        Object.assign(items, this.buildEnergyValueItems(shortDeviceId, Object.keys(ENERGY_ROLE_DIGITS)));
+
         return {
             id: deviceId,
             schema: {
@@ -410,6 +442,106 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 items,
             },
         };
+    }
+
+    /**
+     * Build customInfo/details items for energy-related states (power, voltage, current, energy,
+     * frequency) of a device, based on the state's ioBroker role. Works for any channel naming
+     * scheme, so it applies automatically to every device generation that reports these values.
+     *
+     * @param shortDeviceId device id without adapter namespace
+     * @param allowedRoles roles to include (a subset of the keys of ENERGY_ROLE_DIGITS)
+     * @param excludedUnits units to skip, e.g. to keep apparent power off the main tile
+     */
+    private buildEnergyValueItems(
+        shortDeviceId: string,
+        allowedRoles: readonly string[],
+        excludedUnits?: readonly string[],
+    ): Record<string, ConfigItemAny> {
+        const prefix = `${this.adapter.namespace}.${shortDeviceId}.`;
+        const items: Record<string, ConfigItemAny> = {};
+
+        const matches: { suffix: string; role: string; common: ioBroker.StateCommon }[] = [];
+
+        for (const stateId in this.states) {
+            if (!stateId.startsWith(prefix)) {
+                continue;
+            }
+            const common = this.objects[stateId]?.common as ioBroker.StateCommon | undefined;
+            const role = common?.role;
+            if (!role || !allowedRoles.includes(role) || !(role in ENERGY_ROLE_DIGITS)) {
+                continue;
+            }
+            if (excludedUnits && common.unit && excludedUnits.includes(common.unit)) {
+                continue;
+            }
+
+            matches.push({ suffix: stateId.substring(prefix.length), role, common });
+        }
+
+        // The key order of this.states is not guaranteed, so sort to keep the panel order stable
+        matches.sort((a, b) => a.suffix.localeCompare(b.suffix, undefined, { numeric: true }));
+
+        for (const { suffix, role, common } of matches) {
+            const channel = suffix.substring(0, suffix.lastIndexOf('.'));
+            const colon = channel.indexOf(':');
+            // 'Relay0' -> 'Relay 0'; 'EM1:0' -> 'EM1 0', where the colon already separates the instance
+            const channelLabel = (
+                colon >= 0
+                    ? `${channel.substring(0, colon)} ${channel.substring(colon + 1)}`
+                    : channel.replace(/([a-zA-Z])([0-9]+)$/, '$1 $2')
+            ).trim();
+
+            items[`energy_${suffix.replace(/[.:]/g, '_')}`] = {
+                type: 'state',
+                oid: `${shortDeviceId}.${suffix}`,
+                control: 'text',
+                unit: common.unit,
+                digits: ENERGY_ROLE_DIGITS[role],
+                label: this.buildEnergyLabel(channelLabel, suffix, common.name),
+                size: 12,
+                style: { opacity: 0.7 },
+            };
+        }
+
+        return items;
+    }
+
+    /**
+     * Compose the label of an energy item as `<channel> <datapoint name>`.
+     *
+     * common.name of a created object is always a translation object (objectHelper resolves the
+     * English key on creation), so the channel prefix has to be merged into every language.
+     * Multi-phase meters name all phases alike (VoltageA/B/C are all called "Voltage"), therefore a
+     * trailing phase letter of the state id is appended unless the name already carries it ('Current N').
+     *
+     * @param channelLabel readable channel name, e.g. 'EM 0'
+     * @param suffix state id without the device prefix, e.g. 'EM0.VoltageA'
+     * @param name common.name of the state object
+     */
+    private buildEnergyLabel(
+        channelLabel: string,
+        suffix: string,
+        name: ioBroker.StringOrTranslated,
+    ): ioBroker.StringOrTranslated {
+        const leaf = suffix.substring(suffix.lastIndexOf('.') + 1);
+        const phaseMatch = leaf.match(/[a-z]([A-Z])$/);
+
+        const compose = (text: string): string => {
+            const phase = phaseMatch && !text.trim().endsWith(phaseMatch[1]) ? ` ${phaseMatch[1]}` : '';
+            return `${channelLabel} ${text}${phase}`.trim();
+        };
+
+        if (typeof name === 'string') {
+            return compose(name);
+        }
+
+        const translated: ioBroker.Translated = { en: compose(name.en) };
+        for (const [lang, text] of Object.entries(name)) {
+            translated[lang as ioBroker.Languages] = compose(text);
+        }
+
+        return translated;
     }
 
     private getBleDeviceDetails(deviceId: string, shortDeviceId: string): DeviceDetails<string> {
@@ -598,7 +730,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     stateId: 'door',
                     key: 'door',
                     label: 'Door',
-                    trueText: 'Open',
+                    trueText: 'Opened',
                     falseText: 'Closed',
                     trueColor: 'orange',
                 },
@@ -606,7 +738,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     stateId: 'window',
                     key: 'window',
                     label: 'Window',
-                    trueText: 'Open',
+                    trueText: 'Opened',
                     falseText: 'Closed',
                     trueColor: 'orange',
                 },
@@ -717,7 +849,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     stateId: 'sensor.door',
                     key: 'door',
                     label: 'Door',
-                    trueText: 'Open',
+                    trueText: 'Opened',
                     falseText: 'Closed',
                     trueColor: 'orange',
                 },
@@ -853,6 +985,13 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                     };
                 }
             }
+
+            // Power values are shown directly on the compact main tile so it does not get
+            // overloaded; voltage, current and energy are shown separately in the device info panel.
+            Object.assign(
+                items,
+                this.buildEnergyValueItems(shortDeviceId, ENERGY_TILE_ROLES, ENERGY_TILE_EXCLUDED_UNITS),
+            );
         }
 
         if (Object.keys(items).length === 0) {
