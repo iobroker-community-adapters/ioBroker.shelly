@@ -230,8 +230,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 
 <!--
   Placeholder for the next version (at the beginning of the line):
-  ### **WORK IN PROGRESS** 
+  ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
 ### 12.0.0-alpha.8 (2026-09-18) 
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@mcm1957) Added a "BLE Map" button to the device manager toolbar which opens the Bluetooth map.
@@ -286,6 +288,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 ### 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]
 - (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
+
 
 ### 10.6.0 (2026-02-08)
 * (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
