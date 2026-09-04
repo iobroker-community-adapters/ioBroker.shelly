@@ -216,6 +216,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - USB-powered UVC LED strip
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
+- Shelly Frankever Smart Sprinkler Controller (irrigation) (*)
 
 - Shelly BLU TRV
 - all BLU devices that need to receive data from the adapter.
