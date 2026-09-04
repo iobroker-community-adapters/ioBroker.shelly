@@ -6,13 +6,22 @@ import { Adapter, type AdapterOptions, I18n } from '@iobroker/adapter-core';
 
 import { name as packageName } from '../package.json';
 import { BleDecoder } from './lib/ble-decoder';
+import { bleGatewayScriptVersion } from './lib/ble-gateway-script';
 import DeviceManagement from './lib/deviceManager';
 import ObjectHelper from './lib/objectHelper';
 import { CoAPServer } from './lib/protocol/coap';
+import type { BaseClient } from './lib/protocol/base';
 import { MQTTServer } from './lib/protocol/mqtt';
 import type { ShellyAdapterConfig } from './lib/types';
 
 const adapterName = packageName.split('.').pop() ?? 'shelly';
+
+/**
+ * A gateway which did not receive a BLE device for this time is removed from its `receivedBy` list.
+ * It must be clearly longer than the interval of the BLE advertisements, otherwise a gateway with a
+ * weak reception would disappear from the list between two messages.
+ */
+const bleReceivedByTtlMs = 60 * 60 * 1000;
 
 export class ShellyAdapter extends Adapter {
     declare config: ShellyAdapterConfig;
@@ -519,7 +528,8 @@ export class ShellyAdapter extends Adapter {
                 `[processBleMessage] Received payload ${JSON.stringify(valTyped.payload)} from ${valTyped.src}`,
             );
 
-            const expectedScriptVersion = '1.4';
+            // Only major/minor is compared - a patch release of the script stays compatible
+            const expectedScriptVersion = bleGatewayScriptVersion.split('.').slice(0, 2).join('.');
             if (!String(valTyped.scriptVersion).startsWith(expectedScriptVersion)) {
                 this.log.warn(
                     `[BLE] ${valTyped.srcBle.mac} (via ${valTyped.src}): Script version ${valTyped.scriptVersion} is not supported (expected ${expectedScriptVersion}), see documentation for latest version`,
@@ -708,26 +718,22 @@ export class ShellyAdapter extends Adapter {
                     const pidOld = pidState?.val ? pidState.val : -1;
                     const pidNew = unpackedData.pid as ioBroker.StateValue;
 
+                    // The gateway list is updated for every message - also for a message which has
+                    // already been received by another Shelly - so that it contains all gateways
+                    // which currently receive this device and not only the receivers of one packet.
+                    await this.updateBleReceivedBy(
+                        valTyped.srcBle.mac,
+                        valTyped.src,
+                        valTyped.srcBle.rssi,
+                        valTyped.scriptVersion,
+                    );
+
                     // Check if same message has been received by other Shellys
                     if (pidOld !== pidNew) {
                         await this.setState(`ble.${valTyped.srcBle.mac}.pid`, {
                             val: pidNew,
                             ack: true,
                             c: valTyped.src,
-                        });
-                        await this.setState(`ble.${valTyped.srcBle.mac}.receivedBy`, {
-                            val: JSON.stringify(
-                                {
-                                    [valTyped.src]: {
-                                        rssi: valTyped.srcBle.rssi,
-                                        scriptVersion: valTyped.scriptVersion,
-                                        ts: Date.now(),
-                                    },
-                                },
-                                null,
-                                2,
-                            ),
-                            ack: true,
                         });
 
                         for (const [key, value] of Object.entries(unpackedData)) {
@@ -787,31 +793,55 @@ export class ShellyAdapter extends Adapter {
                                 await this.extendObject(`ble.${valTyped.srcBle.mac}`, { common: updates });
                             }
                         }
-                    } else {
-                        try {
-                            const receivedByState = await this.getStateAsync(`ble.${valTyped.srcBle.mac}.receivedBy`);
-                            if (receivedByState) {
-                                const deviceList = JSON.parse(receivedByState.val as string);
-                                deviceList[valTyped.src] = {
-                                    rssi: valTyped.srcBle.rssi,
-                                    scriptVersion: valTyped.scriptVersion,
-                                    ts: Date.now(),
-                                };
-
-                                await this.setState(`ble.${valTyped.srcBle.mac}.receivedBy`, {
-                                    val: JSON.stringify(deviceList, null, 2),
-                                    ack: true,
-                                });
-                            }
-                        } catch (err) {
-                            this.log.error(
-                                `[processBleMessage] Unable to extend device list (receivedBy) of ${valTyped.srcBle.mac}: ${err}`,
-                            );
-                        }
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Add a gateway to the `receivedBy` list of a BLE device. Gateways which did not receive the
+     * device within `bleReceivedByTtlMs` are removed from the list, so a gateway which was switched
+     * off or moved away does not stay in the list forever.
+     *
+     * @param mac MAC address of the BLE device
+     * @param src Shelly device id of the gateway which received the message
+     * @param rssi signal strength reported by the gateway
+     * @param scriptVersion version of the BLE gateway script running on the gateway
+     */
+    private async updateBleReceivedBy(mac: string, src: string, rssi: number, scriptVersion: string): Promise<void> {
+        try {
+            const receivedByState = await this.getStateAsync(`ble.${mac}.receivedBy`);
+            let deviceList: Record<string, { rssi: number; scriptVersion: string; ts: number }> = {};
+            if (typeof receivedByState?.val === 'string' && receivedByState.val) {
+                deviceList = JSON.parse(receivedByState.val);
+            }
+
+            const now = Date.now();
+            for (const [device, info] of Object.entries(deviceList)) {
+                if (typeof info?.ts !== 'number' || now - info.ts > bleReceivedByTtlMs) {
+                    delete deviceList[device];
+                }
+            }
+            deviceList[src] = { rssi, scriptVersion, ts: now };
+
+            await this.setState(`ble.${mac}.receivedBy`, {
+                val: JSON.stringify(deviceList, null, 2),
+                ack: true,
+            });
+        } catch (err) {
+            this.log.error(`[processBleMessage] Unable to extend device list (receivedBy) of ${mac}: ${err}`);
+        }
+    }
+
+    /**
+     * Connected MQTT client of a device, used by the device manager to talk to the device directly.
+     * Only available for the MQTT protocol - Gen2+ devices are not supported by CoAP.
+     *
+     * @param deviceId ioBroker device id, e.g. `SNSN-0013A#a1b2c3#1`
+     */
+    public getClientByDeviceId(deviceId: string): BaseClient | undefined {
+        return this.serverMqtt?.getClientByDeviceId(deviceId);
     }
 
     private removeNamespace(id: string): string {

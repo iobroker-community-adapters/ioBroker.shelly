@@ -1,0 +1,17 @@
+{
+    "shelly_blemap_gateway": "Gateway",
+    "shelly_blemap_device_id": "Geräte-ID",
+    "shelly_blemap_ble_device": "Bluetooth-Gerät",
+    "shelly_blemap_received_by": "Empfangen von",
+    "shelly_blemap_signal": "Signalstärke",
+    "shelly_blemap_last_seen": "Letzter Empfang",
+    "shelly_blemap_script_version": "Skript-Version",
+    "shelly_blemap_strong": "Stark",
+    "shelly_blemap_medium": "Mittel",
+    "shelly_blemap_weak": "Schwach",
+    "shelly_blemap_stale": "Längere Zeit kein Empfang",
+    "shelly_blemap_summary": "%s Bluetooth-Geräte über %s Gateways",
+    "shelly_blemap_no_devices": "Es wurden noch keine Bluetooth-Geräte empfangen. Das BLE-Gateway-Skript muss auf mindestens einem Shelly-Gerät installiert sein.",
+    "shelly_blemap_fit": "An Fenster anpassen",
+    "shelly_blemap_all_links": "Alle Verbindungen"
+}

@@ -15,6 +15,8 @@ export default [
             'tasks.mts',
             'build',
             'admin/build',
+            'admin/custom/',
+            'src-admin/',
             'admin/words.js',
             'admin/admin.d.ts',
             '**/adapter-config.d.ts',

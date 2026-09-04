@@ -1,5 +1,7 @@
 import * as datapoints from '../datapoints';
+import { bleGatewayScriptCode, bleGatewayScriptName, bleGatewayScriptVersion } from '../ble-gateway-script';
 import axios, { type AxiosRequestConfig } from 'axios';
+import { I18n } from '@iobroker/adapter-core';
 import * as crypto from 'node:crypto';
 import type { EventEmitter } from 'node:events';
 import type { DeviceDefinition, DeviceState, ShellyClient } from '../deviceTypes';
@@ -80,7 +82,16 @@ export class BaseClient implements ShellyClient {
         this.eventEmitter.on('onScriptDownload', async () => await this.downloadAllScripts());
     }
 
-    async requestAsync(url: string): Promise<string> {
+    /**
+     * Perform an HTTP request to the device. Without `postData` a GET request is sent, otherwise the
+     * data is sent as JSON body of a POST request - which is required for RPC calls with a payload
+     * too large for the URL (e.g. `Script.PutCode`).
+     *
+     * @param url path of the request, e.g. `/rpc/Script.List`
+     * @param postData body of a POST request. If omitted, a GET request is performed.
+     */
+    async requestAsync(url: string, postData?: unknown): Promise<string> {
+        const method = postData === undefined ? 'get' : 'post';
         let httpDebugDir = '';
 
         if (this.adapter.config.saveHttpResponses) {
@@ -102,7 +113,7 @@ export class BaseClient implements ShellyClient {
             const httpDebugFilePath = `${httpDebugDir}/${url.replace(/[^a-zA-Z0-9-_.]/g, '_')}.json`;
 
             let axiosRequestObj: AxiosRequestConfig = {
-                method: 'get',
+                method,
                 responseType: 'text',
                 transformResponse: (res: string) => {
                     return res; // Avoid automatic json parse
@@ -110,6 +121,7 @@ export class BaseClient implements ShellyClient {
                 baseURL: `http://${this.getIP()}`,
                 timeout: this.httpTimeout,
                 url,
+                data: postData,
             };
 
             if (this.getDeviceGen() === 1) {
@@ -227,7 +239,7 @@ export class BaseClient implements ShellyClient {
                                 crypto.createHash('sha256').update(str).digest('hex');
 
                             const HA1 = sha256(`${username}:${realm}:${password}`);
-                            const HA2 = sha256(`GET:${url}`);
+                            const HA2 = sha256(`${method.toUpperCase()}:${url}`);
                             const response = sha256(`${HA1}:${nonce}:${nonceCount}:${cnonce}:auth:${HA2}`);
 
                             const authorization = `Digest username="${username}", realm="${realm}", nonce="${nonce}", uri="${url}", cnonce="${cnonce}", nc=${nonceCount}, qop=auth, response="${response}", algorithm=SHA-256`;
@@ -1023,7 +1035,7 @@ export class BaseClient implements ShellyClient {
                 const scriptDir = `scripts/${this.getDirectoryName()}`;
                 await this.adapter.mkdirAsync(this.adapter.namespace, scriptDir);
 
-                const body = await this.requestAsync('/rpc/Script.List');
+                const body = await this.rpcRequest('/rpc/Script.List');
 
                 this.adapter.log.debug(`[downloadAllScripts] Found scripts on device ${this.getLogInfo()}: ${body}`);
 
@@ -1050,6 +1062,333 @@ export class BaseClient implements ShellyClient {
             }
         } catch (err) {
             this.adapter.log.error(`[downloadAllScripts] Error ${this.getLogInfo()}: ${err}`);
+        }
+    }
+
+    /**
+     * Look for the ioBroker BLE gateway script on the device and read its version out of the code.
+     *
+     * @returns information about the installed script or `null` if it is not installed
+     */
+    /**
+     * Perform an RPC request and retry it if the device answers with 429 (too many requests). Shelly
+     * devices reject a request which arrives while they are still busy with another one - and the
+     * adapter polls the same device over HTTP in parallel, so that happens easily.
+     *
+     * @param url path of the request, e.g. `/rpc/Script.List`
+     * @param postData body of a POST request. If omitted, a GET request is performed.
+     */
+    private async rpcRequest(url: string, postData?: unknown): Promise<string> {
+        let lastError: unknown;
+
+        for (let attempt = 0; attempt < 4; attempt++) {
+            if (attempt) {
+                // 300 ms, 600 ms, 1200 ms - the device only needs to finish its current request
+                const delay = 300 * 2 ** (attempt - 1);
+                this.adapter.log.debug(
+                    `[rpcRequest] ${this.getLogInfo()}: device is busy (429), repeating "${url}" in ${delay} ms`,
+                );
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+
+            try {
+                return await this.requestAsync(url, postData);
+            } catch (err) {
+                if ((err as { response?: { status?: number } })?.response?.status !== 429) {
+                    throw err;
+                }
+                lastError = err;
+            }
+        }
+
+        throw lastError;
+    }
+
+    async getBleGatewayScript(): Promise<{ id: number; version: string | null; running: boolean } | null> {
+        return (await this.getBleGatewayScripts())[0] ?? null;
+    }
+
+    /**
+     * All scripts on the device which forward BLE advertisements to this adapter. There is normally
+     * one, but a device can end up with several - e.g. if the script was added manually twice. They
+     * all have to be found, otherwise an old one keeps running and keeps reporting its version.
+     */
+    private async getBleGatewayScripts(): Promise<
+        { id: number; name: string; version: string | null; running: boolean }[]
+    > {
+        const body = await this.rpcRequest('/rpc/Script.List');
+        const scriptList = JSON.parse(body) as { scripts?: { id: number; name: string; running?: boolean }[] };
+        const scripts = scriptList.scripts ?? [];
+
+        // Our own name first, so it becomes the script which is updated
+        const candidates = [
+            ...scripts.filter(s => s.name === bleGatewayScriptName),
+            ...scripts.filter(s => s.name !== bleGatewayScriptName),
+        ];
+
+        const found: { id: number; name: string; version: string | null; running: boolean }[] = [];
+
+        for (const script of candidates) {
+            // Scripts which were added manually (as described in the documentation) have any name,
+            // so a script is also recognized by its content
+            const code = await this.getScriptCode(script.id);
+
+            if (script.name === bleGatewayScriptName || (code.includes('/events/ble') && code.includes('BTHOME'))) {
+                const version = /SCRIPT_VERSION\s*=\s*'([^']+)'/.exec(code);
+
+                found.push({
+                    id: script.id,
+                    name: script.name,
+                    version: version ? version[1] : null,
+                    running: !!script.running,
+                });
+            }
+        }
+
+        return found;
+    }
+
+    /**
+     * Read the complete code of a script. The device answers `Script.GetCode` with a limited amount
+     * of data and reports the remainder in `left`, so it has to be read in several requests.
+     *
+     * @param id id of the script on the device
+     */
+    private async getScriptCode(id: number): Promise<string> {
+        let code = '';
+
+        for (let guard = 0; guard < 20; guard++) {
+            const body = await this.rpcRequest(`/rpc/Script.GetCode?id=${id}&offset=${code.length}`);
+            const chunk = JSON.parse(body) as { data?: string; left?: number };
+
+            code += chunk.data ?? '';
+
+            if (!chunk.left || !chunk.data) {
+                break;
+            }
+        }
+
+        return code;
+    }
+
+    /**
+     * Install or update the ioBroker BLE gateway script on a Gen2+ device. An already installed
+     * script with the current version is not touched, so this can be called for every device.
+     *
+     * Bluetooth is enabled first if required, because the script refuses to start without it. The
+     * code is uploaded in chunks (the device rejects a single large request) and read back
+     * afterwards - a `Script.PutCode` which is aborted in the middle leaves an incomplete script on
+     * the device, and that must not be reported as success.
+     *
+     * @param force upload the code even if the installed version is already the expected one
+     */
+    async installBleGatewayScript(force = false): Promise<{
+        status: 'installed' | 'updated' | 'uptodate' | 'error';
+        version?: string;
+        message: string;
+        /** Bluetooth was switched on and the device must be restarted before the script can work */
+        restartRequired?: boolean;
+    }> {
+        if (this.getDeviceGen() < 2) {
+            return { status: 'error', message: 'Scripts are only supported by Gen2+ devices' };
+        }
+        if (!this.isOnline()) {
+            return { status: 'error', message: 'Device is offline' };
+        }
+
+        try {
+            this.adapter.log.info(
+                `[installBleGatewayScript] ${this.getLogInfo()}: looking for the gateway script on the device`,
+            );
+            const foundScripts = await this.getBleGatewayScripts();
+            const installed = foundScripts[0] ?? null;
+
+            this.adapter.log.info(
+                installed
+                    ? `[installBleGatewayScript] ${this.getLogInfo()}: found script id ${installed.id} "${installed.name}", version ${installed.version ?? '<unknown>'}, ${installed.running ? 'running' : 'stopped'}`
+                    : `[installBleGatewayScript] ${this.getLogInfo()}: no gateway script installed yet`,
+            );
+
+            // A second gateway script would keep sending its own (old) version, so stop the others
+            for (const duplicate of foundScripts.slice(1)) {
+                this.adapter.log.warn(
+                    `[installBleGatewayScript] ${this.getLogInfo()}: stopping additional gateway script id ${duplicate.id} "${duplicate.name}" (version ${duplicate.version ?? '<unknown>'})`,
+                );
+                await this.rpcRequest(`/rpc/Script.Stop?id=${duplicate.id}`).catch(() => {
+                    /* may not be running */
+                });
+                await this.rpcRequest('/rpc/Script.SetConfig', {
+                    id: duplicate.id,
+                    config: { enable: false },
+                }).catch(() => {
+                    /* not fatal - it is only stopped until the next restart then */
+                });
+            }
+
+            // Also for an up to date script, because a running script without Bluetooth does nothing
+            const restartRequired = await this.enableBle();
+
+            if (!force && installed && installed.version === bleGatewayScriptVersion && installed.running) {
+                this.adapter.log.info(
+                    `[installBleGatewayScript] ${this.getLogInfo()}: version ${installed.version} is up to date and running - nothing to do`,
+                );
+                await this.setBleGatewayScriptVersionState(installed.version);
+                return {
+                    status: 'uptodate',
+                    version: installed.version,
+                    message: `Script version ${installed.version} is already installed`,
+                    restartRequired,
+                };
+            }
+
+            // The script must not run while its code is replaced
+            let scriptId: number;
+            if (installed) {
+                scriptId = installed.id;
+                this.adapter.log.info(`[installBleGatewayScript] ${this.getLogInfo()}: stopping script ${scriptId}`);
+                await this.rpcRequest(`/rpc/Script.Stop?id=${scriptId}`).catch(() => {
+                    /* the script may not be running - not an error */
+                });
+            } else {
+                const createBody = await this.rpcRequest('/rpc/Script.Create', {
+                    name: bleGatewayScriptName,
+                });
+                const created = JSON.parse(createBody) as { id?: number };
+                if (typeof created.id !== 'number') {
+                    return { status: 'error', message: `Device did not create a script: ${createBody}` };
+                }
+                scriptId = created.id;
+                this.adapter.log.info(
+                    `[installBleGatewayScript] ${this.getLogInfo()}: created script "${bleGatewayScriptName}" with id ${scriptId}`,
+                );
+            }
+
+            // The device limits the size of a single request, so the code is sent in chunks. The
+            // first chunk replaces the existing code, the following ones are appended.
+            const chunkSize = 1024;
+            const chunks = Math.ceil(bleGatewayScriptCode.length / chunkSize);
+            this.adapter.log.info(
+                `[installBleGatewayScript] ${this.getLogInfo()}: uploading version ${bleGatewayScriptVersion} (${bleGatewayScriptCode.length} bytes in ${chunks} chunks)`,
+            );
+
+            let storedLength = 0;
+            for (let offset = 0; offset < bleGatewayScriptCode.length; offset += chunkSize) {
+                this.adapter.log.debug(
+                    `[installBleGatewayScript] ${this.getLogInfo()}: chunk ${Math.floor(offset / chunkSize) + 1}/${chunks}`,
+                );
+                const putResult = await this.rpcRequest('/rpc/Script.PutCode', {
+                    id: scriptId,
+                    code: bleGatewayScriptCode.substring(offset, offset + chunkSize),
+                    append: offset > 0,
+                });
+                storedLength = (JSON.parse(putResult) as { len?: number }).len ?? 0;
+            }
+
+            // The device reports the length of the stored code - comparing that is more reliable
+            // than reading the code back, which the device only delivers in pieces.
+            if (storedLength !== bleGatewayScriptCode.length) {
+                this.adapter.log.warn(
+                    `[installBleGatewayScript] ${this.getLogInfo()}: the device stored ${storedLength} of ${bleGatewayScriptCode.length} bytes`,
+                );
+                return {
+                    status: 'error',
+                    message: `Only ${storedLength} of ${bleGatewayScriptCode.length} bytes have been stored on the device - please retry`,
+                };
+            }
+            this.adapter.log.debug(
+                `[installBleGatewayScript] ${this.getLogInfo()}: ${storedLength} bytes stored, enabling and starting script ${scriptId}`,
+            );
+
+            // enable = start automatically after a reboot of the device. The name is set as well, so
+            // an adopted script is found by its name the next time.
+            await this.rpcRequest('/rpc/Script.SetConfig', {
+                id: scriptId,
+                config: { enable: true, name: bleGatewayScriptName },
+            });
+            await this.rpcRequest(`/rpc/Script.Start?id=${scriptId}`);
+
+            const started = await this.getBleGatewayScript();
+            this.adapter.log.info(
+                `[installBleGatewayScript] ${this.getLogInfo()}: device reports script id ${started?.id ?? '?'}, version ${started?.version ?? '<unknown>'}, ${started?.running ? 'running' : 'NOT running'}`,
+            );
+
+            await this.setBleGatewayScriptVersionState(bleGatewayScriptVersion);
+
+            this.adapter.log.info(
+                `[installBleGatewayScript] ${this.getLogInfo()}: script version ${bleGatewayScriptVersion} is ${installed ? 'updated' : 'installed'} and started${restartRequired ? ' - the device must be restarted to activate Bluetooth' : ''}`,
+            );
+
+            return {
+                status: installed ? 'updated' : 'installed',
+                version: bleGatewayScriptVersion,
+                message: `Script version ${bleGatewayScriptVersion} has been ${installed ? 'updated' : 'installed'}`,
+                restartRequired,
+            };
+        } catch (err) {
+            this.adapter.log.warn(`[installBleGatewayScript] Error for ${this.getLogInfo()}: ${err}`);
+
+            // 429 survived all retries - the device is permanently busy, a plain axios message
+            // ("Request failed with status code 429") would not tell the user anything
+            const message =
+                (err as { response?: { status?: number } })?.response?.status === 429
+                    ? 'The device rejected the request because it is busy (429) - please try again in a moment'
+                    : String(err);
+
+            return { status: 'error', message };
+        }
+    }
+
+    /**
+     * Enable Bluetooth on the device if it is disabled - the gateway script does not run without it.
+     *
+     * @returns `true` if the device must be restarted to apply the change
+     */
+    private async enableBle(): Promise<boolean> {
+        const bleConfigBody = await this.rpcRequest('/rpc/BLE.GetConfig');
+        const bleConfig = JSON.parse(bleConfigBody) as { enable?: boolean };
+
+        if (bleConfig.enable === true) {
+            this.adapter.log.debug(`[installBleGatewayScript] ${this.getLogInfo()}: Bluetooth is enabled`);
+            return false;
+        }
+
+        this.adapter.log.info(`[installBleGatewayScript] Enabling Bluetooth of ${this.getLogInfo()}`);
+        const result = await this.rpcRequest('/rpc/BLE.SetConfig', { config: { enable: true } });
+
+        return !!(JSON.parse(result) as { restart_required?: boolean }).restart_required;
+    }
+
+    private async setBleGatewayScriptVersionState(version: string): Promise<void> {
+        const deviceId = this.getDeviceId();
+        if (!deviceId) {
+            return;
+        }
+
+        try {
+            // The object is normally created by createObjects(), but not yet if the device connected
+            // with an older adapter version and has not reconnected since - without it the value
+            // would be lost and the version would stay invisible in the device manager.
+            await this.adapter.extendObject(`${deviceId}.BLE`, {
+                type: 'channel',
+                common: { name: 'Channel BLE' },
+                native: {},
+            });
+            await this.adapter.extendObject(`${deviceId}.BLE.scriptVersion`, {
+                type: 'state',
+                common: {
+                    name: I18n.getTranslatedObject('Version of the BLE gateway script'),
+                    type: 'string',
+                    role: 'text',
+                    read: true,
+                    write: false,
+                },
+                native: {},
+            });
+            await this.adapter.setState(`${deviceId}.BLE.scriptVersion`, { val: version, ack: true });
+        } catch (err) {
+            this.adapter.log.warn(
+                `[installBleGatewayScript] ${this.getLogInfo()}: cannot set the script version state: ${err}`,
+            );
         }
     }
 

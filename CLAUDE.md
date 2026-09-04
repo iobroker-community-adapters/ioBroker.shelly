@@ -38,6 +38,9 @@ npm run translate
 
 # Generate SVG icons for admin config
 npm run update-svg
+
+# Build only the admin custom components (src-admin/ -> admin/custom/); also part of `npm run build`
+npm run build:admin
 ```
 
 ## Architecture
@@ -71,6 +74,7 @@ See `docs/en/dev/dev.md` for the full datapoint contract and `docs/en/dev/newdev
 - `src/lib/deviceTypes.ts` - Shared device-definition contract (`DeviceDefinition`/`DeviceState`/`ProtocolBlock`/`ShellyClient`/`ShellyAdapter`)
 - `src/lib/shelly-helper.ts` - Utilities: temperature/color conversion, HTTP API calls, icon generation, state management
 - `src/lib/ble-decoder.ts` - BTHome protocol BLE message decoding
+- `src/lib/ble-gateway-script.ts` - the Shelly script installed on a gateway device (`Script.PutCode`). It is the single source of truth: the code blocks in `docs/{en,de}/ble-devices.md` must stay identical to it, `test/ble-gateway-script.test.js` enforces that
 - `src/lib/colorconv.ts` - Color space conversions (RGB, RGBW, HSV)
 - `src/lib/deviceManager.ts` - Extends `@iobroker/dm-utils` for device lifecycle management
 - `src/lib/objectHelper.ts` - Helper for ioBroker object/state management
@@ -82,6 +86,8 @@ All of the above compile to `build/lib/*.js` (with `.js.map`/`.d.ts`).
 ### Admin UI
 
 `admin/jsonConfig.json` defines the configuration UI. Translations are in `admin/i18n/{lang}/translations.json` (11 languages). After modifying jsonConfig labels/help text, run `npm run translate`.
+
+The "Bluetooth map" tab is a jsonConfig `custom` item and therefore a React component of its own: the sources live in `src-admin/` (a separate npm package, Vite + module federation, `vis-network` for the graph), and `npm run build:admin` builds them into `admin/custom/` (it is also the last step of `npm run build`). The build result is committed so that an installation directly from GitHub works without the admin build. The federation remote is named `ShellyComponentsSet`; that name must stay in sync between `src-admin/vite.config.ts` and the `name` of the item in `admin/jsonConfig.json`. Translations of the component are in `src-admin/src/i18n/*.json` (prefix `shelly_blemap_`) and are copied to `admin/custom/i18n/` by the build.
 
 ## Code Conventions
 

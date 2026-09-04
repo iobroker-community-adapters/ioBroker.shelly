@@ -64,9 +64,17 @@ Danach kann das nächste BLE-Ereignis entschlüsselt werden.
 **WICHTIG**
 Die Bluetooth-Funktionalität am Shelly-Gerät, das als Gateway verwendet werden soll, muss aktiviert werden.
 
+## Installation aus dem Adapter
+
+Das Skript muss nicht von Hand kopiert werden. Im Device Manager des Adapters bietet jedes erreichbare Gen2+-Gerät die Aktion **BLE-Gateway-Skript installieren oder aktualisieren**: Bluetooth wird bei Bedarf aktiviert, das Skript übertragen und gestartet. Ein bereits installiertes Skript mit der aktuellen Version wird nicht angefasst.
+
+Über der Geräteliste aktualisiert die Instanz-Aktion **BLE-Skripte aktualisieren** das Skript auf allen Geräten, auf denen es bereits installiert ist - nützlich nach einem Adapter-Update, das eine neuere Skript-Version benötigt.
+
+Die Version des auf einem Gerät laufenden Skripts wird in den Gerätedetails und im State `shelly.0.<device>.BLE.scriptVersion` angezeigt, sobald das Gerät eine BLE-Nachricht weitergeleitet hat.
+
 ## JavaScript (Shelly Scripting)
 
-Dieses Skript im Shelly Scripting-Bereich eines Shelly Plus- oder Pro-Geräts (Gen 2+) hinzufügen und starten:
+Dieses Skript im Shelly Scripting-Bereich eines Shelly Plus- oder Pro-Geräts (Gen 2+) hinzufügen und starten (oder den Device Manager verwenden, siehe oben):
 
 ```javascript
 // v1.4.0

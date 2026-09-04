@@ -1,0 +1,17 @@
+{
+    "shelly_blemap_gateway": "网关",
+    "shelly_blemap_device_id": "设备 ID",
+    "shelly_blemap_ble_device": "蓝牙设备",
+    "shelly_blemap_received_by": "接收自",
+    "shelly_blemap_signal": "信号强度",
+    "shelly_blemap_last_seen": "最后接收",
+    "shelly_blemap_script_version": "脚本版本",
+    "shelly_blemap_strong": "强",
+    "shelly_blemap_medium": "中",
+    "shelly_blemap_weak": "弱",
+    "shelly_blemap_stale": "长时间无接收",
+    "shelly_blemap_summary": "%s 个蓝牙设备，通过 %s 个网关",
+    "shelly_blemap_no_devices": "尚未接收到蓝牙设备。必须在至少一台 Shelly 设备上安装 BLE 网关脚本。",
+    "shelly_blemap_fit": "适应窗口",
+    "shelly_blemap_all_links": "所有连接"
+}

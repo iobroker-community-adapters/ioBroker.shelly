@@ -1,0 +1,17 @@
+{
+    "shelly_blemap_gateway": "Шлюз",
+    "shelly_blemap_device_id": "Ідентифікатор пристрою",
+    "shelly_blemap_ble_device": "Пристрій Bluetooth",
+    "shelly_blemap_received_by": "Отримано від",
+    "shelly_blemap_signal": "Потужність сигналу",
+    "shelly_blemap_last_seen": "Останній прийом",
+    "shelly_blemap_script_version": "Версія скрипта",
+    "shelly_blemap_strong": "Сильний",
+    "shelly_blemap_medium": "Середній",
+    "shelly_blemap_weak": "Слабкий",
+    "shelly_blemap_stale": "Давно немає прийому",
+    "shelly_blemap_summary": "%s пристроїв Bluetooth через %s шлюзів",
+    "shelly_blemap_no_devices": "Пристрої Bluetooth ще не отримано. Скрипт BLE-шлюзу має бути встановлений щонайменше на одному пристрої Shelly.",
+    "shelly_blemap_fit": "Вписати у вікно",
+    "shelly_blemap_all_links": "Усі з'єднання"
+}

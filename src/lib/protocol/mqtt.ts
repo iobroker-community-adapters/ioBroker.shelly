@@ -1104,6 +1104,16 @@ export class MQTTServer extends BaseServer {
         );
     }
 
+    /**
+     * Find the connected client of a device, e.g. to perform an HTTP request with the credentials
+     * and the IP address known by the client.
+     *
+     * @param deviceId ioBroker device id, e.g. `SNSN-0013A#a1b2c3#1`
+     */
+    getClientByDeviceId(deviceId: string): MQTTClient | undefined {
+        return Object.values(this.clients).find(client => client.getDeviceId() === deviceId);
+    }
+
     destroy(): void {
         super.destroy();
         this.adapter.log.debug(`[MQTT Server] Destroying`);

@@ -8,6 +8,7 @@ import {
     type DeviceInfo,
     type DeviceLoadContext,
     type DeviceRefresh,
+    type DeviceStatus,
     type InstanceDetails,
     type BackEndCommandJsonFormOptions,
     ACTIONS,
@@ -16,11 +17,35 @@ import {
 import type { ControlState } from '@iobroker/dm-utils/build/types/base';
 import * as crypto from 'node:crypto';
 import * as dgram from 'node:dgram';
+import * as fs from 'node:fs';
 import * as http from 'node:http';
 import * as os from 'node:os';
+import * as path from 'node:path';
 import * as datapoints from './datapoints';
 import type { ShellyAdapter } from '../main';
+import { bleGatewayScriptVersion } from './ble-gateway-script';
 import type { ShellyAdapterConfig } from './types';
+
+/**
+ * Icon of the BLE actions. Action icons are either one of the names known by the device manager or
+ * an image - a path relative to the admin is not resolved there, so the SVG is inlined once.
+ */
+const bleActionIcon = ((): string => {
+    try {
+        const svg = fs.readFileSync(path.join(__dirname, '..', '..', 'admin', 'icons', 'ble.svg'), 'utf8');
+        return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
+    } catch {
+        return 'settings';
+    }
+})();
+
+/**
+ * Appearance of the instance actions in the toolbar above the device list. The device manager applies
+ * `style` as MUI `sx` to the label and tints the icon with `color`, so both have to be set - `color`
+ * alone would only change the icon. `primary.light` is resolved from the theme.
+ */
+const instanceActionStyle = { color: 'primary.light', fontWeight: 600 };
+const instanceActionIconColor = '#4dabf5';
 
 class HttpAuthError extends Error {
     constructor() {
@@ -75,14 +100,16 @@ const groupMeta: Record<string, { nameKey: string; icon: string }> = {
 /**
  * DeviceManager Class
  */
-export default class ShellyDeviceManagement extends DeviceManagement {
+export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapter> {
     private config: ShellyAdapterConfig;
     private readonly states: { [id: string]: ioBroker.State } = {};
     private readonly objects: { [id: string]: ioBroker.DeviceObject | ioBroker.StateObject | ioBroker.ChannelObject } =
         {};
 
     constructor(adapter: ShellyAdapter) {
-        super(adapter);
+        // `true` creates `info.deviceManager` - the channel through which the adapter can update an
+        // open device manager. Without it the cards keep the values they had when the list was loaded.
+        super(adapter, true);
 
         this.config = adapter.config;
 
@@ -133,9 +160,24 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                           icon: 'search',
                           title: I18n.getTranslatedObject('Discover devices'),
                           description: I18n.getTranslatedObject('Scan network for Shelly devices via mDNS'),
+                          color: instanceActionIconColor,
+                          style: instanceActionStyle,
                           timeout: 40_000,
                           handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
                               await this.handleDiscoverDevices(context),
+                      },
+                      {
+                          id: 'updateBleScripts',
+                          icon: bleActionIcon,
+                          title: I18n.getTranslatedObject('Update BLE scripts'),
+                          description: I18n.getTranslatedObject(
+                              'Update the BLE gateway script on all devices which already have it installed',
+                          ),
+                          color: instanceActionIconColor,
+                          style: instanceActionStyle,
+                          timeout: 300_000,
+                          handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
+                              await this.handleUpdateAllBleScripts(context),
                       },
                   ];
 
@@ -143,22 +185,57 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             apiVersion: 'v3',
             actions,
             smallCards: true,
+            communicationStateId: `${this.adapter.namespace}.info.deviceManager`,
         };
     }
 
     public onStateChange(id: string, state: ioBroker.State | null): void {
+        const previous = this.states[id];
+
         if (state) {
-            if (!this.states[id]) {
+            if (!previous) {
                 // trigger DM update
                 this.states[id] = state;
-            } else if (this.states[id].val !== state.val) {
+            } else if (previous.val !== state.val) {
                 // trigger DM update
                 this.states[id] = state;
             }
-        } else if (this.states[id]) {
+        } else if (previous) {
             // trigger DM update
             delete this.states[id];
         }
+
+        // An open device manager does not poll, so a device which goes offline would keep its green
+        // connection symbol until the list is reloaded. Push the new status instead.
+        if (id.endsWith('.online') && previous?.val !== state?.val) {
+            const deviceId = id.substring(0, id.length - '.online'.length);
+
+            this.sendCommandToGui({
+                command: 'statusUpdate',
+                deviceId,
+                status: this.buildDeviceStatus(deviceId.substring(this.adapter.namespace.length + 1)),
+            }).catch((e: unknown) => this.adapter.log.debug(`[DeviceManager] Cannot update GUI: ${String(e)}`));
+        }
+    }
+
+    /**
+     * Connection, signal strength and battery of a device, as shown in the header of its card.
+     *
+     * @param shortDeviceId device id without the namespace, e.g. `SNSN-0013A#a1b2c3#1`
+     */
+    private buildDeviceStatus(shortDeviceId: string): DeviceStatus {
+        const ns = this.adapter.namespace;
+        const isOnline = !!this.states[`${ns}.${shortDeviceId}.online`]?.val;
+
+        return {
+            connection: isOnline ? 'connected' : 'disconnected',
+            rssi: isOnline ? ((this.states[`${ns}.${shortDeviceId}.rssi`]?.val as number) ?? undefined) : undefined,
+            battery:
+                (this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`]?.val as number) ??
+                (this.states[`${ns}.${shortDeviceId}.sensor.battery`]?.val as number) ??
+                (this.states[`${ns}.${shortDeviceId}.battery`]?.val as number) ??
+                undefined,
+        };
     }
 
     public onObjectChange(
@@ -191,6 +268,7 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             const hostname = this.states[`${ns}.${shortDeviceId}.hostname`]?.val as string | undefined;
             const firmwareUpdate = this.states[`${ns}.${shortDeviceId}.firmware`]?.val as boolean | undefined;
             const firmwareVersion = this.states[`${ns}.${shortDeviceId}.version`]?.val as string | undefined;
+            const gen = this.states[`${ns}.${shortDeviceId}.gen`]?.val as number | undefined;
 
             const battery = this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`]
                 ? (this.states[`${ns}.${shortDeviceId}.DevicePower0.BatteryPercent`].val as number)
@@ -272,6 +350,26 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                                       context: ActionContext,
                                   ): Promise<{ refresh: DeviceRefresh }> =>
                                       await this.handleFirmwareUpdate(deviceId, context),
+                              },
+                          ]
+                        : []),
+                    // The BLE gateway script needs MQTT (it publishes the advertisements by MQTT) and
+                    // the script API, which only exists on Gen2+ devices.
+                    ...(isOnline && !isBle && (gen ?? 0) >= 2 && this.config.protocol !== 'coap'
+                        ? [
+                              {
+                                  id: 'bleScript',
+                                  icon: bleActionIcon,
+                                  description: I18n.getTranslatedObject('Install or update the BLE gateway script'),
+                                  confirmation: I18n.getTranslatedObject(
+                                      'The BLE gateway script will be written to the device. Continue?',
+                                  ),
+                                  timeout: 60_000,
+                                  handler: async (
+                                      deviceId: string,
+                                      context: ActionContext,
+                                  ): Promise<{ refresh: DeviceRefresh }> =>
+                                      await this.handleBleScriptInstall(deviceId, context),
                               },
                           ]
                         : []),
@@ -407,6 +505,20 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 type: 'staticInfo',
                 label: I18n.getTranslatedObject('Protocol'),
                 data: protocol,
+                addColon: true,
+            };
+        }
+
+        const bleScriptVersion = this.states[`${ns}.${shortDeviceId}.BLE.scriptVersion`]?.val as string | undefined;
+        if (bleScriptVersion) {
+            items.bleScriptVersion = {
+                type: 'staticInfo',
+                label: I18n.getTranslatedObject('BLE gateway script'),
+                // An outdated script is shown as "1.3.0 → 1.4.0" to point at the available update
+                data:
+                    bleScriptVersion === bleGatewayScriptVersion
+                        ? bleScriptVersion
+                        : `${bleScriptVersion} → ${bleGatewayScriptVersion}`,
                 addColon: true,
             };
         }
@@ -658,6 +770,30 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             name: I18n.getTranslatedObject(meta.nameKey),
             icon: meta.icon,
         };
+    }
+
+    /**
+     * Age of a timestamp in a short readable form: `45 s`, `12 min`, `3 h`, `2 d`.
+     *
+     * @param ts timestamp in milliseconds
+     */
+    private static formatAge(ts: number): string {
+        const seconds = Math.max(0, Math.floor((Date.now() - ts) / 1000));
+        if (seconds < 60) {
+            return `${seconds} s`;
+        }
+
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) {
+            return `${minutes} min`;
+        }
+
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) {
+            return `${hours} h`;
+        }
+
+        return `${Math.floor(hours / 24)} d`;
     }
 
     private buildCustomInfo(
@@ -992,6 +1128,42 @@ export default class ShellyDeviceManagement extends DeviceManagement {
                 items,
                 this.buildEnergyValueItems(shortDeviceId, ENERGY_TILE_ROLES, ENERGY_TILE_EXCLUDED_UNITS),
             );
+        }
+
+        // "Last seen": for a BLE device the time of the last received advertisement, for a normal
+        // device the time it went offline. An online device is reachable right now, there is nothing
+        // to show for it.
+        const lastSeenTs = isBle
+            ? this.states[`${prefix}receivedBy`]?.ts
+            : this.states[`${prefix}online`]?.val === false
+              ? this.states[`${prefix}online`]?.lc
+              : undefined;
+
+        if (lastSeenTs) {
+            items.lastSeen = {
+                type: 'staticInfo',
+                label: I18n.getTranslatedObject('Last seen'),
+                data: I18n.translate('%s ago', ShellyDeviceManagement.formatAge(lastSeenTs)),
+                addColon: true,
+                size: 12,
+                style: { opacity: 0.7 },
+            };
+        }
+
+        // Version of the BLE gateway script, so it can be seen without opening the device details
+        const bleScriptVersion = this.states[`${prefix}BLE.scriptVersion`]?.val as string | undefined;
+        if (!isBle && bleScriptVersion) {
+            items.bleScriptVersion = {
+                type: 'staticInfo',
+                label: I18n.getTranslatedObject('BLE gateway script'),
+                data:
+                    bleScriptVersion === bleGatewayScriptVersion
+                        ? bleScriptVersion
+                        : `${bleScriptVersion} → ${bleGatewayScriptVersion}`,
+                addColon: true,
+                size: 12,
+                style: { opacity: 0.7 },
+            };
         }
 
         if (Object.keys(items).length === 0) {
@@ -1404,7 +1576,8 @@ export default class ShellyDeviceManagement extends DeviceManagement {
             this.adapter.log.warn(`Can not rename device ${id}: ${JSON.stringify(res)}`);
             return { refresh: 'none' };
         }
-        return { refresh: 'device' as DeviceRefresh };
+        // 'device' is not a valid value - the GUI only knows 'all', 'instance' and 'devices'
+        return { refresh: 'devices' };
     }
 
     /**
@@ -1456,6 +1629,153 @@ export default class ShellyDeviceManagement extends DeviceManagement {
 
         this.adapter.log.info(`[DeviceManager] Deleted unreachable device ${shortDeviceId}`);
         return { delete: id };
+    }
+
+    /**
+     * Install or update the BLE gateway script on one device.
+     *
+     * @param id full object id of the device
+     * @param context action context of the device manager
+     */
+    async handleBleScriptInstall(id: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {
+        const shortDeviceId = id.substring(this.adapter.namespace.length + 1);
+        const progress = await context.openProgress('Installing BLE gateway script...', { indeterminate: true });
+
+        let result: { status: string; version?: string; message: string; restartRequired?: boolean };
+        try {
+            result = await this.installBleGatewayScript(shortDeviceId);
+        } finally {
+            // The progress dialog must be closed before a message dialog can be opened
+            await progress.close();
+        }
+
+        if (result.status === 'error') {
+            await context.showMessage(
+                I18n.getTranslatedObject('Could not install the BLE gateway script: %s', result.message),
+            );
+        } else if (result.status === 'uptodate') {
+            await context.showMessage(
+                I18n.getTranslatedObject(
+                    'The BLE gateway script is already up to date (version %s)',
+                    result.version ?? '',
+                ),
+            );
+        } else {
+            await context.showMessage(
+                I18n.getTranslatedObject(
+                    'The BLE gateway script (version %s) has been installed',
+                    result.version ?? '',
+                ),
+            );
+        }
+
+        // Bluetooth was switched off on the device - it applies that only after a restart
+        if (result.restartRequired) {
+            await context.showMessage(
+                I18n.getTranslatedObject('Bluetooth has been enabled - please restart the device to activate it'),
+            );
+        }
+
+        // 'device' is not a valid value - the GUI only knows 'all', 'instance' and 'devices'
+        return { refresh: 'devices' };
+    }
+
+    /**
+     * Update the BLE gateway script on every device which already has it installed. Devices without
+     * the script are not touched - installing it everywhere is done per device on purpose.
+     *
+     * @param context action context of the device manager
+     */
+    async handleUpdateAllBleScripts(context: ActionContext): Promise<{ refresh: boolean }> {
+        const ns = this.adapter.namespace;
+        const progress = await context.openProgress('Updating BLE gateway scripts...', { indeterminate: true });
+
+        const updated: string[] = [];
+        const failed: string[] = [];
+        let upToDate = 0;
+
+        try {
+            for (const deviceId of Object.keys(this.objects)
+                .filter(objectId => this.objects[objectId].type === 'device')
+                .map(objectId => objectId.substring(ns.length + 1))
+                .filter(deviceId => !deviceId.startsWith('ble.'))) {
+                // Only devices which are online and already report a script version are candidates.
+                // Everything else would need an HTTP request per device just to find out.
+                const installedVersion = this.states[`${ns}.${deviceId}.BLE.scriptVersion`]?.val as string | undefined;
+                if (!installedVersion || !this.states[`${ns}.${deviceId}.online`]?.val) {
+                    continue;
+                }
+                if (installedVersion === bleGatewayScriptVersion) {
+                    this.adapter.log.debug(
+                        `[DeviceManager] ${deviceId}: BLE gateway script ${installedVersion} is up to date`,
+                    );
+                    upToDate++;
+                    continue;
+                }
+
+                const name = this.objects[`${ns}.${deviceId}`]?.common?.name;
+                const label = typeof name === 'string' && name ? name : deviceId;
+
+                await progress.update({ label: I18n.translate('Updating %s...', label) });
+
+                this.adapter.log.info(
+                    `[DeviceManager] ${deviceId}: updating the BLE gateway script from ${installedVersion} to ${bleGatewayScriptVersion}`,
+                );
+
+                const result = await this.installBleGatewayScript(deviceId);
+                if (result.status === 'error') {
+                    this.adapter.log.warn(`[DeviceManager] ${deviceId}: ${result.message}`);
+                    failed.push(label);
+                } else {
+                    updated.push(label);
+                }
+            }
+        } finally {
+            await progress.close();
+        }
+
+        this.adapter.log.info(
+            `[DeviceManager] BLE gateway scripts: ${updated.length} updated, ${failed.length} failed, ${upToDate} already up to date`,
+        );
+
+        if (!updated.length && !failed.length) {
+            await context.showMessage(
+                I18n.getTranslatedObject('All %s installed BLE gateway scripts are up to date', String(upToDate)),
+            );
+        } else if (!failed.length) {
+            await context.showMessage(
+                I18n.getTranslatedObject('Updated the BLE gateway script on: %s', updated.join(', ')),
+            );
+        } else {
+            await context.showMessage(
+                I18n.getTranslatedObject(
+                    'Updated the BLE gateway script on: %s. Failed for: %s - see the log for details',
+                    updated.join(', ') || '-',
+                    failed.join(', '),
+                ),
+            );
+        }
+
+        return { refresh: true };
+    }
+
+    /**
+     * Run the script installation on the connected client of a device.
+     *
+     * @param shortDeviceId device id without the namespace, e.g. `SNSN-0013A#a1b2c3#1`
+     */
+    private async installBleGatewayScript(
+        shortDeviceId: string,
+    ): Promise<{ status: string; version?: string; message: string; restartRequired?: boolean }> {
+        const client = this.adapter.getClientByDeviceId(shortDeviceId);
+
+        if (!client) {
+            return { status: 'error', message: `Device ${shortDeviceId} is not connected` };
+        }
+
+        this.adapter.log.info(`[DeviceManager] Installing BLE gateway script on ${shortDeviceId}`);
+
+        return await client.installBleGatewayScript();
     }
 
     async handleFirmwareUpdate(id: string, context: ActionContext): Promise<{ refresh: DeviceRefresh }> {
@@ -1530,7 +1850,8 @@ export default class ShellyDeviceManagement extends DeviceManagement {
         }
 
         await progress.close();
-        return { refresh: 'device' as DeviceRefresh };
+        // 'device' is not a valid value - the GUI only knows 'all', 'instance' and 'devices'
+        return { refresh: 'devices' };
     }
 
     private mdnsScan(timeout: number): Promise<{ name: string; ip: string }[]> {
