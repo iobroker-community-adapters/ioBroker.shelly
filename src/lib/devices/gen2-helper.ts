@@ -7233,7 +7233,7 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
-    deviceObj[`RGBCCT${rgbcctId}.transition_target_output`] = {
+    deviceObj[`RGBCCT${rgbcctId}.Transition_Target_Output`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
             mqtt_publish_funct: value => JSON.parse(value)?.transition?.target?.output,
@@ -7247,7 +7247,7 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
-    deviceObj[`RGBCCT${rgbcctId}.transition_target_rgb`] = {
+    deviceObj[`RGBCCT${rgbcctId}.Transition_Target_RGB`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
             mqtt_publish_funct: value => {
@@ -7264,7 +7264,7 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
-    deviceObj[`RGBCCT${rgbcctId}.transition_target_ct`] = {
+    deviceObj[`RGBCCT${rgbcctId}.Transition_Target_Ct`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
             mqtt_publish_funct: value => JSON.parse(value)?.transition?.target?.ct,
@@ -7279,7 +7279,7 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
-    deviceObj[`RGBCCT${rgbcctId}.transition_target_brightness`] = {
+    deviceObj[`RGBCCT${rgbcctId}.Transition_Target_Brightness`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
             mqtt_publish_funct: value => JSON.parse(value)?.transition?.target?.brightness,
@@ -7296,7 +7296,7 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
-    deviceObj[`RGBCCT${rgbcctId}.transition_started_at`] = {
+    deviceObj[`RGBCCT${rgbcctId}.Transition_Started_At`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
             mqtt_publish_funct: value => JSON.parse(value)?.transition?.started_at,
@@ -7310,7 +7310,7 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
         },
     };
 
-    deviceObj[`RGBCCT${rgbcctId}.transition_duration`] = {
+    deviceObj[`RGBCCT${rgbcctId}.Transition_Duration`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
             mqtt_publish_funct: value => JSON.parse(value)?.transition?.duration,
@@ -8676,10 +8676,7 @@ export {
     addHumiditySensor,
     addIlluminanceSensor,
     addInput,
-    addLight,
-    addPM1,
-    addPlusAddon,
-    addPresence,
+    addLight, addPlusAddon, addPM1, addPresence,
     addPresenceZone,
     addProOutputAddon,
     addRGB,
@@ -8687,5 +8684,6 @@ export {
     addRGBW,
     addSwitch,
     addTemperatureSensor,
-    addVoltmeterSensor,
+    addVoltmeterSensor
 };
+
