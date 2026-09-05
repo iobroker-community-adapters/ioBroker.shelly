@@ -230,23 +230,17 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (@mcm1957) Corrected the role of energy datapoints from value.power.consumption to value.energy.consumed.
-- (@mcm1957) Corrected the role of the gain datapoint from level.color.brightness to level.dimmer.
+- (@mcm1957) Corrected the role of several states.
 - (@GermanBluefox) Corrected wrong datapoint translations in all supported languages, e.g. current, voltage and apparent power.
 - (@patricknitsch) Device Manager now automatically shows power values on the device tile, and voltage, current, energy and frequency in the device info, for any device that reports them.
 - (@mcm1957) Added the missing translations for all datapoint names in all supported languages.
-- (@mcm1957) Added tests to validate that all datapoint names and descriptions are translated and that all i18n language files are consistent.
 - (@mcm1957) Added support for Shelly Duo Bulb E27 Gen 3 (shellyduobulbg3). [#1385]
 - (@mcm1957) Added support for Shelly Multicolor Bulb E27 Gen 3 (shellycolorblbg3). [#1386]
 - (@mcm1957) Added support for Shelly AZ H&T (shellyazht). [#1573]
-
-### 12.0.0-alpha.2 (2026-08-19)
 - (@mcm1957) The transition time can now be written for Shelly Dimmer1/Dimmer2 and for Gen2+ dimmers/lights (incl. Dimmer Gen3 and Dimmer Gen4). [#1214][#1224]
 - (@mcm1957) Added support for Top AC Portable EV Charger (topacportableevcharger) - **EXPERIMENTAL ONLY** [#1401]
 - (@mcm1957) Added support for Shelly Flood S Gen 4 (shellyfloodsg4). [#1380]
 - (@mcm1957) Added monophase mode support for Shelly 3EM G3 (shelly3em63g3). [#1540]
-
-### 12.0.0-alpha.1 (2026-08-19)
 - (@GermanBluefox) Added option to ignore the timezone mismatch message (device timezone differs from the ioBroker host timezone).
 - (@GermanBluefox) Fixed MQTT errors ("Cannot read properties of undefined") if a device closes the connection while it is still being initialized (e.g. battery powered devices).
 - (@floze-the-genius) Corrected roles for Gen 2+ input states. [#1498]
