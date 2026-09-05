@@ -1,0 +1,1 @@
+import{t as e}from"./virtual_mf-exposes___mfe_internal__ShellyComponentsSet__customComponents_js-Cf7MII_k.js";export{e as default};

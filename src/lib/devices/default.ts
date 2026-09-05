@@ -1071,6 +1071,30 @@ const defaultsgen2: DeviceDefinition = {
             write: false,
         },
     },
+    'BLE.scriptVersion': {
+        mqtt: {
+            // Same topic as BLE.Event - the version of the gateway script is part of every message,
+            // so it is known without asking the device.
+            mqtt_publish: `<mqttprefix>/events/ble`,
+            mqtt_publish_funct: (value, self) => {
+                try {
+                    return JSON.parse(value).scriptVersion;
+                } catch {
+                    self.adapter.log.warn(
+                        `[BLE.scriptVersion] ${self.getLogInfo()}: Unable to parse json payload "${value}"`,
+                    );
+                    return undefined;
+                }
+            },
+        },
+        common: {
+            name: 'Version of the BLE gateway script',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
 };
 
 const defaultsgen3 = Object.assign({}, defaultsgen2);

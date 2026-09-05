@@ -34,6 +34,8 @@ class MQTTClient extends BaseClient {
     stream: net.Socket;
     /** MQTT topic prefix announced by the device (e.g. `shellyplus1-abc`). */
     mqttprefix: string | undefined;
+    /** Running HTTP request for the mqtt prefix, so it is not requested several times in parallel */
+    private mqttPrefixLookup: Promise<string | undefined> | undefined;
     /** Pending fragmented/awaited messages by id. */
     messageCache: Record<string, CachedMessage>;
     messageId: number;
@@ -357,6 +359,7 @@ class MQTTClient extends BaseClient {
         this.messageCache = {};
         this.messageId = 1;
         this.mqttprefix = undefined;
+        this.mqttPrefixLookup = undefined;
         this.will = undefined;
         this.publishQueue = [];
         this.processingQueue = false;
@@ -375,6 +378,11 @@ class MQTTClient extends BaseClient {
             this.adapter.log.warn(
                 `[MQTT] Unable to publish message to ${this.getLogInfo()} - mqtt prefix was not set but is required for this message: ${topic} = ${value}`,
             );
+
+            // The prefix is normally read once while the device connects. If that failed (e.g.
+            // because the device was busy), every command would be lost until it reconnects - so
+            // read it again in the background, the next command then works.
+            void this.setMqttPrefixHttp();
             return;
         }
 
@@ -590,14 +598,24 @@ class MQTTClient extends BaseClient {
         if (this.mqttprefix) {
             return this.mqttprefix;
         }
+        if (this.mqttPrefixLookup) {
+            return await this.mqttPrefixLookup;
+        }
 
+        this.mqttPrefixLookup = this.requestMqttPrefixHttp().finally(() => (this.mqttPrefixLookup = undefined));
+
+        return await this.mqttPrefixLookup;
+    }
+
+    /** The actual HTTP request of {@link setMqttPrefixHttp}, without the "already running" handling. */
+    private async requestMqttPrefixHttp(): Promise<string | undefined> {
         this.adapter.log.debug(
             `[MQTT] Started mqttprefix fallback via HTTP for client ${this.getId()} (Gen ${this.getDeviceGen()})`,
         );
 
         if (this.getDeviceGen() == 1) {
             try {
-                const body = await this.requestAsync('/settings');
+                const body = await this.requestWithRetry('/settings');
                 if (body) {
                     const settings = JSON.parse(body);
                     this.mqttprefix = settings.mqtt.id;
@@ -621,7 +639,7 @@ class MQTTClient extends BaseClient {
             }
         } else if (this.getDeviceGen() >= 2) {
             try {
-                const body = await this.requestAsync('/rpc/Mqtt.GetConfig');
+                const body = await this.requestWithRetry('/rpc/Mqtt.GetConfig');
                 if (body) {
                     const settings = JSON.parse(body);
                     this.mqttprefix = settings.topic_prefix;
@@ -1102,6 +1120,16 @@ export class MQTTServer extends BaseServer {
                 `[MQTT Server] Started listener on ${this.adapter.config.bind}:${this.adapter.config.port}`,
             ),
         );
+    }
+
+    /**
+     * Find the connected client of a device, e.g. to perform an HTTP request with the credentials
+     * and the IP address known by the client.
+     *
+     * @param deviceId ioBroker device id, e.g. `SNSN-0013A#a1b2c3#1`
+     */
+    getClientByDeviceId(deviceId: string): MQTTClient | undefined {
+        return Object.values(this.clients).find(client => client.getDeviceId() === deviceId);
     }
 
     destroy(): void {
