@@ -8676,7 +8676,10 @@ export {
     addHumiditySensor,
     addIlluminanceSensor,
     addInput,
-    addLight, addPlusAddon, addPM1, addPresence,
+    addLight,
+    addPlusAddon,
+    addPM1,
+    addPresence,
     addPresenceZone,
     addProOutputAddon,
     addRGB,
@@ -8684,6 +8687,5 @@ export {
     addRGBW,
     addSwitch,
     addTemperatureSensor,
-    addVoltmeterSensor
+    addVoltmeterSensor,
 };
-
