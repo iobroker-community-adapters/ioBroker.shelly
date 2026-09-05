@@ -463,7 +463,6 @@ describe('Test Device Definitions', function () {
                         'value.power',
                         'value.power.active',
                         'value.power.consumed',
-                        'value.power.consumption',  // should be removed
                         'value.power.produced',
                         'value.power.reactive',
                         'value.temperature',
