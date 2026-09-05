@@ -8687,6 +8687,5 @@ export {
     addRGBW,
     addSwitch,
     addTemperatureSensor,
-    addVoltmeterSensor
+    addVoltmeterSensor,
 };
-
