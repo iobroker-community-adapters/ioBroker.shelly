@@ -212,11 +212,12 @@ const shellycolorbulb: DeviceDefinition = {
         common: {
             name: 'Gain',
             type: 'number',
-            role: 'level.color.brightness',
+            role: 'level.dimmer',
             read: true,
             write: true,
             min: 0,
             max: 100,
+            unit: '%',
         },
     },
     'lights.temp': {
@@ -426,7 +427,7 @@ const shellycolorbulb: DeviceDefinition = {
         common: {
             name: 'Total energy consumed in Watt-minute',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             unit: 'Wmin',
             read: true,
             write: false,
@@ -448,7 +449,7 @@ const shellycolorbulb: DeviceDefinition = {
         common: {
             name: 'Total energy consumed in kWh',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             unit: 'kWh',
             read: true,
             write: false,
