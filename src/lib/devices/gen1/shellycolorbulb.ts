@@ -212,11 +212,12 @@ const shellycolorbulb: DeviceDefinition = {
         common: {
             name: 'Gain',
             type: 'number',
-            role: 'level.color.brightness',
+            role: 'level.dimmer',
             read: true,
             write: true,
             min: 0,
             max: 100,
+            unit: '%',
         },
     },
     'lights.temp': {
