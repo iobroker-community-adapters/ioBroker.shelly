@@ -258,7 +258,7 @@ const shellydimmer2: DeviceDefinition = {
         common: {
             name: 'Energy',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             read: true,
             write: false,
             def: 0,

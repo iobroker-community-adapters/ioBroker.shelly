@@ -230,6 +230,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+- (@mcm1957) Corrected the role of energy datapoints from value.power.consumption to value.energy.consumed.
 - (@GermanBluefox) Corrected wrong datapoint translations in all supported languages, e.g. current, voltage and apparent power.
 - (@patricknitsch) Device Manager now automatically shows power values on the device tile, and voltage, current, energy and frequency in the device info, for any device that reports them.
 - (@mcm1957) Added the missing translations for all datapoint names in all supported languages.
