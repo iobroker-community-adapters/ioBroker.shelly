@@ -229,6 +229,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (@mcm1957) **BREAKING:** Adapter requires js-controller >= 7.7.2 and admin >= 8.0.11 now.
+
 ### 12.0.0-alpha.3 (2026-09-05)
 - (@mcm1957) Corrected the role of several states.
 - (@GermanBluefox) Corrected wrong datapoint translations in all supported languages, e.g. current, voltage and apparent power.
