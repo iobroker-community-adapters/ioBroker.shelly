@@ -426,5 +426,12 @@
     "swap OPEN and CLOSE directions": "OPEN- en DICHT-richtingen omwisselen",
     "target illuminance": "doelverlichtingssterkte",
     "target state": "doelstatus",
-    "unknown": "onbekend"
+    "unknown": "onbekend",
+    "Average temperature": "Gemiddelde temperatuur",
+    "Precipitation in the last 24 hours": "Neerslag in de laatste 24 uur",
+    "Active irrigation sequence": "Actieve irrigatiesequentie",
+    "Enable zone irrigation": "Zone-irrigatie inschakelen",
+    "Watering duration": "Bewateringsduur",
+    "Started at": "Gestart om",
+    "Command source": "Opdrachtbron"
 }

@@ -426,5 +426,12 @@
     "swap OPEN and CLOSE directions": "Trocar direções ABRIR e FECHAR",
     "target illuminance": "iluminância alvo",
     "target state": "estado alvo",
-    "unknown": "desconhecido"
+    "unknown": "desconhecido",
+    "Average temperature": "Temperatura média",
+    "Precipitation in the last 24 hours": "Precipitação nas últimas 24 horas",
+    "Active irrigation sequence": "Sequência de irrigação ativa",
+    "Enable zone irrigation": "Ativar irrigação da zona",
+    "Watering duration": "Duração da rega",
+    "Started at": "Iniciado às",
+    "Command source": "Origem do comando"
 }
