@@ -229,6 +229,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (@mcm1957) Fixed authentication with Gen2+ devices running firmware 2.x which could fail with "Wrong http username or http password!" although the credentials were correct. [#1543]
+
 ### 12.0.0-alpha.6 (2026-09-09)
 - (@mcm1957) **BREAKING:** Adapter requires js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@mcm1957) Added missing translations for the adapter configuration. [#1586]
