@@ -229,7 +229,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 12.0.0-alpha.4 (2026-09-09)
 - (@mcm1957) **BREAKING:** Adapter requires js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@GermanBluefox) Added a new "Bluetooth map" tab to the adapter configuration which shows which Bluetooth devices are received by which Shelly gateway, including the signal strength. The gateways are arranged in a circle and each device is shown at the gateway which receives it best - all other connections and the signal values can be switched on.
 - (@GermanBluefox) Fixed devices which stayed uncontrollable after connecting with "mqtt prefix was not set": the adapter now repeats the request if the device was busy and reads the prefix again instead of losing every command until the next reconnect.
@@ -286,6 +286,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 * (@mcm1957) FrankEver Smart Watervalve (watervalve) has been added. [#1341]
 * (@mcm1957) LinkedGo ST1820 (st1820) has been added. [#1257]
 * (@mcm1957) Dependencies have been updated
+
 
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
