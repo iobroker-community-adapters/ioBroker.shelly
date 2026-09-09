@@ -114,6 +114,7 @@ import { shellypstripg4 } from './devices/gen4/shellypstripg4';
 import { cury } from './devices/poweredbyshelly/cury';
 import { hiluxds8 } from './devices/poweredbyshelly/hiluxds8';
 import { irrigation } from './devices/poweredbyshelly/irrigation';
+import { neowatervalve } from './devices/poweredbyshelly/neowatervalve';
 import { ogemray25a } from './devices/poweredbyshelly/ogemray25a';
 import { st1820 } from './devices/poweredbyshelly/st1820';
 import { topacportableevcharger } from './devices/poweredbyshelly/topacportableevcharger';
@@ -232,6 +233,7 @@ const devices: Record<string, DeviceDefinition> = {
     cury,
     hiluxds8,
     irrigation,
+    neowatervalve,
     ogemray25a,
     st1820,
     topacportableevcharger,
@@ -351,6 +353,7 @@ const deviceGen: Record<string, number> = {
     cury: 3,
     hiluxds8: 3,
     irrigation: 3,
+    neowatervalve: 3,
     ogemray25a: 3,
     st1820: 3,
     topacportableevcharger: 3,
@@ -471,6 +474,7 @@ const deviceGroupMap: Record<string, string> = {
     cury: 'other',
     hiluxds8: 'light',
     irrigation: 'other',
+    neowatervalve: 'other',
     ogemray25a: 'other',
     st1820: 'other',
     topacportableevcharger: 'other',
@@ -590,6 +594,7 @@ const deviceIcons: Record<string, string> = {
     cury: 'cury',
     hiluxds8: 'shellyprorgbwwpm',
     irrigation: 'shellyplus1',
+    neowatervalve: 'shellyplus1',
     ogemray25a: 'shellyplus1',
     st1820: 'shellyplus1',
     topacportableevcharger: 'shellyplus1',
@@ -710,6 +715,7 @@ const deviceKnowledgeBase: Record<string, string | undefined> = {
     cury: 'https://kb.shelly.cloud/knowledge-base/cury',
     hiluxds8: undefined, // no knowledgebase entry exists
     irrigation: undefined, // no knowledgebase entry exists
+    neowatervalve: 'https://www.shelly.com/blogs/documentation/neo-smart-water-valve',
     ogemray25a: 'https://www.shelly.com/de/products/ogemray-25a-smart-relay',
     st1820: undefined, // no knowledgebase entry exists,
     topacportableevcharger: undefined, // no knowledgebase entry exists,
@@ -831,6 +837,7 @@ const deviceTypes: Record<string, string[]> = {
     cury: ['cury'],
     hiluxds8: ['hiluxds8'],
     irrigation: ['irrigation'],
+    neowatervalve: ['neowatervalve'],
     ogemray25a: ['ogemray25a'],
     st1820: ['st1820'],
     topacportableevcharger: ['topacportableevcharger'],
