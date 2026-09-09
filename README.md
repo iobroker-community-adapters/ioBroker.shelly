@@ -277,7 +277,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (HGlab01) OnUnload handling has been improved. [#1279]
 - (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
 
-
 ### 10.6.0 (2026-02-08)
 * (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
 * (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]
@@ -287,6 +286,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 * (@mcm1957) FrankEver Smart Watervalve (watervalve) has been added. [#1341]
 * (@mcm1957) LinkedGo ST1820 (st1820) has been added. [#1257]
 * (@mcm1957) Dependencies have been updated
+
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 
