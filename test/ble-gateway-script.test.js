@@ -14,7 +14,7 @@ const {
  */
 function readScriptFromDocs(lang) {
     const doc = fs.readFileSync(path.join(__dirname, '..', 'docs', lang, 'ble-devices.md'), 'utf8');
-    const match = /```javascript\n([\s\S]*?)```/.exec(doc);
+    const match = /```javascript\r?\n([\s\S]*?)```/.exec(doc);
 
     return match ? match[1] : null;
 }
