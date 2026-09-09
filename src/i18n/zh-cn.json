@@ -426,5 +426,12 @@
     "swap OPEN and CLOSE directions": "交换 打开 和 关闭 方向",
     "target illuminance": "目标照度",
     "target state": "目标状态",
-    "unknown": "未知"
+    "unknown": "未知",
+    "Average temperature": "平均温度",
+    "Precipitation in the last 24 hours": "过去24小时降水量",
+    "Active irrigation sequence": "当前灌溉序列",
+    "Enable zone irrigation": "启用区域灌溉",
+    "Watering duration": "浇水时长",
+    "Started at": "开始于",
+    "Command source": "命令来源"
 }

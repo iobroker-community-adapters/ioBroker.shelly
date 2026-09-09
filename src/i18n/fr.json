@@ -426,5 +426,12 @@
     "swap OPEN and CLOSE directions": "Inverser les directions OUVRIR et FERMER",
     "target illuminance": "éclairement cible",
     "target state": "état cible",
-    "unknown": "inconnu"
+    "unknown": "inconnu",
+    "Average temperature": "Température moyenne",
+    "Precipitation in the last 24 hours": "Précipitations des dernières 24 heures",
+    "Active irrigation sequence": "Séquence d'irrigation active",
+    "Enable zone irrigation": "Activer l'irrigation de la zone",
+    "Watering duration": "Durée d'arrosage",
+    "Started at": "Démarré à",
+    "Command source": "Source de la commande"
 }

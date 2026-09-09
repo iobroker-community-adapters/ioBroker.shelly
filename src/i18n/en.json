@@ -426,5 +426,12 @@
     "swap OPEN and CLOSE directions": "swap OPEN and CLOSE directions",
     "target illuminance": "target illuminance",
     "target state": "target state",
-    "unknown": "unknown"
+    "unknown": "unknown",
+    "Average temperature": "Average temperature",
+    "Precipitation in the last 24 hours": "Precipitation in the last 24 hours",
+    "Active irrigation sequence": "Active irrigation sequence",
+    "Enable zone irrigation": "Enable zone irrigation",
+    "Watering duration": "Watering duration",
+    "Started at": "Started at",
+    "Command source": "Command source"
 }
