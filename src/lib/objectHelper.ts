@@ -29,7 +29,7 @@ export default class ObjectHelper {
         createNow: boolean = true,
         callback?: () => void,
     ): void {
-        // The caller passes `common` by reference from the device definition (see base.ts/mqtt.ts/
+        // The caller passes `common` by reference from the device definition (see base.ts, mqtt.ts,
         // coap.ts). Work on a copy, so neither the normalization below nor the obtainCustomFields
         // delete in processObjectQueue() modifies that definition - otherwise every following call
         // would build a different object and defeat the isEquivalent() guard below, causing a
