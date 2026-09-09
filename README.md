@@ -242,6 +242,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (@mcm1957) Added tests to validate that all datapoint names and descriptions are translated and that all i18n language files are consistent.
 - (@mcm1957) Added support for Shelly Duo Bulb E27 Gen 3 (shellyduobulbg3). [#1385]
 - (@mcm1957) Added support for Shelly Multicolor Bulb E27 Gen 3 (shellycolorblbg3). [#1386]
+- Fixed frequent object updates caused by i18n state names. [#1560]
+- (@GermanBluefox) Fixed devices which stayed uncontrollable after connecting with "mqtt prefix was not set": the adapter now repeats the request if the device was busy and reads the prefix again instead of losing every command until the next reconnect.
+- (@mcm1957) Corrected the role of several states.
+- (@mcm1957) Added support for Shelly AZ H&T (shellyazht). [#1573]
 
 ### 12.0.0-alpha.2 (2026-08-19)
 - (@mcm1957) The transition time can now be written for Shelly Dimmer1/Dimmer2 and for Gen2+ dimmers/lights (incl. Dimmer Gen3 and Dimmer Gen4). [#1214][#1224]
