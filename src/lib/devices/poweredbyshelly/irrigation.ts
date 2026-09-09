@@ -110,10 +110,7 @@ for (let zoneId = 0; zoneId <= 5; zoneId++) {
     const startedAtState: DeviceState = {
         mqtt: {
             http_publish: '/rpc/Object.GetStatus?owner="service:0"&role="zones_status"',
-            http_publish_funct: value => {
-                const startedAt = value ? JSON.parse(value).value[`zone${zoneId}`]?.started_at : undefined;
-                return startedAt ? startedAt * 1000 : undefined;
-            },
+            http_publish_funct: value => (value ? JSON.parse(value).value[`zone${zoneId}`]?.started_at : undefined),
         },
         common: {
             name: 'Started at',
