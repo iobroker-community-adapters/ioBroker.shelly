@@ -426,5 +426,12 @@
     "swap OPEN and CLOSE directions": "Zamień kierunki OTWÓRZ i ZAMKNIJ",
     "target illuminance": "docelowe natężenie oświetlenia",
     "target state": "stan docelowy",
-    "unknown": "nieznany"
+    "unknown": "nieznany",
+    "Average temperature": "Średnia temperatura",
+    "Precipitation in the last 24 hours": "Opady w ciągu ostatnich 24 godzin",
+    "Active irrigation sequence": "Aktywna sekwencja nawadniania",
+    "Enable zone irrigation": "Włącz nawadnianie strefy",
+    "Watering duration": "Czas podlewania",
+    "Started at": "Rozpoczęto o",
+    "Command source": "Źródło polecenia"
 }

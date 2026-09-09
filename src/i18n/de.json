@@ -426,5 +426,12 @@
     "swap OPEN and CLOSE directions": "Richtungen ÖFFNEN und SCHLIESSEN tauschen",
     "target illuminance": "Zielbeleuchtungsstärke",
     "target state": "Zielzustand",
-    "unknown": "unbekannt"
+    "unknown": "unbekannt",
+    "Average temperature": "Durchschnittstemperatur",
+    "Precipitation in the last 24 hours": "Niederschlag der letzten 24 Stunden",
+    "Active irrigation sequence": "Aktive Bewässerungssequenz",
+    "Enable zone irrigation": "Bewässerung der Zone aktivieren",
+    "Watering duration": "Bewässerungsdauer",
+    "Started at": "Gestartet um",
+    "Command source": "Befehlsquelle"
 }
