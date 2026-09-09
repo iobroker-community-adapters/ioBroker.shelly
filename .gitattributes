@@ -1,0 +1,2 @@
+# Force LF line endings on checkout for all text files on all platforms (including Windows)
+* text=auto eol=lf
