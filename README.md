@@ -183,6 +183,7 @@ Notes:
 | FrankEver Smart Watervalve (watervalve)                    | ❌   | >= v10.6.0 |
 | HiluX DS8 by Shelly (hiluxds8)                             | ❌   | >= v11.0.0 |
 | LinkedGo Smart Thermost (st1820)                           | ❌   | >= v10.6.0 |
+| Neo Smart Water Valve NAS-WV02W (neowatervalve)            | ❌   | >= v12.0.0 |
 | Ogemray 25A (ogemray25a)                                   | ❌   | >= v9.5.0  |
 | Shelly Cury (cury)                                         | ❌   | >= v11.0.0 |
 | Top AC Portable EV Charger (topacportableevcharger) (1)(*) | ❌   | >= v12.0.0 |
@@ -229,6 +230,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (@mcm1957) Added support for Neo Smart Water Valve NAS-WV02W (neowatervalve). [#1322]
+
 ### 12.0.0-alpha.6 (2026-09-09)
 - (@mcm1957) **BREAKING:** Adapter requires js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@mcm1957) Added missing translations for the adapter configuration. [#1586]
