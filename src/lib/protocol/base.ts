@@ -169,136 +169,141 @@ export class BaseClient implements ShellyClient {
                     `[requestAsync] HTTP request to Gen 2+ device (with digest auth): "${axiosRequestObj.baseURL}${url}"`,
                 );
 
-                axios(axiosRequestObj)
-                    .then(response => {
-                        this.adapter.log.silly(
-                            `[requestAsync] HTTP response of Gen 2+ device without auth: "${axiosRequestObj.baseURL}${url}" -> "${response.data}"`,
-                        );
+                const saveAndResolve = (data: string): void => {
+                    if (this.adapter.config.saveHttpResponses) {
+                        this.adapter.log.silly(`[requestAsync] Saving HTTP debug file to ${httpDebugFilePath}`);
+                        let fileContent = data;
+                        try {
+                            fileContent = JSON.stringify(JSON.parse(data), null, 2);
+                        } catch {
+                            // keep raw response if it is not valid JSON
+                        }
+                        this.adapter
+                            .writeFileAsync(this.adapter.namespace, httpDebugFilePath, fileContent)
+                            .catch((e: unknown) =>
+                                this.adapter.log.debug(`[requestAsync] Could not save HTTP debug file: ${String(e)}`),
+                            );
+                    }
 
-                        if (this.adapter.config.saveHttpResponses) {
-                            this.adapter.log.silly(`[requestAsync] Saving HTTP debug file to ${httpDebugFilePath}`);
-                            try {
-                                const responseObj = JSON.parse(response.data);
-                                this.adapter
-                                    .writeFileAsync(
-                                        this.adapter.namespace,
-                                        httpDebugFilePath,
-                                        JSON.stringify(responseObj, null, 2),
-                                    )
-                                    .catch((e: unknown) =>
-                                        this.adapter.log.debug(
-                                            `[requestAsync] Could not save HTTP debug file: ${String(e)}`,
-                                        ),
-                                    );
-                            } catch {
-                                this.adapter
-                                    .writeFileAsync(this.adapter.namespace, httpDebugFilePath, response.data)
-                                    .catch((e: unknown) =>
-                                        this.adapter.log.debug(
-                                            `[requestAsync] Could not save HTTP debug file: ${String(e)}`,
-                                        ),
-                                    );
+                    resolve(data);
+                };
+
+                // Send the request; on a 401 digest challenge (re)compute the Authorization header and
+                // retry. Firmware 2.x manages nonces per RFC 7616 and may answer an authenticated request
+                // with "401 stale=true" once a nonce expires - in that case retry once with the fresh nonce
+                // instead of treating it as a credential error.
+                const attempt = (config: AxiosRequestConfig, staleRetriesLeft: number): void => {
+                    axios(config)
+                        .then(response => {
+                            this.adapter.log.silly(
+                                `[requestAsync] HTTP response of Gen 2+ device: "${axiosRequestObj.baseURL}${url}" -> "${response.data}"`,
+                            );
+                            saveAndResolve(response.data);
+                        })
+                        .catch(err => {
+                            const wwwAuthenticate =
+                                err?.response?.status === 401 && err.response?.headers?.['www-authenticate'];
+
+                            if (!wwwAuthenticate) {
+                                reject(err instanceof Error ? err : new Error(String(err)));
+                                return;
                             }
-                        }
 
-                        resolve(response.data);
-                    })
-                    .catch(err => {
-                        if (
-                            err &&
-                            err.response &&
-                            err.response?.status === 401 &&
-                            err.response?.headers?.['www-authenticate']
-                        ) {
-                            const authDetails = err.response.headers['www-authenticate']
-                                .replace('Digest ', '')
-                                .split(', ')
-                                .map((v: string) => {
-                                    const l = v.split('=');
-                                    return { [l[0]]: l[1].replace(/"/g, '') };
-                                })
-                                .reduce(
-                                    (prev: Record<string, string>, curr: Record<string, string>) => ({
-                                        ...prev,
-                                        ...curr,
-                                    }),
-                                    {},
-                                );
+                            const wasAuthenticated = !!(config.headers as Record<string, string> | undefined)
+                                ?.Authorization;
+                            const authDetails = this.parseDigestChallenge(wwwAuthenticate as string);
+                            const isStale = String(authDetails.stale).toLowerCase() === 'true';
 
-                            const username = 'admin';
-                            const password = this.adapter.config.httppassword;
+                            // Already authenticated and the device still rejects with a non-stale nonce
+                            // -> genuine credential error. Also stop once the stale retries are exhausted.
+                            if (wasAuthenticated && (!isStale || staleRetriesLeft <= 0)) {
+                                reject(err instanceof Error ? err : new Error(String(err)));
+                                return;
+                            }
 
-                            this.nonceCount++;
-                            const nonceCount = `00000000${this.nonceCount}`.slice(-8);
-                            const cnonce = crypto.randomBytes(24).toString('hex');
+                            const authorization = this.buildDigestAuthHeader(authDetails, method, url);
+                            attempt(
+                                { ...axiosRequestObj, headers: { Authorization: authorization } },
+                                wasAuthenticated ? staleRetriesLeft - 1 : staleRetriesLeft,
+                            );
+                        });
+                };
 
-                            const realm = authDetails.realm;
-                            const nonce = authDetails.nonce;
-
-                            const sha256 = (str: string): string =>
-                                crypto.createHash('sha256').update(str).digest('hex');
-
-                            const HA1 = sha256(`${username}:${realm}:${password}`);
-                            const HA2 = sha256(`${method.toUpperCase()}:${url}`);
-                            const response = sha256(`${HA1}:${nonce}:${nonceCount}:${cnonce}:auth:${HA2}`);
-
-                            const authorization = `Digest username="${username}", realm="${realm}", nonce="${nonce}", uri="${url}", cnonce="${cnonce}", nc=${nonceCount}, qop=auth, response="${response}", algorithm=SHA-256`;
-
-                            axiosRequestObj = {
-                                ...axiosRequestObj,
-                                headers: {
-                                    Authorization: authorization,
-                                },
-                            };
-
-                            axios(axiosRequestObj)
-                                .then(response => {
-                                    this.adapter.log.silly(
-                                        `[requestAsync] HTTP response of Gen 2+ device with digest auth: "${axiosRequestObj.baseURL}${url}" -> "${response.data}"`,
-                                    );
-
-                                    if (this.adapter.config.saveHttpResponses) {
-                                        this.adapter.log.silly(
-                                            `[requestAsync] Saving HTTP debug file to ${httpDebugFilePath}`,
-                                        );
-                                        try {
-                                            const responseObj = JSON.parse(response.data);
-                                            this.adapter
-                                                .writeFileAsync(
-                                                    this.adapter.namespace,
-                                                    httpDebugFilePath,
-                                                    JSON.stringify(responseObj, null, 2),
-                                                )
-                                                .catch((e: unknown) =>
-                                                    this.adapter.log.debug(
-                                                        `[requestAsync] Could not save HTTP debug file: ${String(e)}`,
-                                                    ),
-                                                );
-                                        } catch {
-                                            this.adapter
-                                                .writeFileAsync(
-                                                    this.adapter.namespace,
-                                                    httpDebugFilePath,
-                                                    response.data,
-                                                )
-                                                .catch((e: unknown) =>
-                                                    this.adapter.log.debug(
-                                                        `[requestAsync] Could not save HTTP debug file: ${String(e)}`,
-                                                    ),
-                                                );
-                                        }
-                                    }
-
-                                    resolve(response.data);
-                                })
-                                .catch(reject);
-                        } else {
-                            reject(err instanceof Error ? err : new Error(String(err)));
-                        }
-                    })
-                    .catch(reject);
+                attempt(axiosRequestObj, 1);
             }
         });
+    }
+
+    /**
+     * Parse a Gen2+ "WWW-Authenticate: Digest ..." challenge header into a key/value map.
+     * The value is split on the FIRST "=" only so Base64 nonces (which end in "=" padding per
+     * RFC 7616) are kept intact.
+     *
+     * @param header the raw www-authenticate header value
+     */
+parseDigestChallenge(header: string): Record<string, string> {
+        const src = header.replace(/^Digest\s+/i, '');
+
+        // Split on commas that are NOT inside quoted strings (e.g. qop="auth,auth-int")
+        const parts: string[] = [];
+        let buf = '';
+        let inQuotes = false;
+        for (let i = 0; i < src.length; i++) {
+            const ch = src[i];
+            if (ch === '"' && src[i - 1] !== '\\') {
+                inQuotes = !inQuotes;
+            }
+            if (ch === ',' && !inQuotes) {
+                parts.push(buf);
+                buf = '';
+                continue;
+            }
+            buf += ch;
+        }
+        if (buf) {
+            parts.push(buf);
+        }
+
+        return parts.reduce((acc: Record<string, string>, pair: string) => {
+            const eq = pair.indexOf('=');
+            if (eq === -1) {
+                return acc;
+            }
+            const key = pair.slice(0, eq).trim();
+            const value = pair
+                .slice(eq + 1)
+                .trim()
+                .replace(/^"|"$/g, '');
+            acc[key] = value;
+            return acc;
+        }, {});
+    }
+
+    /**
+     * Build a Gen2+ digest Authorization header for the given challenge.
+     *
+     * @param authDetails parsed challenge (realm/nonce/...)
+     * @param method the HTTP method of the request
+     * @param url the request URI
+     */
+    buildDigestAuthHeader(authDetails: Record<string, string>, method: string, url: string): string {
+        const username = 'admin';
+        const password = this.adapter.config.httppassword;
+
+        this.nonceCount++;
+        const nonceCount = `00000000${this.nonceCount}`.slice(-8);
+        const cnonce = crypto.randomBytes(24).toString('hex');
+
+        const realm = authDetails.realm;
+        const nonce = authDetails.nonce;
+
+        const sha256 = (str: string): string => crypto.createHash('sha256').update(str).digest('hex');
+
+        const HA1 = sha256(`${username}:${realm}:${password}`);
+        const HA2 = sha256(`${method.toUpperCase()}:${url}`);
+        const response = sha256(`${HA1}:${nonce}:${nonceCount}:${cnonce}:auth:${HA2}`);
+
+        return `Digest username="${username}", realm="${realm}", nonce="${nonce}", uri="${url}", cnonce="${cnonce}", nc=${nonceCount}, qop=auth, response="${response}", algorithm=SHA-256`;
     }
 
     getNextMsgId(): number {

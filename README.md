@@ -232,6 +232,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 - (@mcm1957) **BREAKING:** Adapter requires js-controller >= 7.7.2 and admin >= 8.0.11 now.
+- (@mcm1957) Fixed authentication with Gen2+ devices running firmware 2.x which could fail with "Wrong http username or http password!" although the credentials were correct. [#1543]
 - (@mcm1957) Added experimental support for FrankEver Smart Sprinkler Controller (irrigation). [#1207]
 - (@mcm1957) Added support for Neo Smart Water Valve NAS-WV02W (neowatervalve). [#1322]
 - (@mcm1957) Added missing translations for the adapter configuration. [#1586]
