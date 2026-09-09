@@ -55,6 +55,8 @@ export class BaseClient implements ShellyClient {
     serialId: string | undefined; // e.g. 8CAAB5616291
     deviceGen: number | undefined; // 1 or 2
     nonceCount: number;
+    /** Last digest challenge (realm/nonce) that authenticated successfully, reused pre-emptively. */
+    digestChallenge: Record<string, string> | null;
     httpTimeout: number;
 
     constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
@@ -73,6 +75,7 @@ export class BaseClient implements ShellyClient {
         this.http = {};
 
         this.nonceCount = 0;
+        this.digestChallenge = null;
         this.httpTimeout = 8 * 1000;
 
         // Handle firmware updates
@@ -190,9 +193,20 @@ export class BaseClient implements ShellyClient {
 
                 // Send the request; on a 401 digest challenge (re)compute the Authorization header and
                 // retry. Firmware 2.x manages nonces per RFC 7616 and may answer an authenticated request
-                // with "401 stale=true" once a nonce expires - in that case retry once with the fresh nonce
+                // with "401 stale=true" once a nonce expires - in that case retry with the fresh nonce
                 // instead of treating it as a credential error.
-                const attempt = (config: AxiosRequestConfig, staleRetriesLeft: number): void => {
+                //
+                // `challengeAuthed` is true once the Authorization was derived from a live challenge of the
+                // current request. A header derived from a cached challenge does not count: if the device
+                // rejects it (expired/unknown nonce) we simply re-challenge instead of reporting a
+                // credential error. Caching the last working challenge lets us authenticate the first
+                // request pre-emptively, which avoids the extra unauthenticated round-trip that otherwise
+                // triggers the firmware 2.x brute-force protection ("429 Too Many Requests").
+                const attempt = (
+                    config: AxiosRequestConfig,
+                    staleRetriesLeft: number,
+                    challengeAuthed: boolean,
+                ): void => {
                     axios(config)
                         .then(response => {
                             this.adapter.log.silly(
@@ -209,27 +223,37 @@ export class BaseClient implements ShellyClient {
                                 return;
                             }
 
-                            const wasAuthenticated = !!(config.headers as Record<string, string> | undefined)
-                                ?.Authorization;
                             const authDetails = this.parseDigestChallenge(wwwAuthenticate as string);
                             const isStale = String(authDetails.stale).toLowerCase() === 'true';
 
-                            // Already authenticated and the device still rejects with a non-stale nonce
-                            // -> genuine credential error. Also stop once the stale retries are exhausted.
-                            if (wasAuthenticated && (!isStale || staleRetriesLeft <= 0)) {
+                            // Already authenticated against a live challenge and still rejected with a
+                            // non-stale nonce -> genuine credential error. Also stop once the stale retries
+                            // are exhausted. Drop the cached challenge so we re-challenge next time.
+                            if (challengeAuthed && (!isStale || staleRetriesLeft <= 0)) {
+                                this.digestChallenge = null;
                                 reject(err instanceof Error ? err : new Error(String(err)));
                                 return;
                             }
 
+                            // Remember the working challenge so subsequent requests can authenticate up front.
+                            this.digestChallenge = authDetails;
                             const authorization = this.buildDigestAuthHeader(authDetails, method, url);
                             attempt(
                                 { ...axiosRequestObj, headers: { Authorization: authorization } },
-                                wasAuthenticated ? staleRetriesLeft - 1 : staleRetriesLeft,
+                                challengeAuthed ? staleRetriesLeft - 1 : staleRetriesLeft,
+                                true,
                             );
                         });
                 };
 
-                attempt(axiosRequestObj, 1);
+                if (this.digestChallenge) {
+                    // Authenticate pre-emptively with the last known-good challenge; if the nonce is no
+                    // longer accepted the catch handler falls back to a normal challenge/response.
+                    const authorization = this.buildDigestAuthHeader(this.digestChallenge, method, url);
+                    attempt({ ...axiosRequestObj, headers: { Authorization: authorization } }, 1, false);
+                } else {
+                    attempt(axiosRequestObj, 1, false);
+                }
             }
         });
     }

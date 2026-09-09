@@ -231,6 +231,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 - (@mcm1957) Fixed authentication with Gen2+ devices running firmware 2.x which could fail with "Wrong http username or http password!" although the credentials were correct. [#1543]
+- (@mcm1957) Gen2+ devices are now authenticated up front by reusing the last valid login, which reduces the "Too Many Requests" rejections seen with firmware 2.x. [#1543]
 
 ### 12.0.0-alpha.6 (2026-09-09)
 - (@mcm1957) **BREAKING:** Adapter requires js-controller >= 7.7.2 and admin >= 8.0.11 now.
