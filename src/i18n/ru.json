@@ -426,5 +426,12 @@
     "swap OPEN and CLOSE directions": "Поменять направления ОТКРЫТЬ и ЗАКРЫТЬ",
     "target illuminance": "целевая освещенность",
     "target state": "целевое состояние",
-    "unknown": "неизвестный"
+    "unknown": "неизвестный",
+    "Average temperature": "Средняя температура",
+    "Precipitation in the last 24 hours": "Осадки за последние 24 часа",
+    "Active irrigation sequence": "Активная последовательность полива",
+    "Enable zone irrigation": "Включить полив зоны",
+    "Watering duration": "Длительность полива",
+    "Started at": "Запущено в",
+    "Command source": "Источник команды"
 }

@@ -426,5 +426,12 @@
     "swap OPEN and CLOSE directions": "Поміняти напрямки ВІДКРИТИ і ЗАКРИТИ",
     "target illuminance": "освітленість цілі",
     "target state": "цільовий стан",
-    "unknown": "невідомий"
+    "unknown": "невідомий",
+    "Average temperature": "Середня температура",
+    "Precipitation in the last 24 hours": "Опади за останні 24 години",
+    "Active irrigation sequence": "Активна послідовність поливу",
+    "Enable zone irrigation": "Увімкнути полив зони",
+    "Watering duration": "Тривалість поливу",
+    "Started at": "Запущено о",
+    "Command source": "Джерело команди"
 }

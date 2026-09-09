@@ -180,6 +180,7 @@ Notes:
 
 | Device                                                     | CoAP | MQTT       |
 |------------------------------------------------------------| ---- | ---------- |
+| FrankEver Smart Sprinkler Controller (irrigation) (*)      | ❌   | >= v12.0.0 |
 | FrankEver Smart Watervalve (watervalve)                    | ❌   | >= v10.6.0 |
 | HiluX DS8 by Shelly (hiluxds8)                             | ❌   | >= v11.0.0 |
 | LinkedGo Smart Thermost (st1820)                           | ❌   | >= v10.6.0 |
@@ -212,7 +213,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - USB-powered UVC LED strip
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
-- Shelly Frankever Smart Sprinkler Controller (irrigation) (*)
 
 - Shelly BLU TRV
 - all BLU devices that need to receive data from the adapter.
@@ -229,6 +229,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (@mcm1957) Added experimental support for FrankEver Smart Sprinkler Controller (irrigation). [#1207]
+
 ### 12.0.0-alpha.6 (2026-09-09)
 - (@mcm1957) **BREAKING:** Adapter requires js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@mcm1957) Added missing translations for the adapter configuration. [#1586]
