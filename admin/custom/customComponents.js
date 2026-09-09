@@ -1,7 +1,7 @@
-import{n as e,t}from"./assets/virtual_mf-REMOTE_ENTRY_ID___mfe_internal__ShellyComponentsSet__customComponents_js-DL6B4iPq.js";export{t as get,e as init};
+import{n as e,t}from"./assets/virtual_mf-REMOTE_ENTRY_ID___mfe_internal__ShellyComponentsSet__customComponents_js-Dj6egwyL.js";export{t as get,e as init};
 if (typeof document !== 'undefined' && document.head) {
   try {
-    for (const __mfWarmupPath of ["assets/virtual_mf-REMOTE_ENTRY_ID___mfe_internal__ShellyComponentsSet__customComponents_js-DL6B4iPq.js","assets/virtualExposes-D6KxS9k5.js","assets/virtual_mf-exposes___mfe_internal__ShellyComponentsSet__customComponents_js-Cf7MII_k.js","assets/_virtual_mf-localSharedImportMap___mfe_internal__ShellyComponentsSet__mf_owner__1-BiG0RCma.js","assets/vite-preload-helper-B7qeedMF.js"]) {
+    for (const __mfWarmupPath of ["assets/virtual_mf-REMOTE_ENTRY_ID___mfe_internal__ShellyComponentsSet__customComponents_js-Dj6egwyL.js","assets/virtualExposes-C5fjCpxG.js","assets/virtual_mf-exposes___mfe_internal__ShellyComponentsSet__customComponents_js-Dw7lAbd4.js","assets/_virtual_mf-localSharedImportMap___mfe_internal__ShellyComponentsSet__mf_owner__1-CimIQ6Jf.js","assets/vite-preload-helper-B7qeedMF.js","assets/dist-BF-PlO2i.js"]) {
       const __mfWarmupLink = document.createElement('link');
       __mfWarmupLink.rel = 'modulepreload';
       __mfWarmupLink.crossOrigin = '';
