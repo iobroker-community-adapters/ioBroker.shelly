@@ -34,7 +34,9 @@ export default class ObjectHelper {
         // delete in processObjectQueue() modifies that definition - otherwise every following call
         // would build a different object and defeat the isEquivalent() guard below, causing a
         // needless extendObject() (and thus an onObjectChange event) on every device update.
-        obj = JSON.parse(JSON.stringify(obj));
+        // Only own properties of the object and of common are ever changed, so a shallow copy is
+        // enough and keeps this hot path (every state update) free of deep-clone overhead.
+        obj = { ...obj, common: { ...obj.common }, native: { ...obj.native } } as Partial<ioBroker.Object>;
         (obj as ioBroker.StateObject).type ||= 'state';
         obj.common ||= {} as ioBroker.ObjectCommon;
         obj.native ||= {};
