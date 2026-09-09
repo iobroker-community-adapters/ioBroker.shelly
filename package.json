@@ -1,6 +1,6 @@
 {
   "name": "iobroker.shelly",
-  "version": "12.0.0-alpha.2",
+  "version": "12.0.0-alpha.3",
   "description": "Integrate your Shelly devices into ioBroker via MQTT or CoAP",
   "author": "Thorsten Stueben <thorsten@stueben.de>",
   "contributors": [
@@ -46,7 +46,7 @@
     "@iobroker/adapter-dev": "^1.5.0",
     "@iobroker/build-tools": "^3.0.1",
     "@iobroker/eslint-config": "^2.3.4",
-    "@iobroker/testing": "^5.3.0",
+    "@iobroker/testing": "^6.0.0",
     "@iobroker/types": "^7.2.2",
     "@tsconfig/node22": "^22.0.6",
     "@types/bl": "^5.1.4",

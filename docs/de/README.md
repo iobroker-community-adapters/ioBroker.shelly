@@ -18,8 +18,8 @@ This is the German documentation - [🇺🇸 English version](../en/README.md)
 ## Anforderungen
 
 1. Node.js 22 (oder neuer)
-2. js-controller 6.0.11 (oder neuer)
-3. Admin Adapter 7.8.23 (oder neuer)
+2. js-controller 7.2.2 (oder neuer)
+3. Admin Adapter 8.0.11 (oder neuer)
 
 ## Geräte-Generationen
 

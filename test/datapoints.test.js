@@ -428,7 +428,6 @@ describe('Test Device Definitions', function () {
                         'level.blind',
                         'level.brightness',
                         'level.color.blue',
-                        'level.color.brightness',
                         'level.color.green',
                         'level.color.hue',
                         'level.color.red',
@@ -437,6 +436,7 @@ describe('Test Device Definitions', function () {
                         'level.color.white',
                         'level.current.max',
                         'level.current.min',
+                        'level.dimmer',
                         'level.humidity',
                         'level.max',
                         'level.min',
@@ -463,7 +463,6 @@ describe('Test Device Definitions', function () {
                         'value.power',
                         'value.power.active',
                         'value.power.consumed',
-                        'value.power.consumption',  // should be removed
                         'value.power.produced',
                         'value.power.reactive',
                         'value.temperature',

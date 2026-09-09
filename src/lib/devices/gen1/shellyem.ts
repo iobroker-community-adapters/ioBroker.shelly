@@ -139,7 +139,7 @@ const shellyem: DeviceDefinition = {
         common: {
             name: 'Total',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             read: true,
             write: false,
             def: 0,
@@ -159,7 +159,7 @@ const shellyem: DeviceDefinition = {
         common: {
             name: 'Total Returned',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             read: true,
             write: false,
             def: 0,
@@ -292,7 +292,7 @@ const shellyem: DeviceDefinition = {
         common: {
             name: 'Total',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             read: true,
             write: false,
             def: 0,
@@ -315,7 +315,7 @@ const shellyem: DeviceDefinition = {
         common: {
             name: 'Total Returned',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             read: true,
             write: false,
             def: 0,

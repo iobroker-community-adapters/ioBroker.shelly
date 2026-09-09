@@ -203,7 +203,7 @@ const shelly4pro: DeviceDefinition = {
         common: {
             name: 'Energy',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             read: true,
             write: false,
             def: 0,
@@ -427,7 +427,7 @@ const shelly4pro: DeviceDefinition = {
         common: {
             name: 'Energy',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             read: true,
             write: false,
             def: 0,
@@ -651,7 +651,7 @@ const shelly4pro: DeviceDefinition = {
         common: {
             name: 'Energy',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             read: true,
             write: false,
             def: 0,
@@ -875,7 +875,7 @@ const shelly4pro: DeviceDefinition = {
         common: {
             name: 'Energy',
             type: 'number',
-            role: 'value.power.consumption',
+            role: 'value.energy.consumed',
             read: true,
             write: false,
             def: 0,
