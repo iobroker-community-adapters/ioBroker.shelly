@@ -12,6 +12,7 @@ import ObjectHelper from './lib/objectHelper';
 import { CoAPServer } from './lib/protocol/coap';
 import type { BaseClient } from './lib/protocol/base';
 import { MQTTServer } from './lib/protocol/mqtt';
+import { parseHostnameWithPort } from './lib/shelly-helper';
 import type { ShellyAdapterConfig } from './lib/types';
 
 const adapterName = packageName.split('.').pop() ?? 'shelly';
@@ -270,8 +271,6 @@ export class ShellyAdapter extends Adapter {
      * Online-Check via TCP ping (when using CoAP)
      */
     private async onlineCheck(): Promise<void> {
-        const valPort = 80;
-
         if (this.onlineCheckTimeout) {
             this.clearTimeout(this.onlineCheckTimeout);
             this.onlineCheckTimeout = null;
@@ -284,9 +283,10 @@ export class ShellyAdapter extends Adapter {
                 const valHostname = stateHostName?.val;
 
                 if (valHostname) {
-                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
+                    const { hostname, port } = parseHostnameWithPort(String(valHostname));
+                    this.log.debug(`[onlineCheck] Checking ${deviceId} on ${hostname}:${port}`);
 
-                    tcpPing.probe(String(valHostname), valPort, (_error: Error | undefined, isAlive: boolean) =>
+                    tcpPing.probe(hostname, port, (_error: Error | undefined, isAlive: boolean) =>
                         this.deviceStatusUpdate(deviceId, isAlive),
                     );
                 }

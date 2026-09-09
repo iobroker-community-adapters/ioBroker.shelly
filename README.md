@@ -32,7 +32,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 ## Supported devices
 
-Note that devices connected using **Shellies Range Extender** functionality are **not supported**.  
+Note that Gen 1 devices connected using **Shellies Range Extender** functionality are **not supported**. Gen 2+ devices behind a range extender are reached over the port the extender maps for them.  
 Please connect your devices directly to your (W)LAN and use a classic WLAN Repeater if required.
 
 ### Generation 1 (Gen 1)
@@ -228,6 +228,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 <!--
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
+- () Added support for Shelly Gen2+ devices connected through a Shelly Range Extender.
 -->
 ### **WORK IN PROGRESS**
 - (@GermanBluefox) Added a new "Bluetooth map" tab to the adapter configuration which shows which Bluetooth devices are received by which Shelly gateway, including the signal strength. The gateways are arranged in a circle and each device is shown at the gateway which receives it best - all other connections and the signal values can be switched on.
