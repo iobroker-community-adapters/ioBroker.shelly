@@ -29,6 +29,14 @@ export default class ObjectHelper {
         createNow: boolean = true,
         callback?: () => void,
     ): void {
+        // The caller passes `common` by reference from the device definition (see base.ts/mqtt.ts/
+        // coap.ts). Work on a copy, so neither the normalization below nor the obtainCustomFields
+        // delete in processObjectQueue() modifies that definition - otherwise every following call
+        // would build a different object and defeat the isEquivalent() guard below, causing a
+        // needless extendObject() (and thus an onObjectChange event) on every device update.
+        // Only own properties of the object and of common are ever changed, so a shallow copy is
+        // enough and keeps this hot path (every state update) free of deep-clone overhead.
+        obj = { ...obj, common: { ...obj.common }, native: { ...obj.native } } as Partial<ioBroker.Object>;
         (obj as ioBroker.StateObject).type ||= 'state';
         obj.common ||= {} as ioBroker.ObjectCommon;
         obj.native ||= {};
@@ -51,7 +59,7 @@ export default class ObjectHelper {
             obj.common.read = true; //!(obj.common.type === 'boolean' && !!stateChangeCallback);
         }
         if (obj.common && obj.common.write === undefined) {
-            obj.common.write = !!stateChangeCallback || this.stateChangeTrigger[id];
+            obj.common.write = !!stateChangeCallback || !!this.stateChangeTrigger[id];
         }
         /*    if (obj.common && obj.common.def === undefined && value !== null && value !== undefined) {
                 obj.common.def = value;
