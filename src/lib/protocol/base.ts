@@ -241,23 +241,42 @@ export class BaseClient implements ShellyClient {
      *
      * @param header the raw www-authenticate header value
      */
-    parseDigestChallenge(header: string): Record<string, string> {
-        return header
-            .replace(/^Digest\s+/i, '')
-            .split(',')
-            .reduce((acc: Record<string, string>, pair: string) => {
-                const eq = pair.indexOf('=');
-                if (eq === -1) {
-                    return acc;
-                }
-                const key = pair.slice(0, eq).trim();
-                const value = pair
-                    .slice(eq + 1)
-                    .trim()
-                    .replace(/^"|"$/g, '');
-                acc[key] = value;
+parseDigestChallenge(header: string): Record<string, string> {
+        const src = header.replace(/^Digest\s+/i, '');
+
+        // Split on commas that are NOT inside quoted strings (e.g. qop="auth,auth-int")
+        const parts: string[] = [];
+        let buf = '';
+        let inQuotes = false;
+        for (let i = 0; i < src.length; i++) {
+            const ch = src[i];
+            if (ch === '"' && src[i - 1] !== '\\') {
+                inQuotes = !inQuotes;
+            }
+            if (ch === ',' && !inQuotes) {
+                parts.push(buf);
+                buf = '';
+                continue;
+            }
+            buf += ch;
+        }
+        if (buf) {
+            parts.push(buf);
+        }
+
+        return parts.reduce((acc: Record<string, string>, pair: string) => {
+            const eq = pair.indexOf('=');
+            if (eq === -1) {
                 return acc;
-            }, {});
+            }
+            const key = pair.slice(0, eq).trim();
+            const value = pair
+                .slice(eq + 1)
+                .trim()
+                .replace(/^"|"$/g, '');
+            acc[key] = value;
+            return acc;
+        }, {});
     }
 
     /**
