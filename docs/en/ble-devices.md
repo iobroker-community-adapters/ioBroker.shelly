@@ -64,9 +64,17 @@ After that, the next BLE event can be decrypted.
 **IMPORTANT**
 Do not forget to enable the Bluetooth functionality at the Shelly device to be used as a gateway.
 
+## Installation from the adapter
+
+The script does not have to be copied by hand. In the device manager of the adapter every online Gen2+ device offers the action **Install or update the BLE gateway script**: it enables Bluetooth on the device if required, uploads the script and starts it. An already installed script with the current version is left untouched.
+
+Above the device list the instance action **Update BLE scripts** updates the script on all devices which already have it installed - useful after an adapter update which needs a newer script version.
+
+The version of the script running on a device is shown in the device details and in the state `shelly.0.<device>.BLE.scriptVersion`, as soon as the device has forwarded a BLE message.
+
 ## JavaScript (Shelly Scripting)
 
-Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2+) and start it:
+Add this script in the Shelly Scripting section of a Shelly Plus or Pro device (Gen 2+) and start it (or use the device manager, see above):
 
 ```javascript
 // v1.4.0

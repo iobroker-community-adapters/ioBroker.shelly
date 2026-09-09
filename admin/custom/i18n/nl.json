@@ -1,0 +1,17 @@
+{
+    "shelly_blemap_gateway": "Gateway",
+    "shelly_blemap_device_id": "Apparaat-ID",
+    "shelly_blemap_ble_device": "Bluetooth-apparaat",
+    "shelly_blemap_received_by": "Ontvangen door",
+    "shelly_blemap_signal": "Signaalsterkte",
+    "shelly_blemap_last_seen": "Laatste ontvangst",
+    "shelly_blemap_script_version": "Scriptversie",
+    "shelly_blemap_strong": "Sterk",
+    "shelly_blemap_medium": "Gemiddeld",
+    "shelly_blemap_weak": "Zwak",
+    "shelly_blemap_stale": "Al een tijd geen ontvangst",
+    "shelly_blemap_summary": "%s Bluetooth-apparaten via %s gateways",
+    "shelly_blemap_no_devices": "Er zijn nog geen Bluetooth-apparaten ontvangen. Het BLE-gatewayscript moet op ten minste één Shelly-apparaat zijn geïnstalleerd.",
+    "shelly_blemap_fit": "Passend maken",
+    "shelly_blemap_all_links": "Alle verbindingen"
+}

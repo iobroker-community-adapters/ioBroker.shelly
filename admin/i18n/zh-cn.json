@@ -1,6 +1,7 @@
 {
     "Allow to transfer errors if the adapter crash. Private data like usernames, passwords, tokens, ... will be NOT be transferd.": "如果适配器崩溃，则允许传输错误。用户名，密码，令牌等私密数据将不会被传输。",
     "Auto update of new firmware": "自动更新新固件",
+    "Bluetooth map": "蓝牙地图",
     "COAP listen IP": "COAP监听IP",
     "CoAP and HTTP": "CoAP 和 HTTP",
     "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)": "Gen1 设备支持 CoAP，所有设备（Gen1 和 Gen2）都支持 MQTT",

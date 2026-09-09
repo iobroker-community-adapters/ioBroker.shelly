@@ -1,6 +1,7 @@
 {
     "Allow to transfer errors if the adapter crash. Private data like usernames, passwords, tokens, ... will be NOT be transferd.": "Дозволяє передавати помилки в разі збою адаптера. Особисті дані, такі як імена користувачів, паролі, токени, ... НЕ будуть передані.",
     "Auto update of new firmware": "Автоматичне оновлення нової прошивки",
+    "Bluetooth map": "Карта Bluetooth",
     "COAP listen IP": "COAP слухати IP",
     "CoAP and HTTP": "CoAP і HTTP",
     "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)": "CoAP підтримується пристроями Gen1, MQTT підтримується всіма пристроями (Gen1 і Gen2)",

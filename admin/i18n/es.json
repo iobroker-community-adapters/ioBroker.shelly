@@ -1,6 +1,7 @@
 {
     "Allow to transfer errors if the adapter crash. Private data like usernames, passwords, tokens, ... will be NOT be transferd.": "Permita transferir errores si el adaptador falla. NO se transferirán datos privados como nombres de usuario, contraseñas, tokens, ...",
     "Auto update of new firmware": "Actualización automática de nuevo firmware",
+    "Bluetooth map": "Mapa Bluetooth",
     "COAP listen IP": "IP de escucha COAP",
     "CoAP and HTTP": "CoAP y HTTP",
     "CoAP ist supported by Gen1 devices, MQTT is supported by all devices (Gen1 and Gen2)": "CoAP es compatible con dispositivos Gen1, MQTT es compatible con todos los dispositivos (Gen1 y Gen2)",

@@ -1,0 +1,17 @@
+{
+    "shelly_blemap_gateway": "Brama",
+    "shelly_blemap_device_id": "Identyfikator urządzenia",
+    "shelly_blemap_ble_device": "Urządzenie Bluetooth",
+    "shelly_blemap_received_by": "Odebrane przez",
+    "shelly_blemap_signal": "Siła sygnału",
+    "shelly_blemap_last_seen": "Ostatni odbiór",
+    "shelly_blemap_script_version": "Wersja skryptu",
+    "shelly_blemap_strong": "Silny",
+    "shelly_blemap_medium": "Średni",
+    "shelly_blemap_weak": "Słaby",
+    "shelly_blemap_stale": "Od dłuższego czasu brak odbioru",
+    "shelly_blemap_summary": "%s urządzeń Bluetooth przez %s bram",
+    "shelly_blemap_no_devices": "Nie odebrano jeszcze żadnych urządzeń Bluetooth. Skrypt bramy BLE musi być zainstalowany na co najmniej jednym urządzeniu Shelly.",
+    "shelly_blemap_fit": "Dopasuj do okna",
+    "shelly_blemap_all_links": "Wszystkie połączenia"
+}

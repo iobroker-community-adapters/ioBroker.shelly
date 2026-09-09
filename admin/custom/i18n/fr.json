@@ -1,0 +1,17 @@
+{
+    "shelly_blemap_gateway": "Passerelle",
+    "shelly_blemap_device_id": "ID de l'appareil",
+    "shelly_blemap_ble_device": "Appareil Bluetooth",
+    "shelly_blemap_received_by": "Reçu par",
+    "shelly_blemap_signal": "Force du signal",
+    "shelly_blemap_last_seen": "Dernière réception",
+    "shelly_blemap_script_version": "Version du script",
+    "shelly_blemap_strong": "Fort",
+    "shelly_blemap_medium": "Moyen",
+    "shelly_blemap_weak": "Faible",
+    "shelly_blemap_stale": "Aucune réception depuis un moment",
+    "shelly_blemap_summary": "%s appareils Bluetooth via %s passerelles",
+    "shelly_blemap_no_devices": "Aucun appareil Bluetooth n'a encore été reçu. Le script de passerelle BLE doit être installé sur au moins un appareil Shelly.",
+    "shelly_blemap_fit": "Ajuster à la fenêtre",
+    "shelly_blemap_all_links": "Toutes les connexions"
+}
