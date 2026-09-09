@@ -229,7 +229,8 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 12.0.0-alpha.4 (2026-09-09)
+- (@mcm1957) **BREAKING:** Adapter requires js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@GermanBluefox) Added a new "Bluetooth map" tab to the adapter configuration which shows which Bluetooth devices are received by which Shelly gateway, including the signal strength. The gateways are arranged in a circle and each device is shown at the gateway which receives it best - all other connections and the signal values can be switched on.
 - (@GermanBluefox) The device manager now updates the device list after renaming a device, after a firmware update and after installing the BLE gateway script - the cards showed outdated values before.
 - (@GermanBluefox) The device tiles now show when a device was last seen, and a device which goes offline is marked as disconnected immediately instead of only after reloading the list.
@@ -277,6 +278,18 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 ### 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]
 - (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
+
+### 10.6.0 (2026-02-08)
+* (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
+* (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]
+* (@mcm1957) Shelly BLU H&T Display ZB support for light attribute has been added. [#1230]
+* (@mcm1957) Support for favorites for Gen 2+ devices with cover support has been added. [#1001]
+* (@mcm1957) Power metering support has been added to RGB and RGBW components. [#1339]
+* (@mcm1957) FrankEver Smart Watervalve (watervalve) has been added. [#1341]
+* (@mcm1957) LinkedGo ST1820 (st1820) has been added. [#1257]
+* (@mcm1957) Dependencies have been updated
+
+
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 
