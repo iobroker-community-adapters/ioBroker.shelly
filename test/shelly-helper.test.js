@@ -72,4 +72,19 @@ describe('Test Shelly Helper', function () {
         assert.strictEqual(shellyHelper.hextoInt('FF'), 255);
         assert.strictEqual(shellyHelper.hextoInt('FFF'), 4095);
     });
+    it('Test parseHostnameWithPort', function () {
+        assert.deepStrictEqual(shellyHelper.parseHostnameWithPort('192.168.1.2'), {
+            hostname: '192.168.1.2',
+            port: 80,
+        });
+        assert.deepStrictEqual(shellyHelper.parseHostnameWithPort('192.168.1.3:23456'), {
+            hostname: '192.168.1.3',
+            port: 23456,
+        });
+        assert.deepStrictEqual(shellyHelper.parseHostnameWithPort('shellyplus1pm-44179394d4d4'), {
+            hostname: 'shellyplus1pm-44179394d4d4',
+            port: 80,
+        });
+        assert.deepStrictEqual(shellyHelper.parseHostnameWithPort(''), { hostname: '', port: 80 });
+    });
 });

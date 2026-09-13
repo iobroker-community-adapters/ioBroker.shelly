@@ -144,7 +144,7 @@ const defaultsgen1: DeviceDefinition = {
             init_funct: self => self.getIP(),
         },
         mqtt: {
-            init_funct: self => self.getIP(),
+            init_funct: self => self.getHttpEndpoint(),
         },
         common: {
             name: 'Device IP address or hostname',
@@ -627,7 +627,7 @@ const defaultsgen2: DeviceDefinition = {
     },
     hostname: {
         mqtt: {
-            init_funct: self => self.getIP(),
+            init_funct: self => self.getHttpEndpoint(),
         },
         common: {
             name: 'Device IP address or hostname',
