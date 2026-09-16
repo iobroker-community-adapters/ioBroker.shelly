@@ -242,7 +242,6 @@ export class BaseClient implements ShellyClient {
      * @param header the raw www-authenticate header value
      */
     private parseDigestChallenge(header: string): Record<string, string> {
-
         // Split on commas that are NOT inside quoted strings (e.g. qop="auth,auth-int")
         const parts: string[] = [];
         let buf = '';
