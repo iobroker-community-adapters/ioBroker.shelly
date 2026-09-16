@@ -55,7 +55,7 @@ export class BaseClient implements ShellyClient {
     serialId: string | undefined; // e.g. 8CAAB5616291
     deviceGen: number | undefined; // 1 or 2
     nonceCount: number;
-    /** Last digest challenge (realm/nonce) that authenticated successfully, reused pre-emptively. */
+    /** Last digest challenge (realm/nonce/...) received from the device, cached for pre-emptive authentication. */
     digestChallenge: Record<string, string> | null;
     httpTimeout: number;
 
