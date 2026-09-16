@@ -247,9 +247,9 @@ export class BaseClient implements ShellyClient {
         const parts: string[] = [];
         let buf = '';
         let inQuotes = false;
-        for (let i = 0; i < src.length; i++) {
-            const ch = src[i];
-            if (ch === '"' && src[i - 1] !== '\\') {
+        for (let i = 0; i < header.length; i++) {
+            const ch = header[i];
+            if (ch === '"' && header[i - 1] !== '\\') {
                 inQuotes = !inQuotes;
             }
             if (ch === ',' && !inQuotes) {
