@@ -399,7 +399,10 @@ function addCCT(deviceObj: DeviceDefinition, cctId: number, hasPowerMetering: bo
     deviceObj[`CCT${cctId}.TimerStartedAt`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/cct:${cctId}`,
-            mqtt_publish_funct: value => JSON.parse(value).timer_started_at,
+            mqtt_publish_funct: value => {
+                const startedAt = JSON.parse(value).timer_started_at;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
+            },
         },
         common: {
             name: 'Start time of the timer',
@@ -475,7 +478,10 @@ function addCCT(deviceObj: DeviceDefinition, cctId: number, hasPowerMetering: bo
     deviceObj[`CCT${cctId}.Transition_StartedAt`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/cct:${cctId}`,
-            mqtt_publish_funct: value => JSON.parse(value).transition?.started_at,
+            mqtt_publish_funct: value => {
+                const startedAt = JSON.parse(value).transition?.started_at;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
+            },
         },
         common: {
             name: 'Start time of transition',
@@ -2643,9 +2649,11 @@ function addCury(deviceObj: DeviceDefinition, curyId: number): void {
             mqtt_publish: `<mqttprefix>/status/cury:${curyId}`,
             mqtt_publish_funct: value => {
                 const parsed = JSON.parse(value);
-                return parsed.slots && parsed.slots.left && parsed.slots.left.boost
-                    ? parsed.slots.left.boost.started_at
-                    : undefined;
+                const startedAt =
+                    parsed.slots && parsed.slots.left && parsed.slots.left.boost
+                        ? parsed.slots.left.boost.started_at
+                        : undefined;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
             },
         },
         common: {
@@ -2682,9 +2690,11 @@ function addCury(deviceObj: DeviceDefinition, curyId: number): void {
             mqtt_publish: `<mqttprefix>/status/cury:${curyId}`,
             mqtt_publish_funct: value => {
                 const parsed = JSON.parse(value);
-                return parsed.slots && parsed.slots.left && parsed.slots.left.timer
-                    ? parsed.slots.left.timer.timer_started_at
-                    : undefined;
+                const startedAt =
+                    parsed.slots && parsed.slots.left && parsed.slots.left.timer
+                        ? parsed.slots.left.timer.timer_started_at
+                        : undefined;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
             },
         },
         common: {
@@ -2861,9 +2871,11 @@ function addCury(deviceObj: DeviceDefinition, curyId: number): void {
             mqtt_publish: `<mqttprefix>/status/cury:${curyId}`,
             mqtt_publish_funct: value => {
                 const parsed = JSON.parse(value);
-                return parsed.slots && parsed.slots.right && parsed.slots.right.boost
-                    ? parsed.slots.right.boost.started_at
-                    : undefined;
+                const startedAt =
+                    parsed.slots && parsed.slots.right && parsed.slots.right.boost
+                        ? parsed.slots.right.boost.started_at
+                        : undefined;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
             },
         },
         common: {
@@ -2900,9 +2912,11 @@ function addCury(deviceObj: DeviceDefinition, curyId: number): void {
             mqtt_publish: `<mqttprefix>/status/cury:${curyId}`,
             mqtt_publish_funct: value => {
                 const parsed = JSON.parse(value);
-                return parsed.slots && parsed.slots.right && parsed.slots.right.timer
-                    ? parsed.slots.right.timer.timer_started_at
-                    : undefined;
+                const startedAt =
+                    parsed.slots && parsed.slots.right && parsed.slots.right.timer
+                        ? parsed.slots.right.timer.timer_started_at
+                        : undefined;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
             },
         },
         common: {
@@ -4351,7 +4365,10 @@ function addLight(deviceObj: DeviceDefinition, lightId: number, hasPowerMetering
     deviceObj[`Light${lightId}.TimerStartedAt`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/light:${lightId}`,
-            mqtt_publish_funct: value => JSON.parse(value).timer_started_at,
+            mqtt_publish_funct: value => {
+                const startedAt = JSON.parse(value).timer_started_at;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
+            },
         },
         common: {
             name: 'start time of the timer',
@@ -4412,7 +4429,10 @@ function addLight(deviceObj: DeviceDefinition, lightId: number, hasPowerMetering
     deviceObj[`Light${lightId}.Transition_StartedAt`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/light:${lightId}`,
-            mqtt_publish_funct: value => JSON.parse(value).transition?.started_at,
+            mqtt_publish_funct: value => {
+                const startedAt = JSON.parse(value).transition?.started_at;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
+            },
         },
         common: {
             name: 'starttime of transition',
@@ -6055,7 +6075,8 @@ function addPresence(deviceObj: DeviceDefinition): void {
             mqtt_publish: `<mqttprefix>/status/presence`,
             mqtt_publish_funct: value => {
                 const parsed = JSON.parse(value);
-                return parsed.live_track ? parsed.live_track.timer_started_at : undefined;
+                const startedAt = parsed.live_track ? parsed.live_track.timer_started_at : undefined;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
             },
         },
         common: {
@@ -7299,7 +7320,10 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
     deviceObj[`RGBCCT${rgbcctId}.Transition_Started_At`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
-            mqtt_publish_funct: value => JSON.parse(value)?.transition?.started_at,
+            mqtt_publish_funct: value => {
+                const startedAt = JSON.parse(value)?.transition?.started_at;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
+            },
         },
         common: {
             name: 'Start time of transition',
@@ -7368,7 +7392,10 @@ function addRGBCCT(deviceObj: DeviceDefinition, rgbcctId: number, hasPowerMeteri
     deviceObj[`RGBCCT${rgbcctId}.TimerStartedAt`] = {
         mqtt: {
             mqtt_publish: `<mqttprefix>/status/rgbcct:${rgbcctId}`,
-            mqtt_publish_funct: value => JSON.parse(value).timer_started_at,
+            mqtt_publish_funct: value => {
+                const startedAt = JSON.parse(value).timer_started_at;
+                return typeof startedAt === 'number' ? startedAt * 1000 : undefined;
+            },
         },
         common: {
             name: 'Start time of the timer',
