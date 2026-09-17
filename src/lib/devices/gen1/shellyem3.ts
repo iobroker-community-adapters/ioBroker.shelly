@@ -597,7 +597,7 @@ const shellyem3: DeviceDefinition = {
             mqtt_publish_funct: async (value, self) => shellyHelper.getTotalSumm(self),
         },
         common: {
-            name: 'Total Energy',
+            name: 'Energy',
             type: 'number',
             role: 'value.energy.consumed',
             read: true,
@@ -616,7 +616,7 @@ const shellyem3: DeviceDefinition = {
             mqtt_publish_funct: async (value, self) => shellyHelper.getCurrentSumm(self),
         },
         common: {
-            name: 'Total Current',
+            name: 'Current',
             type: 'number',
             role: 'value.current',
             read: true,
@@ -635,7 +635,7 @@ const shellyem3: DeviceDefinition = {
             mqtt_publish_funct: async (value, self) => shellyHelper.getPowerSumm(self),
         },
         common: {
-            name: 'Total Instantaneous power',
+            name: 'Instantaneous power',
             type: 'number',
             role: 'value.power',
             read: true,
@@ -673,7 +673,7 @@ const shellyem3: DeviceDefinition = {
             mqtt_publish_funct: async (value, self) => shellyHelper.getTotalReturnedSumm(self),
         },
         common: {
-            name: 'Total Returned',
+            name: 'Returned',
             type: 'number',
             role: 'value.energy.consumed',
             read: true,
@@ -693,7 +693,7 @@ const shellyem3: DeviceDefinition = {
             http_publish_funct: async (value, self) => shellyHelper.getVoltageCalc(self, 'total'),
         },
         common: {
-            name: 'Voltage Total',
+            name: 'Voltage',
             type: 'number',
             role: 'value.voltage',
             read: true,
