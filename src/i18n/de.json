@@ -433,5 +433,7 @@
     "Enable zone irrigation": "Bewässerung der Zone aktivieren",
     "Watering duration": "Bewässerungsdauer",
     "Started at": "Gestartet um",
-    "Command source": "Befehlsquelle"
+    "Command source": "Befehlsquelle",
+    "Instantaneous power": "Momentanleistung",
+    "Returned": "Eingespeist"
 }

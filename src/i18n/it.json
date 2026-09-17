@@ -433,5 +433,7 @@
     "Enable zone irrigation": "Attiva irrigazione della zona",
     "Watering duration": "Durata dell'irrigazione",
     "Started at": "Avviato alle",
-    "Command source": "Origine del comando"
+    "Command source": "Origine del comando",
+    "Instantaneous power": "Potenza istantanea",
+    "Returned": "Restituito"
 }

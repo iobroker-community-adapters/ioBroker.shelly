@@ -433,5 +433,7 @@
     "Enable zone irrigation": "启用区域灌溉",
     "Watering duration": "浇水时长",
     "Started at": "开始于",
-    "Command source": "命令来源"
+    "Command source": "命令来源",
+    "Instantaneous power": "瞬时功率",
+    "Returned": "回馈"
 }
