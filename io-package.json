@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "shelly",
-    "version": "12.0.0-dev.0",
+    "version": "12.0.0-dev.1",
     "news": {
+      "12.0.0-dev.1": {
+        "en": "Fixed duplicated \"Total\" prefix in the device manager labels of the Shelly 3EM (SHEM-3) total values.\nFixed date states (timer/transition/boost start times) to report the timestamp in milliseconds so it is compatible with JavaScript Date handling.",
+        "de": "Doppeltes Präfix „Total“ im Gerätemanager der Shelly 3EM (SHEM-3) -Gesamtwerte behoben.\nFeste Datumsangaben (Timer/Übergangs-/Boost-Startzeiten), um den Zeitstempel in Millisekunden anzuzeigen.",
+        "ru": "Исправлен дублированный префикс «Всего» в надписях диспетчера устройств суммарных значений Shelly 3EM (SHEM-3).\nФиксированные состояния даты (время запуска таймера/перехода/ускорения) для отображения отметки времени в миллисекундах, поэтому приложение совместимо с обработкой даты в JavaScript.",
+        "pt": "Corrigido o prefixo “Total” duplicado nos rótulos do gerenciador do Shelly 3EM (SHEM-3).\nOs estados de data fixa (timer/transição/boost start times) relatam a data e hora em milissegundos e são compatíveis com o JavaScript.",
+        "nl": "Dubbele voorvoegsel „Totaal” opgelost in de labels van de apparaatbeheerder van de totale waarden van de Shelly 3EM (SHEM-3).\nVaste datumstatussen (starttijden van timer/transitie/boost) om de tijdstempel in milliseconden te rapporteren, zodat deze compatibel is met de datumverwerking in JavaScript.",
+        "fr": "Correction du préfixe « Total » dans les libellés du Device Manager pour les valeurs totales du Shelly 3EM (SHEM-3).\nÉtats de date fixes (minuteur/transition/boost) pour indiquer l'horodatage en millisecondes afin de le rendre compatible avec JavaScript.",
+        "it": "Risolto il problema con il prefisso «Total» duplicato dei valori totali di Shelly 3EM (SHEM-3)\nData fissa (timer/transition/boost start time) per riportare il timestamp in millisecondi, compatibile con JavaScript Date.",
+        "es": "Se ha corregido el prefijo «Total» duplicado en las etiquetas del gestor de dispositivos del Shelly 3EM (SHEM-3).\nEstados de fecha fijos (temporizador/transición/hora de inicio) para indicar la fecha en milisegundos y ser compatible con el manejo de fechas en JavaScript.",
+        "pl": "Naprawiono zduplikowany prefiks „Total” w etykietach menedżera urządzeń wartości całkowitych Shelly 3EM (SHEM-3).\nNaprawiono stany daty (timer/przejści/przyspieszenie czasu rozpoczęcia), aby zgłaszać znacznik czasu w milisekundach, dzięki czemu jest kompatybilny z obsługą JavaScript Date.",
+        "uk": "Виправлено дубльований префікс «Total» в мітках диспетчера пристроїв загальних значень Shelly 3EM (SHEM-3).\nФіксовані стани дати (час початку таймер/переходу/збільшення), щоб повідомити про часову мітку в мілісекундах, щоб вона була сумісна з обробкою дати JavaScript.",
+        "zh-cn": "修复了 Shelly 3EM (SHEM-3) 总值的设备管理器标签中重复的 “总计” 前缀。\n固定日期状态（计时器/过渡/加速开始时间），以毫秒为单位报告时间戳，因此它与 JavaScript 日期处理兼容。"
+      },
       "12.0.0-dev.0": {
         "en": "Fixed date states (timer/transition/boost start times) to report the timestamp in milliseconds so it is compatible with JavaScript Date handling.",
         "de": "Feste Datumsangaben (Timer/Übergangs-/Boost-Startzeiten), um den Zeitstempel in Millisekunden anzuzeigen.",
