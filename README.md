@@ -232,8 +232,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 - (@mcm1957) Fixed duplicated "Total" prefix in the device manager labels of the Shelly 3EM (SHEM-3) total values.
-
-### 12.0.0-dev.0 (2026-09-17)
 - (@mcm1957) Fixed date states (timer/transition/boost start times) to report the timestamp in milliseconds so it is compatible with JavaScript Date handling.
 
 ### 12.0.0-alpha.7 (2026-09-09)
