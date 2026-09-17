@@ -433,5 +433,7 @@
     "Enable zone irrigation": "Увімкнути полив зони",
     "Watering duration": "Тривалість поливу",
     "Started at": "Запущено о",
-    "Command source": "Джерело команди"
+    "Command source": "Джерело команди",
+    "Instantaneous power": "Миттєва потужність",
+    "Returned": "Повернено"
 }

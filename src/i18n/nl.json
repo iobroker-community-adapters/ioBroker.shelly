@@ -433,5 +433,7 @@
     "Enable zone irrigation": "Zone-irrigatie inschakelen",
     "Watering duration": "Bewateringsduur",
     "Started at": "Gestart om",
-    "Command source": "Opdrachtbron"
+    "Command source": "Opdrachtbron",
+    "Instantaneous power": "Momentaan vermogen",
+    "Returned": "Teruggeleverd"
 }
