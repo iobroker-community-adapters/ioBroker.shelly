@@ -179,6 +179,18 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
                           handler: async (context: ActionContext): Promise<{ refresh: boolean }> =>
                               await this.handleUpdateAllBleScripts(context),
                       },
+                      {
+                          // Clickable text linking to the "Bluetooth map" tab (`_ble`) of the adapter
+                          // config (jsonConfig). `url` instead of a handler makes the device manager
+                          // navigate there instead of running a backend action.
+                          id: 'bleMap',
+                          icon: bleActionIcon,
+                          title: I18n.getTranslatedObject('BLE Map'),
+                          description: I18n.getTranslatedObject('Open the Bluetooth map'),
+                          color: instanceActionIconColor,
+                          style: instanceActionStyle,
+                          url: `#tab-instances/config/system.adapter.${this.adapter.namespace}/_ble`,
+                      },
                   ];
 
         return {
