@@ -230,7 +230,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 
 <!--
   Placeholder for the next version (at the beginning of the line):
-  ### **WORK IN PROGRESS**
+  ### **WORK IN PROGRESS** 
 -->
 ### **WORK IN PROGRESS**
 - (@mcm1957) Added support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).
