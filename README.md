@@ -160,9 +160,11 @@ Notes:
 | Shelly Device                                   | CoAP | MQTT       |
 |-------------------------------------------------| ---- | ---------- |
 | Shelly 1 Gen4 (shelly1g4)                       | ❌   | >= v9.4.0  |
+| Shelly 1L Gen4 (shelly1lg4)                      | ❌   | >= v12.0.0 |
 | Shelly 1 PM Gen4 (shelly1pmg4)                  | ❌   | >= v9.4.0  |
 | Shelly 1 Mini Gen4 (shelly1minig4)              | ❌   | >= v9.4.0  |
 | Shelly 1 PM Mini Gen4 (shelly1pmminig4)         | ❌   | >= v9.4.0  |
+| Shelly 2L Gen4 (shelly2lg4)                      | ❌   | >= v12.0.0 |
 | Shelly 2 PM Gen4 (shelly2pmg4) (1)              | ❌   | >= v10.2.0 |
 | Shelly Dimmer Gen4 (shellydimmerg4) (*)         | ❌   | >= v10.5.0 |
 | Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimG4) | ❌   | >= v11.0.0 |
@@ -231,6 +233,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+- (@mcm1957) Added support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).
+
+### 12.0.0-dev.1 (2026-09-17)
 - (@mcm1957) Fixed duplicated "Total" prefix in the device manager labels of the Shelly 3EM (SHEM-3) total values.
 - (@mcm1957) Fixed date states (timer/transition/boost start times) to report the timestamp in milliseconds so it is compatible with JavaScript Date handling.
 
