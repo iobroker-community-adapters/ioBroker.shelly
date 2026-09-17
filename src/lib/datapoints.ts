@@ -98,9 +98,11 @@ import { shellyshutter } from './devices/gen3/shellyshutter';
 // Gen 4
 import { shelly0110dimg4 } from './devices/gen4/shelly0110dimg4';
 import { shelly1g4 } from './devices/gen4/shelly1g4';
+import { shelly1lg4 } from './devices/gen4/shelly1lg4';
 import { shelly1minig4 } from './devices/gen4/shelly1minig4';
 import { shelly1pmg4 } from './devices/gen4/shelly1pmg4';
 import { shelly1pmminig4 } from './devices/gen4/shelly1pmminig4';
+import { shelly2lg4 } from './devices/gen4/shelly2lg4';
 import { shelly2pmg4 } from './devices/gen4/shelly2pmg4';
 import { shellydimmerg4 } from './devices/gen4/shellydimmerg4';
 import { shellyemg4 } from './devices/gen4/shellyemg4';
@@ -217,9 +219,11 @@ const devices: Record<string, DeviceDefinition> = {
     // Gen 4
     shelly0110dimg4,
     shelly1g4,
+    shelly1lg4,
     shelly1minig4,
     shelly1pmg4,
     shelly1pmminig4,
+    shelly2lg4,
     shelly2pmg4,
     shellydimmerg4,
     shellyemg4,
@@ -337,9 +341,11 @@ const deviceGen: Record<string, number> = {
     // Gen 4
     shelly0110dimg4: 4,
     shelly1g4: 4,
+    shelly1lg4: 4,
     shelly1minig4: 4,
     shelly1pmg4: 4,
     shelly1pmminig4: 4,
+    shelly2lg4: 4,
     shelly2pmg4: 4,
     shellydimmerg4: 4,
     shellyemg4: 4,
@@ -458,9 +464,11 @@ const deviceGroupMap: Record<string, string> = {
     // Gen 4
     shelly0110dimg4: 'dimmer',
     shelly1g4: 'relay',
+    shelly1lg4: 'relay',
     shelly1minig4: 'relay',
     shelly1pmg4: 'relay',
     shelly1pmminig4: 'relay',
+    shelly2lg4: 'relay',
     shelly2pmg4: 'relay',
     shellydimmerg4: 'dimmer',
     shellyemg4: 'meter',
@@ -578,9 +586,11 @@ const deviceIcons: Record<string, string> = {
     // Gen 4
     shelly0110dimg4: 'shellydimmerg4',
     shelly1g4: 'shelly1g4',
+    shelly1lg4: 'shelly1lg3',
     shelly1minig4: 'shelly1minig4',
     shelly1pmg4: 'shelly1pmg4',
     shelly1pmminig4: 'shelly1pmminig4',
+    shelly2lg4: 'shelly2lg3',
     shelly2pmg4: 'shelly2pmg4',
     shellydimmerg4: 'shellydimmerg4',
     shellyemg4: 'shellyemg3',
@@ -699,9 +709,11 @@ const deviceKnowledgeBase: Record<string, string | undefined> = {
     // Gen 4
     shelly0110dimg4: 'https://kb.shelly.cloud/knowledge-base/shelly-dimmer-0-1-10v-pm-gen4',
     shelly1g4: 'https://kb.shelly.cloud/knowledge-base/shelly-1-gen4',
+    shelly1lg4: 'https://kb.shelly.cloud/knowledge-base/shelly-1l-gen4',
     shelly1minig4: 'https://kb.shelly.cloud/knowledge-base/shelly-1-mini-gen4',
     shelly1pmg4: 'https://kb.shelly.cloud/knowledge-base/shelly-1pm-gen4',
     shelly1pmminig4: 'https://kb.shelly.cloud/knowledge-base/shelly-1pm-mini-gen4',
+    shelly2lg4: 'https://kb.shelly.cloud/knowledge-base/shelly-2l-gen4',
     shelly2pmg4: 'https://kb.shelly.cloud/knowledge-base/shelly-2pm-gen4',
     shellydimmerg4: 'https://kb.shelly.cloud/knowledge-base/shelly-dimmer-gen4',
     shellyemg4: 'https://kb.shelly.cloud/knowledge-base/shelly-em-gen4',
@@ -821,9 +833,11 @@ const deviceTypes: Record<string, string[]> = {
     // Gen 4
     shelly0110dimg4: ['shelly0110dimg4'],
     shelly1g4: ['shelly1g4'],
+    shelly1lg4: ['shelly1lg4'],
     shelly1minig4: ['shelly1minig4'],
     shelly1pmg4: ['shelly1pmg4'],
     shelly1pmminig4: ['shelly1pmminig4'],
+    shelly2lg4: ['shelly2lg4'],
     shelly2pmg4: ['shelly2pmg4'],
     shellydimmerg4: ['shellydimmerg4'],
     shellyemg4: ['shellyemg4'],
