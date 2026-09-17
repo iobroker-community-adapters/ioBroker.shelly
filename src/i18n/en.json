@@ -433,5 +433,7 @@
     "Enable zone irrigation": "Enable zone irrigation",
     "Watering duration": "Watering duration",
     "Started at": "Started at",
-    "Command source": "Command source"
+    "Command source": "Command source",
+    "Instantaneous power": "Instantaneous power",
+    "Returned": "Returned"
 }

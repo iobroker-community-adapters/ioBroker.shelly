@@ -433,5 +433,7 @@
     "Enable zone irrigation": "Włącz nawadnianie strefy",
     "Watering duration": "Czas podlewania",
     "Started at": "Rozpoczęto o",
-    "Command source": "Źródło polecenia"
+    "Command source": "Źródło polecenia",
+    "Instantaneous power": "Moc chwilowa",
+    "Returned": "Oddane"
 }
