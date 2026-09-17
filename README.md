@@ -232,7 +232,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS** 
 -->
-### **WORK IN PROGRESS**
+### 12.0.0-dev.3 (2026-09-17)
 - (@mcm1957) Added a "BLE Map" button to the device manager toolbar which opens the Bluetooth map.
 - (@mcm1957) Added support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).
 - (@mcm1957) Fixed duplicated "Total" prefix in the device manager labels of the Shelly 3EM (SHEM-3) total values.
