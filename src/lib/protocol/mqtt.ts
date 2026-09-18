@@ -45,6 +45,8 @@ class MQTTClient extends BaseClient {
     initializing: boolean;
     /** Publish packets queued during initialization. */
     publishQueue: MqttPacket[];
+    /** Commands to the device queued during initialization, because the mqtt prefix was not known yet. */
+    commandQueue: { topic: string; value: any }[];
     /** True while the publish queue is being drained. */
     processingQueue: boolean;
     /** True during destruction, to stop queuing new packets. */
@@ -63,6 +65,7 @@ class MQTTClient extends BaseClient {
 
         this.initializing = false; // use to delay publish packets after new connection
         this.publishQueue = []; // queue for publish packets during initialization
+        this.commandQueue = []; // queue for commands to the device during initialization (mqtt prefix unknown)
         this.processingQueue = false; // flag to indicate queue processing is in progress
         this.destroying = false; // flag to prevent new packets from being queued during destruction
 
@@ -190,6 +193,18 @@ class MQTTClient extends BaseClient {
             this.processingQueue = false;
         }
         this.adapter.log.silly(`[MQTT] Publish: ${this.getLogInfo()} - processing queued packets done`);
+    }
+
+    /**
+     * Send the commands which were queued during initialization (mqtt prefix was not known yet)
+     */
+    processCommandQueue(): void {
+        const commands = this.commandQueue;
+        this.commandQueue = [];
+
+        for (const command of commands) {
+            this.publishStateValue(command.topic, command.value);
+        }
     }
 
     /**
@@ -347,6 +362,13 @@ class MQTTClient extends BaseClient {
             await this.processPublishQueue();
         }
 
+        // Commands queued during initialization cannot be sent anymore
+        if (this.commandQueue.length > 0) {
+            this.adapter.log.warn(
+                `[MQTT] Connection to ${this.getLogInfo()} closed during initialization - ${this.commandQueue.length} queued commands were not sent`,
+            );
+        }
+
         super.destroy();
         this.adapter.log.debug(`[MQTT] Destroying`);
 
@@ -362,6 +384,7 @@ class MQTTClient extends BaseClient {
         this.mqttPrefixLookup = undefined;
         this.will = undefined;
         this.publishQueue = [];
+        this.commandQueue = [];
         this.processingQueue = false;
 
         if (this.client) {
@@ -375,6 +398,15 @@ class MQTTClient extends BaseClient {
      */
     publishStateValue(topic: string, value: any): void {
         if (topic.includes('<mqttprefix>') && !this.getMqttPrefix()) {
+            // The device is still initializing (prefix will be determined) - send the command afterwards
+            if (this.initializing && !this.destroying) {
+                this.adapter.log.debug(
+                    `[MQTT] Queuing message to ${this.getLogInfo()} until initialization is done (mqtt prefix not known yet): ${topic} = ${value}`,
+                );
+                this.commandQueue.push({ topic, value });
+                return;
+            }
+
             this.adapter.log.warn(
                 `[MQTT] Unable to publish message to ${this.getLogInfo()} - mqtt prefix was not set but is required for this message: ${topic} = ${value}`,
             );
@@ -719,15 +751,6 @@ class MQTTClient extends BaseClient {
                         return;
                     }
 
-                    this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" deleting old states`);
-                    await this.deleteOldStates();
-                    this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" create objects`);
-                    await this.createObjects();
-
-                    if (this.isInitAborted('createObjects')) {
-                        return;
-                    }
-
                     // Save last will
                     // Gen 1:  {"retain": false, "qos": 0, "topic" :"shellies/shellyswitch25-C45BBE798F0F/online", "payload": {"type":"Buffer","data": [102,97,108,115,101]}}
                     // Gen 2+: {"retain": false, "qos": 0, "topic": "shellypro2pm-30c6f7850a64/online", "payload": {"type":"Buffer","data":[102,97,108,115,101]}}
@@ -736,6 +759,23 @@ class MQTTClient extends BaseClient {
                         this.adapter.log.debug(
                             `[MQTT] Last will for client id "${packet.clientId}" saved: ${JSON.stringify(this.will)}`,
                         );
+                    }
+
+                    // Set the mqtt prefix before the objects are created - from then on commands can be sent
+                    if (this.will?.topic) {
+                        this.adapter.log.silly(
+                            `[MQTT] Client id "${packet.clientId}" setting mqtt prefix by last will`,
+                        );
+                        this.setMqttPrefixByWill(this.will.topic);
+                    }
+
+                    this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" deleting old states`);
+                    await this.deleteOldStates();
+                    this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" create objects`);
+                    await this.createObjects();
+
+                    if (this.isInitAborted('createObjects')) {
+                        return;
                     }
 
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting ip`);
@@ -756,10 +796,9 @@ class MQTTClient extends BaseClient {
                         return;
                     }
 
-                    this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting mqtt prefix`);
-                    if (this.will?.topic) {
-                        this.setMqttPrefixByWill(this.will.topic);
-                    } else {
+                    // No (usable) last will - request the mqtt prefix via HTTP (requires the IP address)
+                    if (!this.getMqttPrefix()) {
+                        this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting mqtt prefix by HTTP`);
                         await this.setMqttPrefixHttp();
                     }
 
@@ -814,6 +853,14 @@ class MQTTClient extends BaseClient {
 
                     this.adapter.log.info(`[MQTT] Device with client id "${packet.clientId}" initialized.`);
                     this.initializing = false;
+
+                    // Send commands which were received during initialization
+                    if (this.commandQueue.length > 0) {
+                        this.adapter.log.debug(
+                            `[MQTT] Sending ${this.commandQueue.length} queued commands to ${this.getLogInfo()}`,
+                        );
+                        this.processCommandQueue();
+                    }
 
                     // Process any queued publish packets
                     if (this.publishQueue.length > 0) {
