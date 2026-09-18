@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "shelly",
-    "version": "12.0.0-dev.3",
+    "version": "12.0.0-alpha.7",
     "news": {
       "12.0.0-dev.3": {
         "en": "Added a \"BLE Map\" button to the device manager toolbar which opens the Bluetooth map.\nAdded support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).\nFixed duplicated \"Total\" prefix in the device manager labels of the Shelly 3EM (SHEM-3) total values.\nFixed date states (timer/transition/boost start times) to report the timestamp in milliseconds so it is compatible with JavaScript Date handling.",

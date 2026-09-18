@@ -232,14 +232,12 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS** 
 -->
-### 12.0.0-dev.3 (2026-09-17)
+### **WORK IN PROGRESS** 
+- (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@mcm1957) Added a "BLE Map" button to the device manager toolbar which opens the Bluetooth map.
 - (@mcm1957) Added support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).
 - (@mcm1957) Fixed duplicated "Total" prefix in the device manager labels of the Shelly 3EM (SHEM-3) total values.
 - (@mcm1957) Fixed date states (timer/transition/boost start times) to report the timestamp in milliseconds so it is compatible with JavaScript Date handling.
-
-### 12.0.0-alpha.7 (2026-09-09)
-- (@mcm1957) **BREAKING:** Adapter requires js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@mcm1957) Fixed authentication with Gen2+ devices running firmware 2.x which could fail with "Wrong http username or http password!" although the credentials were correct. [#1543]
 - (@mcm1957) Added experimental support for FrankEver Smart Sprinkler Controller (irrigation). [#1207]
 - (@mcm1957) Added support for Neo Smart Water Valve NAS-WV02W (neowatervalve). [#1322]
@@ -256,14 +254,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (@mcm1957) Added tests to validate that all datapoint names and descriptions are translated and that all i18n language files are consistent.
 - (@mcm1957) Added support for Shelly Duo Bulb E27 Gen 3 (shellyduobulbg3). [#1385]
 - (@mcm1957) Added support for Shelly Multicolor Bulb E27 Gen 3 (shellycolorblbg3). [#1386]
-
-### 12.0.0-alpha.2 (2026-08-19)
 - (@mcm1957) The transition time can now be written for Shelly Dimmer1/Dimmer2 and for Gen2+ dimmers/lights (incl. Dimmer Gen3 and Dimmer Gen4). [#1214][#1224]
 - (@mcm1957) Added support for Top AC Portable EV Charger (topacportableevcharger) - **EXPERIMENTAL ONLY** [#1401]
 - (@mcm1957) Added support for Shelly Flood S Gen 4 (shellyfloodsg4). [#1380]
 - (@mcm1957) Added monophase mode support for Shelly 3EM G3 (shelly3em63g3). [#1540]
-
-### 12.0.0-alpha.1 (2026-08-19)
 - (@GermanBluefox) Added option to ignore the timezone mismatch message (device timezone differs from the ioBroker host timezone).
 - (@GermanBluefox) Fixed MQTT errors ("Cannot read properties of undefined") if a device closes the connection while it is still being initialized (e.g. battery powered devices).
 - (@floze-the-genius) Corrected roles for Gen 2+ input states. [#1498]
