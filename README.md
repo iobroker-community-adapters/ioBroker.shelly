@@ -232,7 +232,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS** 
 -->
-### **WORK IN PROGRESS** 
+### 12.0.0-alpha.8 (2026-09-18) 
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@mcm1957) Added a "BLE Map" button to the device manager toolbar which opens the Bluetooth map.
 - (@mcm1957) Added support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).
@@ -273,6 +273,29 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (@mcm1957) Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.23 now.
 - (@GermanBluefox) Device manager has been added providing info and control of devices and provisioning.
 - (@mcm1957) IMPORTANT: Please read the changelog at README.md listing more information.
+
+### 11.0.0 additional information 
+- (@mcm1957) Added Shelly Presence Gen 4
+- (@mcm1957) Added Shelly Cury
+- (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
+- (@GermanBluefox) Added detection of new devices in the background
+- (@mcm1957) Some missing states added at an illuminance component
+- (@mcm1957) DISABLE all PLUG_UI functionality due to unrecoverable HW faults.
+- (@mcm1957) Dependencies have been updated
+
+### 10.6.1 (2026-02-23)
+- (HGlab01) OnUnload handling has been improved. [#1279]
+- (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
+
+### 10.6.0 (2026-02-08)
+* (@mcm1957) The-Pill-By-Shelly (shellypill) has been added. [#1232]
+* (@mcm1957) Shelly EM mini Gen 4 (shellyemminimg4) and Plug M Gen 3 (shellyplugmg3) have been added. [#1327,#1332]
+* (@mcm1957) Shelly BLU H&T Display ZB support for light attribute has been added. [#1230]
+* (@mcm1957) Support for favorites for Gen 2+ devices with cover support has been added. [#1001]
+* (@mcm1957) Power metering support has been added to RGB and RGBW components. [#1339]
+* (@mcm1957) FrankEver Smart Watervalve (watervalve) has been added. [#1341]
+* (@mcm1957) LinkedGo ST1820 (st1820) has been added. [#1257]
+* (@mcm1957) Dependencies have been updated
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 
