@@ -209,17 +209,8 @@ describe('Test Device Definitions', function () {
                             return true;
                         });
 
-                        // http cannot be used if type command is defined
-                        expect(
-                            Object.keys(state.mqtt),
-                            `Unreachable http_publish for ${deviceClass} (${stateId})`,
-                        ).to.satisfy(keys => {
-                            if (keys.includes('mqtt_publish')) {
-                                return !keys.includes('http_publish');
-                            }
-
-                            return true;
-                        });
+                        // For MQTT a state may define both mqtt_publish (live push) and
+                        // http_publish (periodic/connect reseed) - see base.ts and issue #1318.
                     }
                 } else {
                     if (state.coap) {
