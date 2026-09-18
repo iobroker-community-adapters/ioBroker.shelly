@@ -232,7 +232,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS** 
 -->
-### **WORK IN PROGRESS**
+### 12.0.0-alpha.9 (2026-09-18)
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@mcm1957) Fixed inverted Relay0.Switch state of the Shelly 1L Gen3 (shelly1lg3) caused by a device firmware bug. [#1318]
 - (@mcm1957) Added a "BLE Map" button to the device manager toolbar which opens the Bluetooth map.
