@@ -866,7 +866,11 @@ export class BaseClient implements ShellyClient {
                         }
 
                         // Fill this.http object for httpIoBrokerState()
-                        if (httpBlock?.http_publish && !hasTypePublishCmd) {
+                        // For MQTT a state may define both mqtt_publish (live push) and http_publish
+                        // (periodic/connect reseed) - this is used for devices whose MQTT push value
+                        // is unreliable (e.g. shelly1lg3, see issue #1318). For CoAP the historic
+                        // either/or behaviour is kept.
+                        if (httpBlock?.http_publish && (this.type === 'mqtt' || !hasTypePublishCmd)) {
                             const key = httpBlock.http_publish;
                             if (!deviceStatesHttp[key]) {
                                 deviceStatesHttp[key] = [stateId];
