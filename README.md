@@ -230,7 +230,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 
 <!--
   Placeholder for the next version (at the beginning of the line):
-  ### **WORK IN PROGRESS** 
+  ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
 - (@GermanBluefox) Fixed MQTT commands getting lost with "mqtt prefix was not set" if they were sent while a device was (re)connecting.
