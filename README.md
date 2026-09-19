@@ -233,12 +233,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (@mcm1957) Applied the inverted switch state firmware bug fix to the Shelly 1PM Mini Gen3 (shelly1pmminig3), Shelly Pro 2PM (shellypro2pm) and Shelly Plug S Gen3 (shellyplugsg3) too. [#1318]
-
-### 12.0.0-alpha.10 (2026-09-18)
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@GermanBluefox) Fixed MQTT commands getting lost with "mqtt prefix was not set" if they were sent while a device was (re)connecting.
-- (@mcm1957) Fixed inverted Relay0.Switch state of the Shelly 1L Gen3 (shelly1lg3) caused by a device firmware bug. [#1318]
+- (@mcm1957) Fixed inverted Relay0.Switch state of Shelly 1L Gen3 (shelly1lg3), Shelly 1PM Mini Gen3 (shelly1pmminig3), Shelly Pro 2PM (shellypro2pm) and Shelly Plug S Gen3 (shellyplugsg3) caused by a device firmware bug. [#1318]
 - (@mcm1957) Added a "BLE Map" button to the device manager toolbar which opens the Bluetooth map.
 - (@mcm1957) Added support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).
 - (@mcm1957) Fixed duplicated "Total" prefix in the device manager labels of the Shelly 3EM (SHEM-3) total values.
