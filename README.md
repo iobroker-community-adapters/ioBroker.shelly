@@ -232,7 +232,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 12.0.0-alpha.11 (2026-09-19)
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@GermanBluefox) Fixed MQTT commands getting lost with "mqtt prefix was not set" if they were sent while a device was (re)connecting.
 - (@mcm1957) Fixed inverted Relay0.Switch state of Shelly 1L Gen3 (shelly1lg3), Shelly 1PM Mini Gen3 (shelly1pmminig3), Shelly Pro 2PM (shellypro2pm) and Shelly Plug S Gen3 (shellyplugsg3) caused by a device firmware bug. [#1318]
