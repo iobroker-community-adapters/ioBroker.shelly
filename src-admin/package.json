@@ -29,7 +29,7 @@
         "typescript": "~7.0.2",
         "vis-data": "^8.0.5",
         "vis-network": "^10.1.2",
-        "vite": "^8.2.2",
+        "vite": "^8.3.0",
         "vite-plugin-commonjs": "^0.10.4"
     }
 }
