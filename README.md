@@ -233,7 +233,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (@mcm1957) Applied the inverted Relay0.Switch firmware bug fix to the Shelly 1PM Mini Gen3 (shelly1pmminig3) too. [#1318]
+- (@mcm1957) Applied the inverted switch state firmware bug fix to the Shelly 1PM Mini Gen3 (shelly1pmminig3), Shelly Pro 2PM (shellypro2pm) and Shelly Plug S Gen3 (shellyplugsg3) too. [#1318]
 
 ### 12.0.0-alpha.10 (2026-09-18)
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
