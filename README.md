@@ -171,6 +171,7 @@ Notes:
 | Shelly EM Gen4 (shellyemg4)                     | ❌   | >= v11.0.0 |
 | Shelly EM mini Gen4 (shellyemminig4)            | ❌   | >= v10.6.0 |
 | Shelly Flood Gen4 (shellyfloodg4)               | ❌   | >= v10.3.0 |
+| Shelly Flood S Gen4 (shellyfloodsg4)            | ❌   | >= v12.0.0 |
 | Shelly Power Strip Gen4 (shellypstripg4) (*)    | ❌   | >= v10.3.0 |
 | Shelly Presence Gen4 (shellypresenceg4)         | ❌   | >= v11.0.0 |
 
