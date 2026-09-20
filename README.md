@@ -232,39 +232,37 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### 12.0.0-alpha.11 (2026-09-19)
+### **WORK IN PROGRESS**
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
-- (@GermanBluefox) Fixed MQTT commands getting lost with "mqtt prefix was not set" if they were sent while a device was (re)connecting.
-- (@mcm1957) Fixed inverted Relay0.Switch state of Shelly 1L Gen3 (shelly1lg3), Shelly 1PM Mini Gen3 (shelly1pmminig3), Shelly Pro 2PM (shellypro2pm) and Shelly Plug S Gen3 (shellyplugsg3) caused by a device firmware bug. [#1318]
-- (@mcm1957) Added a "BLE Map" button to the device manager toolbar which opens the Bluetooth map.
-- (@mcm1957) Added support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).
-- (@mcm1957) Fixed duplicated "Total" prefix in the device manager labels of the Shelly 3EM (SHEM-3) total values.
-- (@mcm1957) Fixed date states (timer/transition/boost start times) to report the timestamp in milliseconds so it is compatible with JavaScript Date handling.
-- (@mcm1957) Fixed authentication with Gen2+ devices running firmware 2.x which could fail with "Wrong http username or http password!" although the credentials were correct. [#1543]
-- (@mcm1957) Added experimental support for FrankEver Smart Sprinkler Controller (irrigation). [#1207]
-- (@mcm1957) Added support for Neo Smart Water Valve NAS-WV02W (neowatervalve). [#1322]
-- (@mcm1957) Added missing translations for the adapter configuration. [#1586]
-- (@GermanBluefox) Fixed that the adapter needlessly rewrote object definitions on every device update and reconnect, which caused repeated object change events and log spam in other adapters (e.g. valuetrackerovertime). [#1560]
-- (@GermanBluefox) Added a new "Bluetooth map" tab to the adapter configuration which shows which Bluetooth devices are received by which Shelly gateway, including the signal strength. The gateways are arranged in a circle and each device is shown at the gateway which receives it best - all other connections and the signal values can be switched on.
-- (@GermanBluefox) The device manager now updates the device list after renaming a device, after a firmware update and after installing the BLE gateway script - the cards showed outdated values before.
-- (@GermanBluefox) The device tiles now show when a device was last seen, and a device which goes offline is marked as disconnected immediately instead of only after reloading the list.
-- (@GermanBluefox) The BLE gateway script can now be installed and updated from the device manager - per device or for all devices which already have it installed. The installed script version is shown in the device details.
-- (@GermanBluefox) The list of gateways which receive a Bluetooth device (state "receivedBy") now collects all gateways instead of showing only the receivers of the last message. A gateway which stops receiving a device is removed after one hour.
-- (@GermanBluefox) Corrected wrong datapoint translations in all supported languages, e.g. current, voltage and apparent power.
-- (@patricknitsch) Device Manager now automatically shows power values on the device tile, and voltage, current, energy and frequency in the device info, for any device that reports them.
-- (@mcm1957) Added the missing translations for all datapoint names in all supported languages.
-- (@mcm1957) Added tests to validate that all datapoint names and descriptions are translated and that all i18n language files are consistent.
+- (@GermanBluefox) Codebase has been migrated to typescript.
 - (@mcm1957) Added support for Shelly Duo Bulb E27 Gen 3 (shellyduobulbg3). [#1385]
 - (@mcm1957) Added support for Shelly Multicolor Bulb E27 Gen 3 (shellycolorblbg3). [#1386]
-- (@mcm1957) The transition time can now be written for Shelly Dimmer1/Dimmer2 and for Gen2+ dimmers/lights (incl. Dimmer Gen3 and Dimmer Gen4). [#1214][#1224]
+- (@mcm1957) Added support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).
+- (@mcm1957) Added experimental support for FrankEver Smart Sprinkler Controller (irrigation). [#1207]
+- (@mcm1957) Added support for Neo Smart Water Valve NAS-WV02W (neowatervalve). [#1322]
 - (@mcm1957) Added support for Top AC Portable EV Charger (topacportableevcharger) - **EXPERIMENTAL ONLY** [#1401]
 - (@mcm1957) Added support for Shelly Flood S Gen 4 (shellyfloodsg4). [#1380]
 - (@mcm1957) Added monophase mode support for Shelly 3EM G3 (shelly3em63g3). [#1540]
-- (@GermanBluefox) Added option to ignore the timezone mismatch message (device timezone differs from the ioBroker host timezone).
+- (@klein0r) Updated ble script (v1.4) for Shelly firmware > 2.0
+- (@GermanBluefox) Added a new "Bluetooth map" tab to the adapter configuration which shows which Bluetooth devices are received by which Shelly gateway, including the signal strength. The gateways are arranged in a circle and each device is shown at the gateway which receives it best - all other connections and the signal values can be switched on.
+- (@mcm1957) Added a "BLE Map" button to the device manager toolbar which opens the Bluetooth map.
+- (@GermanBluefox) The device tiles now show when a device was last seen, and a device which goes offline is marked as disconnected immediately instead of only after reloading the list.
+- (@GermanBluefox) The BLE gateway script can now be installed and updated from the device manager - per device or for all devices which already have it installed. The installed script version is shown in the device details.
+- (@GermanBluefox) The list of gateways which receive a Bluetooth device (state "receivedBy") now collects all gateways instead of showing only the receivers of the last message. A gateway which stops receiving a device is removed after one hour.
+- (@patricknitsch) Device Manager now automatically shows power values on the device tile, and voltage, current, energy and frequency in the device info, for any device that reports them.
+- (@mcm1957) The transition time can now be written for Shelly Dimmer1/Dimmer2 and for Gen2+ dimmers/lights (incl. Dimmer Gen3 and Dimmer Gen4). [#1214][#1224]
+- (@mcm1957) Fixed inverted Relay0.Switch state of Shelly 1L Gen3 (shelly1lg3), Shelly 1PM Mini Gen3 (shelly1pmminig3), Shelly Pro 2PM (shellypro2pm) and Shelly Plug S Gen3 (shellyplugsg3) caused by a device firmware bug. [#1318]
+- (@mcm1957) Fixed date states (timer/transition/boost start times) to report the timestamp in milliseconds so it is compatible with JavaScript Date handling.
+- (@mcm1957) Fixed authentication with Gen2+ devices running firmware 2.x which could fail with "Wrong http username or http password!" although the credentials were correct. [#1543]
+- (@GermanBluefox) Fixed MQTT commands getting lost with "mqtt prefix was not set" if they were sent while a device was (re)connecting.
+- (@GermanBluefox) Fixed that the adapter needlessly rewrote object definitions on every device update and reconnect, which caused repeated object change events and log spam in other adapters (e.g. valuetrackerovertime). [#1560]
+- (@GermanBluefox) The device manager now updates the device list after renaming a device, after a firmware update and after installing the BLE gateway script - the cards showed outdated values before.
+- (@mcm1957) Added the missing translations for all datapoint names in all supported languages.
+- (@mcm1957) Added tests to validate that all datapoint names and descriptions are translated and that all i18n language files are consistent.
 - (@GermanBluefox) Fixed MQTT errors ("Cannot read properties of undefined") if a device closes the connection while it is still being initialized (e.g. battery powered devices).
 - (@floze-the-genius) Corrected roles for Gen 2+ input states. [#1498]
-- (@klein0r) Updated ble script (v1.4) for Shelly firmware > 2.0
-- (@GermanBluefox) Codebase has been migrated to typescript.
+- (@GermanBluefox) Added option to ignore the timezone mismatch message (device timezone differs from the ioBroker host timezone).
+- (mcm1957) dependencies have been updated
 
 ### 11.0.0 (2026-07-03)
 - (@klein0r) Updated ble script (v1.3) for Shelly firmware > 2.0
