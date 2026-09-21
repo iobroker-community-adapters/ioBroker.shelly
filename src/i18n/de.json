@@ -449,5 +449,6 @@
     "Storage free": "Speicher frei",
     "Zone enabled": "Zone aktiviert",
     "Zone type": "Zonentyp",
-    "Streamer version": "Streamer-Version"
+    "Streamer version": "Streamer-Version",
+    "RTSP stream URL": "RTSP-Stream-URL"
 }

@@ -138,6 +138,25 @@ function addCamera(deviceObj: DeviceDefinition, cameraId: number): void {
             write: false,
         },
     };
+
+    // The RTSP server is disabled by default and must be enabled via the camera configuration
+    // (Camera config `rtsp.enable`). The URL itself is not exposed by the API and is composed
+    // from the device address; `/stream/0` is the main stream, `/stream/1` the sub stream.
+    deviceObj[`Camera${cameraId}.rtspStreamUrl`] = {
+        mqtt: {
+            init_funct: self => {
+                const ip = self.getIP();
+                return ip ? `rtsp://${ip}:554/stream/0` : undefined;
+            },
+        },
+        common: {
+            name: 'RTSP stream URL',
+            type: 'string',
+            role: 'text.url',
+            read: true,
+            write: false,
+        },
+    };
 }
 
 /**

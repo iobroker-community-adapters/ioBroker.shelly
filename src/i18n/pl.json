@@ -449,5 +449,6 @@
     "Storage free": "Wolna pamięć",
     "Zone enabled": "Strefa włączona",
     "Zone type": "Typ strefy",
-    "Streamer version": "Wersja streamera"
+    "Streamer version": "Wersja streamera",
+    "RTSP stream URL": "Adres URL strumienia RTSP"
 }

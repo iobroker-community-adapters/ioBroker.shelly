@@ -449,5 +449,6 @@
     "Storage free": "Свободно на накопителе",
     "Zone enabled": "Зона включена",
     "Zone type": "Тип зоны",
-    "Streamer version": "Версия стримера"
+    "Streamer version": "Версия стримера",
+    "RTSP stream URL": "URL RTSP-потока"
 }

@@ -449,5 +449,6 @@
     "Storage free": "存储可用",
     "Zone enabled": "区域已启用",
     "Zone type": "区域类型",
-    "Streamer version": "推流器版本"
+    "Streamer version": "推流器版本",
+    "RTSP stream URL": "RTSP 流地址"
 }
