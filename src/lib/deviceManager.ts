@@ -93,6 +93,7 @@ const groupMeta: Record<string, { nameKey: string; icon: string }> = {
     input: { nameKey: 'Buttons & Inputs', icon: 'adapter/shelly/icons/shellyplusi4.png' },
     climate: { nameKey: 'Climate', icon: 'adapter/shelly/icons/shellytrv.png' },
     gateway: { nameKey: 'Gateways', icon: 'adapter/shelly/icons/shellyblugw.png' },
+    camera: { nameKey: 'Cameras', icon: 'adapter/shelly/icons/shellycamera.png' },
     ble: { nameKey: 'BLE Devices', icon: 'adapter/shelly/icons/ble.svg' },
     other: { nameKey: 'Other', icon: 'adapter/shelly/icons/shellyplus1.png' },
 };

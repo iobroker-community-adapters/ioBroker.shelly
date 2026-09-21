@@ -437,5 +437,17 @@
     "Started at": "Avviato alle",
     "Command source": "Origine del comando",
     "Instantaneous power": "Potenza istantanea",
-    "Returned": "Restituito"
+    "Returned": "Restituito",
+    "Cameras": "Telecamere",
+    "Armed": "Armato",
+    "Privacy mode": "Modalità privacy",
+    "Streamer state": "Stato streamer",
+    "Active streams": "Flussi attivi",
+    "Storage present": "Memoria presente",
+    "Storage active": "Memoria attiva",
+    "Storage size": "Dimensione memoria",
+    "Storage free": "Memoria libera",
+    "Zone enabled": "Zona attiva",
+    "Zone type": "Tipo di zona",
+    "Streamer version": "Versione streamer"
 }

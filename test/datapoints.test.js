@@ -750,7 +750,7 @@ describe('Test Device Registry Completeness', function () {
     });
 
     it('Every value in "deviceGroupMap" is a valid group', function () {
-        const validGroups = ['ble', 'climate', 'cover', 'dimmer', 'gateway', 'input', 'light', 'meter', 'plug', 'relay', 'sensor', 'other'];
+        const validGroups = ['ble', 'camera', 'climate', 'cover', 'dimmer', 'gateway', 'input', 'light', 'meter', 'plug', 'relay', 'sensor', 'other'];
         for (const [deviceClass, group] of Object.entries(deviceGroupMap)) {
             expect(
                 group,

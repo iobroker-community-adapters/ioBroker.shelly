@@ -437,5 +437,17 @@
     "Started at": "Gestart om",
     "Command source": "Opdrachtbron",
     "Instantaneous power": "Momentaan vermogen",
-    "Returned": "Teruggeleverd"
+    "Returned": "Teruggeleverd",
+    "Cameras": "Camera's",
+    "Armed": "Ingeschakeld",
+    "Privacy mode": "Privacymodus",
+    "Streamer state": "Streamerstatus",
+    "Active streams": "Actieve streams",
+    "Storage present": "Opslag aanwezig",
+    "Storage active": "Opslag actief",
+    "Storage size": "Opslaggrootte",
+    "Storage free": "Opslag vrij",
+    "Zone enabled": "Zone ingeschakeld",
+    "Zone type": "Zonetype",
+    "Streamer version": "Streamerversie"
 }

@@ -80,6 +80,7 @@ import { shelly3em63g3 } from './devices/gen3/shelly3em63g3';
 import { shellyazht } from './devices/gen3/shellyazht';
 import { shellyazplug } from './devices/gen3/shellyazplug';
 import { shellyblugwg3 } from './devices/gen3/shellyblugwg3';
+import { shellycamera } from './devices/gen3/shellycamera';
 import { shellyddimmerg3 } from './devices/gen3/shellyddimmerg3';
 import { shellydimmerg3 } from './devices/gen3/shellydimmerg3';
 import { shellycolorblbg3 } from './devices/gen3/shellycolorblbg3';
@@ -201,6 +202,7 @@ const devices: Record<string, DeviceDefinition> = {
     shellyazht,
     shellyazplug,
     shellyblugwg3,
+    shellycamera,
     shellyddimmerg3,
     shellydimmerg3,
     shellycolorblbg3,
@@ -323,6 +325,7 @@ const deviceGen: Record<string, number> = {
     shellyazht: 3,
     shellyazplug: 3,
     shellyblugwg3: 3,
+    shellycamera: 3,
     shellyddimmerg3: 3,
     shellydimmerg3: 3,
     shellycolorblbg3: 3,
@@ -446,6 +449,7 @@ const deviceGroupMap: Record<string, string> = {
     shellyazht: 'sensor',
     shellyazplug: 'plug',
     shellyblugwg3: 'gateway',
+    shellycamera: 'camera',
     shellyddimmerg3: 'dimmer',
     shellydimmerg3: 'dimmer',
     shellycolorblbg3: 'light',
@@ -568,6 +572,7 @@ const deviceIcons: Record<string, string> = {
     shellyazht: 'shellyhtg3',
     shellyazplug: 'shellyplugsg3',
     shellyblugwg3: 'shellyblugwg3',
+    shellycamera: 'shellycamera',
     shellyddimmerg3: 'shellydimmerg3',
     shellydimmerg3: 'shellydimmerg3',
     shellycolorblbg3: 'shellybulbduo',
@@ -691,6 +696,7 @@ const deviceKnowledgeBase: Record<string, string | undefined> = {
     shellyazht: 'https://kb.shelly.cloud/knowledge-base/shelly-az-h-t',
     shellyazplug: 'https://kb.shelly.cloud/knowledge-base/shelly-az-plug',
     shellyblugwg3: 'https://kb.shelly.cloud/knowledge-base/shelly-blu-gateway-gen3',
+    shellycamera: 'https://kb.shelly.cloud/knowledge-base/shelly-camera',
     shellyddimmerg3: 'https://kb.shelly.cloud/knowledge-base/shelly-dali-dimmer-gen3',
     shellydimmerg3: 'https://kb.shelly.cloud/knowledge-base/shelly-dimmer-gen3',
     shellycolorblbg3: 'https://kb.shelly.cloud/knowledge-base/shelly-multicolor-bulb-e27-gen3',
@@ -815,6 +821,7 @@ const deviceTypes: Record<string, string[]> = {
     shellyazht: ['shellyazht'],
     shellyazplug: ['shellyazplug'],
     shellyblugwg3: ['shellyblugwg3'],
+    shellycamera: ['shellycamera'],
     shellyddimmerg3: ['shellyddimmerg3'],
     shellydimmerg3: ['shellydimmerg3'],
     shellycolorblbg3: ['shellycolorblbg3'],
