@@ -14,7 +14,7 @@ updates:
     open-pull-requests-limit: 15
 
   - package-ecosystem: 'npm'
-    directories: 
+    directories:
       - '**/*'
     schedule:
       interval: 'cron'
@@ -25,5 +25,5 @@ updates:
     cooldown:
       default-days: 7
     ignore:
-      - dependency-name: "@types/node"
-        update-types: ["version-update:semver-major"]
+      - dependency-name: '@types/node'
+        update-types: [ 'version-update:semver-major' ]
