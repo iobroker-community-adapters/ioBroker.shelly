@@ -437,5 +437,18 @@
     "Started at": "Démarré à",
     "Command source": "Source de la commande",
     "Instantaneous power": "Puissance instantanée",
-    "Returned": "Réinjecté"
+    "Returned": "Réinjecté",
+    "Cameras": "Caméras",
+    "Armed": "Armé",
+    "Privacy mode": "Mode confidentialité",
+    "Streamer state": "État du streamer",
+    "Active streams": "Flux actifs",
+    "Storage present": "Stockage présent",
+    "Storage active": "Stockage actif",
+    "Storage size": "Taille du stockage",
+    "Storage free": "Stockage libre",
+    "Zone enabled": "Zone activée",
+    "Zone type": "Type de zone",
+    "Streamer version": "Version du streamer",
+    "RTSP stream URL": "URL du flux RTSP"
 }

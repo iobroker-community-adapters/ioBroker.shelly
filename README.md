@@ -137,6 +137,7 @@ Notes:
 | Shelly AZ H&T (shellyazht)                         | ❌   | >= v12.0.0 |
 | Shelly AZ Plug (shellyazplug)                      | ❌   | >= v9.5.0  |
 | Shelly BLU Gateway Gen3 (shellyblugwg3)            | ❌   | >= v8.5.0  |
+| Shelly Camera (shellycamera)                       | ❌   | >= v12.1.0 |
 | Shelly DALI Dimmer Gen3 (shellyddimmerg3)          | ❌   | >= v10.2.0 |
 | Shelly Dimmer Gen3 (shellydimmerg3)                | ❌   | >= v9.2.0  |
 | Shelly Duo Bulb E27 Gen3 (shellyduobulbg3)         | ❌   | >= v12.0.0 |
@@ -233,6 +234,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (@mcm1957) Added support for Shelly Camera (shellycamera). [#1617]
+
 ### 12.0.0 (2026-09-20)
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
 - (@GermanBluefox) Codebase has been migrated to typescript.

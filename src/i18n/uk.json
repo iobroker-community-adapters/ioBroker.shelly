@@ -437,5 +437,18 @@
     "Started at": "Запущено о",
     "Command source": "Джерело команди",
     "Instantaneous power": "Миттєва потужність",
-    "Returned": "Повернено"
+    "Returned": "Повернено",
+    "Cameras": "Камери",
+    "Armed": "Активовано",
+    "Privacy mode": "Режим конфіденційності",
+    "Streamer state": "Стан стрімера",
+    "Active streams": "Активні потоки",
+    "Storage present": "Накопичувач присутній",
+    "Storage active": "Накопичувач активний",
+    "Storage size": "Розмір накопичувача",
+    "Storage free": "Вільно на накопичувачі",
+    "Zone enabled": "Зона увімкнена",
+    "Zone type": "Тип зони",
+    "Streamer version": "Версія стрімера",
+    "RTSP stream URL": "URL RTSP-потоку"
 }

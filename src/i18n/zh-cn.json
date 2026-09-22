@@ -437,5 +437,18 @@
     "Started at": "开始于",
     "Command source": "命令来源",
     "Instantaneous power": "瞬时功率",
-    "Returned": "回馈"
+    "Returned": "回馈",
+    "Cameras": "摄像头",
+    "Armed": "已布防",
+    "Privacy mode": "隐私模式",
+    "Streamer state": "推流状态",
+    "Active streams": "活动流数量",
+    "Storage present": "存储存在",
+    "Storage active": "存储激活",
+    "Storage size": "存储大小",
+    "Storage free": "存储可用",
+    "Zone enabled": "区域已启用",
+    "Zone type": "区域类型",
+    "Streamer version": "推流器版本",
+    "RTSP stream URL": "RTSP 流地址"
 }
