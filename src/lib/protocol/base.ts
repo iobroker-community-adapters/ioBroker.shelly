@@ -421,7 +421,7 @@ export class BaseClient implements ShellyClient {
      */
     static parseFirmwareSemver(rawVersion: string): string | undefined {
         // Extract the part after the last '/' if present
-        const afterSlash = rawVersion.includes('/') ? rawVersion.split('/').pop() ?? rawVersion : rawVersion;
+        const afterSlash = rawVersion.includes('/') ? (rawVersion.split('/').pop() ?? rawVersion) : rawVersion;
         const match = /^(\d+\.\d+\.\d+)/.exec(afterSlash);
         return match ? match[1] : undefined;
     }
@@ -436,8 +436,12 @@ export class BaseClient implements ShellyClient {
         const parse = (v: string): number[] => v.split('.').map(Number);
         const [aMaj, aMin, aPat] = parse(a);
         const [bMaj, bMin, bPat] = parse(b);
-        if (aMaj !== bMaj) return aMaj > bMaj;
-        if (aMin !== bMin) return aMin > bMin;
+        if (aMaj !== bMaj) {
+            return aMaj > bMaj;
+        }
+        if (aMin !== bMin) {
+            return aMin > bMin;
+        }
         return aPat >= bPat;
     }
 
@@ -474,7 +478,6 @@ export class BaseClient implements ShellyClient {
             }
         }
     }
-
 
     /**
      * IP of Shelly device

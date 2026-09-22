@@ -971,8 +971,12 @@ function isSemverAtLeast(a: string, b: string): boolean {
     const parse = (v: string): number[] => v.split('.').map(Number);
     const [aMaj, aMin, aPat] = parse(a);
     const [bMaj, bMin, bPat] = parse(b);
-    if (aMaj !== bMaj) return aMaj > bMaj;
-    if (aMin !== bMin) return aMin > bMin;
+    if (aMaj !== bMaj) {
+        return aMaj > bMaj;
+    }
+    if (aMin !== bMin) {
+        return aMin > bMin;
+    }
     return aPat >= bPat;
 }
 

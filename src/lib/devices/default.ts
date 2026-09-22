@@ -144,8 +144,10 @@ const defaultsgen1: DeviceDefinition = {
             http_publish: '/settings',
             http_publish_funct: value => {
                 const fw = value ? JSON.parse(value).fw : undefined;
-                if (!fw) return undefined;
-                const afterSlash = fw.includes('/') ? fw.split('/').pop() ?? fw : fw;
+                if (!fw) {
+                    return undefined;
+                }
+                const afterSlash = fw.includes('/') ? (fw.split('/').pop() ?? fw) : fw;
                 const m = /^(\d+\.\d+\.\d+)/.exec(afterSlash);
                 return m ? m[1] : undefined;
             },
@@ -154,8 +156,10 @@ const defaultsgen1: DeviceDefinition = {
             http_publish: '/settings',
             http_publish_funct: value => {
                 const fw = value ? JSON.parse(value).fw : undefined;
-                if (!fw) return undefined;
-                const afterSlash = fw.includes('/') ? fw.split('/').pop() ?? fw : fw;
+                if (!fw) {
+                    return undefined;
+                }
+                const afterSlash = fw.includes('/') ? (fw.split('/').pop() ?? fw) : fw;
                 const m = /^(\d+\.\d+\.\d+)/.exec(afterSlash);
                 return m ? m[1] : undefined;
             },
@@ -660,8 +664,10 @@ const defaultsgen2: DeviceDefinition = {
             http_publish: '/rpc/Shelly.GetDeviceInfo',
             http_publish_funct: value => {
                 const fw = value ? JSON.parse(value).fw_id : undefined;
-                if (!fw) return undefined;
-                const afterSlash = fw.includes('/') ? fw.split('/').pop() ?? fw : fw;
+                if (!fw) {
+                    return undefined;
+                }
+                const afterSlash = fw.includes('/') ? (fw.split('/').pop() ?? fw) : fw;
                 const m = /^(\d+\.\d+\.\d+)/.exec(afterSlash);
                 return m ? m[1] : undefined;
             },
