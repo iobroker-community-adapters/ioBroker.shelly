@@ -137,7 +137,7 @@ Notes:
 | Shelly AZ H&T (shellyazht)                         | ❌   | >= v12.0.0 |
 | Shelly AZ Plug (shellyazplug)                      | ❌   | >= v9.5.0  |
 | Shelly BLU Gateway Gen3 (shellyblugwg3)            | ❌   | >= v8.5.0  |
-| Shelly Camera (shellycamera)                       | ❌   | >= v12.1.0 |
+| Shelly Camera (shellycamera) (*)                   | ❌   | >= v12.1.0 |
 | Shelly DALI Dimmer Gen3 (shellyddimmerg3)          | ❌   | >= v10.2.0 |
 | Shelly Dimmer Gen3 (shellydimmerg3)                | ❌   | >= v9.2.0  |
 | Shelly Duo Bulb E27 Gen3 (shellyduobulbg3)         | ❌   | >= v12.0.0 |
@@ -145,16 +145,17 @@ Notes:
 | Shelly H&T Gen3 (shellyhtg3)                       | ❌   | >= v8.0.0  |
 | Shelly I4 / I4DC Gen3 (shellyi4g3)                 | ❌   | >= v8.5.0  |
 | Shelly Multicolor Bulb E27 Gen3 (shellycolorblbg3) | ❌   | >= v12.0.0 |
-| Shelly Pill (shellypill)                      | ❌   | >= v10.6.1 |
-| Shelly Plug M Gen3 (shellyplugmg3)            | ❌   | >= v10.6.0 |
-| Shelly Plug PM Gen3 (shellyplugpmg3)          | ❌   | >= v10.5.0 |
-| Shelly Plug S Gen3 (shellyplugsg3)            | ❌   | >= v8.5.0  |
-| Shelly PM Mini Gen3 (shellypmminig3)          | ❌   | >= v7.0.0  |
-| Shelly Outdoor Plug S Gen3 (shellyoutdoorsg3) | ❌   | >= v9.3.0  |
-| Shelly Shutter (shellyshutter) (1)            | ❌   | >= v10.2.0 |
+| Shelly Pill (shellypill)                           | ❌   | >= v10.6.1 |
+| Shelly Plug M Gen3 (shellyplugmg3)                 | ❌   | >= v10.6.0 |
+| Shelly Plug PM Gen3 (shellyplugpmg3)               | ❌   | >= v10.5.0 |
+| Shelly Plug S Gen3 (shellyplugsg3)                 | ❌   | >= v8.5.0  |
+| Shelly PM Mini Gen3 (shellypmminig3)               | ❌   | >= v7.0.0  |
+| Shelly Outdoor Plug S Gen3 (shellyoutdoorsg3)      | ❌   | >= v9.3.0  |
+| Shelly Shutter (shellyshutter) (1)                 | ❌   | >= v10.2.0 |
 
 Notes:
 (1) slat control requires >= v10.4.0
+(*) only partial support, full implementation work in progress
 
 ### Generation 4 (Gen 4)
 
@@ -235,7 +236,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (@mcm1957) Added support for Shelly Camera (shellycamera). [#1617]
+- (@mcm1957) Added support for Shelly Camera (shellycamera) - **EXPERIMENTAL ONLY** [#1617]
 
 ### 12.0.0 (2026-09-20)
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
