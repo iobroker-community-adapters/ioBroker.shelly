@@ -333,6 +333,6 @@ const shellyplusplugs: DeviceDefinition = {};
 // };
 
 shellyHelperGen2.addSwitch(shellyplusplugs, 0, true);
-//shellyHelperGen2.addPlugsUI(shellyplusplugs);
+shellyHelperGen2.addPlugsUI(shellyplusplugs);
 
 export { shellyplusplugs };

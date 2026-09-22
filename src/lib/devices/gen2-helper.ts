@@ -1,4 +1,4 @@
-import type { DeviceDefinition } from '../deviceTypes';
+﻿import type { DeviceDefinition } from '../deviceTypes';
 import * as shellyHelper from '../shelly-helper';
 
 /**
@@ -4772,9 +4772,9 @@ function addPM1(deviceObj: DeviceDefinition, pmId: number): void {
  *
  * @param deviceObj
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function addPlugsUI(deviceObj: DeviceDefinition): void {
     deviceObj['PLUGS_UI.Mode'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGS_UI.GetConfig',
             http_publish_funct: value => (value ? JSON.parse(value).leds.mode : undefined),
@@ -4827,6 +4827,7 @@ function addPlugsUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGS_UI.PowerBrightness'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGS_UI.GetConfig',
             http_publish_funct: value => (value ? JSON.parse(value)?.leds?.colors?.power?.brightness : undefined),
@@ -4864,6 +4865,7 @@ function addPlugsUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGS_UI.SwitchOnBrightness'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGS_UI.GetConfig',
             http_publish_funct: value =>
@@ -4904,6 +4906,7 @@ function addPlugsUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGS_UI.SwitchOnColor'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGS_UI.GetConfig',
             http_publish_funct: value =>
@@ -4941,6 +4944,7 @@ function addPlugsUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGS_UI.SwitchOffBrightness'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGS_UI.GetConfig',
             http_publish_funct: value =>
@@ -4981,6 +4985,7 @@ function addPlugsUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGS_UI.SwitchOffColor'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGS_UI.GetConfig',
             http_publish_funct: value =>
@@ -5018,6 +5023,7 @@ function addPlugsUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGS_UI.NightModeEnabled'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGS_UI.GetConfig',
             http_publish_funct: value => (value ? JSON.parse(value)?.leds?.night_mode?.enable : undefined),
@@ -5050,6 +5056,7 @@ function addPlugsUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGS_UI.NightModeBrightness'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGS_UI.GetConfig',
             http_publish_funct: value => (value ? JSON.parse(value)?.leds?.night_mode?.brightness : undefined),
@@ -5091,9 +5098,9 @@ function addPlugsUI(deviceObj: DeviceDefinition): void {
  *
  * @param deviceObj
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function addPlugpmUI(deviceObj: DeviceDefinition): void {
     deviceObj['PLUGPM_UI.Mode'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGPM_UI.GetConfig',
             http_publish_funct: value => (value ? JSON.parse(value).leds.mode : undefined),
@@ -5128,6 +5135,7 @@ function addPlugpmUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGPM_UI.PowerBrightness'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGPM_UI.GetConfig',
             http_publish_funct: value => (value ? JSON.parse(value)?.leds?.colors?.power?.brightness : undefined),
@@ -5165,6 +5173,7 @@ function addPlugpmUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGPM_UI.NightModeEnabled'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGPM_UI.GetConfig',
             http_publish_funct: value => (value ? JSON.parse(value)?.leds?.night_mode?.enable : undefined),
@@ -5197,6 +5206,7 @@ function addPlugpmUI(deviceObj: DeviceDefinition): void {
     };
 
     deviceObj['PLUGPM_UI.NightModeBrightness'] = {
+        firmware_version_min: '2.0.0',
         mqtt: {
             http_publish: '/rpc/PLUGPM_UI.GetConfig',
             http_publish_funct: value => (value ? JSON.parse(value)?.leds?.night_mode?.brightness : undefined),
@@ -8705,6 +8715,8 @@ export {
     addInput,
     addLight,
     addPlusAddon,
+    addPlugpmUI,
+    addPlugsUI,
     addPM1,
     addPresence,
     addPresenceZone,

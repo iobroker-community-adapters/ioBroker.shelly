@@ -927,7 +927,12 @@ function clone<T>(obj: T): T {
     return temp as T;
 }
 
-function deleteNoDisplay(device: DeviceDefinition, protocol: 'coap' | 'mqtt', mode?: string): DeviceDefinition {
+function deleteNoDisplay(
+    device: DeviceDefinition,
+    protocol: 'coap' | 'mqtt',
+    mode?: string,
+    firmwareVersion?: string,
+): DeviceDefinition {
     if (protocol === 'coap' || protocol === 'mqtt') {
         for (const key in device) {
             const dev = device[key];
@@ -940,6 +945,14 @@ function deleteNoDisplay(device: DeviceDefinition, protocol: 'coap' | 'mqtt', mo
             if (mode && dev?.device_mode) {
                 if (dev.device_mode !== mode) {
                     delete device[key];
+                    continue;
+                }
+            }
+
+            // Firmware version minimum - remove state if firmware version is unknown or too old
+            if (dev?.firmware_version_min) {
+                if (!firmwareVersion || !isSemverAtLeast(firmwareVersion, dev.firmware_version_min)) {
+                    delete device[key];
                 }
             }
         }
@@ -948,7 +961,27 @@ function deleteNoDisplay(device: DeviceDefinition, protocol: 'coap' | 'mqtt', mo
     return device;
 }
 
-function getDeviceByClass(deviceClass: string, protocol: 'coap' | 'mqtt', mode?: string): DeviceDefinition | undefined {
+/**
+ * Compare two semver strings. Returns true if a >= b.
+ *
+ * @param a - semver string like '2.0.0'
+ * @param b - semver string like '2.0.0'
+ */
+function isSemverAtLeast(a: string, b: string): boolean {
+    const parse = (v: string): number[] => v.split('.').map(Number);
+    const [aMaj, aMin, aPat] = parse(a);
+    const [bMaj, bMin, bPat] = parse(b);
+    if (aMaj !== bMaj) return aMaj > bMaj;
+    if (aMin !== bMin) return aMin > bMin;
+    return aPat >= bPat;
+}
+
+function getDeviceByClass(
+    deviceClass: string,
+    protocol: 'coap' | 'mqtt',
+    mode?: string,
+    firmwareVersion?: string,
+): DeviceDefinition | undefined {
     if (!devices[deviceClass]) {
         return;
     }
@@ -969,7 +1002,7 @@ function getDeviceByClass(deviceClass: string, protocol: 'coap' | 'mqtt', mode?:
             device = clone(Object.assign(Object.assign({}, defaultsgen1), devices[deviceClass]));
     }
 
-    device = deleteNoDisplay(device, protocol, mode);
+    device = deleteNoDisplay(device, protocol, mode, firmwareVersion);
     return device;
 }
 

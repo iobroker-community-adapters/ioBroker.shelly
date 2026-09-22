@@ -9,6 +9,6 @@ import * as shellyHelperGen2 from '../gen2-helper';
 const shellyplugpmg3: DeviceDefinition = {};
 
 shellyHelperGen2.addPM1(shellyplugpmg3, 0);
-//shellyHelperGen2.addPlugpmUI(shellyplugpmg3);
+shellyHelperGen2.addPlugpmUI(shellyplugpmg3);
 
 export { shellyplugpmg3 };

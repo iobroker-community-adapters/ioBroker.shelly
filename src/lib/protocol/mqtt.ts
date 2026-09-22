@@ -285,6 +285,11 @@ class MQTTClient extends BaseClient {
                                 await this.setDeviceMode(newDeviceMode);
                             }
                         }
+
+                        // Firmware version (from Shelly.GetDeviceInfo response)
+                        if (payloadObj?.result?.fw_id) {
+                            await this.setDeviceFirmwareVersion(String(payloadObj.result.fw_id));
+                        }
                     } catch (err) {
                         this.adapter.log.debug(
                             `[MQTT] Error parsing init command response: ${this.getLogInfo()} - topic: ${packet.topic}, error: ${err}`,
@@ -739,6 +744,7 @@ class MQTTClient extends BaseClient {
                     // Device Mode information (init)
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" init device mode`);
                     await this.initDeviceModeFromState();
+
 
                     // accept connection
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" accepting connection`);
