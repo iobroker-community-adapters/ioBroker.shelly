@@ -51,6 +51,7 @@ export class BaseClient implements ShellyClient {
     id: string | undefined; // e.g. ShellyBulbDuo-8CAAB5616291
     deviceType: string | undefined; // e.g. SHBDUO-1 or SHRGBW2
     deviceMode: string | undefined; // e.g. color or white / relay or roller
+    deviceFirmwareVersion: string | undefined; // parsed semver, e.g. 1.7.1
     deviceClass: string | undefined; // e.g. ShellyBulbDuo or shellyrgbw2
     serialId: string | undefined; // e.g. 8CAAB5616291
     deviceGen: number | undefined; // 1 or 2
@@ -412,6 +413,73 @@ export class BaseClient implements ShellyClient {
     }
 
     /**
+     * Parse a semver string from a Shelly firmware version string.
+     * Input example: "20250924-062655/1.7.1-gd336f31" or "1.7.1-gd336f31"
+     * Returns the semver string (e.g. "1.7.1") or undefined if not parseable.
+     *
+     * @param rawVersion - raw firmware version string
+     */
+    static parseFirmwareSemver(rawVersion: string): string | undefined {
+        // Extract the part after the last '/' if present
+        const afterSlash = rawVersion.includes('/') ? (rawVersion.split('/').pop() ?? rawVersion) : rawVersion;
+        const match = /^(\d+\.\d+\.\d+)/.exec(afterSlash);
+        return match ? match[1] : undefined;
+    }
+
+    /**
+     * Compare two semver strings. Returns true if a >= b.
+     *
+     * @param a - semver string
+     * @param b - semver string
+     */
+    static isSemverAtLeast(a: string, b: string): boolean {
+        const parse = (v: string): number[] => v.split('.').map(Number);
+        const [aMaj, aMin, aPat] = parse(a);
+        const [bMaj, bMin, bPat] = parse(b);
+        if (aMaj !== bMaj) {
+            return aMaj > bMaj;
+        }
+        if (aMin !== bMin) {
+            return aMin > bMin;
+        }
+        return aPat >= bPat;
+    }
+
+    getDeviceFirmwareVersion(): string | undefined {
+        return this.deviceFirmwareVersion;
+    }
+
+    async setDeviceFirmwareVersion(rawVersionString: string): Promise<void> {
+        const parsed = BaseClient.parseFirmwareSemver(rawVersionString);
+        this.adapter.log.debug(
+            `[setDeviceFirmwareVersion] ${this.getLogInfo()} raw: "${rawVersionString}", parsed: ${parsed ?? '<unknown>'}`,
+        );
+
+        if (!parsed) {
+            // Cannot determine version — treat as too old, no PLUGS_UI
+            return;
+        }
+
+        if (parsed !== this.deviceFirmwareVersion) {
+            const wasAboveThreshold =
+                this.deviceFirmwareVersion !== undefined &&
+                BaseClient.isSemverAtLeast(this.deviceFirmwareVersion, '2.0.0');
+            const isAboveThreshold = BaseClient.isSemverAtLeast(parsed, '2.0.0');
+
+            this.deviceFirmwareVersion = parsed;
+
+            // Re-create objects only if the PLUGS_UI eligibility changed
+            if (wasAboveThreshold !== isAboveThreshold) {
+                this.adapter.log.info(
+                    `[setDeviceFirmwareVersion] ${this.getLogInfo()} firmware version changed to ${parsed} - recreating states`,
+                );
+                await this.deleteOldStates();
+                await this.createObjects();
+            }
+        }
+    }
+
+    /**
      * IP of Shelly device
      * Example 192.168.1.2
      *
@@ -659,6 +727,7 @@ export class BaseClient implements ShellyClient {
                     this.getDeviceClass(),
                     this.type,
                     this.getDeviceMode(),
+                    this.getDeviceFirmwareVersion(),
                 );
 
                 if (deviceStates) {
@@ -922,7 +991,12 @@ export class BaseClient implements ShellyClient {
     async deleteOldStates(): Promise<void> {
         const deviceId = this.getDeviceId();
         const objList = await this.adapter.getAdapterObjectsAsync();
-        const dps = datapoints.getDeviceByClass(this.getDeviceClass(), this.type, this.getDeviceMode());
+        const dps = datapoints.getDeviceByClass(
+            this.getDeviceClass(),
+            this.type,
+            this.getDeviceMode(),
+            this.getDeviceFirmwareVersion(),
+        );
 
         if (dps) {
             for (const o in objList) {
@@ -1421,6 +1495,7 @@ export class BaseClient implements ShellyClient {
         this.id = undefined;
         this.deviceType = undefined;
         this.deviceMode = undefined;
+        this.deviceFirmwareVersion = undefined;
         this.deviceClass = undefined;
         this.serialId = undefined;
         this.deviceGen = undefined;

@@ -139,6 +139,40 @@ const defaultsgen1: DeviceDefinition = {
             icon: shellyHelper.getIcon('chip'),
         },
     },
+    versionShort: {
+        coap: {
+            http_publish: '/settings',
+            http_publish_funct: value => {
+                const fw = value ? JSON.parse(value).fw : undefined;
+                if (!fw) {
+                    return undefined;
+                }
+                const afterSlash = fw.includes('/') ? (fw.split('/').pop() ?? fw) : fw;
+                const m = /^(\d+\.\d+\.\d+)/.exec(afterSlash);
+                return m ? m[1] : undefined;
+            },
+        },
+        mqtt: {
+            http_publish: '/settings',
+            http_publish_funct: value => {
+                const fw = value ? JSON.parse(value).fw : undefined;
+                if (!fw) {
+                    return undefined;
+                }
+                const afterSlash = fw.includes('/') ? (fw.split('/').pop() ?? fw) : fw;
+                const m = /^(\d+\.\d+\.\d+)/.exec(afterSlash);
+                return m ? m[1] : undefined;
+            },
+        },
+        common: {
+            name: 'Firmware version short',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: false,
+            icon: shellyHelper.getIcon('chip'),
+        },
+    },
     hostname: {
         coap: {
             init_funct: self => self.getIP(),
@@ -618,6 +652,28 @@ const defaultsgen2: DeviceDefinition = {
         },
         common: {
             name: 'Firmware version',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: false,
+            icon: shellyHelper.getIcon('chip'),
+        },
+    },
+    versionShort: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => {
+                const fw = value ? JSON.parse(value).fw_id : undefined;
+                if (!fw) {
+                    return undefined;
+                }
+                const afterSlash = fw.includes('/') ? (fw.split('/').pop() ?? fw) : fw;
+                const m = /^(\d+\.\d+\.\d+)/.exec(afterSlash);
+                return m ? m[1] : undefined;
+            },
+        },
+        common: {
+            name: 'Firmware version short',
             type: 'string',
             role: 'state',
             read: true,

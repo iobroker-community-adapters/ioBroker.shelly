@@ -9,6 +9,6 @@ import * as shellyHelperGen2 from '../gen2-helper';
 const shellyazplug: DeviceDefinition = {};
 
 shellyHelperGen2.addSwitch(shellyazplug, 0, true);
-//shellyHelperGen2.addPlugsUI(shellyazplug);
+shellyHelperGen2.addPlugsUI(shellyazplug);
 
 export { shellyazplug };

@@ -238,6 +238,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 ### **WORK IN PROGRESS**
 - (@mcm1957) Added support for Shelly Camera (shellycamera) - **EXPERIMENTAL ONLY** [#1617]
 - (@mcm1957) Device manager now refreshes the device list after adding devices via discovery and after a firmware update completes. [#1484]
+- (@mcm1957) PLUG_UI states (LED control) are now activated for supported plug devices when firmware version 2.0.0 or newer is detected.
 
 ### 12.0.0 (2026-09-20)
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.

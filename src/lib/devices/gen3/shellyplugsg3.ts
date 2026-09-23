@@ -10,7 +10,7 @@ import * as shellyHotfixesGen2 from '../gen2-hotfixes';
 const shellyplugsg3: DeviceDefinition = {};
 
 shellyHelperGen2.addSwitch(shellyplugsg3, 0, true);
-//shellyHelperGen2.addPlugsUI(shellyplugsg3);
+shellyHelperGen2.addPlugsUI(shellyplugsg3);
 
 // Firmware bug: the switch output is reported outdated/inverted on the status topic
 // right after a change (see issue #1318). Derive it from the NotifyStatus message instead.

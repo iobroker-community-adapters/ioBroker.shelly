@@ -164,6 +164,8 @@ export interface DeviceState {
     common: ioBroker.StateCommon;
     /** Restricts this state to a specific device mode (e.g. `color` vs `white`). */
     device_mode?: string;
+    /** Minimum firmware semver required for this state (e.g. `2.0.0`). */
+    firmware_version_min?: string;
     /** The state id, injected by the protocol layer at runtime (`createObjects()`). */
     state?: string;
 }

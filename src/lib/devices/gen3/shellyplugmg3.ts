@@ -10,6 +10,6 @@ import * as shellyHelperGen2 from '../gen2-helper';
 const shellyplugmg3: DeviceDefinition = {};
 
 shellyHelperGen2.addSwitch(shellyplugmg3, 0, true);
-//shellyHelperGen2.addPlugsUI(shellyplugmg3);
+shellyHelperGen2.addPlugsUI(shellyplugmg3);
 
 export { shellyplugmg3 };
