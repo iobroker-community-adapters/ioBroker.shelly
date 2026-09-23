@@ -745,7 +745,6 @@ class MQTTClient extends BaseClient {
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" init device mode`);
                     await this.initDeviceModeFromState();
 
-
                     // accept connection
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" accepting connection`);
                     try {
