@@ -1,5 +1,6 @@
 import type { DeviceDefinition } from '../../deviceTypes';
 import * as shellyHelperGen2 from '../gen2-helper';
+import * as shellyHotfixesGen2 from '../gen2-hotfixes';
 
 /**
  * Shelly 2 PM Gen 3 / shelly2pmg3
@@ -38,6 +39,11 @@ const shelly2pmg3: DeviceDefinition = {
 
 shellyHelperGen2.addSwitch(shelly2pmg3, 0, true);
 shellyHelperGen2.addSwitch(shelly2pmg3, 1, true);
+
+// Firmware bug: the switch output is reported outdated/inverted on the status topic
+// right after a change (see issue #1318). Derive it from the NotifyStatus message instead.
+shellyHotfixesGen2.fixMqttOutdatedSwitchStatus(shelly2pmg3, 0);
+shellyHotfixesGen2.fixMqttOutdatedSwitchStatus(shelly2pmg3, 1);
 
 shellyHelperGen2.addInput(shelly2pmg3, 0);
 shellyHelperGen2.addInput(shelly2pmg3, 1);
