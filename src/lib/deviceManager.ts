@@ -229,6 +229,14 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
                 status: this.buildDeviceStatus(deviceId.substring(this.adapter.namespace.length + 1)),
             }).catch((e: unknown) => this.adapter.log.debug(`[DeviceManager] Cannot update GUI: ${String(e)}`));
         }
+
+        // After a firmware update completes the firmware state flips to false. Trigger a full
+        // device list refresh so the "Update firmware" action and the update indicator disappear.
+        if (id.endsWith('.firmware') && previous?.val === true && state?.val === false) {
+            this.sendCommandToGui({ command: 'all' }).catch((e: unknown) =>
+                this.adapter.log.debug(`[DeviceManager] Cannot update GUI: ${String(e)}`),
+            );
+        }
     }
 
     /**
@@ -2201,6 +2209,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
                     }
                     if (selected.length > 0) {
                         await this.provisionDevices(selected, context);
+                        return { refresh: true };
                     }
                 }
             }
