@@ -1072,8 +1072,8 @@ export class BaseClient implements ShellyClient {
             return;
         }
 
-        if (!this.isOnline()) {
-            this.adapter.log.debug(`[firmwareUpdate] Device is offline ${this.getLogInfo()}`);
+        if (!this.isOnline() || !this.getIP()) {
+            this.adapter.log.debug(`[firmwareUpdate] Device is offline (or IP is unknown) ${this.getLogInfo()}`);
             return;
         }
 

@@ -236,6 +236,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+- (@mcm1957) Fixed false "IP address is unknown" error during auto firmware update on adapter restart. [#1539]
 - (@mcm1957) Added support for Shelly Camera (shellycamera) - **EXPERIMENTAL ONLY** [#1617]
 - (@mcm1957) Device manager now refreshes the device list after adding devices via discovery and after a firmware update completes. [#1484]
 - (@mcm1957) PLUG_UI states (LED control) are now activated for supported plug devices when firmware version 2.0.0 or newer is detected.
