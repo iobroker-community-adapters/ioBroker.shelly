@@ -33,6 +33,7 @@ export class ShellyAdapter extends Adapter {
     private deviceManagement: DeviceManagement | null = null;
     /** Set of device ids currently considered online. */
     private onlineDevices: Record<string, boolean> = {};
+    private onlineCheckIsStartup = true;
     private readonly eventEmitter: EventEmitter = new EventEmitter();
     private readonly bleDecoder: BleDecoder = new BleDecoder();
     public isUnloaded = false;
@@ -277,6 +278,9 @@ export class ShellyAdapter extends Adapter {
             this.onlineCheckTimeout = null;
         }
 
+        const isStartup = this.onlineCheckIsStartup;
+        this.onlineCheckIsStartup = false;
+
         try {
             const deviceIds = await this.getAllDeviceIds();
             for (const deviceId of deviceIds) {
@@ -286,9 +290,16 @@ export class ShellyAdapter extends Adapter {
                 if (valHostname) {
                     this.log.debug(`[onlineCheck] Checking ${deviceId} on ${valHostname}:${valPort}`);
 
-                    tcpPing.probe(String(valHostname), valPort, (_error: Error | undefined, isAlive: boolean) =>
-                        this.deviceStatusUpdate(deviceId, isAlive),
-                    );
+                    tcpPing.probe(String(valHostname), valPort, (_error: Error | undefined, isAlive: boolean) => {
+                        if (isStartup && isAlive) {
+                            // On startup, devices connect via MQTT/CoAP and set their own online status.
+                            // Marking devices online here before the protocol layer has initialized (e.g. IP not yet set)
+                            // can cause premature actions such as firmware update attempts with an unknown IP address.
+                            this.log.debug(`[onlineCheck] Skipping online status update for ${deviceId} during startup`);
+                            return;
+                        }
+                        this.deviceStatusUpdate(deviceId, isAlive);
+                    });
                 }
             }
         } catch (e) {
