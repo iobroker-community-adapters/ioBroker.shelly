@@ -295,10 +295,12 @@ export class ShellyAdapter extends Adapter {
                             // On startup, devices connect via MQTT/CoAP and set their own online status.
                             // Marking devices online here before the protocol layer has initialized (e.g. IP not yet set)
                             // can cause premature actions such as firmware update attempts with an unknown IP address.
-                            this.log.debug(`[onlineCheck] Skipping online status update for ${deviceId} during startup`);
+                            this.log.debug(
+                                `[onlineCheck] Skipping online status update for ${deviceId} during startup`,
+                            );
                             return;
                         }
-                        this.deviceStatusUpdate(deviceId, isAlive);
+                        void this.deviceStatusUpdate(deviceId, isAlive);
                     });
                 }
             }
