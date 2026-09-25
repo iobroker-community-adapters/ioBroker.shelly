@@ -1,17 +1,9 @@
 {
-    "shelly_blemap_all_links": "Все соединения",
     "shelly_blemap_ble_device": "Bluetooth-устройство",
-    "shelly_blemap_device_id": "Идентификатор устройства",
     "shelly_blemap_fit": "Подходит к окну",
-    "shelly_blemap_gateway": "шлюз",
     "shelly_blemap_last_seen": "Последний прием",
-    "shelly_blemap_medium": "Середина",
     "shelly_blemap_no_devices": "Устройства Bluetooth пока не получены. Сценарий шлюза BLE должен быть установлен хотя бы на одном устройстве Shelly.",
-    "shelly_blemap_received_by": "Получено",
     "shelly_blemap_script_version": "Версия сценария",
-    "shelly_blemap_signal": "Уровень сигнала",
     "shelly_blemap_stale": "Некоторое время нет приема",
-    "shelly_blemap_strong": "Сильный",
-    "shelly_blemap_summary": "%s устройств Bluetooth через шлюзы %s",
-    "shelly_blemap_weak": "Слабый"
+    "shelly_blemap_summary": "%s устройств Bluetooth через шлюзы %s"
 }
