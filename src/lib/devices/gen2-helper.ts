@@ -9042,6 +9042,7 @@ export {
     addPlusAddon,
     addPlugpmUI,
     addPlugsUI,
+    addPowerStripUI,
     addPM1,
     addPresence,
     addPresenceZone,
