@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.4.3",
-    "@iobroker/dm-utils": "^3.2.0",
+    "@iobroker/dm-utils": "^3.2.1",
     "axios": "^1.20.0",
     "mqtt-connection": "^4.1.0",
     "shelly-iot": "^1.1.2",
@@ -45,10 +45,10 @@
     "@iobroker/build-tools": "^3.0.3",
     "@iobroker/eslint-config": "^2.3.4",
     "@iobroker/testing": "^6.2.2",
-    "@iobroker/types": "^7.2.2",
+    "@iobroker/types": "^7.2.3",
     "@tsconfig/node22": "^22.0.6",
     "@types/bl": "^5.1.4",
-    "@types/node": "^22.20.2",
+    "@types/node": "^22.20.4",
     "@types/tcp-ping": "^0.1.6",
     "source-map-support": "^0.5.21",
     "typescript": "~6.0.3"

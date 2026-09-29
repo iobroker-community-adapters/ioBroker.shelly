@@ -99,7 +99,7 @@ function addBoolean(
             return JSON.stringify({
                 id: self.getNextMsgId(),
                 src: 'iobroker',
-                method: 'Boolean.value',
+                method: 'Boolean.Set',
                 params: { id: id, value: value },
             });
         };
@@ -153,12 +153,12 @@ function addButton(
             // mqtt_publish: `<mqttprefix>/status/button:${id}`,
             // mqtt_publish_funct: value => JSON.parse(value).value,
             mqtt_cmd: '<mqttprefix>/rpc',
-            mqtt_cmd_funct: (value, self) => {
+            mqtt_cmd_funct: (_value, self) => {
                 return JSON.stringify({
                     id: self.getNextMsgId(),
                     src: 'iobroker',
-                    method: 'Button.value',
-                    params: { id: id, value: value },
+                    method: 'Button.Trigger',
+                    params: { id: id, event: 'single_push' },
                 });
             },
         },
