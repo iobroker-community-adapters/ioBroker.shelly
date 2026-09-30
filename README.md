@@ -239,9 +239,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
-* (GermanBluefox) Fixed switching of virtual boolean and button datapoints (e.g. Neo Smart Water Valve), which failed with an error before
-
-### 12.0.1-alpha.0 (2026-09-25)
+- (GermanBluefox) Fixed switching of virtual boolean and button datapoints (e.g. Neo Smart Water Valve)
 - (@mcm1957) Fixed false "IP address is unknown" error during auto firmware update on adapter restart. [#1539]
 - (@mcm1957) Fixed devices being marked online too early on adapter startup before protocol initialization is complete. [#1539]
 - (@mcm1957) Added support for Shelly Camera (shellycamera) - **EXPERIMENTAL ONLY** [#1617]
