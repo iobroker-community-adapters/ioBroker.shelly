@@ -8,6 +8,7 @@
 node_modules
 nbproject
 build
+admin/custom
 
 # npm package files
 iobroker.*.tgz
@@ -17,4 +18,3 @@ Thumbs.db
 # i18n intermediate files
 admin/i18n/flat.txt
 admin/i18n/*/flat.txt
-/shelly.0.ble.json
