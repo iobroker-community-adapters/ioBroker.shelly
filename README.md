@@ -237,7 +237,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 12.0.1-alpha.1 (2026-09-30)
 
 - (GermanBluefox) Fixed switching of virtual boolean and button datapoints (e.g. Neo Smart Water Valve)
 - (@mcm1957) Fixed false "IP address is unknown" error during auto firmware update on adapter restart. [#1539]
