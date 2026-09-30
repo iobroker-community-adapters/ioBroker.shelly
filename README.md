@@ -222,7 +222,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - USB-powered UVC LED strip
 - Shelly Wall Display X2
 - Shelly LoRa Add-On
-
 - Shelly BLU TRV
 - all BLU devices that need to receive data from the adapter.
 
@@ -238,6 +237,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (GermanBluefox) Fixed switching of virtual boolean and button datapoints (e.g. Neo Smart Water Valve), which failed with an error before
+
 ### 12.0.1-alpha.0 (2026-09-25)
 - (@mcm1957) Fixed false "IP address is unknown" error during auto firmware update on adapter restart. [#1539]
 - (@mcm1957) Fixed devices being marked online too early on adapter startup before protocol initialization is complete. [#1539]
@@ -247,7 +250,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 
 ### 12.0.0 (2026-09-20)
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
-- (@GermanBluefox) Codebase has been migrated to typescript.
+- (@GermanBluefox) Codebase has been migrated to TypeScript.
 - (@mcm1957) Added support for Shelly Duo Bulb E27 Gen 3 (shellyduobulbg3). [#1385]
 - (@mcm1957) Added support for Shelly Multicolor Bulb E27 Gen 3 (shellycolorblbg3). [#1386]
 - (@mcm1957) Added support for Shelly 1L Gen4 (shelly1lg4) and Shelly 2L Gen4 (shelly2lg4).
