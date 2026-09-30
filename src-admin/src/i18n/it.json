@@ -1,5 +1,3 @@
 {
-    "shelly_blemap_fit": "Adatta alla finestra",
-    "shelly_blemap_no_devices": "Nessun dispositivo Bluetooth ancora ricevuto. Lo script del gateway BLE deve essere installato su almeno un dispositivo Shelly.",
-    "shelly_blemap_stale": "Nessuna ricezione per un po'"
+    "shelly_blemap_no_devices": "Nessun dispositivo Bluetooth ancora ricevuto. Lo script del gateway BLE deve essere installato su almeno un dispositivo Shelly."
 }

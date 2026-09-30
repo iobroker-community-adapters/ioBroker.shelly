@@ -1,5 +1,3 @@
 {
-    "shelly_blemap_fit": "Dopasuj do okna",
-    "shelly_blemap_no_devices": "Nie odebrano jeszcze żadnych urządzeń Bluetooth. Skrypt bramy BLE musi być zainstalowany na co najmniej jednym urządzeniu Shelly.",
-    "shelly_blemap_stale": "Brak odbioru przez jakiś czas"
+    "shelly_blemap_no_devices": "Nie odebrano jeszcze żadnych urządzeń Bluetooth. Skrypt bramy BLE musi być zainstalowany na co najmniej jednym urządzeniu Shelly."
 }
