@@ -1,9 +1,0 @@
-{
-    "shelly_blemap_ble_device": "dispositivo Bluetooth",
-    "shelly_blemap_fit": "Ajustar a la ventana",
-    "shelly_blemap_last_seen": "Última recepción",
-    "shelly_blemap_no_devices": "Aún no se han recibido dispositivos Bluetooth. El script de la puerta de enlace BLE debe instalarse en al menos un dispositivo Shelly.",
-    "shelly_blemap_script_version": "Versión de guión",
-    "shelly_blemap_stale": "Sin recepción por un tiempo.",
-    "shelly_blemap_summary": "%s dispositivos Bluetooth a través de %s puertas de enlace"
-}
