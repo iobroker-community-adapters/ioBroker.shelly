@@ -1,5 +1,1 @@
-{
-    "shelly_blemap_fit": "Ajustar a la ventana",
-    "shelly_blemap_no_devices": "Aún no se han recibido dispositivos Bluetooth. El script de la puerta de enlace BLE debe instalarse en al menos un dispositivo Shelly.",
-    "shelly_blemap_stale": "Sin recepción por un tiempo."
-}
+{}

@@ -1,5 +1,1 @@
-{
-    "shelly_blemap_fit": "Подходит к окну",
-    "shelly_blemap_no_devices": "Устройства Bluetooth пока не получены. Сценарий шлюза BLE должен быть установлен хотя бы на одном устройстве Shelly.",
-    "shelly_blemap_stale": "Некоторое время нет приема"
-}
+{}
