@@ -1,5 +1,1 @@
-{
-    "shelly_blemap_fit": "适合窗户",
-    "shelly_blemap_no_devices": "尚未收到蓝牙设备。 BLE 网关脚本必须安装在至少一台 Shelly 设备上。",
-    "shelly_blemap_stale": "有一段时间没有接收"
-}
+{}

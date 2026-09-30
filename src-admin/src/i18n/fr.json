@@ -1,5 +1,1 @@
-{
-    "shelly_blemap_fit": "Ajuster à la fenêtre",
-    "shelly_blemap_no_devices": "Aucun appareil Bluetooth reçu pour l'instant. Le script de passerelle BLE doit être installé sur au moins un appareil Shelly.",
-    "shelly_blemap_stale": "Pas de réception pendant un moment"
-}
+{}
