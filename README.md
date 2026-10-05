@@ -247,7 +247,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (@mcm1957) PLUG_UI states (LED control) are now activated for supported plug devices when firmware version 2.0.0 or newer is detected.
 
 ### 12.0.0 (2026-09-20)
-- (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.7.2 and admin >= 8.0.11 now.
+- (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.2.2 and admin >= 8.0.11 now.
 - (@GermanBluefox) Codebase has been migrated to TypeScript.
 - (@mcm1957) Added support for Shelly Duo Bulb E27 Gen 3 (shellyduobulbg3). [#1385]
 - (@mcm1957) Added support for Shelly Multicolor Bulb E27 Gen 3 (shellycolorblbg3). [#1386]
