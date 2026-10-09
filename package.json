@@ -48,7 +48,7 @@
     "@iobroker/types": "^7.2.3",
     "@tsconfig/node22": "^22.0.6",
     "@types/bl": "^5.1.4",
-    "@types/node": "^22.20.4",
+    "@types/node": "^22.20.5",
     "@types/tcp-ping": "^0.1.6",
     "source-map-support": "^0.5.21",
     "typescript": "~6.0.3"
