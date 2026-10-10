@@ -177,6 +177,7 @@ Notes:
 | Shelly EM mini Gen4 (shellyemminig4)            | ❌   | >= v10.6.0 |
 | Shelly Flood Gen4 (shellyfloodg4)               | ❌   | >= v10.3.0 |
 | Shelly Flood S Gen4 (shellyfloodsg4)            | ❌   | >= v12.0.0 |
+| Shelly I4 Gen4 (shellyi4g4)                     | ❌   | >= v12.1.0 |
 | Shelly Power Strip Gen4 (shellypstripg4) (*)    | ❌   | >= v10.3.0 |
 | Shelly Presence Gen4 (shellypresenceg4)         | ❌   | >= v11.0.0 |
 
@@ -239,6 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
+-   (mcm57) Added support for Shelly I4 Gen4 (shellyi4g4) (refers to #1645)
 -   (mcm57) Fix stale switch state after MQTT command on Shelly Pro 4 PM (refers to #1640)
 -   (mcm57) Fix stale switch state after MQTT command on Shelly 2 PM Gen3 (refers to #1627)
 
