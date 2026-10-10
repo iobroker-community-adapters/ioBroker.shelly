@@ -526,7 +526,7 @@ const deviceIcons: Record<string, string> = {
     shellysense: 'shellysense',
     shellysmoke: 'shellysmoke',
     shellyswitch: 'shellyswitch',
-    shellyswitch25: 'shellyplus2pm',
+    shellyswitch25: 'shellyswitch25',
     shellytrv: 'shellytrv',
     shellyuni: 'shellyuni',
     ShellyVintage: 'shellyvintage',
