@@ -240,6 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
+-   (mcm57) Added device icon for Shelly Switch (shellyswitch)
 -   (mcm57) Added device icon for Shelly Smoke (shellysmoke)
 -   (mcm57) Added device icon for Shelly Door/Window (shellydw)
 -   (mcm57) Added device icon for Shelly Dimmer (shellydimmer)
