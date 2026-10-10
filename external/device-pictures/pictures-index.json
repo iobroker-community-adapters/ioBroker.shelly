@@ -1,6 +1,60 @@
 {
   "_comment": "Index of all device pictures. Used by Claude to manage future updates and speed up downloading. Each entry: deviceId -> { file, dir, sourceUrl, kbPage, fetchedAt }",
   "Gen1": {
+    "shellyswitch25": {
+      "file": "shellyswitch25.jpg",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-2-5",
+      "sourceUrl": "https://shelly-api-docs.shelly.cloud/gen1/images/shelly/shelly25-product-16fab919.jpg"
+    },
+    "shellyswitch": {
+      "file": "shellyswitch.png",
+      "dir": "Gen1",
+      "kbPage": "https://shelly-api-docs.shelly.cloud/gen1/#shelly1-shelly1pm",
+      "sourceUrl": "https://shelly-api-docs.shelly.cloud/gen1/images/shelly/shelly1_new_label_stand-458fac7c.png"
+    },
+    "shellysmoke": {
+      "file": "shellysmoke.png",
+      "dir": "Gen1",
+      "kbPage": "https://shelly-api-docs.shelly.cloud/gen1/#shelly-smoke",
+      "sourceUrl": "https://shelly-api-docs.shelly.cloud/gen1/images/shelly/shellysmoke-product-a727a4f4.png"
+    },
+    "shellydw": {
+      "file": "shellydw.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-door-window",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_12dd3bb9f850387b54eb316b30b82149410dd7f905c7b17789baedede1b84843/image-20220920-070350.png?cb=98d7d56bb9f5983a291918ac04d0dea3"
+    },
+    "shellydimmer": {
+      "file": "shellydimmer.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-dimmer",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_e3c4d696ea7778d143e8701b909dad76af6cdca513284b2a00d51ace9af13ae2/image-20220920-071316.png?cb=576a3aa0b4bd14e60ae94c3a3179e1f1"
+    },
+    "shelly2led": {
+      "file": "shelly2led.jpg",
+      "dir": "Gen1",
+      "kbPage": "https://shelly-api-docs.shelly.cloud/gen1/#shelly2led",
+      "sourceUrl": "https://user-images.githubusercontent.com/12217243/48370768-8dac8780-e6ba-11e8-9ff8-d30a24d5c114.jpeg"
+    },
+    "shellysense": {
+      "file": "shellysense.jpg",
+      "dir": "Gen1",
+      "kbPage": "https://shelly-api-docs.shelly.cloud/gen1/#shelly-sense",
+      "sourceUrl": "https://static-data2.manualslib.com/product-images/097/1531913/shelly-sense.jpg"
+    },
+    "shellybulb": {
+      "file": "shellybulb.png",
+      "dir": "Gen1",
+      "kbPage": "https://shelly-api-docs.shelly.cloud/gen1/#shelly-bulb",
+      "sourceUrl": "https://shelly-api-docs.shelly.cloud/gen1/images/shelly/shellybulb-product-04f5ccb6.png"
+    },
+    "shelly4pro": {
+      "file": "shelly4pro.png",
+      "dir": "Gen1",
+      "kbPage": "https://shelly-api-docs.shelly.cloud/gen1/#shelly4pro",
+      "sourceUrl": "https://shelly-api-docs.shelly.cloud/gen1/images/shelly/shelly4pro-product-90774ab5.png"
+    },
     "shelly1": {
       "file": "shelly1.png",
       "dir": "Gen1",

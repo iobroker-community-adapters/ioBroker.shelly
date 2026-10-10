@@ -240,6 +240,15 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
+-   (mcm57) Added device icon for Shelly Switch 2.5 (shellyswitch25)
+-   (mcm57) Added device icon for Shelly Switch (shellyswitch)
+-   (mcm57) Added device icon for Shelly Smoke (shellysmoke)
+-   (mcm57) Added device icon for Shelly Door/Window (shellydw)
+-   (mcm57) Added device icon for Shelly Dimmer (shellydimmer)
+-   (mcm57) Added device icon for Shelly 2LED (shelly2led)
+-   (mcm57) Added device icon for Shelly Sense (shellysense)
+-   (mcm57) Added device icon for Shelly Bulb (shellybulb)
+-   (mcm57) Added device icon for Shelly 4Pro (shelly4pro)
 -   (mcm57) Updated device icons to use device-specific images where available
 -   (mcm57) Added support for Shelly I4 Gen4 (shellyi4g4) (refers to #1645)
 -   (mcm57) Fix stale switch state after MQTT command on Shelly Pro 4 PM (refers to #1640)
