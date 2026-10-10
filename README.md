@@ -237,6 +237,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+-   (mcm57) Fix stale switch state after MQTT command on Shelly Pro 4 PM (refers to #1640)
+
 ### 12.0.1-alpha.1 (2026-09-30)
 
 - (GermanBluefox) Fixed switching of virtual boolean and button datapoints (e.g. Neo Smart Water Valve)
