@@ -110,6 +110,7 @@ import { shellyemg4 } from './devices/gen4/shellyemg4';
 import { shellyemminig4 } from './devices/gen4/shellyemminig4';
 import { shellyfloodg4 } from './devices/gen4/shellyfloodg4';
 import { shellyfloodsg4 } from './devices/gen4/shellyfloodsg4';
+import { shellyi4g4 } from './devices/gen4/shellyi4g4';
 import { shellypresence } from './devices/gen4/shellypresence';
 import { shellypstripg4 } from './devices/gen4/shellypstripg4';
 
@@ -232,6 +233,7 @@ const devices: Record<string, DeviceDefinition> = {
     shellyemminig4,
     shellyfloodg4,
     shellyfloodsg4,
+    shellyi4g4,
     shellypresence,
     shellypstripg4,
 
@@ -355,6 +357,7 @@ const deviceGen: Record<string, number> = {
     shellyemminig4: 4,
     shellyfloodg4: 4,
     shellyfloodsg4: 4,
+    shellyi4g4: 4,
     shellypresence: 4,
     shellypstripg4: 4,
 
@@ -479,6 +482,7 @@ const deviceGroupMap: Record<string, string> = {
     shellyemminig4: 'meter',
     shellyfloodg4: 'sensor',
     shellyfloodsg4: 'sensor',
+    shellyi4g4: 'input',
     shellypresence: 'sensor',
     shellypstripg4: 'light',
 
@@ -602,6 +606,7 @@ const deviceIcons: Record<string, string> = {
     shellyemminig4: 'shellyemminig4',
     shellyfloodg4: 'shellyfloodg4',
     shellyfloodsg4: 'shellyfloodg4',
+    shellyi4g4: 'shellyi4g3',
     shellypresence: 'shellypresence',
     shellypstripg4: 'shelly2pmg4',
 
@@ -726,6 +731,7 @@ const deviceKnowledgeBase: Record<string, string | undefined> = {
     shellyemminig4: 'https://kb.shelly.cloud/knowledge-base/shelly-em-mini-gen4',
     shellyfloodg4: 'https://kb.shelly.cloud/knowledge-base/shelly-flood-gen4',
     shellyfloodsg4: 'https://kb.shelly.cloud/knowledge-base/shelly-flood-s-gen4',
+    shellyi4g4: 'https://kb.shelly.cloud/knowledge-base/shelly-i4-gen4',
     shellypresence: 'https://kb.shelly.cloud/knowledge-base/shelly-presence-gen4',
     shellypstripg4: 'https://kb.shelly.cloud/knowledge-base/shelly-power-strip-gen4',
 
@@ -851,6 +857,7 @@ const deviceTypes: Record<string, string[]> = {
     shellyemminig4: ['shellyemminig4'],
     shellyfloodg4: ['shellyfloodg4'],
     shellyfloodsg4: ['shellyfloodsg4'],
+    shellyi4g4: ['shellyi4g4'],
     shellypresence: ['shellypresence'],
     shellypstripg4: ['shellypstripg4'],
 
