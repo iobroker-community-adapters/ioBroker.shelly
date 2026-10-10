@@ -504,7 +504,7 @@ const deviceIcons: Record<string, string> = {
     shelly1pm: 'shelly1pm',
     shelly2led: 'shellyrgbw2',
     shelly4pro: 'shelly4pro',
-    shellybulb: 'shellybulbduo',
+    shellybulb: 'shellybulb',
     ShellyBulbDuo: 'shellybulbduo',
     shellybutton1: 'shellybutton1',
     shellycolorbulb: 'shellycolorbulb',

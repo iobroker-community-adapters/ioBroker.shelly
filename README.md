@@ -240,6 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
+-   (mcm57) Added device icon for Shelly Bulb (shellybulb)
 -   (mcm57) Added device icon for Shelly 4Pro (shelly4pro)
 -   (mcm57) Updated device icons to use device-specific images where available
 -   (mcm57) Added support for Shelly I4 Gen4 (shellyi4g4) (refers to #1645)

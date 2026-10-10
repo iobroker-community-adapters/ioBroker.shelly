@@ -1,6 +1,12 @@
 {
   "_comment": "Index of all device pictures. Used by Claude to manage future updates and speed up downloading. Each entry: deviceId -> { file, dir, sourceUrl, kbPage, fetchedAt }",
   "Gen1": {
+    "shellybulb": {
+      "file": "shellybulb.png",
+      "dir": "Gen1",
+      "kbPage": "https://shelly-api-docs.shelly.cloud/gen1/#shelly-bulb",
+      "sourceUrl": "https://shelly-api-docs.shelly.cloud/gen1/images/shelly/shellybulb-product-04f5ccb6.png"
+    },
     "shelly4pro": {
       "file": "shelly4pro.png",
       "dir": "Gen1",
