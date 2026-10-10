@@ -238,30 +238,19 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
 ### **WORK IN PROGRESS**
 
--   (mcm57) Added device icon for Shelly Switch 2.5 (shellyswitch25)
--   (mcm57) Added device icon for Shelly Switch (shellyswitch)
--   (mcm57) Added device icon for Shelly Smoke (shellysmoke)
--   (mcm57) Added device icon for Shelly Door/Window (shellydw)
--   (mcm57) Added device icon for Shelly Dimmer (shellydimmer)
--   (mcm57) Added device icon for Shelly 2LED (shelly2led)
--   (mcm57) Added device icon for Shelly Sense (shellysense)
--   (mcm57) Added device icon for Shelly Bulb (shellybulb)
--   (mcm57) Added device icon for Shelly 4Pro (shelly4pro)
--   (mcm57) Updated device icons to use device-specific images where available
--   (mcm57) Added support for Shelly I4 Gen4 (shellyi4g4) (refers to #1645)
--   (mcm57) Fix stale switch state after MQTT command on Shelly Pro 4 PM (refers to #1640)
--   (mcm57) Fix stale switch state after MQTT command on Shelly 2 PM Gen3 (refers to #1627)
-
-### 12.0.1-alpha.1 (2026-09-30)
-
+- (@mcm1957) Updated device icons to use device-specific images where available
+- (@mcm1957) Added support for Shelly I4 Gen4 (shellyi4g4) (#1645)
+- (@mcm1957) Fix stale switch state after MQTT command on Shelly Pro 4 PM and Shelly 2 PM Gen3. (#1640, #1627)
 - (GermanBluefox) Fixed switching of virtual boolean and button datapoints (e.g. Neo Smart Water Valve)
 - (@mcm1957) Fixed false "IP address is unknown" error during auto firmware update on adapter restart. [#1539]
 - (@mcm1957) Fixed devices being marked online too early on adapter startup before protocol initialization is complete. [#1539]
 - (@mcm1957) Added support for Shelly Camera (shellycamera) - **EXPERIMENTAL ONLY** [#1617]
 - (@mcm1957) Device manager now refreshes the device list after adding devices via discovery and after a firmware update completes. [#1484]
 - (@mcm1957) PLUG_UI states (LED control) are now activated for supported plug devices when firmware version 2.0.0 or newer is detected.
+- (@mcm1957) dependencies have been updated
 
 ### 12.0.0 (2026-09-20)
 - (@mcm1957) **BREAKING:** Adapter requires node.js >= 22, js-controller >= 7.2.2 and admin >= 8.0.11 now.
