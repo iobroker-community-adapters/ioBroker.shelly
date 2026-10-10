@@ -1,6 +1,12 @@
 {
   "_comment": "Index of all device pictures. Used by Claude to manage future updates and speed up downloading. Each entry: deviceId -> { file, dir, sourceUrl, kbPage, fetchedAt }",
   "Gen1": {
+    "shellydimmer": {
+      "file": "shellydimmer.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-dimmer",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_e3c4d696ea7778d143e8701b909dad76af6cdca513284b2a00d51ace9af13ae2/image-20220920-071316.png?cb=576a3aa0b4bd14e60ae94c3a3179e1f1"
+    },
     "shelly2led": {
       "file": "shelly2led.jpg",
       "dir": "Gen1",
