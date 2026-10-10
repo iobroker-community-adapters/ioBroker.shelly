@@ -737,15 +737,15 @@ describe('Test Device Registry Completeness', function () {
         }
     });
 
-    it('Every device in "deviceIcons" has its own icon file (key === icon name)', function () {
+    it('Every device in "deviceIcons" uses its own icon file (key === icon name)', function () {
         const iconsDir = path.join(__dirname, '..', 'admin', 'icons');
         for (const [deviceClass, iconName] of Object.entries(deviceIcons)) {
-            const ownIconFile = path.join(iconsDir, `${deviceClass}.png`);
-            if (deviceClass !== iconName || !fs.existsSync(ownIconFile)) {
-                console.info(
-                    `Info: "${deviceClass}" does not have its own icon file - uses "${iconName}.png" as fallback`,
-                );
-            }
+            const normalizedKey = deviceClass.toLowerCase().replace(/-/g, '');
+            const ownIconFile = path.join(iconsDir, `${iconName}.png`);
+            expect(
+                fs.existsSync(ownIconFile) && normalizedKey === iconName,
+                `"${deviceClass}" does not use its own icon - uses "${iconName}.png" as fallback`,
+            ).to.be.true;
         }
     });
 
