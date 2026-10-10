@@ -240,6 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
+-   (mcm57) Added device icon for Shelly 2LED (shelly2led)
 -   (mcm57) Added device icon for Shelly Sense (shellysense)
 -   (mcm57) Added device icon for Shelly Bulb (shellybulb)
 -   (mcm57) Added device icon for Shelly 4Pro (shelly4pro)
