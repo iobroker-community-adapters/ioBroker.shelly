@@ -238,8 +238,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 12.1.0-alpha.0 (2026-10-10)
 
 - (@mcm1957) Updated device icons to use device-specific images where available
 - (@mcm1957) Added support for Shelly I4 Gen4 (shellyi4g4) (#1645)
