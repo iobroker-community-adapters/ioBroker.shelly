@@ -1,0 +1,993 @@
+{
+  "_comment": "Index of all device pictures. Used by Claude to manage future updates and speed up downloading. Each entry: deviceId -> { file, dir, sourceUrl, kbPage, fetchedAt }",
+  "Gen1": {
+    "shelly4pro": {
+      "file": "shelly4pro.png",
+      "dir": "Gen1",
+      "kbPage": "https://shelly-api-docs.shelly.cloud/gen1/#shelly4pro",
+      "sourceUrl": "https://shelly-api-docs.shelly.cloud/gen1/images/shelly/shelly4pro-product-90774ab5.png"
+    },
+    "shelly1": {
+      "file": "shelly1.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_cb25aa66719b545430231ca22ce4214909c118ad547aadfce3a6e5b49742e5dc/shelly1.png"
+    },
+    "shelly1pm": {
+      "file": "shelly1pm.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_b40ae702395082075eb333a4016c2651bb3a9af808a7db15b4324beb30d49528/shelly1pm.png"
+    },
+    "shelly1l": {
+      "file": "shelly1l.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1l",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_0ea49b189f53fe15b2e12d221d864ee98b56b34eaa13f95c6520daea122533ac/shelly1l.png"
+    },
+    "shelly25": {
+      "file": "shelly25.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-2-5",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_28333cef8eb06295f384fb7c26177f4d14c2b31f51162378ec8df734c51d24a8/shelly25.png"
+    },
+    "shellyix3": {
+      "file": "shellyix3.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-i3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_b7e3b980e89cfbc4631d51b6aa8fc65c5e170a7fddb96ac78bbed3743bc98fe4/image-20220912-075931.png"
+    },
+    "shellyem": {
+      "file": "shellyem.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-em",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_3001015d4fc4077bd354529c1a1be75ad0d72c5a1c419b7a8bd2fd887705c0e4/image-20220920-072542.png"
+    },
+    "shellyem3": {
+      "file": "shellyem3.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-3em",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_d13d4354dc7ab2d2e210530917d73311a45ac1393e39c03061c9a90f623351ee/image-20220920-071052.png"
+    },
+    "shellyuni": {
+      "file": "shellyuni.jpg",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-uni",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_59f5b3a0383fa43bfad1d982c68ba116ede4576b0706d7df839ba35a27ba64ff/UNI.jpg"
+    },
+    "shellytrv": {
+      "file": "shellytrv.jpg",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-trv",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_b125ac6cecf449dadb0d7d69660a562cb9f907bb7fe44ae993aece31b6785ea8/Shelly-TRV.jpg"
+    },
+    "shellybutton1": {
+      "file": "shellybutton1.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-button-1",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_dd6df43e1f5705a1efe7a8d286c7f3096dd038cf56b4856a0993152f5887a336/image-20220920-070824.png"
+    },
+    "shellyplug": {
+      "file": "shellyplug.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plug",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_fc7308cabd9e29d43f419f1093d67e10745c5eabc5bdbf1912c65b0a68553701/image-20220920-070758.png"
+    },
+    "shellyplugs": {
+      "file": "shellyplugs.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plug-s",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_413be633fc32bb805dedcac17819116ef87bb7d2f3976abacadff1c91b5069e8/image-20220920-070723.png"
+    },
+    "shellyplugus": {
+      "file": "shellyplugus.jpg",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plug-us",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_ffba229f5f5273c6f55070b190a4dee53a2967ae90e5ce93594dee08acfd197b/Plug-US.jpg"
+    },
+    "shellyrgbw2": {
+      "file": "shellyrgbw2.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-rgbw2",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_5441b28b1fbbc6e155d9ba9fac7761c71b7d65e5b6a83735fff931c079af5933/image-20220920-071244.png"
+    },
+    "shellydimmer2": {
+      "file": "shellydimmer2.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-dimmer-2",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_e3c4d696ea7778d143e8701b909dad76af6cdca513284b2a00d51ace9af13ae2/image-20220920-071316.png"
+    },
+    "shellybulbduo": {
+      "file": "shellybulbduo.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-duo-duo-gu10",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_d4ca218dc9d9b59b81230a46064d92e29c8597ff4cafff62ddae6d354d579bd0/image-20220920-070145.png"
+    },
+    "shellyvintage": {
+      "file": "shellyvintage.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-vintage",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_e72d8ef329089551177f36d3f409f11b8eba6e2b9af6551cc320ea5a66493305/image-20220913-064404.png"
+    },
+    "shellycolorbulb": {
+      "file": "shellycolorbulb.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-bulb-duo-rgbw",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_ec0ac3a15fb257a5628ab8127b356a7d7311cf994c02d929b2a684fab6f45278/image-20220920-070606.png"
+    },
+    "shellyht": {
+      "file": "shellyht.jpg",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-h-t",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_4afbfeeca19b940572d312919d0683dead2608af0d92380f8ede3c147fc94fc1/ShellyHT.jpg"
+    },
+    "shellyflood": {
+      "file": "shellyflood.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-flood",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_d40693561df563a19180ef1ffcc0afb95491624aace963dd372bfa897afe8ba7/image-20220920-070426.png"
+    },
+    "shellydw2": {
+      "file": "shellydw2.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-door-window-2",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_12dd3bb9f850387b54eb316b30b82149410dd7f905c7b17789baedede1b84843/image-20220920-070350.png"
+    },
+    "shellygas": {
+      "file": "shellygas.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-gas",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_47992718620f73dca4516d7d2dd09e37ffd6c57f2abf0658b41920217fb25eab/image-20220913-072130.png"
+    },
+    "shellymotionsensor": {
+      "file": "shellymotionsensor.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-motion",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_28854f355f5985a9d2051e7fc81eab87e8809460e98222e5d06e732964762e3a/image-20220913-072649.png"
+    },
+    "shellymotion2": {
+      "file": "shellymotion2.png",
+      "dir": "Gen1",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-motion-2",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_7aeea9bf285fc7d0ff8c6b1d776ab04f188f275c4a595220036a51c39ab2fe96/image-20230321-132908.png"
+    }
+  },
+  "Gen2": {
+    "shelly1mini": {
+      "file": "shelly1mini.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-1-mini",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_5bd673fcf6f0b9ac9f35ea59efbaa078cc93caf2af4c7b3dbb0c02bcbbeebd31/Shelly%201%20Mini%20Gen4.jpg"
+    },
+    "shelly1pmmini": {
+      "file": "shelly1pmmini.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-1pm-mini",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_0b1e9bd791121a9f9e1c6360125cfe92e4e289109f591916572d1f4414d4afb6/Shelly%201PM%20Mini%20Gen4.jpg"
+    },
+    "shellyblugw": {
+      "file": "shellyblugw.png",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-gateway",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_c3066f5dddf5a56c8eb09ac201a9bd906c50e3e0f334e7eeb289e1ada2d056a6/Shelly%20BLU%20Gateway.png"
+    },
+    "shellyplus010v": {
+      "file": "shellyplus010v.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-0-10v-dimmer",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyplus1": {
+      "file": "shellyplus1.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-1",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_a8905ae131d68beb64923e3b9de1788f9becd14c2815a67e353db7aeb6250abd/Shelly%20Plus%201.jpg"
+    },
+    "shellyplus1pm": {
+      "file": "shellyplus1pm.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-1pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_a209db7a5fc7f7f849c7602efce328ca1d95a12ed688b42518205b23f3141fb1/Shelly%201PM%20Gen4.jpg"
+    },
+    "shellyplus2pm": {
+      "file": "shellyplus2pm.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-2pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_7538dbbce6e0f8f8834406858acd45920cc9e54f429d73d223aeb25994e59a9c/Shelly%202PM%20Gen4.jpg"
+    },
+    "shellyplusht": {
+      "file": "shellyplusht.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-h-t",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_dd72a454e2af92eaa20b187453bc0ab014c3802c23670897e59de09c9273d635/H%26T-Gen3.jpg"
+    },
+    "shellyplusi4": {
+      "file": "shellyplusi4.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-i4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_45ae8d994e7eeb5fd52717b4ae31eeb8c490be4e5edcded8f8d8ef742735558d/Plus-addon-interface.png"
+    },
+    "shellyplusplugs": {
+      "file": "shellyplusplugs.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-plug-s",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_eb850432bb7436fb40349a872d43f3c264536bbd22a3c7313d67567e3b13eb63/Plus-Plug-S.jpg"
+    },
+    "shellyplusrgbwpm": {
+      "file": "shellyplusrgbwpm.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-rgbw-pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyplussmoke": {
+      "file": "shellyplussmoke.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-smoke",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyplusuni": {
+      "file": "shellyplusuni.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-uni",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellypmmini": {
+      "file": "shellypmmini.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-pm-mini",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellypro0110pm": {
+      "file": "shellypro0110pm.png",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-dimmer-0-1-10v-pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_fe00cb30a27d3d263ad7716540a18c3b611131182e28d4ba0098a3c828334093/%7BB28EDF5D-F191-4731-A195-359CB5A48428%7D-20250818-221307.png"
+    },
+    "shellypro1": {
+      "file": "shellypro1.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-1-v1",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_e276cb4e8a7bbc367e13dbde089bb14d584b0d27410e9df91aaeff11a7f94c61/Pro%201%20isometric.jpg"
+    },
+    "shellypro1pm": {
+      "file": "shellypro1pm.png",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-1pm-v1",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_c6aeaffad15396801674b99a2f25788cd01f06936fe85eee6f3b1c1cc9ea902e/Pro%201%20PM.png"
+    },
+    "shellypro2": {
+      "file": "shellypro2.png",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-2-v1",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_42e8c546c2efdf3e759f854f5dfb487ab14737f190637b3b658be00222a4a1f9/Pro%202.png"
+    },
+    "shellypro2cover": {
+      "file": "shellypro2cover.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-dual-cover-pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_4b8596cddc8b908aadfad84f4f14338f83c77e78fd1d106f8a6eecc2053546ab/Pro%202%20PM.png"
+    },
+    "shellypro2pm": {
+      "file": "shellypro2pm.png",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-2pm-v1",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_4b8596cddc8b908aadfad84f4f14338f83c77e78fd1d106f8a6eecc2053546ab/Pro%202%20PM.png"
+    },
+    "shellypro3": {
+      "file": "shellypro3.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-3-v1",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_0c62d10f9b6a2d955a7d5945b39348f4c8dc294dceadde709c739c6aa3e6ac88/Shelly%204Pro%20PM.jpg"
+    },
+    "shellypro3em": {
+      "file": "shellypro3em.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-3em",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellypro3em400": {
+      "file": "shellypro3em400.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-3em-400",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellypro3em63": {
+      "file": "shellypro3em63.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-3em-3ct63",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellypro4pm": {
+      "file": "shellypro4pm.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-4pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_0c62d10f9b6a2d955a7d5945b39348f4c8dc294dceadde709c739c6aa3e6ac88/Shelly%204Pro%20PM.jpg"
+    },
+    "shellyprodm1pm": {
+      "file": "shellyprodm1pm.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-dimmer-1pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_b1a44456685ced20fabd0bcaaab7585f29d6751dfeba4653f7aa83e425c990d7/Shelly%20Dimmer%20Gen4.jpg"
+    },
+    "shellyprodm2pm": {
+      "file": "shellyprodm2pm.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-dimmer-2pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyproem50": {
+      "file": "shellyproem50.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-em-50",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyprorgbwwpm": {
+      "file": "shellyprorgbwwpm.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-rgbww-pm",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellywalldisplay": {
+      "file": "shellywalldisplay.jpg",
+      "dir": "Gen2",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-wall-display",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_52c49b887de204fc05203d104ec9486ad9aaf308aec2ea58f2be0b9d4b4228fb/shelly-wall-display.jpg"
+    }
+  },
+  "Gen3": {
+    "shelly0110dimg3": {
+      "file": "shelly0110dimg3.png",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-dimmer-0-1-10v-pm-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_fe00cb30a27d3d263ad7716540a18c3b611131182e28d4ba0098a3c828334093/%7BB28EDF5D-F191-4731-A195-359CB5A48428%7D-20250818-221307.png"
+    },
+    "shelly1g3": {
+      "file": "shelly1g3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_f3000f539c4f0439e4a7c1a4fec887e213e82cd233df290fe1fe0b6a0b8f9f21/Shelly%201%20Gen4.jpg"
+    },
+    "shelly1lg3": {
+      "file": "shelly1lg3.png",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1l-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_4c1c2be3c4ec6842ba527b2e1d3b6833577db85296670250e0dd17e5550e27a9/Shelly-1L-Gen4.jpg"
+    },
+    "shelly1minig3": {
+      "file": "shelly1minig3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1-mini-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_5bd673fcf6f0b9ac9f35ea59efbaa078cc93caf2af4c7b3dbb0c02bcbbeebd31/Shelly%201%20Mini%20Gen4.jpg"
+    },
+    "shelly1pmg3": {
+      "file": "shelly1pmg3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1pm-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_a209db7a5fc7f7f849c7602efce328ca1d95a12ed688b42518205b23f3141fb1/Shelly%201PM%20Gen4.jpg"
+    },
+    "shelly1pmminig3": {
+      "file": "shelly1pmminig3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1pm-mini-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_0b1e9bd791121a9f9e1c6360125cfe92e4e289109f591916572d1f4414d4afb6/Shelly%201PM%20Mini%20Gen4.jpg"
+    },
+    "shelly2lg3": {
+      "file": "shelly2lg3.png",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-2l-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_f3afcced7f1cfba6e36cf9013eda74dc2d61064d642e15270489e87971eda2eb/Shelly-2L-Gen4.jpg"
+    },
+    "shelly2pmg3": {
+      "file": "shelly2pmg3.png",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-2pm-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_7538dbbce6e0f8f8834406858acd45920cc9e54f429d73d223aeb25994e59a9c/Shelly%202PM%20Gen4.jpg"
+    },
+    "shelly3em63g3": {
+      "file": "shelly3em63g3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-3em-63-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyazht": {
+      "file": "shellyazht.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-az-h-t",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_dd72a454e2af92eaa20b187453bc0ab014c3802c23670897e59de09c9273d635/H%26T-Gen3.jpg"
+    },
+    "shellyazplug": {
+      "file": "shellyazplug.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-az-plug",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_389d37d5305bda11657a8aca131fe762115ab19d23fc50e7056f027e0b95d6f7/Shelly_Plug_AZ.jpg"
+    },
+    "shellyblugwg3": {
+      "file": "shellyblugwg3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-gateway-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_c3066f5dddf5a56c8eb09ac201a9bd906c50e3e0f334e7eeb289e1ada2d056a6/Shelly%20BLU%20Gateway.png"
+    },
+    "shellycamera": {
+      "file": "shellycamera.png",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-camera",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_e2167356d74e967bf934e18fe02916a33c3c62ec87703c6cbab7fe879921c183/Camera%20Packshot.png"
+    },
+    "shellycolorblbg3": {
+      "file": "shellycolorblbg3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-multicolor-bulb-e27-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyddimmerg3": {
+      "file": "shellyddimmerg3.png",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-dali-dimmer-gen3-1",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_ad82f8a4f47902f5a94d366dccc366e150d8ed31058229a94099d3d34df1bbee/Picture2.png"
+    },
+    "shellydimmerg3": {
+      "file": "shellydimmerg3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-dimmer-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_b1a44456685ced20fabd0bcaaab7585f29d6751dfeba4653f7aa83e425c990d7/Shelly%20Dimmer%20Gen4.jpg"
+    },
+    "shellyduobulbg3": {
+      "file": "shellyduobulbg3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-duo-bulb-e27-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyemg3": {
+      "file": "shellyemg3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-em-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyhtg3": {
+      "file": "shellyhtg3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-h-t-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_dd72a454e2af92eaa20b187453bc0ab014c3802c23670897e59de09c9273d635/H%26T-Gen3.jpg"
+    },
+    "shellyi4g3": {
+      "file": "shellyi4g3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-i4-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_10bf666c1598fc866911f645720d7ecfe9a0a29e61a21c038a14eda1a3c31499/Shelly%20i4%20Gen4.jpg"
+    },
+    "shellyoutdoorsg3": {
+      "file": "shellyoutdoorsg3.png",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-outdoor-plug-s-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_1491696aaaf566c45dd81de4de798ea905c97d0939b3b4a55f52b9fc2f3c73fa/outdoor%20plug%20s%20gen3.png"
+    },
+    "shellypill": {
+      "file": "shellypill.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/the-pill-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_3cd92c794e153ef52d964df7b55eaf404e5e2746b34a03f941ecd7ed97ca234b/The%20Pill%20by%20Shelly%20with%20cable.jpg",
+      "note": "Also listed under By Shelly. Image copied from poweredbyshelly/shellypill.jpg"
+    },
+    "shellyplugmg3": {
+      "file": "shellyplugmg3.png",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plug-m-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyplugpmg3": {
+      "file": "shellyplugpmg3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plug-pm-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyplugsg3": {
+      "file": "shellyplugsg3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plug-s-mtr-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellypmminig3": {
+      "file": "shellypmminig3.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pm-mini-gen3",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    },
+    "shellyshutter": {
+      "file": "shellyshutter.jpg",
+      "dir": "Gen3",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-shutter",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_088536de98950b24e702b7420e795f89265a69046487eea7b8987af6ce3fa6d9/Plus-Plug-IT.jpg"
+    }
+  },
+  "Gen4": {
+    "shelly1g4": {
+      "file": "shelly1g4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_f3000f539c4f0439e4a7c1a4fec887e213e82cd233df290fe1fe0b6a0b8f9f21/Shelly%201%20Gen4.jpg"
+    },
+    "shelly1g4anz": {
+      "file": "shelly1g4anz.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1-gen4-anz",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_12810253b1b7035cbc5ed383421480c3247e965487cb41631d1901fb837675d6/Shelly%201_Gen4_ANZ.jpg"
+    },
+    "shelly1lg4": {
+      "file": "shelly1lg4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1l-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_4c1c2be3c4ec6842ba527b2e1d3b6833577db85296670250e0dd17e5550e27a9/Shelly-1L-Gen4.jpg"
+    },
+    "shelly1minig4": {
+      "file": "shelly1minig4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1-mini-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_5bd673fcf6f0b9ac9f35ea59efbaa078cc93caf2af4c7b3dbb0c02bcbbeebd31/Shelly%201%20Mini%20Gen4.jpg"
+    },
+    "shelly1minig4anz": {
+      "file": "shelly1minig4anz.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1-mini-gen4-anz",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_e9f069ac003da0d3e8f78ca15148873da59ed867f2a7f902d72fc480e89a2aaa/Shelly%201%20Mini%20Gen4%20ANZ.jpg"
+    },
+    "shelly1pmg4": {
+      "file": "shelly1pmg4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1pm-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_a209db7a5fc7f7f849c7602efce328ca1d95a12ed688b42518205b23f3141fb1/Shelly%201PM%20Gen4.jpg"
+    },
+    "shelly1pmg4anz": {
+      "file": "shelly1pmg4anz.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1pm-gen4-anz",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_e41de3dae3b56f808f93e65625d11fba015512917beab8a8fb445b88538abdad/Shelly%201PM%20Gen4_ANZ.jpg"
+    },
+    "shelly1pmminig4": {
+      "file": "shelly1pmminig4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-1pm-mini-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_0b1e9bd791121a9f9e1c6360125cfe92e4e289109f591916572d1f4414d4afb6/Shelly%201PM%20Mini%20Gen4.jpg"
+    },
+    "shelly2lg4": {
+      "file": "shelly2lg4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-2l-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_f3afcced7f1cfba6e36cf9013eda74dc2d61064d642e15270489e87971eda2eb/Shelly-2L-Gen4.jpg"
+    },
+    "shelly2pmg4": {
+      "file": "shelly2pmg4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-2pm-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_7538dbbce6e0f8f8834406858acd45920cc9e54f429d73d223aeb25994e59a9c/Shelly%202PM%20Gen4.jpg"
+    },
+    "shelly2pmg4anz": {
+      "file": "shelly2pmg4anz.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-2pm-gen4-anz",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_d3240c16e193eaeea0bd21e96f4dad45bb9bd1b64b699628e4abac4b7a09f92b/Shelly%202PM%20Gen4%20ANZ.jpg"
+    },
+    "shelly0110dimg4": {
+      "file": "shelly0110dimg4.png",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-dimmer-0-1-10v-pm-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_fe00cb30a27d3d263ad7716540a18c3b611131182e28d4ba0098a3c828334093/%7BB28EDF5D-F191-4731-A195-359CB5A48428%7D-20250818-221307.png"
+    },
+    "shellydimmerg4": {
+      "file": "shellydimmerg4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-dimmer-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_b1a44456685ced20fabd0bcaaab7585f29d6751dfeba4653f7aa83e425c990d7/Shelly%20Dimmer%20Gen4.jpg"
+    },
+    "shellydimmerg4us": {
+      "file": "shellydimmerg4us.png",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-dimmer-gen4-us",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_a4ea1141349e177f6566d9541118ce7bd4ca9f2549a1b27119e9f2cc809c5774/%7B131BC15C-D576-43A0-8404-E853CE6EB349%7D-20250721-113028.png"
+    },
+    "shellyemg4": {
+      "file": "shellyemg4.png",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-em-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_12e2e93156f3c0eb49d83d55155dd331457261980eb53ea2f4d4c75f892c3ba4/Shelly%20EM%20Gen4_front%20view1.png"
+    },
+    "shellyemminig4": {
+      "file": "shellyemminig4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-em-mini-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_25d01f02840889153ac53b8ec2d4d71e62dccc63bf7b39237a73bc7e3c2cabd0/Shelly%20%D0%95M%20Mini%20Gen4.jpg"
+    },
+    "shellyfloodg4": {
+      "file": "shellyfloodg4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-flood-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_ac4d4e84c40c946ef16490d38fc7c1f6d9c671de132cbd17308903d658a4fba4/Shelly%20Flood%20Gen4%20.jpg"
+    },
+    "shellyfloodsg4": {
+      "file": "shellyfloodsg4.png",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-flood-s-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_ad82f8a4f47902f5a94d366dccc366e150d8ed31058229a94099d3d34df1bbee/Picture2.png"
+    },
+    "shellyi4g4": {
+      "file": "shellyi4g4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-i4-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_10bf666c1598fc866911f645720d7ecfe9a0a29e61a21c038a14eda1a3c31499/Shelly%20i4%20Gen4.jpg"
+    },
+    "shellyleaksensorcable": {
+      "file": "shellyleaksensorcable.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-leak-sensor-cable",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_c163f3ae85d348063a21005f574f6e8109f7ea9b5d5e857d136cd2f37bb36093/Shelly%20Leak%20Sensor%20Cable.jpg"
+    },
+    "shellyplugsg4us": {
+      "file": "shellyplugsg4us.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plug-us-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_2b1e1656165d04f05f913ef1215a36a0117ec067875cde44734dfe1f4c9515df/plug-us-gen4.jpg"
+    },
+    "shellypresence": {
+      "file": "shellypresence.png",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-presence-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_400d1d2652221cde216491d4ce6f3dc09772723ed7f44680127f470595f6e81b/Shelly%20Presence%20Gen4.png"
+    },
+    "shellypstripg4": {
+      "file": "shellypstripg4.jpg",
+      "dir": "Gen4",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-power-strip-gen4",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_4b4803fef25c2ec9d4f50618793f6a0bdbfde5809a241b6fa85e5f238b92cb52/Power%20Strip%204%20Gen4.jpg"
+    }
+  },
+  "poweredbyshelly": {
+    "shellypill": {
+      "file": "shellypill.jpg",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/the-pill-by-shelly",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_3cd92c794e153ef52d964df7b55eaf404e5e2746b34a03f941ecd7ed97ca234b/The%20Pill%20by%20Shelly%20with%20cable.jpg"
+    },
+    "cury": {
+      "file": "cury.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/cury",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_862e347f6ccf0a3218cda6b68f446bab58bb9958551460c0c733af7a3a9b196e/cury-image.png"
+    },
+    "hiluxds8": {
+      "file": "hiluxds8.jpg",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/lightsolutions-hilux-ds8-white",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_6b0b54f3ea224551a286f2bb6aae0afb2aba274e216485d14bc78ca7b12f6c8b/HiluX%20DS8%20-%20White_Main.jpg"
+    },
+    "hiluxds8us": {
+      "file": "hiluxds8us.jpg",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/lightsolutions-hilux-ds8-us-hilux-ds4-us",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_c9e28c7c3ef12e4297dd12d32eaf39cc469e4c9c07aefdc7c77a4093e99cdfc9/51493d36-5ed9-4efc-975a-efbf633705e7.jpg"
+    },
+    "ws90poweradaptor": {
+      "file": "ws90poweradaptor.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/dc-12-v-1-a-power-adaptor-for-ws90",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_643e7966930e8d230be4159f22ed9c38da9cebaad7ff946d2bcb325c30fe1f42/main-image.png"
+    },
+    "smarthvacthermostat": {
+      "file": "smarthvacthermostat.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/smart-hvac-thermostat",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_85ce16c1d0661208aa87b202bedfe5488fe596dc6a64b65b6822c6cb660df2bf/ST802-B.png"
+    },
+    "st1820": {
+      "file": "st1820.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/smart-floor-heating-thermostat",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_c9ff2e85f95f2adf728a596d5390013ec62ad93ef6848565d71012472dd79990/LinkedGoThermostatST1820.png"
+    },
+    "ogemray25a": {
+      "file": "ogemray25a.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/ogemray-smart-relay-25a",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_73c5633844c6e8ed252c5128a182b1d43767c03d7d7ed70515d32f70b75713a3/Ogemray%2025A%20relay%20-%201%20-%20main.png"
+    },
+    "ws90weatherstation": {
+      "file": "ws90weatherstation.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/ws90-7-in-1-weather-station",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_f515682be4eabd7ddd371df6bcc8aadda3db01d2e93a6732b89a2f026815f666/2025-09-17-EV-WS_25.png"
+    },
+    "raexcurtain": {
+      "file": "raexcurtain.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/raex-smart-curtain-system",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_6b65f12477f8e4999e410402148d51cfe075ae7c3f52dec2bd061cca40cca604/assembled-product-render2-white.png"
+    },
+    "yihaoblinds": {
+      "file": "yihaoblinds.jpg",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/yihao-blinds-chain-controller-yh002-a",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_30cee9e918fecb2d707ae6f89573f309b1cc214196ea69583bf4420b2b9a1746/Yihao-YH-002-A_full_set.jpg"
+    },
+    "neowatervalve": {
+      "file": "neowatervalve.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/neo-smart-water-valve",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_8015339bff8f74e54e17f7114b00fd414f43e4b1edb2abdd63fd5755c5fd8f7e/Backup_1.png"
+    },
+    "topacportableevcharger": {
+      "file": "topacportableevcharger.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/topac-portable-ev-charger-eve01-11r",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_cb13d5e5e84eb739daacf37847924f0d8d5daf56967b87ded50df15439dcc7dc/TopAC_Portable_EV_charger.png"
+    },
+    "irrigation": {
+      "file": "irrigation.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/sprinkler-controller-fk-06x",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_95286da5b9437c982f19dfac09c6c6d4c9166f715353838b7d3c25b354ec6cd3/Shelly-Sprinkler-Controller-main.png"
+    },
+    "watervalve": {
+      "file": "watervalve.png",
+      "dir": "poweredbyshelly",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/frankever-smart-water-valve",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/powered-by-shelly",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_2c51a97f37a8d7f02fe14be7880a6bf48cb036147ae079d6c9eed43651ffe89a/FrankEver-SmartWaterValve-FK-V02.png"
+    }
+  },
+  "ble": {
+    "shellyblugw": {
+      "file": "shellyblugw.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shellyblu-gateway",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_ccc8b4c332b11ec0a51c2be5a28a2cf8af29758e944e9b11b996a104ee1543d9/ShellyBLU%20GW.jpg"
+    },
+    "shellyblubutton1": {
+      "file": "shellyblubutton1.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shellyblu-button1",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_88b9f2090a8c46693f154ae181c3f212f99d87d2533818c82eb1f94ea4fb386e/ShellyBLU-Button1.jpg"
+    },
+    "shellyblubtough1": {
+      "file": "shellyblubtough1.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-button-tough-1",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_4c7115424d23c4ff2103933e282ef8e885f6666ac85076b5290030270db67c74/Shelly%20BLU%20Button%20Tough%201.jpg"
+    },
+    "shellyblubtough1zb": {
+      "file": "shellyblubtough1zb.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-button-tough-1-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_4c7115424d23c4ff2103933e282ef8e885f6666ac85076b5290030270db67c74/Shelly%20BLU%20Button%20Tough%201.jpg"
+    },
+    "shellyblurcbutton4": {
+      "file": "shellyblurcbutton4.png",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-rc-button-4-us",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_fb8a8074d175faa42d527889653de1ff074074967f2b6521934ba7e0f63c5c4f/RC_button_EU.png"
+    },
+    "shellyblurcbutton4zb": {
+      "file": "shellyblurcbutton4zb.png",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-rc-button-4-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_fb8a8074d175faa42d527889653de1ff074074967f2b6521934ba7e0f63c5c4f/RC_button_EU.png"
+    },
+    "shellybluremotezb": {
+      "file": "shellybluremotezb.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-remote-control-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_5697398bf1dcab5a23b6ace002cdf24ec7fde8fab9c6ca37f98eb4194cf47d56/BLU%20Remote%20Control%20ZB.jpg"
+    },
+    "shellybludw": {
+      "file": "shellybludw.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shellyblu-door-window",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_980e52a791c0b6726a8d332f6b8ad4802cf356ea23a33bf1e0b90ac83feedac3/ShellyBLU-DoorWindow.jpg"
+    },
+    "shellybludwzb": {
+      "file": "shellybludwzb.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-door-window-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_ea1b17b294e62299a7efe050b79df365c15089de86606e0d80ef1d8fae8e9425/ShellyBLU-Door%20Window%20ZB%20white.jpg"
+    },
+    "shellybludwminizb": {
+      "file": "shellybludwminizb.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-door-window-mini-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_7f682f64f4cee1df8e29219786524cb030fa45925bc3b72730bdfe75f157011f/ShellyBLU-DoorWindow-Mini.jpg"
+    },
+    "shellybludwoutdoorzb": {
+      "file": "shellybludwoutdoorzb.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-door-window-outdoor-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_2a9e1d808a47f946aeb28cb4bd044ad0b284f5462ea4df8ab1fd80748551a9ff/ShellyBLU-Outdoor-DoorWindow.jpg"
+    },
+    "shellyblumotion": {
+      "file": "shellyblumotion.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shellyblu-motion",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_f4ba283420e6984372bf87ccfd819aea5a635b20c63b3fccb78835e8e3e9bfcf/ShellyBLU-Motion.jpg"
+    },
+    "shellyblumotionzb": {
+      "file": "shellyblumotionzb.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-motion-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_d5aa4f0d57cb31d4425a9e98444718589325bea1ac5f3da8bbae2284df0e52c4/Shelly%20BLU%20Motion%20ZB.jpg"
+    },
+    "shellyblusecuritybundle": {
+      "file": "shellyblusecuritybundle.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-smart-security-bundle",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_4b00382abc6d4d95823cef404c150fe8c40cd6189b56420c2182e47306995b73/blu-security-bundles.jpg"
+    },
+    "shellybluht": {
+      "file": "shellybluht.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-h-t",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_3da86233fa88647d2f40fc05fb0bf7cd615e52c71e90e0b1e89fac1429bab55f/ShellyBLU%20H%26T.jpg"
+    },
+    "shellybluhtszb": {
+      "file": "shellybluhtszb.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-h-t-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_3da86233fa88647d2f40fc05fb0bf7cd615e52c71e90e0b1e89fac1429bab55f/ShellyBLU%20H%26T.jpg"
+    },
+    "shellybluhtdisplayzb": {
+      "file": "shellybluhtdisplayzb.png",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-h-t-display-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_632b2d896dfb36ab4fb05b8c986bf9e9474b07b226238729231114a2c90289d3/BLU%20H%26T%20Display%20ZB.png"
+    },
+    "shellybluws4": {
+      "file": "shellybluws4.png",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-wall-switch-4",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_818d2d1ace4262d8c04d2a11f2dbb70bc1ade26dc85ea0c2c48582962602fd56/Shelly%20BLU%20Wall%20Switch%204%20.png"
+    },
+    "shellybluws4zbdk": {
+      "file": "shellybluws4zbdk.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-wall-switch-4-zb-dk",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_85c078766d91190f183cf737a54f65b962d69b6ec9cf473d65c4bd51cf0fe2a7/blu-wall-switch-zb-dk.jpg"
+    },
+    "shellybluws4zb": {
+      "file": "shellybluws4zb.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-wall-switch-4-zb",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_bad2e4e4a08c6d440f996c1aa414ef28655554ffbffeda6ef27f833ded97d316/Shelly%20BLU%20Wall%20Switch%204.jpg"
+    },
+    "shellyblutrv": {
+      "file": "shellyblutrv.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-trv",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_e1e6dd1e863a5d01d1217c271f16cc8cd0825258201d67f1babc4bc843dcbc68/BLU_TRV.jpg"
+    },
+    "shellybludistance": {
+      "file": "shellybludistance.jpg",
+      "dir": "ble",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-blu-distance",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-ble-devices",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_8c74085f6799ec3485d24d5b4f582cd9129c3c595231d88b8a32602e78664149/Shellu%20BLU%20Distance.jpg"
+    }
+  },
+  "android-devices": {
+    "shellywalldisplay": {
+      "file": "shellywalldisplay.jpg",
+      "dir": "android-devices",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-wall-display",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-control-panels",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_52c49b887de204fc05203d104ec9486ad9aaf308aec2ea58f2be0b9d4b4228fb/shelly-wall-display.jpg"
+    },
+    "shellywalldisplayx2": {
+      "file": "shellywalldisplayx2.jpg",
+      "dir": "android-devices",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x2",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-control-panels",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_7fc953f3809bebfb2d6e87fb5b4ac0a0f423525815f9eb5f725f5d628dcc501b/Shelly%20Wall%20Display%20X2_1000x500.jpg"
+    },
+    "shellywalldisplayx1i": {
+      "file": "shellywalldisplayx1i.png",
+      "dir": "android-devices",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x1i",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-control-panels",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_c7bbc24a3fb38a5744aafc0f04c6de7e0d301e1294b3cf888f81c565f73455b3/image-20260710-081820.png"
+    },
+    "shellywalldisplayx2i": {
+      "file": "shellywalldisplayx2i.png",
+      "dir": "android-devices",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-wall-display-x2i",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-control-panels",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_a8f22347ab376d608fb096a68d77c161ae3b22ce173713e839188f174e9d7bdb/%7B97B05CB3-565C-478E-9EBC-B0729DA4C347%7D-20251118-150309.png"
+    },
+    "shellywalldisplayxl": {
+      "file": "shellywalldisplayxl.png",
+      "dir": "android-devices",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-wall-display-xl",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/shelly-control-panels",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_c9fcced62b1f49361e5bc7342bf3bd1a08d7423c5521df91efc81d6df33dbe83/image-20250730-143453.png"
+    }
+  },
+  "add-ons": {
+    "shellylora": {
+      "file": "shellylora.png",
+      "dir": "add-ons",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-lora-add-on",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/add-ons",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_06f6d73e69ade3d6e6eb5f50f40f9fd2666d2c0bd5c63d919865d6421acc2051/lora-add-on.png"
+    },
+    "shellyplusaddon": {
+      "file": "shellyplusaddon.jpg",
+      "dir": "add-ons",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-plus-add-on",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/add-ons",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_b536fe20ddbaa1b1d3414782c83be3ea1e31410bbc5eea8c4caf4a33a3dafefd/Shelly-Plus-Addon.jpg"
+    },
+    "shellypro3emswitchaddon": {
+      "file": "shellypro3emswitchaddon.jpg",
+      "dir": "add-ons",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-3em-switch-add-on",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/add-ons",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_a7b0ce300f117bb23387b29d4c10412fc8f9d7cd55834fbfa033afb00353e979/Shelly%20Pro%203EM%20Switch%20Add-on.jpg"
+    },
+    "shellyproaddon": {
+      "file": "shellyproaddon.jpg",
+      "dir": "add-ons",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-sensor-add-on",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/add-ons",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_fd478d8b8975814d7b8bcc4b4a9e90fac47fd22fa7bbbfe7fcf146b387f3bf97/Shelly-Pro-Sensor-Add-on.jpg"
+    },
+    "shellyprolora": {
+      "file": "shellyprolora.jpg",
+      "dir": "add-ons",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-lora-add-on",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/add-ons",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_29c27518f9553f1a49cd6ff9cbe8e2ddc6976c595221ef636a6bce3cac08c237/Pro%20LoRa%20Add-on.jpg"
+    },
+    "shellypromodbus": {
+      "file": "shellypromodbus.png",
+      "dir": "add-ons",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/shelly-pro-modbus-add-on",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/add-ons",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_75d3fe461a53a3d878cc7d91e6ea3ae3f5cae59da06faee5348f01eec934c0b4/%7B82DFD9CD-22E1-4675-8041-DF711EE5A878%7D-20260615-063040.png"
+    },
+    "shellypillmodbus": {
+      "file": "shellypillmodbus.png",
+      "dir": "add-ons",
+      "kbPage": "https://kb.shelly.cloud/knowledge-base/modbus-rs485-add-on-for-the-pill-by-shelly",
+      "kbSection": "https://kb.shelly.cloud/knowledge-base/add-ons",
+      "sourceUrl": "https://kb.shelly.cloud/__attachments/a_3a6bc25dac2a4017561d47008706a7be2c9d2447abea0872994988ad65f832a6/image-20260520-122928.png"
+    }
+  }
+}
