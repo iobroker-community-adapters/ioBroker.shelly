@@ -240,6 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
+-   (mcm57) Updated device icons to use device-specific images where available
 -   (mcm57) Added support for Shelly I4 Gen4 (shellyi4g4) (refers to #1645)
 -   (mcm57) Fix stale switch state after MQTT command on Shelly Pro 4 PM (refers to #1640)
 -   (mcm57) Fix stale switch state after MQTT command on Shelly 2 PM Gen3 (refers to #1627)
