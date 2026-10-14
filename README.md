@@ -238,6 +238,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (@mcm1957) Fixed digest authentication failing after ~7530 requests due to nonce counter never resetting and being formatted as decimal instead of hex (refers to #1667)
+
 ### 12.1.0-alpha.0 (2026-10-10)
 
 - (@mcm1957) Updated device icons to use device-specific images where available
