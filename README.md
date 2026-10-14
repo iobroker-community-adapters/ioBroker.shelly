@@ -240,7 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
-- (@mcm1957) Fixed digest authentication failing after ~7530 requests due to nonce counter never resetting and being formatted as decimal instead of hex (refers to #1667)
+- (@mcm1957) Fixed digest authentication failing after ~7530 requests due to nonce counter never resetting and being formatted as decimal instead of hex (#1667). Thanks to @sadam6752-tech for detailled problemanalyses and solution.
 
 ### 12.1.0-alpha.0 (2026-10-10)
 
