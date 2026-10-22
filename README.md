@@ -238,6 +238,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (GermanBluefox) Updated packages
+
 ### 12.1.0-alpha.1 (2026-10-14)
 
 - (@mcm1957) Fixed digest authentication failing after ~7530 requests due to nonce counter never resetting and being formatted as decimal instead of hex (#1667). Thanks to @sadam6752-tech for detailled problemanalyses and solution.
