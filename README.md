@@ -241,6 +241,11 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 ### **WORK IN PROGRESS**
 
 - (@GermanBluefox) Shelly Dimmer / Dimmer 2: the minimum brightness is no longer recognized as a separate device in visualizations and smart assistants
+- (GermanBluefox) Updated packages
+
+### 12.1.0-alpha.1 (2026-10-14)
+
+- (@mcm1957) Fixed digest authentication failing after ~7530 requests due to nonce counter never resetting and being formatted as decimal instead of hex (#1667). Thanks to @sadam6752-tech for detailled problemanalyses and solution.
 
 ### 12.1.0-alpha.0 (2026-10-10)
 
@@ -305,10 +310,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (@mcm1957) Some missing states added at an illuminance component
 - (@mcm1957) DISABLE all PLUG_UI functionality due to unrecoverable HW faults.
 - (@mcm1957) Dependencies have been updated
-
-### 10.6.1 (2026-02-23)
-- (HGlab01) OnUnload handling has been improved. [#1279]
-- (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

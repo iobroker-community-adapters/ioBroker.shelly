@@ -56,6 +56,7 @@ export class BaseClient implements ShellyClient {
     serialId: string | undefined; // e.g. 8CAAB5616291
     deviceGen: number | undefined; // 1 or 2
     nonceCount: number;
+    lastNonce: string | undefined;
     httpTimeout: number;
 
     constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
@@ -74,6 +75,7 @@ export class BaseClient implements ShellyClient {
         this.http = {};
 
         this.nonceCount = 0;
+        this.lastNonce = undefined;
         this.httpTimeout = 8 * 1000;
 
         // Handle firmware updates
@@ -290,8 +292,12 @@ export class BaseClient implements ShellyClient {
         const username = 'admin';
         const password = this.adapter.config.httppassword;
 
+        if (authDetails.nonce !== this.lastNonce) {
+            this.lastNonce = authDetails.nonce;
+            this.nonceCount = 0;
+        }
         this.nonceCount++;
-        const nonceCount = `00000000${this.nonceCount}`.slice(-8);
+        const nonceCount = this.nonceCount.toString(16).padStart(8, '0');
         const cnonce = crypto.randomBytes(24).toString('hex');
 
         const realm = authDetails.realm;
