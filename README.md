@@ -239,6 +239,8 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+
+- (@GermanBluefox) Shelly Dimmer / Dimmer 2: the minimum brightness is no longer recognized as a separate device in visualizations and smart assistants
 - (GermanBluefox) Updated packages
 
 ### 12.1.0-alpha.1 (2026-10-14)
