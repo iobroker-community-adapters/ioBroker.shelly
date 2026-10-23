@@ -13,6 +13,7 @@ shellyHelperGen2.addSwitch(shellypstripg4, 0, true);
 shellyHelperGen2.addSwitch(shellypstripg4, 1, true);
 shellyHelperGen2.addSwitch(shellypstripg4, 2, true);
 shellyHelperGen2.addSwitch(shellypstripg4, 3, true);
+shellyHelperGen2.addPowerStripUI(shellypstripg4);
 
 // shellyHelperGen2.addPowerstripUI(shellypstripg4, 0); ### not yet implemented ###
 
