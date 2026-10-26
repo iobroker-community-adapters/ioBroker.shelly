@@ -939,6 +939,7 @@ function deleteNoDisplay(
     protocol: 'coap' | 'mqtt',
     mode?: string,
     firmwareVersion?: string,
+    keepWithoutFirmware?: boolean,
 ): DeviceDefinition {
     if (protocol === 'coap' || protocol === 'mqtt') {
         for (const key in device) {
@@ -956,9 +957,11 @@ function deleteNoDisplay(
                 }
             }
 
-            // Firmware version minimum - remove state if firmware version is unknown or too old
+            // Firmware version minimum - remove state if firmware version is too old, or unknown (unless keepWithoutFirmware)
             if (dev?.firmware_version_min) {
-                if (!firmwareVersion || !isSemverAtLeast(firmwareVersion, dev.firmware_version_min)) {
+                if (
+                    firmwareVersion ? !isSemverAtLeast(firmwareVersion, dev.firmware_version_min) : !keepWithoutFirmware
+                ) {
                     delete device[key];
                 }
             }
@@ -992,6 +995,7 @@ function getDeviceByClass(
     protocol: 'coap' | 'mqtt',
     mode?: string,
     firmwareVersion?: string,
+    keepWithoutFirmware?: boolean,
 ): DeviceDefinition | undefined {
     if (!devices[deviceClass]) {
         return;
@@ -1013,7 +1017,7 @@ function getDeviceByClass(
             device = clone(Object.assign(Object.assign({}, defaultsgen1), devices[deviceClass]));
     }
 
-    device = deleteNoDisplay(device, protocol, mode, firmwareVersion);
+    device = deleteNoDisplay(device, protocol, mode, firmwareVersion, keepWithoutFirmware);
     return device;
 }
 
