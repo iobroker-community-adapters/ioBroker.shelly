@@ -240,6 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 - (GermanBluefox) Updated packages
+- (GermanBluefox) Fixed `PLUGS_UI.*` states of the Plug S Gen3 and other plugs being written without objects after the MQTT reconnect; such states are no longer deleted while the firmware version is unknown
 
 ### 12.1.0-alpha.1 (2026-10-14)
 

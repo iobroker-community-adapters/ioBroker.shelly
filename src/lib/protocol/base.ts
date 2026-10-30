@@ -997,11 +997,14 @@ export class BaseClient implements ShellyClient {
     async deleteOldStates(): Promise<void> {
         const deviceId = this.getDeviceId();
         const objList = await this.adapter.getAdapterObjectsAsync();
+        // The firmware version is unknown until the device answers (e.g. right after the MQTT connect):
+        // keep the states which need a minimum firmware version instead of deleting and recreating them
         const dps = datapoints.getDeviceByClass(
             this.getDeviceClass(),
             this.type,
             this.getDeviceMode(),
             this.getDeviceFirmwareVersion(),
+            true,
         );
 
         if (dps) {
@@ -1016,11 +1019,9 @@ export class BaseClient implements ShellyClient {
                     if (tmpObj.type === 'state' && tmpObj._id.startsWith(`${this.adapter.namespace}.${deviceId}`)) {
                         if (!dps[stateId]) {
                             try {
-                                if (this.objectHelper.getObject(tmpObj._id)) {
-                                    this.objectHelper.deleteObject(tmpObj._id);
-                                } else {
-                                    await this.adapter.delForeignObjectAsync(tmpObj._id);
-                                }
+                                await this.adapter.delForeignObjectAsync(tmpObj._id);
+                                // The object helper caches IDs without namespace
+                                this.objectHelper.forgetObject(`${deviceId}.${stateId}`);
 
                                 delete objList[tmpObj._id];
                                 delete this.device[stateId];
@@ -1056,11 +1057,8 @@ export class BaseClient implements ShellyClient {
 
                 if (!found) {
                     try {
-                        if (this.objectHelper.getObject(tmpObj._id)) {
-                            this.objectHelper.deleteObject(tmpObj._id);
-                        } else {
-                            await this.adapter.delForeignObjectAsync(tmpObj._id, { recursive: true });
-                        }
+                        await this.adapter.delForeignObjectAsync(tmpObj._id, { recursive: true });
+                        this.objectHelper.forgetObject(tmpObj._id.substring(this.adapter.namespace.length + 1), true);
 
                         delete objList[tmpObj._id];
 

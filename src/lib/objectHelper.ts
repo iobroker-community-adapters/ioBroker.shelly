@@ -157,6 +157,24 @@ export default class ObjectHelper {
         }
     }
 
+    /**
+     * Forget an object which was deleted without this helper (e.g. by delForeignObjectAsync).
+     * Otherwise, the cache still lists it, and the next setOrUpdateObject() only writes the state - without object.
+     *
+     * @param id object ID without namespace
+     * @param recursive forget all objects below this ID too
+     */
+    public forgetObject(id: string, recursive: boolean = false): void {
+        for (const cache of [this.adapterObjects, this.existingStates, this.stateChangeTrigger]) {
+            delete cache[id];
+            if (recursive) {
+                Object.keys(cache)
+                    .filter(objId => objId.startsWith(`${id}.`))
+                    .forEach(objId => delete cache[objId]);
+            }
+        }
+    }
+
     public isEquivalent(a: unknown, b: unknown): boolean {
         // this.adapter.log.debug('Compare ' + JSON.stringify(a) + ' with ' +  JSON.stringify(b));
         // Create arrays of property names
