@@ -48,6 +48,8 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 
 *Since script version v1.0 the processing of the ble message has been migrated to ioBroker. Older versions may not run on Gen3 devices, since they need more resources to unpack the Bluetooth messages.*
 
+**NOTE:** Bluetooth scanning is not supported on Gen4 devices running the Zigbee firmware (Zigbee mode), see https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/BLE/#bluetooth-scan. The BLE gateway script will fail with `Cannot read property 'Start' of undefined`. Use the standard (WiFi) firmware on devices which should act as BLE gateway.
+
 ## Encryption
 
 Encryption is supported since adapter version >10.0.0
