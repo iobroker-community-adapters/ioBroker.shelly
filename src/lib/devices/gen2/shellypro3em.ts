@@ -5,6 +5,10 @@ import * as shellyHelperGen2 from '../gen2-helper';
  * Shelly Pro 3 EM / shellypro3em
  *
  * https://shelly-api-docs.shelly.cloud/gen2/Devices/Gen2/ShellyPro3EM
+ *
+ * Note: The temperature:0 component (internal device temperature sensor) is not listed on the device
+ * page above, but the device publishes it over MQTT. The component itself is documented at
+ * https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/Temperature
  */
 const shellypro3em: DeviceDefinition = {
     'Sys.deviceMode': {
@@ -47,5 +51,9 @@ shellyHelperGen2.addEM1Data(shellypro3em, 1);
 shellyHelperGen2.addEM1Data(shellypro3em, 2);
 
 shellyHelperGen2.addProOutputAddon(shellypro3em);
+
+// temperature:0 is not listed on the device page but is published by the device over MQTT
+// https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/Temperature
+shellyHelperGen2.addTemperatureSensor(shellypro3em, 0);
 
 export { shellypro3em };
