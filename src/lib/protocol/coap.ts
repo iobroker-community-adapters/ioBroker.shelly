@@ -230,6 +230,9 @@ class CoAPClient extends BaseClient {
             // Device Mode information (init)
             await this.initDeviceModeFromState();
 
+            // Firmware version information (init)
+            await this.initDeviceFirmwareVersionFromState();
+
             await this.deleteOldStates();
             await this.createObjects();
 

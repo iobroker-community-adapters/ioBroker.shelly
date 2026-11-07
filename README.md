@@ -241,7 +241,11 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 ### **WORK IN PROGRESS**
 
 - (@GermanBluefox) Shelly Dimmer / Dimmer 2: the minimum brightness is no longer recognized as a separate device in visualizations and smart assistants
+- (GermanBluefox) Restarts of Bluetooth devices are detected (new state "lastRestart" and a warning in the log). Frequent restarts usually indicate a weak battery
+- (GermanBluefox) Button presses of a Bluetooth device are no longer lost after the device has restarted
 - (GermanBluefox) Updated packages
+- (GermanBluefox) (docs) Added note that BLE scanning is not supported on Gen4 devices in Zigbee mode (#1678)
+- (mcm57) Fixed missing PLUGS_UI states after MQTT reconnect when firmware version was not yet known
 
 ### 12.1.0-alpha.1 (2026-10-14)
 

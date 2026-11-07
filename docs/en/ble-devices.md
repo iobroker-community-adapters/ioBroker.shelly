@@ -22,6 +22,9 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
   }
 }
 ```
+
+If a BLE device restarts (it begins again with a low packet id and sends its device information), the time is stored in `shelly.0.ble.<macAddress>.lastRestart` and a warning is logged. Frequent restarts, e.g. on every button press, usually indicate a weak battery.
+
 ### Video tutorials for shelly BLE on Youtube (german)
 
 - https://www.youtube.com/watch?v=qOjEFsCjhLg 
@@ -47,6 +50,8 @@ Since adapter version 7.1.0 you will get a list of all devices (JSON object) whi
 | [>= 6.6.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.6.0/docs/en/ble-devices.md)   | v0.1           |
 
 *Since script version v1.0 the processing of the ble message has been migrated to ioBroker. Older versions may not run on Gen3 devices, since they need more resources to unpack the Bluetooth messages.*
+
+**NOTE:** Bluetooth scanning is not supported on Gen4 devices running the Zigbee firmware (Zigbee mode), see https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/BLE/#bluetooth-scan. The BLE gateway script will fail with `Cannot read property 'Start' of undefined`. Use the standard (WiFi) firmware on devices which should act as BLE gateway.
 
 ## Encryption
 

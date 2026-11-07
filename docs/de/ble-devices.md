@@ -22,6 +22,9 @@ Seit Adapter-Version 7.1.0 wird eine Liste aller Geräte (JSON-Objekt) bereitges
   }
 }
 ```
+
+Startet ein BLE-Gerät neu (es beginnt wieder mit einer niedrigen Paket-ID und sendet seine Geräteinformationen), wird der Zeitpunkt in `shelly.0.ble.<macAddress>.lastRestart` gespeichert und eine Warnung ins Log geschrieben. Häufige Neustarts, z. B. bei jedem Tastendruck, deuten meist auf eine schwache Batterie hin.
+
 ### Video-Tutorials für Shelly BLE auf Youtube (deutsch)
 
 - https://www.youtube.com/watch?v=qOjEFsCjhLg 
@@ -47,6 +50,8 @@ Seit Adapter-Version 7.1.0 wird eine Liste aller Geräte (JSON-Objekt) bereitges
 | [>= 6.6.0](https://github.com/iobroker-community-adapters/ioBroker.shelly/blob/v6.6.0/docs/en/ble-devices.md)   | v0.1           |
 
 *Seit Skriptversion v1.0 wurde die Verarbeitung der BLE-Nachrichten zu ioBroker migriert. Ältere Versionen funktionieren möglicherweise nicht auf Gen3-Geräten, da diese mehr Ressourcen benötigen, um die Bluetooth-Nachrichten zu entpacken.*
+
+**HINWEIS:** Bluetooth-Scan wird von Gen4-Geräten mit Zigbee-Firmware (Zigbee-Modus) nicht unterstützt, siehe https://shelly-api-docs.shelly.cloud/gen2/ComponentsAndServices/BLE/#bluetooth-scan. Das BLE-Gateway-Script bricht dann mit `Cannot read property 'Start' of undefined` ab. Geräte, die als BLE-Gateway dienen sollen, müssen mit der Standard-Firmware (WLAN) laufen.
 
 ## Verschlüsselung
 
