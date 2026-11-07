@@ -1,4 +1,13 @@
 # Older changes
+## 11.0.0 additional information 
+- (@mcm1957) Added Shelly Presence Gen 4
+- (@mcm1957) Added Shelly Cury
+- (@GermanBluefox) Added support for Device manager: info and control of devices and provisioning
+- (@GermanBluefox) Added detection of new devices in the background
+- (@mcm1957) Some missing states added at an illuminance component
+- (@mcm1957) DISABLE all PLUG_UI functionality due to unrecoverable HW faults.
+- (@mcm1957) Dependencies have been updated
+
 ## 10.6.1 (2026-02-23)
 - (HGlab01) OnUnload handling has been improved. [#1279]
 - (@mcm1957) shellypill: missing input 202 has been added, nonexisting analog input has been removed.
