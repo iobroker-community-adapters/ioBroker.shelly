@@ -245,7 +245,8 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (GermanBluefox) Button presses of a Bluetooth device are no longer lost after the device has restarted
 - (GermanBluefox) Updated packages
 - (GermanBluefox) (docs) Added note that BLE scanning is not supported on Gen4 devices in Zigbee mode (#1678)
-- (mcm57) Fixed missing PLUGS_UI states after MQTT reconnect when firmware version was not yet known
+- (mcm1957) Fixed missing PLUGS_UI states after MQTT reconnect when firmware version was not yet known
+- (mcm1957) EMTemperature added to shellypro3em
 
 ### 12.1.0-alpha.1 (2026-10-14)
 

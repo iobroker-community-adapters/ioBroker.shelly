@@ -46,6 +46,7 @@ shellyHelperGen2.addEM1Data(shellypro3em, 0);
 shellyHelperGen2.addEM1Data(shellypro3em, 1);
 shellyHelperGen2.addEM1Data(shellypro3em, 2);
 
+shellyHelperGen2.addEMTemperatureSensor(shellypro3em);
 shellyHelperGen2.addProOutputAddon(shellypro3em);
 
 export { shellypro3em };
