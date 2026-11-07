@@ -68,7 +68,7 @@ const shellydimmer: DeviceDefinition = {
         common: {
             name: 'Minimum Brightness',
             type: 'number',
-            role: 'level.brightness',
+            role: 'state',
             read: true,
             write: false,
             min: 0,

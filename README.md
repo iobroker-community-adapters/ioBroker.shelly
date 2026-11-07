@@ -239,6 +239,8 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+
+- (@GermanBluefox) Shelly Dimmer / Dimmer 2: the minimum brightness is no longer recognized as a separate device in visualizations and smart assistants
 - (GermanBluefox) Restarts of Bluetooth devices are detected (new state "lastRestart" and a warning in the log). Frequent restarts usually indicate a weak battery
 - (GermanBluefox) Button presses of a Bluetooth device are no longer lost after the device has restarted
 - (GermanBluefox) Updated packages
