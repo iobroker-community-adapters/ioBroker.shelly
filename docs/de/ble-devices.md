@@ -22,6 +22,9 @@ Seit Adapter-Version 7.1.0 wird eine Liste aller Geräte (JSON-Objekt) bereitges
   }
 }
 ```
+
+Startet ein BLE-Gerät neu (es beginnt wieder mit einer niedrigen Paket-ID und sendet seine Geräteinformationen), wird der Zeitpunkt in `shelly.0.ble.<macAddress>.lastRestart` gespeichert und eine Warnung ins Log geschrieben. Häufige Neustarts, z. B. bei jedem Tastendruck, deuten meist auf eine schwache Batterie hin.
+
 ### Video-Tutorials für Shelly BLE auf Youtube (deutsch)
 
 - https://www.youtube.com/watch?v=qOjEFsCjhLg 
