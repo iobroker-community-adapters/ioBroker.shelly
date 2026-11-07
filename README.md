@@ -239,7 +239,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 -->
 ### 12.1.0 (2026-11-07)
-
 - (@GermanBluefox) Shelly Dimmer / Dimmer 2: the minimum brightness is no longer recognized as a separate device in visualizations and smart assistants
 - (GermanBluefox) Restarts of Bluetooth devices are detected (new state "lastRestart" and a warning in the log). Frequent restarts usually indicate a weak battery
 - (GermanBluefox) Button presses of a Bluetooth device are no longer lost after the device has restarted
@@ -247,13 +246,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (GermanBluefox) (docs) Added note that BLE scanning is not supported on Gen4 devices in Zigbee mode (#1678)
 - (mcm1957) Fixed missing PLUGS_UI states after MQTT reconnect when firmware version was not yet known
 - (mcm1957) EMTemperature added to shellypro3em
-
-### 12.1.0-alpha.1 (2026-10-14)
-
 - (@mcm1957) Fixed digest authentication failing after ~7530 requests due to nonce counter never resetting and being formatted as decimal instead of hex (#1667). Thanks to @sadam6752-tech for detailled problemanalyses and solution.
-
-### 12.1.0-alpha.0 (2026-10-10)
-
 - (@mcm1957) Updated device icons to use device-specific images where available
 - (@mcm1957) Added support for Shelly I4 Gen4 (shellyi4g4) (#1645)
 - (@mcm1957) Fix stale switch state after MQTT command on Shelly Pro 4 PM and Shelly 2 PM Gen3. (#1640, #1627)
