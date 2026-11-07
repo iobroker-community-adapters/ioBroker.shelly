@@ -3746,6 +3746,10 @@ function addEMData(deviceObj: DeviceDefinition, emId: number, phases: (string | 
  *
  * @param deviceObj
  */
+/* NOTE:
+ * This sensor is identical to addTemperatureSensor. It exists due to historical reasons only.
+ * correct implementation would be addTemepraturSensor(xxx, 0) as this what the sensor reads
+ */
 function addEMTemperatureSensor(deviceObj: DeviceDefinition): void {
     deviceObj[`EMTemperature.tC`] = {
         mqtt: {
@@ -8714,9 +8718,9 @@ export {
     addIlluminanceSensor,
     addInput,
     addLight,
-    addPlusAddon,
     addPlugpmUI,
     addPlugsUI,
+    addPlusAddon,
     addPM1,
     addPresence,
     addPresenceZone,
