@@ -5090,6 +5090,331 @@ function addPlugsUI(deviceObj: DeviceDefinition): void {
         },
     };
 }
+/**
+ * Adds states for the POWERSTRIP_UI component used by Shelly Powerstrip* (gen 4)
+ * see
+ * https://shelly-api-docs.shelly.cloud/gen2/Devices/Gen4/ShellyPowerStripG4/#powerstrip_ui
+ *
+ * @param deviceObj
+ */
+function addPowerStripUI(deviceObj: DeviceDefinition): void {
+    deviceObj['POWERSTRIP_UI.Mode'] = {
+        firmware_version_min: '2.0.0',
+        mqtt: {
+            http_publish: '/rpc/POWERSTRIP_UI.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value).leds.mode : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'POWERSTRIP_UI.SetConfig',
+                    params: {
+                        config: {
+                            leds: {
+                                mode: value,
+                                /*
+                                colors: {
+                                    power: {
+                                        brightness: 100,
+                                    },
+                                    'switch:0': {
+                                        on: {
+                                            rgb: [0,100,0],
+                                            brightness: 100,
+                                        },
+                                        off: {
+                                            rgb: [100,0,0],
+                                            brightness: 100,
+                                        },
+                                    },
+                                },
+                                */
+                            },
+                        },
+                    },
+                });
+            },
+        },
+        common: {
+            name: 'Mode',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+            def: 'off',
+            states: {
+                power: 'power',
+                switch: 'switch',
+                off: 'off',
+            },
+        },
+    };
+
+    deviceObj['POWERSTRIP_UI.PowerBrightness'] = {
+        firmware_version_min: '2.0.0',
+        mqtt: {
+            http_publish: '/rpc/POWERSTRIP_UI.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.leds?.colors?.power?.brightness : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'POWERSTRIP_UI.SetConfig',
+                    params: {
+                        config: {
+                            leds: {
+                                mode: 'power',
+                                colors: {
+                                    power: {
+                                        brightness: value,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                });
+            },
+        },
+        common: {
+            name: 'Brightness (Mode: power)',
+            type: 'number',
+            role: 'level.brightness',
+            read: true,
+            write: true,
+            unit: '%',
+            min: 0,
+            max: 100,
+        },
+    };
+
+    deviceObj['POWERSTRIP_UI.SwitchOnBrightness'] = {
+        firmware_version_min: '2.0.0',
+        mqtt: {
+            http_publish: '/rpc/POWERSTRIP_UI.GetConfig',
+            http_publish_funct: value =>
+                value ? JSON.parse(value)?.leds?.colors?.['switch:0']?.on?.brightness : undefined,
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'POWERSTRIP_UI.SetConfig',
+                    params: {
+                        config: {
+                            leds: {
+                                mode: 'switch',
+                                colors: {
+                                    'switch:0': {
+                                        on: {
+                                            brightness: value,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                });
+            },
+        },
+        common: {
+            name: 'Brightness On (Mode: switch)',
+            type: 'number',
+            role: 'level.brightness',
+            read: true,
+            write: true,
+            unit: '%',
+            min: 0,
+            max: 100,
+        },
+    };
+
+    deviceObj['POWERSTRIP_UI.SwitchOnColor'] = {
+        firmware_version_min: '2.0.0',
+        mqtt: {
+            http_publish: '/rpc/POWERSTRIP_UI.GetConfig',
+            http_publish_funct: value =>
+                value ? JSON.parse(value)?.leds?.colors?.['switch:0']?.on?.rgb.join(',') : undefined,
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'POWERSTRIP_UI.SetConfig',
+                    params: {
+                        config: {
+                            leds: {
+                                mode: 'switch',
+                                colors: {
+                                    'switch:0': {
+                                        on: {
+                                            rgb: value.split(',').map(Number),
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                });
+            },
+        },
+        common: {
+            name: 'Color',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+        },
+    };
+
+    deviceObj['POWERSTRIP_UI.SwitchOffBrightness'] = {
+        firmware_version_min: '2.0.0',
+        mqtt: {
+            http_publish: '/rpc/POWERSTRIP_UI.GetConfig',
+            http_publish_funct: value =>
+                value ? JSON.parse(value)?.leds?.colors?.['switch:0']?.off?.brightness : undefined,
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'POWERSTRIP_UI.SetConfig',
+                    params: {
+                        config: {
+                            leds: {
+                                mode: 'switch',
+                                colors: {
+                                    'switch:0': {
+                                        off: {
+                                            brightness: value,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                });
+            },
+        },
+        common: {
+            name: 'Brightness Off (Mode: switch)',
+            type: 'number',
+            role: 'level.brightness',
+            read: true,
+            write: true,
+            unit: '%',
+            min: 0,
+            max: 100,
+        },
+    };
+
+    deviceObj['POWERSTRIP_UI.SwitchOffColor'] = {
+        firmware_version_min: '2.0.0',
+        mqtt: {
+            http_publish: '/rpc/POWERSTRIP_UI.GetConfig',
+            http_publish_funct: value =>
+                value ? JSON.parse(value)?.leds?.colors?.['switch:0']?.off?.rgb.join(',') : undefined,
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'POWERSTRIP_UI.SetConfig',
+                    params: {
+                        config: {
+                            leds: {
+                                mode: 'switch',
+                                colors: {
+                                    'switch:0': {
+                                        off: {
+                                            rgb: value.split(',').map(Number),
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                });
+            },
+        },
+        common: {
+            name: 'Color',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: true,
+        },
+    };
+
+    deviceObj['POWERSTRIP_UI.NightModeEnabled'] = {
+        firmware_version_min: '2.0.0',
+        mqtt: {
+            http_publish: '/rpc/POWERSTRIP_UI.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.leds?.night_mode?.enable : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'POWERSTRIP_UI.SetConfig',
+                    params: {
+                        config: {
+                            leds: {
+                                night_mode: {
+                                    enable: value,
+                                    brightness: 100,
+                                },
+                            },
+                        },
+                    },
+                });
+            },
+        },
+        common: {
+            name: 'Night Mode Enabled',
+            type: 'boolean',
+            role: 'switch',
+            read: true,
+            write: true,
+        },
+    };
+
+    deviceObj['POWERSTRIP_UI.NightModeBrightness'] = {
+        firmware_version_min: '2.0.0',
+        mqtt: {
+            http_publish: '/rpc/POWERSTRIP_UI.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.leds?.night_mode?.brightness : undefined),
+            mqtt_cmd: '<mqttprefix>/rpc',
+            mqtt_cmd_funct: (value, self) => {
+                return JSON.stringify({
+                    id: self.getNextMsgId(),
+                    src: 'iobroker',
+                    method: 'POWERSTRIP_UI.SetConfig',
+                    params: {
+                        config: {
+                            leds: {
+                                night_mode: {
+                                    brightness: value,
+                                },
+                            },
+                        },
+                    },
+                });
+            },
+        },
+        common: {
+            name: 'Brightness (Mode: night)',
+            type: 'number',
+            role: 'level.brightness',
+            read: true,
+            write: true,
+            unit: '%',
+            min: 0,
+            max: 100,
+        },
+    };
+}
 
 /**
  * Adds states for the PLUGPM_UI component used by Shelly Plug PM (gen 3+)
@@ -8717,6 +9042,7 @@ export {
     addPlusAddon,
     addPlugpmUI,
     addPlugsUI,
+    addPowerStripUI,
     addPM1,
     addPresence,
     addPresenceZone,
