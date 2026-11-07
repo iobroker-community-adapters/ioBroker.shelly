@@ -204,6 +204,9 @@ class BleDecoder {
         if (type === uint24 || type === int24) {
             return 3;
         }
+        if (type === uint32 || type === int32) {
+            return 4;
+        }
         // impossible as advertisements are much smaller
         return 255;
     }
