@@ -253,7 +253,7 @@ class CoAPClient extends BaseClient {
             this.listener();
         } else {
             this.adapter.log.error(
-                `[CoAP] Device unknown, configuration for Shelly device ${this.getLogInfo()} does not exist!`,
+                `[CoAP] Device unknown, configuration for Shelly device ${this.getLogInfo()} does not exist`,
             );
             this.adapter.log.error(
                 `[CoAP] 1. Send developer following info for ${this.getDeviceId()}: ${JSON.stringify(description)}`,

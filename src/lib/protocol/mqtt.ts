@@ -738,7 +738,7 @@ class MQTTClient extends BaseClient {
 
                     const ip = this.stream?.remoteAddress ?? null;
 
-                    this.adapter.log.info(`[MQTT] Device with client id "${packet.clientId}" connected from ${ip}!`);
+                    this.adapter.log.info(`[MQTT] Device with client id "${packet.clientId}" connected from ${ip}`);
                     this.initializing = true;
 
                     // Device Mode information (init)
