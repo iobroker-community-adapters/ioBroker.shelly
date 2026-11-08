@@ -238,6 +238,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (mcm1957) Shelly Pro 1PM: fixed outdated switch status after Switch.Set via MQTT (refers to #1694)
+
 ### 12.1.0 (2026-11-07)
 
 - (@GermanBluefox) Shelly Dimmer / Dimmer 2: the minimum brightness is no longer recognized as a separate device in visualizations and smart assistants
