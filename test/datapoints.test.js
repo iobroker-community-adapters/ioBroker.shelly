@@ -506,7 +506,7 @@ describe('Test Device Definitions', function () {
                     'level.temperature': ['°C', '°F'],
                     'value.battery': ['%'],
                     'value.voltage': ['V'],
-                    'value.power': ['W', 'VA'],
+                    'value.power': ['W', 'kW', 'VA', 'kVA'],
                     'value.frequency': ['Hz'],
                     'value.power.consumption': ['Wh', 'Wmin', 'kWh'],
                     'value.power.reactive': ['VAR'],
