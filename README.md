@@ -238,6 +238,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (mcm1957) Power units corrected for Top AC Portable EV Charger (topacportableevcharger) (#1702) 
+
 ### 12.1.1 (2026-11-08)
 
 - (mcm1957) Shelly Pro 1PM: fixed outdated switch status after Switch.Set via MQTT (refers to #1694)
