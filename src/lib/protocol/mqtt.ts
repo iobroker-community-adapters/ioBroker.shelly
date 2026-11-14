@@ -374,6 +374,9 @@ class MQTTClient extends BaseClient {
             );
         }
 
+        // Update MQTT connection state before super.destroy() triggers deviceStatusUpdate(false)
+        void this.adapter.mqttConnectionUpdate(this.getDeviceId(), false);
+
         super.destroy();
         this.adapter.log.debug(`[MQTT] Destroying`);
 
@@ -796,6 +799,7 @@ class MQTTClient extends BaseClient {
                     }
 
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" updating device status`);
+                    await this.adapter.mqttConnectionUpdate(this.getDeviceId(), true); // MQTT connected
                     await this.adapter.deviceStatusUpdate(this.getDeviceId(), true); // Device online
 
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting http states`);

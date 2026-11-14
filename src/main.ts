@@ -40,6 +40,8 @@ export class ShellyAdapter extends Adapter {
     private deviceManagement: DeviceManagement | null = null;
     /** Set of device ids currently considered online. */
     private onlineDevices: Record<string, boolean> = {};
+    /** MQTT connection state per device id: true = connected, false = disconnected, undefined = not an MQTT device */
+    private mqttConnectedDevices: Record<string, boolean> = {};
     private onlineCheckIsStartup = true;
     private readonly eventEmitter: EventEmitter = new EventEmitter();
     private readonly bleDecoder: BleDecoder = new BleDecoder();
@@ -321,6 +323,28 @@ export class ShellyAdapter extends Adapter {
         }, 60 * 1000); // Restart online check in 60 seconds
     }
 
+    /**
+     * Called by MQTTClient when a device connects or disconnects via MQTT.
+     * Updates the MQTT.connected state and gates online status on MQTT connectivity.
+     *
+     * @param deviceId - device id
+     * @param connected - true when MQTT connection established, false when closed
+     */
+    public async mqttConnectionUpdate(deviceId: string | undefined, connected: boolean): Promise<void> {
+        if (this.isUnloaded || !deviceId) {
+            return;
+        }
+
+        this.log.debug(`[mqttConnectionUpdate] ${deviceId}: ${connected}`);
+        this.mqttConnectedDevices[deviceId] = connected;
+
+        await this.setState(`${deviceId}.MQTT.connected`, { val: connected, ack: true });
+
+        if (!connected) {
+            await this.deviceStatusUpdate(deviceId, false);
+        }
+    }
+
     public async deviceStatusUpdate(deviceId: string | undefined, status: boolean): Promise<void> {
         if (this.isUnloaded) {
             return;
@@ -340,6 +364,12 @@ export class ShellyAdapter extends Adapter {
             return;
         }
 
+        // For MQTT devices: only go online when the MQTT connection is active
+        const effectiveStatus =
+            status && Object.prototype.hasOwnProperty.call(this.mqttConnectedDevices, deviceId)
+                ? this.mqttConnectedDevices[deviceId]
+                : status;
+
         // Update online status
         const idOnline = `${deviceId}.online`;
         const onlineState = await this.getStateAsync(idOnline);
@@ -348,15 +378,15 @@ export class ShellyAdapter extends Adapter {
             // Compare to previous value
             const prevValue = onlineState.val ? onlineState.val === 'true' || onlineState.val === true : false;
 
-            if (prevValue != status) {
-                await this.setState(idOnline, { val: status, ack: true });
+            if (prevValue != effectiveStatus) {
+                await this.setState(idOnline, { val: effectiveStatus, ack: true });
             }
         }
 
         // Update connection state
         const oldOnlineDeviceCount = Object.keys(this.onlineDevices).length;
 
-        if (status) {
+        if (effectiveStatus) {
             this.onlineDevices[deviceId] = true;
         } else if (Object.prototype.hasOwnProperty.call(this.onlineDevices, deviceId)) {
             delete this.onlineDevices[deviceId];

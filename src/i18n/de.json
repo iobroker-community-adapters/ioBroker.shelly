@@ -495,5 +495,6 @@
     "Enhanced security (HTTPS)": "Erweiterte Sicherheit (HTTPS)",
     "MAC address": "MAC-Adresse",
     "Firmware version (short)": "Firmware-Version (kurz)",
-    "Application name": "Anwendungsname"
+    "Application name": "Anwendungsname",
+    "MQTT connected": "MQTT verbunden"
 }

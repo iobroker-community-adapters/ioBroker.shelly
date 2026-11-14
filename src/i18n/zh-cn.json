@@ -495,5 +495,6 @@
     "Enhanced security (HTTPS)": "增强安全性 (HTTPS)",
     "MAC address": "MAC地址",
     "Firmware version (short)": "固件版本（简短）",
-    "Application name": "应用程序名称"
+    "Application name": "应用程序名称",
+    "MQTT connected": "MQTT已连接"
 }
