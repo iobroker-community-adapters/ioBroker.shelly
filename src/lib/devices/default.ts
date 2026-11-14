@@ -1274,10 +1274,158 @@ const defaultsgen2: DeviceDefinition = {
             write: false,
         },
     },
-    'WiFi.apClientCount': {
+    'apClients.count': {
         mqtt: {
             http_publish: '/rpc/WiFi.ListAPClients',
             http_publish_funct: async (value, self) => shellyHelper.updateWifiApClients(self, value),
+        },
+        common: {
+            name: 'AP client count',
+            type: 'number',
+            role: 'value',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.staIpCurrent': {
+        mqtt: {
+            mqtt_publish: '<mqttprefix>/events/rpc',
+            mqtt_publish_funct: value => {
+                const v = JSON.parse(value);
+                if (v?.method === 'NotifyStatus' && v?.params?.wifi !== undefined) {
+                    return v.params.wifi.sta_ip ?? '';
+                }
+                return undefined;
+            },
+            http_publish: '/rpc/WiFi.GetStatus',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta_ip ?? '') : undefined),
+        },
+        common: {
+            name: 'Current IP address',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.connectionStatus': {
+        mqtt: {
+            mqtt_publish: '<mqttprefix>/events/rpc',
+            mqtt_publish_funct: value => {
+                const v = JSON.parse(value);
+                if (v?.method === 'NotifyStatus' && v?.params?.wifi !== undefined) {
+                    return v.params.wifi.status;
+                }
+                return undefined;
+            },
+            http_publish: '/rpc/WiFi.GetStatus',
+            http_publish_funct: value => (value ? JSON.parse(value)?.status : undefined),
+        },
+        common: {
+            name: 'Connection status',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.connectedSsid': {
+        mqtt: {
+            mqtt_publish: '<mqttprefix>/events/rpc',
+            mqtt_publish_funct: value => {
+                const v = JSON.parse(value);
+                if (v?.method === 'NotifyStatus' && v?.params?.wifi !== undefined) {
+                    return v.params.wifi.ssid ?? '';
+                }
+                return undefined;
+            },
+            http_publish: '/rpc/WiFi.GetStatus',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.ssid ?? '') : undefined),
+        },
+        common: {
+            name: 'Connected SSID',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.bssid': {
+        mqtt: {
+            mqtt_publish: '<mqttprefix>/events/rpc',
+            mqtt_publish_funct: value => {
+                const v = JSON.parse(value);
+                if (v?.method === 'NotifyStatus' && v?.params?.wifi !== undefined) {
+                    return v.params.wifi.bssid ?? '';
+                }
+                return undefined;
+            },
+            http_publish: '/rpc/WiFi.GetStatus',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.bssid ?? '') : undefined),
+        },
+        common: {
+            name: 'BSSID of connected access point',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.channel': {
+        mqtt: {
+            mqtt_publish: '<mqttprefix>/events/rpc',
+            mqtt_publish_funct: value => {
+                const v = JSON.parse(value);
+                if (v?.method === 'NotifyStatus' && v?.params?.wifi !== undefined) {
+                    return v.params.wifi.channel;
+                }
+                return undefined;
+            },
+            http_publish: '/rpc/WiFi.GetStatus',
+            http_publish_funct: value => (value ? JSON.parse(value)?.channel : undefined),
+        },
+        common: {
+            name: 'WiFi channel',
+            type: 'number',
+            role: 'value',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.rssi': {
+        mqtt: {
+            mqtt_publish: '<mqttprefix>/events/rpc',
+            mqtt_publish_funct: value => {
+                const v = JSON.parse(value);
+                if (v?.method === 'NotifyStatus' && v?.params?.wifi !== undefined) {
+                    return v.params.wifi.rssi;
+                }
+                return undefined;
+            },
+            http_publish: '/rpc/WiFi.GetStatus',
+            http_publish_funct: value => (value ? JSON.parse(value)?.rssi : undefined),
+        },
+        common: {
+            name: 'Signal strength',
+            type: 'number',
+            role: 'value',
+            unit: 'dBm',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.apClientCount': {
+        mqtt: {
+            mqtt_publish: '<mqttprefix>/events/rpc',
+            mqtt_publish_funct: value => {
+                const v = JSON.parse(value);
+                if (v?.method === 'NotifyStatus' && v?.params?.wifi !== undefined) {
+                    return v.params.wifi.ap_client_count;
+                }
+                return undefined;
+            },
+            http_publish: '/rpc/WiFi.GetStatus',
+            http_publish_funct: value => (value ? JSON.parse(value)?.ap_client_count : undefined),
         },
         common: {
             name: 'AP client count',
