@@ -1411,7 +1411,7 @@ const defaultsgen2: DeviceDefinition = {
     'apClients.count': {
         mqtt: {
             http_publish: '/rpc/WiFi.ListAPClients',
-            http_publish_funct: async (value, self) => shellyHelper.updateWifiApClients(self, value),
+            http_publish_funct: (value, self) => shellyHelper.updateWifiApClients(self, value),
         },
         common: {
             name: 'AP client count',
