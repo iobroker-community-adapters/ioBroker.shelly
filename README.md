@@ -240,6 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
+- (mcm1957) Fixed stale/inverted switch status after MQTT command for Shelly 1PM Gen4 and 1PM Mini Gen4 (refers to #1706)
 - (mcm1957) Added MQTT.connected state for Gen1/Gen2+ devices; online state for MQTT devices now requires both HTTP reachability and an active MQTT connection
 - (mcm1957) Extended WiFi states for Gen2+ devices: all WiFi.GetConfig fields (AP, station, fallback station, roaming) are now available as individual states
 - (mcm1957) Added WiFi.GetStatus states (current IP, connection status, SSID, BSSID, channel, RSSI, AP client count) updated via MQTT notifications with HTTP polling as fallback
