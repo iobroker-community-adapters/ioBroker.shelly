@@ -482,21 +482,13 @@ async function updateWifiApClients(self: ShellyClient, value: string): Promise<n
         });
 
         const stateDefs: Array<[string, ioBroker.StateCommon, ioBroker.StateValue]> = [
-            [
-                'ip',
-                { name: 'IP address', type: 'string', role: 'info.ip', read: true, write: false },
-                client.ip ?? '',
-            ],
+            ['ip', { name: 'IP address', type: 'string', role: 'info.ip', read: true, write: false }, client.ip ?? ''],
             [
                 'ipStatic',
                 { name: 'Static IP', type: 'boolean', role: 'state', read: true, write: false },
                 client.ip_static,
             ],
-            [
-                'mport',
-                { name: 'Mapped port', type: 'number', role: 'value', read: true, write: false },
-                client.mport,
-            ],
+            ['mport', { name: 'Mapped port', type: 'number', role: 'value', read: true, write: false }, client.mport],
             [
                 'since',
                 { name: 'Connected since', type: 'number', role: 'date', unit: 'sec', read: true, write: false },
