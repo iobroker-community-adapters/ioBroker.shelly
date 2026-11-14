@@ -999,6 +999,294 @@ const defaultsgen2: DeviceDefinition = {
             write: true,
         },
     },
+    'WiFi.apSsid': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.ap?.ssid : undefined),
+        },
+        common: {
+            name: 'Access point SSID',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.apIsOpen': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.ap?.is_open : undefined),
+        },
+        common: {
+            name: 'Access point open (no password)',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.apRangeExtenderEnabled': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.ap?.range_extender?.enable : undefined),
+        },
+        common: {
+            name: 'Range extender enabled',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.staSsid': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.sta?.ssid : undefined),
+        },
+        common: {
+            name: 'Station SSID',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.staIsOpen': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.sta?.is_open : undefined),
+        },
+        common: {
+            name: 'Station open (no password)',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.staEnabled': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.sta?.enable : undefined),
+        },
+        common: {
+            name: 'Station enabled',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.staIpv4mode': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.sta?.ipv4mode : undefined),
+        },
+        common: {
+            name: 'Station IPv4 mode',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.staIp': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta?.ip ?? '') : undefined),
+        },
+        common: {
+            name: 'Station IP address',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.staNetmask': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta?.netmask ?? '') : undefined),
+        },
+        common: {
+            name: 'Station netmask',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.staGw': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta?.gw ?? '') : undefined),
+        },
+        common: {
+            name: 'Station gateway',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.staDns': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta?.nameserver ?? '') : undefined),
+        },
+        common: {
+            name: 'Station DNS server',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.sta1Ssid': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta1?.ssid ?? '') : undefined),
+        },
+        common: {
+            name: 'Fallback station SSID',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.sta1IsOpen': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.sta1?.is_open : undefined),
+        },
+        common: {
+            name: 'Fallback station open (no password)',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.sta1Enabled': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.sta1?.enable : undefined),
+        },
+        common: {
+            name: 'Fallback station enabled',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.sta1Ipv4mode': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.sta1?.ipv4mode : undefined),
+        },
+        common: {
+            name: 'Fallback station IPv4 mode',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.sta1Ip': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta1?.ip ?? '') : undefined),
+        },
+        common: {
+            name: 'Fallback station IP address',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.sta1Netmask': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta1?.netmask ?? '') : undefined),
+        },
+        common: {
+            name: 'Fallback station netmask',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.sta1Gw': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta1?.gw ?? '') : undefined),
+        },
+        common: {
+            name: 'Fallback station gateway',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.sta1Dns': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? (JSON.parse(value)?.sta1?.nameserver ?? '') : undefined),
+        },
+        common: {
+            name: 'Fallback station DNS server',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.roamRssiThr': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.roam?.rssi_thr : undefined),
+        },
+        common: {
+            name: 'Roam RSSI threshold',
+            type: 'number',
+            role: 'value',
+            unit: 'dBm',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.roamInterval': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.GetConfig',
+            http_publish_funct: value => (value ? JSON.parse(value)?.roam?.interval : undefined),
+        },
+        common: {
+            name: 'Roam scan interval',
+            type: 'number',
+            role: 'value.interval',
+            unit: 'sec',
+            read: true,
+            write: false,
+        },
+    },
+    'WiFi.apClientCount': {
+        mqtt: {
+            http_publish: '/rpc/WiFi.ListAPClients',
+            http_publish_funct: async (value, self) => shellyHelper.updateWifiApClients(self, value),
+        },
+        common: {
+            name: 'AP client count',
+            type: 'number',
+            role: 'value',
+            read: true,
+            write: false,
+        },
+    },
     'Mqtt.topicPrefix': {
         mqtt: {
             http_publish: '/rpc/Mqtt.GetConfig',

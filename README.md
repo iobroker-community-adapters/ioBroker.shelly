@@ -238,6 +238,11 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (mcm1957) Extended WiFi states for Gen2+ devices: all WiFi.GetConfig fields (AP, station, fallback station, roaming) are now available as individual states
+- (mcm1957) Added dynamic AP client states (apClients.{mac}.*) updated each poll cycle via WiFi.ListAPClients
+
 ### 12.1.2 (2026-11-13)
 
 - (mcm1957) Power units corrected for Top AC Portable EV Charger (topacportableevcharger) (#1702)
