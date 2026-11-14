@@ -494,7 +494,6 @@
     "Authentication domain": "Domaine d'authentification",
     "Enhanced security (HTTPS)": "Sécurité renforcée (HTTPS)",
     "MAC address": "Adresse MAC",
-    "Firmware version (short)": "Version du firmware (courte)",
     "Application name": "Nom de l'application",
     "MQTT connected": "MQTT connecté"
 }

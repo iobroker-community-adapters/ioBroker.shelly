@@ -494,7 +494,6 @@
     "Authentication domain": "Authentication domain",
     "Enhanced security (HTTPS)": "Enhanced security (HTTPS)",
     "MAC address": "MAC address",
-    "Firmware version (short)": "Firmware version (short)",
     "Application name": "Application name",
     "MQTT connected": "MQTT connected"
 }

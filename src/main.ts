@@ -325,7 +325,7 @@ export class ShellyAdapter extends Adapter {
 
     /**
      * Called by MQTTClient when a device connects or disconnects via MQTT.
-     * Updates the MQTT.connected state and gates online status on MQTT connectivity.
+     * Updates the Mqtt.connected state and gates online status on MQTT connectivity.
      *
      * @param deviceId - device id
      * @param connected - true when MQTT connection established, false when closed
@@ -338,7 +338,7 @@ export class ShellyAdapter extends Adapter {
         this.log.debug(`[mqttConnectionUpdate] ${deviceId}: ${connected}`);
         this.mqttConnectedDevices[deviceId] = connected;
 
-        await this.setState(`${deviceId}.MQTT.connected`, { val: connected, ack: true });
+        await this.setState(`${deviceId}.Mqtt.connected`, { val: connected, ack: true });
 
         if (!connected) {
             await this.deviceStatusUpdate(deviceId, false);
