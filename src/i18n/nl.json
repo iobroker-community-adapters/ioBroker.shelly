@@ -101,6 +101,8 @@
     "Device generation": "Vernietigingsgeneratie",
     "Device ID": "Apparaat-ID",
     "Device IP address or hostname": "IP-adres of gastnaam",
+    "Device IP address": "IP-adres van het apparaat",
+    "Connected via range extender": "Verbonden via range extender",
     "Device is password-protected": "Apparaat is met een wachtwoord beveiligd",
     "Device is rebooting...": "Het apparaat wordt opnieuw opgestart...",
     "Device model": "Vernietig model",

@@ -178,7 +178,7 @@ const defaultsgen1: DeviceDefinition = {
             init_funct: self => self.getIP(),
         },
         mqtt: {
-            init_funct: self => self.getIP(),
+            init_funct: self => self.getHttpEndpoint(),
         },
         common: {
             name: 'Device IP address or hostname',
@@ -186,6 +186,37 @@ const defaultsgen1: DeviceDefinition = {
             role: 'info.ip',
             read: true,
             write: false,
+        },
+    },
+    ip: {
+        coap: {
+            no_display: true,
+        },
+        mqtt: {
+            init_funct: self => self.getIP(),
+        },
+        common: {
+            name: 'Device IP address',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
+    relayed: {
+        coap: {
+            no_display: true,
+        },
+        mqtt: {
+            init_value: false,
+        },
+        common: {
+            name: 'Connected via range extender',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+            def: false,
         },
     },
     id: {
@@ -690,7 +721,7 @@ const defaultsgen2: DeviceDefinition = {
     },
     hostname: {
         mqtt: {
-            init_funct: self => self.getIP(),
+            init_funct: self => self.getHttpEndpoint(),
         },
         common: {
             name: 'Device IP address or hostname',
@@ -698,6 +729,31 @@ const defaultsgen2: DeviceDefinition = {
             role: 'info.ip',
             read: true,
             write: false,
+        },
+    },
+    ip: {
+        mqtt: {
+            init_funct: self => self.getIP(),
+        },
+        common: {
+            name: 'Device IP address',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
+    relayed: {
+        mqtt: {
+            init_value: false,
+        },
+        common: {
+            name: 'Connected via range extender',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+            def: false,
         },
     },
     id: {

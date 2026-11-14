@@ -101,6 +101,8 @@
     "Device generation": "Generazione di dispositivi",
     "Device ID": "ID dispositivo",
     "Device IP address or hostname": "Indirizzo IP del dispositivo o nome host",
+    "Device IP address": "Indirizzo IP del dispositivo",
+    "Connected via range extender": "Connesso tramite range extender",
     "Device is password-protected": "Il dispositivo è protetto da password",
     "Device is rebooting...": "Il dispositivo si sta riavviando...",
     "Device model": "Modello del dispositivo",
