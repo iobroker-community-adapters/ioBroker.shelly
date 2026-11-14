@@ -883,7 +883,9 @@ export class BaseClient implements ShellyClient {
                                     try {
                                         if (this.getDeviceGen() === 1) {
                                             // Append value parameters
-                                            const url = new URL(`http://${this.getHttpEndpoint()}${httpBlock?.http_cmd}`);
+                                            const url = new URL(
+                                                `http://${this.getHttpEndpoint()}${httpBlock?.http_cmd}`,
+                                            );
                                             if (typeof publishValue === 'object') {
                                                 Object.keys(publishValue).forEach(key =>
                                                     url.searchParams.append(key, publishValue[key]),

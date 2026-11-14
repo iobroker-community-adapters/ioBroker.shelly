@@ -180,15 +180,10 @@ class MQTTClient extends BaseClient {
             try {
                 const body = await client.requestAsync('/rpc/WiFi.ListAPClients');
                 const apClients = JSON.parse(body)?.ap_clients ?? [];
-                const apClient = apClients.find(
-                    (entry: { ip?: string; mport?: number }) => entry?.ip === deviceIp,
-                );
+                const apClient = apClients.find((entry: { ip?: string; mport?: number }) => entry?.ip === deviceIp);
 
                 if (apClient?.mport > 0) {
-                    await this.setHttpEndpoint(
-                        `${remoteIp}:${apClient.mport}`,
-                        `range extender ${client.getId()}`,
-                    );
+                    await this.setHttpEndpoint(`${remoteIp}:${apClient.mport}`, `range extender ${client.getId()}`);
                     this.adapter.log.info(
                         `[MQTT] Device ${this.getId()} uses range extender ${client.getId()} via ${this.getHttpEndpoint()}`,
                     );
