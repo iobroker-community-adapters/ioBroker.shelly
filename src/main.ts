@@ -338,7 +338,10 @@ export class ShellyAdapter extends Adapter {
         this.log.debug(`[mqttConnectionUpdate] ${deviceId}: ${connected}`);
         this.mqttConnectedDevices[deviceId] = connected;
 
-        await this.setState(`${deviceId}.Mqtt.connected`, { val: connected, ack: true });
+        const mqttConnectedObj = await this.getObjectAsync(`${deviceId}.Mqtt.connected`);
+        if (mqttConnectedObj) {
+            await this.setState(`${deviceId}.Mqtt.connected`, { val: connected, ack: true });
+        }
 
         if (!connected) {
             await this.deviceStatusUpdate(deviceId, false);
