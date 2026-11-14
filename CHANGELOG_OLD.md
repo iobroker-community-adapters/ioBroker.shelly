@@ -1,4 +1,14 @@
 # Older changes
+## 11.0.0 (2026-07-03)
+- (@klein0r) Updated ble script (v1.3) for Shelly firmware > 2.0
+- (@GermanBluefox) Added firmware update available indicator for devices supporting this feature.
+- (@copilot) Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).
+- (@copilot) Added HiluX DS8 by Shelly (hiluxds8)
+- (@copilot) Added Shelly EM Gen4 (shellyemg4)
+- (@mcm1957) Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.23 now.
+- (@GermanBluefox) Device manager has been added providing info and control of devices and provisioning.
+- (@mcm1957) IMPORTANT: Please read the changelog at README.md listing more information.
+
 ## 11.0.0 additional information 
 - (@mcm1957) Added Shelly Presence Gen 4
 - (@mcm1957) Added Shelly Cury

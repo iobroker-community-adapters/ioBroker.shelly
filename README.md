@@ -238,7 +238,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 12.2.0-alpha.0 (2026-11-14)
 
 - (mcm1957) Fixed stale/inverted switch status after MQTT command for Shelly 1PM Gen4 and 1PM Mini Gen4 (refers to #1706)
 - (mcm1957) Added MQTT.connected state for Gen1/Gen2+ devices; online state for MQTT devices now requires both HTTP reachability and an active MQTT connection
@@ -306,16 +306,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (@floze-the-genius) Corrected roles for Gen 2+ input states. [#1498]
 - (@GermanBluefox) Added option to ignore the timezone mismatch message (device timezone differs from the ioBroker host timezone).
 - (mcm1957) dependencies have been updated
-
-### 11.0.0 (2026-07-03)
-- (@klein0r) Updated ble script (v1.3) for Shelly firmware > 2.0
-- (@GermanBluefox) Added firmware update available indicator for devices supporting this feature.
-- (@copilot) Added Shelly Dimmer 0/1-10V PM Gen4 (shelly0110dimg4).
-- (@copilot) Added HiluX DS8 by Shelly (hiluxds8)
-- (@copilot) Added Shelly EM Gen4 (shellyemg4)
-- (@mcm1957) Adapter requires node.js >= 22, js-controller >= 6.0.11 and admin >= 7.8.23 now.
-- (@GermanBluefox) Device manager has been added providing info and control of devices and provisioning.
-- (@mcm1957) IMPORTANT: Please read the changelog at README.md listing more information.
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 
