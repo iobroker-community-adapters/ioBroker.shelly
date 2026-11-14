@@ -101,6 +101,8 @@
     "Device generation": "Генерация устройства",
     "Device ID": "Идентификатор устройства",
     "Device IP address or hostname": "IP-адрес устройства или имя хоста",
+    "Device IP address": "IP-адрес устройства",
+    "Connected via range extender": "Подключено через расширитель диапазона",
     "Device is password-protected": "Устройство защищено паролем",
     "Device is rebooting...": "Устройство перезагружается...",
     "Device model": "Модель устройства",

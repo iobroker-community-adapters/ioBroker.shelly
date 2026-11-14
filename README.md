@@ -39,7 +39,7 @@ It uses the default Shelly firmware (no flashing of firmware needed!). You will 
 
 ## Supported devices
 
-Note that devices connected using **Shellies Range Extender** functionality are **not supported**.  
+Note that Gen 1 devices connected using **Shellies Range Extender** functionality are **not supported**. Gen 2+ devices behind a range extender are reached over the port the extender maps for them.  
 Please connect your devices directly to your (W)LAN and use a classic WLAN Repeater if required.
 
 ### Generation 1 (Gen 1)
@@ -240,6 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### 12.2.0-alpha.0 (2026-11-14)
 
+- (mcm1957) Added support for Gen2+ devices connected through a Shelly Range Extender; added new states `ip` (real device IP) and `relayed` (true if behind a range extender); `hostname` state now always includes the port
 - (mcm1957) Fixed stale/inverted switch status after MQTT command for Shelly 1PM Gen4 and 1PM Mini Gen4 (refers to #1706)
 - (mcm1957) Added MQTT.connected state for Gen1/Gen2+ devices; online state for MQTT devices now requires both HTTP reachability and an active MQTT connection
 - (mcm1957) Extended WiFi states for Gen2+ devices: all WiFi.GetConfig fields (AP, station, fallback station, roaming) are now available as individual states

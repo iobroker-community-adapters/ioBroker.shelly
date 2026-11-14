@@ -156,6 +156,54 @@ class MQTTClient extends BaseClient {
         return this.mqttprefix ?? '';
     }
 
+    /**
+     * A Gen 2+ device connected through a range extender is reachable at the extender's
+     * address and a mapped port only. Ask every extender candidate that shares the remote
+     * address for its AP clients and find the entry whose IP matches the device's own IP.
+     *
+     * @param remoteIp address the MQTT connection of this device came from
+     * @param deviceIp the device's own IP address (from Shelly.GetDeviceInfo)
+     * @returns whether an endpoint was found
+     */
+    async setRangeExtenderHttpEndpoint(remoteIp: string, deviceIp: string): Promise<boolean> {
+        if (this.getDeviceGen() < 2) {
+            return false;
+        }
+
+        const clients = MQTTClient.clientlist ?? {};
+        for (const clientId in clients) {
+            const client = clients[clientId];
+            if (!client || client === this || client.getDeviceGen() < 2 || client.getIP() !== remoteIp) {
+                continue;
+            }
+
+            try {
+                const body = await client.requestAsync('/rpc/WiFi.ListAPClients');
+                const apClients = JSON.parse(body)?.ap_clients ?? [];
+                const apClient = apClients.find(
+                    (entry: { ip?: string; mport?: number }) => entry?.ip === deviceIp,
+                );
+
+                if (apClient?.mport > 0) {
+                    await this.setHttpEndpoint(
+                        `${remoteIp}:${apClient.mport}`,
+                        `range extender ${client.getId()}`,
+                    );
+                    this.adapter.log.info(
+                        `[MQTT] Device ${this.getId()} uses range extender ${client.getId()} via ${this.getHttpEndpoint()}`,
+                    );
+                    return true;
+                }
+            } catch (err) {
+                this.adapter.log.debug(
+                    `[MQTT] Unable to check range extender clients of ${client.getLogInfo()} for ${this.getLogInfo()}: ${err}`,
+                );
+            }
+        }
+
+        return false;
+    }
+
     replacePrefixIn(topic: string): string {
         return new String(topic).replace(new RegExp('<mqttprefix>', 'g'), this.getMqttPrefix());
     }
@@ -275,6 +323,13 @@ class MQTTClient extends BaseClient {
                         const ip = payloadObj?.result?.eth?.ip || payloadObj?.result?.wifi?.sta_ip;
                         if (ip && ip !== this.getIP()) {
                             await this.setIP(ip, `Gen 2+ ${INIT_SRC}/rpc`);
+
+                            const remoteIp = this.stream?.remoteAddress;
+                            if (remoteIp && !remoteIp.endsWith('.1') && ip !== remoteIp) {
+                                // TODO: remove workaround to skip in Docker env
+                                await this.setRangeExtenderHttpEndpoint(remoteIp, ip);
+                            }
+
                             await this.adapter.deviceStatusUpdate(this.getDeviceId(), true); // Device online
                         }
 

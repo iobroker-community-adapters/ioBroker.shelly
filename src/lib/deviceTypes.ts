@@ -46,6 +46,8 @@ export interface ShellyClient {
     deviceId: string | undefined;
     /** Current IP address of the device, e.g. `192.168.1.2`. */
     ip: string | undefined;
+    /** HTTP endpoint (ip:port) for this device, e.g. `192.168.1.2:80` or `192.168.1.3:23456` behind a range extender. */
+    httpEndpoint: string | undefined;
     /** Device id reported by the device, e.g. `shellyplug-s-12345`. */
     id: string | undefined;
     /** Hardware type, e.g. `SHRGBW2`. */
@@ -70,6 +72,8 @@ export interface ShellyClient {
     getDirectoryName: () => string;
     getDeviceMode: () => string | undefined;
     getIP: () => string | undefined;
+    /** HTTP endpoint (ip:port) to send HTTP requests to. */
+    getHttpEndpoint: () => string | undefined;
     /** Human-readable `ip (class / id / deviceId)` string for log messages. */
     getLogInfo: () => string;
     getDeviceId: () => string | undefined;
