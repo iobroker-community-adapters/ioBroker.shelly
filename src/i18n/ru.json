@@ -496,7 +496,6 @@
     "Authentication domain": "Домен аутентификации",
     "Enhanced security (HTTPS)": "Расширенная безопасность (HTTPS)",
     "MAC address": "MAC-адрес",
-    "Firmware version (short)": "Версия прошивки (краткая)",
     "Application name": "Название приложения",
     "MQTT connected": "MQTT подключён"
 }
