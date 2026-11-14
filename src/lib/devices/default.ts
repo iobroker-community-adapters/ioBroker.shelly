@@ -662,15 +662,7 @@ const defaultsgen2: DeviceDefinition = {
     versionShort: {
         mqtt: {
             http_publish: '/rpc/Shelly.GetDeviceInfo',
-            http_publish_funct: value => {
-                const fw = value ? JSON.parse(value).fw_id : undefined;
-                if (!fw) {
-                    return undefined;
-                }
-                const afterSlash = fw.includes('/') ? (fw.split('/').pop() ?? fw) : fw;
-                const m = /^(\d+\.\d+\.\d+)/.exec(afterSlash);
-                return m ? m[1] : undefined;
-            },
+            http_publish_funct: value => (value ? (JSON.parse(value).ver ?? undefined) : undefined),
         },
         common: {
             name: 'Firmware version short',
@@ -777,6 +769,148 @@ const defaultsgen2: DeviceDefinition = {
             read: true,
             write: false,
             icon: shellyHelper.getIcon('auth'),
+        },
+    },
+    authDomain: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => (value ? (JSON.parse(value).auth_domain ?? '') : undefined),
+        },
+        common: {
+            name: 'Authentication domain',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    enhancedSecurity: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => (value ? (JSON.parse(value).enhanced_security ?? false) : undefined),
+        },
+        common: {
+            name: 'Enhanced security (HTTPS)',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    mac: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => (value ? JSON.parse(value).mac : undefined),
+        },
+        common: {
+            name: 'MAC address',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    ver: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => (value ? JSON.parse(value).ver : undefined),
+        },
+        common: {
+            name: 'Firmware version (short)',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    app: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => (value ? JSON.parse(value).app : undefined),
+        },
+        common: {
+            name: 'Application name',
+            type: 'string',
+            role: 'text',
+            read: true,
+            write: false,
+        },
+    },
+    originalId: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => (value ? JSON.parse(value).id : undefined),
+        },
+        common: {
+            name: 'Original device ID',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    matter: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => {
+                const v = value ? JSON.parse(value) : undefined;
+                return v && 'matter' in v ? v.matter : undefined;
+            },
+        },
+        common: {
+            name: 'Matter support',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    provision: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => {
+                const v = value ? JSON.parse(value) : undefined;
+                return v && 'provision' in v ? v.provision : undefined;
+            },
+        },
+        common: {
+            name: 'Provision status',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    profile: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => {
+                const v = value ? JSON.parse(value) : undefined;
+                return v && 'profile' in v ? v.profile : undefined;
+            },
+        },
+        common: {
+            name: 'Device profile',
+            type: 'string',
+            role: 'state',
+            read: true,
+            write: false,
+        },
+    },
+    discoverable: {
+        mqtt: {
+            http_publish: '/rpc/Shelly.GetDeviceInfo',
+            http_publish_funct: value => {
+                const v = value ? JSON.parse(value) : undefined;
+                return v && 'discoverable' in v ? v.discoverable : undefined;
+            },
+        },
+        common: {
+            name: 'Discoverable',
+            type: 'boolean',
+            role: 'state',
+            read: true,
+            write: false,
         },
     },
     rssi: {

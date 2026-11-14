@@ -485,5 +485,15 @@
     "Zone area": "区域范围",
     "Zone enabled": "区域已启用",
     "Zone name": "区域名称",
-    "Zone type": "区域类型"
+    "Zone type": "区域类型",
+    "Original device ID": "原始设备ID",
+    "Matter support": "Matter支持",
+    "Provision status": "配置状态",
+    "Device profile": "设备配置文件",
+    "Discoverable": "可发现",
+    "Authentication domain": "认证域",
+    "Enhanced security (HTTPS)": "增强安全性 (HTTPS)",
+    "MAC address": "MAC地址",
+    "Firmware version (short)": "固件版本（简短）",
+    "Application name": "应用程序名称"
 }

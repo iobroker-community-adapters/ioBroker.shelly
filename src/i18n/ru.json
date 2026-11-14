@@ -485,5 +485,15 @@
     "Zone area": "Область зоны",
     "Zone enabled": "Зона включена",
     "Zone name": "Имя зоны",
-    "Zone type": "Тип зоны"
+    "Zone type": "Тип зоны",
+    "Original device ID": "Исходный идентификатор устройства",
+    "Matter support": "Поддержка Matter",
+    "Provision status": "Статус подготовки",
+    "Device profile": "Профиль устройства",
+    "Discoverable": "Обнаруживаемый",
+    "Authentication domain": "Домен аутентификации",
+    "Enhanced security (HTTPS)": "Расширенная безопасность (HTTPS)",
+    "MAC address": "MAC-адрес",
+    "Firmware version (short)": "Версия прошивки (краткая)",
+    "Application name": "Название приложения"
 }

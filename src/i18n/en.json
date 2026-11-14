@@ -485,5 +485,15 @@
     "Zone area": "Zone area",
     "Zone enabled": "Zone enabled",
     "Zone name": "Zone name",
-    "Zone type": "Zone type"
+    "Zone type": "Zone type",
+    "Original device ID": "Original device ID",
+    "Matter support": "Matter support",
+    "Provision status": "Provision status",
+    "Device profile": "Device profile",
+    "Discoverable": "Discoverable",
+    "Authentication domain": "Authentication domain",
+    "Enhanced security (HTTPS)": "Enhanced security (HTTPS)",
+    "MAC address": "MAC address",
+    "Firmware version (short)": "Firmware version (short)",
+    "Application name": "Application name"
 }

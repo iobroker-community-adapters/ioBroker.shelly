@@ -243,6 +243,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (mcm1957) Extended WiFi states for Gen2+ devices: all WiFi.GetConfig fields (AP, station, fallback station, roaming) are now available as individual states
 - (mcm1957) Added WiFi.GetStatus states (current IP, connection status, SSID, BSSID, channel, RSSI, AP client count) updated via MQTT notifications with HTTP polling as fallback
 - (mcm1957) Added dynamic AP client states (apClients.{mac}.*) updated each poll cycle via WiFi.ListAPClients
+- (mcm1957) Extended device info states: added originalId, matter, provision, profile, discoverable from Shelly.GetDeviceInfo; versionShort now uses the ver field directly
 
 ### 12.1.2 (2026-11-13)
 

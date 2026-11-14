@@ -485,5 +485,15 @@
     "Zone area": "Obszar strefy",
     "Zone enabled": "Strefa włączona",
     "Zone name": "Nazwa strefy",
-    "Zone type": "Typ strefy"
+    "Zone type": "Typ strefy",
+    "Original device ID": "Oryginalny identyfikator urządzenia",
+    "Matter support": "Obsługa Matter",
+    "Provision status": "Status provisjonowania",
+    "Device profile": "Profil urządzenia",
+    "Discoverable": "Wykrywalny",
+    "Authentication domain": "Domena uwierzytelniania",
+    "Enhanced security (HTTPS)": "Rozszerzone zabezpieczenia (HTTPS)",
+    "MAC address": "Adres MAC",
+    "Firmware version (short)": "Wersja oprogramowania (skrócona)",
+    "Application name": "Nazwa aplikacji"
 }

@@ -485,5 +485,15 @@
     "Zone area": "Área de la zona",
     "Zone enabled": "Zona activada",
     "Zone name": "Nombre de la zona",
-    "Zone type": "Tipo de zona"
+    "Zone type": "Tipo de zona",
+    "Original device ID": "ID de dispositivo original",
+    "Matter support": "Soporte Matter",
+    "Provision status": "Estado de aprovisionamiento",
+    "Device profile": "Perfil de dispositivo",
+    "Discoverable": "Descubrible",
+    "Authentication domain": "Dominio de autenticación",
+    "Enhanced security (HTTPS)": "Seguridad mejorada (HTTPS)",
+    "MAC address": "Dirección MAC",
+    "Firmware version (short)": "Versión de firmware (corta)",
+    "Application name": "Nombre de aplicación"
 }

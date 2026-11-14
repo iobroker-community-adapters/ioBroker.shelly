@@ -485,5 +485,15 @@
     "Zone area": "Zonegebied",
     "Zone enabled": "Zone ingeschakeld",
     "Zone name": "Zonenaam",
-    "Zone type": "Zonetype"
+    "Zone type": "Zonetype",
+    "Original device ID": "Origineel apparaat-ID",
+    "Matter support": "Matter-ondersteuning",
+    "Provision status": "Inrichtingsstatus",
+    "Device profile": "Apparaatprofiel",
+    "Discoverable": "Vindbaar",
+    "Authentication domain": "Authenticatiedomein",
+    "Enhanced security (HTTPS)": "Verbeterde beveiliging (HTTPS)",
+    "MAC address": "MAC-adres",
+    "Firmware version (short)": "Firmwareversie (kort)",
+    "Application name": "Applicatienaam"
 }
