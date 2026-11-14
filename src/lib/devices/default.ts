@@ -495,7 +495,7 @@ const defaultsgen1: DeviceDefinition = {
             write: false,
         },
     },
-    'MQTT.connected': {
+    'Mqtt.connected': {
         coap: {
             no_display: true,
         },
@@ -821,19 +821,6 @@ const defaultsgen2: DeviceDefinition = {
             name: 'MAC address',
             type: 'string',
             role: 'text',
-            read: true,
-            write: false,
-        },
-    },
-    ver: {
-        mqtt: {
-            http_publish: '/rpc/Shelly.GetDeviceInfo',
-            http_publish_funct: value => (value ? JSON.parse(value).ver : undefined),
-        },
-        common: {
-            name: 'Firmware version (short)',
-            type: 'string',
-            role: 'state',
             read: true,
             write: false,
         },
@@ -1663,7 +1650,7 @@ const defaultsgen2: DeviceDefinition = {
             write: false,
         },
     },
-    'MQTT.connected': {
+    'Mqtt.connected': {
         mqtt: {
             init_value: false,
         },
