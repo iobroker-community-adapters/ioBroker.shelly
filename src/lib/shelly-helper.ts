@@ -1,6 +1,10 @@
 import * as colorconv from './colorconv';
 import type { ShellyClient } from './deviceTypes';
 
+export const RELAYED_NONE = 0;
+export const RELAYED_RANGE_EXTENDER = 1;
+export const RELAYED_VPN = 2;
+
 /** Base64-encoded SVG icons (Font Awesome) used for generated states in the admin UI. */
 const icons: Record<string, string> = {
     // https://fontawesome.com/icons/file-signature?s=solid&f=classic
