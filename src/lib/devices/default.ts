@@ -12,6 +12,10 @@ import * as shellyHelper from '../shelly-helper';
 function checkTimezone(timeZone: string | undefined, self: ShellyClient): string | undefined {
     const systemTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
+    if (self.timezoneChecked) {
+        return;
+    }
+    self.timezoneChecked = true;
     if (timeZone && timeZone !== systemTimeZone) {
         if (!self.adapter.config.ignoreTimezoneMismatch) {
             self.adapter.log.info(
@@ -1469,7 +1473,7 @@ const defaultsgen2: DeviceDefinition = {
     'apClients.count': {
         mqtt: {
             http_publish: '/rpc/WiFi.ListAPClients',
-            http_publish_funct: (value, self) => shellyHelper.updateWifiApClients(self, value),
+            http_publish_funct: async (value, self) => shellyHelper.updateWifiApClients(self, value),
         },
         common: {
             name: 'AP client count',

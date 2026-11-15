@@ -450,17 +450,17 @@ interface WifiApClient {
 async function updateWifiApClients(self: ShellyClient, value: string): Promise<number | undefined> {
     const deviceId = self.getDeviceId();
     if (!deviceId || !value) {
-        return undefined;
+        return 0;
     }
 
     let parsed: { ap_clients?: WifiApClient[] };
     try {
         parsed = JSON.parse(value);
     } catch {
-        return undefined;
+        return 0;
     }
 
-    const clients = parsed.ap_clients ?? [];
+    const clients = parsed?.ap_clients ?? [];
     const currentMacs = new Set<string>();
 
     // Ensure apClients channel exists
@@ -508,7 +508,7 @@ async function updateWifiApClients(self: ShellyClient, value: string): Promise<n
                 common,
                 native: {},
             });
-            await self.adapter.setStateAsync(stateId, { val, ack: true });
+            await self.adapter.setState(stateId, { val, ack: true });
         }
     }
 
@@ -520,7 +520,7 @@ async function updateWifiApClients(self: ShellyClient, value: string): Promise<n
         if (obj?.type === 'channel' && fullId.startsWith(prefix)) {
             const mac = fullId.slice(prefix.length);
             if (!mac.includes('.') && !currentMacs.has(mac)) {
-                await self.adapter.setStateAsync(`${deviceId}.apClients.${mac}.connected`, { val: false, ack: true });
+                await self.adapter.setState(`${deviceId}.apClients.${mac}.connected`, { val: false, ack: true });
             }
         }
     }

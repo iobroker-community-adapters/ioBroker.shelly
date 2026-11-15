@@ -60,6 +60,8 @@ export interface ShellyClient {
     serialId: string | undefined;
     /** Protocol generation (1 for CoAP/Gen1, >= 2 for MQTT/Gen2+). */
     deviceGen: number | undefined;
+    /** Marker for timeZone check */
+    timezoneChecked: boolean;
 
     /** Returns the next rolling 16-bit message id (used for Gen2+ JSON-RPC requests). */
     getNextMsgId: () => number;
