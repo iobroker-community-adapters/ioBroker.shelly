@@ -53,6 +53,8 @@ class MQTTClient extends BaseClient {
     destroying: boolean;
     /** The mqtt-connection wrapper around the stream (assigned in `start()`, called from the ctor). */
     client!: Connection;
+    /** Resolve callback for waiting until real IP is received via iobroker-init/rpc (range extender support). */
+    private pendingIpFromRpcResolve: (() => void) | null;
 
     constructor(adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter, stream: net.Socket) {
         super('mqtt', adapter, objectHelper, eventEmitter);
@@ -68,6 +70,7 @@ class MQTTClient extends BaseClient {
         this.commandQueue = []; // queue for commands to the device during initialization (mqtt prefix unknown)
         this.processingQueue = false; // flag to indicate queue processing is in progress
         this.destroying = false; // flag to prevent new packets from being queued during destruction
+        this.pendingIpFromRpcResolve = null;
 
         this.start();
     }
@@ -326,6 +329,12 @@ class MQTTClient extends BaseClient {
                             }
 
                             await this.adapter.deviceStatusUpdate(this.getDeviceId(), true); // Device online
+                        }
+
+                        // Unblock httpIoBrokerState() which waits for the real IP
+                        if (ip && this.pendingIpFromRpcResolve) {
+                            this.pendingIpFromRpcResolve();
+                            this.pendingIpFromRpcResolve = null;
                         }
 
                         // Device Mode information (new)
@@ -852,6 +861,51 @@ class MQTTClient extends BaseClient {
                     await this.adapter.mqttConnectionUpdate(this.getDeviceId(), true); // MQTT connected
                     await this.adapter.deviceStatusUpdate(this.getDeviceId(), true); // Device online
 
+                    // For Gen 2+ devices: query real IP via MQTT before HTTP calls.
+                    // Required for devices connected via range extender, where the MQTT remote IP is the
+                    // range extender's IP rather than the device's own IP.
+                    if (this.getDeviceGen() >= 2 && this.getMqttPrefix()) {
+                        this.adapter.log.silly(
+                            `[MQTT] Client id "${packet.clientId}" retrieving device mode information (Gen 2+)`,
+                        );
+                        try {
+                            // Ask for more information (like IP address)
+                            this.publishStateValue(
+                                '<mqttprefix>/rpc',
+                                JSON.stringify({
+                                    id: this.getNextMsgId(),
+                                    src: INIT_SRC,
+                                    method: 'Shelly.GetDeviceInfo',
+                                    params: { ident: true },
+                                }),
+                            );
+
+                            this.publishStateValue(
+                                '<mqttprefix>/rpc',
+                                JSON.stringify({
+                                    id: this.getNextMsgId(),
+                                    src: INIT_SRC,
+                                    method: 'Shelly.GetStatus',
+                                }),
+                            );
+
+                            this.publishStateValue('<mqttprefix>/command', 'status_update');
+
+                            // Wait until iobroker-init/rpc response with real IP arrives (or 5s timeout)
+                            await Promise.race([
+                                new Promise<void>((resolve) => {
+                                    this.pendingIpFromRpcResolve = resolve;
+                                }),
+                                new Promise<void>((resolve) => setTimeout(resolve, 5000)),
+                            ]);
+                            this.pendingIpFromRpcResolve = null;
+                        } catch (err) {
+                            this.adapter.log.debug(
+                                `[MQTT] Client communication error (publish): "${packet.clientId}" - error: ${err}`,
+                            );
+                        }
+                    }
+
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting http states`);
                     await this.httpIoBrokerState();
 
@@ -875,11 +929,9 @@ class MQTTClient extends BaseClient {
                     try {
                         //this.client.connack({ returnCode: 0 });
 
-                        // Device Mode information (request)
-                        if (this.getDeviceGen() >= 2) {
-                            this.adapter.log.silly(
-                                `[MQTT] Client id "${packet.clientId}" retrieving device mode information (Gen 2+)`,
-                            );
+                        // Device Mode information (request) - only for Gen 2+ devices without mqttprefix
+                        // (devices with mqttprefix already published these requests above before httpIoBrokerState)
+                        if (this.getDeviceGen() >= 2 && !this.getMqttPrefix()) {
                             try {
                                 // Ask for more information (like IP address)
                                 this.publishStateValue(

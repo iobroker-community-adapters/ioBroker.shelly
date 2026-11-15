@@ -238,6 +238,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* Fixed incorrect IP address being used for HTTP requests on devices connected via a Shelly Range Extender
+
 ### 12.2.0-alpha.0 (2026-11-14)
 
 - (mcm1957) Added support for Gen2+ devices connected through a Shelly Range Extender; added new states `ip` (real device IP) and `relayed` (true if behind a range extender); `hostname` state now always includes the port
