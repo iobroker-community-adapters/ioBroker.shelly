@@ -897,10 +897,10 @@ class MQTTClient extends BaseClient {
 
                             // Wait until iobroker-init/rpc response with real IP arrives (or 5s timeout)
                             await Promise.race([
-                                new Promise<void>((resolve) => {
+                                new Promise<void>(resolve => {
                                     this.pendingIpFromRpcResolve = resolve;
                                 }),
-                                new Promise<void>((resolve) => setTimeout(resolve, 5000)),
+                                new Promise<void>(resolve => setTimeout(resolve, 5000)),
                             ]);
                             this.pendingIpFromRpcResolve = null;
                         } catch (err) {
