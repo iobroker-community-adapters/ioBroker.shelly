@@ -850,7 +850,11 @@ class MQTTClient extends BaseClient {
                     }
 
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" setting ip`);
-                    if (ip && !String(ip).endsWith('.1')) {
+                    if (this.getDeviceGen() >= 2) {
+                        // For Gen 2+ devices the real IP is confirmed via iobroker-init/rpc below.
+                        // Using the MQTT remote IP here would set a wrong endpoint for relayed devices.
+                        await this.initIPFromState();
+                    } else if (ip && !String(ip).endsWith('.1')) {
                         // TODO: remove workaround to skip in Docker env
                         await this.setIP(ip, 'MQTT connect');
                     } else {
