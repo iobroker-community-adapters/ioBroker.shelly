@@ -1,6 +1,6 @@
 import * as datapoints from '../datapoints';
 import { bleGatewayScriptCode, bleGatewayScriptName, bleGatewayScriptVersion } from '../ble-gateway-script';
-import { parseHostnameWithPort } from '../shelly-helper';
+import { parseHostnameWithPort, RELAYED_NONE, RELAYED_RANGE_EXTENDER } from '../shelly-helper';
 import axios, { type AxiosRequestConfig } from 'axios';
 import { I18n } from '@iobroker/adapter-core';
 import * as crypto from 'node:crypto';
@@ -532,7 +532,7 @@ export class BaseClient implements ShellyClient {
                 await this.adapter.setState(`${deviceId}.hostname`, { val: endpoint, ack: true, c: source });
             }
 
-            const relayed = this.ip ? endpoint !== `${this.ip}:80` : false;
+            const relayed = this.ip && endpoint !== `${this.ip}:80` ? RELAYED_RANGE_EXTENDER : RELAYED_NONE;
             const relayedObj = await this.adapter.getObjectAsync(`${deviceId}.relayed`);
             if (relayedObj) {
                 await this.adapter.setState(`${deviceId}.relayed`, { val: relayed, ack: true, c: source });

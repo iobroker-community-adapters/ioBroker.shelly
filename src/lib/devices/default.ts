@@ -212,15 +212,20 @@ const defaultsgen1: DeviceDefinition = {
             no_display: true,
         },
         mqtt: {
-            init_value: false,
+            init_value: 0,
         },
         common: {
-            name: 'Connected via range extender',
-            type: 'boolean',
+            name: 'Connection type',
+            type: 'number',
             role: 'state',
             read: true,
             write: false,
-            def: false,
+            def: 0,
+            states: {
+                0: 'none',
+                1: 'range extender',
+                2: 'vpn',
+            },
         },
     },
     id: {
@@ -749,15 +754,20 @@ const defaultsgen2: DeviceDefinition = {
     },
     relayed: {
         mqtt: {
-            init_value: false,
+            init_value: 0,
         },
         common: {
-            name: 'Connected via range extender',
-            type: 'boolean',
+            name: 'Connection type',
+            type: 'number',
             role: 'state',
             read: true,
             write: false,
-            def: false,
+            def: 0,
+            states: {
+                0: 'none',
+                1: 'range extender',
+                2: 'vpn',
+            },
         },
     },
     id: {
