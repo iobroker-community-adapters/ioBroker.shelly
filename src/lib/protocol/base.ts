@@ -60,6 +60,7 @@ export class BaseClient implements ShellyClient {
     nonceCount: number;
     lastNonce: string | undefined;
     httpTimeout: number;
+    timezoneChecked: boolean;
 
     constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         this.type = type; // mqtt or coap
@@ -79,6 +80,7 @@ export class BaseClient implements ShellyClient {
         this.nonceCount = 0;
         this.lastNonce = undefined;
         this.httpTimeout = 8 * 1000;
+        this.timezoneChecked = false;
 
         // Handle firmware updates
         this.eventEmitter.on('onFirmwareUpdate', async () => await this.firmwareUpdate());
@@ -679,6 +681,9 @@ export class BaseClient implements ShellyClient {
         for (const httpUrl in this.http) {
             const dps = this.http[httpUrl];
             try {
+                this.adapter.log.debug(
+                    `[httpIoBrokerState] ${this.getDeviceId()} - requesting ${this.getHttpEndpoint()} ${httpUrl}`,
+                );
                 const body = await this.requestAsync(httpUrl);
                 for (const id of dps) {
                     const dp = this.device[id];

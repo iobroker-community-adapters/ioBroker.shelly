@@ -173,6 +173,10 @@ class MQTTClient extends BaseClient {
             return false;
         }
 
+        this.adapter.log.debug(
+            `[MQTT] executing setRangeExtenderHttpEndpoint for remoteIp ${remoteIp} / deviceIp ${deviceIp} }`,
+        );
+
         const clients = MQTTClient.clientlist ?? {};
         for (const clientId in clients) {
             const client = clients[clientId];
@@ -319,10 +323,14 @@ class MQTTClient extends BaseClient {
 
                         // Update IP address
                         const ip = payloadObj?.result?.eth?.ip || payloadObj?.result?.wifi?.sta_ip;
+                        const remoteIp = this.stream?.remoteAddress;
+                        this.adapter.log.debug(
+                            `[MQTT] ${this.getLogInfo()} - topic: ${packet.topic} - setting ip address (ip: ${ip}, remoteIp: ${remoteIp})`,
+                        );
+                        this.adapter.log.silly(`[MQTT] ${this.getLogInfo()} - ${JSON.stringify(payloadObj.result)})`);
                         if (ip && ip !== this.getIP()) {
                             await this.setIP(ip, `Gen 2+ ${INIT_SRC}/rpc`);
 
-                            const remoteIp = this.stream?.remoteAddress;
                             if (remoteIp && !remoteIp.endsWith('.1') && ip !== remoteIp) {
                                 // TODO: remove workaround to skip in Docker env
                                 await this.setRangeExtenderHttpEndpoint(remoteIp, ip);
