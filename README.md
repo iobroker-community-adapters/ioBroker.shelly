@@ -240,6 +240,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
+* Fixed deletion of dynamic apClients states on adapter restart
 - (mcm1957) Fixed warning "has no existing object" for Mqtt.connected state when a device disconnects before objects are created (e.g. wrong MQTT password)
 
 ### 12.2.0-alpha.0 (2026-11-14)
