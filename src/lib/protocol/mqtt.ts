@@ -187,6 +187,13 @@ class MQTTClient extends BaseClient {
                     this.adapter.log.info(
                         `[MQTT] Device ${this.getId()} uses range extender ${client.getId()} via ${this.getHttpEndpoint()}`,
                     );
+                    // The first HTTP poll ran before this endpoint was known (against extenderIP:80).
+                    // Cancel the scheduled next run and restart immediately with the correct proxy endpoint.
+                    if (this.httpIoBrokerStateTimeout) {
+                        clearTimeout(this.httpIoBrokerStateTimeout);
+                        this.httpIoBrokerStateTimeout = null;
+                    }
+                    void this.httpIoBrokerState();
                     return true;
                 }
             } catch (err) {

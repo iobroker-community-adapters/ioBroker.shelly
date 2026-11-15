@@ -512,7 +512,7 @@ async function updateWifiApClients(self: ShellyClient, value: string): Promise<n
         }
     }
 
-    // Mark clients no longer present as disconnected
+    // Delete channels for clients no longer present
     const allObjs = await self.adapter.getAdapterObjectsAsync();
     const prefix = `${self.adapter.namespace}.${deviceId}.apClients.`;
     for (const fullId in allObjs) {
@@ -520,7 +520,7 @@ async function updateWifiApClients(self: ShellyClient, value: string): Promise<n
         if (obj?.type === 'channel' && fullId.startsWith(prefix)) {
             const mac = fullId.slice(prefix.length);
             if (!mac.includes('.') && !currentMacs.has(mac)) {
-                await self.adapter.setStateAsync(`${deviceId}.apClients.${mac}.connected`, { val: false, ack: true });
+                await self.adapter.delObjectAsync(`${deviceId}.apClients.${mac}`, { recursive: true });
             }
         }
     }
