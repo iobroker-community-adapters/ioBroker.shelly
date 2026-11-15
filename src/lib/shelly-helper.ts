@@ -460,7 +460,13 @@ async function updateWifiApClients(self: ShellyClient, value: string): Promise<n
         return undefined;
     }
 
-    const clients = parsed.ap_clients ?? [];
+    // Filter out the device's own MAC: if the range extender proxy returns the extender's
+    // AP client list instead of the relayed device's list, the relayed device appears as its
+    // own AP client. A device cannot be its own AP client, so remove it.
+    const ownMac = self.getSerialId().toLowerCase();
+    const clients = (parsed.ap_clients ?? []).filter(
+        (c: WifiApClient) => c.mac.replace(/[^a-f0-9]/gi, '').toLowerCase() !== ownMac,
+    );
     const currentMacs = new Set<string>();
 
     // Ensure apClients channel exists

@@ -1617,7 +1617,14 @@ const defaultsgen2: DeviceDefinition = {
                 return undefined;
             },
             http_publish: '/rpc/WiFi.GetStatus',
-            http_publish_funct: value => (value ? JSON.parse(value)?.ap_client_count : undefined),
+            http_publish_funct: (value, self) => {
+                // Skip HTTP fallback for relayed devices: the proxy may return the extender's
+                // WiFi status instead of the device's own. MQTT notifications are correct.
+                if (self.ip && self.httpEndpoint !== `${self.ip}:80`) {
+                    return undefined;
+                }
+                return value ? JSON.parse(value)?.ap_client_count : undefined;
+            },
         },
         common: {
             name: 'AP client count',
