@@ -1074,7 +1074,7 @@ export class BaseClient implements ShellyClient {
 
                     // Just delete states of this device!
                     if (tmpObj.type === 'state' && tmpObj._id.startsWith(`${this.adapter.namespace}.${deviceId}`)) {
-                        if (!dps[stateId]) {
+                        if (!dps[stateId] && !stateId.startsWith('apClients.')) {
                             try {
                                 if (this.objectHelper.getObject(tmpObj._id)) {
                                     this.objectHelper.deleteObject(tmpObj._id);
