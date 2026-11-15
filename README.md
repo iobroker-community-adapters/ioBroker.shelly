@@ -238,7 +238,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 12.2.0-alpha.1 (2026-11-15)
 
 - (typhosj) Added support for shelly range extender (Gen 2+ only)
 - (mcm1957) Limit timezone difference messages to one message per connection (if enabled at all)
