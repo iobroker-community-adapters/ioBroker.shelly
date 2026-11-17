@@ -238,6 +238,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- (mcm1957) MQTT connection is now disconnected (and re-established by the device) if HTTP polling fails two times in a row; this corrects incorrect local-connection detection without a manual restart
+
 ### 12.2.0-alpha.2 (2026-11-17)
 
 - (typhosj) Added support for shelly range extender (Gen 2+ only)
