@@ -218,16 +218,13 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
             delete this.states[id];
         }
 
-        // An open device manager does not poll, so a device which goes offline would keep its green
-        // connection symbol until the list is reloaded. Push the new status instead.
+        // An open device manager does not poll, so a device which goes online/offline would keep
+        // its previous tile state until the list is reloaded. Trigger a full refresh so the tile
+        // background color, available actions and connection symbol are all updated.
         if (id.endsWith('.online') && previous?.val !== state?.val) {
-            const deviceId = id.substring(0, id.length - '.online'.length);
-
-            this.sendCommandToGui({
-                command: 'statusUpdate',
-                deviceId,
-                status: this.buildDeviceStatus(deviceId.substring(this.adapter.namespace.length + 1)),
-            }).catch((e: unknown) => this.adapter.log.debug(`[DeviceManager] Cannot update GUI: ${String(e)}`));
+            this.sendCommandToGui({ command: 'all' }).catch((e: unknown) =>
+                this.adapter.log.debug(`[DeviceManager] Cannot update GUI: ${String(e)}`),
+            );
         }
 
         // After a firmware update completes the firmware state flips to false. Trigger a full

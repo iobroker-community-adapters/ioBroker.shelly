@@ -238,6 +238,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* Device manager tile now fully refreshes when a device changes its online/offline status
+
 ### 12.2.0-alpha.1 (2026-11-15)
 
 - (typhosj) Added support for shelly range extender (Gen 2+ only)
