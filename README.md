@@ -240,10 +240,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
-* Device manager tile now fully refreshes when a device changes its online/offline status
-
-### 12.2.0-alpha.1 (2026-11-15)
-
 - (typhosj) Added support for shelly range extender (Gen 2+ only)
 - (mcm1957) Limit timezone difference messages to one message per connection (if enabled at all)
 - (mcm1957) Added support for Gen2+ devices connected through a Shelly Range Extender; added new states `ip` (real device IP) and `relayed` (true if behind a range extender); `hostname` state now always includes the port
