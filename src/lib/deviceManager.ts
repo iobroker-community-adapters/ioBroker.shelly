@@ -136,8 +136,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
             if (!device.common.icon || String(device.common.icon).startsWith('data:')) {
                 const shortDeviceId = device._id.substring(this.adapter.namespace.length + 1);
                 const deviceClass = this.states[`${this.adapter.namespace}.${shortDeviceId}.class`]?.val as
-                    | string
-                    | undefined;
+                    string | undefined;
                 if (deviceClass) {
                     const iconName = datapoints.getDeviceIcon(deviceClass);
                     await this.adapter.extendObjectAsync(device._id, { common: { icon: `icons/${iconName}.png` } });
@@ -204,6 +203,9 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
 
     public onStateChange(id: string, state: ioBroker.State | null): void {
         const previous = this.states[id];
+        this.adapter.log.debug(
+            `[DeviceManager] onStateChange - id: ${id}, state: ${state?.val}, prev: ${previous?.val}`,
+        );
 
         if (state) {
             if (!previous) {
@@ -222,6 +224,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
         // its previous tile state until the list is reloaded. Trigger a full refresh so the tile
         // background color, available actions and connection symbol are all updated.
         if (id.endsWith('.online') && previous?.val !== state?.val) {
+            this.adapter.log.debug(`[DeviceManager] onStateChange - sendCommandToGUI({ command: 'all' })`);
             this.sendCommandToGui({ command: 'all' }).catch((e: unknown) =>
                 this.adapter.log.debug(`[DeviceManager] Cannot update GUI: ${String(e)}`),
             );
@@ -230,6 +233,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
         // After a firmware update completes the firmware state flips to false. Trigger a full
         // device list refresh so the "Update firmware" action and the update indicator disappear.
         if (id.endsWith('.firmware') && previous?.val === true && state?.val === false) {
+            this.adapter.log.debug(`[DeviceManager] onStateChange - sendCommandToGUI({ command: 'all' })`);
             this.sendCommandToGui({ command: 'all' }).catch((e: unknown) =>
                 this.adapter.log.debug(`[DeviceManager] Cannot update GUI: ${String(e)}`),
             );
@@ -273,6 +277,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
      * @param context
      */
     async loadDevices(context: DeviceLoadContext<string>): Promise<void> {
+        this.adapter.log.debug(`[DeviceManager] loadDevices called`);
         for (const deviceId in this.objects) {
             const device = this.objects[deviceId];
             if (device.type !== 'device') {
