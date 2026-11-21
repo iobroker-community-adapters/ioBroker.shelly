@@ -55,6 +55,8 @@ class MQTTClient extends BaseClient {
     client!: Connection;
     /** Resolve callback for waiting until real IP is received via iobroker-init/rpc (range extender support). */
     private pendingIpFromRpcResolve: (() => void) | null;
+    /** Remote IP address of the TCP connection this MQTT client arrived on. */
+    connectIp: string | undefined;
 
     constructor(adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter, stream: net.Socket) {
         super('mqtt', adapter, objectHelper, eventEmitter);
@@ -71,6 +73,7 @@ class MQTTClient extends BaseClient {
         this.processingQueue = false; // flag to indicate queue processing is in progress
         this.destroying = false; // flag to prevent new packets from being queued during destruction
         this.pendingIpFromRpcResolve = null;
+        this.connectIp = undefined;
 
         this.start();
     }
@@ -164,12 +167,20 @@ class MQTTClient extends BaseClient {
      * address and a mapped port only. Ask every extender candidate that shares the remote
      * address for its AP clients and find the entry whose IP matches the device's own IP.
      *
-     * @param remoteIp address the MQTT connection of this device came from
+     * Uses `this.connectIp` (the TCP remote address of this device's MQTT connection) to
+     * identify range extender candidates: another Gen2+ device whose own IP equals the
+     * remote address this connection arrived from is a potential extender.
+     *
      * @param deviceIp the device's own IP address (from Shelly.GetDeviceInfo)
      * @returns whether an endpoint was found
      */
-    async setRangeExtenderHttpEndpoint(remoteIp: string, deviceIp: string): Promise<boolean> {
+    async setRangeExtenderHttpEndpoint(deviceIp: string): Promise<boolean> {
         if (this.getDeviceGen() < 2) {
+            return false;
+        }
+
+        const remoteIp = this.connectIp;
+        if (!remoteIp) {
             return false;
         }
 
@@ -323,9 +334,8 @@ class MQTTClient extends BaseClient {
 
                         // Update IP address
                         const ip = payloadObj?.result?.eth?.ip || payloadObj?.result?.wifi?.sta_ip;
-                        const remoteIp = this.stream?.remoteAddress;
                         this.adapter.log.debug(
-                            `[MQTT] ${this.getLogInfo()} - topic: ${packet.topic} - setting ip address (ip: ${ip}, remoteIp: ${remoteIp})`,
+                            `[MQTT] ${this.getLogInfo()} - topic: ${packet.topic} - setting ip address (ip: ${ip}, connectIp: ${this.connectIp})`,
                         );
                         this.adapter.log.silly(`[MQTT] ${this.getLogInfo()} - ${JSON.stringify(payloadObj.result)})`);
                         if (ip && ip !== this.getIP()) {
@@ -334,9 +344,9 @@ class MQTTClient extends BaseClient {
                             await this.setIP(ip, `Gen 2+ ${INIT_SRC}/rpc`, true);
 
                             let rangeExtenderFound = false;
-                            if (remoteIp && !remoteIp.endsWith('.1') && ip !== remoteIp) {
+                            if (this.connectIp && !this.connectIp.endsWith('.1') && ip !== this.connectIp) {
                                 // TODO: remove workaround to skip in Docker env
-                                rangeExtenderFound = await this.setRangeExtenderHttpEndpoint(remoteIp, ip);
+                                rangeExtenderFound = await this.setRangeExtenderHttpEndpoint(ip);
                             }
 
                             if (!rangeExtenderFound) {
@@ -468,6 +478,7 @@ class MQTTClient extends BaseClient {
         this.publishQueue = [];
         this.commandQueue = [];
         this.processingQueue = false;
+        this.connectIp = undefined;
 
         if (this.client) {
             this.client.removeAllListeners();
@@ -814,6 +825,7 @@ class MQTTClient extends BaseClient {
                     MQTTClient._registerRun(this);
 
                     const ip = this.stream?.remoteAddress ?? null;
+                    this.connectIp = ip ?? undefined;
 
                     this.adapter.log.info(`[MQTT] Device with client id "${packet.clientId}" connected from ${ip}`);
                     this.initializing = true;
