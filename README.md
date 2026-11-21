@@ -15,7 +15,7 @@
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/iobroker-community-adapters/iobroker.shelly/test-and-release.yml?branch=master&logo=github&style=flat-square)
 
 > [!IMPORTANT]
-> This adapter cannot be installed from github
+> This adapter cannot be installed from GitHub. Install it from the adapter list in ioBroker Admin.
 
 ## Sentry
 
