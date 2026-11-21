@@ -543,7 +543,7 @@ export class BaseClient implements ShellyClient {
         }
     }
 
-    async setIP(ip: string | undefined, source: string): Promise<void> {
+    async setIP(ip: string | undefined, source: string, skipDefaultEndpoint = false): Promise<void> {
         if (!ip) {
             return;
         }
@@ -551,7 +551,9 @@ export class BaseClient implements ShellyClient {
         this.ip = ip;
         this.adapter.log.debug(`[setIP] New IP for device ${this.getDeviceId()}: ${ip} (source: ${source})`);
 
-        await this.setHttpEndpoint(`${ip}:80`, source);
+        if (!skipDefaultEndpoint) {
+            await this.setHttpEndpoint(`${ip}:80`, source);
+        }
 
         const deviceId = this.getDeviceId();
         if (deviceId) {
