@@ -344,9 +344,9 @@ export class ShellyAdapter extends Adapter {
             await this.setState(`${deviceId}.Mqtt.connected`, { val: connected, ack: true });
         }
 
-        const connectIpObj = await this.getObjectAsync(`${deviceId}.connectIp`);
-        if (connectIpObj) {
-            await this.setState(`${deviceId}.connectIp`, { val: connected ? (ip ?? null) : null, ack: true });
+        const mqttIpObj = await this.getObjectAsync(`${deviceId}.Mqtt.ip`);
+        if (mqttIpObj) {
+            await this.setState(`${deviceId}.Mqtt.ip`, { val: connected ? (ip ?? null) : null, ack: true });
         }
 
         if (!connected) {
