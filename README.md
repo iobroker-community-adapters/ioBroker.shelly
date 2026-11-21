@@ -238,7 +238,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 12.2.0-alpha.3 (2026-11-21)
 
 - (typhosj) Added support for shelly range extender (Gen 2+ only)
 - (mcm1957) Added new state `mqtt.ip` to show the IP address the device has connected from
