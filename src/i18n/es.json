@@ -255,6 +255,7 @@
     "Motion activation threshold": "Umbral de activación de movimiento",
     "Motion release threshold": "Umbral de liberación de movimiento",
     "MQTT connected": "MQTT conectado",
+    "IP address the device has connected from": "Dirección IP desde la que se conectó el dispositivo",
     "mute": "silenciado",
     "Mute alarm": "Silenciar alarma",
     "Muted": "Silenciado",

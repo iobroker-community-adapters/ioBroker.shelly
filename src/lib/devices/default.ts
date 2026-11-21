@@ -550,6 +550,21 @@ const defaultsgen1: DeviceDefinition = {
             write: false,
         },
     },
+    'connectIp': {
+        coap: {
+            no_display: true,
+        },
+        mqtt: {
+            init_value: null,
+        },
+        common: {
+            name: 'IP address the device has connected from',
+            type: 'string',
+            role: 'info.ip',
+            read: true,
+            write: false,
+        },
+    },
     'Cloud.enabled': {
         coap: {
             http_publish: '/status',
@@ -1728,6 +1743,18 @@ const defaultsgen2: DeviceDefinition = {
             name: 'MQTT connected',
             type: 'boolean',
             role: 'indicator.reachable',
+            read: true,
+            write: false,
+        },
+    },
+    'connectIp': {
+        mqtt: {
+            init_value: null,
+        },
+        common: {
+            name: 'IP address the device has connected from',
+            type: 'string',
+            role: 'info.ip',
             read: true,
             write: false,
         },

@@ -255,6 +255,7 @@
     "Motion activation threshold": "Drempelwaarde bewegingsactivering",
     "Motion release threshold": "Drempelwaarde bewegingsvrijgave",
     "MQTT connected": "MQTT verbonden",
+    "IP address the device has connected from": "IP-adres waarmee het apparaat verbinding heeft gemaakt",
     "mute": "gedempt",
     "Mute alarm": "Alarm dempen",
     "Muted": "Gedempt",

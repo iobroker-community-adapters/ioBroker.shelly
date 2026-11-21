@@ -255,6 +255,7 @@
     "Motion activation threshold": "Motion activation threshold",
     "Motion release threshold": "Motion release threshold",
     "MQTT connected": "MQTT connected",
+    "IP address the device has connected from": "IP address the device has connected from",
     "mute": "mute",
     "Mute alarm": "Mute alarm",
     "Muted": "Muted",

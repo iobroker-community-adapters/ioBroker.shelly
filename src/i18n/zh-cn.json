@@ -255,6 +255,7 @@
     "Motion activation threshold": "运动激活阈值",
     "Motion release threshold": "运动释放阈值",
     "MQTT connected": "MQTT已连接",
+    "IP address the device has connected from": "设备连接的IP地址",
     "mute": "沉默的",
     "Mute alarm": "静音报警",
     "Muted": "已静音",
