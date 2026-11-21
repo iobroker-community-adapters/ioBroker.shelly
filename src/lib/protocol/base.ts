@@ -572,7 +572,7 @@ export class BaseClient implements ShellyClient {
                 this.ip = hostname;
                 this.httpEndpoint = `${hostname}:${port}`;
                 this.adapter.log.debug(
-                    `Configured IP of ${this.getLogInfo()} by state "${this.getDeviceId()}.hostname" (fallback): ${this.ip}`,
+                    `Configured IP of ${this.getLogInfo()} by state "${this.getDeviceId()}.hostname" (fallback): ${this.ip}:${port}`,
                 );
             }
         }
