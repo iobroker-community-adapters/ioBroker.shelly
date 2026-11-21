@@ -550,7 +550,7 @@ const defaultsgen1: DeviceDefinition = {
             write: false,
         },
     },
-    'connectIp': {
+    connectIp: {
         coap: {
             no_display: true,
         },
@@ -1747,7 +1747,7 @@ const defaultsgen2: DeviceDefinition = {
             write: false,
         },
     },
-    'connectIp': {
+    connectIp: {
         mqtt: {
             init_value: null,
         },

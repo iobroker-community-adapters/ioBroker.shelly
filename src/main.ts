@@ -329,6 +329,7 @@ export class ShellyAdapter extends Adapter {
      *
      * @param deviceId - device id
      * @param connected - true when MQTT connection established, false when closed
+     * @param ip - remote IP address of the MQTT connection
      */
     public async mqttConnectionUpdate(deviceId: string | undefined, connected: boolean, ip?: string): Promise<void> {
         if (this.isUnloaded || !deviceId) {
