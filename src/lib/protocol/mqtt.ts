@@ -329,11 +329,18 @@ class MQTTClient extends BaseClient {
                         );
                         this.adapter.log.silly(`[MQTT] ${this.getLogInfo()} - ${JSON.stringify(payloadObj.result)})`);
                         if (ip && ip !== this.getIP()) {
-                            await this.setIP(ip, `Gen 2+ ${INIT_SRC}/rpc`);
+                            // Skip writing the default endpoint (ip:80) here because we may need
+                            // to use the range extender's endpoint instead - set it only once below.
+                            await this.setIP(ip, `Gen 2+ ${INIT_SRC}/rpc`, true);
 
+                            let rangeExtenderFound = false;
                             if (remoteIp && !remoteIp.endsWith('.1') && ip !== remoteIp) {
                                 // TODO: remove workaround to skip in Docker env
-                                await this.setRangeExtenderHttpEndpoint(remoteIp, ip);
+                                rangeExtenderFound = await this.setRangeExtenderHttpEndpoint(remoteIp, ip);
+                            }
+
+                            if (!rangeExtenderFound) {
+                                await this.setHttpEndpoint(`${ip}:80`, `Gen 2+ ${INIT_SRC}/rpc`);
                             }
 
                             await this.adapter.deviceStatusUpdate(this.getDeviceId(), true); // Device online

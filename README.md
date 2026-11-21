@@ -241,6 +241,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 ### **WORK IN PROGRESS**
 
 - (mcm1957) MQTT connection is now disconnected (and re-established by the device) if HTTP polling fails two times in a row; this corrects incorrect local-connection detection without a manual restart
+- (mcm1957) Fixed hostname state being incorrectly set to device IP and port 80 instead of range extender IP and assigned port for devices behind a range extender
 
 ### 12.2.0-alpha.2 (2026-11-17)
 
