@@ -255,6 +255,7 @@
     "Motion activation threshold": "Порог активации движения",
     "Motion release threshold": "Порог отпускания движения",
     "MQTT connected": "MQTT подключён",
+    "IP address the device has connected from": "IP-адрес, с которого подключилось устройство",
     "mute": "без звука",
     "Mute alarm": "Отключить звук тревоги",
     "Muted": "Звук отключён",

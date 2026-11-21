@@ -877,7 +877,7 @@ class MQTTClient extends BaseClient {
                     }
 
                     this.adapter.log.silly(`[MQTT] Client id "${packet.clientId}" updating device status`);
-                    await this.adapter.mqttConnectionUpdate(this.getDeviceId(), true); // MQTT connected
+                    await this.adapter.mqttConnectionUpdate(this.getDeviceId(), true, ip ?? undefined); // MQTT connected
                     await this.adapter.deviceStatusUpdate(this.getDeviceId(), true); // Device online
 
                     // For Gen 2+ devices: query real IP via MQTT before HTTP calls.

@@ -329,8 +329,9 @@ export class ShellyAdapter extends Adapter {
      *
      * @param deviceId - device id
      * @param connected - true when MQTT connection established, false when closed
+     * @param ip - remote IP address of the MQTT connection
      */
-    public async mqttConnectionUpdate(deviceId: string | undefined, connected: boolean): Promise<void> {
+    public async mqttConnectionUpdate(deviceId: string | undefined, connected: boolean, ip?: string): Promise<void> {
         if (this.isUnloaded || !deviceId) {
             return;
         }
@@ -341,6 +342,11 @@ export class ShellyAdapter extends Adapter {
         const mqttConnectedObj = await this.getObjectAsync(`${deviceId}.Mqtt.connected`);
         if (mqttConnectedObj) {
             await this.setState(`${deviceId}.Mqtt.connected`, { val: connected, ack: true });
+        }
+
+        const connectIpObj = await this.getObjectAsync(`${deviceId}.connectIp`);
+        if (connectIpObj) {
+            await this.setState(`${deviceId}.connectIp`, { val: connected ? (ip ?? null) : null, ack: true });
         }
 
         if (!connected) {
