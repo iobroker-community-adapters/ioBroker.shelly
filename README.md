@@ -240,14 +240,8 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
-- (mcm1957) Added new state `connectIp` to show the IP address the device has connected from
-- (mcm1957) Improved range extender detection by using stored connection IP
-- (mcm1957) MQTT connection is now disconnected (and re-established by the device) if HTTP polling fails two times in a row; this corrects incorrect local-connection detection without a manual restart
-- (mcm1957) Fixed hostname state being incorrectly set to device IP and port 80 instead of range extender IP and assigned port for devices behind a range extender
-
-### 12.2.0-alpha.2 (2026-11-17)
-
 - (typhosj) Added support for shelly range extender (Gen 2+ only)
+- (mcm1957) Added new state `mqtt.ip` to show the IP address the device has connected from
 - (mcm1957) Limit timezone difference messages to one message per connection (if enabled at all)
 - (mcm1957) Added support for Gen2+ devices connected through a Shelly Range Extender; added new states `ip` (real device IP) and `relayed` (true if behind a range extender); `hostname` state now always includes the port
 - (mcm1957) Fixed stale/inverted switch status after MQTT command for Shelly 1PM Gen4 and 1PM Mini Gen4 (refers to #1706)
