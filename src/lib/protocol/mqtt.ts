@@ -176,11 +176,17 @@ class MQTTClient extends BaseClient {
      */
     async setRangeExtenderHttpEndpoint(deviceIp: string): Promise<boolean> {
         if (this.getDeviceGen() < 2) {
+            this.adapter.log.debug(
+                `[MQTT] executing setRangeExtenderHttpEndpoint for deviceIp ${deviceIp} - ignored for gen 1 device`,
+            );
             return false;
         }
 
         const remoteIp = this.connectIp;
         if (!remoteIp) {
+            this.adapter.log.debug(
+                `[MQTT] executing setRangeExtenderHttpEndpoint for deviceIp ${deviceIp} - no remoteIp defined`,
+            );
             return false;
         }
 
@@ -338,7 +344,7 @@ class MQTTClient extends BaseClient {
                             `[MQTT] ${this.getLogInfo()} - topic: ${packet.topic} - setting ip address (ip: ${ip}, connectIp: ${this.connectIp})`,
                         );
                         this.adapter.log.silly(`[MQTT] ${this.getLogInfo()} - ${JSON.stringify(payloadObj.result)})`);
-                        if (ip && ip !== this.getIP()) {
+                        if (ip && ip !== this.connectIp) {
                             // Skip writing the default endpoint (ip:80) here because we may need
                             // to use the range extender's endpoint instead - set it only once below.
                             await this.setIP(ip, `Gen 2+ ${INIT_SRC}/rpc`, true);
