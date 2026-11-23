@@ -230,7 +230,7 @@
                 },
                 "_headerDebugging": {
                     "newLine": true,
-                    "expert": true,
+                    "expertMode": true,
                     "type": "header",
                     "size": 3,
                     "xs": 12,
@@ -238,23 +238,11 @@
                     "md": 12,
                     "lg": 12,
                     "xl": 12,
-                    "text": {
-                        "en": "Expert Options",
-                        "de": "Expertenoptionen",
-                        "ru": "Экспертные параметры",
-                        "pt": "Opções avançadas",
-                        "nl": "Expertopties",
-                        "fr": "Options experts",
-                        "it": "Opzioni avanzate",
-                        "es": "Opciones avanzadas",
-                        "pl": "Opcje eksperta",
-                        "uk": "Розширені параметри",
-                        "zh-cn": "专家选项"
-                    }
+                    "text": "Expert Options"
                 },
                 "logDebugMessages": {
                     "newLine": true,
-                    "expert": true,
+                    "expertMode": true,
                     "type": "checkbox",
                     "xs": 12,
                     "sm": 12,
@@ -264,8 +252,7 @@
                     "label": "Log Debug Messages"
                 },
                 "saveHttpResponses": {
-                    "newLine": true,
-                    "expert": true,
+                    "expertMode": true,
                     "type": "checkbox",
                     "xs": 12,
                     "sm": 12,
@@ -275,30 +262,17 @@
                     "label": "Save HTTP responses (for debugging)"
                 },
                 "pingFailureThreshold": {
-                    "newLine": true,
-                    "expert": true,
+                    "expertMode": true,
                     "type": "number",
                     "min": 0,
                     "max": 10,
-                    "def": 3,
+                    "default": 3,
                     "xs": 12,
                     "sm": 12,
                     "md": 4,
                     "lg": 4,
                     "xl": 4,
-                    "label": {
-                        "en": "Consecutive ping failures before MQTT disconnect (0 = disabled)",
-                        "de": "Aufeinanderfolgende Ping-Fehler vor MQTT-Trennung (0 = deaktiviert)",
-                        "ru": "Последовательные сбои ping до отключения MQTT (0 = отключено)",
-                        "pt": "Falhas de ping consecutivas antes da desconexão MQTT (0 = desativado)",
-                        "nl": "Opeenvolgende ping-fouten voor MQTT-verbinding verbreken (0 = uitgeschakeld)",
-                        "fr": "Échecs ping consécutifs avant déconnexion MQTT (0 = désactivé)",
-                        "it": "Errori ping consecutivi prima della disconnessione MQTT (0 = disabilitato)",
-                        "es": "Fallos ping consecutivos antes de la desconexión MQTT (0 = desactivado)",
-                        "pl": "Kolejne błędy ping przed rozłączeniem MQTT (0 = wyłączone)",
-                        "uk": "Послідовні збої ping до відключення MQTT (0 = вимкнено)",
-                        "zh-cn": "MQTT断开前连续ping失败次数（0 = 禁用）"
-                    }
+                    "label": "Consecutive ping failures before MQTT disconnect (0 = disabled)"
                 }
             }
         },
