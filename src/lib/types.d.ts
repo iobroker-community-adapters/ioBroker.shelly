@@ -18,6 +18,7 @@ export interface ShellyAdapterConfig {
         [id: string]: string;
     }[];
     scanInterval: number | string;
+    pingFailureThreshold: number;
 }
 
 // The ambient stubs for the two untyped runtime dependencies (shelly-iot, mqtt-connection) live

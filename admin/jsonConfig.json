@@ -506,6 +506,48 @@
                 "overflow": "hidden"
             }
         },
+        "_expert": {
+            "type": "panel",
+            "expert": true,
+            "label": {
+                "en": "Expert settings",
+                "de": "Experteneinstellungen",
+                "ru": "Экспертные настройки",
+                "pt": "Configurações avançadas",
+                "nl": "Expertinstellingen",
+                "fr": "Paramètres experts",
+                "it": "Impostazioni avanzate",
+                "es": "Configuración avanzada",
+                "pl": "Ustawienia eksperta",
+                "uk": "Розширені налаштування",
+                "zh-cn": "专家设置"
+            },
+            "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNTEyIj4KICAgIDxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTMyMCAwYzE3LjcgMCAzMiAxNC4zIDMyIDMyVjk2aDMyYzE3LjcgMCAzMiAxNC4zIDMyIDMycy0xNC4zIDMyLTMyIDMyaC0zMnY2NGgxMTJjMTcuNyAwIDMyIDE0LjMgMzIgMzJzLTE0LjMgMzItMzIgMzJIMzUydjY0aDMyYzE3LjcgMCAzMiAxNC4zIDMyIDMycy0xNC4zIDMyLTMyIDMyaC0zMnY2NGgzMmMxNy43IDAgMzIgMTQuMyAzMiAzMnMtMTQuMyAzMi0zMiAzMkgzMjBjLTE3LjcgMC0zMi0xNC4zLTMyLTMydi02NGgtMzJjLTE3LjcgMC0zMi0xNC4zLTMyLTMycy0xNC4zLTMyLTMyLTMySDgwYy0xNy43IDAtMzItMTQuMy0zMi0zMnMxNC4zLTMyIDMyLTMyaDExMnYtNjRIODBjLTE3LjcgMC0zMi0xNC4zLTMyLTMyUzYyLjMgOTYgODAgOTZoMTEyVjMyYzAtMTcuNyAxNC4zLTMyIDMyLTMyczMyIDE0LjMgMzIgMzJ2NjRoMzJ2LTY0YzAtMTcuNyAxNC4zLTMyIDMyLTMyeiIvPgo8L3N2Zz4K",
+            "items": {
+                "pingFailureThreshold": {
+                    "type": "number",
+                    "min": 0,
+                    "max": 10,
+                    "label": {
+                        "en": "Consecutive ping failures before MQTT disconnect (0 = disabled)",
+                        "de": "Aufeinanderfolgende Ping-Fehler vor MQTT-Trennung (0 = deaktiviert)",
+                        "ru": "Последовательные сбои ping до отключения MQTT (0 = отключено)",
+                        "pt": "Falhas de ping consecutivas antes da desconexão MQTT (0 = desativado)",
+                        "nl": "Opeenvolgende ping-fouten voor MQTT-verbinding verbreken (0 = uitgeschakeld)",
+                        "fr": "Échecs ping consécutifs avant déconnexion MQTT (0 = désactivé)",
+                        "it": "Errori ping consecutivi prima della disconnessione MQTT (0 = disabilitato)",
+                        "es": "Fallos ping consecutivos antes de la desconexión MQTT (0 = desactivado)",
+                        "pl": "Kolejne błędy ping przed rozłączeniem MQTT (0 = wyłączone)",
+                        "uk": "Послідовні збої ping до відключення MQTT (0 = вимкнено)",
+                        "zh-cn": "MQTT断开前连续ping失败次数（0 = 禁用）"
+                    },
+                    "def": 3,
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 4
+                }
+            }
+        },
         "_ble": {
             "type": "panel",
             "label": "Bluetooth map",

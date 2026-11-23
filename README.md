@@ -237,6 +237,9 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 <!--
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
+
+- (mcm1957) MQTT connection is no longer disconnected on HTTP polling failures; instead, configurable consecutive TCP ping failures (default: 3) trigger the MQTT disconnect — set to 0 in expert settings to disable
+
 -->
 ### 12.2.0-alpha.3 (2026-11-21)
 
