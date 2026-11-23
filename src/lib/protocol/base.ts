@@ -61,9 +61,6 @@ export class BaseClient implements ShellyClient {
     lastNonce: string | undefined;
     httpTimeout: number;
     timezoneChecked: boolean;
-    /** Number of consecutive HTTP polling failures; triggers MQTT disconnect after reaching threshold. */
-    httpPollingFailureCount: number;
-
     constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         this.type = type; // mqtt or coap
 
@@ -83,7 +80,6 @@ export class BaseClient implements ShellyClient {
         this.lastNonce = undefined;
         this.httpTimeout = 8 * 1000;
         this.timezoneChecked = false;
-        this.httpPollingFailureCount = 0;
 
         // Handle firmware updates
         this.eventEmitter.on('onFirmwareUpdate', async () => await this.firmwareUpdate());
@@ -754,7 +750,6 @@ export class BaseClient implements ShellyClient {
                 }
 
                 this.objectHelper.processObjectQueue(() => {});
-                this.httpPollingFailureCount = 0;
             } catch (err) {
                 // Increase polltime on http error
                 if (pollTime > 0 && pollTime < 60) {
@@ -772,18 +767,6 @@ export class BaseClient implements ShellyClient {
                     this.adapter.log.debug(
                         `[httpIoBrokerState] HTTP request error for ${this.getLogInfo()} "${httpUrl}": ${err}`,
                     );
-                }
-
-                if (this.type === 'mqtt') {
-                    const maxFailures = 2; // Number of consecutive HTTP polling failures before disconnecting MQTT
-                    this.httpPollingFailureCount++;
-                    if (this.httpPollingFailureCount >= maxFailures) {
-                        this.adapter.log.info(
-                            `[httpIoBrokerState] Disconnecting MQTT for ${this.getLogInfo()} after ${this.httpPollingFailureCount} consecutive HTTP polling failures - device will reconnect`,
-                        );
-                        this.destroy();
-                        return;
-                    }
                 }
             }
         }
@@ -1572,7 +1555,6 @@ export class BaseClient implements ShellyClient {
         this.stateValueCache = {};
         this.device = {};
         this.http = {};
-        this.httpPollingFailureCount = 0;
 
         this.deviceId = undefined;
         this.ip = undefined;

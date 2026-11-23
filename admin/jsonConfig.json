@@ -230,6 +230,7 @@
                 },
                 "_headerDebugging": {
                     "newLine": true,
+                    "expertMode": true,
                     "type": "header",
                     "size": 3,
                     "xs": 12,
@@ -237,10 +238,11 @@
                     "md": 12,
                     "lg": 12,
                     "xl": 12,
-                    "text": "Debugging (expert options)"
+                    "text": "Expert Options"
                 },
                 "logDebugMessages": {
                     "newLine": true,
+                    "expertMode": true,
                     "type": "checkbox",
                     "xs": 12,
                     "sm": 12,
@@ -250,7 +252,7 @@
                     "label": "Log Debug Messages"
                 },
                 "saveHttpResponses": {
-                    "newLine": true,
+                    "expertMode": true,
                     "type": "checkbox",
                     "xs": 12,
                     "sm": 12,
@@ -258,6 +260,19 @@
                     "lg": 4,
                     "xl": 4,
                     "label": "Save HTTP responses (for debugging)"
+                },
+                "pingFailureThreshold": {
+                    "expertMode": true,
+                    "type": "number",
+                    "min": 0,
+                    "max": 10,
+                    "default": 3,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 4,
+                    "xl": 4,
+                    "label": "Consecutive ping failures before MQTT disconnect (0 = disabled)"
                 }
             }
         },

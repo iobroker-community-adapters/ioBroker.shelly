@@ -43,6 +43,8 @@ export class ShellyAdapter extends Adapter {
     private onlineDevices: Record<string, boolean> = {};
     /** MQTT connection state per device id: true = connected, false = disconnected, undefined = not an MQTT device */
     private mqttConnectedDevices: Record<string, boolean> = {};
+    /** Consecutive TCP ping failure count per device id. */
+    private pingFailureCount: Record<string, number> = {};
     private onlineCheckIsStartup = true;
     private readonly eventEmitter: EventEmitter = new EventEmitter();
     private readonly bleDecoder: BleDecoder = new BleDecoder();
@@ -309,6 +311,24 @@ export class ShellyAdapter extends Adapter {
                             );
                             return;
                         }
+
+                        if (isAlive) {
+                            this.pingFailureCount[deviceId] = 0;
+                        } else {
+                            this.pingFailureCount[deviceId] = (this.pingFailureCount[deviceId] ?? 0) + 1;
+                            const threshold = this.config.pingFailureThreshold ?? 3;
+                            if (threshold > 0 && this.pingFailureCount[deviceId] >= threshold) {
+                                const mqttClient = this.serverMqtt?.getClientByDeviceId(deviceId);
+                                if (mqttClient) {
+                                    this.log.info(
+                                        `[onlineCheck] Disconnecting MQTT for ${deviceId} after ${this.pingFailureCount[deviceId]} consecutive ping failures`,
+                                    );
+                                    void mqttClient.destroy();
+                                    this.pingFailureCount[deviceId] = 0;
+                                }
+                            }
+                        }
+
                         void this.deviceStatusUpdate(deviceId, isAlive);
                     });
                 }
