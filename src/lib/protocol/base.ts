@@ -768,7 +768,6 @@ export class BaseClient implements ShellyClient {
                         `[httpIoBrokerState] HTTP request error for ${this.getLogInfo()} "${httpUrl}": ${err}`,
                     );
                 }
-
             }
         }
 
