@@ -1097,25 +1097,37 @@ export class BaseClient implements ShellyClient {
         }
 
         // Delete empty channels
+        // Sorted list of state IDs to find states of a channel via binary search
+        const sortedStateIds: string[] = [];
+        for (const j in objList) {
+            const tmpIDj = objList[j];
+            if (tmpIDj?.type === 'state' && tmpIDj._id) {
+                sortedStateIds.push(tmpIDj._id);
+            }
+        }
+        sortedStateIds.sort();
+
+        const hasStateWithPrefix = (prefix: string): boolean => {
+            // find first ID >= prefix
+            let lo = 0;
+            let hi = sortedStateIds.length;
+            while (lo < hi) {
+                const mid = (lo + hi) >> 1;
+                if (sortedStateIds[mid] < prefix) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            }
+            return lo < sortedStateIds.length && sortedStateIds[lo].startsWith(prefix);
+        };
+
         for (const o in objList) {
             const tmpObj = objList[o];
 
             if (tmpObj && tmpObj.type && tmpObj._id && tmpObj.type === 'channel') {
                 // Search for states in current channel
-                let found = false;
-                for (const j in objList) {
-                    const tmpIDj = objList[j];
-                    if (!tmpIDj) {
-                        continue;
-                    }
-
-                    if (tmpIDj?.type && tmpIDj._id && tmpIDj.type === 'state' && tmpIDj._id.startsWith(tmpObj._id)) {
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found) {
+                if (!hasStateWithPrefix(tmpObj._id)) {
                     try {
                         if (this.objectHelper.getObject(tmpObj._id)) {
                             this.objectHelper.deleteObject(tmpObj._id);
