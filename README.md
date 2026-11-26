@@ -239,6 +239,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 
 -->
+### **WORK IN PROGRESS**
+
+- (@GermanBluefox) Fixed high CPU load / MQTT reconnect storm with many devices caused by the empty channel check in deleteOldStates() (#1727)
+
 ### 12.2.0-alpha.4 (2026-11-23)
 
 - (mcm1957) Added new state `mqtt.ip` to show the IP address the device has connected from
