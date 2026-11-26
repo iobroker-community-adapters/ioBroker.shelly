@@ -31,12 +31,31 @@ function createAdapter(port) {
 }
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+/**
+ * Starts an MQTT server on a free port (port 0) and connects one TCP client.
+ *
+ * @returns the MQTTClient object created by the server for this connection
+ */
+async function connectClient() {
+    server = new MQTTServer(createAdapter(0), {}, new EventEmitter());
+    server.listen();
+    await new Promise((resolve, reject) => {
+        server.server.once('listening', resolve);
+        server.server.once('error', reject);
+    });
+    socket = net.connect(server.server.address().port, '127.0.0.1');
+    await wait(200);
+    const client = [...Object.values(server.clients ?? {}), ...(server.clients?.values?.() ?? [])][0];
+    assert.ok(client, 'the connection must have reached the MQTT server');
+    return client;
+}
+let server;
+let socket;
 const mqttConnection = require('mqtt-connection');
 
 describe('MQTT message ids', function () {
     this.timeout(10000);
-    let server;
-    let socket;
     afterEach(() => {
         socket?.destroy();
         server?.destroy();
@@ -48,14 +67,7 @@ describe('MQTT message ids', function () {
     });
 
     it('message ids stay in the valid range 1..65535', async function () {
-        const port = 18932;
-        server = new MQTTServer(createAdapter(port), {}, new EventEmitter());
-        server.listen();
-        await wait(100);
-
-        socket = net.connect(port, '127.0.0.1');
-        await wait(200);
-        const client = [...Object.values(server.clients ?? {}), ...(server.clients?.values?.() ?? [])][0];
+        const client = await connectClient();
 
         const ids = [];
         client.client.publish = packet => ids.push(packet.messageId);
@@ -66,5 +78,19 @@ describe('MQTT message ids', function () {
             client.publishStateValue('test/rpc', 'x');
         }
         assert.deepStrictEqual(ids, [65535, 1, 2]);
+    });
+
+    it('ids of unacknowledged messages are not reused after the wrap-around', async function () {
+        const client = await connectClient();
+
+        const ids = [];
+        client.client.publish = packet => ids.push(packet.messageId);
+        client.resendState2Client = noop;
+        client.mqttprefix = 'test';
+        client.messageId = 65535;
+        client.messageCache[1] = { cmd: 'publish', message: { topic: 'test/other' } };
+        client.messageCache[2] = { cmd: 'publish', message: { topic: 'test/other2' } };
+        client.publishStateValue('test/rpc', 'x');
+        assert.deepStrictEqual(ids, [3]);
     });
 });
