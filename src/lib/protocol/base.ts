@@ -61,6 +61,8 @@ export class BaseClient implements ShellyClient {
     lastNonce: string | undefined;
     httpTimeout: number;
     timezoneChecked: boolean;
+    /** True once destroy() ran - stops a still running poll from scheduling itself again. */
+    destroyed: boolean;
     constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         this.type = type; // mqtt or coap
 
@@ -80,6 +82,7 @@ export class BaseClient implements ShellyClient {
         this.lastNonce = undefined;
         this.httpTimeout = 8 * 1000;
         this.timezoneChecked = false;
+        this.destroyed = false;
 
         // Handle firmware updates
         this.eventEmitter.on('onFirmwareUpdate', async () => await this.firmwareUpdate());
@@ -664,14 +667,25 @@ export class BaseClient implements ShellyClient {
      * Missing data will be pulled by HTTP
      */
     async httpIoBrokerState(): Promise<void> {
+        // A new run replaces a scheduled one - otherwise two poll loops would run in parallel
+        if (this.httpIoBrokerStateTimeout) {
+            clearTimeout(this.httpIoBrokerStateTimeout);
+            this.httpIoBrokerStateTimeout = null;
+        }
+        if (this.destroyed || this.adapter.isUnloaded) {
+            return;
+        }
+
         if (!this.isOnline() || !this.getHttpEndpoint()) {
             this.adapter.log.silly(
                 `[httpIoBrokerState] Device ${this.getLogInfo()} is offline (or HTTP endpoint is unknown) - waiting`,
             );
 
+            // @KI_HINWEIS: getPollTime() is 0 if polling is disabled and NaN-safe - the raw config value
+            // could be 0/NaN and would turn this into a busy loop. Wait 60 s in that case.
             this.httpIoBrokerStateTimeout = setTimeout(
                 async () => await this.httpIoBrokerState(),
-                (this.adapter.config.polltime as number) * 1000,
+                (this.getPollTime() || 60) * 1000,
             );
             return;
         }
@@ -771,7 +785,7 @@ export class BaseClient implements ShellyClient {
             }
         }
 
-        if (this.http && Object.keys(this.http).length > 0 && pollTime > 0) {
+        if (!this.destroyed && this.http && Object.keys(this.http).length > 0 && pollTime > 0) {
             this.httpIoBrokerStateTimeout = setTimeout(async () => await this.httpIoBrokerState(), pollTime * 1000);
         }
     }
@@ -1555,12 +1569,14 @@ export class BaseClient implements ShellyClient {
 
     destroy(): void {
         this.adapter.log.debug(`[BaseClient] Destroying ${this.getLogInfo()}`);
+        this.destroyed = true;
         this.adapter
             .deviceStatusUpdate(this.getDeviceId(), false) // Device offline
             .catch((e: unknown) => this.adapter.log.error(`[BaseClient] deviceStatusUpdate failed: ${String(e)}`));
 
         if (this.httpIoBrokerStateTimeout) {
             clearTimeout(this.httpIoBrokerStateTimeout);
+            this.httpIoBrokerStateTimeout = null;
         }
 
         this.msgId = 1;
