@@ -61,6 +61,11 @@ export class BaseClient implements ShellyClient {
     lastNonce: string | undefined;
     httpTimeout: number;
     timezoneChecked: boolean;
+    /** True once destroy() ran - stops a still running poll from scheduling itself again. */
+    destroyed: boolean;
+    /** Handlers registered on the shared event emitter, removed again in destroy(). */
+    private readonly onFirmwareUpdateHandler: () => Promise<void>;
+    private readonly onScriptDownloadHandler: () => Promise<void>;
     constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         this.type = type; // mqtt or coap
 
@@ -80,12 +85,19 @@ export class BaseClient implements ShellyClient {
         this.lastNonce = undefined;
         this.httpTimeout = 8 * 1000;
         this.timezoneChecked = false;
+        this.destroyed = false;
+
+        // @KI_HINWEIS: The emitter is shared by all clients and a new client is created for every
+        // MQTT connection, so the handlers must be removed in destroy() - otherwise every
+        // reconnect leaves a listener (and the whole client) behind.
+        this.onFirmwareUpdateHandler = async (): Promise<void> => await this.firmwareUpdate();
+        this.onScriptDownloadHandler = async (): Promise<void> => await this.downloadAllScripts();
 
         // Handle firmware updates
-        this.eventEmitter.on('onFirmwareUpdate', async () => await this.firmwareUpdate());
+        this.eventEmitter.on('onFirmwareUpdate', this.onFirmwareUpdateHandler);
 
         // Handle script download
-        this.eventEmitter.on('onScriptDownload', async () => await this.downloadAllScripts());
+        this.eventEmitter.on('onScriptDownload', this.onScriptDownloadHandler);
     }
 
     /**
@@ -664,14 +676,25 @@ export class BaseClient implements ShellyClient {
      * Missing data will be pulled by HTTP
      */
     async httpIoBrokerState(): Promise<void> {
+        // A new run replaces a scheduled one - otherwise two poll loops would run in parallel
+        if (this.httpIoBrokerStateTimeout) {
+            clearTimeout(this.httpIoBrokerStateTimeout);
+            this.httpIoBrokerStateTimeout = null;
+        }
+        if (this.destroyed || this.adapter.isUnloaded) {
+            return;
+        }
+
         if (!this.isOnline() || !this.getHttpEndpoint()) {
             this.adapter.log.silly(
                 `[httpIoBrokerState] Device ${this.getLogInfo()} is offline (or HTTP endpoint is unknown) - waiting`,
             );
 
+            // @KI_HINWEIS: getPollTime() is 0 if polling is disabled and NaN-safe - the raw config value
+            // could be 0/NaN and would turn this into a busy loop. Wait 60 s in that case.
             this.httpIoBrokerStateTimeout = setTimeout(
                 async () => await this.httpIoBrokerState(),
-                (this.adapter.config.polltime as number) * 1000,
+                (this.getPollTime() || 60) * 1000,
             );
             return;
         }
@@ -771,7 +794,7 @@ export class BaseClient implements ShellyClient {
             }
         }
 
-        if (this.http && Object.keys(this.http).length > 0 && pollTime > 0) {
+        if (!this.destroyed && this.http && Object.keys(this.http).length > 0 && pollTime > 0) {
             this.httpIoBrokerStateTimeout = setTimeout(async () => await this.httpIoBrokerState(), pollTime * 1000);
         }
     }
@@ -1543,12 +1566,17 @@ export class BaseClient implements ShellyClient {
 
     destroy(): void {
         this.adapter.log.debug(`[BaseClient] Destroying ${this.getLogInfo()}`);
+        this.destroyed = true;
         this.adapter
             .deviceStatusUpdate(this.getDeviceId(), false) // Device offline
             .catch((e: unknown) => this.adapter.log.error(`[BaseClient] deviceStatusUpdate failed: ${String(e)}`));
 
+        this.eventEmitter.removeListener('onFirmwareUpdate', this.onFirmwareUpdateHandler);
+        this.eventEmitter.removeListener('onScriptDownload', this.onScriptDownloadHandler);
+
         if (this.httpIoBrokerStateTimeout) {
             clearTimeout(this.httpIoBrokerStateTimeout);
+            this.httpIoBrokerStateTimeout = null;
         }
 
         this.msgId = 1;

@@ -239,6 +239,13 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 
 -->
+### **WORK IN PROGRESS**
+
+- (Schimi1983) Fixed memory leak and growing CPU load caused by device reconnects
+- (Schimi1983) Fixed lost commands after a long MQTT connection with QoS 1/2
+- (Schimi1983) Fixed devices behind the same IP address (e.g. range extender) disturbing each other
+- (Schimi1983) CoAP listener is now stopped completely when the adapter is stopped
+
 ### 12.2.0-alpha.4 (2026-11-23)
 
 - (mcm1957) Added new state `mqtt.ip` to show the IP address the device has connected from

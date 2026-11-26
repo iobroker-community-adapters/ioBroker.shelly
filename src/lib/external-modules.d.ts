@@ -40,6 +40,11 @@ declare module 'shelly-iot' {
             event: 'device-connection-status',
             listener: (deviceId: string, connected: boolean) => void,
         ): void;
+        removeListener(event: 'error', listener: (err: unknown) => void): void;
+        /** Close the CoAP socket. Emits `disconnect`. */
+        stopListening(callback?: () => void): void;
+        /** Internal list of the devices seen so far (used to clear their offline timers on unload). */
+        knownDevices?: Record<string, { offlineTimer?: NodeJS.Timeout | null; ip?: string } | undefined>;
     }
 }
 
