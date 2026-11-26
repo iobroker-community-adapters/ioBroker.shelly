@@ -239,6 +239,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 
 -->
+### **WORK IN PROGRESS**
+
+- (Schimi1983) Fixed growing memory use caused by device reconnects (refers to #1735)
+
 ### 12.2.0-alpha.5 (2026-11-26)
 
 - (@GermanBluefox) Fixed high CPU load / MQTT reconnect storm with many devices caused by deleteOldStates() (#1727)
