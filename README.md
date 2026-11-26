@@ -239,15 +239,8 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 
 -->
+
 ### **WORK IN PROGRESS**
-
-* (mcm1957) fix: mDNS device detection incorrectly reports known Gen2+ devices as new (refers to #1734)
-
-### 12.2.0-alpha.6 (2026-11-26)
-
-* (mcm57) Fix: Gen2+ MQTT devices now always write correct IP address and hostname state on connect
-
-### 12.2.0-alpha.5 (2026-11-26)
 
 - (@GermanBluefox) Fixed high CPU load / MQTT reconnect storm with many devices caused by deleteOldStates() (#1727)
 - (mcm1957) Added new state `mqtt.ip` to show the IP address the device has connected from
