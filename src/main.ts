@@ -46,6 +46,8 @@ export class ShellyAdapter extends Adapter {
     /** Consecutive TCP ping failure count per device id. */
     private pingFailureCount: Record<string, number> = {};
     private onlineCheckIsStartup = true;
+    /** Device ids with an available firmware update which were already part of a notification. */
+    private notifiedFirmwareUpdates = new Set<string>();
     private readonly eventEmitter: EventEmitter = new EventEmitter();
     private readonly bleDecoder: BleDecoder = new BleDecoder();
     public isUnloaded = false;
@@ -491,6 +493,7 @@ export class ShellyAdapter extends Adapter {
             this.log.debug(`[firmwareNotify] Starting firmware check on every device`);
 
             const availableUpdates = [];
+            const devicesWithUpdate = new Set<string>();
 
             try {
                 const deviceIds = await this.getAllDeviceIds();
@@ -499,6 +502,7 @@ export class ShellyAdapter extends Adapter {
                     const hasNewFirmware = stateFirmware && stateFirmware.ack ? stateFirmware.val : false;
 
                     if (hasNewFirmware) {
+                        devicesWithUpdate.add(deviceId);
                         const deviceObj = await this.getObjectAsync(deviceId);
                         const deviceName =
                             typeof deviceObj?.common.name === 'string'
@@ -512,9 +516,14 @@ export class ShellyAdapter extends Adapter {
                 this.log.error(e.toString());
             }
 
-            if (availableUpdates.length > 0) {
+            // Notify only if a device got a new update since the last notification - otherwise the
+            // same notification would be repeated every 15 minutes (refers to #1013)
+            const hasNewUpdate = [...devicesWithUpdate].some(id => !this.notifiedFirmwareUpdates.has(id));
+            if (hasNewUpdate) {
                 await this.registerNotification('shelly', 'deviceUpdates', availableUpdates.join('\n'));
             }
+            // Devices which were updated are forgotten, so a later update is reported again
+            this.notifiedFirmwareUpdates = devicesWithUpdate;
 
             this.firmwareUpdateTimeout = this.setTimeout(
                 async () => {
