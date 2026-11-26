@@ -363,6 +363,15 @@ export class CoAPServer extends BaseServer {
             this.adapter.log.debug(`[CoAP Server] Status update received for ${deviceId}: ${JSON.stringify(status)}`);
 
             if (deviceId && typeof deviceId === 'string') {
+                // @KI_HINWEIS: Every status packet used to trigger a CoAP request for the device
+                // description (/cit/d, with 2 s retries). It is only needed for a new device or after
+                // an IP change - a known client processes the status by its own listener.
+                const knownIp = shelly.knownDevices?.[deviceId]?.ip;
+                const client = this.clients[deviceId];
+                if ((client && knownIp && client.getIP() === knownIp) || this.blacklist[deviceId]) {
+                    return;
+                }
+
                 shelly.getDeviceDescription(
                     deviceId,
                     (err: unknown, deviceId: string, description: unknown, ip: string) => {
