@@ -1338,7 +1338,9 @@ export class MQTTServer extends BaseServer {
      */
     getClientByDeviceId(deviceId: string): MQTTClient | undefined {
         for (const client of this.clients.values()) {
-            if (client.getDeviceId() === deviceId) {
+            // a client which is being destroyed stays in the map until its socket is closed -
+            // after a reconnect the new connection of the device is the right one
+            if (client.getDeviceId() === deviceId && !client.destroying) {
                 return client;
             }
         }

@@ -31,9 +31,24 @@ function createAdapter(port) {
 }
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+let server;
+
+/**
+ * Starts the MQTT server on a free port (port 0), so the test cannot reach another server.
+ *
+ * @returns the port the server listens on
+ */
+async function startServer() {
+    server = new MQTTServer(createAdapter(0), {}, new EventEmitter());
+    server.listen();
+    await new Promise((resolve, reject) => {
+        server.server.once('listening', resolve);
+        server.server.once('error', reject);
+    });
+    return server.server.address().port;
+}
 describe('MQTT clients', function () {
     this.timeout(10000);
-    let server;
     const sockets = [];
     afterEach(() => {
         sockets.splice(0).forEach(socket => socket.destroy());
@@ -41,10 +56,7 @@ describe('MQTT clients', function () {
     });
 
     it('several connections from the same address are tracked separately', async function () {
-        const port = 18931;
-        server = new MQTTServer(createAdapter(port), {}, new EventEmitter());
-        server.listen();
-        await wait(100);
+        const port = await startServer();
 
         sockets.push(net.connect(port, '127.0.0.1'), net.connect(port, '127.0.0.1'));
         await wait(200);
@@ -53,5 +65,18 @@ describe('MQTT clients', function () {
         sockets[0].end();
         await wait(200);
         assert.strictEqual(server.clients.size, 1);
+    });
+
+    it('a reconnected device is found by its new connection, not the one being destroyed', async function () {
+        const port = await startServer();
+
+        sockets.push(net.connect(port, '127.0.0.1'), net.connect(port, '127.0.0.1'));
+        await wait(200);
+        const [oldClient, newClient] = [...server.clients.values()];
+        oldClient.getDeviceId = () => 'shellyplus1pm#aabbcc#1';
+        newClient.getDeviceId = () => 'shellyplus1pm#aabbcc#1';
+        oldClient.destroying = true;
+
+        assert.strictEqual(server.getClientByDeviceId('shellyplus1pm#aabbcc#1'), newClient);
     });
 });
