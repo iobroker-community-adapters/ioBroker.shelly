@@ -44,6 +44,8 @@ class CoAPClient extends BaseClient {
     listenerus?: (deviceId: string, payload: CoapStatusPayload) => void;
     listenerds?: (deviceId: string, connected: boolean) => void;
     listenererr?: (err: unknown) => void;
+    /** Set in destroy() - start() must not continue for a destroyed client. */
+    private stopped = false;
 
     constructor(
         adapter: ShellyAdapter,
@@ -130,6 +132,7 @@ class CoAPClient extends BaseClient {
     }
 
     destroy(): void {
+        this.stopped = true;
         super.destroy();
         this.adapter.log.debug(`[CoAP] Destroying`);
 
@@ -239,6 +242,13 @@ class CoAPClient extends BaseClient {
 
             await this.deleteOldStates();
             await this.createObjects();
+
+            // @KI_HINWEIS: The client can be destroyed while the awaits above run (adapter stopped or
+            // IP changed) - starting polling and listeners now would leave them running untracked.
+            if (this.stopped) {
+                this.adapter.log.debug(`[CoAP] Start of ${this.getLogInfo()} aborted - client was destroyed`);
+                return;
+            }
 
             this.adapter
                 .deviceStatusUpdate(this.getDeviceId(), true) // Device online
@@ -375,6 +385,10 @@ export class CoAPServer extends BaseServer {
                 shelly.getDeviceDescription(
                     deviceId,
                     (err: unknown, deviceId: string, description: unknown, ip: string) => {
+                        // the answer can arrive after destroy() - do not create clients anymore
+                        if (this.shelly !== shelly) {
+                            return;
+                        }
                         if (!err && deviceId && ip) {
                             this.adapter.log.debug(
                                 `[CoAP Server] Received device description for ${deviceId} (${ip}): ${JSON.stringify(description)}`,
