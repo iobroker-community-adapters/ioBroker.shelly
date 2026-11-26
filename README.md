@@ -241,10 +241,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
-- (@GermanBluefox) Fixed high CPU load / MQTT reconnect storm with many devices caused by the empty channel check in deleteOldStates() (#1727)
-
-### 12.2.0-alpha.4 (2026-11-23)
-
+- (@GermanBluefox) Fixed high CPU load / MQTT reconnect storm with many devices caused by deleteOldStates() (#1727)
 - (mcm1957) Added new state `mqtt.ip` to show the IP address the device has connected from
 - (typhosj) Added support for shelly range extender (Gen 2+ only)
 - (mcm1957) Added support for Gen2+ devices connected through a Shelly Range Extender; added new states `ip` (real device IP) and `relayed` (true if behind a range extender); `hostname` state now always includes the port
