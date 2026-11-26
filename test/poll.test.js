@@ -94,4 +94,34 @@ describe('HTTP poll loop', function () {
         await client.httpIoBrokerState();
         assert.strictEqual(client.httpIoBrokerStateTimeout, null);
     });
+
+    it('an MQTT connection stops polling at once, even if its teardown has to wait', async function () {
+        const server = new MQTTServer(createAdapter(0), {}, new EventEmitter());
+        server.listen();
+        await new Promise((resolve, reject) => {
+            server.server.once('listening', resolve);
+            server.server.once('error', reject);
+        });
+        const socket = net.connect(server.server.address().port, '127.0.0.1');
+        try {
+            await wait(200);
+            const client = [...Object.values(server.clients)][0];
+            assert.ok(client, 'the connection must have reached the MQTT server');
+
+            await client.httpIoBrokerState(); // offline: schedules the next run
+            assert.ok(client.httpIoBrokerStateTimeout);
+
+            client.initializing = true; // teardown has to wait for the initialization
+            const destroying = client.destroy();
+            assert.strictEqual(client.httpIoBrokerStateTimeout, null);
+            await client.httpIoBrokerState();
+            assert.strictEqual(client.httpIoBrokerStateTimeout, null);
+
+            client.initializing = false;
+            await destroying;
+        } finally {
+            socket.destroy();
+            server.destroy();
+        }
+    });
 });

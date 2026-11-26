@@ -1567,17 +1567,24 @@ export class BaseClient implements ShellyClient {
         }
     }
 
-    destroy(): void {
-        this.adapter.log.debug(`[BaseClient] Destroying ${this.getLogInfo()}`);
+    /**
+     * Stops HTTP polling for good: clears a scheduled run and prevents a running one from scheduling
+     * itself again. Called by destroy() and as early as possible by protocols whose teardown waits.
+     */
+    stopPolling(): void {
         this.destroyed = true;
-        this.adapter
-            .deviceStatusUpdate(this.getDeviceId(), false) // Device offline
-            .catch((e: unknown) => this.adapter.log.error(`[BaseClient] deviceStatusUpdate failed: ${String(e)}`));
-
         if (this.httpIoBrokerStateTimeout) {
             clearTimeout(this.httpIoBrokerStateTimeout);
             this.httpIoBrokerStateTimeout = null;
         }
+    }
+
+    destroy(): void {
+        this.adapter.log.debug(`[BaseClient] Destroying ${this.getLogInfo()}`);
+        this.stopPolling();
+        this.adapter
+            .deviceStatusUpdate(this.getDeviceId(), false) // Device offline
+            .catch((e: unknown) => this.adapter.log.error(`[BaseClient] deviceStatusUpdate failed: ${String(e)}`));
 
         this.msgId = 1;
         this.stateValueCache = {};

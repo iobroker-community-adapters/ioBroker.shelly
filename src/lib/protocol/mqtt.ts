@@ -431,6 +431,9 @@ class MQTTClient extends BaseClient {
         // Set destroying flag to prevent new packets from being queued
         this.destroying = true;
 
+        // The waiting below can take up to 2 minutes - stop HTTP polling of the closed connection now
+        this.stopPolling();
+
         // Wait for initialization to complete
         if (this.initializing) {
             this.adapter.log.debug(`[MQTT] Destroying ${this.getLogInfo()}, waiting for initialization to complete`);
