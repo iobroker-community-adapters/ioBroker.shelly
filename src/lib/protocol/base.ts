@@ -84,7 +84,7 @@ export class BaseClient implements ShellyClient {
         this.httpTimeout = 8 * 1000;
         this.timezoneChecked = false;
 
-        // @KI_HINWEIS: The emitter is shared by all clients and a new client is created for every
+        // The emitter is shared by all clients and a new client is created for every
         // MQTT connection, so the handlers must be removed in destroy() - otherwise every
         // reconnect leaves a listener (and the whole client) behind.
         this.onFirmwareUpdateHandler = async (): Promise<void> => await this.firmwareUpdate();
