@@ -243,7 +243,7 @@ class CoAPClient extends BaseClient {
             await this.deleteOldStates();
             await this.createObjects();
 
-            // @KI_HINWEIS: The client can be destroyed while the awaits above run (adapter stopped or
+            // The client can be destroyed while the awaits above run (adapter stopped or
             // IP changed) - starting polling and listeners now would leave them running untracked.
             if (this.stopped) {
                 this.adapter.log.debug(`[CoAP] Start of ${this.getLogInfo()} aborted - client was destroyed`);
@@ -448,7 +448,7 @@ export class CoAPServer extends BaseServer {
         }
 
         if (this.shelly) {
-            // @KI_HINWEIS: shelly-iot keeps one offline timer per known device and has no API to
+            // shelly-iot keeps one offline timer per known device and has no API to
             // stop them - clear them here, otherwise they keep running after the adapter stopped.
             const knownDevices = this.shelly.knownDevices ?? {};
             for (const deviceId in knownDevices) {
