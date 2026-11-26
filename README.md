@@ -247,6 +247,7 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 - (typhosj) Added support for shelly range extender (Gen 2+ only)
 - (mcm1957) Added support for Gen2+ devices connected through a Shelly Range Extender; added new states `ip` (real device IP) and `relayed` (true if behind a range extender); `hostname` state now always includes the port
 - (mcm1957) Fixed stale/inverted switch status after MQTT command for Shelly 1PM Gen4 and 1PM Mini Gen4 (refers to #1706)
+- (mcm1957) Fixed mDNS device detection incorrectly reporting known Gen2+ devices as new after hostname state started including the port (refers to #1734)
 - (mcm1957) Added MQTT.connected state for Gen1/Gen2+ devices; online state for MQTT devices now requires both HTTP reachability and an active MQTT connection
 - (mcm1957) Added dynamic AP client states (apClients.{mac}.*) updated each poll cycle via WiFi.ListAPClients
 - (mcm1957) Extended device info states: added originalId, matter, provision, profile, discoverable from Shelly.GetDeviceInfo; versionShort now uses the ver field directly

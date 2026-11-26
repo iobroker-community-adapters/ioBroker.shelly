@@ -2077,13 +2077,20 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
                 return { refresh: false };
             }
 
-            // Filter out devices already known
+            // Filter out devices already known.
+            // Use the '.ip' state (always the device's real IP, no port) instead of '.hostname'
+            // which may contain "ip:port" for devices relayed through a range extender.
+            // Only match top-level device states (ns.deviceId.ip) to exclude sub-states like APClient.MAC.ip.
             const knownIps = new Set<string>();
+            const nsPrefix = `${this.adapter.namespace}.`;
             for (const stateId in this.states) {
-                if (stateId.endsWith('.hostname')) {
-                    const ip = this.states[stateId]?.val;
-                    if (typeof ip === 'string' && ip) {
-                        knownIps.add(ip);
+                if (stateId.startsWith(nsPrefix) && stateId.endsWith('.ip')) {
+                    const middle = stateId.slice(nsPrefix.length, -3);
+                    if (!middle.includes('.')) {
+                        const ip = this.states[stateId]?.val;
+                        if (typeof ip === 'string' && ip) {
+                            knownIps.add(ip);
+                        }
                     }
                 }
             }
@@ -2807,11 +2814,15 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
         const found = await this.mdnsScan(5000);
 
         const knownIps = new Set<string>();
+        const nsPrefix = `${this.adapter.namespace}.`;
         for (const stateId in this.states) {
-            if (stateId.endsWith('.hostname')) {
-                const ip = this.states[stateId]?.val;
-                if (typeof ip === 'string' && ip) {
-                    knownIps.add(ip);
+            if (stateId.startsWith(nsPrefix) && stateId.endsWith('.ip')) {
+                const middle = stateId.slice(nsPrefix.length, -3);
+                if (!middle.includes('.')) {
+                    const ip = this.states[stateId]?.val;
+                    if (typeof ip === 'string' && ip) {
+                        knownIps.add(ip);
+                    }
                 }
             }
         }
