@@ -43,6 +43,7 @@ class CoAPClient extends BaseClient {
     shelly: Shelly;
     listenerus?: (deviceId: string, payload: CoapStatusPayload) => void;
     listenerds?: (deviceId: string, connected: boolean) => void;
+    listenererr?: (err: unknown) => void;
 
     constructor(
         adapter: ShellyAdapter,
@@ -137,6 +138,9 @@ class CoAPClient extends BaseClient {
         }
         if (this.listenerds) {
             this.shelly.removeListener('device-connection-status', this.listenerds);
+        }
+        if (this.listenererr) {
+            this.shelly.removeListener('error', this.listenererr);
         }
     }
 
@@ -265,8 +269,10 @@ class CoAPClient extends BaseClient {
     }
 
     listener(): void {
-        this.shelly.on('error', (err: unknown) =>
-            this.adapter.log.debug(`[CoAP] Listener - error handling data: ${String(err)}`),
+        this.shelly.on(
+            'error',
+            (this.listenererr = (err: unknown) =>
+                this.adapter.log.debug(`[CoAP] Listener - error handling data: ${String(err)}`)),
         );
 
         this.shelly.on(
@@ -305,6 +311,8 @@ export class CoAPServer extends BaseServer {
     clients: Record<string, CoAPClient>;
     /** Device ids that matched a blacklist entry (cached). */
     blacklist: Record<string, string>;
+    /** The shared shelly-iot listener, created in listen(). */
+    private shelly: Shelly | null = null;
 
     constructor(adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         super(adapter, objectHelper, eventEmitter);
@@ -354,6 +362,7 @@ export class CoAPServer extends BaseServer {
 
         this.adapter.log.debug(`[CoAP Server] Starting shelly listener with options: ${JSON.stringify(options)}`);
         const shelly = new Shelly(options);
+        this.shelly = shelly;
 
         shelly.on('error', (err: unknown) =>
             this.adapter.log.debug(`[CoAP Server] Error - handling data: ${String(err)}`),
@@ -419,6 +428,23 @@ export class CoAPServer extends BaseServer {
         super.destroy();
         this.adapter.log.debug(`[CoAP Server] Destroying`);
 
-        // TODO: Disconnect all clients
+        for (const i in this.clients) {
+            this.clients[i].destroy();
+            delete this.clients[i];
+        }
+
+        if (this.shelly) {
+            // @KI_HINWEIS: shelly-iot keeps one offline timer per known device and has no API to
+            // stop them - clear them here, otherwise they keep running after the adapter stopped.
+            const knownDevices = this.shelly.knownDevices ?? {};
+            for (const deviceId in knownDevices) {
+                if (knownDevices[deviceId]?.offlineTimer) {
+                    clearTimeout(knownDevices[deviceId].offlineTimer);
+                    knownDevices[deviceId].offlineTimer = null;
+                }
+            }
+            this.shelly.stopListening();
+            this.shelly = null;
+        }
     }
 }
