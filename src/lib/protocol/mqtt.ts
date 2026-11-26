@@ -523,7 +523,7 @@ class MQTTClient extends BaseClient {
 
         // MQTT packet identifiers are 16 bit (1..65535) - a larger id cannot be encoded and the
         // publish fails (QoS 1/2), so wrap around instead of counting up forever.
-        // @KI_HINWEIS: After the wrap-around an id may still belong to an unacknowledged message
+        // After the wrap-around an id may still belong to an unacknowledged message
         // (messageCache) - skip those ids, otherwise a late PUBACK would remove the wrong message.
         for (let i = 0; i < 0xffff; i++) {
             this.messageId = (this.messageId % 0xffff) + 1;
