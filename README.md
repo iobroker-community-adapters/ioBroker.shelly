@@ -239,6 +239,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 
 -->
+### **WORK IN PROGRESS**
+
+* (mcm1957) fix: mDNS device detection incorrectly reports known Gen2+ devices as new (refers to #1734)
+
 ### 12.2.0-alpha.6 (2026-11-26)
 
 * (mcm57) Fix: Gen2+ MQTT devices now always write correct IP address and hostname state on connect
