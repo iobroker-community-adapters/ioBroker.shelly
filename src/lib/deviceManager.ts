@@ -24,6 +24,7 @@ import * as path from 'node:path';
 import * as datapoints from './datapoints';
 import type { ShellyAdapter } from '../main';
 import { bleGatewayScriptVersion } from './ble-gateway-script';
+import { parseHostnameWithPort } from './shelly-helper.js';
 import type { ShellyAdapterConfig } from './types';
 
 /**
@@ -2083,7 +2084,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
                 if (stateId.endsWith('.hostname')) {
                     const ip = this.states[stateId]?.val;
                     if (typeof ip === 'string' && ip) {
-                        knownIps.add(ip);
+                        knownIps.add(parseHostnameWithPort(ip).hostname);
                     }
                 }
             }
@@ -2811,7 +2812,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
             if (stateId.endsWith('.hostname')) {
                 const ip = this.states[stateId]?.val;
                 if (typeof ip === 'string' && ip) {
-                    knownIps.add(ip);
+                    knownIps.add(parseHostnameWithPort(ip).hostname);
                 }
             }
         }
