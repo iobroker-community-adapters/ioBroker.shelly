@@ -521,8 +521,9 @@ class MQTTClient extends BaseClient {
 
         const qos = Number(this.adapter.config.qos) || 0;
 
-        this.messageId &= 0xffffffff;
-        this.messageId++;
+        // MQTT packet identifiers are 16 bit (1..65535) - a larger id cannot be encoded and the
+        // publish fails (QoS 1/2), so wrap around instead of counting up forever
+        this.messageId = (this.messageId % 0xffff) + 1;
 
         try {
             this.adapter.log.debug(

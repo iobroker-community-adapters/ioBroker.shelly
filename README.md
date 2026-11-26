@@ -239,6 +239,10 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
   ### **WORK IN PROGRESS**
 
 -->
+### **WORK IN PROGRESS**
+
+- (Schimi1983) Fixed lost commands after a long MQTT connection with QoS 1/2 (refers to #1736)
+
 ### 12.2.0-alpha.5 (2026-11-26)
 
 - (@GermanBluefox) Fixed high CPU load / MQTT reconnect storm with many devices caused by deleteOldStates() (#1727)
