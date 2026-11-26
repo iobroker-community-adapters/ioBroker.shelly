@@ -241,10 +241,6 @@ See [documentation (en)](https://github.com/iobroker-community-adapters/ioBroker
 -->
 ### **WORK IN PROGRESS**
 
-* (mcm57) Fix: Gen2+ MQTT devices now always write correct IP address and hostname state on connect
-
-### 12.2.0-alpha.5 (2026-11-26)
-
 - (@GermanBluefox) Fixed high CPU load / MQTT reconnect storm with many devices caused by deleteOldStates() (#1727)
 - (mcm1957) Added new state `mqtt.ip` to show the IP address the device has connected from
 - (typhosj) Added support for shelly range extender (Gen 2+ only)
