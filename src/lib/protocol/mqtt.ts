@@ -344,7 +344,7 @@ class MQTTClient extends BaseClient {
                             `[MQTT] ${this.getLogInfo()} - topic: ${packet.topic} - setting ip address (ip: ${ip}, connectIp: ${this.connectIp})`,
                         );
                         this.adapter.log.silly(`[MQTT] ${this.getLogInfo()} - ${JSON.stringify(payloadObj.result)})`);
-                        if (ip && ip !== this.connectIp) {
+                        if (ip) {
                             // Skip writing the default endpoint (ip:80) here because we may need
                             // to use the range extender's endpoint instead - set it only once below.
                             await this.setIP(ip, `Gen 2+ ${INIT_SRC}/rpc`, true);
