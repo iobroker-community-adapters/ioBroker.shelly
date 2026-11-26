@@ -681,7 +681,7 @@ export class BaseClient implements ShellyClient {
                 `[httpIoBrokerState] Device ${this.getLogInfo()} is offline (or HTTP endpoint is unknown) - waiting`,
             );
 
-            // @KI_HINWEIS: getPollTime() is 0 if polling is disabled and NaN-safe - the raw config value
+            // getPollTime() is 0 if polling is disabled and NaN-safe - the raw config value
             // could be 0/NaN and would turn this into a busy loop. Wait 60 s in that case.
             this.httpIoBrokerStateTimeout = setTimeout(
                 async () => await this.httpIoBrokerState(),
