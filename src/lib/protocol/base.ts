@@ -61,6 +61,9 @@ export class BaseClient implements ShellyClient {
     lastNonce: string | undefined;
     httpTimeout: number;
     timezoneChecked: boolean;
+    /** Handlers registered on the shared event emitter, removed again in destroy(). */
+    private readonly onFirmwareUpdateHandler: () => Promise<void>;
+    private readonly onScriptDownloadHandler: () => Promise<void>;
     constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         this.type = type; // mqtt or coap
 
@@ -81,11 +84,17 @@ export class BaseClient implements ShellyClient {
         this.httpTimeout = 8 * 1000;
         this.timezoneChecked = false;
 
+        // The emitter is shared by all clients and a new client is created for every
+        // MQTT connection, so the handlers must be removed in destroy() - otherwise every
+        // reconnect leaves a listener (and the whole client) behind.
+        this.onFirmwareUpdateHandler = async (): Promise<void> => await this.firmwareUpdate();
+        this.onScriptDownloadHandler = async (): Promise<void> => await this.downloadAllScripts();
+
         // Handle firmware updates
-        this.eventEmitter.on('onFirmwareUpdate', async () => await this.firmwareUpdate());
+        this.eventEmitter.on('onFirmwareUpdate', this.onFirmwareUpdateHandler);
 
         // Handle script download
-        this.eventEmitter.on('onScriptDownload', async () => await this.downloadAllScripts());
+        this.eventEmitter.on('onScriptDownload', this.onScriptDownloadHandler);
     }
 
     /**
@@ -1558,6 +1567,9 @@ export class BaseClient implements ShellyClient {
         this.adapter
             .deviceStatusUpdate(this.getDeviceId(), false) // Device offline
             .catch((e: unknown) => this.adapter.log.error(`[BaseClient] deviceStatusUpdate failed: ${String(e)}`));
+
+        this.eventEmitter.removeListener('onFirmwareUpdate', this.onFirmwareUpdateHandler);
+        this.eventEmitter.removeListener('onScriptDownload', this.onScriptDownloadHandler);
 
         if (this.httpIoBrokerStateTimeout) {
             clearTimeout(this.httpIoBrokerStateTimeout);
