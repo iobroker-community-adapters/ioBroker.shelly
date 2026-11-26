@@ -512,18 +512,19 @@ export class ShellyAdapter extends Adapter {
                         availableUpdates.push(`${deviceName} (${deviceId})`);
                     }
                 }
+
+                // Notify only if a device got a new update since the last notification - otherwise the
+                // same notification would be repeated every 15 minutes (refers to #1013).
+                // Only a complete scan gets here, a failed one keeps the last state.
+                const hasNewUpdate = [...devicesWithUpdate].some(id => !this.notifiedFirmwareUpdates.has(id));
+                if (hasNewUpdate) {
+                    await this.registerNotification('shelly', 'deviceUpdates', availableUpdates.join('\n'));
+                }
+                // Devices which were updated are forgotten, so a later update is reported again
+                this.notifiedFirmwareUpdates = devicesWithUpdate;
             } catch (e) {
                 this.log.error(e.toString());
             }
-
-            // Notify only if a device got a new update since the last notification - otherwise the
-            // same notification would be repeated every 15 minutes (refers to #1013)
-            const hasNewUpdate = [...devicesWithUpdate].some(id => !this.notifiedFirmwareUpdates.has(id));
-            if (hasNewUpdate) {
-                await this.registerNotification('shelly', 'deviceUpdates', availableUpdates.join('\n'));
-            }
-            // Devices which were updated are forgotten, so a later update is reported again
-            this.notifiedFirmwareUpdates = devicesWithUpdate;
 
             this.firmwareUpdateTimeout = this.setTimeout(
                 async () => {
