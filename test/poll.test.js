@@ -105,7 +105,10 @@ describe('HTTP poll loop', function () {
         const socket = net.connect(server.server.address().port, '127.0.0.1');
         try {
             await wait(200);
-            const client = [...Object.values(server.clients)][0];
+            // clients is an object today and a Map after #1743
+            const client = [
+                ...(server.clients instanceof Map ? server.clients.values() : Object.values(server.clients)),
+            ][0];
             assert.ok(client, 'the connection must have reached the MQTT server');
 
             await client.httpIoBrokerState(); // offline: schedules the next run
