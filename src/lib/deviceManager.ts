@@ -24,6 +24,7 @@ import * as path from 'node:path';
 import * as datapoints from './datapoints';
 import type { ShellyAdapter } from '../main';
 import { bleGatewayScriptVersion } from './ble-gateway-script';
+import { parseHostnameWithPort } from './shelly-helper';
 import type { ShellyAdapterConfig } from './types';
 
 /**
@@ -2078,15 +2079,7 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
             }
 
             // Filter out devices already known
-            const knownIps = new Set<string>();
-            for (const stateId in this.states) {
-                if (stateId.endsWith('.hostname')) {
-                    const ip = this.states[stateId]?.val;
-                    if (typeof ip === 'string' && ip) {
-                        knownIps.add(ip);
-                    }
-                }
-            }
+            const knownIps = this.getKnownIps();
 
             const unknownDevices = found.filter(d => !knownIps.has(d.ip));
             const existingDevices = found.filter(d => knownIps.has(d.ip));
@@ -2801,20 +2794,31 @@ export default class ShellyDeviceManagement extends DeviceManagement<ShellyAdapt
     }
 
     /**
+     * IP addresses of all devices which already exist in this instance. The `hostname` state
+     * contains the address with a port (e.g. `192.168.1.2:80`) and the `ip` state the plain
+     * address of the device, so both are normalized to the plain address.
+     */
+    private getKnownIps(): Set<string> {
+        const knownIps = new Set<string>();
+        for (const stateId in this.states) {
+            // apClients.<mac>.ip are other devices behind a range extender - not known by that
+            if ((stateId.endsWith('.hostname') || stateId.endsWith('.ip')) && !stateId.includes('.apClients.')) {
+                const value = this.states[stateId]?.val;
+                if (typeof value === 'string' && value) {
+                    knownIps.add(parseHostnameWithPort(value).hostname);
+                }
+            }
+        }
+        return knownIps;
+    }
+
+    /**
      * Scan for new Shelly devices and return names/IPs of unknown ones.
      */
     public async scanForNewDevices(): Promise<{ name: string; ip: string }[]> {
         const found = await this.mdnsScan(5000);
 
-        const knownIps = new Set<string>();
-        for (const stateId in this.states) {
-            if (stateId.endsWith('.hostname')) {
-                const ip = this.states[stateId]?.val;
-                if (typeof ip === 'string' && ip) {
-                    knownIps.add(ip);
-                }
-            }
-        }
+        const knownIps = this.getKnownIps();
 
         return found.filter(d => !knownIps.has(d.ip) && !this.isGen1DeviceByName(d.name));
     }
