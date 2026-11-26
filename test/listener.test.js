@@ -17,9 +17,9 @@ Module._load = originalLoad;
 
 const noop = () => {};
 
-function createAdapter(port) {
+function createAdapter(port, debug = noop) {
     return {
-        log: { debug: noop, silly: noop, info: noop, warn: noop, error: noop },
+        log: { debug, silly: noop, info: noop, warn: noop, error: noop },
         namespace: 'shelly.0',
         isUnloaded: false,
         config: { mqttusername: 'user', mqttpassword: 'secret', port, bind: '127.0.0.1', qos: 1, polltime: 30 },
@@ -30,18 +30,23 @@ function createAdapter(port) {
     };
 }
 
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 describe('MQTT client lifecycle', function () {
     this.timeout(10000);
     let server;
     afterEach(() => server?.destroy());
 
     it('closed connections do not leave event listeners behind', async function () {
-        const port = 18930;
+        // port 0: the system picks a free port, so the test cannot talk to another server by accident
+        let connections = 0;
+        const debug = msg => msg.startsWith('[MQTT Server] New connection') && connections++;
         const eventEmitter = new EventEmitter();
-        server = new MQTTServer(createAdapter(port), {}, eventEmitter);
+        server = new MQTTServer(createAdapter(0, debug), {}, eventEmitter);
         server.listen();
-        await wait(100);
+        await new Promise((resolve, reject) => {
+            server.server.once('listening', resolve);
+            server.server.once('error', reject);
+        });
+        const port = server.server.address().port;
 
         for (let i = 0; i < 20; i++) {
             await new Promise(resolve => {
@@ -52,6 +57,7 @@ describe('MQTT client lifecycle', function () {
             });
         }
 
+        assert.strictEqual(connections, 20, 'all connections must have reached the MQTT server');
         assert.strictEqual(eventEmitter.listenerCount('onFirmwareUpdate'), 0);
         assert.strictEqual(eventEmitter.listenerCount('onScriptDownload'), 0);
     });
