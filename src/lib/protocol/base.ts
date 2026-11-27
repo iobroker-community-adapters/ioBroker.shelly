@@ -61,6 +61,8 @@ export class BaseClient implements ShellyClient {
     lastNonce: string | undefined;
     httpTimeout: number;
     timezoneChecked: boolean;
+    /** sys.cfg_rev of the last complete poll of the configuration (Gen 2+). */
+    lastCfgRev: number | undefined;
     constructor(type: 'mqtt' | 'coap', adapter: ShellyAdapter, objectHelper: ObjectHelper, eventEmitter: EventEmitter) {
         this.type = type; // mqtt or coap
 
@@ -679,13 +681,37 @@ export class BaseClient implements ShellyClient {
         this.adapter.log.silly(`[httpIoBrokerState] Running for ${this.getLogInfo()}: ${JSON.stringify(this.http)}`);
 
         let pollTime = this.getPollTime();
+
+        // Responses of this poll cycle - a combined request (e.g. Shelly.GetConfig) is sent only once
+        const cycle = new Map<string, Promise<string>>();
+
+        // The configuration of a Gen 2+ device only changes if sys.cfg_rev changes. As long
+        // as the revision is the same as in the last complete poll, the *.GetConfig and
+        // Shelly.GetDeviceInfo requests are skipped - they made up most of the HTTP requests.
+        let cfgRev: number | undefined;
+        let skipConfig = false;
+        if (this.getDeviceGen() >= 2 && Object.prototype.hasOwnProperty.call(this.http, '/rpc/Shelly.GetStatus')) {
+            try {
+                const status = JSON.parse(await this.cachedRequest('/rpc/Shelly.GetStatus', cycle));
+                cfgRev = typeof status?.sys?.cfg_rev === 'number' ? status.sys.cfg_rev : undefined;
+                skipConfig = cfgRev !== undefined && cfgRev === this.lastCfgRev;
+            } catch {
+                // handled below, when the states of Shelly.GetStatus are updated
+            }
+        }
+        let configComplete = true;
+
         for (const httpUrl in this.http) {
             const dps = this.http[httpUrl];
+            const isConfigUrl = BaseClient.isConfigUrl(httpUrl);
+            if (skipConfig && isConfigUrl) {
+                continue;
+            }
             try {
                 this.adapter.log.debug(
                     `[httpIoBrokerState] ${this.getDeviceId()} - requesting ${this.getHttpEndpoint()} ${httpUrl}`,
                 );
-                const body = await this.requestAsync(httpUrl);
+                const body = await this.bundledRequest(httpUrl, cycle);
                 for (const id of dps) {
                     const dp = this.device[id];
                     if (dp?.state) {
@@ -751,6 +777,11 @@ export class BaseClient implements ShellyClient {
 
                 this.objectHelper.processObjectQueue(() => {});
             } catch (err) {
+                // A component which is not supported answers 404 forever - that does not make the
+                // configuration incomplete, any other error does (read it again next time)
+                if (isConfigUrl && err?.response?.status != 404) {
+                    configComplete = false;
+                }
                 // Increase polltime on http error
                 if (pollTime > 0 && pollTime < 60) {
                     pollTime = 60;
@@ -771,9 +802,66 @@ export class BaseClient implements ShellyClient {
             }
         }
 
+        if (!skipConfig && configComplete) {
+            this.lastCfgRev = cfgRev;
+        }
+
         if (this.http && Object.keys(this.http).length > 0 && pollTime > 0) {
             this.httpIoBrokerStateTimeout = setTimeout(async () => await this.httpIoBrokerState(), pollTime * 1000);
         }
+    }
+
+    /**
+     * Requests which only return the configuration (or static device information) of a device.
+     *
+     * @param url path of the request, e.g. `/rpc/Switch.GetConfig?id=0`
+     */
+    static isConfigUrl(url: string): boolean {
+        return /^\/rpc\/[A-Za-z0-9_]+\.GetConfig(\?|$)/.test(url) || url === '/rpc/Shelly.GetDeviceInfo';
+    }
+
+    /**
+     * Perform a request only once per poll cycle, all users of the same url share the response.
+     *
+     * @param url path of the request
+     * @param cycle responses of the current poll cycle
+     */
+    private cachedRequest(url: string, cycle: Map<string, Promise<string>>): Promise<string> {
+        let request = cycle.get(url);
+        if (!request) {
+            request = this.requestAsync(url);
+            cycle.set(url, request);
+        }
+        return request;
+    }
+
+    /**
+     * Get the response for a poll url. Single component requests of Gen 2+ devices are answered
+     * from one combined request per cycle: `/rpc/Switch.GetConfig?id=0` from `Shelly.GetConfig`
+     * (key `switch:0`), `/rpc/WiFi.GetStatus` from `Shelly.GetStatus` (key `wifi`). If the
+     * combined response does not contain the component, the original request is sent - so the
+     * result is always the same as before.
+     *
+     * @param url path of the request
+     * @param cycle responses of the current poll cycle
+     */
+    private async bundledRequest(url: string, cycle: Map<string, Promise<string>>): Promise<string> {
+        try {
+            if (this.getDeviceGen() >= 2) {
+                const match = /^\/rpc\/(?!Shelly\.)([A-Za-z0-9_]+)\.(GetConfig|GetStatus)(?:\?id=(\d+))?$/.exec(url);
+                if (match) {
+                    const all = JSON.parse(await this.cachedRequest(`/rpc/Shelly.${match[2]}`, cycle));
+                    const key = `${match[1].toLowerCase()}${match[3] !== undefined ? `:${match[3]}` : ''}`;
+                    if (all && typeof all === 'object' && all[key] !== undefined && all[key] !== null) {
+                        return JSON.stringify(all[key]);
+                    }
+                }
+            }
+        } catch {
+            // combined request failed - fall back to the original request
+        }
+
+        return this.cachedRequest(url, cycle);
     }
 
     /**
